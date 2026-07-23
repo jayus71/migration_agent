@@ -1,0 +1,430 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{url}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+% TODO change the title
+\title{Hierarchical Feedback for PyTorch-to-MindSpore Training-Code Migration Repair}
+
+\author{\IEEEauthorblockN{Anonymous Authors}
+\IEEEauthorblockA{Anonymous Institution\\
+anonymous@example.com}}
+
+\maketitle
+
+\begin{abstract}
+Migrating deep learning training code across frameworks is harder than ordinary source-code translation because a translated program must preserve execution behavior, forward numerics, gradients, and parameter updates. Existing code-translation and repair systems increasingly use executable feedback, but their validation signals are often too coarse for framework migration: a candidate may run successfully while silently changing training semantics. This paper formulates PyTorch-to-MindSpore training-code migration as a feedback-design problem and introduces a hierarchical validator with execution, numerical, and gradient/update signals. We instantiate the design in a prototype built on a torch4ms-backed execution path and evaluate it on controlled paired training anchors, controlled fault injection, and short-horizon training trajectories. On a 12-task sentinel set, execution-only feedback repairs 4/12 tasks, execution-plus-numerical feedback repairs 8/12, and the full hierarchy repairs 12/12 under strict re-verification. In a separate 24-base-task multi-scope ablation, binary feedback repairs no tasks, whereas layered feedback repairs 18/24 without the Fixer guide and 14/24 with it; no condition repairs the core autograd/optimizer tasks. A one-shot Translator ablation raises Translation Success@1 from 0/15 without platform guidance to 15/15 with it, while the final real-LLM Fixer evaluation repairs 46/50 instances across 25 fault categories. All 12 oracle-candidate runs in the selected 50-step consistency bundle pass the studied loss, gradient-norm, and parameter-update thresholds. The results support hierarchical feedback as a useful diagnostic layer for framework migration on controlled tasks and short-horizon training trajectories.
+\end{abstract}
+
+\begin{IEEEkeywords}
+deep learning framework migration, PyTorch, MindSpore, code translation, program repair, differential testing
+\end{IEEEkeywords}
+
+\section{Introduction}
+
+Migrating software across programming languages and execution platforms has long been a costly part of software maintenance. Recent large language models (LLMs) make code translation more accessible, and recent systems improve translation with executability representations, intermediate translation paths, repository-level context, agent/workflow orchestration, and automated validation~\cite{he-etal-2025-execoder,macedo2024intertrans,guan2025repotransagent,erer2025fullyautomated,gray2025workflows}. Adjacent multilingual-code work also uses multi-agent collaboration for instruction tuning~\cite{yang2025multiagentcollaboration}. These advances suggest that code translation is moving beyond direct source-to-target rewriting toward feedback-aware and context-aware pipelines. Deep learning (DL) framework migration, however, imposes a stricter correctness condition than ordinary programming-language translation: the migrated training program must preserve tensor semantics, automatic differentiation behavior, optimizer state, and parameter updates.
+
+This distinction matters when migrating training code between PyTorch and MindSpore. PyTorch programs are commonly organized around imperative tensor operations, dynamic execution, explicit backward propagation, gradient accumulation, optimizer-side gradient consumption, and framework-specific defaults~\cite{paszke2019pytorch}. MindSpore exposes different execution modes, graph compilation mechanisms, differentiation interfaces, and operator conventions~\cite{mindspore2020framework}. As a result, migration is not a matter of replacing API names. A translated training script may execute successfully while computing different forward values; it may match forward values while producing incorrect gradients; and it may compute plausible gradients while updating the wrong parameters. Executability is therefore necessary but not sufficient.
+
+Existing approaches leave a gap at this point. MindConverter provides a documented migration path from third-party frameworks to MindSpore~\cite{mindspore2023mindconverter}. Such static conversion is useful as a starting point, but runtime training-state, gradient, and update equivalence still require dynamic validation. LLM-based repair and agent systems can iteratively improve generated code from feedback~\cite{shinn2023reflexion,chen2023selfdebugging,wang2024codeact,xia2023aprplm}, but their feedback is commonly reduced to binary test outcomes or coarse execution errors. Code-translation systems have recognized the value of executability and validation~\cite{he-etal-2025-execoder,macedo2024intertrans,guan2025repotransagent}, yet these signals primarily answer whether a program compiles, runs, or passes a test. They do not directly expose the layered semantic failures that dominate DL training migration.
+
+We argue that automatic repair for DL framework migration requires feedback signals aligned with training correctness. We decompose correctness into three diagnostic dimensions: executability, forward numerical equivalence, and backward/update equivalence. We then propose a hierarchical feedback mechanism consisting of execution signals, numerical signals, and gradient/update signals. This hierarchy changes the repair problem from asking whether a candidate is simply right or wrong to asking where it first departs from the source training semantics and how severe that departure is.
+
+\texttt{torch4ms}\footnote{\texttt{torch4ms} The prototype repository used for the experiments is available at \url{https://gitee.com/feixiao13/ascend-torch4ms.git}.} The prototype organizes migration repair as a three-role loop: a translation component produces a \texttt{torch4ms} compatible candidate, a verifier emits structured hierarchical diagnostics, and a fixer proposes targeted patches based on the earliest informative failure signal. The loop is coordinated by an orchestrator that records iterations, stopping criteria, reports, and bounded patch application.
+
+This paper makes two contributions:
+\begin{itemize}
+  \item We formulate DL framework migration as a feedback-design problem and introduce a three-level diagnostic hierarchy for execution, numerical, and gradient/update semantics.
+  \item We implement and evaluate the hierarchy in a PyTorch-to-MindSpore migration-repair prototype, showing that layered feedback improves strict repair success and exposes failures that execution-only validation misses.
+\end{itemize}
+The goal is to show that domain-specific feedback exposes failure modes hidden by binary validation and provides a more structured basis for iterative repair.
+
+\section{Related Work}
+
+\subsection{Code Translation and Validation}
+Early neural code translation showed that programming languages can be translated without direct supervision when models are trained on multilingual code corpora~\cite{roziere2020transcoder}. Later work improved this line by using automated unit tests as validation and self-training signals~\cite{roziere2021unittests} and by introducing compiler representations to reduce source-target semantic gaps~\cite{szafraniec2023compiler}. Recent LLM-based systems further incorporate executability representations, intermediate translation paths, repository-level context, and validation~\cite{he-etal-2025-execoder,macedo2024intertrans,guan2025repotransagent}. These studies motivate feedback-aware translation pipelines. Their validation, however, is typically organized around compilation, unit tests, or repository-level pass rates. DL framework migration needs a more specific validator that distinguishes execution failures, forward numerical divergence, and backward/update inconsistency in training code.
+
+\subsection{Feedback-Driven Repair and Multi-Agent Systems}
+Automated program repair has long used tests or semantic constraints to guide patch generation~\cite{nguyen2013semfix}. Large pre-trained language models have changed this space by making patch generation more fluent and enabling iterative repair from execution feedback~\cite{xia2023aprplm}. Reflection and agent-based methods feed natural-language feedback, self-debugging traces, or executable code actions back into the generation loop~\cite{shinn2023reflexion,chen2023selfdebugging,wang2024codeact}. Multi-agent LLM systems further show that role specialization, structured communication, shared artifacts, and explicit workflows can improve complex software tasks~\cite{qian2023chatdev,hong2023metagpt,wu2023autogen,chen2023agentverse}. These approaches motivate our translator--verifier--fixer decomposition, but they do not define migration-specific feedback for DL training semantics. In our setting, agent collaboration is only useful if the verifier exposes the failed semantic layer.
+
+\subsection{Framework Migration and Runtime Bridging}
+Modern DL frameworks expose different execution models and optimization abstractions. PyTorch emphasizes an imperative, dynamic front end~\cite{paszke2019pytorch}, whereas TensorFlow demonstrates large-scale dataflow execution for machine learning systems~\cite{abadi2016tensorflow}; compiler infrastructures such as MLIR further show how domain-specific computation can be lowered through extensible intermediate representations~\cite{lattner2021mlir}. Existing migration and bridging tools address parts of this compatibility problem. MindConverter targets migration from third-party frameworks to MindSpore~\cite{mindspore2023mindconverter}. Runtime bridges such as \texttt{torchax} preserve a PyTorch-style front end while dispatching execution to another backend~\cite{google2025torchax}. These systems reduce engineering burden, but they do not by themselves define a layered diagnostic mechanism for determining whether the migrated training process preserves forward values, gradients, and parameter updates.
+
+\subsection{Differential and DL-System Testing}
+Differential testing has been effective for finding compiler and program-analysis bugs by comparing semantically related executions~\cite{yang2011csmith,le2014emi}. Testing work for DL systems has similarly explored behavioral coverage and differential-style validation of neural networks~\cite{pei2017deepxplore,ma2018deepgauge}. These methods establish behavioral discrepancy as useful diagnostic evidence. Our work specializes differential validation to DL training migration and uses it to build hierarchical feedback over execution status, forward numerical behavior, gradient behavior, and parameter updates.
+
+\section{Problem Setting and Motivation}
+
+\subsection{Task Formulation}
+Given a PyTorch training program $P$ and a target MindSpore-backed execution environment, the migration task is to produce a candidate program $\hat{P}$ that executes under the target backend while preserving the training semantics of $P$. Training semantics refers to the behavior that determines whether a training step is equivalent in practice: the program must construct compatible tensors and modules, compute comparable forward values and losses, propagate comparable gradients, and update parameters in a comparable direction and magnitude.
+
+We model migration correctness as a relation between paired executions of $P$ and $\hat{P}$ under controlled inputs, synchronized initialization, and matched optimizer settings. Let $\mathcal{O}_{t}(P)$ denote the observable state of the source program at training step $t$, including execution status, selected forward outputs or losses, gradients, and parameter-update statistics. A migrated candidate is considered semantically aligned within the studied scope if $\mathcal{O}_{t}(\hat{P})$ remains close to $\mathcal{O}_{t}(P)$ under predefined tolerances for the checked steps. This formulation does not require complete equivalence of all internal framework states. Instead, it focuses on the semantic quantities most useful for diagnosing whether a migrated training loop still behaves like the source loop.
+
+\subsection{Why Binary Feedback Fails}
+A binary validator maps a candidate program to a coarse label such as pass or fail. This label is useful for detecting gross failures, but it discards information needed to repair migrated training code. The same failed label may correspond to at least three qualitatively different situations. The candidate may fail before producing a valid tensor because an operator, dtype, shape rule, or lowering path is unsupported. It may execute successfully but produce a different loss or activation because a forward operator has different numerical semantics. It may match the forward loss while producing different gradients or parameter updates because the automatic differentiation or optimizer path is not aligned.
+
+These failures require different repair actions. An execution failure may require adding an adapter, replacing an unsupported API call, or rewriting a shape-sensitive path. A forward numerical mismatch may require inspecting operator semantics, broadcasting, initialization, or reduction behavior. A gradient or update mismatch may require checking backward paths, parameter registration, gradient accumulation, or optimizer state. Binary feedback collapses these cases into the same outcome and therefore gives the repair component little guidance about where to intervene.
+
+\section{Hierarchical Feedback for Migration Repair}
+
+\subsection{Design Principle}
+The feedback mechanism is designed around the observation that training-code correctness is layered. A migrated program must first be executable under the target backend; if it executes, it must preserve the forward computation; if the forward computation is aligned, it must also preserve the backward and update behavior that determines learning. We therefore organize validation around three diagnostic dimensions:
+\[
+\text{execution signal} \rightarrow \text{numerical signal} \rightarrow \text{gradient/update signal}.
+\]
+This ordering is both a testing order and a repair policy. The verifier stops or down-weights deeper checks when an earlier layer is invalid, because a numerical comparison is not meaningful if the candidate has not produced valid outputs, and a gradient comparison is unreliable if the forward loss has already diverged. Conversely, when an earlier layer passes and a later layer fails, the hierarchy narrows the likely repair region.
+
+\subsection{Execution Signal}
+The execution signal checks whether $\hat{P}$ can complete the required training step under the target backend. It records whether module construction, data movement, forward execution, loss computation, backward execution, and optimizer stepping terminate without runtime failure. When a failure occurs, the verifier stores the exception type, stack location, operator or API name when available, tensor shape and dtype context, and the phase in which the failure appears. Typical failure classes include missing operators, unsupported lowering paths, interface mismatches, device-placement errors, dtype incompatibilities, shape errors, and invalid optimizer or parameter-registration behavior.
+
+\subsection{Numerical Signal}
+The numerical signal checks whether the forward computation of $\hat{P}$ remains aligned with the source program $P$ once both executions complete. Under controlled inputs $(x,y)$ and synchronized initialization, the verifier compares forward quantities such as logits, selected intermediate activations, and losses. The minimal scalar comparison is
+\begin{equation}
+\Delta_{\mathrm{loss}} =
+\left| L(P; x, y) - L(\hat{P}; x, y) \right|.
+\end{equation}
+When intermediate outputs are available, the verifier also computes output- or layer-level discrepancies and locates the earliest module whose difference exceeds tolerance. This localization is important because an end-to-end loss mismatch can be caused by an early operator difference, a reduction convention, a broadcasting rule, a normalization layer, or a later loss-function discrepancy.
+
+\subsection{Gradient and Update Signal}
+The gradient/update signal checks whether the migrated candidate preserves backward and optimizer behavior. This layer is necessary because two programs may produce similar forward losses while computing different gradients, updating different parameter subsets, or applying optimizer state differently. The verifier compares gradient norms and parameter-update statistics:
+\begin{equation}
+\Delta_{\mathrm{grad}} =
+\left|
+\|\nabla_{\theta} L(P)\|_2 -
+\|\nabla_{\hat{\theta}} L(\hat{P})\|_2
+\right|,
+\end{equation}
+\begin{equation}
+\Delta_{\mathrm{param}} =
+\frac{\|\Delta \theta - \Delta \hat{\theta}\|_2}
+{\|\Delta \theta\|_2 + \epsilon}.
+\end{equation}
+In addition to aggregate norms, the verifier can record missing gradients, zero-gradient parameters, parameter-name mismatches, and update outliers. A normal forward loss with missing gradients suggests an automatic-differentiation or parameter-registration issue, whereas aligned gradients with divergent updates suggests an optimizer-state or parameter-step issue.
+
+\subsection{Structured Diagnosis Report}
+The verifier emits a structured diagnosis report rather than a single pass/fail label. The report contains the status of each layer, the first failing layer, the metrics computed at that layer, and a bounded set of root-cause hints. The repair component uses the first failing layer to choose a strategy: execution failures trigger compatibility edits, numerical failures trigger forward-semantics edits, and gradient/update failures trigger backward or optimizer edits. The hierarchy does not guarantee that the repair will succeed, but it reduces the ambiguity of the feedback that the repair component receives.
+
+\section{Prototype}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.97\textwidth]{figures_to_be_redrawed/hierarchical_feedback_architecture.png}
+\caption{Multi-agent architecture of the proposed migration-repair system. The coordination plane controls rounds and stopping conditions; the collaboration layer connects translator, verifier, and fixer agents through a shared artifact pool; and the execution/evaluation layer runs candidates under the \texttt{torch4ms} MindSpore-backed runtime before strict re-verification. The verifier replaces binary pass/fail feedback with execution, numerical, and gradient/update signals.}
+\label{fig:architecture}
+\end{figure*}
+
+Figure~\ref{fig:architecture} summarizes the prototype as a multi-agent repair system rather than a single-pass converter. The coordination plane receives a migration task and controls repair rounds, stopping rules, and snapshot logging. The agent collaboration layer contains three specialized roles: the translator produces an initial \texttt{torch4ms}-compatible candidate, the verifier compares paired executions and emits layered diagnostics, and the fixer applies bounded diagnosis-guided patches. These roles communicate through a shared artifact pool containing the source program, candidate program, diagnosis report, and patch log. This artifact-centered design avoids relying on implicit conversation state: every repair step is tied to an executable candidate and an explicit verifier report.
+
+The execution and evaluation layer runs each candidate under \texttt{torch4ms}, which supplies a PyTorch-style front end, operator dispatch to MindSpore-backed implementations, a default execution environment, loss wrapping, backward execution, and optimizer wrapping. The verifier then records the earliest failing semantic layer and writes a structured diagnosis report. The experiment artifacts record strict re-verification outcomes for saved snapshots even when the repair loop used weaker feedback; the selected bundles do not, however, share a common verifier-version hash. In the experiments below, \texttt{torch4ms} is treated as the target runtime substrate. The scientific question is whether the feedback hierarchy improves migration diagnosis and repair under this substrate, not whether \texttt{torch4ms} is itself a complete framework-equivalence layer.
+
+The verifier uses paired harnesses for each anchor. Each harness records source and candidate execution status, loss differences, optional layer-level differences, gradient-norm differences, and parameter-update relative $\ell_2$ differences. Reported strict success is taken from the strongest verification outcome stored for each experiment. Because the bundles lack a cross-experiment verifier identity, comparisons refer to the same metric hierarchy rather than a proven bit-identical verifier binary.
+
+\section{Experiments}
+
+\subsection{Research Questions}
+We evaluate four questions:
+\begin{itemize}
+  \item \textbf{RQ1:} Does hierarchical feedback provide more actionable repair guidance than binary pass/fail feedback?
+  \item \textbf{RQ2:} What are the separate effects of \texttt{torch4ms}-specific Translator guidance, Fixer guidance, and hierarchical verifier feedback?
+  \item \textbf{RQ3:} Which failure types are diagnosed by execution, numerical, and gradient/update signals?
+  \item \textbf{RQ4:} To what extent does the covered oracle-candidate execution path preserve short-horizon training behavior?
+\end{itemize}
+
+\subsection{Experimental Scope and Metrics}
+The experiments use small vision and language training programs, controlled migration faults, and experiment-specific model sets. The feedback-granularity ablation spans four model families; the multi-scope ablation uses CNN and MLP tasks; the one-shot Translator ablation adds a held-out ResNet task; the fixed fault pool covers four model families; and the TorchAX pilot uses CNN and MLP tasks. These controlled sets are designed to expose execution, forward numerical, and gradient/update failures without claiming coverage of arbitrary PyTorch programs.
+
+The main task-level metrics are strict repair success rate, Repair@$k$, median repair rounds over strict-success runs, final status, and out-of-scope edit rate where applicable. The signal-level metrics include execution success, loss absolute difference, layer-level numerical differences when available, gradient-norm difference, and parameter-update relative $\ell_2$ difference. Unless otherwise stated, strict success means satisfying the strict outcome fields recorded by that experiment. A missing gradient-norm comparison is not the same as a measured small gradient difference; missing observations are therefore treated as an explicit verifier limitation.
+
+\subsection{Feedback Mechanism Ablation}
+\textbf{Design.}
+To evaluate whether richer feedback improves repair under the same repair budget, we ran a real-LLM feedback-granularity ablation on four model families: CNN, image MLP, Transformer classifier, and tiny causal LM. Each model was evaluated under three sentinel fault categories: an execution fault (EX-01), a numerical fault (NU-04), and a gradient/update fault (GR-07). We use this NU-04 + GR-07 clean-alias sentinel set to isolate feedback granularity rather than to estimate the absolute success rate of the final system. The repair loop used one of three feedback conditions: execution-only feedback, execution plus numerical feedback, or the full execution/numerical/gradient-update diagnosis. This produced 36 repair episodes in total. Every episode records final execution, numerical, and gradient/update pass fields, and strict success required all three recorded outcomes to pass.
+
+\begin{table}[t]
+\caption{Repair performance under three feedback-granularity settings.}
+\label{tab:feedback-ablation}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{lcccc}
+\hline
+\textbf{Feedback} & \textbf{Tasks} & \textbf{Strict succ.} & \textbf{Repair@1} & \textbf{Repair@4} \\
+\hline
+Exec. only & 12 & 4/12 & 33.3\% & 33.3\% \\
+Exec.+Num. & 12 & 8/12 & 66.7\% & 66.7\% \\
+Full & 12 & 12/12 & 100.0\% & 100.0\% \\
+\hline
+\end{tabular}
+\vspace{2pt}
+\begin{flushleft}
+\footnotesize Each condition contains the same 12 model--fault tasks. Repair@1 and Repair@4 report the cumulative strict success rate after one and four repair attempts, respectively. Median rounds was 1 for all three conditions.
+\end{flushleft}
+\end{table}
+
+\begin{table}[t]
+\caption{Strict success by fault type in the feedback-granularity ablation.}
+\label{tab:feedback-by-fault}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lccc}
+\hline
+\textbf{Fault type} & \textbf{Exec. only} & \textbf{Exec.+Num.} & \textbf{Full} \\
+\hline
+Execution & 4/4 & 4/4 & 4/4 \\
+Numerical & 0/4 & 4/4 & 4/4 \\
+Gradient/update & 0/4 & 0/4 & 4/4 \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Results.}
+Table~\ref{tab:feedback-ablation} shows a stepwise improvement as the repair loop receives the semantic layer needed for each fault class. Execution-only feedback repaired 4 of 12 tasks under strict verification, execution plus numerical feedback repaired 8 of 12, and the full feedback stack repaired all 12 tasks. The same pattern appears in Repair@4, which increased from 33.3\% to 66.7\% and then to 100.0\%. The fault-type breakdown in Table~\ref{tab:feedback-by-fault} explains the trend. Runtime evidence was sufficient for the four execution faults across all conditions. Numerical faults were not repaired with execution-only feedback, but all four were repaired once numerical diagnostics were exposed. Gradient/update faults remained unsolved until gradient and parameter-update feedback was included, after which all four gradient/update tasks were repaired.
+
+These results support a bounded claim. On this sentinel ablation set, each added feedback layer enabled the fixer to recover the corresponding class of hidden training-semantics failure. The experiment should not be read as the final absolute repair-rate estimate: Section~\ref{sec:fixer-capability} evaluates the final configuration on a broader 25-category, 50-instance fault pool. Instead, this ablation isolates why the hierarchy is useful: execution feedback handles runnable failures, numerical feedback exposes forward-semantic faults, and gradient/update feedback is necessary for backward or optimizer-state faults that execution and loss signals alone do not localize.
+
+
+\subsection{Platform-Guidance Ablations}
+We separate guidance for the iterative Fixer from guidance for the one-shot Translator because the two components have different inputs, actions, and evaluation scopes.
+
+\subsubsection{Multi-Scope Feedback by Fixer-Guide Ablation}
+\label{sec:fixer-guide-ablation}
+\textbf{Design.}
+We crossed binary versus layered verifier feedback with the Fixer guide disabled versus enabled while freezing the Translator. The experiment contains 24 base tasks over CNN and MLP models: 12 candidate-level tasks, eight core-operator tasks, and four core autograd/optimizer tasks. Each base task was run under all four conditions with a four-round budget, producing 96 condition runs. Core conditions used fresh isolated worktrees and FaultSpec-authorized edit paths.
+
+\begin{table*}[t]
+\caption{Multi-scope feedback by Fixer-guide ablation. Repair@1, Repair@4, and OOS edit rate are shown for layered-feedback cells.}
+\label{tab:multiscope-fixer-guide}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llrrrrr}
+\hline
+\textbf{Repair scope} & \textbf{Fixer guide} & \textbf{Binary strict} & \textbf{Layered strict} & \textbf{Layered R@1} & \textbf{Layered R@4} & \textbf{Layered OOS} \\
+\hline
+Candidate-level & Off & 0/12 & 12/12 & 100.0\% & 100.0\% & 0.0\% \\
+Candidate-level & On  & 0/12 & 8/12  & 58.3\%  & 66.7\%  & 0.0\% \\
+Core operator & Off & 0/8 & 6/8 & 50.0\% & 75.0\% & 12.5\% \\
+Core operator & On  & 0/8 & 6/8 & 50.0\% & 75.0\% & 0.0\% \\
+Core autograd/optimizer & Off & 0/4 & 0/4 & 0.0\% & 0.0\% & 0.0\% \\
+Core autograd/optimizer & On  & 0/4 & 0/4 & 0.0\% & 0.0\% & 0.0\% \\
+\hline
+\end{tabular}
+\vspace{2pt}
+\begin{flushleft}
+\footnotesize All binary-feedback cells have Repair@1=Repair@4=0.0\% and OOS edit rate 0.0\%. OOS denotes an out-of-scope edit.
+\end{flushleft}
+\end{table*}
+
+\textbf{Results.}
+Binary feedback produced no strict repairs among the 24 tasks under either guide setting. Layered feedback repaired 18/24 tasks without the Fixer guide and 14/24 with it, corresponding to gains of 75.0 and 58.3 percentage points over binary feedback. The latest run therefore supports the value of layered diagnostics but not a complementary strict-success gain from the Fixer guide. With layered feedback, enabling the guide reduced candidate-level strict success from 12/12 to 8/12, left core-operator strict success unchanged at 6/8, and reduced the observed core-operator OOS edit rate from 12.5\% to 0.0\%. No condition repaired any of the four core autograd/optimizer tasks.
+
+\subsubsection{One-Shot Translator-Guide Ablation}
+\label{sec:translator-guide-ablation}
+\textbf{Design.}
+To isolate Translator guidance, we disabled the Fixer and made one Translator call per run. Five held-out migration tasks---Image MLP, CNN, ResNet, Transformer classifier, and tiny causal LM---were evaluated over three repeats in each condition, giving 15 runs without the guide and 15 with it. The experiment used one LLM and prompt configuration and evaluated the first Translator proposal for compilation, execution, training, and Translation Success@1.
+
+\begin{table}[t]
+\caption{One-shot Translator-guide ablation with the Fixer disabled.}
+\label{tab:translator-guide}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrrrr}
+\hline
+\textbf{Condition} & \textbf{Runs} & \textbf{Compile} & \textbf{Execute} & \textbf{Train} & \textbf{Trans.@1} \\
+\hline
+Guide off & 15 & 13.3\% & 13.3\% & 0.0\% & 0.0\% \\
+Guide on  & 15 & 100.0\% & 100.0\% & 100.0\% & 100.0\% \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Results.}
+Without Translator guidance, 2/15 outputs compiled and executed, but none completed the training check or met Translation Success@1. With guidance, all 15 outputs passed all four stages. This result shows a strong guide effect for the tested one-shot Translator configuration; it does not imply that the same guide improves the iterative Fixer, whose latest multi-scope results are reported separately in Table~\ref{tab:multiscope-fixer-guide}.
+
+\subsection{Verifier Signals and Final Fixer Capability}
+
+\subsubsection{Signal Sanity under Controlled Faults}
+\label{sec:signal-effectiveness}
+\textbf{Design.}
+We evaluated whether each verifier signal detects the fault class it is designed to expose. This experiment uses controlled fault injection rather than automatic repair. For each model and seed, we compare a PyTorch reference step with a \texttt{torch4ms} candidate under one of three injected conditions: an execution fault, a numerical fault, or a training fault. The evaluation uses four model families (CNN, MLP, Transformer, and tiny causal LM), three seeds per fault, and thresholds of $\Delta_{\mathrm{loss}}>0.02$, $\Delta_{\mathrm{grad}}>0.05$, and $\Delta_{\mathrm{param}}>0.03$.
+
+\begin{table}[t]
+\centering
+\caption{Signal effectiveness under controlled faults.}
+\label{tab:signal-effectiveness}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{llcc}
+\hline
+\textbf{Model} & \textbf{Fault} & \textbf{Det.} & \textbf{Signals} \\
+\hline
+CNN & Exec. & 1.000 & E \\
+CNN & Num. & 1.000 & N+G+U \\
+CNN & Train. & 1.000 & G+U \\
+MLP & Exec. & 1.000 & E \\
+MLP & Num. & 1.000 & N+G+U \\
+MLP & Train. & 1.000 & G+U \\
+Trans. & Exec. & 1.000 & E \\
+Trans. & Num. & 1.000 & N+G+U \\
+Trans. & Train. & 1.000 & G+U \\
+TinyLM & Exec. & 1.000 & E \\
+TinyLM & Num. & 1.000 & N+U \\
+TinyLM & Train. & 1.000 & G+U \\
+\hline
+\end{tabular}
+\vspace{2pt}
+\begin{flushleft}
+\footnotesize Det. is expected-signal detection rate over three seeds (3/3 detections for every row). E, N, G, and U denote execution, numerical, gradient, and parameter-update signals.
+\end{flushleft}
+\end{table}
+
+\textbf{Results.}
+Table~\ref{tab:signal-effectiveness} shows that the expected signal detects its corresponding fault in all 36 controlled fault-injection runs. Execution faults are isolated by the execution signal. In the archived training-fault rows, the checker combines a missing candidate gradient comparison with a parameter-update relative $\ell_2$ difference of 1.0; thus G denotes missing-gradient evidence there, not an observed gradient-norm difference. Numerical faults are detected by the loss-difference criterion and often propagate to gradient or update metrics. The signals are therefore not mutually exclusive in their effects, but they provide different first diagnostic handles.
+
+\subsubsection{Final Fixer Evaluation on a Fixed Fault Pool}
+\label{sec:fixer-capability}
+\textbf{Design.}
+We next evaluated whether the recorded verifier diagnoses and real-LLM fixer could be turned into repairs. This experiment used a fixed pool of 25 controlled migration-fault categories and 50 model-assigned instances. The pool covered four model families (CNN, image MLP, Transformer classifier, and tiny causal LM), three failure layers, and three repair scopes: candidate-level code, core operators, and core autograd/optimizer behavior. The result bundle marks all 50 instances as blind. Each instance allowed at most four repair attempts. Strict success required the repaired artifact to pass the original fault oracle and strict re-verification; failures were restored or rolled back.
+
+\begin{table*}[t]
+\caption{Final repair performance on the fixed 25-category, 50-instance fault pool.}
+\label{tab:fixed50-layer}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrrrrr}
+\hline
+\textbf{Failure layer} & \textbf{Categories} & \textbf{Instances} & \textbf{Strict succ.} & \textbf{Rate} & \textbf{Repair@1} & \textbf{Repair@4} & \textbf{Median rounds} \\
+\hline
+Execution & 10 & 20 & 19 & 95.0\% & 65.0\% & 95.0\% & 1 \\
+Numerical & 7 & 14 & 13 & 92.9\% & 50.0\% & 92.9\% & 1 \\
+Gradient/update & 8 & 16 & 14 & 87.5\% & 62.5\% & 87.5\% & 1 \\
+Overall & 25 & 50 & 46 & 92.0\% & 60.0\% & 92.0\% & 1 \\
+\hline
+\end{tabular}
+\end{table*}
+
+\begin{table}[t]
+\caption{Repair performance by repair scope.}
+\label{tab:fixed50-scope}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrr}
+\hline
+\textbf{Repair scope} & \textbf{Inst.} & \textbf{Strict succ.} & \textbf{Repair@1} \\
+\hline
+Candidate-level & 26 & 25 (96.2\%) & 84.6\% \\
+Core operator & 20 & 19 (95.0\%) & 40.0\% \\
+Core autograd/optimizer & 4 & 2 (50.0\%) & 0.0\% \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{Results.}
+Table~\ref{tab:fixed50-layer} shows that the final repair loop achieved 46/50 strict successes, corresponding to an overall strict repair rate of 92.0\%. The system repaired 19/20 execution instances, 13/14 numerical instances, and 14/16 gradient/update instances. All 25 fault categories had at least one repaired instance, giving 100\% category coverage across the studied pool. The four failures comprised one invalid execution patch, one numerical instance that exhausted the repair budget, and two gradient/update instances where the mismatch remained after the allowed attempts.
+
+
+
+\subsection{Oracle-Candidate 50-Step Path Consistency}
+\label{sec:training-consistency}
+\textbf{Design.}
+We then evaluate short-horizon path consistency in the latest paper-facing result artifact. The bundle records the candidate provenance as \texttt{oracle\_candidate}, validates CIFAR-10 and AG News input files, and contains paired trajectories for four model labels---CNN, NLP, Transformer, and tiny causal LM. Each model is evaluated for 50 steps over three seeds with strict per-step thresholds: $\Delta_{\mathrm{loss}}\leq0.02$, $\Delta_{\mathrm{grad}}\leq0.05$, and $\Delta_{\mathrm{param}}\leq0.03$.
+
+\begin{table}[t]
+\centering
+\caption{Selected oracle-candidate 50-step training-consistency bundle.}
+\label{tab:training-consistency}
+\scriptsize
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{lccccc}
+\hline
+\textbf{Model} & \textbf{Pass} & \textbf{Mean $\Delta L$} & \textbf{Max $\Delta L$} & \textbf{Mean $\Delta G$} & \textbf{Mean $\Delta U$} \\
+\hline
+CNN & 1.000 & $4.570{\times}10^{-7}$ & $2.980{\times}10^{-6}$ & $1.510{\times}10^{-8}$ & $1.146{\times}10^{-6}$ \\
+NLP & 1.000 & $6.167{\times}10^{-7}$ & $1.669{\times}10^{-6}$ & $1.441{\times}10^{-8}$ & $3.825{\times}10^{-6}$ \\
+Trans. & 1.000 & $5.643{\times}10^{-8}$ & $2.384{\times}10^{-7}$ & $1.748{\times}10^{-8}$ & $7.913{\times}10^{-7}$ \\
+TinyLM & 1.000 & $1.745{\times}10^{-6}$ & $3.815{\times}10^{-6}$ & $3.835{\times}10^{-8}$ & $1.127{\times}10^{-6}$ \\
+\hline
+\end{tabular}
+\vspace{2pt}
+\begin{flushleft}
+\footnotesize Each row aggregates three seeds and 50 paired training steps per seed. The raw artifact labels the second model \texttt{nlp}. $\Delta L$, $\Delta G$, and $\Delta U$ denote loss, gradient-norm, and parameter-update differences.
+\end{flushleft}
+\end{table}
+
+\textbf{Results.}
+Table~\ref{tab:training-consistency} shows that all four model labels pass the strict consistency check in the selected oracle-candidate bundle. The largest maximum loss difference is $3.815\times10^{-6}$ for the tiny causal LM case, several orders of magnitude below the threshold of 0.02. Mean gradient-norm differences remain below $4\times10^{-8}$, and mean parameter-update relative $\ell_2$ differences remain below $3.9\times10^{-6}$. These results show short-horizon numerical path consistency for the covered known-good candidates under the stated thresholds.
+
+\subsection{Cross-Bridge Pilot on TorchAX}
+\label{sec:torchax-pilot}
+\textbf{Design.}
+To test whether the feedback schema was tied only to the \texttt{torch4ms} substrate, we ran a small cross-bridge pilot on a \texttt{torchax}-backed path. The pilot had two parts. First, we evaluated signal collection and first-layer localization on MLP and CNN tasks with controlled execution, numerical, and gradient/update faults. For each task, the verifier predicted the first failing layer and recorded the corresponding evidence: exception phase for execution faults, loss/output difference for numerical faults, and missing gradients plus update difference for gradient/update faults. Second, we ran a bounded candidate-level repair pilot on the same two models and three representative fault categories (EX-01, NU-01, and GR-01). This repair pilot tested whether the same diagnosis schema could guide candidate-level edits on a second bridge, but it did not cover core operator or autograd repairs.
+
+\begin{table}[t]
+\caption{TorchAX cross-bridge signal-only pilot.}
+\label{tab:torchax-signal}
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{lccc}
+\hline
+\textbf{Fault type} & \textbf{Tasks} & \textbf{Correct layer} & \textbf{Accuracy} \\
+\hline
+Execution & 2 & 2 & 100.0\% \\
+Numerical & 2 & 2 & 100.0\% \\
+Gradient/update & 2 & 2 & 100.0\% \\
+Overall & 6 & 6 & 100.0\% \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{TorchAX candidate-level repair pilot.}
+\label{tab:torchax-repair}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccc}
+\hline
+\textbf{Fault type} & \textbf{Tasks} & \textbf{Layer acc.} & \textbf{Repair succ.} & \textbf{Strict pass} \\
+\hline
+Execution & 2 & 100.0\% & 100.0\% & 100.0\% \\
+Numerical & 2 & 100.0\% & 100.0\% & 100.0\% \\
+Gradient/update & 2 & 100.0\% & 100.0\% & 100.0\% \\
+Overall & 6 & 100.0\% & 100.0\% & 100.0\% \\
+\hline
+\end{tabular}
+\vspace{2pt}
+\begin{flushleft}
+\footnotesize The clean \texttt{torchax} candidates passed in both model cases (2/2). Repair@1 and Repair@3 were both 100.0\%, with a median of one repair round.
+\end{flushleft}
+\end{table}
+
+\textbf{Results.}
+Table~\ref{tab:torchax-signal} shows that the same execution, numerical, and gradient/update schema localized all six controlled faults on the \texttt{torchax} path. The execution cases failed at the injected runtime layer, the numerical cases reported the injected output/loss divergence, and the gradient/update cases exposed missing gradients and update differences at the injected layer. The overall first-layer localization accuracy was therefore 6/6.
+
+Table~\ref{tab:torchax-repair} shows that the bounded candidate-level repair pilot also succeeded on all six \texttt{torchax} fault instances. The clean candidates passed in both model settings, all diagnoses were complete, and every repaired candidate passed the final strict check. All six repairs completed in one round, giving 100.0\% Repair@1 and Repair@3 with a median of one repair round. These results do not establish broad cross-backend repair performance, because the pilot covers only two models and candidate-level faults. They do, however, indicate that the hierarchical verifier interface and its diagnosis-to-repair loop can be instantiated on a second PyTorch-style bridge without changing the basic execution/numerical/gradient-update signal schema.
+
+
+\subsection{Limitations}
+The evidence is intentionally bounded: the repair ablations use small controlled tasks, and the signal-effectiveness experiment uses controlled fault injection. The current checker can score gradient/update evidence when a gradient comparison is missing but an update comparison is present; future versions should require complete metrics and rerun the repair ablations. The selected artifacts lack a shared verifier-version hash, a fixed-50 prompt/redaction manifest, and per-trajectory dataset/batch identifiers. The 50-step bundle uses oracle candidates, so it supports short-horizon path consistency rather than arbitrary generated-output quality. The Translator-guide result uses one LLM and prompt configuration, while the latest Fixer-guide ablation does not show a strict-success benefit; broader configurations are needed before generalizing guide effects.
+
+\section{Conclusion}
+
+This paper studied DL framework migration as a feedback-design problem. We proposed a hierarchical validation mechanism that separates execution, forward numerical, and gradient/update signals, then used it to guide PyTorch-to-MindSpore training-code migration repair on a \texttt{torch4ms}-backed prototype. The experiments show that layered feedback improves repair outcomes under the recorded strict outcomes and that a platform-specific guide can improve one-shot Translator output in the tested configuration. The latest multi-scope run does not show a strict-success benefit from applying the guide to the Fixer, and the selected 50-step bundle establishes short-horizon numerical consistency for the covered paths. The verifier analysis further motivates treating missing observations explicitly rather than silently scoring only the metrics that are present. The results support hierarchical feedback as a useful diagnostic layer for training-code migration. Future work should harden the verifier against missing metrics, archive versioned verifier and prompt manifests, broaden the benchmark, evaluate generated candidates over longer training horizons, improve layer-level localization for complex models, and test the design across additional framework pairs.
+
+\bibliographystyle{IEEEtran}
+\bibliography{ref}
+
+\end{document}

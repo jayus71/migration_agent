@@ -1,0 +1,54 @@
+{
+  "repository": "https://gitee.com/feixiao13/ascend-torch4ms.git",
+  "baseline_branch": "codex/llm-fixer-capability",
+  "baseline_commit": "f66cafebb8bda4881e92d40f1aa9432b94e36d2c",
+  "declared_result_files": 23,
+  "remote_branches_inspected": 15,
+  "repository_is_shallow": false,
+  "evidence_policy": "Only the baseline branch files declared by paper_experiment_results_index.md are used for paper numbers; other branches are provenance-only.",
+  "branch_matrix": [
+    {"branch": "codex/llm-fixer-capability", "same": 23, "different": 0, "missing": 0},
+    {"branch": "codex/scoped-guide-routing", "same": 2, "different": 0, "missing": 21},
+    {"branch": "codex/section67-candidate-fixer", "same": 2, "different": 0, "missing": 21},
+    {"branch": "experiment6566", "same": 2, "different": 0, "missing": 21},
+    {"branch": "llm-fixer-xyz", "same": 2, "different": 0, "missing": 21},
+    {"branch": "phase10-core-apply-gated", "same": 2, "different": 0, "missing": 21},
+    {"branch_group": "remaining_nine_remote_branches", "same": 0, "different": 0, "missing": 23}
+  ],
+  "section66_lineage": {
+    "raw_blob": "8729f8344d2372d963ccc48d23263a4850aa541c",
+    "steps_blob": "5cfe0234c52d5eae51c372f05c5e28249612595a",
+    "raw_started_at": "2026-06-13T14:01:04Z",
+    "source_commit": "6deff109f9529879e16c78538e62dcb831446ba0",
+    "source_commit_time": "2026-06-13T22:02:09+08:00",
+    "source_branch": "experiment6566",
+    "source_model_label": "nlp",
+    "source_model_class": "TinyTextClassifier",
+    "source_dataset_config": "AG News",
+    "source_models_blob": "825388f5d5252b0628c2a5b797938dcda10945fa",
+    "source_realdata_blob": "d19644e44acfd2832acd84e39704490b0748d7d9",
+    "current_lineage_import_commit": "ab195e7d790f3cb0982965df7e56772266c8c0e7",
+    "current_model_label": "mlp",
+    "current_model_class": "TinyImageMLP",
+    "current_dataset_config": "CIFAR-10",
+    "current_models_blob": "76b549f17550d776cf8b8020eeff229a9f710443",
+    "current_realdata_blob": "cc201c01ef699b9fc3cd7fe356f0a56f91492db2",
+    "direct_current_runner_replay": false
+  },
+  "paper_alignment": {
+    "tex_changed": true,
+    "numeric_changes_required": false,
+    "model_label_in_paper": "NLP",
+    "oracle_candidate_disclosed": true,
+    "missing_per_trajectory_lineage_disclosed": true,
+    "historical_results_excluded": true,
+    "wording_changes": {
+      "latest_to_selected_occurrences": 0,
+      "latest_restored_from_authoritative_index": 4,
+      "latest_index_supported_occurrences": 5,
+      "repeated_caveats_deduplicated": true,
+      "numeric_values_changed": false
+    },
+    "conclusion": "The archived NLP label is correct and must not be replaced by the current image MLP label. All paper numbers remain unchanged; the authoritative index supports the restored latest wording, and repeated caveats were consolidated."
+  }
+}

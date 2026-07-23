@@ -1,0 +1,128 @@
+{
+  "audit_skill": "paper-claim-audit",
+  "verdict": "PASS",
+  "reason_code": "all_numbers_match",
+  "summary": "Verified 456 experiment-facing claims against 23 declared raw artifacts plus the authoritative result-selection index: 424 exact matches, 32 standard-rounding matches, and zero issue-class findings.",
+  "audited_input_hashes": {
+    "conference_101719.tex": "sha256:981dc07935900cff87a9e64006a5558a634a360790eab11dcfb33716c6c1d1bd",
+    "paper_experiment_results_index.md": "sha256:586239cd699749ed8e5b1a1f09d2f5aad3a5d9f6a5d0a81b248588d793f0bbdd",
+    "ascend-torch4ms/experiments/paper_section_63_64/results/section63_feedback_ablation_nu04_clean_alias_rerun_20260715/section63_summary.json": "sha256:b3e986afc30096ca4d65e766b7446b6df0fcc1165f0037239ba87ac7b812c65b",
+    "ascend-torch4ms/experiments/paper_section_63_64/results/section63_feedback_ablation_nu04_clean_alias_rerun_20260715/section63_episode_results.csv": "sha256:3da1c573387ddde4de76cbf055763e36092ff73e7b1c741d2e8eef96e4306a2b",
+    "ascend-torch4ms/experiments/paper_section_63_64/results/section63_feedback_ablation_nu04_clean_alias_rerun_20260715/section63_summary_by_fault_type.csv": "sha256:ca2ba5a14e00716bdd35977b8b30e41096b4932f9e968c8e7f5bc72e4657c0f1",
+    "ascend-torch4ms/experiments/paper_section_63_64/results/section63_feedback_ablation_nu04_clean_alias_rerun_20260715/section63_summary_by_feedback.csv": "sha256:14693b8d57fdc9c664e9faf7bc4a81f39c79bdca647f97bc7d27cec71bfb6b1e",
+    "ascend-torch4ms/experiments/paper_section_63_64/results_section641_multiscope_v1/section641_multiscope_raw.json": "sha256:b588243eab54a08c4c2d6358b2d0cd00f6d4b9efe5c455a445516dfc8d48aa9a",
+    "ascend-torch4ms/experiments/paper_section_63_64/results_section641_multiscope_v1/section641_tasks.csv": "sha256:192f8a42ddd5b6998fcdf24424fc1d47d10d4109e9ec05020f7d4586561865a8",
+    "ascend-torch4ms/experiments/paper_section_63_64/results_section641_multiscope_v1/section641_scope_summary.csv": "sha256:b47db48122b219813e658f30a757a4316b077857bb5be58ea93db5dc53b704be",
+    "ascend-torch4ms/experiments/paper_section_63_64/results_section641_multiscope_v1/section641_private_manifest.json": "sha256:dd5ea4c01681f4d97e5f7392bcfcf0897bb7fb9c34bb172ec99b9a1d4586c913",
+    "ascend-torch4ms/experiments/paper_section_63_64/results_section642_translator_guide_ablation_v4/section642_translator_guide_ablation_raw.json": "sha256:a26639ea334c36859edb0b7d5d363ac2662d8f77b0ed0a55d771bef89d429f32",
+    "ascend-torch4ms/experiments/paper_section_63_64/results_section642_translator_guide_ablation_v4/section642_translator_guide_ablation_tasks.csv": "sha256:02a457ceb383a7ae23c0af3ee6833b0db51d58ba07697f29d7b6b8a78eac2c47",
+    "ascend-torch4ms/experiments/paper_section_65_66/results_section65_signal_sanity_current/section65_signal_effectiveness_raw.json": "sha256:8bbace3d2e9e6ce7169e2ec1d59fd6ce34f8ff014509ddedf0cb8c14960af5ad",
+    "ascend-torch4ms/experiments/paper_section_65_66/results_section65_signal_sanity_current/section65_signal_effectiveness_table.csv": "sha256:3d8b1da5e9fde3ac88dd7eeb6e4d2ee926c1a9e5dc76eb15a74c80b129f91a1a",
+    "ascend-torch4ms/experiments/paper_section_65_66/results_section65_fixed50_full_real/section65_fault_pool_repair_raw.json": "sha256:20a605d0c5fd0c48ba2cbb8832b44d64f29ead79d2ea8444186c73864aec885c",
+    "ascend-torch4ms/experiments/paper_section_65_66/results_section65_fixed50_full_real/section65_fault_pool_repair_table.csv": "sha256:cb11e969db6f84b85a13b001a9f6c706a7416c77f78c7c81e318ec12e6c4322a",
+    "ascend-torch4ms/experiments/paper_section_65_66/results_section65_fixed50_full_real/section65_fault_pool_repair_layer_summary.csv": "sha256:f95caed8c5a9a2af3721bda952c8d1256cbd327105fa629f9006c5903cb2b6cb",
+    "ascend-torch4ms/experiments/paper_section_65_66/results_section65_fixed50_full_real/section65_fault_pool_repair_scope_summary.csv": "sha256:f2ebc3213035ea6055f59bc945fa7285fe030e7e108d288796de92d31a1c0885",
+    "ascend-torch4ms/experiments/paper_section_65_66/results_section65_fixed50_full_real/section65_fault_pool_repair_category_coverage.csv": "sha256:b19d952456fca279be0d8dfe4a7dbada9e908fc9515271f5cfda439a3e2116a0",
+    "ascend-torch4ms/experiments/paper_section_65_66/results_section65_fixed50_full_real/section65_fault_pool_repair_failure_reasons.csv": "sha256:f82047c2ac24ed6bbd84f2f6ff51a9763a168e483d8c23ef65226cc3763104e1",
+    "ascend-torch4ms/experiments/paper_section_65_66/results_realdata_66/section66_realdata_training_consistency_raw_steps50.json": "sha256:3874f028c195cc09f1250c25d04b5a7f784c2cb8293a27f1e031d2722cf69c0f",
+    "ascend-torch4ms/experiments/paper_section_65_66/results_realdata_66/section66_realdata_training_consistency_steps_steps50.csv": "sha256:2e0c97c2ec7c9490510dba804026a9d9a91716130029a30d24f9838556e0639e",
+    "ascend-torch4ms/autofix/reports/torchax_verifier_current_signal_synced/torchax_verifier_summary.json": "sha256:d30d5883c0f72a5fd25386eb83e53180227d4dce81742f425357bfef60f7b516",
+    "ascend-torch4ms/experiments/paper_section_67/results_fixer_torchax/section67_fixer_torchax_raw.json": "sha256:75ae5cd65e37cff537f634bbd23a4d538565567bc659e2ed62f562e6bf09a4b2",
+    "ascend-torch4ms/experiments/paper_section_67/results_fixer_torchax/section67_fixer_torchax_tasks.csv": "sha256:b49d349648b3f9c366c1073b1f60e942a32f71b5131498a4bc0724d3d6d22aa3"
+  },
+  "trace_path": ".aris/traces/paper-claim-audit/2026-07-20_run01/",
+  "agent_id": "019f7fb8-95a1-70b0-ac56-f542ab1f6750",
+  "thread_id": "019f7fb8-95a1-70b0-ac56-f542ab1f6750",
+  "reviewer_model": "codex-subagent-runtime-id-unexposed",
+  "reviewer_reasoning": "runtime-managed",
+  "generated_at": "2026-07-20T13:49:06Z",
+  "details": {
+    "paper_title": "Hierarchical Feedback for PyTorch-to-MindSpore Training-Code Migration Repair",
+    "result_branch": "codex/llm-fixer-capability",
+    "result_commit": "f66cafebb8bda4881e92d40f1aa9432b94e36d2c",
+    "paper_pdf": {
+      "path": "conference_101719.pdf",
+      "sha256": "de16d13d5a912ac82791cb85faa14b298fefabe94ade1f8a31fee46f9af08a9f",
+      "pages": 9
+    },
+    "counting_rule": "Each independently checkable experiment-facing occurrence is counted once; a fraction is one occurrence, a separately printed percentage is another, and repeated prose/table occurrences count again. Citations, equations, references, and formatting dimensions are excluded.",
+    "total_claims": 456,
+    "status_counts": {
+      "exact_match": 424,
+      "rounding_ok": 32,
+      "ambiguous_mapping": 0,
+      "missing_evidence": 0,
+      "config_mismatch": 0,
+      "aggregation_mismatch": 0,
+      "number_mismatch": 0,
+      "scope_overclaim": 0,
+      "unsupported_claim": 0
+    },
+    "mismatches": [],
+    "non_exact_occurrences": {
+      "status": "rounding_ok",
+      "count": 32,
+      "groups": [
+        "section63 one-third and two-thirds percentages",
+        "section641 7/12, 8/12, and 14/24 percentages",
+        "section642 2/15 percentages",
+        "fixed50 13/14, 25/26, and 22/26 percentages",
+        "section66 displayed scientific-notation precision"
+      ]
+    },
+    "provenance_files": [
+      "paper_experiment_results_index.md"
+    ],
+    "result_files": [
+      "ascend-torch4ms/experiments/paper_section_63_64/results/section63_feedback_ablation_nu04_clean_alias_rerun_20260715/section63_summary.json",
+      "ascend-torch4ms/experiments/paper_section_63_64/results/section63_feedback_ablation_nu04_clean_alias_rerun_20260715/section63_episode_results.csv",
+      "ascend-torch4ms/experiments/paper_section_63_64/results/section63_feedback_ablation_nu04_clean_alias_rerun_20260715/section63_summary_by_fault_type.csv",
+      "ascend-torch4ms/experiments/paper_section_63_64/results/section63_feedback_ablation_nu04_clean_alias_rerun_20260715/section63_summary_by_feedback.csv",
+      "ascend-torch4ms/experiments/paper_section_63_64/results_section641_multiscope_v1/section641_multiscope_raw.json",
+      "ascend-torch4ms/experiments/paper_section_63_64/results_section641_multiscope_v1/section641_tasks.csv",
+      "ascend-torch4ms/experiments/paper_section_63_64/results_section641_multiscope_v1/section641_scope_summary.csv",
+      "ascend-torch4ms/experiments/paper_section_63_64/results_section641_multiscope_v1/section641_private_manifest.json",
+      "ascend-torch4ms/experiments/paper_section_63_64/results_section642_translator_guide_ablation_v4/section642_translator_guide_ablation_raw.json",
+      "ascend-torch4ms/experiments/paper_section_63_64/results_section642_translator_guide_ablation_v4/section642_translator_guide_ablation_tasks.csv",
+      "ascend-torch4ms/experiments/paper_section_65_66/results_section65_signal_sanity_current/section65_signal_effectiveness_raw.json",
+      "ascend-torch4ms/experiments/paper_section_65_66/results_section65_signal_sanity_current/section65_signal_effectiveness_table.csv",
+      "ascend-torch4ms/experiments/paper_section_65_66/results_section65_fixed50_full_real/section65_fault_pool_repair_raw.json",
+      "ascend-torch4ms/experiments/paper_section_65_66/results_section65_fixed50_full_real/section65_fault_pool_repair_table.csv",
+      "ascend-torch4ms/experiments/paper_section_65_66/results_section65_fixed50_full_real/section65_fault_pool_repair_layer_summary.csv",
+      "ascend-torch4ms/experiments/paper_section_65_66/results_section65_fixed50_full_real/section65_fault_pool_repair_scope_summary.csv",
+      "ascend-torch4ms/experiments/paper_section_65_66/results_section65_fixed50_full_real/section65_fault_pool_repair_category_coverage.csv",
+      "ascend-torch4ms/experiments/paper_section_65_66/results_section65_fixed50_full_real/section65_fault_pool_repair_failure_reasons.csv",
+      "ascend-torch4ms/experiments/paper_section_65_66/results_realdata_66/section66_realdata_training_consistency_raw_steps50.json",
+      "ascend-torch4ms/experiments/paper_section_65_66/results_realdata_66/section66_realdata_training_consistency_steps_steps50.csv",
+      "ascend-torch4ms/autofix/reports/torchax_verifier_current_signal_synced/torchax_verifier_summary.json",
+      "ascend-torch4ms/experiments/paper_section_67/results_fixer_torchax/section67_fixer_torchax_raw.json",
+      "ascend-torch4ms/experiments/paper_section_67/results_fixer_torchax/section67_fixer_torchax_tasks.csv"
+    ],
+    "orphan_result_files": [],
+    "section_mapping": [
+      {"paper": "Abstract and Section 6.3", "evidence_group": "section63", "headline": "4/12 -> 8/12 -> 12/12"},
+      {"paper": "Section 6.4.1", "evidence_group": "section641", "headline": "0/24, 18/24, 0/24, 14/24"},
+      {"paper": "Section 6.4.2", "evidence_group": "section642", "headline": "guide off 0/15 Success@1; guide on 15/15"},
+      {"paper": "Section 6.5 signal", "evidence_group": "section65 signal sanity", "headline": "36/36 expected detections"},
+      {"paper": "Section 6.5 repair", "evidence_group": "section65 fixed50", "headline": "46/50 strict success; 25/25 category coverage"},
+      {"paper": "Section 6.6", "evidence_group": "section66", "headline": "12 runs x 50 steps; all thresholds pass"},
+      {"paper": "Section 6.7 signal", "evidence_group": "torchax verifier", "headline": "6/6 localization"},
+      {"paper": "Section 6.7 repair", "evidence_group": "section67", "headline": "6/6 repair; clean 2/2; one round"}
+    ],
+    "audit_history": [
+      {"stage": "initial", "verdict": "FAIL", "note": "Stale Section 6.4, unsupported abstract values, stale real-data row, and provenance overclaim."},
+      {"stage": "intermediate", "verdict": "WARN", "note": "All numerical mismatches removed; wording and provenance boundaries remained."},
+      {"stage": "pre_branch_check", "verdict": "PASS", "note": "The earlier final TeX hash reconciled with all 23 declared raw artifacts."},
+      {"stage": "branch_checked", "verdict": "FAIL", "note": "A fresh strict audit found four unsupported temporal modifiers ('latest'); all numbers still reconciled."},
+      {"stage": "post_selected_wording", "verdict": "PASS", "note": "After replacing the four temporal modifiers with 'selected', that TeX hash reconciled with all 23 declared raw artifacts."},
+      {"stage": "index_aware_final", "verdict": "PASS", "note": "Restored 'latest' from the authoritative result index, de-duplicated repeated caveats, and reconciled the final TeX against all 23 raw artifacts plus the selection index."}
+    ],
+    "external_reproducibility_warnings": [
+      "The selected raw artifact labels its second consistency model as nlp, while the current branch runner registers and dispatches mlp rather than nlp.",
+      "The consistency artifact uses oracle_candidate provenance and lacks per-trajectory dataset/batch identifiers.",
+      "The fixed50 artifact lacks an archived prompt/visible-field/redaction manifest and the selected bundles lack a shared verifier-version hash.",
+      "The controlled training-fault rows have null candidate gradient metrics while the checker can still mark the gradient/update signal from remaining update evidence.",
+      "LaTeX compilation retains the pre-existing unresolved citation mindspore2020framework."
+    ]
+  }
+}
