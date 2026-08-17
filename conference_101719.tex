@@ -345,7 +345,7 @@ We use known-good oracle candidates to verify that the paired execution paths pr
 \textbf{Model} & \textbf{Pass} & \textbf{Mean $\Delta L$} & \textbf{Max $\Delta L$} & \textbf{Mean $\Delta G$} & \textbf{Mean $\Delta U$} \\
 \hline
 CNN & 1.000 & $4.570{\times}10^{-7}$ & $2.980{\times}10^{-6}$ & $1.510{\times}10^{-8}$ & $1.146{\times}10^{-6}$ \\
-NLP & 1.000 & $6.167{\times}10^{-7}$ & $1.669{\times}10^{-6}$ & $1.441{\times}10^{-8}$ & $3.825{\times}10^{-6}$ \\
+MLP & 1.000 & $6.167{\times}10^{-7}$ & $1.669{\times}10^{-6}$ & $1.441{\times}10^{-8}$ & $3.825{\times}10^{-6}$ \\
 Trans. & 1.000 & $5.643{\times}10^{-8}$ & $2.384{\times}10^{-7}$ & $1.748{\times}10^{-8}$ & $7.913{\times}10^{-7}$ \\
 TinyLM & 1.000 & $1.745{\times}10^{-6}$ & $3.815{\times}10^{-6}$ & $3.835{\times}10^{-8}$ & $1.127{\times}10^{-6}$ \\
 \hline
@@ -366,6 +366,9 @@ The evaluation covers two target backend paths, four model families, 25 fault ca
 \section{Conclusion}
 
 Cross-framework training-code migration requires feedback that reaches beyond executability. We introduced an ordered hierarchy over execution, forward-numerical, and gradient/update semantics and used the first failing layer to connect validation with targeted repair. The MindSpore-backed experiments show a stepwise repair gain as semantic feedback is added and a 46/50 strict success rate on the final fault pool. Reusing the same hierarchy on a TorchAX/JAX-backed path yields 6/6 first-layer localization and 6/6 strict repair, demonstrating cross-framework transfer without redesigning the diagnosis schema. These results establish hierarchical semantic feedback as a practical foundation for training-code migration repair. Future work will broaden the framework pairs and program scale, strengthen complete gradient/update collection, and evaluate longer generated training trajectories.
+
+\section*{Acknowledgment}
+This work was supported by CAAI Huawei MindSpore Open Fund, and developed on OpenI Community.
 
 \bibliographystyle{IEEEtran}
 \bibliography{ref}
