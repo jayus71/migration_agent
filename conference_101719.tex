@@ -334,6 +334,15 @@ The ablations show that the ordering carries the repair improvement. This analys
 
 Table~\ref{tab:signal-effectiveness} shows that the expected signal detects its corresponding fault in all 36 fault-injection runs. Execution faults are isolated by the execution signal. For training faults, the gradient signal records missing-gradient evidence and the update signal captures the divergent parameter update. Numerical faults are detected at the forward layer even when their effects propagate to gradient or update metrics. This is the case the first-failure rule exists to handle. A deeper signal also fires, but the forward layer is the one that names the cause. Every fault class therefore keeps a distinct diagnostic handle, which is the property the repair routing depends on.
 
+Whether a signal fires says nothing about how much room the thresholds have. Figure~\ref{fig:signal-magnitude} divides each measured quantity by its own detection threshold, so the value one is exactly where that signal fires and the three quantities share one scale. On known-good oracle candidates every quantity stays orders of magnitude below its threshold, so the margin against false alarms is wide rather than marginal. Under a numerical fault the forward quantity exceeds its threshold in every run. The training fault is the case that separates the layers. There the forward quantity stays within machine precision of the reference while the update quantity sits well above its threshold. A forward layer that agrees therefore carries no information about the layers beneath it, which is why the hierarchy cannot be collapsed into a single check. Absence is diagnostic in the same way: an aborted run leaves no numeric quantity to compare, and a missing gradient leaves the gradient quantity undefined rather than small.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/signal_magnitude.pdf}
+\caption{Measured signal magnitude under controlled faults, each quantity divided by its own detection threshold, so $y=1$ is where that signal fires. Markers are medians and bars span the observed range: 600 per-step records for the oracle control, and 12 runs per fault class. Crosses in the \textsf{n/a} band mark quantities that do not exist rather than small ones, namely an aborted run under an execution fault and a missing gradient under a training fault. Exact agreement clips to the axis floor.}
+\label{fig:signal-magnitude}
+\end{figure}
+
 \begin{table}[t]
 \centering
 \caption{Signal effectiveness under controlled faults.}
