@@ -401,7 +401,7 @@ Before interpreting any repair outcome, we check the paired execution paths agai
 \textbf{Model} & \textbf{Pass} & \textbf{Mean $\Delta L$} & \textbf{Max $\Delta L$} & \textbf{Mean $\Delta G$} & \textbf{Mean $\Delta U$} \\
 \midrule
 CNN & 1.000 & $4.570{\times}10^{-7}$ & $2.980{\times}10^{-6}$ & $1.510{\times}10^{-8}$ & $1.146{\times}10^{-6}$ \\
-NLP & 1.000 & $6.167{\times}10^{-7}$ & $1.669{\times}10^{-6}$ & $1.441{\times}10^{-8}$ & $3.825{\times}10^{-6}$ \\
+MLP & 1.000 & $6.167{\times}10^{-7}$ & $1.669{\times}10^{-6}$ & $1.441{\times}10^{-8}$ & $3.825{\times}10^{-6}$ \\
 Trans. & 1.000 & $5.643{\times}10^{-8}$ & $2.384{\times}10^{-7}$ & $1.748{\times}10^{-8}$ & $7.913{\times}10^{-7}$ \\
 TinyLM & 1.000 & $1.745{\times}10^{-6}$ & $3.815{\times}10^{-6}$ & $3.835{\times}10^{-8}$ & $1.127{\times}10^{-6}$ \\
 \bottomrule
@@ -422,6 +422,9 @@ The MindSpore study covers four model families, 25 fault categories, three repai
 \section{Conclusion}
 
 We introduced a hierarchical feedback framework for cross-framework training-code migration that validates execution, forward-numerical, and gradient/update semantics in order. Specifically, the framework reports the first failing semantic layer and routes that diagnosis to a targeted repair and re-verification loop. This design makes repair guidance actionable at the layer where the divergence originates, rather than at the point of failure. A common adapter interface keeps the hierarchy independent of the target runtime and its differentiation system. Experiments across MindSpore and JAX target paths demonstrate that hierarchical feedback repairs more faults than execution-only and agent baselines at substantially lower token cost.
+
+\section*{Acknowledgment}
+This work was supported by CAAI Huawei MindSpore Open Fund, and developed on OpenI Community.
 
 \bibliographystyle{IEEEtran}
 \bibliography{ref}
