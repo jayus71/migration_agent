@@ -179,7 +179,14 @@ Because every result below is read off a comparison between two executions, we f
 The primary experiment ran the full pool of 50 instances on the MindSpore path. All instances were hidden from the repair prompts, each allowed at most four repair attempts, and failed repairs were rolled back. The transfer experiment repeated the same protocol on the PyTorch-to-JAX path.
 
 \textbf{Repair on the MindSpore path.}
-Panel (a) of Table~\ref{tab:main-results} compares the hierarchy with SWE-agent v1.1.0~\cite{yang2024sweagent}, MatchFixAgent~\cite{ibrahimzada2025matchfixagent}, and the internal execution-only, unordered, and direct-LLM conditions. Reporting all signals without an order improves only marginally over reporting execution status alone. Measuring the deeper layers is therefore not what helps. Ranking them and naming the layer that failed first is. MatchFixAgent is the strongest baseline. Its fragment-pair interface supplies the healthy implementation of the changed function, so its rate is an upper bound rather than a blind-repair result. The hierarchy still leads it at both Repair@1 and Repair@4 while repairing blind. The token column separates the two families sharply. Both agent baselines consume more than an order of magnitude more tokens than the hierarchy. Localizing a failure by exploration is more expensive than reading it from a layered diagnosis.
+Panel (a) of Table~\ref{tab:main-results} compares the hierarchy with SWE-agent v1.1.0~\cite{yang2024sweagent}, MatchFixAgent~\cite{ibrahimzada2025matchfixagent}, and the internal execution-only, unordered, and direct-LLM conditions. Reporting all signals without an order improves only marginally over reporting execution status alone. Measuring the deeper layers is therefore not what helps. Ranking them and naming the layer that failed first is. MatchFixAgent is the strongest baseline. Its fragment-pair interface supplies the healthy implementation of the changed function, so its rate is an upper bound rather than a blind-repair result. The hierarchy still leads it at both Repair@1 and Repair@4 while repairing blind. The token column separates the two families sharply. Figure~\ref{fig:cost-quality} plots that separation: both agent baselines spend more than an order of magnitude more tokens than the hierarchy and still verify fewer instances. Localizing a failure by exploration is more expensive than reading it from a layered diagnosis.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\columnwidth]{figures/cost_quality.pdf}
+\caption{Token cost against verified repair rate on the 50-instance pool. The two families separate along the horizontal axis: exploration-based agents pay an order of magnitude more tokens than the hierarchy for a lower rate. Values are those of Table~\ref{tab:main-results}.}
+\label{fig:cost-quality}
+\end{figure}
 
 Panel (b) shows where those repairs land. Coverage is complete at every semantic layer and every repair scope, so no slice of the pool is carried by the others. Repair@1 is lowest on numerical faults and on the two core scopes, which are the slices that need additional rounds rather than wider coverage.
 
