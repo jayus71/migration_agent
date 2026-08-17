@@ -1,0 +1,300 @@
+# Experiment Plan
+
+**论文问题**：PyTorch 训练代码迁移到 MindSpore 或其他后端后，如何利用执行、数值、梯度和参数更新反馈完成自动修复。
+
+**核心方法**：按 `execution -> numerical -> gradient/update` 的顺序定位首个失败层，再让 LLM 定向修复。
+
+**日期**：2026-07-23
+
+## 1. 最终要跑哪些 baseline
+
+### 必跑
+
+| ID | Baseline | 类型 | 主要跑什么 |
+|---|---|---|---|
+| `T-DIRECT` | Direct LLM | 一次性代码迁移 | 5 个迁移任务，每个生成 3 次 |
+| `T-CTE` | CodeTransEngine Direct | 公开 LLM 代码转换框架 | 5 个迁移任务，每个生成 3 次，只用 Direct Translation |
+| `T-X2MS` | X2MindSpore | 官方迁移工具 | 5 个迁移任务，各转换 1 次 |
+| `T-MSA` | MSAdapter `v0.6.0` | PyTorch 到 MindSpore 兼容层 | 5 个迁移任务，各跑 1 个候选、验证 3 个 seed |
+| `T-HIER` | Full Translator + Fixer | 我们的完整迁移流程 | 5 个迁移任务，每个独立跑 3 次、最多修复 4 轮 |
+| `R-DIRECT` | Direct LLM Repair | 无专门诊断的 LLM 修复 | 先跑 12-task pilot，再决定是否跑 Fixed50 |
+| `R-MATCH` | MatchFixAgent | 公开 translation repair agent | 先跑 12-task pilot，通过后跑 Fixed50 |
+| `R-SWE` | SWE-agent `v1.1.0` | 通用仓库修复 agent | 先跑 12-task pilot，通过后跑 Fixed50 |
+| `R-EXEC` | Execution-only Feedback | 内部消融 | 12-task pilot，最多 4 轮 |
+| `R-FLAT` | Flat Semantic Feedback | 关键新 baseline | 12-task pilot 和 Fixed50，最多 4 轮 |
+| `R-HIER` | Full Hierarchical Feedback | 我们的完整方法 | 12-task pilot 和 Fixed50，最多 4 轮 |
+
+### 有余力再跑
+
+| Baseline | 建议用途 |
+|---|---|
+| MindNLP/MindTorch | 作为第二个 MindSpore 兼容层，只跑支持的迁移任务 |
+| MindConverter 1.7 | 旧官方转换器，优先试 MLP、CNN、ResNet |
+| CRAFT | 只适合补充算子级 PyTorch-to-MindSpore 差异测试，不作为完整训练代码主 baseline |
+| Ivy | 在 PyTorch-to-JAX 扩展实验中跑 MLP 和 CNN |
+| torch2jax | 在 PyTorch-to-JAX 扩展实验中跑 MLP 和 CNN |
+| mini-SWE-agent | 可作为 SWE-agent 的轻量版本敏感性实验 |
+
+不优先跑 ExeCoder、AlphaTrans、Rectifier、RepoTransAgent。这些方法与当前 Python 深度学习训练代码场景不够匹配，或者缺少可直接复用的公开实现/模型。
+
+## 2. Track A：迁移/转换实验
+
+### 输入任务
+
+输入文件位于：
+
+```text
+ascend-torch4ms/experiments/paper_section_63_64/section642_heldout_sources/
+```
+
+共 5 个任务：
+
+| Task ID | 模型 |
+|---|---|
+| `image_mlp` | Image MLP |
+| `cnn` | CNN |
+| `resnet` | ResNet |
+| `transformer_classifier` | Transformer classifier |
+| `tiny_causal_lm` | Tiny causal LM |
+
+### 每个 baseline 怎么跑
+
+#### `T-DIRECT`：Direct LLM
+
+- 把一个完整 PyTorch 源文件直接交给 LLM。
+- 要求输出可训练的 MindSpore、MSAdapter 或 torch4ms 目标代码，必须注明走的是哪条后端路径。
+- 不给仓库 guide，不给错误诊断，不允许修复循环。
+- 每个任务独立调用 3 次，共 15 个输出。
+
+#### `T-CTE`：CodeTransEngine Direct
+
+- 上游：https://github.com/CodeTransEngine/CodeTransEngine
+- 建议固定提交：`e97e4ff0974774e67216b11da20b39d476b3a1e3`
+- 新增自定义任务类型 `PyTorch-Python -> MindSpore-Python`。
+- 只运行 Direct Translation，不启用 InterTrans、few-shot 或额外修复 agent。
+- 使用与 `T-DIRECT` 相同的 LLM、提示目标和生成预算。
+- 每个任务跑 3 次，共 15 个输出。
+
+#### `T-X2MS`：X2MindSpore
+
+- 文档：https://www.hiascend.com/document/detail/en/mindstudio/600/msug/msug_000034.html
+- 用同一版本的 MindStudio/X2MindSpore 处理 5 个源文件。
+- 每个任务只保留工具原始输出，不要手工修代码。
+- 如果工具不支持某个训练脚本，记录 `unsupported` 和报错即可。
+
+#### `T-MSA`：MSAdapter
+
+- 上游：https://openi.pcl.ac.cn/OpenI/MSAdapter
+- 固定版本：`v0.6.0`，提交 `0a6d11d6d00243141e2bdd01f086782b37b49a21`
+- 配套 MindSpore：`2.7.2`。
+- 只允许加入统一的 MSAdapter 启用代码，不允许按任务手工改模型逻辑。
+- 每个任务产生 1 个候选，在 3 个 seed 上验证。
+
+#### `T-HIER`：我们的完整迁移和修复流程
+
+- Translator 先生成目标代码。
+- 如未通过验证，再使用完整层次反馈修复，最多 4 轮。
+- LLM 任务仍需做 3 次独立运行。
+
+### 这个 Track 要交什么结果
+
+每个候选至少交回：
+
+- 生成后的代码文件；
+- 是否编译/导入成功；
+- 是否完成 forward、backward 和 optimizer step；
+- loss 差异、gradient norm 差异、parameter update 差异；
+- 最终 strict pass/fail；
+- 工具版本、运行命令、耗时；
+- LLM 方法额外记录模型、token 和调用次数。
+
+## 3. Track B：修复实验
+
+### 第一阶段：12-task pilot
+
+先只跑下面 12 个任务：
+
+- 4 个模型：CNN、Image MLP、Transformer classifier、Tiny causal LM；
+- 3 类故障：`EX-01`、`NU-04`、`GR-07`；
+- 总计：`4 models x 3 faults = 12 tasks`。
+
+所有修复 baseline 最多 4 次 patch 尝试，并从完全相同的故障候选开始。
+
+### 第二阶段：Fixed50
+
+只有 pilot 能稳定运行的 baseline 才扩展到 Fixed50：
+
+- 25 个故障类别；
+- 每类 2 个模型实例；
+- 共 50 个实例；
+- 10 个 execution 类、7 个 numerical 类、8 个 gradient/update 类；
+- 每个实例最多 4 次 patch 尝试。
+
+Fixed50 的入口为：
+
+```text
+ascend-torch4ms/experiments/paper_section_65_66/run_section65_real_fault_repair.py
+```
+
+### 修复 baseline 的反馈区别
+
+| Baseline | 可以看到什么 |
+|---|---|
+| `R-DIRECT` | 源代码、故障候选、普通测试输出；没有结构化诊断 |
+| `R-MATCH` | MatchFixAgent 自己的静态分析和生成测试；不给我们的层次诊断 |
+| `R-SWE` | SWE-agent 的普通仓库工具和测试输出；不给我们的层次诊断 |
+| `R-EXEC` | execution 是否成功、异常类型和堆栈；不给数值和梯度信息 |
+| `R-FLAT` | 同时给 E/N/G/U 全部指标，但不提供层次顺序、首失败层和修复路由 |
+| `R-HIER` | 给 E/N/G/U、首失败层和对应修复路由 |
+
+`R-FLAT` 是最重要的新 baseline。它用来回答：完整方法的提升究竟来自“看到了更多指标”，还是确实来自“按层次组织并路由这些指标”。如果 Full 与 Flat 没有明显差异，论文不能把收益主要归因于 hierarchy。
+
+### MatchFixAgent 怎么跑
+
+- 上游：https://github.com/Intelligent-CAT-Lab/MatchFixAgent
+- 建议固定提交：`66a52a5626f5e8b480abbcd4b0e7a287fb3d85a7`
+- 先适配 Python 训练代码和本仓库测试命令，再跑 12-task pilot。
+- 使用它自己的 validation/repair 流程，不要把我们的首失败层塞进它的 prompt。
+- 如果 Python 静态分析适配成本过高，也要返回 pilot 的支持范围和失败原因。
+
+### SWE-agent 怎么跑
+
+- 上游：https://github.com/SWE-agent/SWE-agent
+- 固定 tag：`v1.1.0`。
+- 每个故障实例作为一个独立 issue，给出目标、可编辑文件和普通测试命令。
+- 最多保存 4 个 patch checkpoint；每个 checkpoint 都交给同一最终 verifier 检查。
+- 不允许 agent 读取隐藏 oracle 或故障答案。
+
+### 这个 Track 要交什么结果
+
+- `strict success`；
+- `Repair@1`、`Repair@2`、`Repair@4`；
+- 成功实例的修复轮数；
+- compile、execution、numerical、gradient、update 各阶段是否通过；
+- 越界修改次数；
+- token、API cost、wall time；
+- 失败原因和最终 patch。
+
+不支持的实例仍保留在总分母中，同时单独报告 coverage。环境故障不算 baseline 失败，应修好后重跑。
+
+## 4. 可选 Track C：PyTorch-to-JAX
+
+如果还有人力，再比较：
+
+- 我们的 TorchAX/JAX 完整方法；
+- Ivy；
+- torch2jax；
+- Direct LLM。
+
+只需跑 MLP 和 CNN，各覆盖 1 个 execution、1 个 numerical、1 个 gradient/update 故障，共 6 个任务。主要看 strict success 和首失败层定位，不需要先扩展到大规模任务。
+
+## 5. 统一设置
+
+- 当前论文实验使用的 LLM：`deepseek-v4-flash`。
+- Temperature：`0.1`。
+- LLM 迁移方法：每个任务 3 次独立输出。
+- 修复方法：每个实例最多 4 轮。
+- 所有可配置的 LLM baseline 必须使用同一个模型；如果某框架不支持该模型，单独列为非同模型补充实验。
+- MindSpore 主环境：`MindSpore 2.7.2`、`torch 2.8.0`、`numpy 2.0.2`。
+- 当前 torch4ms 实验提交：`f66cafebb8bda4881e92d40f1aa9432b94e36d2c`。
+- 最终验收阈值沿用论文：loss absolute difference `<= 0.02`，gradient norm absolute difference `<= 0.05`，parameter update relative L2 `<= 0.03`。
+- 不得针对单个失败案例进行人工修复；必要的通用适配代码必须对该 baseline 的全部任务一致。
+
+## 6. 本仓库已有命令
+
+在 `ascend-torch4ms/` 目录运行，并提前配置：
+
+```bash
+export AUTOFIX_LLM_ENABLED=1
+export AUTOFIX_TRANSLATOR_LLM_ENABLED=1
+export AUTOFIX_FIXER_LLM_ENABLED=1
+export AUTOFIX_LLM_API_KEY='<key>'
+export AUTOFIX_LLM_BASE_URL='<openai-compatible-endpoint>'
+export AUTOFIX_LLM_MODEL='deepseek-v4-flash'
+```
+
+Direct Translator 与 guided Translator 的 5-task 实验：
+
+```bash
+PYTHONPATH=. python experiments/paper_section_63_64/run_section642_translator_guide_ablation.py \
+  --repeats 3 \
+  --output-dir experiments/baselines/translator_direct_vs_guided
+```
+
+12-task execution/数值/完整反馈实验：
+
+```bash
+PYTHONPATH=. python experiments/paper_section_63_64/run_section63_feedback_ablation.py \
+  --real-llm --repair-attempts 4 --timeout-sec 120 \
+  --output-dir experiments/baselines/repair_pilot12
+```
+
+完整方法 Fixed50：
+
+```bash
+PYTHONPATH=. python experiments/paper_section_65_66/run_section65_real_fault_repair.py \
+  --instance-suite fixed50 --real-llm --blind \
+  --repair-attempts 4 --timeout-sec 300 \
+  --output-dir experiments/baselines/full_hier_fixed50
+```
+
+TorchAX/JAX 6-task 扩展：
+
+```bash
+PYTHONPATH=. python experiments/paper_section_67/run_section67_fixer_torchax.py \
+  --max-rounds 3 \
+  --output-dir experiments/baselines/torchax_full6
+```
+
+注意：`R-FLAT`、MatchFixAgent、SWE-agent、X2MindSpore、MSAdapter 和 CodeTransEngine 目前没有接入本仓库统一 runner。需要分别做一个薄适配层，把候选代码交回同一 verifier 即可。
+
+## 7. 单人执行顺序
+
+按下面的顺序串行完成：
+
+1. 环境和 verifier：先用完整方法跑 1 个 MLP smoke case，确认环境可用。
+2. 迁移 Track A：依次跑 Direct LLM、完整方法、MSAdapter、X2MindSpore、CodeTransEngine。
+3. 内部修复 pilot：依次跑 `R-EXEC`、`R-FLAT`、`R-HIER` 的 12 个任务。
+4. 外部修复 pilot：依次跑 Direct LLM Repair、SWE-agent、MatchFixAgent 的 12 个任务。
+5. Fixed50：优先跑 `R-FLAT` 和 `R-HIER`，随后扩展其他在 pilot 中可正常工作的 baseline。
+6. 可选项：主实验全部完成后，再跑 MindNLP/MindTorch、Ivy、torch2jax 和 TorchAX/JAX 扩展。
+
+任何 baseline 的 smoke case 如果无法运行，先记录安装问题或 `unsupported`，不要因此阻塞后面的 baseline。
+
+## 8. 最终交付
+
+建立一个总结果目录，并按 baseline 创建子目录。每个 baseline 子目录至少包含：
+
+```text
+<baseline>/
+  README.md              # 环境、版本、安装和命令
+  summary.csv            # 一行一个任务/实例
+  raw/                   # 原始 JSON、stdout、stderr
+  candidates/            # 每轮候选或 patch
+  failures.md            # unsupported 和失败原因
+```
+
+论文主表优先比较：
+
+1. Track A 的 coverage、compile、execute、train、strict success；
+2. Track B 的 strict success、Repair@1/2/4、轮数和成本；
+3. `R-FLAT` 与 `R-HIER` 的直接差异；
+4. 我们的方法与 MatchFixAgent、SWE-agent 的差异。
+
+## Claim Map
+
+| Claim | 最少需要的证据 | 对应实验 |
+|---|---|---|
+| C1：层次反馈提高严格修复成功率 | Full 在相同 12-task/Fixed50 和 4 轮预算下优于 execution-only，并与 Flat 拉开差异 | Track B |
+| C2：诊断模式可迁移到不同后端 | TorchAX/JAX 上 6 个故障的定位和修复结果 | Track C |
+| 公开方法对比完整 | 至少完成 CodeTransEngine、X2MindSpore、MSAdapter、MatchFixAgent、SWE-agent 的 pilot 或明确 coverage | Track A、B |
+
+## Final Checklist
+
+- [ ] 5 个迁移任务均已分配
+- [ ] 12-task repair pilot 均已分配
+- [ ] Flat Semantic Feedback 已实现并运行
+- [ ] pilot 通过的方法已扩展到 Fixed50
+- [ ] 每个结果都保留候选代码、版本和原始日志
+- [ ] 未把 unsupported 样本从分母中删除
+- [ ] 未对单个输出进行人工修复
