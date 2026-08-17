@@ -3,17 +3,25 @@
 This index keeps only the latest paper-facing result for each experiment. Historical,
 superseded, and smoke-result directories are intentionally omitted.
 
-Local experiment root:
+> **Updated 2026-08-14.** The paper's two main comparison tables now come from result
+> bundles that live on **separate branches**, not on the branch this index originally
+> assumed. Read the "Result branches" section below before resolving any path.
+> Superseded entries are kept and marked rather than deleted, so the provenance of
+> earlier drafts stays traceable.
 
-```text
-F:\torchax\autofix\ascend-torch4ms
-```
+## Result branches
 
-Manuscript source:
+Experiment repository: `https://gitee.com/feixiao13/ascend-torch4ms.git`
 
-```text
-F:\torchax\autofix\torch4ms_paper\conference_101719.tex
-```
+| Branch | Commit | Contains | Used by paper |
+|---|---|---|---|
+| `codex/llm-fixer-capability` | `f66cafe` | Sections 6.3–6.6 bundles, old 6.7 pilots | Yes (6.3–6.6) |
+| `codex/track-b-repair-baselines` | `365652d` | `experiments/baselines/track_a/`, `experiments/baselines/full_hier_fixed50/` | Yes (`tab:end-to-end-results`, `tab:baseline-comparison`) |
+| `codex/track-c-torchax-autofix` | `3352f71` | `experiments/baselines/track_c/` | Yes (`tab:track-c`) |
+
+The paper repository's submodule pointer is pinned at `f66cafe`, which **predates**
+Track A/B (2026-07-28) and Track C (2026-08-01). A plain clone plus `submodule update`
+therefore does not retrieve the data behind the paper's current main tables.
 
 ## Selected Results
 
@@ -24,10 +32,28 @@ F:\torchax\autofix\torch4ms_paper\conference_101719.tex
 | 6.4.1         | multi-scope feedback x Fixer-guide ablation | `experiments/paper_section_63_64/results_section641_multiscope_v1/`                                    | real LLM, candidate / core operator / core autograd-optimizer scopes   |
 | 6.4.2         | Translator guide ablation                   | `experiments/paper_section_63_64/results_section642_translator_guide_ablation_v4/`                     | one-shot Translator, Fixer disabled, held-out migration tasks          |
 | 6.5 signal    | verifier signal effectiveness               | `experiments/paper_section_65_66/results_section65_signal_sanity_current/`                             | execution / numerical / gradient-update signal separation              |
-| 6.5 repair    | final fixed50 repair evaluation             | `experiments/paper_section_65_66/results_section65_fixed50_full_real/`                                 | real LLM, 25 categories / 50 instances                                 |
+| 6.5 repair    | **superseded** — was fixed50 repair source  | `experiments/paper_section_65_66/results_section65_fixed50_full_real/`                                 | 46/50 = 92.0%. **No longer the paper's number**; superseded by Track B `r_hier` (50/50). Retained for provenance. |
 | 6.6 real-data | real-data training consistency              | `experiments/paper_section_65_66/results_realdata_66/`                                                 | CIFAR-10 and AG News, 50-step trajectories                             |
-| 6.7 signal    | torchax cross-bridge signal pilot           | `autofix/reports/torchax_verifier_current_signal_synced/`                                              | torchax signal-only verification                                       |
-| 6.7 repair    | torchax candidate-level repair pilot        | `experiments/paper_section_67/results_fixer_torchax/`                                                  | bounded candidate-level fixer on EX-01 / NU-01 / GR-01                 |
+| 6.7 signal    | **superseded** — torchax signal pilot       | `autofix/reports/torchax_verifier_current_signal_synced/`                                              | superseded by Track C; old 6.7 tables removed from the paper           |
+| 6.7 repair    | **superseded** — torchax repair pilot       | `experiments/paper_section_67/results_fixer_torchax/`                                                  | superseded by Track C. The old 6.7 runner never imported TorchAX/JAX (see `EXPERIMENT_INTEGRITY_AUDIT_20260731.md` §5) |
+
+### Track results (branches above)
+
+| Track | Use in paper | Path | Branch | Notes |
+|---|---|---|---|---|
+| Track A | **not in paper** | `experiments/baselines/track_a/` | `codex/track-b-repair-baselines` | 5 migration baselines x 15 runs, complete. T-HIER 100% vs T-DIRECT / T-CTE / T-MSA / T-X2MS all 0%. Blocked from paper use: `raw/`, `candidates/`, `logs/` hold only `.gitkeep`; see audit §1, §2, §6 |
+| Track B | `tab:end-to-end-results`, `tab:baseline-comparison` | `experiments/baselines/full_hier_fixed50/` | `codex/track-b-repair-baselines` | Fixed50, 6 baselines. Paper reports R-EXEC 33/50, R-FLAT 34/50, Direct 40/50, SWE-agent 46/50, R-HIER 50/50 |
+| Track B | `tab:baseline-comparison` (added 2026-08-14) | `experiments/baselines/full_hier_fixed50/r_matchfix/` | `codex/track-b-repair-baselines` | MatchFixAgent 47/50 = 94.0%, the strongest external baseline. Now reported in the paper with a dagger footnote stating that its fragment-pair interface supplies the healthy implementation of the changed function (`run_external_repair_pilot.py:932-934,959-967`), so its rate is an upper bound rather than a blind-repair result |
+| Track C | `tab:track-c` | `experiments/baselines/track_c/` | `codex/track-c-torchax-autofix` | PyTorch→JAX. R-HIER 6/6, Direct LLM 5/6, Ivy 0/6, torch2jax 0/6. Runner genuinely uses TorchAX + JAX + Optax |
+
+### Metric definition note
+
+Track B `Repair@1` in `tab:end-to-end-results` uses the runner's `effective_rounds`
+field, matching `summary.json`'s `repair_at_1 = 0.84`. Recomputing from the `attempts`
+column instead yields different values (execution 80.0%, core operator 65.0%,
+overall 80.0%), because `EX-06-A` and `EX-06-B` record `attempts=0` with
+`effective_rounds=1` and `patch_count=1`. `effective_rounds` is the self-consistent
+definition; use it when reproducing the table.
 
 
 ## 6.3 NU-04 Feedback Granularity
