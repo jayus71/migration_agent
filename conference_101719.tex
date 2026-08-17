@@ -6,6 +6,7 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{booktabs}
+\usepackage{multirow}
 \usepackage[hyphens]{url}
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
@@ -185,37 +186,50 @@ Panel (b) shows where those repairs land. Coverage is complete at every semantic
 \textbf{Transfer to the JAX path.}
 Table~\ref{tab:jax-transfer} separates the conversion tools from the repair methods. Ivy and \texttt{torch2jax} produce no candidate that passes the training check at any layer. Direct LLM repair handles the execution and gradient/update faults but misses one numerical fault. The hierarchy localizes every fault at its expected first failing layer and repairs all six in one round. The same hierarchy therefore transfers to a backend with a different differentiation system and optimizer stack.
 
-\begin{table}[!t]
-\caption{Verified repair on the fixed 50-instance MindSpore fault pool. Panel (a) compares all methods under matched conditions; panel (b) decomposes the hierarchy's result by semantic layer and by repair scope.}
+\begin{table*}[!t]
+\caption{Verified repair on the fixed 50-instance MindSpore fault pool, built from recorded real migration failures. Panel (a) compares every method under matched conditions. Panel (b) decomposes our result over the same instances, first by the semantic layer at which the fault surfaced and then by the scope the repair was allowed to edit.}
 \label{tab:main-results}
 \centering
-\scriptsize
-\setlength{\tabcolsep}{1.9pt}
-\begin{tabular}{lrrrrr}
-\multicolumn{6}{l}{\textit{(a) Comparison against internal conditions and repair agents}} \\
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}llrrrrr@{}}
 \toprule
-\textbf{Method} & \textbf{Verified} & \textbf{R@1} & \textbf{R@2} & \textbf{R@4} & \textbf{Tokens} \\
+\multicolumn{7}{@{}l}{\textit{(a) Comparison against internal feedback conditions and repair agents}} \\
 \midrule
-Execution-only & 33/50 (66.0\%) & 58.0\% & 64.0\% & 66.0\% & 0.15M \\
-All signals, unordered & 34/50 (68.0\%) & 66.0\% & 66.0\% & 68.0\% & 0.18M \\
-Direct LLM & 40/50 (80.0\%) & 72.0\% & 76.0\% & 80.0\% & 1.58M \\
-SWE-agent & 46/50 (92.0\%) & 72.0\% & 84.0\% & 92.0\% & 7.64M \\
-MatchFixAgent$^\dagger$ & 47/50 (94.0\%) & 74.0\% & 86.0\% & 94.0\% & 5.21M \\
-Hierarchical (ours) & \textbf{50/50 (100.0\%)} & \textbf{84.0\%} & \textbf{98.0\%} & \textbf{100.0\%} & \textbf{0.19M} \\
+& \textbf{Method} & \textbf{Verified} & \textbf{Repair@1} & \textbf{Repair@2} & \textbf{Repair@4} & \textbf{Tokens} \\
 \midrule
-\multicolumn{6}{l}{\textit{(b) Where the hierarchy's repairs land, as instances and R@1}} \\
+\multirow{2}{*}{\textit{Ours, reduced}}
+  & Execution-only          & 33/50 (66.0\%) & 58.0\% & 64.0\% & 66.0\% & 0.15M \\
+  & All signals, unordered  & 34/50 (68.0\%) & 66.0\% & 66.0\% & 68.0\% & 0.18M \\
 \midrule
-\multicolumn{3}{l}{\textit{By semantic layer}} & \multicolumn{3}{l}{\textit{By repair scope}} \\
-Execution & 20 & 90.0\% & \multicolumn{1}{l}{Candidate-level} & 26 & 92.3\% \\
-Numerical & 14 & 64.3\% & \multicolumn{1}{l}{Core operator} & 20 & 75.0\% \\
-Gradient/update & 16 & 93.8\% & \multicolumn{1}{l}{Core autograd/opt.} & 4 & 75.0\% \\
+\multirow{3}{*}{\textit{Repair baselines}}
+  & Direct LLM              & 40/50 (80.0\%) & 72.0\% & 76.0\% & 80.0\% & 1.58M \\
+  & SWE-agent               & 46/50 (92.0\%) & 72.0\% & 84.0\% & 92.0\% & 7.64M \\
+  & MatchFixAgent$^\dagger$ & 47/50 (94.0\%) & 74.0\% & 86.0\% & 94.0\% & 5.21M \\
+\midrule
+\textit{Ours, full}
+  & Hierarchical            & \textbf{50/50 (100.0\%)} & \textbf{84.0\%} & \textbf{98.0\%} & \textbf{100.0\%} & \textbf{0.19M} \\
+\bottomrule
+\end{tabular}
+
+\vspace{4pt}
+
+\begin{tabular}{@{}lrrcccclrrr@{}}
+\toprule
+\multicolumn{11}{@{}l}{\textit{(b) Where our repairs land. Every slice reaches 100\% verified, so only Repair@1 varies.}} \\
+\midrule
+\textbf{Semantic layer} & \textbf{Inst.} & \textbf{Repair@1} & & & & & \textbf{Repair scope} & \textbf{Inst.} & \textbf{Repair@1} \\
+\midrule
+Execution        & 20 & 90.0\% & & & & & Candidate-level      & 26 & 92.3\% \\
+Numerical        & 14 & 64.3\% & & & & & Core operator        & 20 & 75.0\% \\
+Gradient/update  & 16 & 93.8\% & & & & & Core autograd/optim. & \phantom{0}4 & 75.0\% \\
 \bottomrule
 \end{tabular}
 \vspace{2pt}
 \begin{flushleft}
-\footnotesize R@$k$ is verified success within $k$ repair attempts. All methods use 25 fault categories with two instances per category and the same four-attempt limit. Tokens are total prompt plus completion tokens over the pool. $^\dagger$MatchFixAgent is supplied the healthy implementation of the changed function by its fragment-pair interface, so its rate is an upper bound rather than a blind-repair result. Every slice in panel (b) reaches 100\% verified, so only R@1 varies; the two groupings each partition the same 50 instances.
+\footnotesize Repair@$k$ is verified success within $k$ repair attempts, so Repair@4 equals verified success under the shared four-attempt budget. Tokens are prompt plus completion tokens summed over the pool. $^\dagger$MatchFixAgent's fragment-pair interface supplies the healthy implementation of the changed function, so its rate is an upper bound rather than a blind-repair result. In panel (b) the two groupings each partition the same 50 instances independently; rows across the two halves are not paired.
 \end{flushleft}
-\end{table}
+\end{table*}
 
 \begin{table}[!t]
 \caption{Verified repairs on the PyTorch-to-JAX transfer study.}
