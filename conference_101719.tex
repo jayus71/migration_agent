@@ -34,7 +34,7 @@ The maturation of LLM-based code translation has made it practical to port deep 
 \end{abstract}
 
 \begin{IEEEkeywords}
-cross-framework migration, training-code translation, hierarchical feedback, program repair, differential testing
+cross-framework migration, training-code translation, layered feedback, program repair, differential testing
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -105,7 +105,7 @@ LADDER checks training code in the order required by its computation: the candid
 \[
 \text{execution} \rightarrow \text{forward numerical} \rightarrow \text{gradient/update}.
 \]
-The first failing stage becomes the primary repair guidance. Later signals may provide supporting evidence, but they do not replace the earliest point at which the source and candidate executions diverge.
+The first failing stage becomes the primary repair guidance. Later checks may provide supporting evidence, but they do not replace the earliest point at which the source and candidate executions diverge.
 
 \paragraph{Common adapter.}
 Each target path supplies an execution adapter that runs the candidate and exposes phase status, selected forward values, gradients, and parameter deltas in a common report. Runtime-specific details remain inside the adapter; the checks and their order remain unchanged.
@@ -181,7 +181,7 @@ Because every result below is read off a comparison between two executions, we f
 The primary experiment ran the full pool of 50 instances on the MindSpore path. All instances were hidden from the repair prompts, each allowed at most four repair attempts, and failed repairs were rolled back.
 
 \textbf{Repair on the MindSpore path.}
-Table~\ref{tab:main-results} shows a clear advantage for LADDER under the shared four-attempt budget. LADDER repairs 84.0\% of instances on the first attempt, 98.0\% by the second, and all 50 instances by the fourth. The strongest external baseline, MatchFixAgent, reaches 74.0\%, 86.0\%, and 94.0\% at the same checkpoints. LADDER gains 10 percentage points on first-attempt repair and is the only method that closes the pool, verifying all 50 instances where the strongest baseline leaves three unresolved. The fault-stage columns show where the gain comes from: LADDER repairs all 16 gradient/update faults, compared with 13 for MatchFixAgent and 14 for direct LLM repair. Locating the failing stage also makes the repair cheaper rather than more expensive, at 0.191M tokens per pool and 21.8 seconds per instance against 5.205M tokens and 69.7 seconds for MatchFixAgent, a $27\times$ reduction in tokens and a $3.2\times$ reduction in time. The reduced internal controls establish the mechanism: adding undifferentiated signals gives only a small improvement, while identifying the first failing stage produces the large jump in repair success. Figure~\ref{fig:cost-quality} makes the joint quality--cost advantage visible.
+Table~\ref{tab:main-results} shows a clear advantage for LADDER under the shared four-attempt budget. LADDER repairs 84.0\% of instances on the first attempt, 98.0\% by the second, and all 50 instances by the fourth. The strongest external baseline, MatchFixAgent, reaches 74.0\%, 86.0\%, and 94.0\% at the same checkpoints. LADDER gains 10 percentage points on first-attempt repair and is the only method that closes the pool, verifying all 50 instances where the strongest baseline leaves three unresolved. The fault-stage columns show where the gain comes from: LADDER repairs all 16 gradient/update faults, compared with 13 for MatchFixAgent and 14 for direct LLM repair. Locating the failing stage also makes the repair cheaper rather than more expensive, at 0.191M tokens per pool and 21.8 seconds per instance against 5.205M tokens and 69.7 seconds for MatchFixAgent, a $27\times$ reduction in tokens and a $3.2\times$ reduction in time. The reduced internal controls establish the mechanism: adding undifferentiated checks gives only a small improvement, while identifying the first failing stage produces the large jump in repair success. Figure~\ref{fig:cost-quality} makes the joint quality--cost advantage visible.
 
 \begin{figure}[!t]
 \centering
@@ -205,7 +205,7 @@ Table~\ref{tab:main-results} shows a clear advantage for LADDER under the shared
 \midrule
 \multicolumn{11}{@{}l}{\textit{Internal controls}} \\
 Execution-only          & 50 & 14/20 & 7/14  & 12/16 & 33/50 & 58.0\% & 64.0\% & 66.0\% & 40.3  & 0.155M \\
-All signals, unordered  & 50 & 14/20 & 8/14  & 12/16 & 34/50 & 66.0\% & 66.0\% & 68.0\% & 56.1  & 0.180M \\
+All checks, unordered   & 50 & 14/20 & 8/14  & 12/16 & 34/50 & 66.0\% & 66.0\% & 68.0\% & 56.1  & 0.180M \\
 \midrule
 \multicolumn{11}{@{}l}{\textit{Repair baselines}} \\
 Direct LLM              & 50 & 18/20 & 8/14  & 14/16 & 40/50 & 72.0\% & 76.0\% & 80.0\% & 43.4  & 1.583M \\
@@ -341,12 +341,12 @@ On  & 15 & 100.0\% & 100.0\% & 100.0\% & 100.0\% \\
 \end{tabular}
 \vspace{2pt}
 \begin{flushleft}
-\footnotesize Docs indicates whether target-framework documentation was included in the prompt. Panel (a) rows all use hierarchical feedback; under pass/fail feedback every scope verified 0 tasks with the documentation either on or off, so those rows are omitted. Out-of-scope is the fraction of repairs that edited code outside the assigned scope. In panel (b), a run counts under All three when a single translation passes compilation, execution, and the training check.
+\footnotesize Docs indicates whether target-framework documentation was included in the prompt. Panel (a) rows all use layered feedback; under pass/fail feedback every scope verified 0 tasks with the documentation either on or off, so those rows are omitted. Out-of-scope is the fraction of repairs that edited code outside the assigned scope. In panel (b), a run counts under All three when a single translation passes compilation, execution, and the training check.
 \end{flushleft}
 \end{table}
 
 \subsection{Additional Analysis: Framework Documentation}
-The experiments above vary the feedback. This one varies what the prompts know about the target framework, independently of the feedback, and locates where that knowledge matters. Besides the diagnosis, the fixer prompt can carry documentation for the target framework, covering its operator conventions and optimizer interfaces. Two experiments place it in turn at each end of the pipeline. The first holds the translator fixed and crosses pass/fail against hierarchical feedback, with the documentation off against on. It covers 24 base tasks: 12 candidate-level, eight core-operator, and four core autograd/optimizer. Each ran under all four conditions with a four-round budget. The second moves the same documentation to the translator prompt. The fixer was disabled, so each run made one translation call and no repair round could compensate for a weak first attempt. Five held-out tasks ran at three repeats per condition.
+The experiments above vary the feedback. This one varies what the prompts know about the target framework, independently of the feedback, and locates where that knowledge matters. Besides the diagnosis, the fixer prompt can carry documentation for the target framework, covering its operator conventions and optimizer interfaces. Two experiments place it in turn at each end of the pipeline. The first holds the translator fixed and crosses pass/fail against layered feedback, with the documentation off against on. It covers 24 base tasks: 12 candidate-level, eight core-operator, and four core autograd/optimizer. Each ran under all four conditions with a four-round budget. The second moves the same documentation to the translator prompt. The fixer was disabled, so each run made one translation call and no repair round could compensate for a weak first attempt. Five held-out tasks ran at three repeats per condition.
 
 Panel (a) of Table~\ref{tab:guidance-ablations} isolates the two factors in the fixer. Pass/fail feedback repairs nothing, with or without the documentation. Layered feedback repairs most tasks with the documentation off and remains the decisive factor when documentation is added. The documentation eliminates core-operator out-of-scope edits, while core autograd/optimizer repair remains the hardest scope in every condition.
 
