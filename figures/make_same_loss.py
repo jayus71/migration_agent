@@ -64,17 +64,22 @@ HEAD = "#f2f3f5"
 # 0.0 only because of an eps floor in the denominator. Printing "0.00" would
 # invite a reviewer to ask what a zero cosine means. What is actually true, and
 # needs no definition on page 1, is whether the parameters moved.
+# Values are shown to four decimals, not six. The tolerance a pipeline would
+# apply is 0.02, so a difference in the sixth place is not a difference the check
+# can see, and printing it invites the reader to treat 1.780532 vs 1.780535 as
+# meaningful. At four places both accepted rows read 1.7805 and the agreement is
+# visible rather than something to verify. The exact values are in the caption.
 ROWS = [
     ("Source program", "the reference",
-     "yes", "1.780532", "0.283368", "reference", "--", False),
+     "yes", "1.7805", "0.2834", "reference", "--", False),
     ("Correct port", "no fault",
-     "yes", "1.780535", "0.283368", "matches", "accept", True),
+     "yes", "1.7805", "0.2834", "matches", "accept", True),
     ("Missing operation", "no implementation",
      "no", "--", "--", "--", "reject", False),
     ("Wrong reduction", "averaged, not summed",
-     "yes", "2.500882", "0.687914", "differs", "reject", False),
+     "yes", "2.5009", "0.6879", "differs", "reject", False),
     ("No backward pass", "no gradients",
-     "yes", "1.780535", "--", "never moves", "accept", True),
+     "yes", "1.7805", "--", "no update", "accept", True),
 ]
 
 # Column geometry on a 0-100 canvas. Width is reserved per column so the
@@ -83,13 +88,16 @@ ROWS = [
 # rendered and measured, each column takes the wider of the two plus 2.2 units
 # of padding, and the leftover 4 units are split evenly. Guessing these three
 # times produced three overflow failures.
+# Header is "program", not "ported program": the first row is the source, which
+# is not ported. The verdict header names the same check as the bottom line, so
+# the two do not read as different things.
 COLS = [
-    ("ported program",           2.0, 24.7, "left"),
+    ("program",                  2.0, 24.7, "left"),
     ("runs to\ncompletion?",    24.7, 40.2, "center"),
     ("loss",                    40.2, 53.0, "center"),
     ("gradient\nnorm",          53.0, 65.7, "center"),
     ("parameter\nupdate",       65.7, 82.3, "center"),
-    ("verdict from\nruns + loss", 82.3, 98.0, "center"),
+    ("completion +\nloss verdict",   82.3, 98.0, "center"),
 ]
 
 # Vertical layout is computed from the font sizes, not chosen by eye. At 3.3in
@@ -196,7 +204,7 @@ for i, (label, sub, runs, loss, grad, update, verdict, band) in enumerate(ROWS):
 
     # The last two columns carry the argument, so they are the only emphasized
     # cells. The false accept is the one place the accent colour is used.
-    wrong = band and verdict == "accept" and update == "never moves"
+    wrong = band and verdict == "accept" and update == "no update"
     for (val, col) in ((runs, COLS[1]), (loss, COLS[2]), (grad, COLS[3])):
         xm = (col[1] + col[2]) / 2
         em = val == "--"
@@ -217,16 +225,16 @@ for i, (label, sub, runs, loss, grad, update, verdict, band) in enumerate(ROWS):
 
 # The claim has to be that the shaded rows agree on the columns a single verdict
 # inspects, not that they differ in exactly one column. They differ in two.
-put(50.0, 11.0, "A completion-and-loss check accepts both shaded rows, even though "
-                "their gradients and updates differ.",
+put(50.0, 11.0, "That verdict accepts both shaded rows, though their gradient and "
+                "update evidence differs.",
     fs=FS_HEAD, color=INK, cell=(2.0, 98.0), tag="punchline 1")
-put(50.0, 4.5, "One of the two never updates its parameters, and no single verdict "
-               "tells them apart.",
+put(50.0, 4.5, "One of the two never updates its parameters, and that check cannot "
+               "tell them apart.",
     fs=FS_HEAD, color=ACCENT, cell=(2.0, 98.0), tag="punchline 2")
 
 # footnote naming the provenance, so no reader has to guess
-put(2.0, 93.0, "One CNN training step: PyTorch source and four ported candidates. "
-               "Losses count as matching within 0.02.",
+put(2.0, 93.0, "One convolutional-network training step. Losses match when they "
+               "differ by at most 0.02.",
     ha="left", fs=FS_NOTE, color=MUTED, style="italic", cell=(2.0, 98.0),
     tag="provenance")
 

@@ -30,7 +30,7 @@ anonymous@example.com}}
 \maketitle
 
 \begin{abstract}
-LLM-based code translation has made it practical to port deep learning training programs across frameworks. Such migrations are routinely defeated by differences in operator semantics, automatic differentiation, and optimizer behavior. Existing pipelines validate a candidate against a single outcome such as a clean execution or a passing test, without asking which training stage failed. We argue that the granularity of this feedback, not the power of the repair model, decides whether a migration failure can be repaired. To this end we introduce LADDER, a three-agent framework in which a translator, a verifier, and a fixer iterate under an orchestrator. The verifier compares paired source and candidate executions at the execution, forward-value, and gradient/update stages and reports the first stage that disagrees. The fixer then edits at that stage instead of searching the program for the fault. A stage is measurable only once the stage above it holds, so the ordering follows training semantics rather than a reporting convention. Confining framework-specific code to one execution adapter carries the same loop to a second target. On 50 real MindSpore migration failures LADDER repairs all 50, reaching 84.0\% first-attempt repair against 74.0\% for the strongest baseline while using $27\times$ fewer tokens, and it repairs all six faults in a JAX study.
+LLM-based code translation has made it practical to port deep learning training programs across frameworks. Such migrations are routinely defeated by differences in operator semantics, automatic differentiation, and optimizer behavior. Existing pipelines validate a candidate against a single outcome such as a clean execution or a passing test, without asking which training stage failed. We argue that the granularity of this feedback, not the power of the repair model, determines whether a migration failure is repaired. We introduce Layered Differential Diagnosis for Execution Repair (LADDER), a three-agent framework in which a translator, a verifier, and a fixer iterate under an orchestrator. The verifier compares paired source and candidate executions at the execution, forward-value, and gradient/update stages and reports the first stage that disagrees, and the fixer edits at that stage instead of searching the program. A later stage is meaningful only once its prerequisite passes, so the ordering follows training semantics. Target-specific execution adapters isolate framework code, so the same loop runs on MindSpore and on JAX. On 50 real MindSpore migration failures LADDER closes all 50 within four attempts, reaching 84.0\% first-attempt repair against 74.0\% for the strongest baseline while using $27\times$ fewer tokens, and it repairs all six faults in a JAX study.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -50,7 +50,7 @@ This assumption, however, does not hold for training code. Figure~\ref{fig:diver
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/same_loss.pdf}
-\caption{One verdict cannot locate a training-code failure. Four ported programs run against the same PyTorch source on one training step. A dash marks a quantity that does not exist rather than one that is zero, either because the program stopped before it could be measured or because no backward pass ran. The correct port and the port with no backward pass agree on completion and on loss, reporting $1.780535$ against the source's $1.780532$, and those two columns are all a conventional check inspects. It therefore accepts a program that never updates its parameters, and the three faults shown need three different edits.}
+\caption{One verdict cannot locate a training-code failure. Four ported programs run against the same PyTorch source on one training step. A dash marks a quantity that does not exist rather than one that is zero, either because the program stopped before it could be measured or because no backward pass ran. The correct port and the port with no backward pass agree on completion and on loss, both reporting $1.780535$ against the source's $1.780532$ and so tying at the four decimals shown, and those are the only two columns a conventional check inspects. It therefore accepts a program that never updates its parameters, while the three faults shown need three different edits.}
 \label{fig:divergence}
 \end{figure*}
 
@@ -60,7 +60,7 @@ This paper makes three contributions:
 \begin{itemize}
   \item We show that a single execution verdict cannot guide repair for training-code migration, and formulate validation as a sequence of execution, forward-value, and gradient/update checks.
   \item We introduce LADDER, which turns the first failing check into targeted repair guidance and re-verifies the candidate through a common interface across target frameworks.
-  \item On 50 real migration failures, LADDER verifies 50/50 instances, repairs 84.0\% on the first attempt, and uses 0.19M tokens; it also verifies all six faults in a JAX study.
+  \item On 50 real migration failures, LADDER repairs 50/50 instances, reaches 84.0\% on the first attempt, and uses 0.19M tokens; it also repairs all six faults in a JAX study.
 \end{itemize}
 
 \section{Related Work}
@@ -111,7 +111,7 @@ The first failing stage becomes the primary repair guidance. Later checks may pr
 Each target path supplies an execution adapter that runs the candidate and exposes phase status, selected forward values, gradients, and parameter deltas in a common report. Runtime-specific details remain inside the adapter; the checks and their order remain unchanged.
 
 \paragraph{Execution check.}
-The execution check determines whether $\hat{P}$ completes the required training step under the target backend. It records the phase of failure, including module construction, data movement, forward execution, loss computation, backward execution, and optimizer stepping, together with the exception and operator context when available. This phase identifies compatibility, lowering, placement, dtype, shape, and parameter-registration failures.
+The execution check determines whether $\hat{P}$ completes the required training step under the target backend. It records the phase of failure, including module construction, data movement, forward execution, loss computation, backward execution, and optimizer stepping, together with the exception and operator context when available. This phase identifies compatibility, lowering, placement, dtype, shape, and parameter-registration failures. The check reports a phase that raises, not a phase that is absent. A candidate that never invokes its backward pass raises nothing and therefore completes, which is why backward and update correctness is established at the third stage rather than here. Figure~\ref{fig:divergence} shows a candidate of exactly that kind.
 
 \paragraph{Forward-value check.}
 Once both executions complete, the forward-value check compares logits, selected intermediate activations, and losses under controlled inputs $(x,y)$ and synchronized initialization. The minimal scalar comparison is
