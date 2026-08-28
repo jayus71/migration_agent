@@ -102,7 +102,7 @@ def panel(ax, sub, title, subtitle):
     ax.set_xlim(0, 51)
     ax.set_yticks([1e-5, 1e-3, 1e-1, 1, 1e1, 1e2, ABSENT_Y])
     ax.set_yticklabels(["$10^{-5}$", "$10^{-3}$", "$10^{-1}$", "1", "$10^{1}$",
-                        "$10^{2}$", "n/a"], fontsize=6.6)
+                        "$10^{2}$", "n/a"], fontsize=7.2)
     ax.grid(True, axis="y", which="major", linestyle="-", linewidth=0.5,
             color=GRID, zorder=0)
     ax.set_axisbelow(True)
@@ -111,15 +111,15 @@ def panel(ax, sub, title, subtitle):
     for side in ("left", "bottom"):
         ax.spines[side].set_color("#9a9a9a")
         ax.spines[side].set_linewidth(0.7)
-    ax.tick_params(labelsize=6.6, color="#9a9a9a")
-    ax.set_title(title, fontsize=7.6, color=INK, pad=4.0, loc="left")
+    ax.tick_params(labelsize=7.2, color="#9a9a9a")
+    ax.set_title(title, fontsize=8.2, color=INK, pad=4.0, loc="left")
     # subtitle goes inside the empty mid-band, not on the title baseline
-    ax.text(0.985, 0.055, subtitle, transform=ax.transAxes, fontsize=6.2,
+    ax.text(0.985, 0.055, subtitle, transform=ax.transAxes, fontsize=7.0,
             color=MUTED, va="bottom", ha="right")
 
 
 train = load()
-fig, axes = plt.subplots(1, 2, figsize=(7.0, 2.5), sharey=True)
+fig, axes = plt.subplots(1, 2, figsize=(7.0, 2.9), sharey=True)
 
 tf = train[train.coupling == "teacher-forced"]
 panel(axes[0], tf, "(a) Teacher-forced (each step independent)",
@@ -131,13 +131,13 @@ panel(axes[1], fr, "(b) Free-running (fault accumulates)",
 
 # direct labels: identity is never color-alone, and they satisfy the contrast WARN.
 # Each sits ABOVE its line so nothing is cramped against the axis floor.
-axes[0].text(50.5, 4.4e-5 * 3.6, "Forward", fontsize=6.6,
+axes[0].text(50.5, 4.4e-5 * 3.6, "Forward", fontsize=7.2,
              color=STYLE["loss_abs_diff"]["color"], ha="right", va="bottom")
-axes[0].text(50.5, 33.3 * 2.2, "Update", fontsize=6.6,
+axes[0].text(50.5, 33.3 * 2.2, "Update", fontsize=7.2,
              color=STYLE["param_update_rel_l2"]["color"], ha="right", va="bottom")
-axes[0].text(50.5, ABSENT_Y * 2.4, "Gradient (not measurable)", fontsize=6.2,
+axes[0].text(50.5, ABSENT_Y * 2.4, "Gradient (not measurable)", fontsize=7.0,
              color=STYLE["grad_norm_abs_diff"]["color"], ha="right", va="bottom")
-axes[0].text(1.2, 1.0 * 1.6, "check fires", fontsize=6.2, color=FIRE,
+axes[0].text(1.2, 1.0 * 1.6, "check fires", fontsize=7.0, color=FIRE,
              ha="left", va="bottom")
 
 # panel (b): mark where the forward check finally notices
@@ -145,17 +145,17 @@ cross = fr.groupby("step").loss_abs_diff.mean() / THRESHOLD["loss_abs_diff"]
 first = int(cross[cross > 1.0].index.min())
 axes[1].axvline(first, color=MUTED, linewidth=0.7, linestyle=":", zorder=2)
 axes[1].text(first + 1.4, 3.0e-4, f"forward crosses\nat step {first}",
-             fontsize=6.2, color=MUTED, ha="left", va="center")
+             fontsize=7.0, color=MUTED, ha="left", va="center")
 # arrow stops short of the Update line rather than touching it
 axes[1].annotate("", xy=(1, 14.0), xytext=(1, 1.7),
                  arrowprops=dict(arrowstyle="-|>", color=MUTED, linewidth=0.7,
                                  shrinkA=0, shrinkB=0))
-axes[1].text(2.6, 4.2, "update fires\nat step 1", fontsize=6.2, color=MUTED,
+axes[1].text(2.6, 4.2, "update fires\nat step 1", fontsize=7.0, color=MUTED,
              ha="left", va="center")
 
-axes[0].set_ylabel("Signal / detection threshold", fontsize=7.4, color=INK)
+axes[0].set_ylabel("Signal / detection threshold", fontsize=8.0, color=INK)
 for ax in axes:
-    ax.set_xlabel("Training step", fontsize=7.4, color=INK)
+    ax.set_xlabel("Training step", fontsize=8.0, color=INK)
 
 handles = [
     plt.Line2D([], [], color=STYLE[s]["color"], linewidth=2.0,
@@ -166,11 +166,11 @@ handles = [
 ]
 handles.append(plt.Line2D([], [], color=STYLE["grad_norm_abs_diff"]["color"],
                           linewidth=1.4, linestyle=(0, (4, 2)), marker="x",
-                          markersize=4.6, label="Gradient (absent)"))
+                          markersize=4.6, label="Gradient (not measurable)"))
 handles.append(plt.Line2D([], [], color=FIRE, linewidth=1.0, linestyle="--",
                           label="Detection threshold"))
 # shared legend below both panels: inside either one it would sit on the data
-fig.legend(handles=handles, fontsize=6.4, loc="lower center", ncol=4,
+fig.legend(handles=handles, fontsize=7.0, loc="lower center", ncol=4,
            frameon=False, handletextpad=0.4, columnspacing=1.4,
            bbox_to_anchor=(0.5, -0.045), labelcolor=INK)
 
