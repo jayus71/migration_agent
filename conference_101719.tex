@@ -60,7 +60,7 @@ Based on this observation, we propose Layered Differential Diagnosis for Executi
 
 This paper makes three contributions:
 \begin{itemize}
-  \item We show that a single execution verdict cannot guide repair for training-code migration, and formulate validation as a sequence of execution, forward-value, and gradient/update checks.
+  \item We show that a single verdict on the whole program cannot guide repair for training-code migration, and formulate validation as a sequence of execution, forward-value, and gradient/update checks.
   \item We introduce LADDER, which turns the first failing check into targeted repair guidance and re-verifies the candidate through a common interface across target frameworks.
   \item On 50 real migration failures, LADDER repairs 50/50 instances, reaches 84.0\% on the first attempt, and uses 0.19M tokens; it also repairs all six faults in a JAX study.
 \end{itemize}
@@ -105,7 +105,7 @@ together with the metrics that produced it. Each index names a different repair 
 \paragraph{Ordering.}
 LADDER checks training code in the order its computation requires. The candidate must execute, then preserve the forward computation, then preserve the backward and update behavior that determines learning. A later check is meaningful only after its prerequisite passes,
 \[
-\text{execution} \rightarrow \text{forward numerical} \rightarrow \text{gradient/update}.
+\text{execution} \rightarrow \text{forward-value} \rightarrow \text{gradient/update}.
 \]
 The first failing stage becomes the primary repair guidance. Later checks may provide supporting evidence, but they do not replace the earliest point at which the source and candidate executions diverge.
 
@@ -227,7 +227,7 @@ MatchFixAgent$^\dagger$ & 20/20 & 14/14 & 13/16 & 47/50 & 74.0\% & 86.0\% & 69.7
 \subsection{RQ2: Effect of Layered Feedback}
 \label{sec:ablations}
 \textbf{Feedback detail.}
-This experiment tests whether the improvement comes from the ordered feedback rather than from measuring more quantities. Four model families each received one fault per stage, drawn from the same 25-category pool, giving 12 controlled tasks. The repair loop ran under execution-only feedback, execution plus forward-value feedback, or the full LADDER report for 36 repair episodes under a four-round budget. Table~\ref{tab:feedback-ablation} shows a direct stepwise effect. Execution-only feedback repairs the execution faults, adding the forward check repairs the numerical faults, and the full report repairs the gradient/update faults as well. Every successful repair completes in the first round. The correspondence between the added check and the newly repaired fault class shows why the ordered feedback, rather than a larger undifferentiated report, drives the improvement.
+This experiment tests whether the improvement comes from the ordered feedback rather than from measuring more quantities. Four model families each received one fault per stage, drawn from the same 25-category pool, giving 12 controlled tasks. The repair loop ran under execution-only feedback, execution plus forward-value feedback, or the full LADDER report for 36 repair episodes under a four-round budget. Table~\ref{tab:feedback-ablation} shows a direct stepwise effect. Execution-only feedback repairs the execution faults, adding the forward-value check repairs the numerical faults, and the full report repairs the gradient/update faults as well. Every successful repair completes in the first round. The correspondence between the added check and the newly repaired fault class shows why the ordered feedback, rather than a larger undifferentiated report, drives the improvement.
 
 \begin{table}[tb]
 \caption{Verified repair success under matched feedback conditions.}
@@ -253,7 +253,7 @@ LADDER (ours) & \textbf{12/12} & 4/4 & 4/4 & 4/4 \\
 \textbf{Signal effectiveness.}
 The feedback ablation establishes the repair effect. We next test whether each check identifies the fault class it is meant to expose, independently of repair. For each model and seed we compared a PyTorch reference step with a \texttt{torch4ms} candidate under one of three injected conditions. Injecting a known fault into a known-correct \texttt{torch4ms} implementation fixes the ground truth, which is what makes the specificity of each check measurable. This experiment establishes what each check detects, and Table~\ref{tab:main-results} establishes what the pipeline repairs on translator output. The evaluation used four model families and three seeds per fault. The thresholds are $\Delta_{\mathrm{loss}}>0.02$, $\Delta_{\mathrm{grad}}>0.05$, and $\Delta_{\mathrm{param}}>0.03$.
 
-Table~\ref{tab:signal-effectiveness} shows that the expected check detects its corresponding fault in all 36 fault-injection runs. Execution faults are isolated by the execution check. For training faults, the gradient check records missing-gradient evidence and the update check captures the divergent parameter update. Numerical faults are detected at the forward stage even when their effects propagate to gradient or update metrics. The first-failing-stage rule therefore preserves the distinction needed by repair guidance.
+Table~\ref{tab:signal-effectiveness} shows that the expected check detects its corresponding fault in all 36 fault-injection runs. Execution faults are isolated by the execution check. For training faults, the gradient check records missing-gradient evidence and the update check captures the divergent parameter update. Numerical faults are detected by the forward-value check even when their effects propagate to gradient or update metrics. The first-failing-stage rule therefore preserves the distinction needed by repair guidance.
 
 \begin{table}[t]
 \centering
