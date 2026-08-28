@@ -9,10 +9,11 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 # name, tokens (millions), verified rate (%), family
-# Row labels match Table I exactly; "All checks, unordered" was renamed there.
+# Row labels match Table I exactly. The paper calls the three layered
+# quantities "signals", so this row reads "All signals, unordered" there too.
 POINTS = [
     ("Execution-only",        0.15,  58.0, "reduced"),
-    ("All checks, unordered", 0.18,  66.0, "reduced"),
+    ("All signals, unordered", 0.18,  66.0, "reduced"),
     ("Direct LLM",            1.58,  72.0, "baseline"),
     ("SWE-agent",             7.64,  72.0, "baseline"),
     ("MatchFixAgent",         5.21,  74.0, "baseline"),
@@ -31,7 +32,7 @@ STYLE = {
 OFFSET = {
     # name:                  (dx_pt, dy_pt, horizontal align, vertical align)
     "Execution-only":        (6.0,  -7.0, "left",   "center"),
-    "All checks, unordered": (6.0,   4.0, "left",   "center"),
+    "All signals, unordered": (6.0,   4.0, "left",   "center"),
     "Direct LLM":            (0.0,   5.0, "center", "bottom"),
     "SWE-agent":             (0.0,  -5.0, "center", "top"),
     "MatchFixAgent":         (-1.0,  5.0, "right",  "bottom"),
