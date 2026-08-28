@@ -16,6 +16,11 @@ Text artist on every axes and reports:
   OVERFLOW  a text bbox extends outside its own axes' bounds
   OFFCANVAS a text bbox extends outside the figure canvas
 
+Reading OFFCANVAS: on an axis label or tick label it is normal, because these sit
+outside the axes by design and savefig(bbox_inches="tight") grows the canvas to
+include them. On an in-axes text it is a real defect. OVERLAP and OVERFLOW are
+always worth acting on.
+
 Exit code is 1 if anything is found, so it can gate a commit.
 """
 import importlib.util
@@ -42,14 +47,22 @@ def load(path):
 def texts_of(ax):
     """Every Text artist on an axes that actually renders something.
 
-    Tick labels are skipped when the axis is off: they still exist as artists on
-    a hidden axis and would be reported as phantom collisions.
+    Two kinds of artist exist but are never drawn, and both produced phantom
+    findings before they were excluded:
+      - tick labels on an axis turned off with axis("off");
+      - tick labels whose location falls outside the current view limits.
+        Matplotlib keeps the locator's full label set, so an axis ending at 93
+        still carries a '95' label object.
     """
     out = list(ax.texts)
     for t in (ax.title, ax.xaxis.label, ax.yaxis.label):
         out.append(t)
     if ax.axison:
-        out += ax.get_xticklabels() + ax.get_yticklabels()
+        for locs, labels, (lo, hi) in (
+                (ax.get_xticks(), ax.get_xticklabels(), ax.get_xlim()),
+                (ax.get_yticks(), ax.get_yticklabels(), ax.get_ylim())):
+            lo, hi = min(lo, hi), max(lo, hi)
+            out += [lab for loc, lab in zip(locs, labels) if lo <= loc <= hi]
     return [t for t in out
             if t.get_text().strip() and t.get_visible()]
 
