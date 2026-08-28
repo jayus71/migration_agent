@@ -26,7 +26,7 @@ anonymous@example.com}}
 \maketitle
 
 \begin{abstract}
-The maturation of LLM-based code translation has made it practical to port deep learning training programs across frameworks. Automated migration offers a route to reusing these programs on a new backend, but is frequently defeated by differences in operator semantics, automatic differentiation, and optimizer behavior. Existing translation and repair pipelines validate a candidate against a single outcome such as a clean execution or a passing test, without questioning whether one verdict can locate the semantic layer at which training broke. We argue that the granularity of repair feedback is itself a critical but overlooked factor in migration correctness. To this end, we introduce Layered Differential Diagnosis for Execution Repair (LADDER), which compares paired source and candidate executions through execution, forward-numerical, and gradient/update signals, reporting the first failing layer as the diagnosis that drives targeted repair. Each layer becomes measurable only once the layer above it holds, which makes the ordering a property of training semantics rather than a reporting convention. A common adapter interface carries the same diagnosis to a new target backend without changing the feedback logic. Repair and re-verification are then driven by the reported layer, and a candidate is accepted only once every layer holds. Extensive experiments on MindSpore and JAX target paths demonstrate that LADDER verifies more migrations than execution-only feedback and than blind-repair agents, at an order of magnitude lower token cost.
+The maturation of LLM-based code translation has made it practical to port deep learning training programs across frameworks. Automated migration offers a route to reusing these programs on a new backend, but is frequently defeated by differences in operator semantics, automatic differentiation, and optimizer behavior. Existing translation and repair pipelines validate a candidate against a single outcome such as a clean execution or a passing test, without asking which training stage failed. We identify the detail of repair feedback as the missing factor in migration correctness. We introduce Layered Differential Diagnosis for Execution Repair (LADDER), which compares paired source and candidate executions at the execution, forward-value, and gradient/update stages and uses the first failing stage to guide repair. Each check is enabled only after its prerequisite stage passes, so the order follows the dependency of training computation. A common adapter interface carries the same checks to a second target framework. On a 50-instance MindSpore pool, LADDER verifies every migration, reaches 84.0\% repair in the first attempt, and uses 0.19M tokens, compared with 74.0\% first-attempt repair and 5.21M tokens for the strongest repair baseline; a six-instance JAX study verifies all instances.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -41,65 +41,64 @@ This requirement creates failures that ordinary executability checks cannot see.
 
 Existing systems supply repair feedback in three main ways. Translation pipelines validate against a single outcome such as compilation, unit tests, or repository-level pass rates~\cite{he-etal-2025-execoder,macedo2024intertrans,guan2025repotransagent}. Repair agents explore the program until a test or execution trace exposes the fault~\cite{shinn2023reflexion,chen2023selfdebugging,wang2024codeact,xia2023aprplm,yang2024sweagent}. Conversion and differential-testing tools compare a converted output or a single behavioral property against a reference~\cite{mindspore2023mindconverter,yang2011csmith,pei2017deepxplore}. Despite their variety, all three share a critical implicit assumption, that one verdict on the whole program is a sufficient unit of repair feedback.
 
-This assumption, however, does not hold for training code. Execution failures, forward mismatches, and backward/update errors collapse onto the same verdict even though each calls for a different repair. Training correctness instead carries an ordered semantic structure. A candidate first executes, then preserves the forward computation, and finally preserves gradients and parameter updates. The first failing layer in this sequence provides an actionable diagnosis. Execution failures point to compatibility and lowering, forward failures point to operator semantics, and gradient/update failures point to automatic differentiation, parameter registration, or optimizer behavior.
+This assumption, however, does not hold for training code. Execution failures, forward mismatches, and backward/update errors collapse onto the same verdict even though each calls for a different repair. Training correctness follows an ordered sequence. A candidate first executes, then preserves the forward computation, and finally preserves gradients and parameter updates. The first stage that fails provides actionable repair guidance. Execution failures point to compatibility and lowering, forward failures point to operator semantics, and gradient/update failures point to automatic differentiation, parameter registration, or optimizer behavior.
 
-Based on this observation, we propose Layered Differential Diagnosis for Execution Repair (LADDER), which turns the three signals into an ordered verdict rather than a single one. Paired source and candidate executions are normalized into a common diagnosis report, and a repair component uses the first failing layer to produce a targeted patch before re-verification. Because each layer is measurable only once the layer above it holds, the order is a property of training semantics rather than a reporting convention. A common adapter interface separates this feedback logic from backend execution, so the same diagnosis drives repair on \texttt{torch4ms}/MindSpore\footnote{The primary prototype repository is available at \url{https://gitee.com/feixiao13/ascend-torch4ms.git}.} and on TorchAX/JAX.
+Based on this observation, we propose Layered Differential Diagnosis for Execution Repair (LADDER), which turns the three checks into an ordered verdict rather than a single one. Paired source and candidate executions are normalized into a common report, and a repair component uses the first failing stage to produce a targeted patch before re-verification. Because each check is meaningful only after the preceding check passes, the order follows the dependency of training computation. A common adapter interface separates the checks from backend execution, so the same repair guidance applies to \texttt{torch4ms}/MindSpore\footnote{The primary prototype repository is available at \url{https://gitee.com/feixiao13/ascend-torch4ms.git}.} and TorchAX/JAX.
 
 This paper makes three contributions:
 \begin{itemize}
-  \item We identify the granularity of repair feedback as the factor existing migration pipelines overlook, and formulate training-code migration as an ordered semantic validation problem in which the first failing layer is the actionable signal.
-  \item We introduce LADDER, a backend-independent hierarchy over the execution, forward-numerical, and gradient/update layers, integrated with translation, targeted repair, and re-verification through a common adapter interface.
-  \item Extensive experiments on MindSpore and JAX target paths demonstrate that LADDER verifies more migrations than execution-only feedback and than blind-repair agents, at an order of magnitude lower token cost.
+  \item We show that a single execution verdict cannot guide repair for training-code migration, and formulate validation as a sequence of execution, forward-value, and gradient/update checks.
+  \item We introduce LADDER, which turns the first failing check into targeted repair guidance and re-verifies the candidate through a common interface across target frameworks.
+  \item On 50 real migration failures, LADDER verifies 50/50 instances, repairs 84.0\% on the first attempt, and uses 0.19M tokens; it also verifies all six faults in a JAX study.
 \end{itemize}
 
 \section{Related Work}
-We group related work into three categories according to the feedback each one derives from a candidate program, namely outcome-level validation, search-based fault localization, and single-property comparison.
+We group related work by how it obtains repair feedback: outcome-level validation, search-based fault localization, and conversion or single-property comparison.
 
 \textbf{Outcome-level validation.}
-Most translation systems validate a candidate by one verdict on the whole program. Early neural translation learned from multilingual corpora without direct supervision~\cite{roziere2020transcoder}; later work added automated unit tests as both validation and a self-training signal~\cite{roziere2021unittests}; and compiler representations were introduced to narrow source--target semantic gaps~\cite{szafraniec2023compiler}. Recent LLM-based systems enrich what the candidate is checked against, through executability representations, intermediate translation paths, and repository-level context~\cite{he-etal-2025-execoder,macedo2024intertrans,guan2025repotransagent}. MatchFixAgent goes further and decomposes repository-level equivalence checking across specialized agents, repairing the inequivalences it finds~\cite{ibrahimzada2025matchfixagent}, and we use it as an external repair baseline. The assumption shared by all is that one verdict on the program is a sufficient unit of repair feedback. We relax this assumption by treating validation as an ordered set of semantic layers, so a passing outcome is no longer the unit of feedback.
+Most translation systems validate a candidate by one verdict on the whole program. Early neural translation learned from multilingual corpora without direct supervision~\cite{roziere2020transcoder}; later work added automated unit tests as both validation and a self-training signal~\cite{roziere2021unittests}; and compiler representations were introduced to narrow source--target semantic gaps~\cite{szafraniec2023compiler}. Recent LLM-based systems enrich what the candidate is checked against through executability representations, intermediate translation paths, and repository-level context~\cite{he-etal-2025-execoder,macedo2024intertrans,guan2025repotransagent}. MatchFixAgent decomposes repository-level equivalence checking across specialized agents and repairs the inequivalences it finds~\cite{ibrahimzada2025matchfixagent}. These systems improve the information available to validation, but their feedback remains organized around an overall outcome. LADDER instead reports which training stage fails first, making that stage the unit of repair guidance.
 
 \textbf{Search-based fault localization.}
-A second group treats the fault location as something to be discovered by exploring the program. Automated program repair has long used tests or semantic constraints to guide patch generation~\cite{nguyen2013semfix}, and pre-trained language models made patch generation more fluent while enabling iterative repair from execution feedback~\cite{xia2023aprplm}. Repository-level agents such as SWE-agent edit code iteratively through interactive tools and test feedback~\cite{yang2024sweagent}; reflection and agent-based methods return natural-language critiques, self-debugging traces, or executable code actions to the generation loop~\cite{shinn2023reflexion,chen2023selfdebugging,wang2024codeact}; and multi-agent systems add role specialization, structured communication, and explicit workflows~\cite{qian2023chatdev,hong2023metagpt,wu2023autogen,chen2023agentverse}. This last line motivates our translator--verifier--fixer decomposition. What these methods share is the assumption that locating a fault requires search, because the failure itself does not say where it originated. We read the fault location from the layer at which the two executions first diverge, which removes the search rather than guiding it.
+This group treats fault location as something to be discovered by exploring the program. Automated program repair has long used tests or semantic constraints to guide patch generation~\cite{nguyen2013semfix}, and pretrained language models made patch generation more fluent while enabling iterative repair from execution feedback~\cite{xia2023aprplm}. Repository-level agents such as SWE-agent edit code iteratively through interactive tools and test feedback~\cite{yang2024sweagent}; reflection and agent-based methods return natural-language critiques, self-debugging traces, or executable code actions to the generation loop~\cite{shinn2023reflexion,chen2023selfdebugging,wang2024codeact}; and multi-agent systems add role specialization and structured workflows~\cite{qian2023chatdev,hong2023metagpt,wu2023autogen,chen2023agentverse}. These methods search for a repair location because a whole-program failure does not identify the failing training stage. LADDER supplies that stage directly from paired executions, reducing the amount of search required by the repair loop.
 
-\textbf{Single-property comparison.}
-A third group compares a candidate against a reference on one property. The need arises because frameworks differ in execution model and optimization abstraction, with PyTorch emphasizing an imperative, dynamic front end~\cite{paszke2019pytorch} and TensorFlow demonstrating large-scale dataflow execution~\cite{abadi2016tensorflow}, while compiler infrastructures such as MLIR lower domain-specific computation through extensible intermediate representations~\cite{lattner2021mlir}. Bridging tools compare the conversion output against the source program. MindConverter targets migration from third-party frameworks to MindSpore~\cite{mindspore2023mindconverter}; Ivy\footnote{\url{https://github.com/unifyai/ivy}} and \texttt{torch2jax}\footnote{\url{https://github.com/rdyro/torch2jax}} convert PyTorch computations to JAX; and TorchAX preserves a PyTorch-style front end over a JAX backend~\cite{google2025torchax}. Differential testing instead compares semantically related executions, which has exposed compiler and program-analysis bugs~\cite{yang2011csmith,le2014emi} and, in DL-system testing, has driven behavioral coverage and differential-style validation of networks~\cite{pei2017deepxplore,ma2018deepgauge}. Both lines assume that one comparison at a single depth characterizes the difference. We compare paired training executions at several ordered depths, so the comparison itself yields the repair target. Compiler-level lowering tools act before any execution exists and are complementary to runtime-level differential diagnosis.
+\textbf{Conversion and single-property comparison.}
+Conversion tools and differential tests compare a candidate with a reference at a chosen interface. MindConverter targets migration from third-party frameworks to MindSpore~\cite{mindspore2023mindconverter}; Ivy\footnote{\url{https://github.com/unifyai/ivy}} and \texttt{torch2jax}\footnote{\url{https://github.com/rdyro/torch2jax}} convert PyTorch computations to JAX; and TorchAX preserves a PyTorch-style front end over a JAX backend~\cite{google2025torchax}. Differential testing compares semantically related executions and has exposed compiler and program-analysis bugs~\cite{yang2011csmith,le2014emi}; DL-system testing has extended this idea to behavioral coverage and network-level comparisons~\cite{pei2017deepxplore,ma2018deepgauge}. These tools establish the value of comparing source and target executions, but a single comparison does not distinguish an execution failure from a forward or backward failure. LADDER makes that distinction explicit by checking the three stages in order.
 
-\section{Problem Formulation}
+\section{Method}
 
-\subsection{Task Formulation}
-Given a training program $P$ in a source framework $F_s$ and a target framework path $F_t$, the migration task is to produce a candidate $\hat{P}$ that executes under $F_t$ while preserving the training semantics of $P$. Training semantics includes the quantities that determine whether learning remains equivalent in practice, namely compatible tensors and modules, comparable forward values and losses, comparable gradients, and parameter updates with comparable direction and magnitude. We instantiate this formulation on \texttt{torch4ms}/MindSpore and TorchAX/JAX target paths.
+\subsection{Task and Verification}
+Given a training program $P$ in a source framework $F_s$ and a target framework $F_t$, the migration task is to produce a candidate $\hat{P}$ that executes under $F_t$ while preserving the training behavior checked in our experiments. These checks cover compatible tensors and modules, comparable forward values and losses, comparable gradients, and parameter updates with comparable direction and magnitude. We instantiate this task on \texttt{torch4ms}/MindSpore and TorchAX/JAX.
 
-We evaluate correctness through paired executions under controlled inputs, synchronized initialization, and matched optimizer settings. Let $\mathcal{O}_{t}(P)$ denote the observable state at training step $t$, comprising execution status, selected outputs or losses, gradients, and parameter-update statistics. A candidate is semantically aligned when $\mathcal{O}_{t}(\hat{P})$ remains within predefined tolerances of $\mathcal{O}_{t}(P)$ for the checked steps. All observables are framework-independent. The same diagnostic logic compares executions produced by different target runtimes.
+We evaluate a candidate through paired executions under controlled inputs, synchronized initialization, and matched optimizer settings. Let $\mathcal{O}_{t}(P)$ denote the observable state at training step $t$, comprising execution status, selected outputs or losses, gradients, and parameter-update statistics. A candidate passes when $\mathcal{O}_{t}(\hat{P})$ remains within predefined tolerances of $\mathcal{O}_{t}(P)$ for the checked steps. The adapters expose these observables in a common form so that the same checks apply to different target runtimes.
 
-\subsection{Diagnosis-Guided Repair Objective}
-The repair objective identifies the earliest semantic layer at which $\hat{P}$ departs from $P$ and exposes evidence for the corresponding edit. Execution failures call for compatibility or lowering changes; forward mismatches call for operator-semantics changes; and gradient/update mismatches call for differentiation, parameter-registration, or optimizer changes. Each layer implies its own edit. The verifier preserves this structure in the feedback delivered to the repair component.
+The repair objective is to identify the first stage at which $\hat{P}$ departs from $P$ and expose evidence for the corresponding edit. Execution failures call for compatibility or lowering changes; forward mismatches call for operator-semantics changes; and gradient/update mismatches call for differentiation, parameter-registration, or optimizer changes. The verifier preserves this ordering in the feedback delivered to the repair component.
 
-\section{Hierarchical Semantic Feedback}
+\subsection{Layered Feedback}
 \label{sec:hierarchy}
 
-\subsection{Design Principle}
-LADDER evaluates training-code correctness as an ordered hierarchy. Correctness requires that a migrated program execute under the target backend, then preserve the forward computation, and finally preserve the backward and update behavior that determines learning. The order is not a convention. Each layer is only measurable once the layer above it holds. We organize validation around three semantic layers:
+\paragraph{Ordering.}
+LADDER checks training code in the order required by its computation: the candidate must execute, preserve the forward computation, and preserve the backward and update behavior that determines learning. A later check is meaningful only after its prerequisite passes:
 \[
 \text{execution} \rightarrow \text{forward numerical} \rightarrow \text{gradient/update}.
 \]
-This ordering defines both a testing procedure and a repair policy. A deeper comparison is interpreted only after its prerequisites are available, and the first failing layer becomes the primary diagnosis. Later signals may provide supporting evidence, but they do not replace the earliest point at which the source and candidate executions diverge.
+The first failing stage becomes the primary repair guidance. Later signals may provide supporting evidence, but they do not replace the earliest point at which the source and candidate executions diverge.
 
-\subsection{Framework Adapter Interface}
-The hierarchy operates on a common observation schema rather than framework-specific error formats. Each target path supplies an execution adapter that runs the candidate and exposes phase status, selected forward values, gradients, and parameter deltas in a normalized report. The adapter is the only backend-specific component. Runtime-specific details remain inside it; the layer ordering, comparison metrics, diagnosis format, and repair routing remain unchanged.
+\paragraph{Common adapter.}
+Each target path supplies an execution adapter that runs the candidate and exposes phase status, selected forward values, gradients, and parameter deltas in a common report. Runtime-specific details remain inside the adapter; the checks and their order remain unchanged.
 
-\subsection{Execution Signal}
-The execution signal checks whether $\hat{P}$ can complete the required training step under the target backend, recording whether module construction, data movement, forward execution, loss computation, backward execution, and optimizer stepping each terminate without runtime failure. When a failure occurs, the verifier stores the exception type, stack location, operator or API name when available, tensor shape and dtype context, and the phase in which the failure appears. The phase is what makes the record actionable. Typical failure classes include missing operators, unsupported lowering paths, interface mismatches, device-placement errors, dtype incompatibilities, shape errors, and invalid parameter registration.
+\paragraph{Execution check.}
+The execution check determines whether $\hat{P}$ completes the required training step under the target backend. It records the phase of failure, including module construction, data movement, forward execution, loss computation, backward execution, and optimizer stepping, together with the exception and operator context when available. This phase identifies compatibility, lowering, placement, dtype, shape, and parameter-registration failures.
 
-\subsection{Forward-Numerical Signal}
-The forward-numerical signal checks whether the computation of $\hat{P}$ remains aligned with $P$ once both executions complete. Under controlled inputs $(x,y)$ and synchronized initialization, the verifier compares quantities such as logits, selected intermediate activations, and losses. The minimal scalar comparison is
+\paragraph{Forward-value check.}
+Once both executions complete, the forward-value check compares logits, selected intermediate activations, and losses under controlled inputs $(x,y)$ and synchronized initialization. The minimal scalar comparison is
 \begin{equation}
 \Delta_{\mathrm{loss}} =
 \left| L(P; x, y) - L(\hat{P}; x, y) \right|.
 \end{equation}
-When intermediate outputs are available, the verifier also computes output- and layer-level discrepancies and locates the earliest module whose difference exceeds tolerance. This localization matters because an end-to-end loss mismatch can originate in an early operator difference, a reduction convention, a broadcasting rule, a normalization layer, or the loss function itself. The scalar alone cannot separate these causes. The earliest exceeding module can.
+When intermediate outputs are available, the verifier also computes output- and module-level discrepancies and locates the earliest module whose difference exceeds tolerance. This distinguishes an operator, reduction, broadcasting, normalization, or loss mismatch that would otherwise appear only as an end-to-end loss difference.
 
-\subsection{Gradient and Update Signal}
-The gradient/update signal checks whether the migrated candidate preserves backward and optimizer behavior. This layer is necessary because two programs may produce similar forward losses while computing different gradients, updating different parameter subsets, or applying optimizer state differently. The verifier compares gradient norms and parameter-update statistics:
+\paragraph{Gradient and update check.}
+The gradient and update check determines whether the candidate preserves backward and optimizer behavior. Two programs may produce similar forward losses while computing different gradients, updating different parameter subsets, or applying optimizer state differently. The verifier compares gradient norms and parameter-update statistics:
 \begin{equation}
 \Delta_{\mathrm{grad}} =
 \left|
@@ -112,142 +111,102 @@ The gradient/update signal checks whether the migrated candidate preserves backw
 \frac{\|\Delta \theta - \Delta \hat{\theta}\|_2}
 {\|\Delta \theta\|_2 + \epsilon}.
 \end{equation}
-Beyond aggregate norms, the verifier records missing gradients, zero-gradient parameters, parameter-name mismatches, and update outliers. Norms alone conflate two failures. These fields separate them. A normal forward loss with missing gradients suggests an automatic-differentiation or parameter-registration issue, whereas aligned gradients with divergent updates suggests an optimizer-state or parameter-step issue.
+Beyond aggregate norms, the verifier records missing gradients, zero-gradient parameters, parameter-name mismatches, and update outliers. A normal forward loss with missing gradients indicates an automatic-differentiation or parameter-registration issue, whereas aligned gradients with divergent updates indicates an optimizer-state or parameter-step issue.
 
-\subsection{Structured Diagnosis and Repair Routing}
-The verifier emits the status of each layer, the first failing layer, the supporting metrics, and a bounded set of root-cause hints. The repair component routes execution failures to compatibility edits, forward-numerical failures to operator-semantics edits, and gradient/update failures to backward or optimizer edits. This mapping is fixed rather than learned. The report turns the hierarchy into an actionable interface between validation and repair instead of a collection of independent metrics.
+\paragraph{Repair guidance.}
+The verifier emits the status of each check, the first failing stage, the supporting metrics, and likely repair cues. Execution failures guide compatibility edits, forward-value failures guide operator-semantics edits, and gradient/update failures guide backward or optimizer edits. The report turns the checks into an interface between validation and repair rather than a collection of independent metrics.
 
-\section{Cross-Framework Migration Repair System}
+\subsection{Repair Loop}
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.97\textwidth]{figures_to_be_redrawed/hierarchical_feedback_architecture.png}
-\caption{The migration-repair system on \texttt{torch4ms}/MindSpore. Translation, hierarchical verification, diagnosis-guided repair, and re-verification communicate through explicit artifacts. The TorchAX/JAX implementation uses the same diagnosis schema.}
+\caption{The migration-repair loop on \texttt{torch4ms}/MindSpore. Translation, three-stage verification, targeted repair, and re-verification communicate through explicit artifacts. The TorchAX/JAX implementation uses the same checks.}
 \label{fig:architecture}
 \end{figure*}
 
-Figure~\ref{fig:architecture} shows the primary instantiation as an iterative repair system rather than a single-pass converter. A translator produces an initial target-path candidate, the verifier compares paired source and candidate executions, and the fixer edits the candidate using the structured diagnosis. Each patch is restricted to the repair scope the diagnosis points to, so a gradient-layer diagnosis cannot trigger an unrelated rewrite elsewhere. An orchestrator controls rounds, stopping rules, and reversion of failed attempts. No component holds hidden state. The components communicate through a shared pool of files containing the source program, candidate program, diagnosis report, and patch log, so every repair action is tied to an executable artifact and explicit evidence.
+Figure~\ref{fig:architecture} shows the iterative repair loop. A translator produces an initial candidate, the verifier compares paired source and candidate executions, and the fixer edits the candidate using the first failing stage and its evidence. An orchestrator controls repair rounds, stopping rules, and rollback of failed attempts. The same loop is used on both target frameworks.
 
 The primary execution adapter uses \texttt{torch4ms}, which provides a PyTorch-style front end and dispatches operators, backward execution, and optimizer behavior to MindSpore-backed implementations. The second adapter uses TorchAX with JAX automatic differentiation and Optax updates. Both expose phase status, forward values, gradient evidence, and parameter-update statistics to the verifier.
 
-For each checked training step, paired harnesses synchronize inputs, initialization, and optimizer settings before recording execution status, loss and optional layer-level differences, gradient-norm differences, and parameter-update relative $\ell_2$ differences. A candidate is accepted only after its final version passes re-verification at every configured semantic layer.
+For each checked training step, paired harnesses synchronize inputs, initialization, and optimizer settings before recording execution status, loss and optional module-level differences, gradient-norm differences, and parameter-update relative $\ell_2$ differences. A candidate is accepted only after its final version passes all three checks.
 
 \section{Evaluation}
 
 \subsection{Experimental Setup}
 \label{sec:setup}
-The evaluation answers three questions. Does LADDER improve verified repair success under a fixed budget (RQ1)? Which component of the hierarchy produces that improvement (RQ2)? Do the semantic layers expose the failure types they were designed to expose (RQ3)?
+The evaluation answers three questions. Does LADDER improve verified repair success under a fixed budget (RQ1)? Why does the ordered feedback improve repair (RQ2)? Can the same procedure be applied to a second framework (RQ3)?
 
 \textbf{Fault pool.}
-The faults come from real migration failures rather than synthetic mutation. We migrated PyTorch training programs to the two target paths and recorded the cases that failed. The recurring failures fall into 25 categories, grouped by the semantic layer at which each one surfaced and by the framework mechanism responsible. Each category is instantiated on two model families, giving a pool of 50 instances over CNN, image MLP, Transformer classifier, and tiny causal LM. The JAX pool is built the same way and contributes six MLP and CNN faults across the three layers.
+The faults come from real migration failures rather than synthetic mutation. We migrated PyTorch training programs to the two target paths and recorded the cases that failed. The recurring failures fall into 25 categories, grouped by the stage at which each one surfaced and by the framework mechanism responsible. Each category is instantiated on two model families, giving a pool of 50 instances over CNN, image MLP, Transformer classifier, and tiny causal LM. The JAX pool is built the same way and contributes six MLP and CNN faults across the three stages.
 
 \textbf{Repair scope.}
 A repair scope is the code the fixer is permitted to edit. Candidate-level repairs may change only the migrated program. Core-operator repairs may also change the adapter's operator implementations. Core autograd/optimizer repairs may additionally change its differentiation and optimizer code. Scopes matter because the same observed failure can be fixed at more than one level, and an edit outside the assigned scope may mask the fault instead of repairing it.
 
 \textbf{Conditions and baselines.}
-We compare LADDER with two reduced forms of our own feedback, with direct LLM repair, and with the external systems SWE-agent, MatchFixAgent, Ivy, and \texttt{torch2jax}. The execution-only condition reports runtime status alone and withholds the numerical and gradient comparisons. The unordered condition computes every signal but presents them together as one undifferentiated set, without ranking them or naming the layer that failed first. It isolates what the ordering contributes, separately from what measuring the signals contributes. Every method receives the same faulty candidate and the same repair budget. Where an external interface exposes more of the reference implementation than ours sees, we report that asymmetry with the result rather than adjusting the denominator.
+We compare LADDER with two reduced forms of our own feedback, with direct LLM repair, and with the external systems SWE-agent, MatchFixAgent, Ivy, and \texttt{torch2jax}. The execution-only condition reports runtime status alone and withholds the forward-value and gradient/update comparisons. The unordered condition computes every check but presents them together without ranking them or naming the first stage that failed. It isolates what the ordering contributes, separately from what measuring the checks contributes. Every method receives the same faulty candidate and the same repair budget. Where an external interface exposes more of the reference implementation than ours sees, we report that asymmetry with the result rather than adjusting the denominator.
 
 \textbf{Metrics.}
-A repair counts as verified only when the patched candidate passes all three semantic layers against the source execution. The patched candidate runs to completion and holds $\Delta_{\mathrm{loss}}\leq0.02$, $\Delta_{\mathrm{grad}}\leq0.05$, and $\Delta_{\mathrm{param}}\leq0.03$ at every checked step, using the quantities defined in Section~\ref{sec:hierarchy}. Repair@$k$ is the fraction of instances verified within $k$ repair attempts, so Repair@4 equals verified success under the four-attempt budget used throughout. The out-of-scope edit rate is the fraction of repairs that modified code outside the assigned scope. Tokens are prompt plus completion tokens summed over the pool.
+A repair counts as verified only when the patched candidate passes all three checks against the source execution. The patched candidate runs to completion and holds $\Delta_{\mathrm{loss}}\leq0.02$, $\Delta_{\mathrm{grad}}\leq0.05$, and $\Delta_{\mathrm{param}}\leq0.03$ at every checked step, using the quantities defined in Section~\ref{sec:hierarchy}. Repair@$k$ is the fraction of instances verified within $k$ repair attempts, so Repair@4 equals verified success under the four-attempt budget used throughout. The out-of-scope edit rate is the fraction of repairs that modified code outside the assigned scope. Tokens are prompt plus completion tokens summed over the pool, and time is wall-clock time divided by the 50 instances.
 
-Because every result below is read off a comparison between two executions, we first confirm that the comparison stays quiet on known-good oracle candidates. We ran CNN, MLP, Transformer, and tiny causal-LM trajectories for 50 steps over three seeds. The paired paths agree at every checked step. The largest maximum loss difference is $3.815\times10^{-6}$, and mean gradient-norm and parameter-update differences stay below $4\times10^{-8}$ and $3.9\times10^{-6}$. All reported differences below are attributable to the migration rather than to the measurement.
+Because every result below is read off a comparison between two executions, we first confirm that the comparison stays quiet on known-good reference candidates. We ran CNN, MLP, Transformer, and tiny causal-LM trajectories for 50 steps over three seeds. The paired paths agree at every checked step. The largest maximum loss difference is $3.815\times10^{-6}$, and mean gradient-norm and parameter-update differences stay below $4\times10^{-8}$ and $3.9\times10^{-6}$. All reported differences below are attributable to the migration rather than to the measurement.
 
-\subsection{Main Results}
+\subsection{RQ1: Overall Repair Effectiveness}
 \label{sec:main-results}
 \textbf{Setup.}
-The primary experiment ran the full pool of 50 instances on the MindSpore path. All instances were hidden from the repair prompts, each allowed at most four repair attempts, and failed repairs were rolled back. The transfer experiment repeated the same protocol on the PyTorch-to-JAX path.
+The primary experiment ran the full pool of 50 instances on the MindSpore path. All instances were hidden from the repair prompts, each allowed at most four repair attempts, and failed repairs were rolled back.
 
 \textbf{Repair on the MindSpore path.}
-Panel (a) of Table~\ref{tab:main-results} reveals that the ordering, not the measurement, carries the repair improvement. The comparison covers SWE-agent v1.1.0~\cite{yang2024sweagent}, MatchFixAgent~\cite{ibrahimzada2025matchfixagent}, and the internal execution-only, unordered, and direct-LLM conditions. Reporting all signals without an order improves only marginally over reporting execution status alone. Measuring the deeper layers is not what helps. Ranking them and naming the layer that failed first is. MatchFixAgent is the strongest baseline. Its fragment-pair interface supplies the healthy implementation of the changed function, so its rate is an upper bound rather than a blind-repair result. LADDER still leads it at both Repair@1 and Repair@4 while repairing blind. The token column separates the two families sharply. Figure~\ref{fig:cost-quality} plots that separation, where both agent baselines spend more than an order of magnitude more tokens than LADDER and still verify fewer instances. Localizing a failure by exploration is more expensive than reading it from a layered diagnosis.
+Table~\ref{tab:main-results} shows a clear advantage for LADDER under the shared four-attempt budget. LADDER repairs 84.0\% of instances on the first attempt, 98.0\% by the second, and all 50 instances by the fourth. The strongest external baseline, MatchFixAgent, reaches 74.0\%, 86.0\%, and 94.0\% at the same checkpoints. Thus LADDER gains 10 percentage points on first-attempt repair and closes the remaining cases that the baselines leave unresolved. The fault-stage columns show where the gain comes from: LADDER repairs all 16 gradient/update faults, compared with 13 for MatchFixAgent and 14 for direct LLM repair. It does so with 0.191M tokens per pool and 21.8 seconds per instance, versus 5.205M tokens and 69.7 seconds for MatchFixAgent. The reduced internal controls establish the mechanism: adding undifferentiated signals gives only a small improvement, while identifying the first failing stage produces the large jump in repair success. Figure~\ref{fig:cost-quality} makes the joint quality--cost advantage visible.
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{figures/cost_quality.pdf}
-\caption{Token cost against verified repair rate on the 50-instance pool. The two families separate along the horizontal axis, where exploration-based agents pay an order of magnitude more tokens than LADDER for a lower rate. Values are those of Table~\ref{tab:main-results}.}
+\caption{Token cost against first-attempt repair rate on the 50-instance pool. LADDER combines the highest first-attempt repair rate with the lowest token cost. Values are those of Table~\ref{tab:main-results}.}
 \label{fig:cost-quality}
 \end{figure}
 
-Panel (b) shows where those repairs land. Coverage is complete at every semantic layer and every repair scope, so no slice of the pool is carried by the others. Repair@1 is lowest on numerical faults and on the two core scopes, which are the slices that need additional rounds rather than wider coverage.
-
-\textbf{Transfer to the JAX path.}
-Table~\ref{tab:jax-transfer} separates the conversion tools from the repair methods. Ivy and \texttt{torch2jax} produce no candidate that passes the training check at any layer. Direct LLM repair handles the execution and gradient/update faults but misses one numerical fault. LADDER localizes every fault at its expected first failing layer and repairs all six in one round. LADDER transfers to a backend with a different differentiation system and optimizer stack.
-
 \begin{table*}[!t]
-\caption{Verified repair on the fixed 50-instance MindSpore fault pool, built from recorded real migration failures. Panel (a) compares every method under matched conditions. Panel (b) decomposes our result over the same instances, first by the semantic layer at which the fault surfaced and then by the scope the repair was allowed to edit.}
+\caption{Main repair results on the fixed 50-instance MindSpore fault pool. The first four metric columns give final verified repairs by fault stage; Repair@$k$ gives cumulative success within $k$ attempts; the last two columns report efficiency.}
 \label{tab:main-results}
 \centering
 \footnotesize
-\setlength{\tabcolsep}{5pt}
-\begin{tabular}{@{}llrrrrr@{}}
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabular}{@{}lrrrrrrrrrr@{}}
 \toprule
-\multicolumn{7}{@{}l}{\textit{(a) Comparison against internal feedback conditions and repair agents}} \\
+\textbf{Method} & \textbf{N} & \multicolumn{4}{c}{\textbf{Final verified repairs}} & \multicolumn{3}{c}{\textbf{Repair@$k$}} & \multicolumn{2}{c}{\textbf{Efficiency}} \\
+\cmidrule(lr){3-6}\cmidrule(lr){7-9}\cmidrule(lr){10-11}
+ & & \textbf{Exec.} & \textbf{Num.} & \textbf{Grad./upd.} & \textbf{All} & \textbf{@1} & \textbf{@2} & \textbf{@4} & \shortstack{\textbf{Time/inst.}\\\textbf{(s)}} & \textbf{Tokens} \\
 \midrule
-& \textbf{Method} & \textbf{Verified} & \textbf{Repair@1} & \textbf{Repair@2} & \textbf{Repair@4} & \textbf{Tokens} \\
+\multicolumn{11}{@{}l}{\textit{Internal controls}} \\
+Execution-only          & 50 & 14/20 & 7/14  & 12/16 & 33/50 & 58.0\% & 64.0\% & 66.0\% & 40.3  & 0.155M \\
+All signals, unordered  & 50 & 14/20 & 8/14  & 12/16 & 34/50 & 66.0\% & 66.0\% & 68.0\% & 56.1  & 0.180M \\
 \midrule
-\multirow{2}{*}{\textit{Ours, reduced}}
-  & Execution-only          & 33/50 (66.0\%) & 58.0\% & 64.0\% & 66.0\% & 0.15M \\
-  & All signals, unordered  & 34/50 (68.0\%) & 66.0\% & 66.0\% & 68.0\% & 0.18M \\
+\multicolumn{11}{@{}l}{\textit{Repair baselines}} \\
+Direct LLM              & 50 & 18/20 & 8/14  & 14/16 & 40/50 & 72.0\% & 76.0\% & 80.0\% & 43.4  & 1.583M \\
+SWE-agent               & 50 & 20/20 & 11/14 & 15/16 & 46/50 & 72.0\% & 84.0\% & 92.0\% & 127.5 & 7.635M \\
+MatchFixAgent$^\dagger$ & 50 & 20/20 & 14/14 & 13/16 & 47/50 & 74.0\% & 86.0\% & 94.0\% & 69.7  & 5.205M \\
 \midrule
-\multirow{3}{*}{\textit{Repair baselines}}
-  & Direct LLM              & 40/50 (80.0\%) & 72.0\% & 76.0\% & 80.0\% & 1.58M \\
-  & SWE-agent               & 46/50 (92.0\%) & 72.0\% & 84.0\% & 92.0\% & 7.64M \\
-  & MatchFixAgent$^\dagger$ & 47/50 (94.0\%) & 74.0\% & 86.0\% & 94.0\% & 5.21M \\
-\midrule
-\textit{Ours, full}
-  & \textbf{LADDER}            & \textbf{50/50 (100.0\%)} & \textbf{84.0\%} & \textbf{98.0\%} & \textbf{100.0\%} & \textbf{0.19M} \\
-\bottomrule
-\end{tabular}
-
-\vspace{4pt}
-
-\begin{tabular}{@{}lrrcccclrrr@{}}
-\toprule
-\multicolumn{11}{@{}l}{\textit{(b) Where our repairs land. Every slice reaches 100\% verified, so only Repair@1 varies.}} \\
-\midrule
-\textbf{Semantic layer} & \textbf{Inst.} & \textbf{Repair@1} & & & & & \textbf{Repair scope} & \textbf{Inst.} & \textbf{Repair@1} \\
-\midrule
-Execution        & 20 & 90.0\% & & & & & Candidate-level      & 26 & 92.3\% \\
-Numerical        & 14 & 64.3\% & & & & & Core operator        & 20 & 75.0\% \\
-Gradient/update  & 16 & 93.8\% & & & & & Core autograd/optim. & \phantom{0}4 & 75.0\% \\
+\multicolumn{11}{@{}l}{\textit{Ours, full}} \\
+\textbf{LADDER}         & \textbf{50} & \textbf{20/20} & \textbf{14/14} & \textbf{16/16} & \textbf{50/50} & \textbf{84.0\%} & \textbf{98.0\%} & \textbf{100.0\%} & \textbf{21.8} & \textbf{0.191M} \\
 \bottomrule
 \end{tabular}
 \vspace{2pt}
 \begin{flushleft}
-\footnotesize Repair@$k$ is verified success within $k$ repair attempts, so Repair@4 equals verified success under the shared four-attempt budget. Tokens are prompt plus completion tokens summed over the pool. $^\dagger$MatchFixAgent's fragment-pair interface supplies the healthy implementation of the changed function, so its rate is an upper bound rather than a blind-repair result. In panel (b) the two groupings each partition the same 50 instances independently; rows across the two halves are not paired.
+\footnotesize Repair@$k$ is verified success within $k$ attempts. Stage denominators are 20 execution, 14 numerical, and 16 gradient/update instances. Time is wall-clock seconds per instance; tokens are total prompt plus completion tokens. $^\dagger$MatchFixAgent receives the healthy implementation of the changed function; LADDER does not.
 \end{flushleft}
 \end{table*}
 
-\begin{table}[tb]
-\caption{Verified repairs on the PyTorch-to-JAX transfer study.}
-\label{tab:jax-transfer}
-\centering
-\scriptsize
-\setlength{\tabcolsep}{2.8pt}
-\begin{tabular}{lrrrr}
-\toprule
-\textbf{Method} & \textbf{Exec.} & \textbf{Num.} & \textbf{Grad./upd.} & \textbf{Overall} \\
-\midrule
-LADDER (ours) & \textbf{2/2} & \textbf{2/2} & \textbf{2/2} & \textbf{6/6} \\
-Direct LLM & 2/2 & 1/2 & 2/2 & 5/6 \\
-Ivy & 0/2 & 0/2 & 0/2 & 0/6 \\
-\texttt{torch2jax} & 0/2 & 0/2 & 0/2 & 0/6 \\
-\bottomrule
-\end{tabular}
-\vspace{2pt}
-\begin{flushleft}
-\footnotesize Each semantic layer contains one MLP and one CNN fault. LADDER repairs all six faults in one round.
-\end{flushleft}
-\end{table}
-
-\subsection{Ablation Studies}
+\subsection{RQ2: Effect of Layered Feedback}
 \label{sec:ablations}
-\textbf{Feedback granularity.}
-The first ablation removes layers from the feedback rather than from the model. Four model families each received exactly one fault per semantic layer, drawn from the same 25-category pool. That gives 12 controlled tasks. The repair loop ran under execution-only feedback, execution plus numerical feedback, or the full diagnosis, for 36 repair episodes under a four-round budget. Table~\ref{tab:feedback-ablation} shows a stepwise improvement as the loop receives the layer each fault class requires. Each added layer repairs exactly the fault class it targets and leaves the others unchanged. Execution feedback alone resolves the execution faults and none of the deeper ones; adding numerical feedback resolves the numerical faults; adding gradient/update feedback resolves the remainder. Every successful repair completes in the first round, so Repair@1 and Repair@4 coincide. One fault per layer per model keeps the design balanced. That balance is what makes the layer-to-fault correspondence readable, and the correspondence is what identifies the ordering as the source of the improvement.
+\textbf{Feedback detail.}
+This experiment tests whether the improvement comes from the ordered feedback rather than from measuring more quantities. Four model families each received one fault per stage, drawn from the same 25-category pool, giving 12 controlled tasks. The repair loop ran under execution-only feedback, execution plus forward-value feedback, or the full LADDER report for 36 repair episodes under a four-round budget. Table~\ref{tab:feedback-ablation} shows a direct stepwise effect: execution-only feedback repairs the execution faults, adding the forward check repairs the numerical faults, and the full report repairs the gradient/update faults as well. Every successful repair completes in the first round. The correspondence between the added check and the newly repaired fault class shows why the ordered feedback, rather than a larger undifferentiated report, drives the improvement.
 
-\textbf{Framework documentation.}
+\textbf{Additional analysis: framework documentation.}
 The second ablation varies what the prompts know about the target framework, independently of the feedback. Besides the diagnosis, the fixer prompt can carry documentation for the target framework, covering its operator conventions and optimizer interfaces. Two experiments place it in turn at each end of the pipeline. The first holds the translator fixed and crosses pass/fail against hierarchical feedback, with the documentation off against on. It covers 24 base tasks: 12 candidate-level, eight core-operator, and four core autograd/optimizer. Each ran under all four conditions with a four-round budget. The second moves the same documentation to the translator prompt. The fixer was disabled, so each run made one translation call and no repair round could compensate for a weak first attempt. Five held-out tasks ran at three repeats per condition.
 
-Panel (a) of Table~\ref{tab:guidance-ablations} isolates the two factors in the fixer. Pass/fail feedback repairs nothing, with or without the documentation. Hierarchical feedback repairs most tasks with the documentation off and somewhat fewer with it on. The feedback is the dominant source of repair improvement. The documentation eliminates core-operator out-of-scope edits and lowers candidate-level success, trading repair rate for scope discipline. Core autograd/optimizer repair is the hardest scope in every condition.
+Panel (a) of Table~\ref{tab:guidance-ablations} isolates the two factors in the fixer. Pass/fail feedback repairs nothing, with or without the documentation. Layered feedback repairs most tasks with the documentation off and remains the decisive factor when documentation is added. The documentation eliminates core-operator out-of-scope edits, while core autograd/optimizer repair remains the hardest scope in every condition.
 
 Panel (b) reverses the picture at the translator. The documentation dominates one-shot translation. Without it, most outputs fail to compile and none complete the training check, and with it every output passes all three checks on the first attempt. Framework documentation matters most before any feedback exists, whereas panel (a) shows the feedback carrying the repair loop afterwards.
 
@@ -309,11 +268,10 @@ On  & 15 & 100.0\% & 100.0\% & 100.0\% & 100.0\% \\
 \end{flushleft}
 \end{table}
 
-\subsection{Analysis}
-\label{sec:analysis}
-The ablations show that the ordering carries the repair improvement. This analysis asks whether each signal actually detects the fault class it was designed to expose, independently of whether a repair follows. We used controlled fault injection rather than automatic repair. For each model and seed we compared a PyTorch reference step with a \texttt{torch4ms} candidate under one of three injected conditions. The evaluation used four model families and three seeds per fault. The thresholds are $\Delta_{\mathrm{loss}}>0.02$, $\Delta_{\mathrm{grad}}>0.05$, and $\Delta_{\mathrm{param}}>0.03$.
+\textbf{Signal effectiveness.}
+The feedback ablation establishes the repair effect. We next test whether each check identifies the fault class it is meant to expose, independently of repair. We used controlled fault injection. For each model and seed we compared a PyTorch reference step with a \texttt{torch4ms} candidate under one of three injected conditions. The evaluation used four model families and three seeds per fault. The thresholds are $\Delta_{\mathrm{loss}}>0.02$, $\Delta_{\mathrm{grad}}>0.05$, and $\Delta_{\mathrm{param}}>0.03$.
 
-Table~\ref{tab:signal-effectiveness} shows that the expected signal detects its corresponding fault in all 36 fault-injection runs. Execution faults are isolated by the execution signal. For training faults, the gradient signal records missing-gradient evidence and the update signal captures the divergent parameter update. Numerical faults are detected at the forward layer even when their effects propagate to gradient or update metrics. This is the case the first-failure rule exists to handle. A deeper signal also fires, but the forward layer is the one that names the cause. Every fault class keeps a distinct diagnostic handle, which is the property the repair routing depends on.
+Table~\ref{tab:signal-effectiveness} shows that the expected check detects its corresponding fault in all 36 fault-injection runs. Execution faults are isolated by the execution check. For training faults, the gradient check records missing-gradient evidence and the update check captures the divergent parameter update. Numerical faults are detected at the forward stage even when their effects propagate to gradient or update metrics. The first-failing-stage rule therefore preserves the distinction needed by repair guidance.
 
 \begin{table}[t]
 \centering
@@ -345,12 +303,37 @@ TinyLM & Train. & 1.000 & G+U \\
 \end{flushleft}
 \end{table}
 
+\subsection{RQ3: Application to Another Framework}
+Table~\ref{tab:jax-transfer} applies the same repair procedure to the PyTorch-to-JAX path. Ivy and \texttt{torch2jax} produce no candidate that passes the training check at any stage. Direct LLM repair handles the execution and gradient/update faults but misses one numerical fault. LADDER repairs all six faults in one round and leads at every stage. This result shows that the checks and repair guidance remain effective when the target uses a different differentiation system and optimizer stack.
+
+\begin{table}[tb]
+\caption{Verified repairs on the PyTorch-to-JAX study.}
+\label{tab:jax-transfer}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.8pt}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Method} & \textbf{Exec.} & \textbf{Forward} & \textbf{Grad./upd.} & \textbf{Overall} \\
+\midrule
+LADDER (ours) & \textbf{2/2} & \textbf{2/2} & \textbf{2/2} & \textbf{6/6} \\
+Direct LLM & 2/2 & 1/2 & 2/2 & 5/6 \\
+Ivy & 0/2 & 0/2 & 0/2 & 0/6 \\
+\texttt{torch2jax} & 0/2 & 0/2 & 0/2 & 0/6 \\
+\bottomrule
+\end{tabular}
+\vspace{2pt}
+\begin{flushleft}
+\footnotesize Each stage contains one MLP and one CNN fault. LADDER repairs all six faults in one round.
+\end{flushleft}
+\end{table}
+
 \subsection{Threats to Validity}
-The MindSpore study covers four model families, 25 fault categories, three repair scopes, and 50-step training trajectories; the JAX transfer study covers six MLP/CNN faults. The results establish transfer across two target paths.
+The MindSpore study covers four model families, 25 fault categories, three repair scopes, and 50-step training trajectories. The JAX study is smaller, with six MLP/CNN faults, and serves as a second-framework validation rather than a broad benchmark. The reported checks compare controlled paired executions; longer training horizons and additional framework pairs remain outside the current study.
 
 \section{Conclusion}
 
-We introduced LADDER, which validates cross-framework training-code migration through execution, forward-numerical, and gradient/update semantics in order. Specifically, LADDER reports the first failing semantic layer and routes that diagnosis to a targeted repair and re-verification loop. This design makes repair guidance actionable at the layer where the divergence originates rather than at the point of failure, and a common adapter interface keeps the ordering independent of the target runtime and its differentiation system. Extensive experiments across MindSpore and JAX target paths demonstrate that LADDER repairs more faults than execution-only and agent baselines at substantially lower token cost.
+We introduced LADDER, which validates cross-framework training-code migration through execution, forward-value, and gradient/update checks in order. The first failing stage becomes targeted repair guidance, and the candidate is accepted only after all three checks pass. On 50 real MindSpore migration failures, LADDER reaches 84.0\% repair on the first attempt and 100\% within four attempts while using 0.19M tokens; it also repairs all six faults in the JAX study. These results show that detailed, ordered feedback turns migration validation from a whole-program verdict into an effective repair signal.
 
 \section*{Acknowledgment}
 This work was supported by CAAI Huawei MindSpore Open Fund, and developed on OpenI Community.

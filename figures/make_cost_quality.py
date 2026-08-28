@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Token cost against verified repair rate on the 50-instance MindSpore pool.
+"""Token cost against first-attempt repair rate on the 50-instance MindSpore pool.
 
 All values are taken from Table I of the manuscript; this script only plots
 them, so the figure cannot drift from the table.
@@ -10,12 +10,12 @@ import matplotlib.pyplot as plt
 
 # name, tokens (millions), verified rate (%), family
 POINTS = [
-    ("Execution-only",         0.15,  66.0, "reduced"),
-    ("All signals, unordered", 0.18,  68.0, "reduced"),
-    ("Direct LLM",             1.58,  80.0, "baseline"),
-    ("SWE-agent",              7.64,  92.0, "baseline"),
-    ("MatchFixAgent",          5.21,  94.0, "baseline"),
-    ("LADDER (ours)",          0.19, 100.0, "ours"),
+    ("Execution-only",         0.15,  58.0, "reduced"),
+    ("All signals, unordered", 0.18,  66.0, "reduced"),
+    ("Direct LLM",             1.58,  72.0, "baseline"),
+    ("SWE-agent",              7.64,  72.0, "baseline"),
+    ("MatchFixAgent",          5.21,  74.0, "baseline"),
+    ("LADDER (ours)",          0.19,  84.0, "ours"),
 ]
 
 STYLE = {
@@ -51,9 +51,9 @@ for name, tok, rate, fam in POINTS:
 
 ax.set_xscale("log")
 ax.set_xlabel("Tokens consumed over the pool (M, log scale)", fontsize=7.5)
-ax.set_ylabel("Verified repair rate (\\%)", fontsize=7.5)
+ax.set_ylabel("First-attempt repair rate (\\%)", fontsize=7.5)
 ax.set_xlim(0.10, 14)
-ax.set_ylim(58, 106)
+ax.set_ylim(50, 90)
 ax.set_xticks([0.1, 0.3, 1, 3, 10])
 ax.set_xticklabels(["0.1", "0.3", "1", "3", "10"])
 ax.tick_params(labelsize=7)
@@ -64,10 +64,10 @@ for side in ("top", "right"):
 
 # annotate the gap the table states in prose; the caption sits below the
 # connector so the dashed line stays legible and clear of the point labels
-ax.annotate("", xy=(0.19, 100.0), xytext=(5.21, 94.0),
+ax.annotate("", xy=(0.19, 84.0), xytext=(5.21, 74.0),
             arrowprops=dict(arrowstyle="-", linestyle="--", linewidth=0.7,
                             color="#888888", shrinkA=10, shrinkB=26))
-ax.text(1.15, 93.6, "$27\\times$ fewer tokens,\nhigher rate", fontsize=6.2,
+ax.text(1.15, 78.8, "$27\\times$ fewer tokens,\nhigher rate", fontsize=6.2,
         color="#555555", ha="center", va="top", style="italic")
 
 fig.tight_layout(pad=0.25)
