@@ -30,7 +30,7 @@ anonymous@example.com}}
 \maketitle
 
 \begin{abstract}
-LLM-based code translation has made it practical to port deep learning training programs across frameworks. Such migrations are routinely defeated by differences in operator semantics, automatic differentiation, and optimizer behavior. Existing pipelines validate a candidate against a single outcome such as a clean execution or a passing test, without asking which training stage failed. We argue that the granularity of this feedback, not the power of the repair model, determines whether a migration failure is repaired. We introduce Layered Differential Diagnosis for Execution Repair (LADDER), a three-agent framework in which a translator, a verifier, and a fixer iterate under an orchestrator. The verifier runs the source and the candidate as a pair and reports the earliest of the execution, forward-value, and gradient and update stages at which they disagree. The fixer then edits at that stage instead of searching the program. A later stage is meaningful only once its prerequisite passes, so the order of the signals follows the order of training computation. Target-specific execution adapters isolate framework code, so the same loop runs on MindSpore and on JAX. On 50 real MindSpore migration failures LADDER repairs every one within four attempts and 84.0\% of them on the first attempt, against 74.0\% for the strongest baseline at $27\times$ fewer tokens. It also repairs all six faults in a JAX study.
+Large language models can now translate a deep learning training program from one framework to another. Such a translation often runs to completion and still fails to train, because frameworks differ in operator semantics, automatic differentiation, and optimizer behavior. Existing pipelines validate a candidate against a single outcome such as a clean execution or a passing test, without asking which training stage failed. We argue that repair depends on how precisely the feedback locates a failure, not on the power of the repair model. We introduce Layered Differential Diagnosis for Execution Repair (LADDER), a three-agent framework in which a translator, a verifier, and a fixer iterate under an orchestrator. The verifier runs the source and the candidate as a pair and reports the first stage at which they disagree, whether in execution, in forward values, or in gradients and parameter updates. The fixer edits at that stage instead of searching the program. Because the three signals are defined on training semantics rather than on any one runtime, a single repair loop serves different target frameworks. On real migration failures LADDER repairs every instance in the pool, outperforming the strongest repair baseline at a fraction of its token cost, and the same loop carries over from MindSpore to JAX.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -73,9 +73,9 @@ We realize this ordering as Layered Differential Diagnosis for Execution Repair 
 
 This paper makes three contributions:
 \begin{itemize}
-  \item We show that a single verdict on the whole program cannot guide repair for training-code migration, and formulate validation as a sequence of execution, forward-value, and gradient and update signals.
-  \item We introduce LADDER, which turns the first failing signal into targeted repair guidance and re-verifies the candidate through a common interface across target frameworks.
-  \item On 50 real migration failures, LADDER repairs 50/50 instances, reaches 84.0\% on the first attempt, and uses 0.19M tokens; it also repairs all six faults in a JAX study.
+  \item We recast fault localization in migration repair as a question of verification design rather than program search, and formulate the verdict as an ordered triple of signals whose first disagreement names the failing training stage.
+  \item We introduce LADDER, a three-agent framework that makes this verdict operational, turning the first disagreeing signal into a targeted edit and re-verifying the result under an orchestrator that bounds and rolls back attempts.
+  \item We show that defining the signals on training semantics rather than on a runtime lets one repair loop serve different target frameworks, and that the ordering, not the additional measurement, is what repairs failures a whole-program verdict leaves unresolved.
 \end{itemize}
 
 \section{Related Work}
