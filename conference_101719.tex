@@ -144,8 +144,8 @@ The verifier emits the status of each check, the first failing stage, the suppor
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/architecture.pdf}
-\caption{The migration-repair loop. Paired executions supply the quantities the checks compare, and the three checks run in the order training computation requires, so a check is reachable only once the one above it holds. Whichever check fails first routes to the fixer, which edits at that stage and returns a patch for re-verification from check~1. A candidate is accepted only when all three hold. Only the adapter band is framework-specific; the checks and their order are identical on \texttt{torch4ms}/MindSpore and TorchAX/JAX.}
+\includegraphics[width=0.97\textwidth]{figures_to_be_redrawed/hierarchical_feedback_architecture.png}
+\caption{The migration-repair loop on \texttt{torch4ms}/MindSpore. Translation, three-stage verification, targeted repair, and re-verification communicate through explicit artifacts. The TorchAX/JAX implementation uses the same checks.}
 \label{fig:architecture}
 \end{figure*}
 
