@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 """Per-step signal divergence under the training fault, normalized by threshold.
 
+SUPERSEDED, NOT IN THE MANUSCRIPT. This was Figure 1 until it was replaced by
+figures/make_verdict_collapse.py. The reason: two of its three series are
+constant in panel (a), so a full-width float carried three numbers. Its panel (b)
+survives as panel (c) of the replacement, which is the only part that genuinely
+varies with step. Kept because its docstring records the coupling semantics and
+the free-running horizon argument, which the replacement compresses to a caption.
+Its rendered PDF/PNG were deleted; run this script if you need them back.
+
 Reads the 4800-row per-step result set directly so the figure cannot drift from
 the data:
   ascend-torch4ms/experiments/paper_section_65_66/

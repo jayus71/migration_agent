@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """The migration-repair loop: paired execution, the ordered checks, repair.
 
-Vector replacement for figures_to_be_redrawed/hierarchical_feedback_architecture.png,
-which was a flattened raster (1691x930, about 243 DPI at full text width) whose
-labels no longer match the manuscript. That PNG said "Execution Signal",
-"Numerical Signal" and "first failing layer"; the paper says check and first
-failing stage. A raster cannot be relabelled, so the figure is redrawn here.
+Vector replacement for the former figures_to_be_redrawed/hierarchical_feedback_
+architecture.png (deleted; recoverable from commit 9f9dcf0). That was a flattened
+raster, 1691x930, about 243 DPI at full text width, whose labels no longer
+matched the manuscript: it said "Execution Signal", "Numerical Signal" and
+"first failing layer" where the paper says check and first failing stage. A
+raster cannot be relabelled, so the figure is redrawn here.
 
 Design notes, since an architecture diagram has no data to constrain it:
   - The three checks are drawn as a numbered ladder, because the ordering IS the
@@ -26,8 +27,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
 
-# Shared with figures/make_divergence_trajectory.py so the two figures read as
-# one system.
+# Shared with figures/make_verdict_collapse.py so the two figures read as one
+# system.
 INK, MUTED, GRID = "#1a1a1a", "#5c5c5c", "#d4d4d4"
 FIRE = "#d03b3b"          # failure route, reserved
 SURFACE = "#f4f5f7"       # recessive band fill
