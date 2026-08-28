@@ -45,16 +45,29 @@ This requirement creates failures that ordinary executability checks cannot see.
 
 Existing systems supply repair feedback in three main ways. Translation pipelines validate against a single outcome such as compilation, unit tests, or repository-level pass rates~\cite{he-etal-2025-execoder,macedo2024intertrans,guan2025repotransagent}. Repair agents explore the program until a test or execution trace exposes the fault~\cite{shinn2023reflexion,chen2023selfdebugging,wang2024codeact,xia2023aprplm,yang2024sweagent}. Conversion and differential-testing tools compare a converted output or a single behavioral property against a reference~\cite{mindspore2023mindconverter,yang2011csmith,pei2017deepxplore}. Despite their variety, all three share an implicit assumption that one verdict on the whole program is a sufficient unit of repair feedback.
 
-Training code does not satisfy this assumption. Figure~\ref{fig:divergence} measures four ported programs against the same source over a single training step. A correct port and a port whose backward pass never executes both run to completion and both report the same loss, so a verdict formed from those two observations accepts a program that never updates its parameters. The three faulty ports moreover require three unrelated edits, and a single pass-or-fail verdict separates none of them.
+Training code does not satisfy this assumption. Table~\ref{tab:divergence} measures four ported programs against the same source over a single training step. A correct port and a port whose backward pass never executes both run to completion and both report the same loss, so a verdict formed from those two observations accepts a program that never updates its parameters. The three faulty ports moreover require three unrelated edits, and a single pass-or-fail verdict separates none of them.
 
 Training computation nevertheless imposes an order on what a candidate can be asked to reproduce. It must first execute, then match the forward values of the source, and finally match its gradients and parameter updates. Each stage presupposes the one before it, so the earliest stage at which the two executions disagree identifies the class of defect and the repair it calls for. A candidate that fails to execute requires a compatibility fix, a divergent forward value implicates an operator, and a divergent gradient implicates the differentiation interface or the optimizer.
 
-\begin{figure*}[t]
+\begin{table}[t]
+\caption{One verdict cannot locate a training-code failure. Four ported programs run against the same PyTorch source for one training step. A dash marks a quantity that does not exist rather than one that is zero, either because the program stopped before it could be measured or because no backward pass ran. The verdict column is formed from completion and loss alone, as outcome-level validation forms it. The correct port and the port with no backward pass agree on both, reporting $1.780535$ against the source's $1.780532$, yet only one of the two trains; that row is marked in red.}
+\label{tab:divergence}
 \centering
-\includegraphics[width=\textwidth]{figures/same_loss.pdf}
-\caption{One verdict cannot locate a training-code failure. Four ported programs run against the same PyTorch source on one training step. A dash marks a quantity that does not exist rather than one that is zero, either because the program stopped before it could be measured or because no backward pass ran. The correct port and the port with no backward pass agree on both of the columns a conventional check inspects, reporting $1.780535$ against the source's $1.780532$ and so tying at the four decimals shown, yet only one of the two trains.}
-\label{fig:divergence}
-\end{figure*}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Program} & \textbf{Runs?} & \textbf{Loss} & \shortstack{\textbf{Grad.}\\\textbf{norm}} & \shortstack{\textbf{Param.}\\\textbf{update}} & \textbf{Verdict} \\
+\midrule
+PyTorch source   & yes & 1.7805 & 0.2834 & reference & --- \\
+\midrule
+Correct port     & yes & 1.7805 & 0.2834 & matches & accept \\
+Missing operator & no  & ---    & ---    & ---     & reject \\
+Wrong reduction  & yes & 2.5009 & 0.6879 & differs & reject \\
+No backward pass & yes & 1.7805 & ---    & \textcolor{red}{none} & \textcolor{red}{accept} \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 We realize this ordering as Layered Differential Diagnosis for Execution Repair (LADDER), a three-agent framework built around it. A translator produces a candidate, and a verifier executes it alongside the source and normalizes both runs into a common report that names the first stage at which they disagree. A fixer then edits the candidate at that stage rather than searching it. An orchestrator repeats the cycle, controlling repair rounds and rolling back failed attempts. A common adapter interface separates the signals from backend execution, so the same repair guidance applies to \texttt{torch4ms}/MindSpore\footnote{The primary prototype repository is available at \url{https://gitee.com/feixiao13/ascend-torch4ms.git}.} and TorchAX/JAX.
 
@@ -97,7 +110,7 @@ v_{\mathrm{ladder}}(\hat{P}) =
 \text{verified}, & \text{otherwise},
 \end{cases}
 \end{equation}
-together with the metrics that produced it. Each index names a different repair action. Index 1 points to compatibility or lowering, index 2 to operator semantics, and index 3 to differentiation, parameter registration, or optimizer behavior. Two candidates with the same $v_{\mathrm{single}}$ but different $v_{\mathrm{ladder}}$ require different edits, which is precisely the distinction Figure~\ref{fig:divergence} shows a single verdict discarding. The verifier therefore preserves the index and its evidence in the feedback delivered to the repair component.
+together with the metrics that produced it. Each index names a different repair action. Index 1 points to compatibility or lowering, index 2 to operator semantics, and index 3 to differentiation, parameter registration, or optimizer behavior. Two candidates with the same $v_{\mathrm{single}}$ but different $v_{\mathrm{ladder}}$ require different edits, which is precisely the distinction Table~\ref{tab:divergence} shows a single verdict discarding. The verifier therefore preserves the index and its evidence in the feedback delivered to the repair component.
 
 \subsection{Layered Feedback}
 \label{sec:hierarchy}
@@ -113,7 +126,7 @@ The first failing stage becomes the primary repair guidance. Later signals may p
 Each target path supplies an execution adapter that runs the candidate and exposes phase status, selected forward values, gradients, and parameter deltas in a common report. Runtime-specific details remain inside the adapter; the signals and their order remain unchanged.
 
 \paragraph{Execution signal.}
-The execution signal determines whether $\hat{P}$ completes the required training step under the target backend. It records the phase of failure, including module construction, data movement, forward execution, loss computation, backward execution, and optimizer stepping, together with the exception and operator context when available. This phase identifies compatibility, lowering, placement, dtype, shape, and parameter-registration failures. The signal fires on a phase that raises, not on a phase that is absent. A candidate that never invokes its backward pass raises nothing and therefore completes, which is why backward and update correctness is established at the third stage rather than here. Figure~\ref{fig:divergence} shows a candidate of exactly that kind.
+The execution signal determines whether $\hat{P}$ completes the required training step under the target backend. It records the phase of failure, including module construction, data movement, forward execution, loss computation, backward execution, and optimizer stepping, together with the exception and operator context when available. This phase identifies compatibility, lowering, placement, dtype, shape, and parameter-registration failures. The signal fires on a phase that raises, not on a phase that is absent. A candidate that never invokes its backward pass raises nothing and therefore completes, which is why backward and update correctness is established at the third stage rather than here. Table~\ref{tab:divergence} shows a candidate of exactly that kind.
 
 \paragraph{Forward-value signal.}
 Once both executions complete, the forward-value signal compares logits, selected intermediate activations, and losses under controlled inputs $(x,y)$ and synchronized initialization. The minimal scalar comparison is
