@@ -52,7 +52,7 @@ Training computation nevertheless imposes an order on what a candidate can be as
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/same_loss.pdf}
-\caption{One verdict cannot locate a training-code failure. Four ported programs run against the same PyTorch source on one training step. A dash marks a quantity that does not exist rather than one that is zero, either because the program stopped before it could be measured or because no backward pass ran. The correct port and the port with no backward pass agree on completion and on loss, both reporting $1.780535$ against the source's $1.780532$ and so tying at the four decimals shown, and those are the only two columns a conventional check inspects. It therefore accepts a program that never updates its parameters, while the three faults shown need three different edits.}
+\caption{One verdict cannot locate a training-code failure. Four ported programs run against the same PyTorch source on one training step. A dash marks a quantity that does not exist rather than one that is zero, either because the program stopped before it could be measured or because no backward pass ran. The correct port and the port with no backward pass agree on both of the columns a conventional check inspects, reporting $1.780535$ against the source's $1.780532$ and so tying at the four decimals shown, yet only one of the two trains.}
 \label{fig:divergence}
 \end{figure*}
 
