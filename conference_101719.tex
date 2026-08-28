@@ -45,26 +45,26 @@ This requirement creates failures that ordinary executability checks cannot see.
 
 Existing systems supply repair feedback in three main ways. Translation pipelines validate against a single outcome such as compilation, unit tests, or repository-level pass rates~\cite{he-etal-2025-execoder,macedo2024intertrans,guan2025repotransagent}. Repair agents explore the program until a test or execution trace exposes the fault~\cite{shinn2023reflexion,chen2023selfdebugging,wang2024codeact,xia2023aprplm,yang2024sweagent}. Conversion and differential-testing tools compare a converted output or a single behavioral property against a reference~\cite{mindspore2023mindconverter,yang2011csmith,pei2017deepxplore}. Despite their variety, all three share an implicit assumption that one verdict on the whole program is a sufficient unit of repair feedback.
 
-Training code does not satisfy this assumption. Table~\ref{tab:divergence} measures four ported programs against the same source over a single training step. A correct port and a port whose backward pass never executes both run to completion and both report the same loss, so a verdict formed from those two observations accepts a program that never updates its parameters. The three faulty ports moreover require three unrelated edits, and a single pass-or-fail verdict separates none of them.
+Training code does not satisfy this assumption. Table~\ref{tab:divergence} reports two ported programs run against the same source for a single training step, one correct and one whose backward pass never executes. Both run to completion and both report the same loss, so a verdict formed from those observations accepts a program that never updates its parameters. Such a verdict is also silent about where a failure lies, and different failures need different edits.
 
 Training computation nevertheless imposes an order on what a candidate can be asked to reproduce. It must first execute, then match the forward values of the source, and finally match its gradients and parameter updates. Each stage presupposes the one before it, so the earliest stage at which the two executions disagree identifies the class of defect and the repair it calls for. A candidate that fails to execute requires a compatibility fix, a divergent forward value implicates an operator, and a divergent gradient implicates the differentiation interface or the optimizer.
 
 \begin{table}[t]
-\caption{One verdict cannot locate a training-code failure. Four ported programs run against the same PyTorch source for one training step. A dash marks a quantity that does not exist rather than one that is zero, either because the program stopped before it could be measured or because no backward pass ran. The verdict column is formed from completion and loss alone, as outcome-level validation forms it. The correct port and the port with no backward pass agree on both, reporting $1.780535$ against the source's $1.780532$, yet only one of the two trains; that row is marked in red.}
+\caption{A verdict formed from completion and loss accepts a program that never trains. Two ported programs run against the same PyTorch source for one training step. They agree on everything such a verdict inspects and differ only below the line. A dash marks a quantity that does not exist rather than one that is zero: no backward pass ran, so there is no gradient to report.}
 \label{tab:divergence}
 \centering
 \footnotesize
-\setlength{\tabcolsep}{3.5pt}
-\begin{tabular}{@{}lccccc@{}}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}lccc@{}}
 \toprule
-\textbf{Program} & \textbf{Runs?} & \textbf{Loss} & \shortstack{\textbf{Grad.}\\\textbf{norm}} & \shortstack{\textbf{Param.}\\\textbf{update}} & \textbf{Verdict} \\
+ & \textbf{PyTorch} & \textbf{Correct} & \shortstack{\textbf{No backward}\\\textbf{pass}} \\
+ & \textbf{source} & \textbf{port} & \\
 \midrule
-PyTorch source   & yes & 1.7805 & 0.2834 & reference & --- \\
+Runs to completion & yes & yes & yes \\
+Loss               & 1.780532 & 1.780535 & 1.780535 \\
 \midrule
-Correct port     & yes & 1.7805 & 0.2834 & matches & accept \\
-Missing operator & no  & ---    & ---    & ---     & reject \\
-Wrong reduction  & yes & 2.5009 & 0.6879 & differs & reject \\
-No backward pass & yes & 1.7805 & ---    & \textcolor{red}{none} & \textcolor{red}{accept} \\
+Gradient norm      & 0.2834 & 0.2834 & --- \\
+Parameter update   & reference & matches & \textbf{none} \\
 \bottomrule
 \end{tabular}
 \end{table}
