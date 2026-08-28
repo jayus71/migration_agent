@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
 """Signal magnitude under controlled faults, normalized by detection threshold.
 
+NOT CURRENTLY IN THE MANUSCRIPT. This figure was added in 635ecd5 and dropped
+again in 9da362f; no \\includegraphics in conference_101719.tex refers to
+signal_magnitude.pdf. The magnitude-separation argument it made is now carried
+by Figure 1 (figures/make_divergence_trajectory.py), which shows the same
+separation over training steps rather than at a single step. Kept because it
+reads the fault-injection CSV that Table III also reports, so it is the quickest
+way to re-check that table visually. Delete both this script and its PDF if that
+stops being useful.
+
 Reads the two measured result sets directly so the figure cannot drift from the
 data:
   - oracle negative control : results_realdata_66/...steps_steps50.csv (600 rows)
