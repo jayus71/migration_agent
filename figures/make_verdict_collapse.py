@@ -311,11 +311,14 @@ fig.subplots_adjust(left=0.035, right=0.985, top=0.78, bottom=0.165)
 
 # Titles are placed at figure level, on one shared baseline. Per-axes titles put
 # panel (b)'s far above the other two, because its x-axis sits on top.
+# Titles are kept short enough that (a) and (b) do not touch and (c) does not
+# overrun the 7in canvas; measured, not eyeballed. The caption carries the full
+# reading of each panel.
 TITLE_Y = 0.925
 for ax, text in [
-        (ax_a, "(a) One verdict cannot separate three root causes"),
+        (ax_a, "(a) Three root causes, one verdict"),
         (ax_b, "(b) Measured signatures, ratio to threshold"),
-        (ax_c, "(c) Forward feedback is also slower")]:
+        (ax_c, "(c) Detection latency")]:
     fig.text(ax.get_position().x0, TITLE_Y, text, fontsize=7.6, color=INK,
              ha="left", va="center")
 fig.savefig("figures/verdict_collapse.pdf", bbox_inches="tight")
