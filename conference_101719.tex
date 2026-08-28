@@ -69,7 +69,7 @@ Parameter update   & reference & matches & \textbf{none} \\
 \end{tabular}
 \end{table}
 
-We realize this ordering as Layered Differential Diagnosis for Execution Repair (LADDER), a three-agent framework built around it. A translator produces a candidate, and a verifier executes it alongside the source and normalizes both runs into a common report that names the first stage at which they disagree. A fixer then edits the candidate at that stage rather than searching it. An orchestrator repeats the cycle, controlling repair rounds and rolling back failed attempts. A common adapter interface separates the signals from backend execution, so the same repair guidance applies to \texttt{torch4ms}/MindSpore\footnote{The primary prototype repository is available at \url{https://gitee.com/feixiao13/ascend-torch4ms.git}.} and TorchAX/JAX.
+We realize this ordering as Layered Differential Diagnosis for Execution Repair (LADDER), a three-agent framework built around it. A translator produces a candidate, and a verifier executes it alongside the source and normalizes both runs into a common report that names the first stage at which they disagree. A fixer then edits the candidate at that stage rather than searching it. An orchestrator repeats the cycle, controlling repair rounds and rolling back failed attempts. One loop serves more than one target, because the three signals are properties of training rather than of a runtime. We run it unchanged on \texttt{torch4ms}/MindSpore\footnote{The primary prototype repository is available at \url{https://gitee.com/feixiao13/ascend-torch4ms.git}.} and on TorchAX/JAX, where an adapter supplies the observations and the signals and their order do not change.
 
 This paper makes three contributions:
 \begin{itemize}
