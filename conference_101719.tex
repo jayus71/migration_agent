@@ -181,7 +181,7 @@ Because every result below is read off a comparison between two executions, we f
 The primary experiment ran the full pool of 50 instances on the MindSpore path. All instances were hidden from the repair prompts, each allowed at most four repair attempts, and failed repairs were rolled back.
 
 \textbf{Repair on the MindSpore path.}
-Table~\ref{tab:main-results} shows a clear advantage for LADDER under the shared four-attempt budget. LADDER repairs 84.0\% of instances on the first attempt, 98.0\% by the second, and all 50 instances by the fourth. The strongest external baseline, MatchFixAgent, reaches 74.0\%, 86.0\%, and 94.0\% at the same checkpoints. LADDER gains 10 percentage points on first-attempt repair and is the only method that closes the pool, verifying all 50 instances where the strongest baseline leaves three unresolved. The fault-stage columns show where the gain comes from: LADDER repairs all 16 gradient/update faults, compared with 13 for MatchFixAgent and 14 for direct LLM repair. Locating the failing stage also makes the repair cheaper rather than more expensive, at 0.191M tokens per pool and 21.8 seconds per instance against 5.205M tokens and 69.7 seconds for MatchFixAgent, a $27\times$ reduction in tokens and a $3.2\times$ reduction in time. The reduced internal controls establish the mechanism: adding undifferentiated checks gives only a small improvement, while identifying the first failing stage produces the large jump in repair success. Figure~\ref{fig:cost-quality} makes the joint quality--cost advantage visible.
+Table~\ref{tab:main-results} shows a clear advantage for LADDER under the shared four-attempt budget. LADDER repairs 84.0\% of instances on the first attempt and 98.0\% by the second, and closes all 50 within the budget. The strongest external baseline, MatchFixAgent, reaches 74.0\% and 86.0\% at the same two checkpoints and finishes at 47/50. LADDER gains 10 percentage points on first-attempt repair and is the only method that closes the pool, verifying all 50 instances where the strongest baseline leaves three unresolved. The fault-stage columns show where the gain comes from: LADDER repairs all 16 gradient/update faults, compared with 13 for MatchFixAgent and 14 for direct LLM repair. Locating the failing stage also makes the repair cheaper rather than more expensive, at 0.191M tokens per pool and 21.8 seconds per instance against 5.205M tokens and 69.7 seconds for MatchFixAgent, a $27\times$ reduction in tokens and a $3.2\times$ reduction in time. The reduced internal controls establish the mechanism: adding undifferentiated checks gives only a small improvement, while identifying the first failing stage produces the large jump in repair success. Figure~\ref{fig:cost-quality} makes the joint quality--cost advantage visible.
 
 \begin{figure}[!t]
 \centering
@@ -197,28 +197,28 @@ Table~\ref{tab:main-results} shows a clear advantage for LADDER under the shared
 \footnotesize
 \setlength{\tabcolsep}{3.5pt}
 \renewcommand{\arraystretch}{1.08}
-\begin{tabular}{@{}lrrrrrrrrrr@{}}
+\begin{tabular}{@{}lrrrrrrrr@{}}
 \toprule
-\textbf{Method} & \textbf{N} & \multicolumn{4}{c}{\textbf{Final verified repairs}} & \multicolumn{3}{c}{\textbf{Repair@$k$}} & \multicolumn{2}{c}{\textbf{Efficiency}} \\
-\cmidrule(lr){3-6}\cmidrule(lr){7-9}\cmidrule(lr){10-11}
- & & \textbf{Exec.} & \textbf{Num.} & \textbf{Grad./upd.} & \textbf{All} & \textbf{@1} & \textbf{@2} & \textbf{@4} & \shortstack{\textbf{Time/inst.}\\\textbf{(s)}} & \textbf{Tokens} \\
+\textbf{Method} & \multicolumn{4}{c}{\textbf{Final verified repairs}} & \multicolumn{2}{c}{\textbf{Repair@$k$}} & \multicolumn{2}{c}{\textbf{Efficiency}} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
+ & \textbf{Exec.} & \textbf{Num.} & \textbf{Grad./upd.} & \textbf{All} & \textbf{@1} & \textbf{@2} & \shortstack{\textbf{Time/inst.}\\\textbf{(s)}} & \textbf{Tokens} \\
 \midrule
-\multicolumn{11}{@{}l}{\textit{Internal controls}} \\
-Execution-only          & 50 & 14/20 & 7/14  & 12/16 & 33/50 & 58.0\% & 64.0\% & 66.0\% & 40.3  & 0.155M \\
-All checks, unordered   & 50 & 14/20 & 8/14  & 12/16 & 34/50 & 66.0\% & 66.0\% & 68.0\% & 56.1  & 0.180M \\
+\multicolumn{9}{@{}l}{\textit{Internal controls}} \\
+Execution-only          & 14/20 & 7/14  & 12/16 & 33/50 & 58.0\% & 64.0\% & 40.3  & 0.155M \\
+All checks, unordered   & 14/20 & 8/14  & 12/16 & 34/50 & 66.0\% & 66.0\% & 56.1  & 0.180M \\
 \midrule
-\multicolumn{11}{@{}l}{\textit{Repair baselines}} \\
-Direct LLM              & 50 & 18/20 & 8/14  & 14/16 & 40/50 & 72.0\% & 76.0\% & 80.0\% & 43.4  & 1.583M \\
-SWE-agent               & 50 & 20/20 & 11/14 & 15/16 & 46/50 & 72.0\% & 84.0\% & 92.0\% & 127.5 & 7.635M \\
-MatchFixAgent$^\dagger$ & 50 & 20/20 & 14/14 & 13/16 & 47/50 & 74.0\% & 86.0\% & 94.0\% & 69.7  & 5.205M \\
+\multicolumn{9}{@{}l}{\textit{Repair baselines}} \\
+Direct LLM              & 18/20 & 8/14  & 14/16 & 40/50 & 72.0\% & 76.0\% & 43.4  & 1.583M \\
+SWE-agent               & 20/20 & 11/14 & 15/16 & 46/50 & 72.0\% & 84.0\% & 127.5 & 7.635M \\
+MatchFixAgent$^\dagger$ & 20/20 & 14/14 & 13/16 & 47/50 & 74.0\% & 86.0\% & 69.7  & 5.205M \\
 \midrule
-\multicolumn{11}{@{}l}{\textit{Ours, full}} \\
-\textbf{LADDER}         & \textbf{50} & \textbf{20/20} & \textbf{14/14} & \textbf{16/16} & \textbf{50/50} & \textbf{84.0\%} & \textbf{98.0\%} & \textbf{100.0\%} & \textbf{21.8} & \textbf{0.191M} \\
+\multicolumn{9}{@{}l}{\textit{Ours, full}} \\
+\textbf{LADDER}         & \textbf{20/20} & \textbf{14/14} & \textbf{16/16} & \textbf{50/50} & \textbf{84.0\%} & \textbf{98.0\%} & \textbf{21.8} & \textbf{0.191M} \\
 \bottomrule
 \end{tabular}
 \vspace{2pt}
 \begin{flushleft}
-\footnotesize Repair@$k$ is verified success within $k$ attempts. Stage denominators are 20 execution, 14 numerical, and 16 gradient/update instances. Time is wall-clock seconds per instance; tokens are total prompt plus completion tokens. $^\dagger$MatchFixAgent receives the healthy implementation of the changed function; LADDER does not.
+\footnotesize Every method is run on all 50 instances under the same four-attempt budget, so the All column equals Repair@4 and that column is omitted. Repair@$k$ is verified success within $k$ attempts. Stage denominators are 20 execution, 14 numerical, and 16 gradient/update instances. Time is wall-clock seconds per instance; tokens are total prompt plus completion tokens. $^\dagger$MatchFixAgent receives the healthy implementation of the changed function; LADDER does not.
 \end{flushleft}
 \end{table*}
 
