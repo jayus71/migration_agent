@@ -30,7 +30,7 @@ anonymous@example.com}}
 \maketitle
 
 \begin{abstract}
-Large language models can now translate a deep learning training program from one framework to another. Such a translation often runs to completion and still fails to train, because frameworks differ in operator semantics, automatic differentiation, and optimizer behavior. Existing pipelines validate a candidate against a single outcome such as a clean execution or a passing test, without asking which training stage failed. We argue that repair depends on how precisely the feedback locates a failure, not on the power of the repair model. We introduce Layered Differential Diagnosis for Execution Repair (LADDER), a three-agent framework in which a translator, a verifier, and a fixer iterate under an orchestrator. The verifier runs the source and the candidate as a pair and reports the first stage at which they disagree, whether in execution, in forward values, or in gradients and parameter updates. The fixer edits at that stage instead of searching the program. Because the three signals are defined on training semantics rather than on any one runtime, a single repair loop serves different target frameworks. On real migration failures LADDER repairs every instance in the pool, outperforming the strongest repair baseline at a fraction of its token cost, and the same loop carries over from MindSpore to JAX.
+Large language models can now translate a deep learning training program from one framework to another. Such a translation often runs to completion and still fails to train, because frameworks differ in operator semantics, automatic differentiation, and optimizer behavior. Existing pipelines validate a candidate against a single outcome such as a clean execution or a passing test, without asking which training stage failed. We argue that repair depends on how precisely the feedback locates a failure, not on the power of the repair model. We introduce Layered Differential Diagnosis for Execution Repair (LADDER), a three-agent framework in which a translator, a verifier, and a fixer iterate under an orchestrator. The verifier runs the source and the candidate as a pair and reports the first stage at which they disagree, whether in execution, in forward values, or in gradients and parameter updates. The fixer edits at that stage instead of searching the program. Because the three signals are defined on training semantics rather than on any one runtime, a single repair loop serves different target frameworks. On a pool built from real migration failures LADDER repairs every instance, outperforming the strongest repair baseline at a fraction of its token cost, and the same loop carries over from MindSpore to JAX.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -57,8 +57,8 @@ Training computation nevertheless imposes an order on what a candidate can be as
 \setlength{\tabcolsep}{5pt}
 \begin{tabular}{@{}lccc@{}}
 \toprule
- & \textbf{PyTorch} & \textbf{Correct} & \shortstack{\textbf{No backward}\\\textbf{pass}} \\
- & \textbf{source} & \textbf{port} & \\
+ & \textbf{PyTorch} & \textbf{Correct} & \textbf{No backward} \\
+ & \textbf{source} & \textbf{port} & \textbf{pass} \\
 \midrule
 \multicolumn{4}{@{}l}{\textit{What a completion-and-loss verdict inspects}} \\
 Runs to completion & yes & yes & yes \\
@@ -71,7 +71,7 @@ Parameter update   & reference & matches & \textbf{none} \\
 \end{tabular}
 \vspace{2pt}
 \begin{flushleft}
-\footnotesize One training step of a convolutional network, run against the PyTorch reference on identical inputs and initialization. The two candidates report the same loss to every digit and sit $3\times10^{-6}$ from the source, far inside the $0.02$ tolerance such a verdict applies, so it accepts both. A dash marks a quantity that does not exist rather than one that is zero: no backward pass ran, so there is no gradient to report.
+\footnotesize One training step of a convolutional network, run against the PyTorch reference on identical inputs and initialization. The right-hand column is a controlled instance of a category observed in real migrations, in which the backward pass is suppressed; a missing \texttt{optimizer.step} produces the same signature. The two candidates report the same loss to every digit and sit $3\times10^{-6}$ from the source, far inside the $0.02$ tolerance such a verdict applies, so it accepts both. A dash marks a quantity that does not exist rather than one that is zero: no backward pass ran, so there is no gradient to report.
 \end{flushleft}
 \end{table}
 
@@ -183,7 +183,7 @@ For each checked training step, paired harnesses synchronize inputs, initializat
 The evaluation answers three questions. Does LADDER improve verified repair success under a fixed budget (RQ1)? Why does the ordered feedback improve repair (RQ2)? Can the same procedure be applied to a second framework (RQ3)?
 
 \textbf{Fault pool.}
-The faults come from real migration failures rather than synthetic mutation. We migrated PyTorch training programs to the two target paths and recorded the cases that failed. The recurring failures fall into 25 categories, grouped by the stage at which each one surfaced and by the framework mechanism responsible. Each category is instantiated on two model families, giving a pool of 50 instances over CNN, image MLP, Transformer classifier, and tiny causal LM. The JAX pool is built the same way and contributes six MLP and CNN faults across the three stages.
+The fault categories come from real migration failures rather than from an arbitrary mutation catalogue. We migrated PyTorch training programs to the two target paths and recorded the cases that failed. The recurring failures fall into 25 categories, grouped by the stage at which each one surfaced and by the framework mechanism responsible. Each category is then reproduced by injecting it into a known-correct implementation, which fixes the ground truth for every instance and makes localization measurable; the categories are observed, and the instances are controlled. Each category is instantiated on two model families, giving a pool of 50 instances over CNN, image MLP, Transformer classifier, and tiny causal LM. The JAX pool is built the same way and contributes six MLP and CNN faults across the three stages.
 
 \textbf{Repair scope.}
 A repair scope is the code the fixer is permitted to edit. Candidate-level repairs may change only the migrated program. Core-operator repairs may also change the adapter's operator implementations. Core autograd/optimizer repairs may additionally change its differentiation and optimizer code. Scopes matter because the same observed failure can be fixed at more than one level, and an edit outside the assigned scope may mask the fault instead of repairing it.
@@ -374,7 +374,7 @@ Panel (a) of Table~\ref{tab:guidance-ablations} isolates the two factors in the 
 Panel (b) reverses the picture at the translator. The documentation dominates one-shot translation. Without it, most outputs fail to compile and none complete training verification, and with it every output passes all three signals on the first attempt. Framework documentation matters most before any feedback exists, whereas panel (a) shows the feedback carrying the repair loop afterwards.
 
 \subsection{Threats to Validity}
-The evidence spans four model families, 25 fault categories, three repair scopes, and 50-step training trajectories on the MindSpore path, and the JAX study shows with six MLP/CNN faults that the same signals transfer to a different differentiation system and optimizer stack. Two boundaries are worth stating. The JAX result establishes transfer rather than breadth, and the signals compare controlled paired executions, so longer training horizons and further framework pairs are open questions rather than settled ones.
+The evidence spans four model families, 25 fault categories, three repair scopes, and 50-step training trajectories on the MindSpore path, and the JAX study shows with six MLP/CNN faults that the same signals transfer to a different differentiation system and optimizer stack. Three boundaries are worth stating. The categories are drawn from failures we observed, but each instance is a controlled injection, which fixes the ground truth needed to measure localization at the cost of the variability an uncurated failure would carry. The JAX result establishes transfer rather than breadth. And the signals compare controlled paired executions, so longer training horizons and further framework pairs are open questions rather than settled ones.
 
 \section{Conclusion}
 
