@@ -71,7 +71,7 @@ Parameter update   & reference & matches & \textbf{none} \\
 \end{tabular}
 \vspace{2pt}
 \begin{flushleft}
-\footnotesize One training step of a convolutional network, run against the PyTorch reference on identical inputs and initialization. The right-hand column is a controlled instance of a category observed in real migrations, in which the backward pass is suppressed; a missing \texttt{optimizer.step} produces the same signature. Both candidates sit $3\times10^{-6}$ from the source, far inside the $0.02$ tolerance such a verdict applies, so it accepts both. A dash marks a quantity that does not exist rather than one that is zero: no backward pass ran, so there is no gradient to report.
+\footnotesize One training step of a convolutional network on identical inputs and initialization. The right-hand column is a controlled instance of a category observed in real migrations, with the backward pass suppressed. Both candidate losses lie within the $0.02$ tolerance the verdict applies. A dash marks a quantity that does not exist rather than one that is zero: no backward pass ran, so there is no gradient to report.
 \end{flushleft}
 \end{table}
 
