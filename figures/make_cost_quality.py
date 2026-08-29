@@ -8,16 +8,21 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-# name, tokens (millions), verified rate (%), family
-# Row labels match Table I exactly. The paper calls the three layered
+# name, tokens per repair (thousands), first-attempt rate (%), family
+# Row labels and values match Table I exactly. The paper calls the three layered
 # quantities "signals", so this row reads "All signals, unordered" there too.
+#
+# Cost is per repair achieved, not per pool, matching the table's Cost per repair
+# column: total tokens divided by verified repairs. Dividing by instances
+# attempted flatters whichever method repairs fewest, since it charges the same
+# denominator whether a method closes the pool or abandons a third of it.
 POINTS = [
-    ("Execution-only",        0.15,  58.0, "reduced"),
-    ("All signals, unordered", 0.18,  66.0, "reduced"),
-    ("Direct LLM",            1.58,  72.0, "baseline"),
-    ("SWE-agent",             7.64,  72.0, "baseline"),
-    ("MatchFixAgent",         5.21,  74.0, "baseline"),
-    ("LADDER (ours)",         0.19,  84.0, "ours"),
+    ("Execution-only",         4.7,  58.0, "reduced"),
+    ("All signals, unordered", 5.3,  66.0, "reduced"),
+    ("Direct LLM",            39.6,  72.0, "baseline"),
+    ("SWE-agent",            166.0,  72.0, "baseline"),
+    ("MatchFixAgent",        110.7,  74.0, "baseline"),
+    ("LADDER (ours)",          3.8,  84.0, "ours"),
 ]
 
 STYLE = {
@@ -57,14 +62,14 @@ for name, tok, rate, fam in POINTS:
                           edgecolor="none", alpha=0.72))
 
 ax.set_xscale("log")
-ax.set_xlabel("Tokens consumed over the pool (M, log scale)", fontsize=7.5)
+ax.set_xlabel("Tokens per repair (K, log scale)", fontsize=7.5)
 ax.set_ylabel("First-attempt repair rate (\\%)", fontsize=7.5)
-ax.set_xlim(0.10, 14)
+ax.set_xlim(2.5, 340)
 # Headroom above the star for the annotation, which used to sit mid-plot and
 # collide with the MatchFixAgent label.
 ax.set_ylim(50, 93)
-ax.set_xticks([0.1, 0.3, 1, 3, 10])
-ax.set_xticklabels(["0.1", "0.3", "1", "3", "10"])
+ax.set_xticks([3, 10, 30, 100, 300])
+ax.set_xticklabels(["3", "10", "30", "100", "300"])
 ax.tick_params(labelsize=7)
 # Solid hairline grid: dashing reads as a threshold or projection when it is
 # only a grid.
@@ -77,10 +82,10 @@ for side in ("top", "right"):
 # itself sits in the empty space above the star rather than at the midpoint,
 # where it previously overlapped the MatchFixAgent label and was crossed by this
 # line.
-ax.annotate("", xy=(0.19, 84.0), xytext=(5.21, 74.0),
+ax.annotate("", xy=(3.8, 84.0), xytext=(110.7, 74.0),
             arrowprops=dict(arrowstyle="-", linestyle="--", linewidth=0.6,
                             color="#9a9a9a", shrinkA=10, shrinkB=8))
-ax.text(0.205, 86.4, "$27\\times$ fewer tokens,\nhigher rate", fontsize=6.2,
+ax.text(4.1, 86.4, "$29\\times$ fewer tokens,\nhigher rate", fontsize=6.2,
         color="#555555", ha="left", va="bottom", style="italic")
 
 fig.tight_layout(pad=0.25)

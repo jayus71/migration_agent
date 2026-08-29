@@ -202,44 +202,44 @@ Because every result below is read off a comparison between two executions, we f
 The primary experiment ran the full pool of 50 instances on the MindSpore path. All instances were hidden from the repair prompts, each allowed at most four repair attempts, and failed repairs were rolled back.
 
 \textbf{Repair on the MindSpore path.}
-Table~\ref{tab:main-results} shows a clear advantage for LADDER under the shared four-attempt budget. LADDER repairs 84.0\% of instances on the first attempt and 98.0\% by the second, and closes all 50 within the budget. The strongest external baseline, MatchFixAgent, reaches 74.0\% and 86.0\% at the same two checkpoints and finishes at 47/50. LADDER gains 10 percentage points on first-attempt repair and is the only method that closes the pool, verifying all 50 instances where the strongest baseline leaves three unresolved. The fault-stage columns show where the gain comes from. LADDER repairs all 16 gradient and update faults, compared with 13 for MatchFixAgent and 14 for direct LLM repair. Locating the failing stage also makes the repair cheaper. LADDER spends 0.191M tokens per pool and 21.8 seconds per instance, against 5.205M tokens and 69.7 seconds for MatchFixAgent, a $27\times$ reduction in tokens and a $3.2\times$ reduction in time. The reduced internal controls establish the mechanism. The unordered condition repairs one instance more than execution-only feedback, 34/50 against 33/50, while naming the first failing stage repairs sixteen more. Figure~\ref{fig:cost-quality} makes the joint quality--cost advantage visible.
+Table~\ref{tab:main-results} shows a clear advantage for LADDER under the shared four-attempt budget. LADDER repairs 84.0\% of instances on the first attempt and 98.0\% by the second, and closes all 50 within the budget. The strongest external baseline, MatchFixAgent, reaches 74.0\% and 86.0\% at the same two checkpoints and finishes at 47/50. LADDER gains 10 percentage points on first-attempt repair and is the only method that closes the pool, verifying all 50 instances where the strongest baseline leaves three unresolved. The two partitions locate the gain. By stage, LADDER repairs all 16 gradient and update faults against 13 for MatchFixAgent and 14 for direct LLM repair. By depth, every method handles faults repairable inside the ported program, and the methods separate as the required edit moves into the adapter: at the deepest level, which reaches differentiation and optimizer code, LADDER repairs 4/4 while MatchFixAgent repairs 1/4 and SWE-agent 3/4. Those four instances are the two categories that misalign gradients with the parameters they belong to, and the category that no baseline repairs at all is one of them. Locating the failing stage also makes the repair cheaper. Measured per repair achieved, LADDER spends 3.8K tokens and 21.8 seconds against 110.7K tokens and 74.2 seconds for MatchFixAgent, a $29\times$ reduction in tokens and a $3.4\times$ reduction in time. The reduced internal controls establish the mechanism. The unordered condition repairs one instance more than execution-only feedback, 34/50 against 33/50, while naming the first failing stage repairs sixteen more. Figure~\ref{fig:cost-quality} makes the joint quality--cost advantage visible.
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\columnwidth]{figures/cost_quality.pdf}
-\caption{Token cost against first-attempt repair rate on the 50-instance pool. LADDER combines the highest first-attempt repair rate with the lowest token cost. Values are those of Table~\ref{tab:main-results}.}
+\caption{Cost per repair against first-attempt repair rate on the 50-instance pool. LADDER occupies the corner no baseline reaches, combining the highest first-attempt rate with the lowest cost. Values are those of Table~\ref{tab:main-results}.}
 \label{fig:cost-quality}
 \end{figure}
 
 \begin{table*}[!t]
-\caption{Main repair results on the fixed 50-instance MindSpore fault pool. The first four metric columns give final verified repairs by fault stage; Repair@$k$ gives cumulative success within $k$ attempts; the last two columns report efficiency.}
+\caption{Main repair results on the fixed 50-instance MindSpore fault pool, resolved along two independent partitions of the same 50 instances: the training stage at which the fault surfaces, and the depth of code a repair must reach.}
 \label{tab:main-results}
 \centering
 \footnotesize
 \setlength{\tabcolsep}{3.5pt}
 \renewcommand{\arraystretch}{1.08}
-\begin{tabular}{@{}lrrrrrrrr@{}}
+\begin{tabular}{@{}lrrrrrrrrrrr@{}}
 \toprule
-\textbf{Method} & \multicolumn{4}{c}{\textbf{Final verified repairs}} & \multicolumn{2}{c}{\textbf{Repair@$k$}} & \multicolumn{2}{c}{\textbf{Efficiency}} \\
-\cmidrule(lr){2-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}
- & \textbf{Exec.} & \textbf{Num.} & \textbf{Grad./upd.} & \textbf{All} & \textbf{@1} & \textbf{@2} & \shortstack{\textbf{Time/inst.}\\\textbf{(s)}} & \textbf{Tokens} \\
+\textbf{Method} & \multicolumn{3}{c}{\textbf{By fault stage}} & \multicolumn{3}{c}{\textbf{By repair depth}} & \multicolumn{3}{c}{\textbf{Repair@$k$}} & \multicolumn{2}{c}{\textbf{Cost per repair}} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}\cmidrule(lr){11-12}
+ & \textbf{Exec.} & \textbf{Num.} & \shortstack{\textbf{Grad.}\\\textbf{upd.}} & \textbf{Cand.} & \shortstack{\textbf{Core}\\\textbf{op.}} & \shortstack{\textbf{Core}\\\textbf{a/o}} & \textbf{@1} & \textbf{@2} & \textbf{@4} & \textbf{Tokens} & \textbf{s} \\
 \midrule
-\multicolumn{9}{@{}l}{\textit{Internal controls}} \\
-Execution-only          & 14/20 & 7/14  & 12/16 & 33/50 & 58.0\% & 64.0\% & 40.3  & 0.155M \\
-All signals, unordered   & 14/20 & 8/14  & 12/16 & 34/50 & 66.0\% & 66.0\% & 56.1  & 0.180M \\
+\multicolumn{12}{@{}l}{\textit{Internal controls}} \\
+Execution-only          & 14/20 & 7/14  & 12/16 & 25/26 & 8/20  & 0/4 & 58\% & 64\% & 66\%  & 4.7K   & 61 \\
+All signals, unordered  & 14/20 & 8/14  & 12/16 & 26/26 & 8/20  & 0/4 & 66\% & 66\% & 68\%  & 5.3K   & 82 \\
 \midrule
-\multicolumn{9}{@{}l}{\textit{Repair baselines}} \\
-Direct LLM              & 18/20 & 8/14  & 14/16 & 40/50 & 72.0\% & 76.0\% & 43.4  & 1.583M \\
-SWE-agent               & 20/20 & 11/14 & 15/16 & 46/50 & 72.0\% & 84.0\% & 127.5 & 7.635M \\
-MatchFixAgent$^\dagger$ & 20/20 & 14/14 & 13/16 & 47/50 & 74.0\% & 86.0\% & 69.7  & 5.205M \\
+\multicolumn{12}{@{}l}{\textit{Repair baselines}} \\
+Direct LLM              & 18/20 & 8/14  & 14/16 & 24/26 & 14/20 & 2/4 & 72\% & 76\% & 80\%  & 39.6K  & 54 \\
+SWE-agent               & 20/20 & 11/14 & 15/16 & 26/26 & 17/20 & 3/4 & 72\% & 84\% & 92\%  & 166.0K & 139 \\
+MatchFixAgent$^\dagger$ & 20/20 & 14/14 & 13/16 & 26/26 & 20/20 & 1/4 & 74\% & 86\% & 94\%  & 110.7K & 74 \\
 \midrule
-\multicolumn{9}{@{}l}{\textit{Ours, full}} \\
-\textbf{LADDER}         & \textbf{20/20} & \textbf{14/14} & \textbf{16/16} & \textbf{50/50} & \textbf{84.0\%} & \textbf{98.0\%} & \textbf{21.8} & \textbf{0.191M} \\
+\multicolumn{12}{@{}l}{\textit{Ours, full}} \\
+\textbf{LADDER}         & \textbf{20/20} & \textbf{14/14} & \textbf{16/16} & \textbf{26/26} & \textbf{20/20} & \textbf{4/4} & \textbf{84\%} & \textbf{98\%} & \textbf{100\%} & \textbf{3.8K} & \textbf{22} \\
 \bottomrule
 \end{tabular}
 \vspace{2pt}
 \begin{flushleft}
-\footnotesize Every method is run on all 50 instances under the same four-attempt budget, so the All column equals Repair@4 and that column is omitted. Repair@$k$ is verified success within $k$ attempts. Stage denominators are 20 execution, 14 numerical, and 16 gradient and update instances. Time is wall-clock seconds per instance; tokens are total prompt plus completion tokens. $^\dagger$MatchFixAgent receives the healthy implementation of the changed function; LADDER does not.
+\footnotesize Every method runs on all 50 instances under the same four-attempt budget, and every run bound the intended model with no environment failures, so no method is disadvantaged by infrastructure. The two partitions both total 50: by stage, 20 execution, 14 numerical, and 16 gradient and update instances; by depth, 26 repairable in the ported program alone (Cand.), 20 reaching the adapter's operators (Core op.), and 4 reaching its differentiation and optimizer code (Core a/o). Repair@$k$ is verified success within $k$ attempts, so @4 is the final result. Cost is divided by repairs achieved rather than by instances attempted, which is the fair comparison when methods differ in how many they repair; tokens are prompt plus completion. $^\dagger$MatchFixAgent receives the healthy implementation of the changed function, which LADDER never sees.
 \end{flushleft}
 \end{table*}
 
@@ -378,7 +378,7 @@ The evidence spans four model families, 25 fault categories, three repair scopes
 
 \section{Conclusion}
 
-We introduced LADDER, which validates cross-framework training-code migration through execution, forward-value, and gradient and update signals in order. The first failing stage becomes targeted repair guidance, and the candidate is accepted only after all three signals pass. On 50 real MindSpore migration failures, LADDER reaches 84.0\% repair on the first attempt and closes the pool at 100\% within four attempts, using $27\times$ fewer tokens than the strongest repair baseline; it also repairs all six faults in the JAX study. Locating the failing stage therefore makes repair both more effective and cheaper, because a diagnosis that names the stage replaces the search that a whole-program verdict forces the repair loop to perform.
+We introduced LADDER, which validates cross-framework training-code migration through execution, forward-value, and gradient and update signals in order. The first failing stage becomes targeted repair guidance, and the candidate is accepted only after all three signals pass. On 50 real MindSpore migration failures, LADDER reaches 84.0\% repair on the first attempt and closes the pool at 100\% within four attempts, using $29\times$ fewer tokens per repair than the strongest repair baseline; it also repairs all six faults in the JAX study. Locating the failing stage therefore makes repair both more effective and cheaper, because a diagnosis that names the stage replaces the search that a whole-program verdict forces the repair loop to perform.
 
 \section*{Acknowledgment}
 This work was supported by CAAI Huawei MindSpore Open Fund, and developed on OpenI Community.
