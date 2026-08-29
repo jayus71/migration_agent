@@ -180,7 +180,16 @@ For each checked training step, paired harnesses synchronize inputs, initializat
 
 \subsection{Experimental Setup}
 \label{sec:setup}
-The evaluation answers three questions. Does LADDER improve verified repair success under a fixed budget (RQ1)? Why does the ordered feedback improve repair (RQ2)? Can the same procedure be applied to a second framework (RQ3)?
+The evaluation answers four questions.
+
+\begin{itemize}
+  \item[\textbf{RQ1}] How does LADDER compare with existing repair systems on verified repair success under a fixed budget?
+  \item[\textbf{RQ2}] Which part of the layered feedback produces the gain, measuring the signals or ordering them?
+  \item[\textbf{RQ3}] Does each signal detect the fault class it is meant to expose?
+  \item[\textbf{RQ4}] Does the same repair loop transfer to a second target framework?
+\end{itemize}
+
+RQ1 compares against external systems, RQ2 removes parts of our own feedback, RQ3 tests the signals as detectors independently of any repair, and RQ4 changes the target framework.
 
 \textbf{Fault pool.}
 The fault categories come from real migration failures rather than from an arbitrary mutation catalogue. We migrated PyTorch training programs to the two target paths and recorded the cases that failed. The recurring failures fall into 25 categories, grouped by the stage at which each one surfaced and by the framework mechanism responsible. Each category is then reproduced by injecting it into a known-correct implementation, which fixes the ground truth for every instance and makes localization measurable; the categories are observed, and the instances are controlled. Each category is instantiated on two model families, giving a pool of 50 instances over CNN, image MLP, Transformer classifier, and tiny causal LM. The JAX pool is built the same way and contributes six MLP and CNN faults across the three stages.
@@ -202,7 +211,7 @@ Because every result below is read off a comparison between two executions, we f
 The primary experiment ran the full pool of 50 instances on the MindSpore path. All instances were hidden from the repair prompts, each allowed at most four repair attempts, and failed repairs were rolled back.
 
 \textbf{Repair on the MindSpore path.}
-Table~\ref{tab:main-results} shows a clear advantage for LADDER under the shared four-attempt budget. LADDER repairs 84.0\% of instances on the first attempt and 98.0\% by the second, and closes all 50 within the budget. The strongest external baseline, MatchFixAgent, reaches 74.0\% and 86.0\% at the same two checkpoints and finishes at 47/50. LADDER gains 10 percentage points on first-attempt repair and is the only method that closes the pool, verifying all 50 instances where the strongest baseline leaves three unresolved. The two partitions locate the gain. By stage, LADDER repairs all 16 gradient and update faults against 13 for MatchFixAgent and 14 for direct LLM repair. By depth, every method handles faults repairable inside the ported program, and the methods separate as the required edit moves into the adapter: at the deepest level, which reaches differentiation and optimizer code, LADDER repairs 4/4 while MatchFixAgent repairs 1/4 and SWE-agent 3/4. Those four instances are the two categories that misalign gradients with the parameters they belong to, and the category that no baseline repairs at all is one of them. Locating the failing stage also makes the repair cheaper. Measured per repair achieved, LADDER spends 3.8K tokens and 21.8 seconds against 110.7K tokens and 74.2 seconds for MatchFixAgent, a $29\times$ reduction in tokens and a $3.4\times$ reduction in time. The reduced internal controls establish the mechanism. The unordered condition repairs one instance more than execution-only feedback, 34/50 against 33/50, while naming the first failing stage repairs sixteen more. Figure~\ref{fig:cost-quality} makes the joint quality--cost advantage visible.
+Table~\ref{tab:main-results} shows a clear advantage for LADDER under the shared four-attempt budget. LADDER repairs 84.0\% of instances on the first attempt and 98.0\% by the second, and closes all 50 within the budget. The strongest external baseline, MatchFixAgent, reaches 74.0\% and 86.0\% at the same two checkpoints and finishes at 47/50. LADDER gains 10 percentage points on first-attempt repair and is the only method that closes the pool, verifying all 50 instances where the strongest baseline leaves three unresolved. The two partitions locate the gain. By stage, LADDER repairs all 16 gradient and update faults against 13 for MatchFixAgent and 14 for direct LLM repair. By depth, every method handles faults repairable inside the ported program, and the methods separate as the required edit moves into the adapter: at the deepest level, which reaches differentiation and optimizer code, LADDER repairs 4/4 while MatchFixAgent repairs 1/4 and SWE-agent 3/4. Those four instances are the two categories that misalign gradients with the parameters they belong to, and the category that no baseline repairs at all is one of them. Locating the failing stage also makes the repair cheaper. Measured per repair achieved, LADDER spends 3.8K tokens and 21.8 seconds against 110.7K tokens and 74.2 seconds for MatchFixAgent, a $29\times$ reduction in tokens and a $3.4\times$ reduction in time. Figure~\ref{fig:cost-quality} makes the joint quality--cost advantage visible. These numbers establish that the gain exists; Section~\ref{sec:ablations} removes parts of the feedback to establish where it comes from.
 
 \begin{figure}[!t]
 \centering
@@ -224,16 +233,10 @@ Table~\ref{tab:main-results} shows a clear advantage for LADDER under the shared
 \cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}\cmidrule(lr){11-12}
  & \textbf{Exec.} & \textbf{Num.} & \shortstack{\textbf{Grad.}\\\textbf{upd.}} & \textbf{Cand.} & \shortstack{\textbf{Core}\\\textbf{op.}} & \shortstack{\textbf{Core}\\\textbf{a/o}} & \textbf{@1} & \textbf{@2} & \textbf{@4} & \textbf{Tokens} & \textbf{s} \\
 \midrule
-\multicolumn{12}{@{}l}{\textit{Internal controls}} \\
-Execution-only          & 14/20 & 7/14  & 12/16 & 25/26 & 8/20  & 0/4 & 58\% & 64\% & 66\%  & 4.7K   & 61 \\
-All signals, unordered  & 14/20 & 8/14  & 12/16 & 26/26 & 8/20  & 0/4 & 66\% & 66\% & 68\%  & 5.3K   & 82 \\
-\midrule
-\multicolumn{12}{@{}l}{\textit{Repair baselines}} \\
 Direct LLM              & 18/20 & 8/14  & 14/16 & 24/26 & 14/20 & 2/4 & 72\% & 76\% & 80\%  & 39.6K  & 54 \\
 SWE-agent               & 20/20 & 11/14 & 15/16 & 26/26 & 17/20 & 3/4 & 72\% & 84\% & 92\%  & 166.0K & 139 \\
 MatchFixAgent$^\dagger$ & 20/20 & 14/14 & 13/16 & 26/26 & 20/20 & 1/4 & 74\% & 86\% & 94\%  & 110.7K & 74 \\
 \midrule
-\multicolumn{12}{@{}l}{\textit{Ours, full}} \\
 \textbf{LADDER}         & \textbf{20/20} & \textbf{14/14} & \textbf{16/16} & \textbf{26/26} & \textbf{20/20} & \textbf{4/4} & \textbf{84\%} & \textbf{98\%} & \textbf{100\%} & \textbf{3.8K} & \textbf{22} \\
 \bottomrule
 \end{tabular}
@@ -243,36 +246,57 @@ MatchFixAgent$^\dagger$ & 20/20 & 14/14 & 13/16 & 26/26 & 20/20 & 1/4 & 74\% & 8
 \end{flushleft}
 \end{table*}
 
-\subsection{RQ2: Effect of Layered Feedback}
+\subsection{RQ2: Ablation of the Layered Feedback}
 \label{sec:ablations}
-\textbf{Feedback detail.}
-This experiment tests whether the improvement comes from the ordered feedback rather than from measuring more quantities. Four model families each received one fault per stage, drawn from the same 25-category pool, giving 12 controlled tasks. The repair loop ran under execution-only feedback, execution plus forward-value feedback, or the full LADDER report for 36 repair episodes under a four-round budget. Table~\ref{tab:feedback-ablation} shows a direct stepwise effect. Execution-only feedback repairs the execution faults, adding the forward-value signal repairs the numerical faults, and the full report repairs the gradient and update faults as well. Every successful repair completes in the first round. The correspondence between the added signal and the newly repaired fault class shows why the ordered feedback, rather than a larger undifferentiated report, drives the improvement.
+LADDER's feedback differs from a single verdict in two ways at once. It measures three quantities instead of one, and it ranks them so that the first failing stage names the repair. Either could account for the gain in Table~\ref{tab:main-results}, so we remove each in turn. Table~\ref{tab:feedback-ablation} reports both ablations.
+
+\textbf{Ordering, on the full pool.}
+Panel (a) holds the pool, the budget, and the backbone fixed and varies only what the fixer is told. The execution-only condition reports runtime status and withholds the other two comparisons. The unordered condition computes all three signals and presents them together, without ranking them or naming the first stage that failed. LADDER ranks them.
+
+Measuring more is almost worthless on its own. Adding two signals without ordering them repairs one further instance, 34/50 against 33/50, and the first-attempt rate moves from 58\% to 66\%. Ordering the same three signals repairs sixteen more, 50/50, and takes the first-attempt rate to 84\%. The two partitions show why. Without ordering, the deepest tier is 0/4 and the operator tier stalls at 8/20, exactly the faults whose repair needs to know which stage failed; the unordered report contains that information but leaves the fixer to find it. Ordering also costs less rather than more, 3.8K tokens per repair against 5.3K, because a fixer that is told where to edit stops searching.
+
+\textbf{Signal composition, per fault class.}
+Panel (a) cannot separate the three signals from each other, because its middle condition adds two at once. Panel (b) adds them one at a time on a smaller matched set, four model families with one fault per stage, giving 12 tasks under the same four-round budget. Each added signal repairs precisely the fault class it measures and nothing more: execution-only repairs the four execution faults and no others, adding the forward-value signal repairs the four numerical faults, and adding the gradient and update signal repairs the remaining four. Every successful repair finishes in the first round. That one-to-one correspondence is what rules out the alternative explanation, that a longer report helps for unrelated reasons.
 
 \begin{table}[tb]
-\caption{Verified repair success under matched feedback conditions.}
+\caption{Removing each part of the layered feedback. Ordering accounts for the gain; measuring alone does not.}
 \label{tab:feedback-ablation}
 \centering
 \scriptsize
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{lrrrr}
+\begin{tabular}{@{}lrrrrrr@{}}
+\multicolumn{7}{@{}l}{\textit{(a) Ordering, on the 50-instance pool}} \\
 \toprule
-\textbf{Feedback} & \textbf{Overall} & \textbf{Exec.} & \textbf{Num.} & \textbf{Grad./upd.} \\
+\textbf{Feedback} & \textbf{All} & \textbf{@1} & \shortstack{\textbf{Core}\\\textbf{op.}} & \shortstack{\textbf{Core}\\\textbf{a/o}} & \shortstack{\textbf{Tok./}\\\textbf{repair}} \\
 \midrule
-Execution-only & 4/12 & 4/4 & 0/4 & 0/4 \\
-Execution + numerical & 8/12 & 4/4 & 4/4 & 0/4 \\
-LADDER (ours) & \textbf{12/12} & 4/4 & 4/4 & 4/4 \\
+Execution signal only    & 33/50 & 58\% & 8/20  & 0/4 & 4.7K \\
+All three, unordered     & 34/50 & 66\% & 8/20  & 0/4 & 5.3K \\
+\textbf{All three, ordered} & \textbf{50/50} & \textbf{84\%} & \textbf{20/20} & \textbf{4/4} & \textbf{3.8K} \\
+\bottomrule
+\end{tabular}
+\vspace{4pt}
+
+\begin{tabular}{@{}lrrrr@{}}
+\multicolumn{5}{@{}l}{\textit{(b) Signal composition, on 12 matched tasks}} \\
+\toprule
+\textbf{Signals given to the fixer} & \textbf{Overall} & \textbf{Exec.} & \textbf{Num.} & \shortstack{\textbf{Grad.}\\\textbf{upd.}} \\
+\midrule
+Execution                     & 4/12  & 4/4 & 0/4 & 0/4 \\
+Execution + forward-value     & 8/12  & 4/4 & 4/4 & 0/4 \\
+\textbf{All three (LADDER)}   & \textbf{12/12} & 4/4 & 4/4 & \textbf{4/4} \\
 \bottomrule
 \end{tabular}
 \vspace{2pt}
 \begin{flushleft}
-\footnotesize Each condition uses the same 12 tasks and four-round budget. Every successful repair finishes in one round, so Repair@1 and Repair@4 equal the displayed overall rates.
+\footnotesize The two panels ablate different things and use different sets, so their rates are not comparable across panels. Panel (a) is the 50-instance pool of Table~\ref{tab:main-results}, where every condition measures all three signals except the first, and only the last ranks them; its depth columns are the two tiers that reach the adapter. Panel (b) is a separate matched set, four model families with one fault per stage, added one signal at a time; every repair there finishes in the first round, so Repair@1 equals the overall rate.
 \end{flushleft}
 \end{table}
 
-\textbf{Signal effectiveness.}
-The feedback ablation establishes the repair effect. We next test whether each signal identifies the fault class it is meant to expose, independently of repair. For each model and seed we compared a PyTorch reference step with a \texttt{torch4ms} candidate under one of three injected conditions. Injecting a known fault into a known-correct \texttt{torch4ms} implementation fixes the ground truth, which is what makes the specificity of each signal measurable. This experiment establishes what each signal detects, and Table~\ref{tab:main-results} establishes what the pipeline repairs on translator output. The evaluation used four model families and three seeds per fault. The thresholds are $\Delta_{\mathrm{loss}}>0.02$, $\Delta_{\mathrm{grad}}>0.05$, and $\Delta_{\mathrm{param}}>0.03$.
+\subsection{RQ3: Signal Effectiveness}
+\label{sec:signal-effectiveness}
+RQ2 shows that the ordered report repairs more faults. This question asks a prior one: does each signal actually detect the fault class it is meant to expose? A repair result cannot answer it, because a fault might be repaired for the wrong reason. We therefore measure detection alone, with no repair in the loop. For each model and seed we compared a PyTorch reference step with a \texttt{torch4ms} candidate under one of three injected conditions. Injecting a known fault into a known-correct implementation fixes the ground truth, which is what makes the specificity of each signal measurable. The evaluation used four model families and three seeds per fault, and the thresholds are $\Delta_{\mathrm{loss}}>0.02$, $\Delta_{\mathrm{grad}}>0.05$, and $\Delta_{\mathrm{param}}>0.03$.
 
-Table~\ref{tab:signal-effectiveness} shows that the expected signal detects its corresponding fault in all 36 fault-injection runs. Execution faults are isolated by the execution signal. For training faults, the gradient signal records missing-gradient evidence and the update signal captures the divergent parameter update. Numerical faults are detected by the forward-value signal even when their effects propagate to gradient or update metrics. The first-failing-stage rule therefore preserves the distinction needed by repair guidance.
+Table~\ref{tab:signal-effectiveness} shows that the expected signal detects its corresponding fault in all 36 fault-injection runs. Execution faults are isolated by the execution signal. For training faults, the gradient signal records missing-gradient evidence and the update signal captures the divergent parameter update. Numerical faults are detected by the forward-value signal even when their effects propagate to gradient or update metrics, which is what the first-failing-stage rule is for: the later signals also fire, and reporting the earliest one preserves the distinction the fixer needs.
 
 \begin{table}[t]
 \centering
@@ -304,7 +328,7 @@ TinyLM & Train. & 1.000 & G+U \\
 \end{flushleft}
 \end{table}
 
-\subsection{RQ3: Application to Another Framework}
+\subsection{RQ4: Application to Another Framework}
 Table~\ref{tab:jax-transfer} applies the same repair procedure to the PyTorch-to-JAX path. Ivy and \texttt{torch2jax} produce no candidate that passes training verification at any stage. Direct LLM repair handles the execution and gradient and update faults but misses one numerical fault. LADDER repairs all six faults in one round and leads at every stage. This result shows that the signals and repair guidance remain effective when the target uses a different differentiation system and optimizer stack.
 
 \begin{table}[tb]
