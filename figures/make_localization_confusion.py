@@ -53,12 +53,12 @@ ax.xaxis.set_ticks_position("bottom")
 ax.text(2, -0.65, "96% accuracy\n(48 / 50)", fontsize=7.5, color="#1a6b1a",
         ha="center", va="bottom", fontweight="bold")
 
-# Mark the two misclassifications with a circle around the off-diagonal cell
+# Mark the two misclassifications with a dashed box around the off-diagonal cell
 rect = plt.Rectangle((-.42, 0.58), 0.84, 0.84, linewidth=1.2,
                       edgecolor="#d03b3b", facecolor="none", linestyle="--",
                       zorder=5)
 ax.add_patch(rect)
-ax.annotate("2 mis-\nclassified", xy=(0.0, 1.0), xytext=(-0.9, 2.2),
+ax.annotate("2 misclassified", xy=(0.0, 1.0), xytext=(1.5, 2.3),
             fontsize=5.5, color="#d03b3b", ha="center", va="center",
             fontstyle="italic",
             arrowprops=dict(arrowstyle="-|>", color="#d03b3b",

@@ -28,7 +28,7 @@ from matplotlib.colors import LinearSegmentedColormap
 # - grad_wrong: exec_fail=0, loss=3.8e-6, grad>0.05@step1, param=0.50+
 # - param_wrong:exec_fail=0, loss=3.8e-6, grad<0.05, param=0.19-0.99
 FAULTS  = ["Execution", "Forward-value\n(numeric)", "Gradient\n(grad_wrong)", "Param. update\n(param_wrong)"]
-METRICS = ["Execution\ncheck", "Δ loss\n> 0.02", "Δ gradient\n> 0.05", "Δ param update\n> 0.03"]
+METRICS = ["Exec.\ncheck", "Δ loss\n> 0.02", "Δ grad.\n> 0.05", "Δ param\n> 0.03"]
 
 # rows = fault types, cols = detection metrics
 MATRIX = np.array([
@@ -51,7 +51,7 @@ im = ax.imshow(MATRIX, cmap=cmap, vmin=0, vmax=1, aspect="auto")
 for i in range(len(FAULTS)):
     for j in range(len(METRICS)):
         v = int(MATRIX[i, j])
-        label = "\\u2713" if v else "—"
+        label = "✓" if v else "—"
         color = "white" if v else "#c0c0c0"
         weight = "bold" if v else "normal"
         ax.text(j, i, label, ha="center", va="center",
