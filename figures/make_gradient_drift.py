@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 """Gradient drift under free-running coupling from Experiment C.
 
-Two panels show per-step divergence for grad_wrong and param_wrong faults.
+Two panels show per-step divergence for the grad_wrong and param_wrong
+faults (internal fault-injection names, kept here and in the caption for
+reproducibility). Panel titles use plain-language descriptions instead of
+those names -- this figure is meant for the introduction, before the
+fault taxonomy has been defined, so a reader must be able to tell the two
+panels apart without having read the methodology section.
+
 Under free-running coupling, errors accumulate across steps, revealing how
 long each metric takes to cross its detection threshold.
 
@@ -40,8 +46,8 @@ METRICS = [
 ]
 
 PANELS = [
-    ("grad_wrong",  "(a) Gradient fault (grad_wrong)"),
-    ("param_wrong", "(b) Parameter fault (param_wrong)"),
+    ("grad_wrong",  "(a) Gradient computed incorrectly"),
+    ("param_wrong", "(b) Parameters updated incorrectly"),
 ]
 
 df = pd.read_csv(CSV)
