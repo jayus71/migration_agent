@@ -48,6 +48,26 @@ If the browser has downloaded the asset already:
 python3 scripts/fetch_experiment_data.py --archive /path/to/experiment-data-20260906-v1.tar.gz
 ```
 
+## Writing style reference
+
+The [Zhekai Du writing DNA](literature/zhekai-du/Academic-Writing-DNA.md) describes
+writing patterns in six English first-author papers, including LoCA and its TPAMI
+extension. It covers paragraph structure, language, argumentation, and figures.
+Read it before drafting or editing with this style, and base all technical claims
+and results on this project's evidence.
+
+[Analysis notes](literature/zhekai-du/STYLE-EVIDENCE.md) document the paper sources,
+measurement methods, and limitations. The
+[independent writing check](literature/zhekai-du/TRANSFER-CHECK.md) contains a
+hypothetical example used to test the DNA; it is separate from the manuscript and
+experiment results.
+
+The DNA, supporting notes, bibliographic records, measurements, and corpus-specific
+scripts are included in Git and available in cloud checkouts. Source PDFs,
+extracted text, page images, and raw search responses stay local and are ignored by
+Git. Reading the DNA requires no PDF downloads. Repeating the extraction requires
+the local papers, `pypdf`, and Poppler; see the analysis notes for the procedure.
+
 ## Figures and PDF
 
 ```bash
