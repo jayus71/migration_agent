@@ -38,7 +38,7 @@ PAL = {
     "LADDER":          "#08306b",
 }
 
-fig, ax = plt.subplots(figsize=(3.4, 2.6))
+fig, ax = plt.subplots(figsize=(3.4, 3.2))
 
 n_methods = len(METHODS)
 n_stages = len(STAGES)
@@ -66,20 +66,25 @@ for side in ("left", "bottom"):
     ax.spines[side].set_color(EDGE)
     ax.spines[side].set_linewidth(0.7)
 
-# Annotation: highlight the gradient/update stage
-ax.annotate("gap here", xy=(2 + 0.35, 81.3), xytext=(2 + 0.35, 108),
-            fontsize=6.5, color="#d03b3b", ha="center", va="bottom",
-            fontweight="bold",
-            arrowprops=dict(arrowstyle="-|>", color="#d03b3b",
-                            linewidth=0.8, mutation_scale=6))
+# Annotation: bracket showing the gap between LADDER (100%) and the weakest
+# methods (Exec-only / Unordered at 75%) in the gradient/update stage.
+bracket_x = 2 + total_width / 2 + 0.08
+ax.plot([bracket_x, bracket_x], [75, 100], color="#d03b3b", linewidth=1.0,
+        zorder=5, clip_on=False)
+ax.plot([bracket_x - 0.04, bracket_x], [75, 75], color="#d03b3b",
+        linewidth=1.0, zorder=5, clip_on=False)
+ax.plot([bracket_x - 0.04, bracket_x], [100, 100], color="#d03b3b",
+        linewidth=1.0, zorder=5, clip_on=False)
+ax.text(bracket_x + 0.06, 87.5, "25 pp\ngap", fontsize=6, color="#d03b3b",
+        fontweight="bold", ha="left", va="center")
 
-leg = ax.legend(fontsize=5.6, loc="upper center", bbox_to_anchor=(0.5, 1.22),
+leg = ax.legend(fontsize=5.6, loc="upper center", bbox_to_anchor=(0.42, 1.35),
                 frameon=True, framealpha=0.92, edgecolor="#dcdcdc", ncol=3,
                 handlelength=1.0, handletextpad=0.3, borderpad=0.4,
                 labelspacing=0.35, columnspacing=0.8)
 leg.get_frame().set_linewidth(0.6)
 
-fig.tight_layout(pad=0.3, rect=[0, 0, 1, 0.88])
+fig.tight_layout(pad=0.3, rect=[0, 0, 1, 0.82])
 fig.savefig("figures/gain_by_stage.pdf", bbox_inches="tight")
 fig.savefig("figures/gain_by_stage.png", dpi=200, bbox_inches="tight")
 print("wrote figures/gain_by_stage.pdf + .png")
