@@ -78,7 +78,7 @@ Training code does not satisfy this assumption. Fig.~\ref{fig:gradient-drift} sh
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/gradient_drift.pdf}
-\caption{Per-step divergence of three diagnostic signals under free-running coupling, for two fault classes (72 conditions across four model families). The forward-loss signal (blue) stays below its detection threshold for tens of steps, while the gradient and parameter signals cross theirs at step~1.}
+\caption{Per-step divergence of three diagnostic signals when the translated model runs independently of the source, for two fault classes (72 conditions across four model families). The forward-loss signal (blue) stays below its detection threshold for tens of steps, while the gradient and parameter signals cross theirs at step~1.}
 \label{fig:gradient-drift}
 \end{figure}
 
@@ -193,7 +193,7 @@ The evaluation answers four questions.
   \item[\textbf{RQ4}] Does the repair loop generalize to a second target framework and to different prompt configurations?
 \end{itemize}
 
-RQ1 compares against external systems, RQ2 examines the diagnostic resolution of the signals, RQ3 removes parts of our own feedback, and RQ4 changes the target framework and the prompt.
+RQ1 compares against external systems, RQ2 examines whether the signals distinguish fault classes, RQ3 removes parts of our own feedback, and RQ4 changes the target framework and the prompt.
 
 The fault categories come from real migration failures rather than from an arbitrary mutation catalogue. We migrated PyTorch training programs to the two target paths and recorded the cases that failed. The recurring failures fall into 25 categories, grouped by the stage at which each one surfaced and by the framework mechanism responsible. Each category is then reproduced by injecting it into a known-correct implementation, which fixes the ground truth for every instance and makes localization measurable; the categories are observed, and the instances are controlled. That trade buys the ground truth at the cost of the variability an uncurated failure would carry. Each category is instantiated on two model families, giving a pool of 50 instances over CNN, image MLP, Transformer classifier, and tiny causal LM. The JAX pool is built the same way and contributes six MLP and CNN faults across the three stages.
 
@@ -215,7 +215,7 @@ Table~\ref{tab:main-results} reports the results under the shared four-attempt b
 
 The two partitions locate the gain. By stage, LADDER repairs all 16 gradient and update faults against 13 for MatchFixAgent and 14 for direct LLM repair. By depth, every method handles faults repairable inside the translated program, and the methods separate as the required edit moves into the adapter: at the deepest level, which reaches differentiation and optimizer code, LADDER repairs 4/4 while MatchFixAgent repairs 1/4 and SWE-agent 3/4. Those four instances are the two categories that misalign gradients with the parameters they belong to, and the category that no baseline repairs at all is one of them.
 
-The model families separate the methods differently. LADDER is the only one that repairs every instance of all four, and each baseline concentrates its losses on a different family: six of direct LLM repair's ten failures are on the image MLP, while MatchFixAgent's remaining three are split between the Transformer classifier and the image MLP. No single architecture is hard for every method, which makes the feedback rather than the model the operative difference.
+The model families separate the methods differently. LADDER is the only one that repairs every instance of all four, and each baseline concentrates its losses on a different family: six of direct LLM repair's ten failures are on the image MLP, while MatchFixAgent's remaining three are split between the Transformer classifier and the image MLP. No single architecture is hard for every method, so the feedback explains the gap better than the model does.
 
 Locating the failing stage also makes the repair cheaper. Measured per repair achieved, LADDER spends 3.8K tokens and 21.8 seconds against 110.7K tokens and 74.2 seconds for MatchFixAgent, a $29\times$ reduction in tokens and a $3.4\times$ reduction in time. Fig.~\ref{fig:cost-quality} shows the joint quality--cost position. Section~\ref{sec:ablations} removes parts of the feedback to establish where the gain comes from.
 
@@ -256,20 +256,20 @@ MatchFixAgent$^\dagger$ & 20/20 & 14/14 & 13/16 & 26/26 & 20/20 & 1/4 & 13/13 & 
 \label{sec:fault-characterization}
 
 \paragraph{Fault signatures.}
-Each fault type triggers a distinct subset of the three detection layers under teacher-forced coupling, which isolates each fault's signature from feedback-loop amplification. Fig.~\ref{fig:fault-signatures} summarizes the detection matrix across the four model families. Execution faults fire only the runtime check; numerical (forward-value) faults cross all three thresholds because an incorrect forward pass cascades through the gradient and parameter comparisons; gradient faults cross the gradient and parameter thresholds but leave the forward loss unchanged; and parameter-update faults cross only the parameter threshold. The diagonal structure confirms that each added signal detects exactly one more fault class, which is the premise behind LADDER's ordered diagnosis.
+Each fault type triggers a distinct subset of the three detection layers. To isolate each fault's effect from error accumulation over multiple steps, we feed the translated model the source model's outputs at each stage (teacher forcing) and measure divergence on a single step. Fig.~\ref{fig:fault-signatures} summarizes the detection matrix across the four model families. Execution faults fire only the runtime check; numerical (forward-value) faults cross all three thresholds because an incorrect forward pass cascades through the gradient and parameter comparisons; gradient faults cross the gradient and parameter thresholds but leave the forward loss unchanged; and parameter-update faults cross only the parameter threshold. The diagonal structure confirms that each added signal detects exactly one more fault class, which is why LADDER checks them in order.
 
 \begin{figure}[tb]
 \centering
 \includegraphics[width=0.85\columnwidth]{figures/fault_signatures.pdf}
-\caption{Detection matrix under teacher-forced coupling. Each row is a fault type, each column a detection layer; a check mark means the threshold was crossed for at least one of the four model families. The staircase pattern shows that each signal adds exactly one fault class to the detectable set.}
+\caption{Detection matrix when the translated model is fed the source outputs at each stage (teacher forcing). Each row is a fault type, each column a detection layer; a check mark means the threshold was crossed for at least one model family. The staircase pattern shows that each signal adds exactly one fault class to the detectable set.}
 \label{fig:fault-signatures}
 \end{figure}
 
 \paragraph{Detection latency.}
-Fig.~\ref{fig:gradient-drift} plots the per-step divergence for gradient and parameter-update faults across 72 conditions (four model families $\times$ nine fault variants $\times$ two fault classes). Gradient faults cross the $\Delta\text{grad}>0.05$ threshold within the first training step in every condition, while parameter-update faults cross $\Delta\text{param}>0.03$ by step two. Both signals stabilize well before the five-step comparison window ends, so a short controlled run suffices for detection.
+Fig.~\ref{fig:gradient-drift} plots the per-step divergence for gradient and parameter-update faults across all 72 conditions in the pool (four model families, each with multiple fault variants from the 25 categories). Gradient faults cross the $\Delta\text{grad}>0.05$ threshold within the first training step in every condition, while parameter-update faults cross $\Delta\text{param}>0.03$ by step two. Both signals stabilize within the first few steps, so a short controlled run suffices for detection.
 
 \paragraph{Fault localization.}
-LADDER's three-layer diagnosis localizes each fault to one of three classes---execution, numerical, or gradient/update---by reporting the first threshold that fails in the ordered check. On the full 50-instance pool, this rule classifies 48 of 50 faults correctly (96\% accuracy). The two misclassified instances are both numerical faults from the NU-07 category (mixed-precision overflow), which crash before producing a loss value and are therefore caught by the execution check instead of the forward-value comparison. All execution faults (20/20) and all gradient/update faults (16/16) are localized without error.
+LADDER's three-layer diagnosis localizes each fault to one of three classes---execution, numerical, or gradient/update---by reporting the first threshold that fails in the ordered check. On the full 50-instance pool, this rule classifies 48 of 50 faults correctly (96\% accuracy). The two misclassified instances are both mixed-precision overflow faults that crash before producing a loss value and are therefore caught by the execution check instead of the forward-value comparison. All execution faults (20/20) and all gradient/update faults (16/16) are localized without error.
 
 \subsection{RQ3: Ablation of the Layered Feedback}
 \label{sec:ablations}

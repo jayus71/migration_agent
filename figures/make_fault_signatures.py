@@ -27,7 +27,7 @@ from matplotlib.colors import LinearSegmentedColormap
 # - numeric:    exec_fail=0, loss=1.16, grad=0.72, param=2.96
 # - grad_wrong: exec_fail=0, loss=3.8e-6, grad>0.05@step1, param=0.50+
 # - param_wrong:exec_fail=0, loss=3.8e-6, grad<0.05, param=0.19-0.99
-FAULTS  = ["Execution", "Forward-value\n(numeric)", "Gradient\n(grad_wrong)", "Param. update\n(param_wrong)"]
+FAULTS  = ["Execution", "Forward-value", "Gradient", "Param. update"]
 METRICS = ["Exec.\ncheck", "Δ loss\n> 0.02", "Δ grad.\n> 0.05", "Δ param\n> 0.03"]
 
 # rows = fault types, cols = detection metrics
