@@ -1,0 +1,117 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Replace boundary_op so it returns a TorchLikeTensor wrapper, satisfying downstream_norm's expected .value interface.",
+    "edits": [
+      {
+        "file": "autofix/generated_faults/candidate/case_87cf569b99154dbaa9f02463c777216d.py",
+        "summary": "Wrap tensor output in TorchLikeTensor in boundary_op",
+        "action": "replace",
+        "find_text": "def boundary_op(x):\n    return x + 1.0",
+        "replace_text": "def boundary_op(x):\n    return TorchLikeTensor(x + 1.0)",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": true,
+        "error": ""
+      }
+    ],
+    "risk": "low",
+    "expected_effect": "FAULT_CASE_001 no longer raises AttributeError; wrapped is a TorchLikeTensor and downstream_norm can access .value to produce a float.",
+    "notes": "Minimal edit anchored to the boundary_op definition; TorchLikeTensor is already defined above.",
+    "metadata": {
+      "token_usage": {
+        "prompt_tokens": 2733,
+        "completion_tokens": 920,
+        "total_tokens": 3653
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 920,
+          "prompt_tokens": 2733,
+          "total_tokens": 3653,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 678,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 2733
+        }
+      },
+      "router": {
+        "repair_scope": "candidate",
+        "confidence": 0.94,
+        "reason": "candidate_execution_contract_violation",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "autofix/generated_faults/candidate/case_87cf569b99154dbaa9f02463c777216d.py"
+        ],
+        "recommended_validation": [
+          "controlled_fault_probe"
+        ]
+      },
+      "predicted_layer": "execution",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "candidate",
+        "allowed_files": [
+          "autofix/generated_faults/candidate/case_87cf569b99154dbaa9f02463c777216d.py"
+        ],
+        "allowed_prefixes": [],
+        "checks": [
+          {
+            "file": "autofix/generated_faults/candidate/case_87cf569b99154dbaa9f02463c777216d.py",
+            "action": "replace",
+            "ok": true,
+            "errors": [],
+            "occurrence_count": 1
+          }
+        ],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      }
+    },
+    "applied": true,
+    "applied_count": 1,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"case\": \"FAULT_CASE_001\", \"ok\": true, \"type\": \"TorchLikeTensor\", \"value\": 2.865208864212036}\n",
+      "payload": {
+        "case": "FAULT_CASE_001",
+        "ok": true,
+        "value": 2.865208864212036,
+        "type": "TorchLikeTensor",
+        "model_variant": "mlp"
+      }
+    }
+  }
+}

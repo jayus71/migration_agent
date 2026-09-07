@@ -1,0 +1,142 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Remove the detach() call in TinyNet.forward so gradients flow into fc1 during loss.backward(), restoring fc1 gradient and parameter update for the candidate training path.",
+    "edits": [
+      {
+        "file": "autofix/generated_faults/candidate/case_fa9708e6c3d444d5b7afbb5ebbed987a.py",
+        "summary": "Remove detach from hidden activation to enable gradient flow to fc1",
+        "action": "replace",
+        "find_text": "    def forward(self, x):\n        hidden = torch.relu(self.fc1(x)).detach()\n        return self.fc2(hidden)",
+        "replace_text": "    def forward(self, x):\n        hidden = torch.relu(self.fc1(x))\n        return self.fc2(hidden)",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": true,
+        "error": ""
+      }
+    ],
+    "risk": "low",
+    "expected_effect": "fc1.weight and fc1.bias will receive nonzero gradients and update norms, satisfying the oracle requirement for FAULT_CASE_003.",
+    "notes": "The probe reports null fc1 gradients and zero fc1 update norms because the hidden activation is detached before the downstream fc2 layers. Removing detach reconnects the autograd graph to fc1.",
+    "metadata": {
+      "token_usage": {
+        "prompt_tokens": 4359,
+        "completion_tokens": 641,
+        "total_tokens": 5000
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 641,
+          "prompt_tokens": 4359,
+          "total_tokens": 5000,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 335,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 3975
+        }
+      },
+      "router": {
+        "repair_scope": "candidate",
+        "confidence": 0.97,
+        "reason": "candidate_training_semantics_mismatch",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "autofix/generated_faults/candidate/case_fa9708e6c3d444d5b7afbb5ebbed987a.py"
+        ],
+        "recommended_validation": [
+          "controlled_candidate_training_probe"
+        ]
+      },
+      "predicted_layer": "gradient_update",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "candidate",
+        "allowed_files": [
+          "autofix/generated_faults/candidate/case_fa9708e6c3d444d5b7afbb5ebbed987a.py"
+        ],
+        "allowed_prefixes": [],
+        "checks": [
+          {
+            "file": "autofix/generated_faults/candidate/case_fa9708e6c3d444d5b7afbb5ebbed987a.py",
+            "action": "replace",
+            "ok": true,
+            "errors": [],
+            "occurrence_count": 1
+          }
+        ],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      }
+    },
+    "applied": true,
+    "applied_count": 1,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"case\": \"FAULT_CASE_003\", \"grad_norms\": {\"fc1.bias\": 0.37385547161102295, \"fc1.weight\": 0.19825807213783264, \"fc2.bias\": 0.8842982053756714, \"fc2.weight\": 0.5011415481567383}, \"loss\": 1.2452605962753296, \"manual_update_norms\": {\"fc1.bias\": 0.07477109134197235, \"fc1.weight\": 0.03965162858366966, \"fc2.bias\": 0.17685964703559875, \"fc2.weight\": 0.10022832453250885}, \"mapped_case\": \"FAULT_CASE_003\", \"model_variant\": \"transformer\", \"ok\": true, \"train_step_loss\": 1.2452605962753296, \"train_step_update_norms\": {\"fc1.bias\": 0.07477109134197235, \"fc1.weight\": 0.03965162858366966, \"fc2.bias\": 0.17685964703559875, \"fc2.weight\": 0.10022832453250885}, \"trainable\": {\"fc1.bias\": true, \"fc1.weight\": true, \"fc2.bias\": true, \"fc2.weight\": true}}\n",
+      "payload": {
+        "case": "FAULT_CASE_003",
+        "model_variant": "transformer",
+        "mapped_case": "FAULT_CASE_003",
+        "ok": true,
+        "loss": 1.2452605962753296,
+        "train_step_loss": 1.2452605962753296,
+        "grad_norms": {
+          "fc1.weight": 0.19825807213783264,
+          "fc1.bias": 0.37385547161102295,
+          "fc2.weight": 0.5011415481567383,
+          "fc2.bias": 0.8842982053756714
+        },
+        "manual_update_norms": {
+          "fc1.weight": 0.03965162858366966,
+          "fc1.bias": 0.07477109134197235,
+          "fc2.weight": 0.10022832453250885,
+          "fc2.bias": 0.17685964703559875
+        },
+        "train_step_update_norms": {
+          "fc1.weight": 0.03965162858366966,
+          "fc1.bias": 0.07477109134197235,
+          "fc2.weight": 0.10022832453250885,
+          "fc2.bias": 0.17685964703559875
+        },
+        "trainable": {
+          "fc1.weight": true,
+          "fc1.bias": true,
+          "fc2.weight": true,
+          "fc2.bias": true
+        }
+      }
+    }
+  }
+}

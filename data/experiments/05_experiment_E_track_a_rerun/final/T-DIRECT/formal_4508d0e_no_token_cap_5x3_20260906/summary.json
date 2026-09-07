@@ -1,0 +1,3602 @@
+{
+  "experiment": "track_a_t_direct",
+  "started_at": "2026-09-06T13:05:22+00:00",
+  "status": "complete",
+  "method": "T-DIRECT",
+  "prompt_version": "track_a_t_direct_native_mindspore_v2",
+  "tasks": [
+    "image_mlp",
+    "cnn",
+    "resnet",
+    "transformer_classifier",
+    "tiny_causal_lm"
+  ],
+  "repeats": 3,
+  "seeds": [
+    642,
+    643,
+    644
+  ],
+  "strict_final_verifier": true,
+  "llm_model": "deepseek-v4-flash",
+  "max_tokens": null,
+  "llm_enabled_by_runner": true,
+  "reuse_existing": false,
+  "resume": false,
+  "no_guide": true,
+  "no_diagnosis": true,
+  "no_repair_loop": true,
+  "repo_commit": "4508d0e962d1f27a582b2fcb0a53f1edea5bfb0f",
+  "manifest": [
+    {
+      "task_id": "image_mlp",
+      "model": "Image MLP",
+      "source": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/paper_section_63_64/section642_heldout_sources/image_mlp.py",
+      "source_hash": "896f9524049096fe6455c5d7f56cbe3969706b8163ff0c47324400cc1902379b"
+    },
+    {
+      "task_id": "cnn",
+      "model": "CNN",
+      "source": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/paper_section_63_64/section642_heldout_sources/cnn.py",
+      "source_hash": "9449853eec087d0ee1797255a2cf6bb0cb90b09767b362b0a4ff70181b2dd72a"
+    },
+    {
+      "task_id": "resnet",
+      "model": "ResNet",
+      "source": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/paper_section_63_64/section642_heldout_sources/resnet.py",
+      "source_hash": "7850d0208edfc031e19e6e7f273d9a8f432d461b3edc919fa6169d806950d0b5"
+    },
+    {
+      "task_id": "transformer_classifier",
+      "model": "Transformer classifier",
+      "source": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/paper_section_63_64/section642_heldout_sources/transformer_classifier.py",
+      "source_hash": "7dec23842b9ce0e07a1c63159f651aa7bb046ac8296e51aa7acd83f6ff8f5d8e"
+    },
+    {
+      "task_id": "tiny_causal_lm",
+      "model": "Tiny causal LM",
+      "source": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/paper_section_63_64/section642_heldout_sources/tiny_causal_lm.py",
+      "source_hash": "99b354ef8b7ee995a789aad9afa9e1139333ad08d70de2e7ae8d9e7160206a35"
+    }
+  ],
+  "rows": [
+    {
+      "task_id": "image_mlp",
+      "model": "Image MLP",
+      "repeat": 1,
+      "seed": 642,
+      "direct_calls": 1,
+      "fixer_calls": 0,
+      "reused_existing": false,
+      "backend_path": "MindSpore",
+      "strict_success": false,
+      "compile_success": true,
+      "execution_success": true,
+      "training_success": true,
+      "training_valid": true,
+      "loss_diff": 2.4437904357910156e-05,
+      "grad_norm_diff": 0.00026357173919677734,
+      "param_update_rel_l2": 2.162433624267578,
+      "gradient_observed": true,
+      "parameter_update_norm": 0.47132301330566406,
+      "prompt_tokens": 622,
+      "completion_tokens": 16737,
+      "total_tokens": 17359,
+      "source_hash": "896f9524049096fe6455c5d7f56cbe3969706b8163ff0c47324400cc1902379b",
+      "prompt_hash": "10d5dfdd8cec49ca12165a8c532c43629a18cbb16aca90a7f2a771dd105b83d7",
+      "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/image_mlp/repeat_1/workspace/candidate.py",
+      "error_summary": "strict_metrics: loss_diff=2.4437904357910156e-05, grad_diff=0.00026357173919677734, param_update_rel_l2=2.162433624267578, buffer_state=matched",
+      "failure_class": "valid_experiment_failure",
+      "elapsed_sec": 109.044
+    },
+    {
+      "task_id": "image_mlp",
+      "model": "Image MLP",
+      "repeat": 2,
+      "seed": 643,
+      "direct_calls": 1,
+      "fixer_calls": 0,
+      "reused_existing": false,
+      "backend_path": "MindSpore",
+      "strict_success": false,
+      "compile_success": true,
+      "execution_success": true,
+      "training_success": true,
+      "training_valid": true,
+      "loss_diff": 1.6450881958007812e-05,
+      "grad_norm_diff": 0.0002315044403076172,
+      "param_update_rel_l2": 2.161834478378296,
+      "gradient_observed": true,
+      "parameter_update_norm": 0.47131413221359253,
+      "prompt_tokens": 622,
+      "completion_tokens": 13402,
+      "total_tokens": 14024,
+      "source_hash": "896f9524049096fe6455c5d7f56cbe3969706b8163ff0c47324400cc1902379b",
+      "prompt_hash": "10d5dfdd8cec49ca12165a8c532c43629a18cbb16aca90a7f2a771dd105b83d7",
+      "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/image_mlp/repeat_2/workspace/candidate.py",
+      "error_summary": "strict_metrics: loss_diff=1.6450881958007812e-05, grad_diff=0.0002315044403076172, param_update_rel_l2=2.161834478378296, buffer_state=matched",
+      "failure_class": "valid_experiment_failure",
+      "elapsed_sec": 96.827
+    },
+    {
+      "task_id": "image_mlp",
+      "model": "Image MLP",
+      "repeat": 3,
+      "seed": 644,
+      "direct_calls": 1,
+      "fixer_calls": 0,
+      "reused_existing": false,
+      "backend_path": "MindSpore",
+      "strict_success": false,
+      "compile_success": true,
+      "execution_success": true,
+      "training_success": true,
+      "training_valid": true,
+      "loss_diff": 2.6226043701171875e-06,
+      "grad_norm_diff": 0.0003561973571777344,
+      "param_update_rel_l2": 2.161710262298584,
+      "gradient_observed": true,
+      "parameter_update_norm": 0.47129732370376587,
+      "prompt_tokens": 622,
+      "completion_tokens": 23806,
+      "total_tokens": 24428,
+      "source_hash": "896f9524049096fe6455c5d7f56cbe3969706b8163ff0c47324400cc1902379b",
+      "prompt_hash": "10d5dfdd8cec49ca12165a8c532c43629a18cbb16aca90a7f2a771dd105b83d7",
+      "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/image_mlp/repeat_3/workspace/candidate.py",
+      "error_summary": "strict_metrics: loss_diff=2.6226043701171875e-06, grad_diff=0.0003561973571777344, param_update_rel_l2=2.161710262298584, buffer_state=matched",
+      "failure_class": "valid_experiment_failure",
+      "elapsed_sec": 168.105
+    },
+    {
+      "task_id": "cnn",
+      "model": "CNN",
+      "repeat": 1,
+      "seed": 642,
+      "direct_calls": 1,
+      "fixer_calls": 0,
+      "reused_existing": false,
+      "backend_path": "MindSpore",
+      "strict_success": false,
+      "compile_success": true,
+      "execution_success": false,
+      "training_success": false,
+      "training_valid": false,
+      "loss_diff": null,
+      "grad_norm_diff": null,
+      "param_update_rel_l2": null,
+      "gradient_observed": false,
+      "parameter_update_norm": 0.0,
+      "prompt_tokens": 674,
+      "completion_tokens": 20828,
+      "total_tokens": 21502,
+      "source_hash": "9449853eec087d0ee1797255a2cf6bb0cb90b09767b362b0a4ff70181b2dd72a",
+      "prompt_hash": "efcf22f018c8b8c6fd81be6fee4cce1ba5b159ae4ce9703e6bc273d0f1ca522a",
+      "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/cnn/repeat_1/workspace/candidate.py",
+      "error_summary": "execution: ValueError: incomplete trainable-parameter initialization mapping: {'reference_count': 6, 'candidate_count': 4, 'mapping_strategy': None, 'mapped_count': 0, 'complete': False, 'unmatched_reference': ['stem.weight', 'stem.bias', '",
+      "failure_class": "valid_experiment_failure",
+      "elapsed_sec": 138.488
+    },
+    {
+      "task_id": "cnn",
+      "model": "CNN",
+      "repeat": 2,
+      "seed": 643,
+      "direct_calls": 1,
+      "fixer_calls": 0,
+      "reused_existing": false,
+      "backend_path": "MindSpore",
+      "strict_success": true,
+      "compile_success": true,
+      "execution_success": true,
+      "training_success": true,
+      "training_valid": true,
+      "loss_diff": 3.5762786865234375e-07,
+      "grad_norm_diff": 1.7881393432617188e-07,
+      "param_update_rel_l2": 1.1607026863202918e-05,
+      "gradient_observed": true,
+      "parameter_update_norm": 0.00032095142523758113,
+      "prompt_tokens": 674,
+      "completion_tokens": 33593,
+      "total_tokens": 34267,
+      "source_hash": "9449853eec087d0ee1797255a2cf6bb0cb90b09767b362b0a4ff70181b2dd72a",
+      "prompt_hash": "efcf22f018c8b8c6fd81be6fee4cce1ba5b159ae4ce9703e6bc273d0f1ca522a",
+      "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/cnn/repeat_2/workspace/candidate.py",
+      "error_summary": "",
+      "failure_class": "none",
+      "elapsed_sec": 243.367
+    },
+    {
+      "task_id": "cnn",
+      "model": "CNN",
+      "repeat": 3,
+      "seed": 644,
+      "direct_calls": 1,
+      "fixer_calls": 0,
+      "reused_existing": false,
+      "backend_path": "MindSpore",
+      "strict_success": false,
+      "compile_success": true,
+      "execution_success": false,
+      "training_success": false,
+      "training_valid": false,
+      "loss_diff": null,
+      "grad_norm_diff": null,
+      "param_update_rel_l2": null,
+      "gradient_observed": false,
+      "parameter_update_norm": 0.0,
+      "prompt_tokens": 674,
+      "completion_tokens": 27701,
+      "total_tokens": 28375,
+      "source_hash": "9449853eec087d0ee1797255a2cf6bb0cb90b09767b362b0a4ff70181b2dd72a",
+      "prompt_hash": "efcf22f018c8b8c6fd81be6fee4cce1ba5b159ae4ce9703e6bc273d0f1ca522a",
+      "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/cnn/repeat_3/workspace/candidate.py",
+      "error_summary": "execution: ValueError: incomplete trainable-parameter initialization mapping: {'reference_count': 6, 'candidate_count': 4, 'mapping_strategy': None, 'mapped_count': 0, 'complete': False, 'unmatched_reference': ['stem.weight', 'stem.bias', '",
+      "failure_class": "valid_experiment_failure",
+      "elapsed_sec": 210.684
+    },
+    {
+      "task_id": "resnet",
+      "model": "ResNet",
+      "repeat": 1,
+      "seed": 642,
+      "direct_calls": 1,
+      "fixer_calls": 0,
+      "reused_existing": false,
+      "backend_path": "MindSpore",
+      "strict_success": true,
+      "compile_success": true,
+      "execution_success": true,
+      "training_success": true,
+      "training_valid": true,
+      "loss_diff": 4.76837158203125e-07,
+      "grad_norm_diff": 2.384185791015625e-07,
+      "param_update_rel_l2": 0.0015687368577346206,
+      "gradient_observed": true,
+      "parameter_update_norm": 0.030579792335629463,
+      "prompt_tokens": 755,
+      "completion_tokens": 14523,
+      "total_tokens": 15278,
+      "source_hash": "7850d0208edfc031e19e6e7f273d9a8f432d461b3edc919fa6169d806950d0b5",
+      "prompt_hash": "9c58bcd4e9248b020cf5bb0f43b1b2b2a3df62565a3e399416480b065e4bb702",
+      "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/resnet/repeat_1/workspace/candidate.py",
+      "error_summary": "",
+      "failure_class": "none",
+      "elapsed_sec": 100.985
+    },
+    {
+      "task_id": "resnet",
+      "model": "ResNet",
+      "repeat": 2,
+      "seed": 643,
+      "direct_calls": 1,
+      "fixer_calls": 0,
+      "reused_existing": false,
+      "backend_path": "MindSpore",
+      "strict_success": true,
+      "compile_success": true,
+      "execution_success": true,
+      "training_success": true,
+      "training_valid": true,
+      "loss_diff": 4.76837158203125e-07,
+      "grad_norm_diff": 3.5762786865234375e-07,
+      "param_update_rel_l2": 0.0015972757246345282,
+      "gradient_observed": true,
+      "parameter_update_norm": 0.030581284314393997,
+      "prompt_tokens": 755,
+      "completion_tokens": 36670,
+      "total_tokens": 37425,
+      "source_hash": "7850d0208edfc031e19e6e7f273d9a8f432d461b3edc919fa6169d806950d0b5",
+      "prompt_hash": "9c58bcd4e9248b020cf5bb0f43b1b2b2a3df62565a3e399416480b065e4bb702",
+      "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/resnet/repeat_2/workspace/candidate.py",
+      "error_summary": "",
+      "failure_class": "none",
+      "elapsed_sec": 266.731
+    },
+    {
+      "task_id": "resnet",
+      "model": "ResNet",
+      "repeat": 3,
+      "seed": 644,
+      "direct_calls": 1,
+      "fixer_calls": 0,
+      "reused_existing": false,
+      "backend_path": "MindSpore",
+      "strict_success": true,
+      "compile_success": true,
+      "execution_success": true,
+      "training_success": true,
+      "training_valid": true,
+      "loss_diff": 3.5762786865234375e-07,
+      "grad_norm_diff": 5.960464477539063e-08,
+      "param_update_rel_l2": 0.0017646438209339976,
+      "gradient_observed": true,
+      "parameter_update_norm": 0.03058181144297123,
+      "prompt_tokens": 755,
+      "completion_tokens": 23994,
+      "total_tokens": 24749,
+      "source_hash": "7850d0208edfc031e19e6e7f273d9a8f432d461b3edc919fa6169d806950d0b5",
+      "prompt_hash": "9c58bcd4e9248b020cf5bb0f43b1b2b2a3df62565a3e399416480b065e4bb702",
+      "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/resnet/repeat_3/workspace/candidate.py",
+      "error_summary": "",
+      "failure_class": "none",
+      "elapsed_sec": 176.585
+    },
+    {
+      "task_id": "transformer_classifier",
+      "model": "Transformer classifier",
+      "repeat": 1,
+      "seed": 642,
+      "direct_calls": 1,
+      "fixer_calls": 0,
+      "reused_existing": false,
+      "backend_path": "MindSpore",
+      "strict_success": false,
+      "compile_success": true,
+      "execution_success": true,
+      "training_success": true,
+      "training_valid": true,
+      "loss_diff": 1.1920928955078125e-07,
+      "grad_norm_diff": 4.827976226806641e-06,
+      "param_update_rel_l2": 2.0733773708343506,
+      "gradient_observed": true,
+      "parameter_update_norm": 0.1426900029182434,
+      "prompt_tokens": 727,
+      "completion_tokens": 30210,
+      "total_tokens": 30937,
+      "source_hash": "7dec23842b9ce0e07a1c63159f651aa7bb046ac8296e51aa7acd83f6ff8f5d8e",
+      "prompt_hash": "ed9f80a5e79c26d2790717978eefe5d53fdc3ea20597e209ca26e3a1ead497ff",
+      "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/transformer_classifier/repeat_1/workspace/candidate.py",
+      "error_summary": "strict_metrics: loss_diff=1.1920928955078125e-07, grad_diff=4.827976226806641e-06, param_update_rel_l2=2.0733773708343506, buffer_state=matched",
+      "failure_class": "valid_experiment_failure",
+      "elapsed_sec": 243.151
+    },
+    {
+      "task_id": "transformer_classifier",
+      "model": "Transformer classifier",
+      "repeat": 2,
+      "seed": 643,
+      "direct_calls": 1,
+      "fixer_calls": 0,
+      "reused_existing": false,
+      "backend_path": "MindSpore",
+      "strict_success": false,
+      "compile_success": true,
+      "execution_success": true,
+      "training_success": true,
+      "training_valid": true,
+      "loss_diff": 1.1920928955078125e-07,
+      "grad_norm_diff": 4.649162292480469e-06,
+      "param_update_rel_l2": 2.159533977508545,
+      "gradient_observed": true,
+      "parameter_update_norm": 0.14896343648433685,
+      "prompt_tokens": 727,
+      "completion_tokens": 42221,
+      "total_tokens": 42948,
+      "source_hash": "7dec23842b9ce0e07a1c63159f651aa7bb046ac8296e51aa7acd83f6ff8f5d8e",
+      "prompt_hash": "ed9f80a5e79c26d2790717978eefe5d53fdc3ea20597e209ca26e3a1ead497ff",
+      "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/transformer_classifier/repeat_2/workspace/candidate.py",
+      "error_summary": "strict_metrics: loss_diff=1.1920928955078125e-07, grad_diff=4.649162292480469e-06, param_update_rel_l2=2.159533977508545, buffer_state=matched",
+      "failure_class": "valid_experiment_failure",
+      "elapsed_sec": 304.765
+    },
+    {
+      "task_id": "transformer_classifier",
+      "model": "Transformer classifier",
+      "repeat": 3,
+      "seed": 644,
+      "direct_calls": 1,
+      "fixer_calls": 0,
+      "reused_existing": false,
+      "backend_path": "MindSpore",
+      "strict_success": false,
+      "compile_success": true,
+      "execution_success": true,
+      "training_success": true,
+      "training_valid": true,
+      "loss_diff": 3.5762786865234375e-07,
+      "grad_norm_diff": 2.7418136596679688e-06,
+      "param_update_rel_l2": 2.1566805839538574,
+      "gradient_observed": true,
+      "parameter_update_norm": 0.1461319625377655,
+      "prompt_tokens": 727,
+      "completion_tokens": 21677,
+      "total_tokens": 22404,
+      "source_hash": "7dec23842b9ce0e07a1c63159f651aa7bb046ac8296e51aa7acd83f6ff8f5d8e",
+      "prompt_hash": "ed9f80a5e79c26d2790717978eefe5d53fdc3ea20597e209ca26e3a1ead497ff",
+      "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/transformer_classifier/repeat_3/workspace/candidate.py",
+      "error_summary": "strict_metrics: loss_diff=3.5762786865234375e-07, grad_diff=2.7418136596679688e-06, param_update_rel_l2=2.1566805839538574, buffer_state=matched",
+      "failure_class": "valid_experiment_failure",
+      "elapsed_sec": 149.875
+    },
+    {
+      "task_id": "tiny_causal_lm",
+      "model": "Tiny causal LM",
+      "repeat": 1,
+      "seed": 642,
+      "direct_calls": 1,
+      "fixer_calls": 0,
+      "reused_existing": false,
+      "backend_path": "MindSpore",
+      "strict_success": true,
+      "compile_success": true,
+      "execution_success": true,
+      "training_success": true,
+      "training_valid": true,
+      "loss_diff": 1.430511474609375e-06,
+      "grad_norm_diff": 5.960464477539063e-08,
+      "param_update_rel_l2": 6.153894901217427e-06,
+      "gradient_observed": true,
+      "parameter_update_norm": 0.0006057426217012107,
+      "prompt_tokens": 651,
+      "completion_tokens": 25482,
+      "total_tokens": 26133,
+      "source_hash": "99b354ef8b7ee995a789aad9afa9e1139333ad08d70de2e7ae8d9e7160206a35",
+      "prompt_hash": "91555e74bf53544de9fe21d6a395ed1450820f9c339c2af64473ffcced28fd81",
+      "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/tiny_causal_lm/repeat_1/workspace/candidate.py",
+      "error_summary": "",
+      "failure_class": "none",
+      "elapsed_sec": 187.668
+    },
+    {
+      "task_id": "tiny_causal_lm",
+      "model": "Tiny causal LM",
+      "repeat": 2,
+      "seed": 643,
+      "direct_calls": 1,
+      "fixer_calls": 0,
+      "reused_existing": false,
+      "backend_path": "MindSpore",
+      "strict_success": true,
+      "compile_success": true,
+      "execution_success": true,
+      "training_success": true,
+      "training_valid": true,
+      "loss_diff": 1.430511474609375e-06,
+      "grad_norm_diff": 5.960464477539063e-08,
+      "param_update_rel_l2": 1.1943217941734474e-05,
+      "gradient_observed": true,
+      "parameter_update_norm": 0.0006262669921852648,
+      "prompt_tokens": 651,
+      "completion_tokens": 8343,
+      "total_tokens": 8994,
+      "source_hash": "99b354ef8b7ee995a789aad9afa9e1139333ad08d70de2e7ae8d9e7160206a35",
+      "prompt_hash": "91555e74bf53544de9fe21d6a395ed1450820f9c339c2af64473ffcced28fd81",
+      "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/tiny_causal_lm/repeat_2/workspace/candidate.py",
+      "error_summary": "",
+      "failure_class": "none",
+      "elapsed_sec": 61.481
+    },
+    {
+      "task_id": "tiny_causal_lm",
+      "model": "Tiny causal LM",
+      "repeat": 3,
+      "seed": 644,
+      "direct_calls": 1,
+      "fixer_calls": 0,
+      "reused_existing": false,
+      "backend_path": "MindSpore",
+      "strict_success": true,
+      "compile_success": true,
+      "execution_success": true,
+      "training_success": true,
+      "training_valid": true,
+      "loss_diff": 9.5367431640625e-07,
+      "grad_norm_diff": 0.0,
+      "param_update_rel_l2": 1.5482655726373196e-06,
+      "gradient_observed": true,
+      "parameter_update_norm": 0.0006015447434037924,
+      "prompt_tokens": 651,
+      "completion_tokens": 12092,
+      "total_tokens": 12743,
+      "source_hash": "99b354ef8b7ee995a789aad9afa9e1139333ad08d70de2e7ae8d9e7160206a35",
+      "prompt_hash": "91555e74bf53544de9fe21d6a395ed1450820f9c339c2af64473ffcced28fd81",
+      "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/tiny_causal_lm/repeat_3/workspace/candidate.py",
+      "error_summary": "",
+      "failure_class": "none",
+      "elapsed_sec": 88.429
+    }
+  ],
+  "summary": [
+    {
+      "task_id": "image_mlp",
+      "model": "Image MLP",
+      "runs": 3,
+      "strict_success_rate": 0.0,
+      "compile_success_rate": 1.0,
+      "execution_success_rate": 1.0,
+      "training_success_rate": 1.0,
+      "avg_elapsed_sec": 124.65866666666666,
+      "total_tokens": 55811,
+      "backend_paths": {
+        "MindSpore": 3
+      }
+    },
+    {
+      "task_id": "cnn",
+      "model": "CNN",
+      "runs": 3,
+      "strict_success_rate": 0.3333333333333333,
+      "compile_success_rate": 1.0,
+      "execution_success_rate": 0.3333333333333333,
+      "training_success_rate": 0.3333333333333333,
+      "avg_elapsed_sec": 197.513,
+      "total_tokens": 84144,
+      "backend_paths": {
+        "MindSpore": 3
+      }
+    },
+    {
+      "task_id": "resnet",
+      "model": "ResNet",
+      "runs": 3,
+      "strict_success_rate": 1.0,
+      "compile_success_rate": 1.0,
+      "execution_success_rate": 1.0,
+      "training_success_rate": 1.0,
+      "avg_elapsed_sec": 181.43366666666668,
+      "total_tokens": 77452,
+      "backend_paths": {
+        "MindSpore": 3
+      }
+    },
+    {
+      "task_id": "transformer_classifier",
+      "model": "Transformer classifier",
+      "runs": 3,
+      "strict_success_rate": 0.0,
+      "compile_success_rate": 1.0,
+      "execution_success_rate": 1.0,
+      "training_success_rate": 1.0,
+      "avg_elapsed_sec": 232.59699999999998,
+      "total_tokens": 96289,
+      "backend_paths": {
+        "MindSpore": 3
+      }
+    },
+    {
+      "task_id": "tiny_causal_lm",
+      "model": "Tiny causal LM",
+      "runs": 3,
+      "strict_success_rate": 1.0,
+      "compile_success_rate": 1.0,
+      "execution_success_rate": 1.0,
+      "training_success_rate": 1.0,
+      "avg_elapsed_sec": 112.526,
+      "total_tokens": 47870,
+      "backend_paths": {
+        "MindSpore": 3
+      }
+    },
+    {
+      "task_id": "macro",
+      "model": "Macro average",
+      "runs": 15,
+      "strict_success_rate": 0.4666666666666667,
+      "compile_success_rate": 1.0,
+      "execution_success_rate": 0.8666666666666667,
+      "training_success_rate": 0.8666666666666667,
+      "avg_elapsed_sec": 169.7456666666667,
+      "total_tokens": 361566,
+      "backend_paths": {
+        "MindSpore": 15
+      }
+    }
+  ],
+  "details": [
+    {
+      "row": {
+        "task_id": "image_mlp",
+        "model": "Image MLP",
+        "repeat": 1,
+        "seed": 642,
+        "direct_calls": 1,
+        "fixer_calls": 0,
+        "reused_existing": false,
+        "backend_path": "MindSpore",
+        "strict_success": false,
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "loss_diff": 2.4437904357910156e-05,
+        "grad_norm_diff": 0.00026357173919677734,
+        "param_update_rel_l2": 2.162433624267578,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.47132301330566406,
+        "prompt_tokens": 622,
+        "completion_tokens": 16737,
+        "total_tokens": 17359,
+        "source_hash": "896f9524049096fe6455c5d7f56cbe3969706b8163ff0c47324400cc1902379b",
+        "prompt_hash": "10d5dfdd8cec49ca12165a8c532c43629a18cbb16aca90a7f2a771dd105b83d7",
+        "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/image_mlp/repeat_1/workspace/candidate.py",
+        "error_summary": "strict_metrics: loss_diff=2.4437904357910156e-05, grad_diff=0.00026357173919677734, param_update_rel_l2=2.162433624267578, buffer_state=matched",
+        "failure_class": "valid_experiment_failure",
+        "elapsed_sec": 109.044
+      },
+      "direct_output": {
+        "backend_path": "MindSpore",
+        "notes": "Translated PyTorch PatchImageMLP to a native MindSpore Cell, using nn.CrossEntropyLoss and AdamWeightDecay as the AdamW equivalent. The train_one_step function builds the optimizer and uses value_and_grad to perform one optimization step, matching the original semantics."
+      },
+      "strict_verification": {
+        "task": "image_mlp",
+        "backend_path": "MindSpore",
+        "backend_key": "mindspore",
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "training_execution_success": true,
+        "metric_collection_success": true,
+        "translation_success_at_1": false,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.47132301330566406,
+        "seed": 642,
+        "errors": {
+          "strict_metrics": "loss_diff=2.4437904357910156e-05, grad_diff=0.00026357173919677734, param_update_rel_l2=2.162433624267578, buffer_state=matched"
+        },
+        "initialization_alignment": {
+          "reference_count": 4,
+          "candidate_count": 4,
+          "mapping_strategy": "exact_name",
+          "mapped_count": 4,
+          "complete": true,
+          "unmatched_reference": [],
+          "unmatched_candidate": []
+        },
+        "buffer_initialization_alignment": {
+          "synced": [],
+          "synced_count": 0,
+          "unmatched_reference": [],
+          "note": "PyTorch num_batches_tracked has no required native MindSpore counterpart"
+        },
+        "initial_parameter_audit": [
+          {
+            "name": "features.1.weight",
+            "shape": [
+              37,
+              144
+            ],
+            "dtype": "float32",
+            "hash": "96da640b3520dde907d19b81bd5983d246d982c2ffa7bebbd56d5b1e86f02639",
+            "finite": true
+          },
+          {
+            "name": "features.1.bias",
+            "shape": [
+              37
+            ],
+            "dtype": "float32",
+            "hash": "beb90b3390596da7cbde8ee9b87205b08aa783b1e27f99637e852266fde8883c",
+            "finite": true
+          },
+          {
+            "name": "features.3.weight",
+            "shape": [
+              5,
+              37
+            ],
+            "dtype": "float32",
+            "hash": "9d93155010bb19897c0e3e7d1f44227c61025210209be6e7f95d2e03efb2e970",
+            "finite": true
+          },
+          {
+            "name": "features.3.bias",
+            "shape": [
+              5
+            ],
+            "dtype": "float32",
+            "hash": "2162c233dc67ba03324c2f6d9ece9e14ee783fa7d9ad6bd77232f7513ba32b48",
+            "finite": true
+          }
+        ],
+        "initial_buffer_audit": [],
+        "warnings": [],
+        "final_buffer_audit": [],
+        "gradient_metric_status": "measured",
+        "gradient_parameter_count": 4,
+        "updated_parameter_names": [
+          "features.1.bias",
+          "features.1.weight",
+          "features.3.bias",
+          "features.3.weight"
+        ],
+        "comparison": {
+          "enabled": true,
+          "loss_abs_threshold": 0.02,
+          "grad_norm_abs_threshold": 0.05,
+          "param_update_rel_l2_threshold": 0.03,
+          "last_step_abs_loss_diff": 2.4437904357910156e-05,
+          "last_step_abs_grad_norm_diff": 0.00026357173919677734,
+          "param_update_rel_l2": 2.162433624267578,
+          "parameter_update_alignment": {
+            "reference_count": 4,
+            "candidate_count": 4,
+            "mapping_strategy": "exact_name",
+            "mapped_count": 4,
+            "complete": true,
+            "unmatched_reference": [],
+            "unmatched_candidate": []
+          },
+          "reference_parameter_update_norm": 0.14906229078769684,
+          "candidate_parameter_update_norm": 0.47132301330566406,
+          "buffer_state": {
+            "reference_count": 0,
+            "candidate_count": 0,
+            "ignored_reference_names": [],
+            "mapping": {
+              "reference_count": 0,
+              "candidate_count": 0,
+              "mapping_strategy": null,
+              "mapped_count": 0,
+              "complete": false,
+              "unmatched_reference": [],
+              "unmatched_candidate": []
+            },
+            "matched": true,
+            "max_abs_diff": 0.0,
+            "max_rel_l2": 0.0,
+            "per_buffer": []
+          }
+        },
+        "returncode": 0,
+        "stdout_tail": "t\": {\"synced\": [], \"synced_count\": 0, \"unmatched_reference\": [], \"note\": \"PyTorch num_batches_tracked has no required native MindSpore counterpart\"}, \"initial_parameter_audit\": [{\"name\": \"features.1.weight\", \"shape\": [37, 144], \"dtype\": \"float32\", \"hash\": \"96da640b3520dde907d19b81bd5983d246d982c2ffa7bebbd56d5b1e86f02639\", \"finite\": true}, {\"name\": \"features.1.bias\", \"shape\": [37], \"dtype\": \"float32\", \"hash\": \"beb90b3390596da7cbde8ee9b87205b08aa783b1e27f99637e852266fde8883c\", \"finite\": true}, {\"name\": \"features.3.weight\", \"shape\": [5, 37], \"dtype\": \"float32\", \"hash\": \"9d93155010bb19897c0e3e7d1f44227c61025210209be6e7f95d2e03efb2e970\", \"finite\": true}, {\"name\": \"features.3.bias\", \"shape\": [5], \"dtype\": \"float32\", \"hash\": \"2162c233dc67ba03324c2f6d9ece9e14ee783fa7d9ad6bd77232f7513ba32b48\", \"finite\": true}], \"initial_buffer_audit\": [], \"warnings\": [], \"final_buffer_audit\": [], \"gradient_metric_status\": \"measured\", \"gradient_parameter_count\": 4, \"updated_parameter_names\": [\"features.1.bias\", \"features.1.weight\", \"features.3.bias\", \"features.3.weight\"], \"comparison\": {\"enabled\": true, \"loss_abs_threshold\": 0.02, \"grad_norm_abs_threshold\": 0.05, \"param_update_rel_l2_threshold\": 0.03, \"last_step_abs_loss_diff\": 2.4437904357910156e-05, \"last_step_abs_grad_norm_diff\": 0.00026357173919677734, \"param_update_rel_l2\": 2.162433624267578, \"parameter_update_alignment\": {\"reference_count\": 4, \"candidate_count\": 4, \"mapping_strategy\": \"exact_name\", \"mapped_count\": 4, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"reference_parameter_update_norm\": 0.14906229078769684, \"candidate_parameter_update_norm\": 0.47132301330566406, \"buffer_state\": {\"reference_count\": 0, \"candidate_count\": 0, \"ignored_reference_names\": [], \"mapping\": {\"reference_count\": 0, \"candidate_count\": 0, \"mapping_strategy\": null, \"mapped_count\": 0, \"complete\": false, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"matched\": true, \"max_abs_diff\": 0.0, \"max_rel_l2\": 0.0, \"per_buffer\": []}}}\n",
+        "stderr_tail": "[WARNING] ME(2916726,750153633600,python):2026-09-06-21:07:11.023.853 [mindspore/ccsrc/tools/error_handler/error_config.cc:215] operator()] Value of `MS_ENABLE_TFT` is ``\n[WARNING] ME(2916726,750153633600,python):2026-09-06-21:07:11.023.884 [mindspore/ccsrc/tools/error_handler/error_config.cc:163] operator()] Can find `TRE` in environment var `MS_ENABLE_TFT`\n"
+      },
+      "direct_error": ""
+    },
+    {
+      "row": {
+        "task_id": "image_mlp",
+        "model": "Image MLP",
+        "repeat": 2,
+        "seed": 643,
+        "direct_calls": 1,
+        "fixer_calls": 0,
+        "reused_existing": false,
+        "backend_path": "MindSpore",
+        "strict_success": false,
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "loss_diff": 1.6450881958007812e-05,
+        "grad_norm_diff": 0.0002315044403076172,
+        "param_update_rel_l2": 2.161834478378296,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.47131413221359253,
+        "prompt_tokens": 622,
+        "completion_tokens": 13402,
+        "total_tokens": 14024,
+        "source_hash": "896f9524049096fe6455c5d7f56cbe3969706b8163ff0c47324400cc1902379b",
+        "prompt_hash": "10d5dfdd8cec49ca12165a8c532c43629a18cbb16aca90a7f2a771dd105b83d7",
+        "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/image_mlp/repeat_2/workspace/candidate.py",
+        "error_summary": "strict_metrics: loss_diff=1.6450881958007812e-05, grad_diff=0.0002315044403076172, param_update_rel_l2=2.161834478378296, buffer_state=matched",
+        "failure_class": "valid_experiment_failure",
+        "elapsed_sec": 96.827
+      },
+      "direct_output": {
+        "backend_path": "MindSpore",
+        "notes": "Native MindSpore port: PyTorch nn.Linear -> nn.Dense, nn.Sequential -> nn.SequentialCell, torch.optim.AdamW -> nn.AdamWeightDecay with the same PyTorch AdamW defaults. Automatic differentiation uses mindspore.value_and_grad."
+      },
+      "strict_verification": {
+        "task": "image_mlp",
+        "backend_path": "MindSpore",
+        "backend_key": "mindspore",
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "training_execution_success": true,
+        "metric_collection_success": true,
+        "translation_success_at_1": false,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.47131413221359253,
+        "seed": 643,
+        "errors": {
+          "strict_metrics": "loss_diff=1.6450881958007812e-05, grad_diff=0.0002315044403076172, param_update_rel_l2=2.161834478378296, buffer_state=matched"
+        },
+        "initialization_alignment": {
+          "reference_count": 4,
+          "candidate_count": 4,
+          "mapping_strategy": "exact_name",
+          "mapped_count": 4,
+          "complete": true,
+          "unmatched_reference": [],
+          "unmatched_candidate": []
+        },
+        "buffer_initialization_alignment": {
+          "synced": [],
+          "synced_count": 0,
+          "unmatched_reference": [],
+          "note": "PyTorch num_batches_tracked has no required native MindSpore counterpart"
+        },
+        "initial_parameter_audit": [
+          {
+            "name": "features.1.weight",
+            "shape": [
+              37,
+              144
+            ],
+            "dtype": "float32",
+            "hash": "4a71ba87eb96517364a1b3fb0e5bd9a93ba326eacb69fc0cbc986dc54fefef63",
+            "finite": true
+          },
+          {
+            "name": "features.1.bias",
+            "shape": [
+              37
+            ],
+            "dtype": "float32",
+            "hash": "6d4e0932e9a51b44101b4f074524c1339c87277785d9157586d8e1734856fdc1",
+            "finite": true
+          },
+          {
+            "name": "features.3.weight",
+            "shape": [
+              5,
+              37
+            ],
+            "dtype": "float32",
+            "hash": "4e17ba21ac44219767ea1e80b57c33de430bd7eae3f021ad3afb6741aab6812f",
+            "finite": true
+          },
+          {
+            "name": "features.3.bias",
+            "shape": [
+              5
+            ],
+            "dtype": "float32",
+            "hash": "190a1500f05f5b33016029dc223f0357c4cbba61c675a43052e33e18790faad5",
+            "finite": true
+          }
+        ],
+        "initial_buffer_audit": [],
+        "warnings": [],
+        "final_buffer_audit": [],
+        "gradient_metric_status": "measured",
+        "gradient_parameter_count": 4,
+        "updated_parameter_names": [
+          "features.1.bias",
+          "features.1.weight",
+          "features.3.bias",
+          "features.3.weight"
+        ],
+        "comparison": {
+          "enabled": true,
+          "loss_abs_threshold": 0.02,
+          "grad_norm_abs_threshold": 0.05,
+          "param_update_rel_l2_threshold": 0.03,
+          "last_step_abs_loss_diff": 1.6450881958007812e-05,
+          "last_step_abs_grad_norm_diff": 0.0002315044403076172,
+          "param_update_rel_l2": 2.161834478378296,
+          "parameter_update_alignment": {
+            "reference_count": 4,
+            "candidate_count": 4,
+            "mapping_strategy": "exact_name",
+            "mapped_count": 4,
+            "complete": true,
+            "unmatched_reference": [],
+            "unmatched_candidate": []
+          },
+          "reference_parameter_update_norm": 0.1490638554096222,
+          "candidate_parameter_update_norm": 0.47131413221359253,
+          "buffer_state": {
+            "reference_count": 0,
+            "candidate_count": 0,
+            "ignored_reference_names": [],
+            "mapping": {
+              "reference_count": 0,
+              "candidate_count": 0,
+              "mapping_strategy": null,
+              "mapped_count": 0,
+              "complete": false,
+              "unmatched_reference": [],
+              "unmatched_candidate": []
+            },
+            "matched": true,
+            "max_abs_diff": 0.0,
+            "max_rel_l2": 0.0,
+            "per_buffer": []
+          }
+        },
+        "returncode": 0,
+        "stdout_tail": "ent\": {\"synced\": [], \"synced_count\": 0, \"unmatched_reference\": [], \"note\": \"PyTorch num_batches_tracked has no required native MindSpore counterpart\"}, \"initial_parameter_audit\": [{\"name\": \"features.1.weight\", \"shape\": [37, 144], \"dtype\": \"float32\", \"hash\": \"4a71ba87eb96517364a1b3fb0e5bd9a93ba326eacb69fc0cbc986dc54fefef63\", \"finite\": true}, {\"name\": \"features.1.bias\", \"shape\": [37], \"dtype\": \"float32\", \"hash\": \"6d4e0932e9a51b44101b4f074524c1339c87277785d9157586d8e1734856fdc1\", \"finite\": true}, {\"name\": \"features.3.weight\", \"shape\": [5, 37], \"dtype\": \"float32\", \"hash\": \"4e17ba21ac44219767ea1e80b57c33de430bd7eae3f021ad3afb6741aab6812f\", \"finite\": true}, {\"name\": \"features.3.bias\", \"shape\": [5], \"dtype\": \"float32\", \"hash\": \"190a1500f05f5b33016029dc223f0357c4cbba61c675a43052e33e18790faad5\", \"finite\": true}], \"initial_buffer_audit\": [], \"warnings\": [], \"final_buffer_audit\": [], \"gradient_metric_status\": \"measured\", \"gradient_parameter_count\": 4, \"updated_parameter_names\": [\"features.1.bias\", \"features.1.weight\", \"features.3.bias\", \"features.3.weight\"], \"comparison\": {\"enabled\": true, \"loss_abs_threshold\": 0.02, \"grad_norm_abs_threshold\": 0.05, \"param_update_rel_l2_threshold\": 0.03, \"last_step_abs_loss_diff\": 1.6450881958007812e-05, \"last_step_abs_grad_norm_diff\": 0.0002315044403076172, \"param_update_rel_l2\": 2.161834478378296, \"parameter_update_alignment\": {\"reference_count\": 4, \"candidate_count\": 4, \"mapping_strategy\": \"exact_name\", \"mapped_count\": 4, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"reference_parameter_update_norm\": 0.1490638554096222, \"candidate_parameter_update_norm\": 0.47131413221359253, \"buffer_state\": {\"reference_count\": 0, \"candidate_count\": 0, \"ignored_reference_names\": [], \"mapping\": {\"reference_count\": 0, \"candidate_count\": 0, \"mapping_strategy\": null, \"mapped_count\": 0, \"complete\": false, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"matched\": true, \"max_abs_diff\": 0.0, \"max_rel_l2\": 0.0, \"per_buffer\": []}}}\n",
+        "stderr_tail": "[WARNING] ME(2919130,7121714d9600,python):2026-09-06-21:08:48.026.923 [mindspore/ccsrc/tools/error_handler/error_config.cc:215] operator()] Value of `MS_ENABLE_TFT` is ``\n[WARNING] ME(2919130,7121714d9600,python):2026-09-06-21:08:48.026.951 [mindspore/ccsrc/tools/error_handler/error_config.cc:163] operator()] Can find `TRE` in environment var `MS_ENABLE_TFT`\n"
+      },
+      "direct_error": ""
+    },
+    {
+      "row": {
+        "task_id": "image_mlp",
+        "model": "Image MLP",
+        "repeat": 3,
+        "seed": 644,
+        "direct_calls": 1,
+        "fixer_calls": 0,
+        "reused_existing": false,
+        "backend_path": "MindSpore",
+        "strict_success": false,
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "loss_diff": 2.6226043701171875e-06,
+        "grad_norm_diff": 0.0003561973571777344,
+        "param_update_rel_l2": 2.161710262298584,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.47129732370376587,
+        "prompt_tokens": 622,
+        "completion_tokens": 23806,
+        "total_tokens": 24428,
+        "source_hash": "896f9524049096fe6455c5d7f56cbe3969706b8163ff0c47324400cc1902379b",
+        "prompt_hash": "10d5dfdd8cec49ca12165a8c532c43629a18cbb16aca90a7f2a771dd105b83d7",
+        "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/image_mlp/repeat_3/workspace/candidate.py",
+        "error_summary": "strict_metrics: loss_diff=2.6226043701171875e-06, grad_diff=0.0003561973571777344, param_update_rel_l2=2.161710262298584, buffer_state=matched",
+        "failure_class": "valid_experiment_failure",
+        "elapsed_sec": 168.105
+      },
+      "direct_output": {
+        "backend_path": "MindSpore",
+        "notes": "Translated to native MindSpore using nn.Cell, WithLossCell/TrainOneStepCell, and AdamWeightDecay."
+      },
+      "strict_verification": {
+        "task": "image_mlp",
+        "backend_path": "MindSpore",
+        "backend_key": "mindspore",
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "training_execution_success": true,
+        "metric_collection_success": true,
+        "translation_success_at_1": false,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.47129732370376587,
+        "seed": 644,
+        "errors": {
+          "strict_metrics": "loss_diff=2.6226043701171875e-06, grad_diff=0.0003561973571777344, param_update_rel_l2=2.161710262298584, buffer_state=matched"
+        },
+        "initialization_alignment": {
+          "reference_count": 4,
+          "candidate_count": 4,
+          "mapping_strategy": "exact_name",
+          "mapped_count": 4,
+          "complete": true,
+          "unmatched_reference": [],
+          "unmatched_candidate": []
+        },
+        "buffer_initialization_alignment": {
+          "synced": [],
+          "synced_count": 0,
+          "unmatched_reference": [],
+          "note": "PyTorch num_batches_tracked has no required native MindSpore counterpart"
+        },
+        "initial_parameter_audit": [
+          {
+            "name": "features.1.weight",
+            "shape": [
+              37,
+              144
+            ],
+            "dtype": "float32",
+            "hash": "d5be3a836de425612f393d0c52bd286d775cef55cd023f814b27df30e2170889",
+            "finite": true
+          },
+          {
+            "name": "features.1.bias",
+            "shape": [
+              37
+            ],
+            "dtype": "float32",
+            "hash": "731441c955faa99ae8dccf4535d460edc48c86d2ce781d0ab858a35d08fc5128",
+            "finite": true
+          },
+          {
+            "name": "features.3.weight",
+            "shape": [
+              5,
+              37
+            ],
+            "dtype": "float32",
+            "hash": "8ad09be00e3b8a8a8a88dedcda4b050e51945ee929fb82c0c0a9a3a44e6027e7",
+            "finite": true
+          },
+          {
+            "name": "features.3.bias",
+            "shape": [
+              5
+            ],
+            "dtype": "float32",
+            "hash": "644f4167cb4f5b8abf5090ccb0e877c1ba071c13fe61f8aced8f620b4407d59d",
+            "finite": true
+          }
+        ],
+        "initial_buffer_audit": [],
+        "warnings": [],
+        "final_buffer_audit": [],
+        "gradient_metric_status": "measured",
+        "gradient_parameter_count": 4,
+        "updated_parameter_names": [
+          "features.1.bias",
+          "features.1.weight",
+          "features.3.bias",
+          "features.3.weight"
+        ],
+        "comparison": {
+          "enabled": true,
+          "loss_abs_threshold": 0.02,
+          "grad_norm_abs_threshold": 0.05,
+          "param_update_rel_l2_threshold": 0.03,
+          "last_step_abs_loss_diff": 2.6226043701171875e-06,
+          "last_step_abs_grad_norm_diff": 0.0003561973571777344,
+          "param_update_rel_l2": 2.161710262298584,
+          "parameter_update_alignment": {
+            "reference_count": 4,
+            "candidate_count": 4,
+            "mapping_strategy": "exact_name",
+            "mapped_count": 4,
+            "complete": true,
+            "unmatched_reference": [],
+            "unmatched_candidate": []
+          },
+          "reference_parameter_update_norm": 0.14906425774097443,
+          "candidate_parameter_update_norm": 0.47129732370376587,
+          "buffer_state": {
+            "reference_count": 0,
+            "candidate_count": 0,
+            "ignored_reference_names": [],
+            "mapping": {
+              "reference_count": 0,
+              "candidate_count": 0,
+              "mapping_strategy": null,
+              "mapped_count": 0,
+              "complete": false,
+              "unmatched_reference": [],
+              "unmatched_candidate": []
+            },
+            "matched": true,
+            "max_abs_diff": 0.0,
+            "max_rel_l2": 0.0,
+            "per_buffer": []
+          }
+        },
+        "returncode": 0,
+        "stdout_tail": "nt\": {\"synced\": [], \"synced_count\": 0, \"unmatched_reference\": [], \"note\": \"PyTorch num_batches_tracked has no required native MindSpore counterpart\"}, \"initial_parameter_audit\": [{\"name\": \"features.1.weight\", \"shape\": [37, 144], \"dtype\": \"float32\", \"hash\": \"d5be3a836de425612f393d0c52bd286d775cef55cd023f814b27df30e2170889\", \"finite\": true}, {\"name\": \"features.1.bias\", \"shape\": [37], \"dtype\": \"float32\", \"hash\": \"731441c955faa99ae8dccf4535d460edc48c86d2ce781d0ab858a35d08fc5128\", \"finite\": true}, {\"name\": \"features.3.weight\", \"shape\": [5, 37], \"dtype\": \"float32\", \"hash\": \"8ad09be00e3b8a8a8a88dedcda4b050e51945ee929fb82c0c0a9a3a44e6027e7\", \"finite\": true}, {\"name\": \"features.3.bias\", \"shape\": [5], \"dtype\": \"float32\", \"hash\": \"644f4167cb4f5b8abf5090ccb0e877c1ba071c13fe61f8aced8f620b4407d59d\", \"finite\": true}], \"initial_buffer_audit\": [], \"warnings\": [], \"final_buffer_audit\": [], \"gradient_metric_status\": \"measured\", \"gradient_parameter_count\": 4, \"updated_parameter_names\": [\"features.1.bias\", \"features.1.weight\", \"features.3.bias\", \"features.3.weight\"], \"comparison\": {\"enabled\": true, \"loss_abs_threshold\": 0.02, \"grad_norm_abs_threshold\": 0.05, \"param_update_rel_l2_threshold\": 0.03, \"last_step_abs_loss_diff\": 2.6226043701171875e-06, \"last_step_abs_grad_norm_diff\": 0.0003561973571777344, \"param_update_rel_l2\": 2.161710262298584, \"parameter_update_alignment\": {\"reference_count\": 4, \"candidate_count\": 4, \"mapping_strategy\": \"exact_name\", \"mapped_count\": 4, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"reference_parameter_update_norm\": 0.14906425774097443, \"candidate_parameter_update_norm\": 0.47129732370376587, \"buffer_state\": {\"reference_count\": 0, \"candidate_count\": 0, \"ignored_reference_names\": [], \"mapping\": {\"reference_count\": 0, \"candidate_count\": 0, \"mapping_strategy\": null, \"mapped_count\": 0, \"complete\": false, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"matched\": true, \"max_abs_diff\": 0.0, \"max_rel_l2\": 0.0, \"per_buffer\": []}}}\n",
+        "stderr_tail": "[WARNING] ME(2923041,7fb5ae6c3600,python):2026-09-06-21:11:36.014.902 [mindspore/ccsrc/tools/error_handler/error_config.cc:215] operator()] Value of `MS_ENABLE_TFT` is ``\n[WARNING] ME(2923041,7fb5ae6c3600,python):2026-09-06-21:11:36.014.949 [mindspore/ccsrc/tools/error_handler/error_config.cc:163] operator()] Can find `TRE` in environment var `MS_ENABLE_TFT`\n"
+      },
+      "direct_error": ""
+    },
+    {
+      "row": {
+        "task_id": "cnn",
+        "model": "CNN",
+        "repeat": 1,
+        "seed": 642,
+        "direct_calls": 1,
+        "fixer_calls": 0,
+        "reused_existing": false,
+        "backend_path": "MindSpore",
+        "strict_success": false,
+        "compile_success": true,
+        "execution_success": false,
+        "training_success": false,
+        "training_valid": false,
+        "loss_diff": null,
+        "grad_norm_diff": null,
+        "param_update_rel_l2": null,
+        "gradient_observed": false,
+        "parameter_update_norm": 0.0,
+        "prompt_tokens": 674,
+        "completion_tokens": 20828,
+        "total_tokens": 21502,
+        "source_hash": "9449853eec087d0ee1797255a2cf6bb0cb90b09767b362b0a4ff70181b2dd72a",
+        "prompt_hash": "efcf22f018c8b8c6fd81be6fee4cce1ba5b159ae4ce9703e6bc273d0f1ca522a",
+        "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/cnn/repeat_1/workspace/candidate.py",
+        "error_summary": "execution: ValueError: incomplete trainable-parameter initialization mapping: {'reference_count': 6, 'candidate_count': 4, 'mapping_strategy': None, 'mapped_count': 0, 'complete': False, 'unmatched_reference': ['stem.weight', 'stem.bias', '",
+        "failure_class": "valid_experiment_failure",
+        "elapsed_sec": 138.488
+      },
+      "direct_output": {
+        "backend_path": "MindSpore",
+        "notes": "Direct MindSpore translation preserving OffsetCNN and one-step CrossEntropyLoss/SGD training."
+      },
+      "strict_verification": {
+        "task": "cnn",
+        "backend_path": "MindSpore",
+        "backend_key": "mindspore",
+        "compile_success": true,
+        "execution_success": false,
+        "training_success": false,
+        "training_valid": false,
+        "training_execution_success": false,
+        "metric_collection_success": false,
+        "translation_success_at_1": false,
+        "gradient_observed": false,
+        "parameter_update_norm": 0.0,
+        "seed": 642,
+        "errors": {
+          "execution": "ValueError: incomplete trainable-parameter initialization mapping: {'reference_count': 6, 'candidate_count': 4, 'mapping_strategy': None, 'mapped_count': 0, 'complete': False, 'unmatched_reference': ['stem.weight', 'stem.bias', 'body.1.weight', 'body.1.bias', 'head.weight', 'head.bias'], 'unmatched_candidate': ['stem.weight', 'body.1.weight', 'head.weight', 'head.bias']}"
+        },
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/baselines/track_a/T-DIRECT/verify_t_direct_candidate.py\", line 1107, in verify",
+          "    result = _verify_mindspore(",
+          "  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/baselines/track_a/T-DIRECT/verify_t_direct_candidate.py\", line 714, in _verify_mindspore",
+          "    parameter_audit, buffer_audit = _sync_mindspore_initial_state(model, reference_metrics)",
+          "  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/baselines/track_a/T-DIRECT/verify_t_direct_candidate.py\", line 475, in _sync_mindspore_initial_state",
+          "    raise ValueError(f\"incomplete trainable-parameter initialization mapping: {parameter_audit}\")",
+          "ValueError: incomplete trainable-parameter initialization mapping: {'reference_count': 6, 'candidate_count': 4, 'mapping_strategy': None, 'mapped_count': 0, 'complete': False, 'unmatched_reference': ['stem.weight', 'stem.bias', 'body.1.weight', 'body.1.bias', 'head.weight', 'head.bias'], 'unmatched_candidate': ['stem.weight', 'body.1.weight', 'head.weight', 'head.bias']}"
+        ],
+        "comparison": {
+          "enabled": true,
+          "loss_abs_threshold": 0.02,
+          "grad_norm_abs_threshold": 0.05,
+          "param_update_rel_l2_threshold": 0.03,
+          "last_step_abs_loss_diff": null,
+          "last_step_abs_grad_norm_diff": null,
+          "param_update_rel_l2": null
+        },
+        "returncode": 0,
+        "stdout_tail": " \"metric_collection_success\": false, \"translation_success_at_1\": false, \"gradient_observed\": false, \"parameter_update_norm\": 0.0, \"seed\": 642, \"errors\": {\"execution\": \"ValueError: incomplete trainable-parameter initialization mapping: {'reference_count': 6, 'candidate_count': 4, 'mapping_strategy': None, 'mapped_count': 0, 'complete': False, 'unmatched_reference': ['stem.weight', 'stem.bias', 'body.1.weight', 'body.1.bias', 'head.weight', 'head.bias'], 'unmatched_candidate': ['stem.weight', 'body.1.weight', 'head.weight', 'head.bias']}\"}, \"traceback_tail\": [\"Traceback (most recent call last):\", \"  File \\\"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/baselines/track_a/T-DIRECT/verify_t_direct_candidate.py\\\", line 1107, in verify\", \"    result = _verify_mindspore(\", \"  File \\\"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/baselines/track_a/T-DIRECT/verify_t_direct_candidate.py\\\", line 714, in _verify_mindspore\", \"    parameter_audit, buffer_audit = _sync_mindspore_initial_state(model, reference_metrics)\", \"  File \\\"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/baselines/track_a/T-DIRECT/verify_t_direct_candidate.py\\\", line 475, in _sync_mindspore_initial_state\", \"    raise ValueError(f\\\"incomplete trainable-parameter initialization mapping: {parameter_audit}\\\")\", \"ValueError: incomplete trainable-parameter initialization mapping: {'reference_count': 6, 'candidate_count': 4, 'mapping_strategy': None, 'mapped_count': 0, 'complete': False, 'unmatched_reference': ['stem.weight', 'stem.bias', 'body.1.weight', 'body.1.bias', 'head.weight', 'head.bias'], 'unmatched_candidate': ['stem.weight', 'body.1.weight', 'head.weight', 'head.bias']}\"], \"comparison\": {\"enabled\": true, \"loss_abs_threshold\": 0.02, \"grad_norm_abs_threshold\": 0.05, \"param_update_rel_l2_threshold\": 0.03, \"last_step_abs_loss_diff\": null, \"last_step_abs_grad_norm_diff\": null, \"param_update_rel_l2\": null}}\n",
+        "stderr_tail": ""
+      },
+      "direct_error": ""
+    },
+    {
+      "row": {
+        "task_id": "cnn",
+        "model": "CNN",
+        "repeat": 2,
+        "seed": 643,
+        "direct_calls": 1,
+        "fixer_calls": 0,
+        "reused_existing": false,
+        "backend_path": "MindSpore",
+        "strict_success": true,
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "loss_diff": 3.5762786865234375e-07,
+        "grad_norm_diff": 1.7881393432617188e-07,
+        "param_update_rel_l2": 1.1607026863202918e-05,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.00032095142523758113,
+        "prompt_tokens": 674,
+        "completion_tokens": 33593,
+        "total_tokens": 34267,
+        "source_hash": "9449853eec087d0ee1797255a2cf6bb0cb90b09767b362b0a4ff70181b2dd72a",
+        "prompt_hash": "efcf22f018c8b8c6fd81be6fee4cce1ba5b159ae4ce9703e6bc273d0f1ca522a",
+        "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/cnn/repeat_2/workspace/candidate.py",
+        "error_summary": "",
+        "failure_class": "none",
+        "elapsed_sec": 243.367
+      },
+      "direct_output": {
+        "backend_path": "MindSpore",
+        "notes": "Native MindSpore translation using only MindSpore APIs. Input CPU tensors are converted to MindSpore tensors; SGD (lr, momentum=0.1) and CrossEntropyLoss are combined via TrainOneStepCell to perform one update."
+      },
+      "strict_verification": {
+        "task": "cnn",
+        "backend_path": "MindSpore",
+        "backend_key": "mindspore",
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "training_execution_success": true,
+        "metric_collection_success": true,
+        "translation_success_at_1": true,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.00032095142523758113,
+        "seed": 643,
+        "errors": {},
+        "initialization_alignment": {
+          "reference_count": 6,
+          "candidate_count": 6,
+          "mapping_strategy": "exact_name",
+          "mapped_count": 6,
+          "complete": true,
+          "unmatched_reference": [],
+          "unmatched_candidate": []
+        },
+        "buffer_initialization_alignment": {
+          "synced": [],
+          "synced_count": 0,
+          "unmatched_reference": [],
+          "note": "PyTorch num_batches_tracked has no required native MindSpore counterpart"
+        },
+        "initial_parameter_audit": [
+          {
+            "name": "stem.weight",
+            "shape": [
+              7,
+              3,
+              3,
+              3
+            ],
+            "dtype": "float32",
+            "hash": "2ea60da21b6ec9b1d3190ed00b3fedfaf0342de404ddec9152d4256c26cc0abf",
+            "finite": true
+          },
+          {
+            "name": "stem.bias",
+            "shape": [
+              7
+            ],
+            "dtype": "float32",
+            "hash": "57797849a0e5d0fb7fdf46be9d63a8908e63b7de611e4571ebca0dacaed4e60f",
+            "finite": true
+          },
+          {
+            "name": "body.1.weight",
+            "shape": [
+              11,
+              7,
+              3,
+              3
+            ],
+            "dtype": "float32",
+            "hash": "3763ef53807a5d876a6811a8052aefd05e772b16857d01c6848e8878a578cdf9",
+            "finite": true
+          },
+          {
+            "name": "body.1.bias",
+            "shape": [
+              11
+            ],
+            "dtype": "float32",
+            "hash": "8b03e2b484e4747145d50c8d1bfe38aea730c3d1cb7e187cb5d51b1eeda0a375",
+            "finite": true
+          },
+          {
+            "name": "head.weight",
+            "shape": [
+              4,
+              11
+            ],
+            "dtype": "float32",
+            "hash": "8c52d1ab348ad09f807d1bf004db39f0eae562a362ab414a5a027eb684b44c3b",
+            "finite": true
+          },
+          {
+            "name": "head.bias",
+            "shape": [
+              4
+            ],
+            "dtype": "float32",
+            "hash": "a7eb2d771ffa9c2d1fd23c201082b8c3eba8ef84de23263984b611d30d7c1793",
+            "finite": true
+          }
+        ],
+        "initial_buffer_audit": [],
+        "warnings": [],
+        "final_buffer_audit": [],
+        "gradient_metric_status": "measured",
+        "gradient_parameter_count": 6,
+        "updated_parameter_names": [
+          "body.1.bias",
+          "body.1.weight",
+          "head.bias",
+          "head.weight",
+          "stem.bias",
+          "stem.weight"
+        ],
+        "comparison": {
+          "enabled": true,
+          "loss_abs_threshold": 0.02,
+          "grad_norm_abs_threshold": 0.05,
+          "param_update_rel_l2_threshold": 0.03,
+          "last_step_abs_loss_diff": 3.5762786865234375e-07,
+          "last_step_abs_grad_norm_diff": 1.7881393432617188e-07,
+          "param_update_rel_l2": 1.1607026863202918e-05,
+          "parameter_update_alignment": {
+            "reference_count": 6,
+            "candidate_count": 6,
+            "mapping_strategy": "exact_name",
+            "mapped_count": 6,
+            "complete": true,
+            "unmatched_reference": [],
+            "unmatched_candidate": []
+          },
+          "reference_parameter_update_norm": 0.0003209514543414116,
+          "candidate_parameter_update_norm": 0.00032095142523758113,
+          "buffer_state": {
+            "reference_count": 0,
+            "candidate_count": 0,
+            "ignored_reference_names": [],
+            "mapping": {
+              "reference_count": 0,
+              "candidate_count": 0,
+              "mapping_strategy": null,
+              "mapped_count": 0,
+              "complete": false,
+              "unmatched_reference": [],
+              "unmatched_candidate": []
+            },
+            "matched": true,
+            "max_abs_diff": 0.0,
+            "max_rel_l2": 0.0,
+            "per_buffer": []
+          }
+        },
+        "returncode": 0,
+        "stdout_tail": "6cc0abf\", \"finite\": true}, {\"name\": \"stem.bias\", \"shape\": [7], \"dtype\": \"float32\", \"hash\": \"57797849a0e5d0fb7fdf46be9d63a8908e63b7de611e4571ebca0dacaed4e60f\", \"finite\": true}, {\"name\": \"body.1.weight\", \"shape\": [11, 7, 3, 3], \"dtype\": \"float32\", \"hash\": \"3763ef53807a5d876a6811a8052aefd05e772b16857d01c6848e8878a578cdf9\", \"finite\": true}, {\"name\": \"body.1.bias\", \"shape\": [11], \"dtype\": \"float32\", \"hash\": \"8b03e2b484e4747145d50c8d1bfe38aea730c3d1cb7e187cb5d51b1eeda0a375\", \"finite\": true}, {\"name\": \"head.weight\", \"shape\": [4, 11], \"dtype\": \"float32\", \"hash\": \"8c52d1ab348ad09f807d1bf004db39f0eae562a362ab414a5a027eb684b44c3b\", \"finite\": true}, {\"name\": \"head.bias\", \"shape\": [4], \"dtype\": \"float32\", \"hash\": \"a7eb2d771ffa9c2d1fd23c201082b8c3eba8ef84de23263984b611d30d7c1793\", \"finite\": true}], \"initial_buffer_audit\": [], \"warnings\": [], \"final_buffer_audit\": [], \"gradient_metric_status\": \"measured\", \"gradient_parameter_count\": 6, \"updated_parameter_names\": [\"body.1.bias\", \"body.1.weight\", \"head.bias\", \"head.weight\", \"stem.bias\", \"stem.weight\"], \"comparison\": {\"enabled\": true, \"loss_abs_threshold\": 0.02, \"grad_norm_abs_threshold\": 0.05, \"param_update_rel_l2_threshold\": 0.03, \"last_step_abs_loss_diff\": 3.5762786865234375e-07, \"last_step_abs_grad_norm_diff\": 1.7881393432617188e-07, \"param_update_rel_l2\": 1.1607026863202918e-05, \"parameter_update_alignment\": {\"reference_count\": 6, \"candidate_count\": 6, \"mapping_strategy\": \"exact_name\", \"mapped_count\": 6, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"reference_parameter_update_norm\": 0.0003209514543414116, \"candidate_parameter_update_norm\": 0.00032095142523758113, \"buffer_state\": {\"reference_count\": 0, \"candidate_count\": 0, \"ignored_reference_names\": [], \"mapping\": {\"reference_count\": 0, \"candidate_count\": 0, \"mapping_strategy\": null, \"mapped_count\": 0, \"complete\": false, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"matched\": true, \"max_abs_diff\": 0.0, \"max_rel_l2\": 0.0, \"per_buffer\": []}}}\n",
+        "stderr_tail": "[WARNING] ME(2931666,7492ca684600,python):2026-09-06-21:17:57.947.582 [mindspore/ccsrc/tools/error_handler/error_config.cc:215] operator()] Value of `MS_ENABLE_TFT` is ``\n[WARNING] ME(2931666,7492ca684600,python):2026-09-06-21:17:57.947.627 [mindspore/ccsrc/tools/error_handler/error_config.cc:163] operator()] Can find `TRE` in environment var `MS_ENABLE_TFT`\n"
+      },
+      "direct_error": ""
+    },
+    {
+      "row": {
+        "task_id": "cnn",
+        "model": "CNN",
+        "repeat": 3,
+        "seed": 644,
+        "direct_calls": 1,
+        "fixer_calls": 0,
+        "reused_existing": false,
+        "backend_path": "MindSpore",
+        "strict_success": false,
+        "compile_success": true,
+        "execution_success": false,
+        "training_success": false,
+        "training_valid": false,
+        "loss_diff": null,
+        "grad_norm_diff": null,
+        "param_update_rel_l2": null,
+        "gradient_observed": false,
+        "parameter_update_norm": 0.0,
+        "prompt_tokens": 674,
+        "completion_tokens": 27701,
+        "total_tokens": 28375,
+        "source_hash": "9449853eec087d0ee1797255a2cf6bb0cb90b09767b362b0a4ff70181b2dd72a",
+        "prompt_hash": "efcf22f018c8b8c6fd81be6fee4cce1ba5b159ae4ce9703e6bc273d0f1ca522a",
+        "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/cnn/repeat_3/workspace/candidate.py",
+        "error_summary": "execution: ValueError: incomplete trainable-parameter initialization mapping: {'reference_count': 6, 'candidate_count': 4, 'mapping_strategy': None, 'mapped_count': 0, 'complete': False, 'unmatched_reference': ['stem.weight', 'stem.bias', '",
+        "failure_class": "valid_experiment_failure",
+        "elapsed_sec": 210.684
+      },
+      "direct_output": {
+        "backend_path": "MindSpore",
+        "notes": "Native MindSpore translation. Uses nn.Cell/construct, nn.SGD, and ms.value_and_grad. Momentum and default lr match the PyTorch source; params is accepted but unused in build_model exactly as in the original code."
+      },
+      "strict_verification": {
+        "task": "cnn",
+        "backend_path": "MindSpore",
+        "backend_key": "mindspore",
+        "compile_success": true,
+        "execution_success": false,
+        "training_success": false,
+        "training_valid": false,
+        "training_execution_success": false,
+        "metric_collection_success": false,
+        "translation_success_at_1": false,
+        "gradient_observed": false,
+        "parameter_update_norm": 0.0,
+        "seed": 644,
+        "errors": {
+          "execution": "ValueError: incomplete trainable-parameter initialization mapping: {'reference_count': 6, 'candidate_count': 4, 'mapping_strategy': None, 'mapped_count': 0, 'complete': False, 'unmatched_reference': ['stem.weight', 'stem.bias', 'body.1.weight', 'body.1.bias', 'head.weight', 'head.bias'], 'unmatched_candidate': ['stem.weight', 'body.1.weight', 'head.weight', 'head.bias']}"
+        },
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/baselines/track_a/T-DIRECT/verify_t_direct_candidate.py\", line 1107, in verify",
+          "    result = _verify_mindspore(",
+          "  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/baselines/track_a/T-DIRECT/verify_t_direct_candidate.py\", line 714, in _verify_mindspore",
+          "    parameter_audit, buffer_audit = _sync_mindspore_initial_state(model, reference_metrics)",
+          "  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/baselines/track_a/T-DIRECT/verify_t_direct_candidate.py\", line 475, in _sync_mindspore_initial_state",
+          "    raise ValueError(f\"incomplete trainable-parameter initialization mapping: {parameter_audit}\")",
+          "ValueError: incomplete trainable-parameter initialization mapping: {'reference_count': 6, 'candidate_count': 4, 'mapping_strategy': None, 'mapped_count': 0, 'complete': False, 'unmatched_reference': ['stem.weight', 'stem.bias', 'body.1.weight', 'body.1.bias', 'head.weight', 'head.bias'], 'unmatched_candidate': ['stem.weight', 'body.1.weight', 'head.weight', 'head.bias']}"
+        ],
+        "comparison": {
+          "enabled": true,
+          "loss_abs_threshold": 0.02,
+          "grad_norm_abs_threshold": 0.05,
+          "param_update_rel_l2_threshold": 0.03,
+          "last_step_abs_loss_diff": null,
+          "last_step_abs_grad_norm_diff": null,
+          "param_update_rel_l2": null
+        },
+        "returncode": 0,
+        "stdout_tail": " \"metric_collection_success\": false, \"translation_success_at_1\": false, \"gradient_observed\": false, \"parameter_update_norm\": 0.0, \"seed\": 644, \"errors\": {\"execution\": \"ValueError: incomplete trainable-parameter initialization mapping: {'reference_count': 6, 'candidate_count': 4, 'mapping_strategy': None, 'mapped_count': 0, 'complete': False, 'unmatched_reference': ['stem.weight', 'stem.bias', 'body.1.weight', 'body.1.bias', 'head.weight', 'head.bias'], 'unmatched_candidate': ['stem.weight', 'body.1.weight', 'head.weight', 'head.bias']}\"}, \"traceback_tail\": [\"Traceback (most recent call last):\", \"  File \\\"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/baselines/track_a/T-DIRECT/verify_t_direct_candidate.py\\\", line 1107, in verify\", \"    result = _verify_mindspore(\", \"  File \\\"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/baselines/track_a/T-DIRECT/verify_t_direct_candidate.py\\\", line 714, in _verify_mindspore\", \"    parameter_audit, buffer_audit = _sync_mindspore_initial_state(model, reference_metrics)\", \"  File \\\"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/baselines/track_a/T-DIRECT/verify_t_direct_candidate.py\\\", line 475, in _sync_mindspore_initial_state\", \"    raise ValueError(f\\\"incomplete trainable-parameter initialization mapping: {parameter_audit}\\\")\", \"ValueError: incomplete trainable-parameter initialization mapping: {'reference_count': 6, 'candidate_count': 4, 'mapping_strategy': None, 'mapped_count': 0, 'complete': False, 'unmatched_reference': ['stem.weight', 'stem.bias', 'body.1.weight', 'body.1.bias', 'head.weight', 'head.bias'], 'unmatched_candidate': ['stem.weight', 'body.1.weight', 'head.weight', 'head.bias']}\"], \"comparison\": {\"enabled\": true, \"loss_abs_threshold\": 0.02, \"grad_norm_abs_threshold\": 0.05, \"param_update_rel_l2_threshold\": 0.03, \"last_step_abs_loss_diff\": null, \"last_step_abs_grad_norm_diff\": null, \"param_update_rel_l2\": null}}\n",
+        "stderr_tail": ""
+      },
+      "direct_error": ""
+    },
+    {
+      "row": {
+        "task_id": "resnet",
+        "model": "ResNet",
+        "repeat": 1,
+        "seed": 642,
+        "direct_calls": 1,
+        "fixer_calls": 0,
+        "reused_existing": false,
+        "backend_path": "MindSpore",
+        "strict_success": true,
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "loss_diff": 4.76837158203125e-07,
+        "grad_norm_diff": 2.384185791015625e-07,
+        "param_update_rel_l2": 0.0015687368577346206,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.030579792335629463,
+        "prompt_tokens": 755,
+        "completion_tokens": 14523,
+        "total_tokens": 15278,
+        "source_hash": "7850d0208edfc031e19e6e7f273d9a8f432d461b3edc919fa6169d806950d0b5",
+        "prompt_hash": "9c58bcd4e9248b020cf5bb0f43b1b2b2a3df62565a3e399416480b065e4bb702",
+        "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/resnet/repeat_1/workspace/candidate.py",
+        "error_summary": "",
+        "failure_class": "none",
+        "elapsed_sec": 100.985
+      },
+      "direct_output": {
+        "backend_path": "MindSpore",
+        "notes": "Direct native MindSpore translation. Uses mindspore.nn for the residual network, native ReduceMean for adaptive average pooling, SoftmaxCrossEntropyWithLogits for cross-entropy, and WithLossCell/TrainOneStepCell for one train step."
+      },
+      "strict_verification": {
+        "task": "resnet",
+        "backend_path": "MindSpore",
+        "backend_key": "mindspore",
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "training_execution_success": true,
+        "metric_collection_success": true,
+        "translation_success_at_1": true,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.030579792335629463,
+        "seed": 642,
+        "errors": {},
+        "initialization_alignment": {
+          "reference_count": 10,
+          "candidate_count": 10,
+          "mapping_strategy": "canonical_name",
+          "mapped_count": 10,
+          "complete": true,
+          "unmatched_reference": [],
+          "unmatched_candidate": []
+        },
+        "buffer_initialization_alignment": {
+          "synced": [
+            {
+              "reference": "block.path.1.running_mean",
+              "candidate": "block.path.1.moving_mean"
+            },
+            {
+              "reference": "block.path.1.running_var",
+              "candidate": "block.path.1.moving_variance"
+            },
+            {
+              "reference": "block.path.4.running_mean",
+              "candidate": "block.path.4.moving_mean"
+            },
+            {
+              "reference": "block.path.4.running_var",
+              "candidate": "block.path.4.moving_variance"
+            }
+          ],
+          "synced_count": 4,
+          "unmatched_reference": [
+            "block.path.1.num_batches_tracked",
+            "block.path.4.num_batches_tracked"
+          ],
+          "note": "PyTorch num_batches_tracked has no required native MindSpore counterpart"
+        },
+        "initial_parameter_audit": [
+          {
+            "name": "stem.weight",
+            "shape": [
+              8,
+              3,
+              3,
+              3
+            ],
+            "dtype": "float32",
+            "hash": "1d4a6de2a39822ac20e2b586e26663e27fb30720a5000fffe97a86b76c5081ad",
+            "finite": true
+          },
+          {
+            "name": "stem.bias",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "daf165cfd4a06ce5836a2401e430abd47f874c8198ed839b3a9be1eb6712e0a3",
+            "finite": true
+          },
+          {
+            "name": "block.path.0.weight",
+            "shape": [
+              8,
+              8,
+              3,
+              3
+            ],
+            "dtype": "float32",
+            "hash": "caca9bea9dabe7591e147035f8956a22638f70688efc385ac1c76c79c35c5a8e",
+            "finite": true
+          },
+          {
+            "name": "block.path.1.gamma",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "4f05df05f8da9356bd66425351f166a5f7305b7c805e6900d9ec0f50790c9886",
+            "finite": true
+          },
+          {
+            "name": "block.path.1.beta",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+            "finite": true
+          },
+          {
+            "name": "block.path.3.weight",
+            "shape": [
+              8,
+              8,
+              3,
+              3
+            ],
+            "dtype": "float32",
+            "hash": "75ea7b0270dbf658d3c502d027621356062402186fe9e48b61f3441b64b7e627",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.gamma",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "4f05df05f8da9356bd66425351f166a5f7305b7c805e6900d9ec0f50790c9886",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.beta",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+            "finite": true
+          },
+          {
+            "name": "fc.weight",
+            "shape": [
+              6,
+              8
+            ],
+            "dtype": "float32",
+            "hash": "0e887bd014b4169f31ff320919ce9d3b16d9667c9ba71563374fa3e2f78f7340",
+            "finite": true
+          },
+          {
+            "name": "fc.bias",
+            "shape": [
+              6
+            ],
+            "dtype": "float32",
+            "hash": "8a92f86e9d70561b3b357db39aa434481996d020db0abe544759d2d39a4db693",
+            "finite": true
+          }
+        ],
+        "initial_buffer_audit": [
+          {
+            "name": "block.path.1.moving_mean",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+            "finite": true
+          },
+          {
+            "name": "block.path.1.moving_variance",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "4f05df05f8da9356bd66425351f166a5f7305b7c805e6900d9ec0f50790c9886",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.moving_mean",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.moving_variance",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "4f05df05f8da9356bd66425351f166a5f7305b7c805e6900d9ec0f50790c9886",
+            "finite": true
+          }
+        ],
+        "warnings": [],
+        "final_buffer_audit": [
+          {
+            "name": "block.path.1.moving_mean",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "3aa38ebc76d7ecf413a505c4f46f39a4ad36eb85e66af3d7360659f57e860a98",
+            "finite": true
+          },
+          {
+            "name": "block.path.1.moving_variance",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "950e7feefc3894780dcdb0dca642a2bb1a3896279f76ca7afbea13a3e49bd074",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.moving_mean",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "c298e381065f3074558dc2f05a5d1ddfdc00d4445dc01b1eda65f724653e444c",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.moving_variance",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "3bb1ca4675620185b36ae0fc0b15be4d0c71c40b8fa524892991c62d6f43e477",
+            "finite": true
+          }
+        ],
+        "gradient_metric_status": "measured",
+        "gradient_parameter_count": 10,
+        "updated_parameter_names": [
+          "block.path.0.weight",
+          "block.path.1.beta",
+          "block.path.1.gamma",
+          "block.path.3.weight",
+          "block.path.4.beta",
+          "block.path.4.gamma",
+          "fc.bias",
+          "fc.weight",
+          "stem.bias",
+          "stem.weight"
+        ],
+        "comparison": {
+          "enabled": true,
+          "loss_abs_threshold": 0.02,
+          "grad_norm_abs_threshold": 0.05,
+          "param_update_rel_l2_threshold": 0.03,
+          "last_step_abs_loss_diff": 4.76837158203125e-07,
+          "last_step_abs_grad_norm_diff": 2.384185791015625e-07,
+          "param_update_rel_l2": 0.0015687368577346206,
+          "parameter_update_alignment": {
+            "reference_count": 10,
+            "candidate_count": 10,
+            "mapping_strategy": "canonical_name",
+            "mapped_count": 10,
+            "complete": true,
+            "unmatched_reference": [],
+            "unmatched_candidate": []
+          },
+          "reference_parameter_update_norm": 0.030588606372475624,
+          "candidate_parameter_update_norm": 0.030579792335629463,
+          "buffer_state": {
+            "reference_count": 4,
+            "candidate_count": 4,
+            "ignored_reference_names": [
+              "block.path.1.num_batches_tracked",
+              "block.path.4.num_batches_tracked"
+            ],
+            "mapping": {
+              "reference_count": 4,
+              "candidate_count": 4,
+              "mapping_strategy": "canonical_name",
+              "mapped_count": 4,
+              "complete": true,
+              "unmatched_reference": [],
+              "unmatched_candidate": []
+            },
+            "matched": true,
+            "max_abs_diff": 5.960464477539063e-08,
+            "max_rel_l2": 8.888627592376133e-08,
+            "per_buffer": [
+              {
+                "reference": "block.path.1.running_mean",
+                "candidate": "block.path.1.moving_mean",
+                "max_abs_diff": 1.862645149230957e-09,
+                "rel_l2": 6.693740106236324e-08
+              },
+              {
+                "reference": "block.path.1.running_var",
+                "candidate": "block.path.1.moving_variance",
+                "max_abs_diff": 0.0,
+                "rel_l2": 0.0
+              },
+              {
+                "reference": "block.path.4.running_mean",
+                "candidate": "block.path.4.moving_mean",
+                "max_abs_diff": 4.307366907596588e-09,
+                "rel_l2": 8.888627592376133e-08
+              },
+              {
+                "reference": "block.path.4.running_var",
+                "candidate": "block.path.4.moving_variance",
+                "max_abs_diff": 5.960464477539063e-08,
+                "rel_l2": 2.3145897773639777e-08
+              }
+            ]
+          }
+        },
+        "returncode": 0,
+        "stdout_tail": "4d0c71c40b8fa524892991c62d6f43e477\", \"finite\": true}], \"gradient_metric_status\": \"measured\", \"gradient_parameter_count\": 10, \"updated_parameter_names\": [\"block.path.0.weight\", \"block.path.1.beta\", \"block.path.1.gamma\", \"block.path.3.weight\", \"block.path.4.beta\", \"block.path.4.gamma\", \"fc.bias\", \"fc.weight\", \"stem.bias\", \"stem.weight\"], \"comparison\": {\"enabled\": true, \"loss_abs_threshold\": 0.02, \"grad_norm_abs_threshold\": 0.05, \"param_update_rel_l2_threshold\": 0.03, \"last_step_abs_loss_diff\": 4.76837158203125e-07, \"last_step_abs_grad_norm_diff\": 2.384185791015625e-07, \"param_update_rel_l2\": 0.0015687368577346206, \"parameter_update_alignment\": {\"reference_count\": 10, \"candidate_count\": 10, \"mapping_strategy\": \"canonical_name\", \"mapped_count\": 10, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"reference_parameter_update_norm\": 0.030588606372475624, \"candidate_parameter_update_norm\": 0.030579792335629463, \"buffer_state\": {\"reference_count\": 4, \"candidate_count\": 4, \"ignored_reference_names\": [\"block.path.1.num_batches_tracked\", \"block.path.4.num_batches_tracked\"], \"mapping\": {\"reference_count\": 4, \"candidate_count\": 4, \"mapping_strategy\": \"canonical_name\", \"mapped_count\": 4, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"matched\": true, \"max_abs_diff\": 5.960464477539063e-08, \"max_rel_l2\": 8.888627592376133e-08, \"per_buffer\": [{\"reference\": \"block.path.1.running_mean\", \"candidate\": \"block.path.1.moving_mean\", \"max_abs_diff\": 1.862645149230957e-09, \"rel_l2\": 6.693740106236324e-08}, {\"reference\": \"block.path.1.running_var\", \"candidate\": \"block.path.1.moving_variance\", \"max_abs_diff\": 0.0, \"rel_l2\": 0.0}, {\"reference\": \"block.path.4.running_mean\", \"candidate\": \"block.path.4.moving_mean\", \"max_abs_diff\": 4.307366907596588e-09, \"rel_l2\": 8.888627592376133e-08}, {\"reference\": \"block.path.4.running_var\", \"candidate\": \"block.path.4.moving_variance\", \"max_abs_diff\": 5.960464477539063e-08, \"rel_l2\": 2.3145897773639777e-08}]}}}\n",
+        "stderr_tail": "[WARNING] ME(2938746,7289ca645600,python):2026-09-06-21:23:09.509.018 [mindspore/ccsrc/tools/error_handler/error_config.cc:215] operator()] Value of `MS_ENABLE_TFT` is ``\n[WARNING] ME(2938746,7289ca645600,python):2026-09-06-21:23:09.509.070 [mindspore/ccsrc/tools/error_handler/error_config.cc:163] operator()] Can find `TRE` in environment var `MS_ENABLE_TFT`\n"
+      },
+      "direct_error": ""
+    },
+    {
+      "row": {
+        "task_id": "resnet",
+        "model": "ResNet",
+        "repeat": 2,
+        "seed": 643,
+        "direct_calls": 1,
+        "fixer_calls": 0,
+        "reused_existing": false,
+        "backend_path": "MindSpore",
+        "strict_success": true,
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "loss_diff": 4.76837158203125e-07,
+        "grad_norm_diff": 3.5762786865234375e-07,
+        "param_update_rel_l2": 0.0015972757246345282,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.030581284314393997,
+        "prompt_tokens": 755,
+        "completion_tokens": 36670,
+        "total_tokens": 37425,
+        "source_hash": "7850d0208edfc031e19e6e7f273d9a8f432d461b3edc919fa6169d806950d0b5",
+        "prompt_hash": "9c58bcd4e9248b020cf5bb0f43b1b2b2a3df62565a3e399416480b065e4bb702",
+        "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/resnet/repeat_2/workspace/candidate.py",
+        "error_summary": "",
+        "failure_class": "none",
+        "elapsed_sec": 266.731
+      },
+      "direct_output": {
+        "backend_path": "MindSpore",
+        "notes": "Direct MindSpore translation. Uses nn.Cell for the model, nn.WithLossCell/nn.TrainOneStepCell for automatic differentiation and the native nn.Adam optimizer."
+      },
+      "strict_verification": {
+        "task": "resnet",
+        "backend_path": "MindSpore",
+        "backend_key": "mindspore",
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "training_execution_success": true,
+        "metric_collection_success": true,
+        "translation_success_at_1": true,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.030581284314393997,
+        "seed": 643,
+        "errors": {},
+        "initialization_alignment": {
+          "reference_count": 10,
+          "candidate_count": 10,
+          "mapping_strategy": "canonical_name",
+          "mapped_count": 10,
+          "complete": true,
+          "unmatched_reference": [],
+          "unmatched_candidate": []
+        },
+        "buffer_initialization_alignment": {
+          "synced": [
+            {
+              "reference": "block.path.1.running_mean",
+              "candidate": "block.path.1.moving_mean"
+            },
+            {
+              "reference": "block.path.1.running_var",
+              "candidate": "block.path.1.moving_variance"
+            },
+            {
+              "reference": "block.path.4.running_mean",
+              "candidate": "block.path.4.moving_mean"
+            },
+            {
+              "reference": "block.path.4.running_var",
+              "candidate": "block.path.4.moving_variance"
+            }
+          ],
+          "synced_count": 4,
+          "unmatched_reference": [
+            "block.path.1.num_batches_tracked",
+            "block.path.4.num_batches_tracked"
+          ],
+          "note": "PyTorch num_batches_tracked has no required native MindSpore counterpart"
+        },
+        "initial_parameter_audit": [
+          {
+            "name": "stem.weight",
+            "shape": [
+              8,
+              3,
+              3,
+              3
+            ],
+            "dtype": "float32",
+            "hash": "852a561be34c3ac8510b0d26f3daeff8572794a0ee1059541d18963ce315ec06",
+            "finite": true
+          },
+          {
+            "name": "stem.bias",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "7a475df74edf653d133fe4017a09511cb4518aa66fa86d89e1f4a7f3116501a4",
+            "finite": true
+          },
+          {
+            "name": "block.path.0.weight",
+            "shape": [
+              8,
+              8,
+              3,
+              3
+            ],
+            "dtype": "float32",
+            "hash": "b42514b358e54f1a683aa50226eec805c8c3c0dcfd6ff59d3ca208fd832dfd51",
+            "finite": true
+          },
+          {
+            "name": "block.path.1.gamma",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "4f05df05f8da9356bd66425351f166a5f7305b7c805e6900d9ec0f50790c9886",
+            "finite": true
+          },
+          {
+            "name": "block.path.1.beta",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+            "finite": true
+          },
+          {
+            "name": "block.path.3.weight",
+            "shape": [
+              8,
+              8,
+              3,
+              3
+            ],
+            "dtype": "float32",
+            "hash": "06772d8f5c46c641e760862d7c3e7731b6f0bafcdc5fda37629a6bef153ce56f",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.gamma",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "4f05df05f8da9356bd66425351f166a5f7305b7c805e6900d9ec0f50790c9886",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.beta",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+            "finite": true
+          },
+          {
+            "name": "fc.weight",
+            "shape": [
+              6,
+              8
+            ],
+            "dtype": "float32",
+            "hash": "628a1d345181730eb0ed492b343d539a86d608c1284b50f2e92127d0c49e725e",
+            "finite": true
+          },
+          {
+            "name": "fc.bias",
+            "shape": [
+              6
+            ],
+            "dtype": "float32",
+            "hash": "c6f4cd2116fa9a2e2df435c14708854c05f808295035f693aa3e71be1289ddea",
+            "finite": true
+          }
+        ],
+        "initial_buffer_audit": [
+          {
+            "name": "block.path.1.moving_mean",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+            "finite": true
+          },
+          {
+            "name": "block.path.1.moving_variance",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "4f05df05f8da9356bd66425351f166a5f7305b7c805e6900d9ec0f50790c9886",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.moving_mean",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.moving_variance",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "4f05df05f8da9356bd66425351f166a5f7305b7c805e6900d9ec0f50790c9886",
+            "finite": true
+          }
+        ],
+        "warnings": [],
+        "final_buffer_audit": [
+          {
+            "name": "block.path.1.moving_mean",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "260ddc1b14c4c14dfa0635bd586501c230fa9f695be252e3ea41a19e46e25443",
+            "finite": true
+          },
+          {
+            "name": "block.path.1.moving_variance",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "05d4500b900563eb29e5f152d61fab516abe50431644058daafbc7c1fbd07ed8",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.moving_mean",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "31d30f3495b99af5185884a4729d369709a48aafdab69d39fcca16906fe8e3c6",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.moving_variance",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "c2894a59d9208df5712b6556794378baa8760287cced5a10e485479b4430918d",
+            "finite": true
+          }
+        ],
+        "gradient_metric_status": "measured",
+        "gradient_parameter_count": 10,
+        "updated_parameter_names": [
+          "block.path.0.weight",
+          "block.path.1.beta",
+          "block.path.1.gamma",
+          "block.path.3.weight",
+          "block.path.4.beta",
+          "block.path.4.gamma",
+          "fc.bias",
+          "fc.weight",
+          "stem.bias",
+          "stem.weight"
+        ],
+        "comparison": {
+          "enabled": true,
+          "loss_abs_threshold": 0.02,
+          "grad_norm_abs_threshold": 0.05,
+          "param_update_rel_l2_threshold": 0.03,
+          "last_step_abs_loss_diff": 4.76837158203125e-07,
+          "last_step_abs_grad_norm_diff": 3.5762786865234375e-07,
+          "param_update_rel_l2": 0.0015972757246345282,
+          "parameter_update_alignment": {
+            "reference_count": 10,
+            "candidate_count": 10,
+            "mapping_strategy": "canonical_name",
+            "mapped_count": 10,
+            "complete": true,
+            "unmatched_reference": [],
+            "unmatched_candidate": []
+          },
+          "reference_parameter_update_norm": 0.030588651075959206,
+          "candidate_parameter_update_norm": 0.030581284314393997,
+          "buffer_state": {
+            "reference_count": 4,
+            "candidate_count": 4,
+            "ignored_reference_names": [
+              "block.path.1.num_batches_tracked",
+              "block.path.4.num_batches_tracked"
+            ],
+            "mapping": {
+              "reference_count": 4,
+              "candidate_count": 4,
+              "mapping_strategy": "canonical_name",
+              "mapped_count": 4,
+              "complete": true,
+              "unmatched_reference": [],
+              "unmatched_candidate": []
+            },
+            "matched": true,
+            "max_abs_diff": 7.450580596923828e-09,
+            "max_rel_l2": 1.7041381277334483e-07,
+            "per_buffer": [
+              {
+                "reference": "block.path.1.running_mean",
+                "candidate": "block.path.1.moving_mean",
+                "max_abs_diff": 3.725290298461914e-09,
+                "rel_l2": 1.2525098540363345e-07
+              },
+              {
+                "reference": "block.path.1.running_var",
+                "candidate": "block.path.1.moving_variance",
+                "max_abs_diff": 0.0,
+                "rel_l2": 0.0
+              },
+              {
+                "reference": "block.path.4.running_mean",
+                "candidate": "block.path.4.moving_mean",
+                "max_abs_diff": 7.450580596923828e-09,
+                "rel_l2": 1.7041381277334483e-07
+              },
+              {
+                "reference": "block.path.4.running_var",
+                "candidate": "block.path.4.moving_variance",
+                "max_abs_diff": 0.0,
+                "rel_l2": 0.0
+              }
+            ]
+          }
+        },
+        "returncode": 0,
+        "stdout_tail": ": \"c2894a59d9208df5712b6556794378baa8760287cced5a10e485479b4430918d\", \"finite\": true}], \"gradient_metric_status\": \"measured\", \"gradient_parameter_count\": 10, \"updated_parameter_names\": [\"block.path.0.weight\", \"block.path.1.beta\", \"block.path.1.gamma\", \"block.path.3.weight\", \"block.path.4.beta\", \"block.path.4.gamma\", \"fc.bias\", \"fc.weight\", \"stem.bias\", \"stem.weight\"], \"comparison\": {\"enabled\": true, \"loss_abs_threshold\": 0.02, \"grad_norm_abs_threshold\": 0.05, \"param_update_rel_l2_threshold\": 0.03, \"last_step_abs_loss_diff\": 4.76837158203125e-07, \"last_step_abs_grad_norm_diff\": 3.5762786865234375e-07, \"param_update_rel_l2\": 0.0015972757246345282, \"parameter_update_alignment\": {\"reference_count\": 10, \"candidate_count\": 10, \"mapping_strategy\": \"canonical_name\", \"mapped_count\": 10, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"reference_parameter_update_norm\": 0.030588651075959206, \"candidate_parameter_update_norm\": 0.030581284314393997, \"buffer_state\": {\"reference_count\": 4, \"candidate_count\": 4, \"ignored_reference_names\": [\"block.path.1.num_batches_tracked\", \"block.path.4.num_batches_tracked\"], \"mapping\": {\"reference_count\": 4, \"candidate_count\": 4, \"mapping_strategy\": \"canonical_name\", \"mapped_count\": 4, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"matched\": true, \"max_abs_diff\": 7.450580596923828e-09, \"max_rel_l2\": 1.7041381277334483e-07, \"per_buffer\": [{\"reference\": \"block.path.1.running_mean\", \"candidate\": \"block.path.1.moving_mean\", \"max_abs_diff\": 3.725290298461914e-09, \"rel_l2\": 1.2525098540363345e-07}, {\"reference\": \"block.path.1.running_var\", \"candidate\": \"block.path.1.moving_variance\", \"max_abs_diff\": 0.0, \"rel_l2\": 0.0}, {\"reference\": \"block.path.4.running_mean\", \"candidate\": \"block.path.4.moving_mean\", \"max_abs_diff\": 7.450580596923828e-09, \"rel_l2\": 1.7041381277334483e-07}, {\"reference\": \"block.path.4.running_var\", \"candidate\": \"block.path.4.moving_variance\", \"max_abs_diff\": 0.0, \"rel_l2\": 0.0}]}}}\n",
+        "stderr_tail": "[WARNING] ME(2944612,7ca3fe3e7600,python):2026-09-06-21:27:36.457.193 [mindspore/ccsrc/tools/error_handler/error_config.cc:215] operator()] Value of `MS_ENABLE_TFT` is ``\n[WARNING] ME(2944612,7ca3fe3e7600,python):2026-09-06-21:27:36.457.223 [mindspore/ccsrc/tools/error_handler/error_config.cc:163] operator()] Can find `TRE` in environment var `MS_ENABLE_TFT`\n"
+      },
+      "direct_error": ""
+    },
+    {
+      "row": {
+        "task_id": "resnet",
+        "model": "ResNet",
+        "repeat": 3,
+        "seed": 644,
+        "direct_calls": 1,
+        "fixer_calls": 0,
+        "reused_existing": false,
+        "backend_path": "MindSpore",
+        "strict_success": true,
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "loss_diff": 3.5762786865234375e-07,
+        "grad_norm_diff": 5.960464477539063e-08,
+        "param_update_rel_l2": 0.0017646438209339976,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.03058181144297123,
+        "prompt_tokens": 755,
+        "completion_tokens": 23994,
+        "total_tokens": 24749,
+        "source_hash": "7850d0208edfc031e19e6e7f273d9a8f432d461b3edc919fa6169d806950d0b5",
+        "prompt_hash": "9c58bcd4e9248b020cf5bb0f43b1b2b2a3df62565a3e399416480b065e4bb702",
+        "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/resnet/repeat_3/workspace/candidate.py",
+        "error_summary": "",
+        "failure_class": "none",
+        "elapsed_sec": 176.585
+      },
+      "direct_output": {
+        "backend_path": "MindSpore",
+        "notes": "Native MindSpore translation preserving pocket ResNet, CrossEntropyLoss, and one-step Adam semantics."
+      },
+      "strict_verification": {
+        "task": "resnet",
+        "backend_path": "MindSpore",
+        "backend_key": "mindspore",
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "training_execution_success": true,
+        "metric_collection_success": true,
+        "translation_success_at_1": true,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.03058181144297123,
+        "seed": 644,
+        "errors": {},
+        "initialization_alignment": {
+          "reference_count": 10,
+          "candidate_count": 10,
+          "mapping_strategy": "canonical_name",
+          "mapped_count": 10,
+          "complete": true,
+          "unmatched_reference": [],
+          "unmatched_candidate": []
+        },
+        "buffer_initialization_alignment": {
+          "synced": [
+            {
+              "reference": "block.path.1.running_mean",
+              "candidate": "block.path.1.moving_mean"
+            },
+            {
+              "reference": "block.path.1.running_var",
+              "candidate": "block.path.1.moving_variance"
+            },
+            {
+              "reference": "block.path.4.running_mean",
+              "candidate": "block.path.4.moving_mean"
+            },
+            {
+              "reference": "block.path.4.running_var",
+              "candidate": "block.path.4.moving_variance"
+            }
+          ],
+          "synced_count": 4,
+          "unmatched_reference": [
+            "block.path.1.num_batches_tracked",
+            "block.path.4.num_batches_tracked"
+          ],
+          "note": "PyTorch num_batches_tracked has no required native MindSpore counterpart"
+        },
+        "initial_parameter_audit": [
+          {
+            "name": "stem.weight",
+            "shape": [
+              8,
+              3,
+              3,
+              3
+            ],
+            "dtype": "float32",
+            "hash": "3fb1459ade7796e4ae3702cfe9f9d87af214fe713cf1c1703f44f8ccf63ca25d",
+            "finite": true
+          },
+          {
+            "name": "stem.bias",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "d2c6c48467aa25cf208a1a6d84ab32d71d59a0c95e85d09b6e818ca166dc20a6",
+            "finite": true
+          },
+          {
+            "name": "block.path.0.weight",
+            "shape": [
+              8,
+              8,
+              3,
+              3
+            ],
+            "dtype": "float32",
+            "hash": "6c2d70069817d85a98344f07182a0365aad2bb2c3270a99d2a2f32cf768b05e3",
+            "finite": true
+          },
+          {
+            "name": "block.path.1.gamma",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "4f05df05f8da9356bd66425351f166a5f7305b7c805e6900d9ec0f50790c9886",
+            "finite": true
+          },
+          {
+            "name": "block.path.1.beta",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+            "finite": true
+          },
+          {
+            "name": "block.path.3.weight",
+            "shape": [
+              8,
+              8,
+              3,
+              3
+            ],
+            "dtype": "float32",
+            "hash": "30c3adccbeaad5882b6862aaa761af94a4eade4720abbc239994e53a4a54664f",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.gamma",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "4f05df05f8da9356bd66425351f166a5f7305b7c805e6900d9ec0f50790c9886",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.beta",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+            "finite": true
+          },
+          {
+            "name": "fc.weight",
+            "shape": [
+              6,
+              8
+            ],
+            "dtype": "float32",
+            "hash": "c32d9e2132e88434736b3fd878fa1fcf20483cd7980e4c86f9ab702ac1ba9414",
+            "finite": true
+          },
+          {
+            "name": "fc.bias",
+            "shape": [
+              6
+            ],
+            "dtype": "float32",
+            "hash": "a640497e2232c75f1099d797c42a477f53bfb4b57fdf9fd45318ffd5959226fa",
+            "finite": true
+          }
+        ],
+        "initial_buffer_audit": [
+          {
+            "name": "block.path.1.moving_mean",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+            "finite": true
+          },
+          {
+            "name": "block.path.1.moving_variance",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "4f05df05f8da9356bd66425351f166a5f7305b7c805e6900d9ec0f50790c9886",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.moving_mean",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.moving_variance",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "4f05df05f8da9356bd66425351f166a5f7305b7c805e6900d9ec0f50790c9886",
+            "finite": true
+          }
+        ],
+        "warnings": [],
+        "final_buffer_audit": [
+          {
+            "name": "block.path.1.moving_mean",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "ef2e4d4b20896166cdd2a1b7da29edc14a15290125328488583ecf472294c0c7",
+            "finite": true
+          },
+          {
+            "name": "block.path.1.moving_variance",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "ebf072e45ecce36dcb3c4c74f06025a26d5b00a5a3018f21c3952b5261fa0b25",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.moving_mean",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "8a7f70ad76df861c8827f4d708eb277165e1fbef218b4da0fd3bb4c72a87c56a",
+            "finite": true
+          },
+          {
+            "name": "block.path.4.moving_variance",
+            "shape": [
+              8
+            ],
+            "dtype": "float32",
+            "hash": "88ed40badd21f364549d0b8b49d1db47d892b417a715e4a7bfd0bfce6ea36235",
+            "finite": true
+          }
+        ],
+        "gradient_metric_status": "measured",
+        "gradient_parameter_count": 10,
+        "updated_parameter_names": [
+          "block.path.0.weight",
+          "block.path.1.beta",
+          "block.path.1.gamma",
+          "block.path.3.weight",
+          "block.path.4.beta",
+          "block.path.4.gamma",
+          "fc.bias",
+          "fc.weight",
+          "stem.bias",
+          "stem.weight"
+        ],
+        "comparison": {
+          "enabled": true,
+          "loss_abs_threshold": 0.02,
+          "grad_norm_abs_threshold": 0.05,
+          "param_update_rel_l2_threshold": 0.03,
+          "last_step_abs_loss_diff": 3.5762786865234375e-07,
+          "last_step_abs_grad_norm_diff": 5.960464477539063e-08,
+          "param_update_rel_l2": 0.0017646438209339976,
+          "parameter_update_alignment": {
+            "reference_count": 10,
+            "candidate_count": 10,
+            "mapping_strategy": "canonical_name",
+            "mapped_count": 10,
+            "complete": true,
+            "unmatched_reference": [],
+            "unmatched_candidate": []
+          },
+          "reference_parameter_update_norm": 0.03058866783976555,
+          "candidate_parameter_update_norm": 0.03058181144297123,
+          "buffer_state": {
+            "reference_count": 4,
+            "candidate_count": 4,
+            "ignored_reference_names": [
+              "block.path.1.num_batches_tracked",
+              "block.path.4.num_batches_tracked"
+            ],
+            "mapping": {
+              "reference_count": 4,
+              "candidate_count": 4,
+              "mapping_strategy": "canonical_name",
+              "mapped_count": 4,
+              "complete": true,
+              "unmatched_reference": [],
+              "unmatched_candidate": []
+            },
+            "matched": true,
+            "max_abs_diff": 7.450580596923828e-09,
+            "max_rel_l2": 1.3057111159649978e-07,
+            "per_buffer": [
+              {
+                "reference": "block.path.1.running_mean",
+                "candidate": "block.path.1.moving_mean",
+                "max_abs_diff": 9.313225746154785e-10,
+                "rel_l2": 6.292814889033657e-08
+              },
+              {
+                "reference": "block.path.1.running_var",
+                "candidate": "block.path.1.moving_variance",
+                "max_abs_diff": 0.0,
+                "rel_l2": 0.0
+              },
+              {
+                "reference": "block.path.4.running_mean",
+                "candidate": "block.path.4.moving_mean",
+                "max_abs_diff": 7.450580596923828e-09,
+                "rel_l2": 1.3057111159649978e-07
+              },
+              {
+                "reference": "block.path.4.running_var",
+                "candidate": "block.path.4.moving_variance",
+                "max_abs_diff": 0.0,
+                "rel_l2": 0.0
+              }
+            ]
+          }
+        },
+        "returncode": 0,
+        "stdout_tail": "h\": \"88ed40badd21f364549d0b8b49d1db47d892b417a715e4a7bfd0bfce6ea36235\", \"finite\": true}], \"gradient_metric_status\": \"measured\", \"gradient_parameter_count\": 10, \"updated_parameter_names\": [\"block.path.0.weight\", \"block.path.1.beta\", \"block.path.1.gamma\", \"block.path.3.weight\", \"block.path.4.beta\", \"block.path.4.gamma\", \"fc.bias\", \"fc.weight\", \"stem.bias\", \"stem.weight\"], \"comparison\": {\"enabled\": true, \"loss_abs_threshold\": 0.02, \"grad_norm_abs_threshold\": 0.05, \"param_update_rel_l2_threshold\": 0.03, \"last_step_abs_loss_diff\": 3.5762786865234375e-07, \"last_step_abs_grad_norm_diff\": 5.960464477539063e-08, \"param_update_rel_l2\": 0.0017646438209339976, \"parameter_update_alignment\": {\"reference_count\": 10, \"candidate_count\": 10, \"mapping_strategy\": \"canonical_name\", \"mapped_count\": 10, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"reference_parameter_update_norm\": 0.03058866783976555, \"candidate_parameter_update_norm\": 0.03058181144297123, \"buffer_state\": {\"reference_count\": 4, \"candidate_count\": 4, \"ignored_reference_names\": [\"block.path.1.num_batches_tracked\", \"block.path.4.num_batches_tracked\"], \"mapping\": {\"reference_count\": 4, \"candidate_count\": 4, \"mapping_strategy\": \"canonical_name\", \"mapped_count\": 4, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"matched\": true, \"max_abs_diff\": 7.450580596923828e-09, \"max_rel_l2\": 1.3057111159649978e-07, \"per_buffer\": [{\"reference\": \"block.path.1.running_mean\", \"candidate\": \"block.path.1.moving_mean\", \"max_abs_diff\": 9.313225746154785e-10, \"rel_l2\": 6.292814889033657e-08}, {\"reference\": \"block.path.1.running_var\", \"candidate\": \"block.path.1.moving_variance\", \"max_abs_diff\": 0.0, \"rel_l2\": 0.0}, {\"reference\": \"block.path.4.running_mean\", \"candidate\": \"block.path.4.moving_mean\", \"max_abs_diff\": 7.450580596923828e-09, \"rel_l2\": 1.3057111159649978e-07}, {\"reference\": \"block.path.4.running_var\", \"candidate\": \"block.path.4.moving_variance\", \"max_abs_diff\": 0.0, \"rel_l2\": 0.0}]}}}\n",
+        "stderr_tail": "[WARNING] ME(2948733,7db0c68c2600,python):2026-09-06-21:30:32.969.500 [mindspore/ccsrc/tools/error_handler/error_config.cc:215] operator()] Value of `MS_ENABLE_TFT` is ``\n[WARNING] ME(2948733,7db0c68c2600,python):2026-09-06-21:30:32.969.533 [mindspore/ccsrc/tools/error_handler/error_config.cc:163] operator()] Can find `TRE` in environment var `MS_ENABLE_TFT`\n"
+      },
+      "direct_error": ""
+    },
+    {
+      "row": {
+        "task_id": "transformer_classifier",
+        "model": "Transformer classifier",
+        "repeat": 1,
+        "seed": 642,
+        "direct_calls": 1,
+        "fixer_calls": 0,
+        "reused_existing": false,
+        "backend_path": "MindSpore",
+        "strict_success": false,
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "loss_diff": 1.1920928955078125e-07,
+        "grad_norm_diff": 4.827976226806641e-06,
+        "param_update_rel_l2": 2.0733773708343506,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.1426900029182434,
+        "prompt_tokens": 727,
+        "completion_tokens": 30210,
+        "total_tokens": 30937,
+        "source_hash": "7dec23842b9ce0e07a1c63159f651aa7bb046ac8296e51aa7acd83f6ff8f5d8e",
+        "prompt_hash": "ed9f80a5e79c26d2790717978eefe5d53fdc3ea20597e209ca26e3a1ead497ff",
+        "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/transformer_classifier/repeat_1/workspace/candidate.py",
+        "error_summary": "strict_metrics: loss_diff=1.1920928955078125e-07, grad_diff=4.827976226806641e-06, param_update_rel_l2=2.0733773708343506, buffer_state=matched",
+        "failure_class": "valid_experiment_failure",
+        "elapsed_sec": 243.151
+      },
+      "direct_output": {
+        "backend_path": "MindSpore",
+        "notes": "Native MindSpore translation. The PyTorch forward method is mapped to construct; nn.AdamWeightDecay approximates torch.optim.AdamW. build_model accepts an optional config map; train_one_step uses ms.value_and_grad to update the model once."
+      },
+      "strict_verification": {
+        "task": "transformer_classifier",
+        "backend_path": "MindSpore",
+        "backend_key": "mindspore",
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "training_execution_success": true,
+        "metric_collection_success": true,
+        "translation_success_at_1": false,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.1426900029182434,
+        "seed": 642,
+        "errors": {
+          "strict_metrics": "loss_diff=1.1920928955078125e-07, grad_diff=4.827976226806641e-06, param_update_rel_l2=2.0733773708343506, buffer_state=matched"
+        },
+        "initialization_alignment": {
+          "reference_count": 9,
+          "candidate_count": 9,
+          "mapping_strategy": "canonical_name",
+          "mapped_count": 9,
+          "complete": true,
+          "unmatched_reference": [],
+          "unmatched_candidate": []
+        },
+        "buffer_initialization_alignment": {
+          "synced": [],
+          "synced_count": 0,
+          "unmatched_reference": [],
+          "note": "PyTorch num_batches_tracked has no required native MindSpore counterpart"
+        },
+        "initial_parameter_audit": [
+          {
+            "name": "embed.embedding_table",
+            "shape": [
+              41,
+              20
+            ],
+            "dtype": "float32",
+            "hash": "d744fc48d3a2e25d2b5ccd5b28ba5eb542e8da548e43b5fae82609288733b30b",
+            "finite": true
+          },
+          {
+            "name": "qkv.weight",
+            "shape": [
+              60,
+              20
+            ],
+            "dtype": "float32",
+            "hash": "9336afd4760c1cd0593a04844c4a5ab9e4dc3d9e8ef889645245de814efc15a1",
+            "finite": true
+          },
+          {
+            "name": "qkv.bias",
+            "shape": [
+              60
+            ],
+            "dtype": "float32",
+            "hash": "40398e7f2308c49013201a6db8a206618bb039dcf7d7a09d10ba719810a9d040",
+            "finite": true
+          },
+          {
+            "name": "proj.weight",
+            "shape": [
+              20,
+              20
+            ],
+            "dtype": "float32",
+            "hash": "9e6c0748cc3b763c3820326be4e8eaad31f701aa0a4cb88bdad53074e2dfc963",
+            "finite": true
+          },
+          {
+            "name": "proj.bias",
+            "shape": [
+              20
+            ],
+            "dtype": "float32",
+            "hash": "5e656fd704b8110ebad4a89d318376ce69c8977b732b3cd27ec5d94f20297292",
+            "finite": true
+          },
+          {
+            "name": "norm.gamma",
+            "shape": [
+              20
+            ],
+            "dtype": "float32",
+            "hash": "822d06342bcaebfe6cffcbf978ac916b9b7e7fc9e7b788b5e9d74af71c2e5eef",
+            "finite": true
+          },
+          {
+            "name": "norm.beta",
+            "shape": [
+              20
+            ],
+            "dtype": "float32",
+            "hash": "5b6fb58e61fa475939767d68a446f97f1bff02c0e5935a3ea8bb51e6515783d8",
+            "finite": true
+          },
+          {
+            "name": "head.weight",
+            "shape": [
+              3,
+              20
+            ],
+            "dtype": "float32",
+            "hash": "340ef9027e3e4587a57af1250de2aa62192239357f453418af8102d3e1725bf4",
+            "finite": true
+          },
+          {
+            "name": "head.bias",
+            "shape": [
+              3
+            ],
+            "dtype": "float32",
+            "hash": "8c31790da9573c5f78df8369775d64c7f7ba6ca2db120298bae936fb041bb4ef",
+            "finite": true
+          }
+        ],
+        "initial_buffer_audit": [],
+        "warnings": [],
+        "final_buffer_audit": [],
+        "gradient_metric_status": "measured",
+        "gradient_parameter_count": 9,
+        "updated_parameter_names": [
+          "embed.embedding_table",
+          "head.bias",
+          "head.weight",
+          "norm.beta",
+          "norm.gamma",
+          "proj.bias",
+          "proj.weight",
+          "qkv.bias",
+          "qkv.weight"
+        ],
+        "comparison": {
+          "enabled": true,
+          "loss_abs_threshold": 0.02,
+          "grad_norm_abs_threshold": 0.05,
+          "param_update_rel_l2_threshold": 0.03,
+          "last_step_abs_loss_diff": 1.1920928955078125e-07,
+          "last_step_abs_grad_norm_diff": 4.827976226806641e-06,
+          "param_update_rel_l2": 2.0733773708343506,
+          "parameter_update_alignment": {
+            "reference_count": 9,
+            "candidate_count": 9,
+            "mapping_strategy": "canonical_name",
+            "mapped_count": 9,
+            "complete": true,
+            "unmatched_reference": [],
+            "unmatched_candidate": []
+          },
+          "reference_parameter_update_norm": 0.046506624668836594,
+          "candidate_parameter_update_norm": 0.1426900029182434,
+          "buffer_state": {
+            "reference_count": 0,
+            "candidate_count": 0,
+            "ignored_reference_names": [],
+            "mapping": {
+              "reference_count": 0,
+              "candidate_count": 0,
+              "mapping_strategy": null,
+              "mapped_count": 0,
+              "complete": false,
+              "unmatched_reference": [],
+              "unmatched_candidate": []
+            },
+            "matched": true,
+            "max_abs_diff": 0.0,
+            "max_rel_l2": 0.0,
+            "per_buffer": []
+          }
+        },
+        "returncode": 0,
+        "stdout_tail": "{\"name\": \"proj.bias\", \"shape\": [20], \"dtype\": \"float32\", \"hash\": \"5e656fd704b8110ebad4a89d318376ce69c8977b732b3cd27ec5d94f20297292\", \"finite\": true}, {\"name\": \"norm.gamma\", \"shape\": [20], \"dtype\": \"float32\", \"hash\": \"822d06342bcaebfe6cffcbf978ac916b9b7e7fc9e7b788b5e9d74af71c2e5eef\", \"finite\": true}, {\"name\": \"norm.beta\", \"shape\": [20], \"dtype\": \"float32\", \"hash\": \"5b6fb58e61fa475939767d68a446f97f1bff02c0e5935a3ea8bb51e6515783d8\", \"finite\": true}, {\"name\": \"head.weight\", \"shape\": [3, 20], \"dtype\": \"float32\", \"hash\": \"340ef9027e3e4587a57af1250de2aa62192239357f453418af8102d3e1725bf4\", \"finite\": true}, {\"name\": \"head.bias\", \"shape\": [3], \"dtype\": \"float32\", \"hash\": \"8c31790da9573c5f78df8369775d64c7f7ba6ca2db120298bae936fb041bb4ef\", \"finite\": true}], \"initial_buffer_audit\": [], \"warnings\": [], \"final_buffer_audit\": [], \"gradient_metric_status\": \"measured\", \"gradient_parameter_count\": 9, \"updated_parameter_names\": [\"embed.embedding_table\", \"head.bias\", \"head.weight\", \"norm.beta\", \"norm.gamma\", \"proj.bias\", \"proj.weight\", \"qkv.bias\", \"qkv.weight\"], \"comparison\": {\"enabled\": true, \"loss_abs_threshold\": 0.02, \"grad_norm_abs_threshold\": 0.05, \"param_update_rel_l2_threshold\": 0.03, \"last_step_abs_loss_diff\": 1.1920928955078125e-07, \"last_step_abs_grad_norm_diff\": 4.827976226806641e-06, \"param_update_rel_l2\": 2.0733773708343506, \"parameter_update_alignment\": {\"reference_count\": 9, \"candidate_count\": 9, \"mapping_strategy\": \"canonical_name\", \"mapped_count\": 9, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"reference_parameter_update_norm\": 0.046506624668836594, \"candidate_parameter_update_norm\": 0.1426900029182434, \"buffer_state\": {\"reference_count\": 0, \"candidate_count\": 0, \"ignored_reference_names\": [], \"mapping\": {\"reference_count\": 0, \"candidate_count\": 0, \"mapping_strategy\": null, \"mapped_count\": 0, \"complete\": false, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"matched\": true, \"max_abs_diff\": 0.0, \"max_rel_l2\": 0.0, \"per_buffer\": []}}}\n",
+        "stderr_tail": "[WARNING] ME(2953958,781a3d0e1600,python):2026-09-06-21:34:36.162.101 [mindspore/ccsrc/tools/error_handler/error_config.cc:215] operator()] Value of `MS_ENABLE_TFT` is ``\n[WARNING] ME(2953958,781a3d0e1600,python):2026-09-06-21:34:36.162.135 [mindspore/ccsrc/tools/error_handler/error_config.cc:163] operator()] Can find `TRE` in environment var `MS_ENABLE_TFT`\n"
+      },
+      "direct_error": ""
+    },
+    {
+      "row": {
+        "task_id": "transformer_classifier",
+        "model": "Transformer classifier",
+        "repeat": 2,
+        "seed": 643,
+        "direct_calls": 1,
+        "fixer_calls": 0,
+        "reused_existing": false,
+        "backend_path": "MindSpore",
+        "strict_success": false,
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "loss_diff": 1.1920928955078125e-07,
+        "grad_norm_diff": 4.649162292480469e-06,
+        "param_update_rel_l2": 2.159533977508545,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.14896343648433685,
+        "prompt_tokens": 727,
+        "completion_tokens": 42221,
+        "total_tokens": 42948,
+        "source_hash": "7dec23842b9ce0e07a1c63159f651aa7bb046ac8296e51aa7acd83f6ff8f5d8e",
+        "prompt_hash": "ed9f80a5e79c26d2790717978eefe5d53fdc3ea20597e209ca26e3a1ead497ff",
+        "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/transformer_classifier/repeat_2/workspace/candidate.py",
+        "error_summary": "strict_metrics: loss_diff=1.1920928955078125e-07, grad_diff=4.649162292480469e-06, param_update_rel_l2=2.159533977508545, buffer_state=matched",
+        "failure_class": "valid_experiment_failure",
+        "elapsed_sec": 304.765
+      },
+      "direct_output": {
+        "backend_path": "MindSpore",
+        "notes": "Native MindSpore translation preserving model, AdamW-style optimizer, and one-step training. No PyTorch imports."
+      },
+      "strict_verification": {
+        "task": "transformer_classifier",
+        "backend_path": "MindSpore",
+        "backend_key": "mindspore",
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "training_execution_success": true,
+        "metric_collection_success": true,
+        "translation_success_at_1": false,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.14896343648433685,
+        "seed": 643,
+        "errors": {
+          "strict_metrics": "loss_diff=1.1920928955078125e-07, grad_diff=4.649162292480469e-06, param_update_rel_l2=2.159533977508545, buffer_state=matched"
+        },
+        "initialization_alignment": {
+          "reference_count": 9,
+          "candidate_count": 9,
+          "mapping_strategy": "canonical_name",
+          "mapped_count": 9,
+          "complete": true,
+          "unmatched_reference": [],
+          "unmatched_candidate": []
+        },
+        "buffer_initialization_alignment": {
+          "synced": [],
+          "synced_count": 0,
+          "unmatched_reference": [],
+          "note": "PyTorch num_batches_tracked has no required native MindSpore counterpart"
+        },
+        "initial_parameter_audit": [
+          {
+            "name": "embed.embedding_table",
+            "shape": [
+              41,
+              20
+            ],
+            "dtype": "float32",
+            "hash": "8c7224722c9ab6aa23ba3881d4f4262c6e5ed815aad944c9a2ad6a421130a123",
+            "finite": true
+          },
+          {
+            "name": "qkv.weight",
+            "shape": [
+              60,
+              20
+            ],
+            "dtype": "float32",
+            "hash": "23a34962322b961f0bed3874a0b1dd54f222bf8e112d654995f4ec1cc0657f70",
+            "finite": true
+          },
+          {
+            "name": "qkv.bias",
+            "shape": [
+              60
+            ],
+            "dtype": "float32",
+            "hash": "053869bcee378d027e55c2be0e4aee265a67d57eedd64834ce8f1dfc73c9b22a",
+            "finite": true
+          },
+          {
+            "name": "proj.weight",
+            "shape": [
+              20,
+              20
+            ],
+            "dtype": "float32",
+            "hash": "a700d989ef8ac81704a03be8455d3f555d05c9c57e08bac2d12c8ac5ee9c09ef",
+            "finite": true
+          },
+          {
+            "name": "proj.bias",
+            "shape": [
+              20
+            ],
+            "dtype": "float32",
+            "hash": "73f1c364f4398ffe963032596af1bf8527a250997d8c48edbfed95f7fe8949d8",
+            "finite": true
+          },
+          {
+            "name": "norm.gamma",
+            "shape": [
+              20
+            ],
+            "dtype": "float32",
+            "hash": "822d06342bcaebfe6cffcbf978ac916b9b7e7fc9e7b788b5e9d74af71c2e5eef",
+            "finite": true
+          },
+          {
+            "name": "norm.beta",
+            "shape": [
+              20
+            ],
+            "dtype": "float32",
+            "hash": "5b6fb58e61fa475939767d68a446f97f1bff02c0e5935a3ea8bb51e6515783d8",
+            "finite": true
+          },
+          {
+            "name": "head.weight",
+            "shape": [
+              3,
+              20
+            ],
+            "dtype": "float32",
+            "hash": "df7ee86794bcfe50fcc36de09c0bf93cbce36463cb7d510b1764adc4536718b5",
+            "finite": true
+          },
+          {
+            "name": "head.bias",
+            "shape": [
+              3
+            ],
+            "dtype": "float32",
+            "hash": "a5437b4b893d51ad0d8d55053986fa9fd7140d260954d9c316b035456bc0af97",
+            "finite": true
+          }
+        ],
+        "initial_buffer_audit": [],
+        "warnings": [],
+        "final_buffer_audit": [],
+        "gradient_metric_status": "measured",
+        "gradient_parameter_count": 9,
+        "updated_parameter_names": [
+          "embed.embedding_table",
+          "head.bias",
+          "head.weight",
+          "norm.beta",
+          "norm.gamma",
+          "proj.bias",
+          "proj.weight",
+          "qkv.bias",
+          "qkv.weight"
+        ],
+        "comparison": {
+          "enabled": true,
+          "loss_abs_threshold": 0.02,
+          "grad_norm_abs_threshold": 0.05,
+          "param_update_rel_l2_threshold": 0.03,
+          "last_step_abs_loss_diff": 1.1920928955078125e-07,
+          "last_step_abs_grad_norm_diff": 4.649162292480469e-06,
+          "param_update_rel_l2": 2.159533977508545,
+          "parameter_update_alignment": {
+            "reference_count": 9,
+            "candidate_count": 9,
+            "mapping_strategy": "canonical_name",
+            "mapped_count": 9,
+            "complete": true,
+            "unmatched_reference": [],
+            "unmatched_candidate": []
+          },
+          "reference_parameter_update_norm": 0.04714776575565338,
+          "candidate_parameter_update_norm": 0.14896343648433685,
+          "buffer_state": {
+            "reference_count": 0,
+            "candidate_count": 0,
+            "ignored_reference_names": [],
+            "mapping": {
+              "reference_count": 0,
+              "candidate_count": 0,
+              "mapping_strategy": null,
+              "mapped_count": 0,
+              "complete": false,
+              "unmatched_reference": [],
+              "unmatched_candidate": []
+            },
+            "matched": true,
+            "max_abs_diff": 0.0,
+            "max_rel_l2": 0.0,
+            "per_buffer": []
+          }
+        },
+        "returncode": 0,
+        "stdout_tail": " {\"name\": \"proj.bias\", \"shape\": [20], \"dtype\": \"float32\", \"hash\": \"73f1c364f4398ffe963032596af1bf8527a250997d8c48edbfed95f7fe8949d8\", \"finite\": true}, {\"name\": \"norm.gamma\", \"shape\": [20], \"dtype\": \"float32\", \"hash\": \"822d06342bcaebfe6cffcbf978ac916b9b7e7fc9e7b788b5e9d74af71c2e5eef\", \"finite\": true}, {\"name\": \"norm.beta\", \"shape\": [20], \"dtype\": \"float32\", \"hash\": \"5b6fb58e61fa475939767d68a446f97f1bff02c0e5935a3ea8bb51e6515783d8\", \"finite\": true}, {\"name\": \"head.weight\", \"shape\": [3, 20], \"dtype\": \"float32\", \"hash\": \"df7ee86794bcfe50fcc36de09c0bf93cbce36463cb7d510b1764adc4536718b5\", \"finite\": true}, {\"name\": \"head.bias\", \"shape\": [3], \"dtype\": \"float32\", \"hash\": \"a5437b4b893d51ad0d8d55053986fa9fd7140d260954d9c316b035456bc0af97\", \"finite\": true}], \"initial_buffer_audit\": [], \"warnings\": [], \"final_buffer_audit\": [], \"gradient_metric_status\": \"measured\", \"gradient_parameter_count\": 9, \"updated_parameter_names\": [\"embed.embedding_table\", \"head.bias\", \"head.weight\", \"norm.beta\", \"norm.gamma\", \"proj.bias\", \"proj.weight\", \"qkv.bias\", \"qkv.weight\"], \"comparison\": {\"enabled\": true, \"loss_abs_threshold\": 0.02, \"grad_norm_abs_threshold\": 0.05, \"param_update_rel_l2_threshold\": 0.03, \"last_step_abs_loss_diff\": 1.1920928955078125e-07, \"last_step_abs_grad_norm_diff\": 4.649162292480469e-06, \"param_update_rel_l2\": 2.159533977508545, \"parameter_update_alignment\": {\"reference_count\": 9, \"candidate_count\": 9, \"mapping_strategy\": \"canonical_name\", \"mapped_count\": 9, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"reference_parameter_update_norm\": 0.04714776575565338, \"candidate_parameter_update_norm\": 0.14896343648433685, \"buffer_state\": {\"reference_count\": 0, \"candidate_count\": 0, \"ignored_reference_names\": [], \"mapping\": {\"reference_count\": 0, \"candidate_count\": 0, \"mapping_strategy\": null, \"mapped_count\": 0, \"complete\": false, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"matched\": true, \"max_abs_diff\": 0.0, \"max_rel_l2\": 0.0, \"per_buffer\": []}}}\n",
+        "stderr_tail": "[WARNING] ME(2960851,7a1e68379600,python):2026-09-06-21:39:40.960.327 [mindspore/ccsrc/tools/error_handler/error_config.cc:215] operator()] Value of `MS_ENABLE_TFT` is ``\n[WARNING] ME(2960851,7a1e68379600,python):2026-09-06-21:39:40.960.359 [mindspore/ccsrc/tools/error_handler/error_config.cc:163] operator()] Can find `TRE` in environment var `MS_ENABLE_TFT`\n"
+      },
+      "direct_error": ""
+    },
+    {
+      "row": {
+        "task_id": "transformer_classifier",
+        "model": "Transformer classifier",
+        "repeat": 3,
+        "seed": 644,
+        "direct_calls": 1,
+        "fixer_calls": 0,
+        "reused_existing": false,
+        "backend_path": "MindSpore",
+        "strict_success": false,
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "loss_diff": 3.5762786865234375e-07,
+        "grad_norm_diff": 2.7418136596679688e-06,
+        "param_update_rel_l2": 2.1566805839538574,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.1461319625377655,
+        "prompt_tokens": 727,
+        "completion_tokens": 21677,
+        "total_tokens": 22404,
+        "source_hash": "7dec23842b9ce0e07a1c63159f651aa7bb046ac8296e51aa7acd83f6ff8f5d8e",
+        "prompt_hash": "ed9f80a5e79c26d2790717978eefe5d53fdc3ea20597e209ca26e3a1ead497ff",
+        "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/transformer_classifier/repeat_3/workspace/candidate.py",
+        "error_summary": "strict_metrics: loss_diff=3.5762786865234375e-07, grad_diff=2.7418136596679688e-06, param_update_rel_l2=2.1566805839538574, buffer_state=matched",
+        "failure_class": "valid_experiment_failure",
+        "elapsed_sec": 149.875
+      },
+      "direct_output": {
+        "backend_path": "MindSpore",
+        "notes": "Native MindSpore translation using nn.Cell, nn.AdamWeightDecay, and value_and_grad."
+      },
+      "strict_verification": {
+        "task": "transformer_classifier",
+        "backend_path": "MindSpore",
+        "backend_key": "mindspore",
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "training_execution_success": true,
+        "metric_collection_success": true,
+        "translation_success_at_1": false,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.1461319625377655,
+        "seed": 644,
+        "errors": {
+          "strict_metrics": "loss_diff=3.5762786865234375e-07, grad_diff=2.7418136596679688e-06, param_update_rel_l2=2.1566805839538574, buffer_state=matched"
+        },
+        "initialization_alignment": {
+          "reference_count": 9,
+          "candidate_count": 9,
+          "mapping_strategy": "canonical_name",
+          "mapped_count": 9,
+          "complete": true,
+          "unmatched_reference": [],
+          "unmatched_candidate": []
+        },
+        "buffer_initialization_alignment": {
+          "synced": [],
+          "synced_count": 0,
+          "unmatched_reference": [],
+          "note": "PyTorch num_batches_tracked has no required native MindSpore counterpart"
+        },
+        "initial_parameter_audit": [
+          {
+            "name": "embed.embedding_table",
+            "shape": [
+              41,
+              20
+            ],
+            "dtype": "float32",
+            "hash": "092526fae2005631f211c40abe89767173471ab40e0d3af74172cb75cb253dbc",
+            "finite": true
+          },
+          {
+            "name": "qkv.weight",
+            "shape": [
+              60,
+              20
+            ],
+            "dtype": "float32",
+            "hash": "7a77198be1ea35c90790cb254be74bcb62a4e3671c250e36b7e6bb996f018ea3",
+            "finite": true
+          },
+          {
+            "name": "qkv.bias",
+            "shape": [
+              60
+            ],
+            "dtype": "float32",
+            "hash": "7d4423107e63ba37489f543c69104e8682b28e6a60bc82e9f13ac2c02e0241b0",
+            "finite": true
+          },
+          {
+            "name": "proj.weight",
+            "shape": [
+              20,
+              20
+            ],
+            "dtype": "float32",
+            "hash": "4bb18b69a1865e0f0bf7cbf45438c08999b6775671a70e21efa0aa97203b1d74",
+            "finite": true
+          },
+          {
+            "name": "proj.bias",
+            "shape": [
+              20
+            ],
+            "dtype": "float32",
+            "hash": "478ff42a257e73dddd15170040250cd1dd59ba5b71bf0ca7259002921d00635d",
+            "finite": true
+          },
+          {
+            "name": "norm.gamma",
+            "shape": [
+              20
+            ],
+            "dtype": "float32",
+            "hash": "822d06342bcaebfe6cffcbf978ac916b9b7e7fc9e7b788b5e9d74af71c2e5eef",
+            "finite": true
+          },
+          {
+            "name": "norm.beta",
+            "shape": [
+              20
+            ],
+            "dtype": "float32",
+            "hash": "5b6fb58e61fa475939767d68a446f97f1bff02c0e5935a3ea8bb51e6515783d8",
+            "finite": true
+          },
+          {
+            "name": "head.weight",
+            "shape": [
+              3,
+              20
+            ],
+            "dtype": "float32",
+            "hash": "e01ddb267ac56dbb9c721671c5280a140fd110f011a3226292bc15f0762df31d",
+            "finite": true
+          },
+          {
+            "name": "head.bias",
+            "shape": [
+              3
+            ],
+            "dtype": "float32",
+            "hash": "ec8a1b1c0bfe8ad58e7d3fc445885fcb29669e6663b8cbf14def3ba43f60770c",
+            "finite": true
+          }
+        ],
+        "initial_buffer_audit": [],
+        "warnings": [],
+        "final_buffer_audit": [],
+        "gradient_metric_status": "measured",
+        "gradient_parameter_count": 9,
+        "updated_parameter_names": [
+          "embed.embedding_table",
+          "head.bias",
+          "head.weight",
+          "norm.beta",
+          "norm.gamma",
+          "proj.bias",
+          "proj.weight",
+          "qkv.bias",
+          "qkv.weight"
+        ],
+        "comparison": {
+          "enabled": true,
+          "loss_abs_threshold": 0.02,
+          "grad_norm_abs_threshold": 0.05,
+          "param_update_rel_l2_threshold": 0.03,
+          "last_step_abs_loss_diff": 3.5762786865234375e-07,
+          "last_step_abs_grad_norm_diff": 2.7418136596679688e-06,
+          "param_update_rel_l2": 2.1566805839538574,
+          "parameter_update_alignment": {
+            "reference_count": 9,
+            "candidate_count": 9,
+            "mapping_strategy": "canonical_name",
+            "mapped_count": 9,
+            "complete": true,
+            "unmatched_reference": [],
+            "unmatched_candidate": []
+          },
+          "reference_parameter_update_norm": 0.04629606008529663,
+          "candidate_parameter_update_norm": 0.1461319625377655,
+          "buffer_state": {
+            "reference_count": 0,
+            "candidate_count": 0,
+            "ignored_reference_names": [],
+            "mapping": {
+              "reference_count": 0,
+              "candidate_count": 0,
+              "mapping_strategy": null,
+              "mapped_count": 0,
+              "complete": false,
+              "unmatched_reference": [],
+              "unmatched_candidate": []
+            },
+            "matched": true,
+            "max_abs_diff": 0.0,
+            "max_rel_l2": 0.0,
+            "per_buffer": []
+          }
+        },
+        "returncode": 0,
+        "stdout_tail": "{\"name\": \"proj.bias\", \"shape\": [20], \"dtype\": \"float32\", \"hash\": \"478ff42a257e73dddd15170040250cd1dd59ba5b71bf0ca7259002921d00635d\", \"finite\": true}, {\"name\": \"norm.gamma\", \"shape\": [20], \"dtype\": \"float32\", \"hash\": \"822d06342bcaebfe6cffcbf978ac916b9b7e7fc9e7b788b5e9d74af71c2e5eef\", \"finite\": true}, {\"name\": \"norm.beta\", \"shape\": [20], \"dtype\": \"float32\", \"hash\": \"5b6fb58e61fa475939767d68a446f97f1bff02c0e5935a3ea8bb51e6515783d8\", \"finite\": true}, {\"name\": \"head.weight\", \"shape\": [3, 20], \"dtype\": \"float32\", \"hash\": \"e01ddb267ac56dbb9c721671c5280a140fd110f011a3226292bc15f0762df31d\", \"finite\": true}, {\"name\": \"head.bias\", \"shape\": [3], \"dtype\": \"float32\", \"hash\": \"ec8a1b1c0bfe8ad58e7d3fc445885fcb29669e6663b8cbf14def3ba43f60770c\", \"finite\": true}], \"initial_buffer_audit\": [], \"warnings\": [], \"final_buffer_audit\": [], \"gradient_metric_status\": \"measured\", \"gradient_parameter_count\": 9, \"updated_parameter_names\": [\"embed.embedding_table\", \"head.bias\", \"head.weight\", \"norm.beta\", \"norm.gamma\", \"proj.bias\", \"proj.weight\", \"qkv.bias\", \"qkv.weight\"], \"comparison\": {\"enabled\": true, \"loss_abs_threshold\": 0.02, \"grad_norm_abs_threshold\": 0.05, \"param_update_rel_l2_threshold\": 0.03, \"last_step_abs_loss_diff\": 3.5762786865234375e-07, \"last_step_abs_grad_norm_diff\": 2.7418136596679688e-06, \"param_update_rel_l2\": 2.1566805839538574, \"parameter_update_alignment\": {\"reference_count\": 9, \"candidate_count\": 9, \"mapping_strategy\": \"canonical_name\", \"mapped_count\": 9, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"reference_parameter_update_norm\": 0.04629606008529663, \"candidate_parameter_update_norm\": 0.1461319625377655, \"buffer_state\": {\"reference_count\": 0, \"candidate_count\": 0, \"ignored_reference_names\": [], \"mapping\": {\"reference_count\": 0, \"candidate_count\": 0, \"mapping_strategy\": null, \"mapped_count\": 0, \"complete\": false, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"matched\": true, \"max_abs_diff\": 0.0, \"max_rel_l2\": 0.0, \"per_buffer\": []}}}\n",
+        "stderr_tail": "[WARNING] ME(2964100,7bf8ebebc600,python):2026-09-06-21:42:10.322.714 [mindspore/ccsrc/tools/error_handler/error_config.cc:215] operator()] Value of `MS_ENABLE_TFT` is ``\n[WARNING] ME(2964100,7bf8ebebc600,python):2026-09-06-21:42:10.322.765 [mindspore/ccsrc/tools/error_handler/error_config.cc:163] operator()] Can find `TRE` in environment var `MS_ENABLE_TFT`\n"
+      },
+      "direct_error": ""
+    },
+    {
+      "row": {
+        "task_id": "tiny_causal_lm",
+        "model": "Tiny causal LM",
+        "repeat": 1,
+        "seed": 642,
+        "direct_calls": 1,
+        "fixer_calls": 0,
+        "reused_existing": false,
+        "backend_path": "MindSpore",
+        "strict_success": true,
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "loss_diff": 1.430511474609375e-06,
+        "grad_norm_diff": 5.960464477539063e-08,
+        "param_update_rel_l2": 6.153894901217427e-06,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.0006057426217012107,
+        "prompt_tokens": 651,
+        "completion_tokens": 25482,
+        "total_tokens": 26133,
+        "source_hash": "99b354ef8b7ee995a789aad9afa9e1139333ad08d70de2e7ae8d9e7160206a35",
+        "prompt_hash": "91555e74bf53544de9fe21d6a395ed1450820f9c339c2af64473ffcced28fd81",
+        "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/tiny_causal_lm/repeat_1/workspace/candidate.py",
+        "error_summary": "",
+        "failure_class": "none",
+        "elapsed_sec": 187.668
+      },
+      "direct_output": {
+        "backend_path": "MindSpore",
+        "notes": "Native MindSpore port using nn.Cell, nn.Dense, nn.Embedding, nn.ReLU, CrossEntropyLoss and SGD. Inputs are coerced to int32 and one SGD step is applied via value_and_grad followed by optimizer(grads)."
+      },
+      "strict_verification": {
+        "task": "tiny_causal_lm",
+        "backend_path": "MindSpore",
+        "backend_key": "mindspore",
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "training_execution_success": true,
+        "metric_collection_success": true,
+        "translation_success_at_1": true,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.0006057426217012107,
+        "seed": 642,
+        "errors": {},
+        "initialization_alignment": {
+          "reference_count": 5,
+          "candidate_count": 5,
+          "mapping_strategy": "canonical_name",
+          "mapped_count": 5,
+          "complete": true,
+          "unmatched_reference": [],
+          "unmatched_candidate": []
+        },
+        "buffer_initialization_alignment": {
+          "synced": [],
+          "synced_count": 0,
+          "unmatched_reference": [],
+          "note": "PyTorch num_batches_tracked has no required native MindSpore counterpart"
+        },
+        "initial_parameter_audit": [
+          {
+            "name": "token_emb.embedding_table",
+            "shape": [
+              80,
+              32
+            ],
+            "dtype": "float32",
+            "hash": "c675390994b7a93e7ebfac176693ea0e314fcc29ba6e3481425c524296189683",
+            "finite": true
+          },
+          {
+            "name": "proj.weight",
+            "shape": [
+              32,
+              32
+            ],
+            "dtype": "float32",
+            "hash": "09421584bec696d08f55a35ad8aac30900cd21b184f2d86b68f10ef76f94d663",
+            "finite": true
+          },
+          {
+            "name": "proj.bias",
+            "shape": [
+              32
+            ],
+            "dtype": "float32",
+            "hash": "8cae386b9a6f9231f50b56d9bb0c88cbbdb7ac86dbaa06b5df62db86e69c1f09",
+            "finite": true
+          },
+          {
+            "name": "lm_head.weight",
+            "shape": [
+              80,
+              32
+            ],
+            "dtype": "float32",
+            "hash": "450d0c4072379ed50a82aaac36090afcc7d1c9df6378f925dac12d7e5fc6517a",
+            "finite": true
+          },
+          {
+            "name": "lm_head.bias",
+            "shape": [
+              80
+            ],
+            "dtype": "float32",
+            "hash": "9af4bc5774a9f5ff79085903b77369494759e7f573a78da79e00a72789c0ea91",
+            "finite": true
+          }
+        ],
+        "initial_buffer_audit": [],
+        "warnings": [],
+        "final_buffer_audit": [],
+        "gradient_metric_status": "measured",
+        "gradient_parameter_count": 5,
+        "updated_parameter_names": [
+          "lm_head.bias",
+          "lm_head.weight",
+          "proj.bias",
+          "proj.weight",
+          "token_emb.embedding_table"
+        ],
+        "comparison": {
+          "enabled": true,
+          "loss_abs_threshold": 0.02,
+          "grad_norm_abs_threshold": 0.05,
+          "param_update_rel_l2_threshold": 0.03,
+          "last_step_abs_loss_diff": 1.430511474609375e-06,
+          "last_step_abs_grad_norm_diff": 5.960464477539063e-08,
+          "param_update_rel_l2": 6.153894901217427e-06,
+          "parameter_update_alignment": {
+            "reference_count": 5,
+            "candidate_count": 5,
+            "mapping_strategy": "canonical_name",
+            "mapped_count": 5,
+            "complete": true,
+            "unmatched_reference": [],
+            "unmatched_candidate": []
+          },
+          "reference_parameter_update_norm": 0.0006057426799088717,
+          "candidate_parameter_update_norm": 0.0006057426217012107,
+          "buffer_state": {
+            "reference_count": 0,
+            "candidate_count": 0,
+            "ignored_reference_names": [],
+            "mapping": {
+              "reference_count": 0,
+              "candidate_count": 0,
+              "mapping_strategy": null,
+              "mapped_count": 0,
+              "complete": false,
+              "unmatched_reference": [],
+              "unmatched_candidate": []
+            },
+            "matched": true,
+            "max_abs_diff": 0.0,
+            "max_rel_l2": 0.0,
+            "per_buffer": []
+          }
+        },
+        "returncode": 0,
+        "stdout_tail": "\": [{\"name\": \"token_emb.embedding_table\", \"shape\": [80, 32], \"dtype\": \"float32\", \"hash\": \"c675390994b7a93e7ebfac176693ea0e314fcc29ba6e3481425c524296189683\", \"finite\": true}, {\"name\": \"proj.weight\", \"shape\": [32, 32], \"dtype\": \"float32\", \"hash\": \"09421584bec696d08f55a35ad8aac30900cd21b184f2d86b68f10ef76f94d663\", \"finite\": true}, {\"name\": \"proj.bias\", \"shape\": [32], \"dtype\": \"float32\", \"hash\": \"8cae386b9a6f9231f50b56d9bb0c88cbbdb7ac86dbaa06b5df62db86e69c1f09\", \"finite\": true}, {\"name\": \"lm_head.weight\", \"shape\": [80, 32], \"dtype\": \"float32\", \"hash\": \"450d0c4072379ed50a82aaac36090afcc7d1c9df6378f925dac12d7e5fc6517a\", \"finite\": true}, {\"name\": \"lm_head.bias\", \"shape\": [80], \"dtype\": \"float32\", \"hash\": \"9af4bc5774a9f5ff79085903b77369494759e7f573a78da79e00a72789c0ea91\", \"finite\": true}], \"initial_buffer_audit\": [], \"warnings\": [], \"final_buffer_audit\": [], \"gradient_metric_status\": \"measured\", \"gradient_parameter_count\": 5, \"updated_parameter_names\": [\"lm_head.bias\", \"lm_head.weight\", \"proj.bias\", \"proj.weight\", \"token_emb.embedding_table\"], \"comparison\": {\"enabled\": true, \"loss_abs_threshold\": 0.02, \"grad_norm_abs_threshold\": 0.05, \"param_update_rel_l2_threshold\": 0.03, \"last_step_abs_loss_diff\": 1.430511474609375e-06, \"last_step_abs_grad_norm_diff\": 5.960464477539063e-08, \"param_update_rel_l2\": 6.153894901217427e-06, \"parameter_update_alignment\": {\"reference_count\": 5, \"candidate_count\": 5, \"mapping_strategy\": \"canonical_name\", \"mapped_count\": 5, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"reference_parameter_update_norm\": 0.0006057426799088717, \"candidate_parameter_update_norm\": 0.0006057426217012107, \"buffer_state\": {\"reference_count\": 0, \"candidate_count\": 0, \"ignored_reference_names\": [], \"mapping\": {\"reference_count\": 0, \"candidate_count\": 0, \"mapping_strategy\": null, \"mapped_count\": 0, \"complete\": false, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"matched\": true, \"max_abs_diff\": 0.0, \"max_rel_l2\": 0.0, \"per_buffer\": []}}}\n",
+        "stderr_tail": "[WARNING] ME(2968342,7d2ca0b2f600,python):2026-09-06-21:45:18.635.598 [mindspore/ccsrc/tools/error_handler/error_config.cc:215] operator()] Value of `MS_ENABLE_TFT` is ``\n[WARNING] ME(2968342,7d2ca0b2f600,python):2026-09-06-21:45:18.635.646 [mindspore/ccsrc/tools/error_handler/error_config.cc:163] operator()] Can find `TRE` in environment var `MS_ENABLE_TFT`\n"
+      },
+      "direct_error": ""
+    },
+    {
+      "row": {
+        "task_id": "tiny_causal_lm",
+        "model": "Tiny causal LM",
+        "repeat": 2,
+        "seed": 643,
+        "direct_calls": 1,
+        "fixer_calls": 0,
+        "reused_existing": false,
+        "backend_path": "MindSpore",
+        "strict_success": true,
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "loss_diff": 1.430511474609375e-06,
+        "grad_norm_diff": 5.960464477539063e-08,
+        "param_update_rel_l2": 1.1943217941734474e-05,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.0006262669921852648,
+        "prompt_tokens": 651,
+        "completion_tokens": 8343,
+        "total_tokens": 8994,
+        "source_hash": "99b354ef8b7ee995a789aad9afa9e1139333ad08d70de2e7ae8d9e7160206a35",
+        "prompt_hash": "91555e74bf53544de9fe21d6a395ed1450820f9c339c2af64473ffcced28fd81",
+        "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/tiny_causal_lm/repeat_2/workspace/candidate.py",
+        "error_summary": "",
+        "failure_class": "none",
+        "elapsed_sec": 61.481
+      },
+      "direct_output": {
+        "backend_path": "MindSpore",
+        "notes": "Native MindSpore translation using Cell, value_and_grad, and SGD."
+      },
+      "strict_verification": {
+        "task": "tiny_causal_lm",
+        "backend_path": "MindSpore",
+        "backend_key": "mindspore",
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "training_execution_success": true,
+        "metric_collection_success": true,
+        "translation_success_at_1": true,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.0006262669921852648,
+        "seed": 643,
+        "errors": {},
+        "initialization_alignment": {
+          "reference_count": 5,
+          "candidate_count": 5,
+          "mapping_strategy": "canonical_name",
+          "mapped_count": 5,
+          "complete": true,
+          "unmatched_reference": [],
+          "unmatched_candidate": []
+        },
+        "buffer_initialization_alignment": {
+          "synced": [],
+          "synced_count": 0,
+          "unmatched_reference": [],
+          "note": "PyTorch num_batches_tracked has no required native MindSpore counterpart"
+        },
+        "initial_parameter_audit": [
+          {
+            "name": "token_emb.embedding_table",
+            "shape": [
+              80,
+              32
+            ],
+            "dtype": "float32",
+            "hash": "5f7c4394b13507aa73fe65253871d9dbb9134146f5d62e1532b6f2aabea048a8",
+            "finite": true
+          },
+          {
+            "name": "proj.weight",
+            "shape": [
+              32,
+              32
+            ],
+            "dtype": "float32",
+            "hash": "ad739046228256a4f4f5e102f32381aa7deafeca573a629ce2f4147807165a0d",
+            "finite": true
+          },
+          {
+            "name": "proj.bias",
+            "shape": [
+              32
+            ],
+            "dtype": "float32",
+            "hash": "8a14f4eb8ce6372780190bccce3b153e63256f955712d690fe0ee640916bb481",
+            "finite": true
+          },
+          {
+            "name": "lm_head.weight",
+            "shape": [
+              80,
+              32
+            ],
+            "dtype": "float32",
+            "hash": "c404d2be980abd00e196caef24edcad5f9146e965690c42e0043a37003d43e87",
+            "finite": true
+          },
+          {
+            "name": "lm_head.bias",
+            "shape": [
+              80
+            ],
+            "dtype": "float32",
+            "hash": "369ac76a3c42066397c25c388b2d1570447afca0edbe8bdda780692d2b11faa3",
+            "finite": true
+          }
+        ],
+        "initial_buffer_audit": [],
+        "warnings": [],
+        "final_buffer_audit": [],
+        "gradient_metric_status": "measured",
+        "gradient_parameter_count": 5,
+        "updated_parameter_names": [
+          "lm_head.bias",
+          "lm_head.weight",
+          "proj.bias",
+          "proj.weight",
+          "token_emb.embedding_table"
+        ],
+        "comparison": {
+          "enabled": true,
+          "loss_abs_threshold": 0.02,
+          "grad_norm_abs_threshold": 0.05,
+          "param_update_rel_l2_threshold": 0.03,
+          "last_step_abs_loss_diff": 1.430511474609375e-06,
+          "last_step_abs_grad_norm_diff": 5.960464477539063e-08,
+          "param_update_rel_l2": 1.1943217941734474e-05,
+          "parameter_update_alignment": {
+            "reference_count": 5,
+            "candidate_count": 5,
+            "mapping_strategy": "canonical_name",
+            "mapped_count": 5,
+            "complete": true,
+            "unmatched_reference": [],
+            "unmatched_candidate": []
+          },
+          "reference_parameter_update_norm": 0.0006262673414312303,
+          "candidate_parameter_update_norm": 0.0006262669921852648,
+          "buffer_state": {
+            "reference_count": 0,
+            "candidate_count": 0,
+            "ignored_reference_names": [],
+            "mapping": {
+              "reference_count": 0,
+              "candidate_count": 0,
+              "mapping_strategy": null,
+              "mapped_count": 0,
+              "complete": false,
+              "unmatched_reference": [],
+              "unmatched_candidate": []
+            },
+            "matched": true,
+            "max_abs_diff": 0.0,
+            "max_rel_l2": 0.0,
+            "per_buffer": []
+          }
+        },
+        "returncode": 0,
+        "stdout_tail": ": [{\"name\": \"token_emb.embedding_table\", \"shape\": [80, 32], \"dtype\": \"float32\", \"hash\": \"5f7c4394b13507aa73fe65253871d9dbb9134146f5d62e1532b6f2aabea048a8\", \"finite\": true}, {\"name\": \"proj.weight\", \"shape\": [32, 32], \"dtype\": \"float32\", \"hash\": \"ad739046228256a4f4f5e102f32381aa7deafeca573a629ce2f4147807165a0d\", \"finite\": true}, {\"name\": \"proj.bias\", \"shape\": [32], \"dtype\": \"float32\", \"hash\": \"8a14f4eb8ce6372780190bccce3b153e63256f955712d690fe0ee640916bb481\", \"finite\": true}, {\"name\": \"lm_head.weight\", \"shape\": [80, 32], \"dtype\": \"float32\", \"hash\": \"c404d2be980abd00e196caef24edcad5f9146e965690c42e0043a37003d43e87\", \"finite\": true}, {\"name\": \"lm_head.bias\", \"shape\": [80], \"dtype\": \"float32\", \"hash\": \"369ac76a3c42066397c25c388b2d1570447afca0edbe8bdda780692d2b11faa3\", \"finite\": true}], \"initial_buffer_audit\": [], \"warnings\": [], \"final_buffer_audit\": [], \"gradient_metric_status\": \"measured\", \"gradient_parameter_count\": 5, \"updated_parameter_names\": [\"lm_head.bias\", \"lm_head.weight\", \"proj.bias\", \"proj.weight\", \"token_emb.embedding_table\"], \"comparison\": {\"enabled\": true, \"loss_abs_threshold\": 0.02, \"grad_norm_abs_threshold\": 0.05, \"param_update_rel_l2_threshold\": 0.03, \"last_step_abs_loss_diff\": 1.430511474609375e-06, \"last_step_abs_grad_norm_diff\": 5.960464477539063e-08, \"param_update_rel_l2\": 1.1943217941734474e-05, \"parameter_update_alignment\": {\"reference_count\": 5, \"candidate_count\": 5, \"mapping_strategy\": \"canonical_name\", \"mapped_count\": 5, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"reference_parameter_update_norm\": 0.0006262673414312303, \"candidate_parameter_update_norm\": 0.0006262669921852648, \"buffer_state\": {\"reference_count\": 0, \"candidate_count\": 0, \"ignored_reference_names\": [], \"mapping\": {\"reference_count\": 0, \"candidate_count\": 0, \"mapping_strategy\": null, \"mapped_count\": 0, \"complete\": false, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"matched\": true, \"max_abs_diff\": 0.0, \"max_rel_l2\": 0.0, \"per_buffer\": []}}}\n",
+        "stderr_tail": "[WARNING] ME(2969892,77e5a4003600,python):2026-09-06-21:46:19.956.832 [mindspore/ccsrc/tools/error_handler/error_config.cc:215] operator()] Value of `MS_ENABLE_TFT` is ``\n[WARNING] ME(2969892,77e5a4003600,python):2026-09-06-21:46:19.956.868 [mindspore/ccsrc/tools/error_handler/error_config.cc:163] operator()] Can find `TRE` in environment var `MS_ENABLE_TFT`\n"
+      },
+      "direct_error": ""
+    },
+    {
+      "row": {
+        "task_id": "tiny_causal_lm",
+        "model": "Tiny causal LM",
+        "repeat": 3,
+        "seed": 644,
+        "direct_calls": 1,
+        "fixer_calls": 0,
+        "reused_existing": false,
+        "backend_path": "MindSpore",
+        "strict_success": true,
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "loss_diff": 9.5367431640625e-07,
+        "grad_norm_diff": 0.0,
+        "param_update_rel_l2": 1.5482655726373196e-06,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.0006015447434037924,
+        "prompt_tokens": 651,
+        "completion_tokens": 12092,
+        "total_tokens": 12743,
+        "source_hash": "99b354ef8b7ee995a789aad9afa9e1139333ad08d70de2e7ae8d9e7160206a35",
+        "prompt_hash": "91555e74bf53544de9fe21d6a395ed1450820f9c339c2af64473ffcced28fd81",
+        "candidate_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f/experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/final_4508d0e962d1/T-DIRECT/formal_5x3/raw/tiny_causal_lm/repeat_3/workspace/candidate.py",
+        "error_summary": "",
+        "failure_class": "none",
+        "elapsed_sec": 88.429
+      },
+      "direct_output": {
+        "backend_path": "MindSpore",
+        "notes": "Native MindSpore translation preserving the tiny causal LM, SGD optimizer and cross-entropy one-step training; uses value_and_grad for gradients."
+      },
+      "strict_verification": {
+        "task": "tiny_causal_lm",
+        "backend_path": "MindSpore",
+        "backend_key": "mindspore",
+        "compile_success": true,
+        "execution_success": true,
+        "training_success": true,
+        "training_valid": true,
+        "training_execution_success": true,
+        "metric_collection_success": true,
+        "translation_success_at_1": true,
+        "gradient_observed": true,
+        "parameter_update_norm": 0.0006015447434037924,
+        "seed": 644,
+        "errors": {},
+        "initialization_alignment": {
+          "reference_count": 5,
+          "candidate_count": 5,
+          "mapping_strategy": "canonical_name",
+          "mapped_count": 5,
+          "complete": true,
+          "unmatched_reference": [],
+          "unmatched_candidate": []
+        },
+        "buffer_initialization_alignment": {
+          "synced": [],
+          "synced_count": 0,
+          "unmatched_reference": [],
+          "note": "PyTorch num_batches_tracked has no required native MindSpore counterpart"
+        },
+        "initial_parameter_audit": [
+          {
+            "name": "token_emb.embedding_table",
+            "shape": [
+              80,
+              32
+            ],
+            "dtype": "float32",
+            "hash": "98095b39c75cf641985bc249fceac33457ae3825297131cd00ee9d93b1c424f5",
+            "finite": true
+          },
+          {
+            "name": "proj.weight",
+            "shape": [
+              32,
+              32
+            ],
+            "dtype": "float32",
+            "hash": "4bffd190810fe1f85711786b51876f11cd7698d50078855898caf0379a213074",
+            "finite": true
+          },
+          {
+            "name": "proj.bias",
+            "shape": [
+              32
+            ],
+            "dtype": "float32",
+            "hash": "a6d066717fece001eeb1b535406a7e9fda0bf59b9145a876525e3c00ffc07e8a",
+            "finite": true
+          },
+          {
+            "name": "lm_head.weight",
+            "shape": [
+              80,
+              32
+            ],
+            "dtype": "float32",
+            "hash": "2da0f243a9411cdc8948e600f492b5413fc9cad830b57b9b8cf0f7d70f099858",
+            "finite": true
+          },
+          {
+            "name": "lm_head.bias",
+            "shape": [
+              80
+            ],
+            "dtype": "float32",
+            "hash": "2939a65574b73c76b887ba7ba344f037b739780cd08a0f8bfd71b5ad0176d692",
+            "finite": true
+          }
+        ],
+        "initial_buffer_audit": [],
+        "warnings": [],
+        "final_buffer_audit": [],
+        "gradient_metric_status": "measured",
+        "gradient_parameter_count": 5,
+        "updated_parameter_names": [
+          "lm_head.bias",
+          "lm_head.weight",
+          "proj.bias",
+          "proj.weight",
+          "token_emb.embedding_table"
+        ],
+        "comparison": {
+          "enabled": true,
+          "loss_abs_threshold": 0.02,
+          "grad_norm_abs_threshold": 0.05,
+          "param_update_rel_l2_threshold": 0.03,
+          "last_step_abs_loss_diff": 9.5367431640625e-07,
+          "last_step_abs_grad_norm_diff": 0.0,
+          "param_update_rel_l2": 1.5482655726373196e-06,
+          "parameter_update_alignment": {
+            "reference_count": 5,
+            "candidate_count": 5,
+            "mapping_strategy": "canonical_name",
+            "mapped_count": 5,
+            "complete": true,
+            "unmatched_reference": [],
+            "unmatched_candidate": []
+          },
+          "reference_parameter_update_norm": 0.0006015447434037924,
+          "candidate_parameter_update_norm": 0.0006015447434037924,
+          "buffer_state": {
+            "reference_count": 0,
+            "candidate_count": 0,
+            "ignored_reference_names": [],
+            "mapping": {
+              "reference_count": 0,
+              "candidate_count": 0,
+              "mapping_strategy": null,
+              "mapped_count": 0,
+              "complete": false,
+              "unmatched_reference": [],
+              "unmatched_candidate": []
+            },
+            "matched": true,
+            "max_abs_diff": 0.0,
+            "max_rel_l2": 0.0,
+            "per_buffer": []
+          }
+        },
+        "returncode": 0,
+        "stdout_tail": "ial_parameter_audit\": [{\"name\": \"token_emb.embedding_table\", \"shape\": [80, 32], \"dtype\": \"float32\", \"hash\": \"98095b39c75cf641985bc249fceac33457ae3825297131cd00ee9d93b1c424f5\", \"finite\": true}, {\"name\": \"proj.weight\", \"shape\": [32, 32], \"dtype\": \"float32\", \"hash\": \"4bffd190810fe1f85711786b51876f11cd7698d50078855898caf0379a213074\", \"finite\": true}, {\"name\": \"proj.bias\", \"shape\": [32], \"dtype\": \"float32\", \"hash\": \"a6d066717fece001eeb1b535406a7e9fda0bf59b9145a876525e3c00ffc07e8a\", \"finite\": true}, {\"name\": \"lm_head.weight\", \"shape\": [80, 32], \"dtype\": \"float32\", \"hash\": \"2da0f243a9411cdc8948e600f492b5413fc9cad830b57b9b8cf0f7d70f099858\", \"finite\": true}, {\"name\": \"lm_head.bias\", \"shape\": [80], \"dtype\": \"float32\", \"hash\": \"2939a65574b73c76b887ba7ba344f037b739780cd08a0f8bfd71b5ad0176d692\", \"finite\": true}], \"initial_buffer_audit\": [], \"warnings\": [], \"final_buffer_audit\": [], \"gradient_metric_status\": \"measured\", \"gradient_parameter_count\": 5, \"updated_parameter_names\": [\"lm_head.bias\", \"lm_head.weight\", \"proj.bias\", \"proj.weight\", \"token_emb.embedding_table\"], \"comparison\": {\"enabled\": true, \"loss_abs_threshold\": 0.02, \"grad_norm_abs_threshold\": 0.05, \"param_update_rel_l2_threshold\": 0.03, \"last_step_abs_loss_diff\": 9.5367431640625e-07, \"last_step_abs_grad_norm_diff\": 0.0, \"param_update_rel_l2\": 1.5482655726373196e-06, \"parameter_update_alignment\": {\"reference_count\": 5, \"candidate_count\": 5, \"mapping_strategy\": \"canonical_name\", \"mapped_count\": 5, \"complete\": true, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"reference_parameter_update_norm\": 0.0006015447434037924, \"candidate_parameter_update_norm\": 0.0006015447434037924, \"buffer_state\": {\"reference_count\": 0, \"candidate_count\": 0, \"ignored_reference_names\": [], \"mapping\": {\"reference_count\": 0, \"candidate_count\": 0, \"mapping_strategy\": null, \"mapped_count\": 0, \"complete\": false, \"unmatched_reference\": [], \"unmatched_candidate\": []}, \"matched\": true, \"max_abs_diff\": 0.0, \"max_rel_l2\": 0.0, \"per_buffer\": []}}}\n",
+        "stderr_tail": "[WARNING] ME(2972043,78c7f4bf7600,python):2026-09-06-21:47:48.516.484 [mindspore/ccsrc/tools/error_handler/error_config.cc:215] operator()] Value of `MS_ENABLE_TFT` is ``\n[WARNING] ME(2972043,78c7f4bf7600,python):2026-09-06-21:47:48.516.522 [mindspore/ccsrc/tools/error_handler/error_config.cc:163] operator()] Can find `TRE` in environment var `MS_ENABLE_TFT`\n"
+      },
+      "direct_error": ""
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Minimal targeted fix in the owning implementation: cast the matmul weight to the same dtype as the input tensor before calling torch.matmul. This directly resolves the 'expected m1 and m2 to have the same dtype' runtime error in FAULT_CASE_002 while preserving the intended output dtype and shape.",
+    "edits": [
+      {
+        "file": "autofix/generated_faults/candidate/case_fb2decf44af845328c96497427e33ca3.py",
+        "summary": "Cast matmul weight to x.dtype before multiplication to satisfy dtype contract.",
+        "action": "replace",
+        "find_text": "def dtype_sensitive_matmul(x, weight):\n    return torch.matmul(x, weight)",
+        "replace_text": "def dtype_sensitive_matmul(x, weight):\n    return torch.matmul(x, weight.to(dtype=x.dtype))",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": true,
+        "error": ""
+      }
+    ],
+    "risk": "low",
+    "expected_effect": "The probe for FAULT_CASE_002 will execute without dtype mismatch. Since x is float32 in the probe, weight will be cast to float32, yielding y.dtype == torch.float32 and shape (2, 3), satisfying the oracle contract.",
+    "notes": "The failure is localized to dtype_sensitive_matmul, which passed mismatched dtypes to torch.matmul. Casting only the weight to x.dtype is minimal and keeps the output dtype consistent with the non-weight operand. No other functions or probe cases are affected.",
+    "metadata": {
+      "token_usage": {
+        "prompt_tokens": 2782,
+        "completion_tokens": 1449,
+        "total_tokens": 4231
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 1449,
+          "prompt_tokens": 2782,
+          "total_tokens": 4231,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1096,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 2398
+        }
+      },
+      "router": {
+        "repair_scope": "candidate",
+        "confidence": 0.94,
+        "reason": "candidate_execution_contract_violation",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "autofix/generated_faults/candidate/case_fb2decf44af845328c96497427e33ca3.py"
+        ],
+        "recommended_validation": [
+          "controlled_fault_probe"
+        ]
+      },
+      "predicted_layer": "execution",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "candidate",
+        "allowed_files": [
+          "autofix/generated_faults/candidate/case_fb2decf44af845328c96497427e33ca3.py"
+        ],
+        "allowed_prefixes": [],
+        "checks": [
+          {
+            "file": "autofix/generated_faults/candidate/case_fb2decf44af845328c96497427e33ca3.py",
+            "action": "replace",
+            "ok": true,
+            "errors": [],
+            "occurrence_count": 1
+          }
+        ],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      }
+    },
+    "applied": true,
+    "applied_count": 1,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"case\": \"FAULT_CASE_002\", \"dtype\": \"torch.float32\", \"ok\": true, \"shape\": [2, 3]}\n",
+      "payload": {
+        "case": "FAULT_CASE_002",
+        "ok": true,
+        "shape": [
+          2,
+          3
+        ],
+        "dtype": "torch.float32",
+        "model_variant": "cnn"
+      }
+    }
+  }
+}

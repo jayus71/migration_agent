@@ -1,0 +1,95 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "core_operator_numeric_template_after_llm_error",
+    "edits": [
+      {
+        "file": "autofix/reports/core_issue_proposals/iter1_unknown_op.json",
+        "summary": "Write proposal-only core issue triage record",
+        "action": "write",
+        "find_text": "",
+        "replace_text": "{\n  \"kind\": \"torch4ms_core_issue_proposal\",\n  \"status\": \"proposal_only\",\n  \"repair_scope\": \"torch4ms_core_proposal\",\n  \"op_name\": \"unknown_op\",\n  \"error_type\": \"\",\n  \"message\": \"{\\\"actual_norm\\\": 5.90731954574585, \\\"case\\\": \\\"FAULT_CASE_015\\\", \\\"expected_norm\\\": 5.970496654510498, \\\"max_abs_diff\\\": 1.3935869932174683, \\\"ok\\\": false}\\n\",\n  \"source_path\": null,\n  \"converted_path\": \"torch4ms/ops/case_08c2485811134e7c9353d7ddec3b6925.py\",\n  \"localization\": {},\n  \"router\": {\n    \"repair_scope\": \"core_operator\",\n    \"confidence\": 0.94,\n    \"reason\": \"core_operator_numeric_semantics_mismatch\",\n    \"source\": \"failure_localization\",\n    \"legacy_repair_scope\": \"\",\n    \"recommended_target_files\": [\n      \"torch4ms/ops/case_08c2485811134e7c9353d7ddec3b6925.py\"\n    ],\n    \"recommended_validation\": [\n      \"controlled_fault_probe\"\n    ]\n  },\n  \"repro_path\": \"autofix/generated_harnesses/core_repro_iter1_unknown_op.py\",\n  \"next_steps\": [\n    \"Confirm converted code and verifier metadata are correct.\",\n    \"Minimize the failing operation into the repro script.\",\n    \"Only enable torch4ms core edits with an explicit gated apply mode.\"\n  ]\n}",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": true,
+        "error": ""
+      },
+      {
+        "file": "autofix/generated_harnesses/core_repro_iter1_unknown_op.py",
+        "summary": "Write minimal repro placeholder for suspected core issue",
+        "action": "write",
+        "find_text": "",
+        "replace_text": "from __future__ import annotations\n\nimport argparse\nimport json\nimport traceback\nfrom typing import Any\n\nimport torch\n\nOP_NAME = 'unknown_op'\nERROR_TYPE = ''\n\n\ndef _resolve_op(op_name: str) -> Any:\n    parts = op_name.split('.')\n    if len(parts) < 2:\n        raise ValueError(f'expected namespace.op[.overload], got {op_name!r}')\n    namespace, op = parts[0], parts[1]\n    overload = parts[2] if len(parts) > 2 else 'default'\n    packet = getattr(getattr(torch.ops, namespace), op)\n    if overload in {'', 'default'}:\n        return packet.default if hasattr(packet, 'default') else packet\n    return getattr(packet, overload)\n\n\ndef _sample_inputs(op_name: str) -> tuple[Any, ...]:\n    name = op_name.lower()\n    if 'matmul' in name or name.endswith('.mm.default'):\n        return (torch.randn(2, 3), torch.randn(3, 4))\n    if 'linear' in name:\n        return (torch.randn(2, 3), torch.randn(4, 3), torch.randn(4))\n    if any(key in name for key in ('add', 'sub', 'mul', 'div')):\n        return (torch.randn(2, 3), torch.randn(2, 3))\n    if 'mean' in name or 'sum' in name:\n        return (torch.randn(2, 3),)\n    if 'conv2d' in name or 'convolution' in name:\n        return (torch.randn(1, 3, 8, 8), torch.randn(4, 3, 3, 3), None, [1, 1], [1, 1], [1, 1], False, [0, 0], 1)\n    if any(key in name for key in ('relu', 'gelu', 'sigmoid', 'tanh', 'exp', 'log', 'sqrt', 'neg', 'abs', 'sin', 'cos', 'erf', 'silu')):\n        return (torch.randn(2, 3),)\n    return (torch.randn(2, 3),)\n\n\ndef _clone_arg(arg: Any) -> Any:\n    if isinstance(arg, torch.Tensor):\n        return arg.detach().clone().requires_grad_(arg.is_floating_point())\n    if isinstance(arg, list):\n        return list(arg)\n    return arg\n\n\ndef _summarize(value: Any) -> Any:\n    if isinstance(value, torch.Tensor):\n        return {'shape': list(value.shape), 'dtype': str(value.dtype), 'sum': float(value.detach().float().sum().item())}\n    if isinstance(value, (tuple, list)):\n        return [_summarize(x) for x in value]\n    return repr(value)\n\n\ndef _run_torch(op: Any, inputs: tuple[Any, ...]) -> Any:\n    return op(*[_clone_arg(x) for x in inputs])\n\n\ndef _run_torch4ms(op: Any, inputs: tuple[Any, ...]) -> Any:\n    import torch4ms\n\n    env = torch4ms.default_env()\n    with env:\n        return op(*[_clone_arg(x) for x in inputs])\n\n\ndef _run_torch4ms_summary(op: Any, inputs: tuple[Any, ...]) -> Any:\n    import torch4ms\n\n    env = torch4ms.default_env()\n    with env:\n        return _summarize(op(*[_clone_arg(x) for x in inputs]))\n\n\ndef main(argv: list[str] | None = None) -> int:\n    parser = argparse.ArgumentParser(description='Minimal torch/torch4ms core operator repro')\n    parser.add_argument('--mode', choices=['torch', 'torch4ms', 'both'], default='both')\n    args = parser.parse_args(argv)\n    report: dict[str, Any] = {'op_name': OP_NAME, 'error_type': ERROR_TYPE, 'mode': args.mode}\n    failed = False\n    try:\n        op = _resolve_op(OP_NAME)\n        inputs = _sample_inputs(OP_NAME)\n    except Exception as exc:\n        report['resolve'] = {'ok': False, 'type': type(exc).__name__, 'message': str(exc), 'traceback': traceback.format_exc()[-4000:]}\n        print(json.dumps(report, indent=2, ensure_ascii=False))\n        return 1\n    if args.mode in {'torch', 'both'}:\n        try:\n            report['torch'] = {'ok': True, 'output': _summarize(_run_torch(op, inputs))}\n        except Exception as exc:\n            failed = True\n            report['torch'] = {'ok': False, 'type': type(exc).__name__, 'message': str(exc), 'traceback': traceback.format_exc()[-4000:]}\n    if args.mode in {'torch4ms', 'both'}:\n        try:\n            report['torch4ms'] = {'ok': True, 'output': _run_torch4ms_summary(op, inputs)}\n        except Exception as exc:\n            failed = True\n            report['torch4ms'] = {'ok': False, 'type': type(exc).__name__, 'message': str(exc), 'traceback': traceback.format_exc()[-4000:]}\n    print(json.dumps(report, indent=2, ensure_ascii=False))\n    return 1 if failed else 0\n\n\nif __name__ == '__main__':\n    raise SystemExit(main())\n",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": true,
+        "error": ""
+      }
+    ],
+    "risk": "low",
+    "expected_effect": "reduce forward/loss diff",
+    "notes": "Phase 1.5 template fallback routed to core_operator. | llm_failed: OSError: [Errno 36] File name too long: '/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-20260820-0d71f58/autofix/reports/core_operator_patch_candidates/iter1_torch4ms_ops__candidate_rope_Correct_the_candidate_rotary_embedding_operator_by_changing_the_erroneous_minus_sign_in__candidate_rope_to_the_reference_plus_sign_The_failing_case_FAULT_CASE_015_is_isolated_to__rope_probe_and_the_observed_finite_norm_mismatch_is_consistent_with_a_sign_error_in_the_rotated_half_term_issue.json'",
+    "metadata": {
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "OSError",
+        "error_message": "[Errno 36] File name too long: '/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-20260820-0d71f58/autofix/reports/core_operator_patch_candidates/iter1_torch4ms_ops__candidate_rope_Correct_the_candidate_rotary_embedding_operator_by_changing_the_erroneous_minus_sign_in__candidate_rope_to_the_reference_plus_sign_The_failing_case_FAULT_CASE_015_is_isolated_to__rope_probe_and_the_observed_finite_norm_mismatch_is_consistent_with_a_sign_error_in_the_rotated_half_term_issue.json'",
+        "success": false,
+        "call_error_type": "OSError",
+        "error_repr": "OSError(36, 'File name too long')",
+        "error_chain": [
+          {
+            "type": "OSError",
+            "message": "[Errno 36] File name too long: '/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-20260820-0d71f58/autofix/reports/core_operator_patch_candidates/iter1_torch4ms_ops__candidate_rope_Correct_the_candidate_rotary_embedding_operator_by_changing_the_erroneous_minus_sign_in__candidate_rope_to_the_reference_plus_sign_The_failing_case_FAULT_CASE_015_is_isolated_to__rope_probe_and_the_observed_finite_norm_mismatch_is_consistent_with_a_sign_error_in_the_rotated_half_term_issue.json'",
+            "repr": "OSError(36, 'File name too long')"
+          }
+        ]
+      },
+      "router": {
+        "repair_scope": "core_operator",
+        "confidence": 0.94,
+        "reason": "core_operator_numeric_semantics_mismatch",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "torch4ms/ops/case_08c2485811134e7c9353d7ddec3b6925.py"
+        ],
+        "recommended_validation": [
+          "controlled_fault_probe"
+        ]
+      },
+      "predicted_layer": "numerical",
+      "diagnosis_complete": true
+    },
+    "applied": true,
+    "applied_count": 2,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "rolled_back",
+    "probe": {
+      "returncode": 1,
+      "passed": false,
+      "output": "{\"actual_norm\": 5.90731954574585, \"case\": \"FAULT_CASE_015\", \"expected_norm\": 5.970496654510498, \"max_abs_diff\": 1.3935869932174683, \"ok\": false}\n",
+      "payload": {
+        "case": "FAULT_CASE_015",
+        "ok": false,
+        "max_abs_diff": 1.3935869932174683,
+        "expected_norm": 5.970496654510498,
+        "actual_norm": 5.90731954574585,
+        "model_variant": "mlp"
+      }
+    }
+  }
+}

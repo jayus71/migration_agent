@@ -1,0 +1,161 @@
+{
+  "experiment": "experiment_H_multi_llm_three_seed",
+  "started_at": "2026-09-02T05:16:28.261952+00:00",
+  "temperature": 0.0,
+  "timeout_sec": 500,
+  "reasoning_effort": "high",
+  "repair_attempts": 4,
+  "instance_suite": "fixed50",
+  "seeds": [
+    101
+  ],
+  "methods": [
+    "r_hier",
+    "r_exec",
+    "r_direct"
+  ],
+  "backbones": [
+    "glm-5.2"
+  ],
+  "runs": [
+    {
+      "backbone": "glm-5.2",
+      "model": "glm-5.2",
+      "temperature": 0.0,
+      "reasoning_effort": "high",
+      "seed": 101,
+      "method": "r_hier",
+      "repair_attempts": 4,
+      "output_dir": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm-high-df374a9/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_2_high/glm-5.2/seed_101/r_hier",
+      "command": [
+        "/media/main/whj/miniconda3/envs/mstorch/bin/python",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-safe-f68e48f/experiments/paper_section_65_66/run_section65_real_fault_repair.py",
+        "--instance-suite",
+        "fixed50",
+        "--real-llm",
+        "--blind",
+        "--repair-attempts",
+        "4",
+        "--timeout-sec",
+        "500",
+        "--baseline",
+        "r_hier",
+        "--reports-dir",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm-high-df374a9/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_2_high/glm-5.2/seed_101/r_hier/reports",
+        "--output-dir",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm-high-df374a9/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_2_high/glm-5.2/seed_101/r_hier/results"
+      ],
+      "status": "complete",
+      "returncode": 1,
+      "artifact_complete": true,
+      "provider_failure_files": [],
+      "benchmark_exit_nonzero": true,
+      "reused_complete_artifact": true
+    },
+    {
+      "backbone": "glm-5.2",
+      "model": "glm-5.2",
+      "temperature": 0.0,
+      "reasoning_effort": "high",
+      "seed": 101,
+      "method": "r_exec",
+      "repair_attempts": 4,
+      "output_dir": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm-high-df374a9/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_2_high/glm-5.2/seed_101/r_exec",
+      "command": [
+        "/media/main/whj/miniconda3/envs/mstorch/bin/python",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-safe-f68e48f/experiments/paper_section_65_66/run_section65_real_fault_repair.py",
+        "--instance-suite",
+        "fixed50",
+        "--real-llm",
+        "--blind",
+        "--repair-attempts",
+        "4",
+        "--timeout-sec",
+        "500",
+        "--baseline",
+        "r_exec",
+        "--reports-dir",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm-high-df374a9/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_2_high/glm-5.2/seed_101/r_exec/reports",
+        "--output-dir",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm-high-df374a9/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_2_high/glm-5.2/seed_101/r_exec/results"
+      ],
+      "status": "complete",
+      "returncode": 1,
+      "artifact_complete": true,
+      "provider_failure_files": [],
+      "benchmark_exit_nonzero": true,
+      "reused_complete_artifact": true
+    },
+    {
+      "backbone": "glm-5.2",
+      "model": "glm-5.2",
+      "temperature": 0.0,
+      "reasoning_effort": "high",
+      "seed": 101,
+      "method": "r_direct",
+      "repair_attempts": 4,
+      "output_dir": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm-high-df374a9/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_2_high/glm-5.2/seed_101/r_direct",
+      "command": [
+        "/media/main/whj/miniconda3/envs/mstorch/bin/python",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-safe-f68e48f/autofix/examples/run_external_repair_pilot.py",
+        "--baselines",
+        "r_direct",
+        "--instance-suite",
+        "fixed50",
+        "--repair-attempts",
+        "4",
+        "--output-dir",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm-high-df374a9/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_2_high/glm-5.2/seed_101/r_direct"
+      ],
+      "status": "provider_failed",
+      "returncode": 0,
+      "artifact_complete": true,
+      "provider_failure_files": [
+        "r_direct/raw/NU-03-A",
+        "r_direct/raw/NU-03-B"
+      ],
+      "benchmark_exit_nonzero": false,
+      "provider_failure_instances_before": [
+        "NU-03-A",
+        "NU-03-B"
+      ],
+      "instance_recoveries": [
+        {
+          "recovery_id": "20260902T051628434498Z",
+          "command": [
+            "/media/main/whj/miniconda3/envs/mstorch/bin/python",
+            "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-safe-f68e48f/autofix/examples/run_external_repair_pilot.py",
+            "--baselines",
+            "r_direct",
+            "--instance-suite",
+            "fixed50",
+            "--repair-attempts",
+            "4",
+            "--output-dir",
+            "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm-high-df374a9/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_2_high/glm-5.2/seed_101/r_direct/.instance_retries/20260902T051628434498Z/output",
+            "--instances",
+            "NU-03-A",
+            "NU-03-B",
+            "--stop-on-provider-timeout"
+          ],
+          "returncode": 75,
+          "requested_instances": [
+            "NU-03-A",
+            "NU-03-B"
+          ],
+          "replaced_instances": [],
+          "failed_instances": [
+            "NU-03-A",
+            "NU-03-B"
+          ],
+          "backup_dir": null,
+          "staging_dir": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm-high-df374a9/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_2_high/glm-5.2/seed_101/r_direct/.instance_retries/20260902T051628434498Z"
+        }
+      ],
+      "provider_failure_instances": [
+        "NU-03-A",
+        "NU-03-B"
+      ]
+    }
+  ]
+}

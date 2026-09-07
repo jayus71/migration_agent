@@ -1,0 +1,98 @@
+[
+  {
+    "condition": "r_exec",
+    "meaning": "Execution-only feedback: the Fixer sees runtime success/failure, exception type, and traceback. Numerical and gradient/update defects that execute normally do not trigger repair.",
+    "display_name": "R-EXEC",
+    "feedback_granularity": "full",
+    "visible_execution": true,
+    "visible_numerical": false,
+    "visible_gradient_update": false,
+    "hierarchical_routing": false,
+    "feedback_order": [
+      "execution",
+      "numerical",
+      "gradient_update"
+    ],
+    "description": "Execution result, exception type, and traceback only."
+  },
+  {
+    "condition": "r_binary",
+    "meaning": "Strict aggregate binary feedback: the verifier checks execution, numerical, and gradient/update signals, then exposes only one overall pass/fail bit to the Fixer. It exposes no failing stage, metric, step, tensor, parameter, or repair route.",
+    "display_name": "Pass/fail only",
+    "feedback_granularity": "binary",
+    "visible_execution": true,
+    "visible_numerical": true,
+    "visible_gradient_update": true,
+    "hierarchical_routing": false,
+    "feedback_order": [
+      "execution",
+      "numerical",
+      "gradient_update"
+    ],
+    "description": "One strict pass/fail bit without a stage label or metrics."
+  },
+  {
+    "condition": "r_stage",
+    "meaning": "Stage-label feedback: the verifier checks all three layers and exposes only the first failing stage label, without numerical or tensor/parameter details.",
+    "display_name": "Stage label only",
+    "feedback_granularity": "stage",
+    "visible_execution": true,
+    "visible_numerical": true,
+    "visible_gradient_update": true,
+    "hierarchical_routing": true,
+    "feedback_order": [
+      "execution",
+      "numerical",
+      "gradient_update"
+    ],
+    "description": "First failing stage label without numeric or parameter diagnostics."
+  },
+  {
+    "condition": "r_flat",
+    "meaning": "Flat full feedback: execution, numerical, and gradient/update evidence is exposed as an unordered metric collection, without first-failure localization or routing.",
+    "display_name": "R-FLAT",
+    "feedback_granularity": "full",
+    "visible_execution": true,
+    "visible_numerical": true,
+    "visible_gradient_update": true,
+    "hierarchical_routing": false,
+    "feedback_order": [
+      "execution",
+      "numerical",
+      "gradient_update"
+    ],
+    "description": "All E/N/G/U metrics without ordering, first-failure localization, or repair routing."
+  },
+  {
+    "condition": "r_hier",
+    "meaning": "Hierarchical LADDER feedback: full evidence is ordered execution -> numerical -> gradient/update with first-failure localization and repair routing.",
+    "display_name": "R-HIER",
+    "feedback_granularity": "full",
+    "visible_execution": true,
+    "visible_numerical": true,
+    "visible_gradient_update": true,
+    "hierarchical_routing": true,
+    "feedback_order": [
+      "execution",
+      "numerical",
+      "gradient_update"
+    ],
+    "description": "Full hierarchical E/N/G/U diagnosis with first-failure localization and repair routing."
+  },
+  {
+    "condition": "r_reverse",
+    "meaning": "Reverse hierarchical feedback: the same full evidence and routing as r_hier is presented gradient/update -> numerical -> execution.",
+    "display_name": "Reverse-order LADDER",
+    "feedback_granularity": "full",
+    "visible_execution": true,
+    "visible_numerical": true,
+    "visible_gradient_update": true,
+    "hierarchical_routing": true,
+    "feedback_order": [
+      "gradient_update",
+      "numerical",
+      "execution"
+    ],
+    "description": "Full diagnostics reported in gradient/update, numerical, execution order."
+  }
+]

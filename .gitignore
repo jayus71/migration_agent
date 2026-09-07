@@ -1,6 +1,15 @@
 # Local agent state
 .aris/
 .mindfs/
+.claude/settings.local.json
+.venv/
+.experiment-data/
+dist/
+
+# Full result snapshots are versioned as GitHub Release assets. The selected
+# analysis files and their source hashes are committed under data/.
+/experiment-results-local-20260906/
+*:Zone.Identifier
 
 # Python caches
 __pycache__/

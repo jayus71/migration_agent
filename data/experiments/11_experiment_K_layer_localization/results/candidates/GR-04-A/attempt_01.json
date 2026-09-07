@@ -1,0 +1,142 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Remove the explicit freezing of fc2 parameters in build_model to restore default trainability.",
+    "edits": [
+      {
+        "file": "autofix/generated_faults/candidate/case_83c0368da40447d8a228edea5b7abba0.py",
+        "summary": "Make fc2 trainable by removing requires_grad_(False) calls.",
+        "action": "replace",
+        "find_text": "def build_model():\n    model = TinyNet()\n    model.fc2.weight.requires_grad_(False)\n    model.fc2.bias.requires_grad_(False)\n    return model",
+        "replace_text": "def build_model():\n    model = TinyNet()\n    return model",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": true,
+        "error": ""
+      }
+    ],
+    "risk": "Low; only affects parameter trainability and will include fc2 in optimizer updates.",
+    "expected_effect": "fc2.weight and fc2.bias require grad, get gradients, and receive updates, satisfying FAULT_CASE_004 probe oracle.",
+    "notes": "This is a minimal single-edit repair targeting the identified root cause.",
+    "metadata": {
+      "token_usage": {
+        "prompt_tokens": 4437,
+        "completion_tokens": 2370,
+        "total_tokens": 6807
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 2370,
+          "prompt_tokens": 4437,
+          "total_tokens": 6807,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 2095,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 4053
+        }
+      },
+      "router": {
+        "repair_scope": "candidate",
+        "confidence": 0.97,
+        "reason": "candidate_training_semantics_mismatch",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "autofix/generated_faults/candidate/case_83c0368da40447d8a228edea5b7abba0.py"
+        ],
+        "recommended_validation": [
+          "controlled_candidate_training_probe"
+        ]
+      },
+      "predicted_layer": "gradient_update",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "candidate",
+        "allowed_files": [
+          "autofix/generated_faults/candidate/case_83c0368da40447d8a228edea5b7abba0.py"
+        ],
+        "allowed_prefixes": [],
+        "checks": [
+          {
+            "file": "autofix/generated_faults/candidate/case_83c0368da40447d8a228edea5b7abba0.py",
+            "action": "replace",
+            "ok": true,
+            "errors": [],
+            "occurrence_count": 1
+          }
+        ],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      }
+    },
+    "applied": true,
+    "applied_count": 1,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"case\": \"FAULT_CASE_004\", \"grad_norms\": {\"fc1.bias\": 0.394411563873291, \"fc1.weight\": 0.2480858713388443, \"fc2.bias\": 0.9401720762252808, \"fc2.weight\": 0.6308010816574097}, \"loss\": 1.245730996131897, \"manual_update_norms\": {\"fc1.bias\": 0.07888232916593552, \"fc1.weight\": 0.04961716756224632, \"fc2.bias\": 0.18803441524505615, \"fc2.weight\": 0.12616021931171417}, \"mapped_case\": \"FAULT_CASE_004\", \"model_variant\": \"cnn\", \"ok\": true, \"train_step_loss\": 1.245730996131897, \"train_step_update_norms\": {\"fc1.bias\": 0.07888232916593552, \"fc1.weight\": 0.04961716756224632, \"fc2.bias\": 0.18803441524505615, \"fc2.weight\": 0.12616021931171417}, \"trainable\": {\"fc1.bias\": true, \"fc1.weight\": true, \"fc2.bias\": true, \"fc2.weight\": true}}\n",
+      "payload": {
+        "case": "FAULT_CASE_004",
+        "model_variant": "cnn",
+        "mapped_case": "FAULT_CASE_004",
+        "ok": true,
+        "loss": 1.245730996131897,
+        "train_step_loss": 1.245730996131897,
+        "grad_norms": {
+          "fc1.weight": 0.2480858713388443,
+          "fc1.bias": 0.394411563873291,
+          "fc2.weight": 0.6308010816574097,
+          "fc2.bias": 0.9401720762252808
+        },
+        "manual_update_norms": {
+          "fc1.weight": 0.04961716756224632,
+          "fc1.bias": 0.07888232916593552,
+          "fc2.weight": 0.12616021931171417,
+          "fc2.bias": 0.18803441524505615
+        },
+        "train_step_update_norms": {
+          "fc1.weight": 0.04961716756224632,
+          "fc1.bias": 0.07888232916593552,
+          "fc2.weight": 0.12616021931171417,
+          "fc2.bias": 0.18803441524505615
+        },
+        "trainable": {
+          "fc1.weight": true,
+          "fc1.bias": true,
+          "fc2.weight": true,
+          "fc2.bias": true
+        }
+      }
+    }
+  }
+}

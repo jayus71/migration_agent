@@ -1,0 +1,198 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Restore execution contract for the tuple-consuming path by making tuple_tensor_op return a tuple of two TorchLikeTensor objects, so consume_tensor_tuple can subscript pair[0] and pair[1].",
+    "edits": [
+      {
+        "file": "torch4ms/ops/case_d822a8c6349e4f9a8b1efe0609329534.py",
+        "summary": "Make tuple_tensor_op return a 2-tuple of TorchLikeTensor objects so consume_tensor_tuple's pair[0]/pair[1] access works.",
+        "action": "none",
+        "find_text": "def tuple_tensor_op(x):\n    return TorchLikeTensor(x + 1.0)",
+        "replace_text": "def tuple_tensor_op(x):\n    return (TorchLikeTensor(x + 1.0), TorchLikeTensor(x + 2.0))",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": false,
+        "error": "Patch rejected before application: direct core-operator edits are forbidden; use metadata.core_operator_patch_candidate."
+      },
+      {
+        "file": "autofix/reports/core_operator_patch_candidates/iter1_tuple_tensor_op_Restore_execution_contract_for_the_tuple_consuming_path_by_making_tuple_tensor_op_return_a_tuple_of_two_TorchLikeTensor_objects_so_consume_tensor_tuple_can_subscript_pair_0_and_pair_1_issue.json",
+        "summary": "Write matching core-operator issue proposal for LLM patch candidate dry-run",
+        "action": "write_file",
+        "find_text": "",
+        "replace_text": "{\n  \"kind\": \"torch4ms_core_issue_proposal\",\n  \"status\": \"proposal_only\",\n  \"repair_scope\": \"torch4ms_core_proposal\",\n  \"op_name\": \"unknown_op\",\n  \"error_type\": \"\",\n  \"message\": \"TypeError: 'TorchLikeTensor' object is not subscriptable\",\n  \"source_path\": null,\n  \"converted_path\": \"torch4ms/ops/case_d822a8c6349e4f9a8b1efe0609329534.py\",\n  \"localization\": {},\n  \"router\": {\n    \"repair_scope\": \"core_operator\",\n    \"confidence\": 0.94,\n    \"reason\": \"core_operator_execution_contract_violation\",\n    \"source\": \"failure_localization\",\n    \"legacy_repair_scope\": \"\",\n    \"recommended_target_files\": [\n      \"torch4ms/ops/case_d822a8c6349e4f9a8b1efe0609329534.py\"\n    ],\n    \"recommended_validation\": [\n      \"controlled_fault_probe\"\n    ]\n  },\n  \"repro_path\": \"\",\n  \"next_steps\": [\n    \"Confirm converted code and verifier metadata are correct.\",\n    \"Minimize the failing operation into the repro script.\",\n    \"Only enable torch4ms core edits with an explicit gated apply mode.\"\n  ]\n}",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": false,
+        "error": "No change required."
+      },
+      {
+        "file": "autofix/reports/core_operator_patch_candidates/iter1_tuple_tensor_op_Restore_execution_contract_for_the_tuple_consuming_path_by_making_tuple_tensor_op_return_a_tuple_of_two_TorchLikeTensor_objects_so_consume_tensor_tuple_can_subscript_pair_0_and_pair_1_patch.json",
+        "summary": "Write gated core-operator LLM patch candidate for dry-run evaluation",
+        "action": "write_file",
+        "find_text": "",
+        "replace_text": "{\n  \"kind\": \"torch4ms_core_patch_candidate\",\n  \"proposal_kind\": \"torch4ms_core_issue_proposal\",\n  \"op_name\": \"tuple_tensor_op\",\n  \"hypothesis\": \"tuple_tensor_op violates the expected return protocol: the consumer requires a subscriptable tuple of TorchLikeTensor wrappers, but the implementation returned a single wrapper, causing TypeError.\",\n  \"target_files\": [\n    \"torch4ms/ops/case_d822a8c6349e4f9a8b1efe0609329534.py\"\n  ],\n  \"edits\": [\n    {\n      \"file\": \"torch4ms/ops/case_d822a8c6349e4f9a8b1efe0609329534.py\",\n      \"summary\": \"Make tuple_tensor_op return a 2-tuple of TorchLikeTensor objects so consume_tensor_tuple's pair[0]/pair[1] access works.\",\n      \"action\": \"replace\",\n      \"find_text\": \"def tuple_tensor_op(x):\\n    return TorchLikeTensor(x + 1.0)\",\n      \"replace_text\": \"def tuple_tensor_op(x):\\n    return (TorchLikeTensor(x + 1.0), TorchLikeTensor(x + 2.0))\",\n      \"regex_pattern\": \"\",\n      \"regex_repl\": \"\"\n    }\n  ],\n  \"verify_commands\": [\n    [\n      \"python\",\n      \"-c\",\n      \"from torch4ms.ops.case_d822a8c6349e4f9a8b1efe0609329534 import run_probe; assert run_probe('FAULT_CASE_007')['ok']\"\n    ]\n  ],\n  \"proposal_path\": \"autofix/reports/core_operator_patch_candidates/iter1_tuple_tensor_op_Restore_execution_contract_for_the_tuple_consuming_path_by_making_tuple_tensor_op_return_a_tuple_of_two_TorchLikeTensor_objects_so_consume_tensor_tuple_can_subscript_pair_0_and_pair_1_issue.json\",\n  \"source_fixer_iter\": 1,\n  \"source_fixer_strategy\": \"Restore execution contract for the tuple-consuming path by making tuple_tensor_op return a tuple of two TorchLikeTensor objects, so consume_tensor_tuple can subscript pair[0] and pair[1].\",\n  \"dry_run_command\": [\n    \"/media/main/whj/miniconda3/envs/mstorch/bin/python\",\n    \"-m\",\n    \"autofix.examples.run_phase10_core_apply_dry_run\",\n    \"--proposal\",\n    \"autofix/reports/core_operator_patch_candidates/iter1_tuple_tensor_op_Restore_execution_contract_for_the_tuple_consuming_path_by_making_tuple_tensor_op_return_a_tuple_of_two_TorchLikeTensor_objects_so_consume_tensor_tuple_can_subscript_pair_0_and_pair_1_issue.json\",\n    \"--patch\",\n    \"autofix/reports/core_operator_patch_candidates/iter1_tuple_tensor_op_Restore_execution_contract_for_the_tuple_consuming_path_by_making_tuple_tensor_op_return_a_tuple_of_two_TorchLikeTensor_objects_so_consume_tensor_tuple_can_subscript_pair_0_and_pair_1_patch.json\"\n  ]\n}",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": false,
+        "error": "No change required."
+      }
+    ],
+    "risk": "low",
+    "expected_effect": "FAULT_CASE_007 no longer raises TypeError; consume_tensor_tuple receives pair[0].value and pair[1].value and computes a positive float.",
+    "notes": "Anchored to tuple_tensor_op instead of boundary_op because both functions contain the same TorchLikeTensor return line. The replacement adds enough enclosing context to make the edit unique. | preflight_blocked=1 edit(s); blocked edits were rejected before application; original intent is preserved in metadata.preflight_feedback.",
+    "metadata": {
+      "core_operator_patch_candidate": {
+        "kind": "torch4ms_core_patch_candidate",
+        "proposal_kind": "torch4ms_core_issue_proposal",
+        "op_name": "tuple_tensor_op",
+        "hypothesis": "tuple_tensor_op violates the expected return protocol: the consumer requires a subscriptable tuple of TorchLikeTensor wrappers, but the implementation returned a single wrapper, causing TypeError.",
+        "target_files": [
+          "torch4ms/ops/case_d822a8c6349e4f9a8b1efe0609329534.py"
+        ],
+        "edits": [
+          {
+            "file": "torch4ms/ops/case_d822a8c6349e4f9a8b1efe0609329534.py",
+            "summary": "Make tuple_tensor_op return a 2-tuple of TorchLikeTensor objects so consume_tensor_tuple's pair[0]/pair[1] access works.",
+            "action": "replace",
+            "find_text": "def tuple_tensor_op(x):\n    return TorchLikeTensor(x + 1.0)",
+            "replace_text": "def tuple_tensor_op(x):\n    return (TorchLikeTensor(x + 1.0), TorchLikeTensor(x + 2.0))",
+            "regex_pattern": "",
+            "regex_repl": ""
+          }
+        ],
+        "verify_commands": [
+          [
+            "python",
+            "-c",
+            "from torch4ms.ops.case_d822a8c6349e4f9a8b1efe0609329534 import run_probe; assert run_probe('FAULT_CASE_007')['ok']"
+          ]
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 2988,
+        "completion_tokens": 3225,
+        "total_tokens": 6213
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 3225,
+          "prompt_tokens": 2988,
+          "total_tokens": 6213,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 2514,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 2604
+        }
+      },
+      "router": {
+        "repair_scope": "core_operator",
+        "confidence": 0.94,
+        "reason": "core_operator_execution_contract_violation",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "torch4ms/ops/case_d822a8c6349e4f9a8b1efe0609329534.py"
+        ],
+        "recommended_validation": [
+          "controlled_fault_probe"
+        ]
+      },
+      "predicted_layer": "execution",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "core_operator",
+        "allowed_files": [],
+        "allowed_prefixes": [
+          "torch4ms/ops/"
+        ],
+        "checks": [
+          {
+            "file": "torch4ms/ops/case_d822a8c6349e4f9a8b1efe0609329534.py",
+            "action": "replace",
+            "ok": false,
+            "errors": [
+              "direct core-operator edits are forbidden; use metadata.core_operator_patch_candidate"
+            ],
+            "occurrence_count": 1
+          }
+        ],
+        "blocked_count": 1
+      },
+      "preflight_feedback": {
+        "outcome": "rejected",
+        "blocked_edits": [
+          {
+            "file": "torch4ms/ops/case_d822a8c6349e4f9a8b1efe0609329534.py",
+            "original_action": "replace",
+            "find_text": "def tuple_tensor_op(x):\n    return TorchLikeTensor(x + 1.0)",
+            "occurrence_count": 1,
+            "errors": [
+              "direct core-operator edits are forbidden; use metadata.core_operator_patch_candidate"
+            ]
+          }
+        ]
+      },
+      "core_operator_patch_candidate_gate": {
+        "present": true,
+        "allowed_prefixes": [
+          "torch4ms/ops/"
+        ],
+        "exact_allowed_files": [],
+        "allowed_files": [
+          "torch4ms/ops/case_d822a8c6349e4f9a8b1efe0609329534.py"
+        ],
+        "rejected_files": [],
+        "edit_count": 1,
+        "non_none_edit_count": 1,
+        "missing_edits": false,
+        "missing_verify_commands": false,
+        "valid_for_dry_run": true
+      },
+      "core_operator_issue_proposal_path": "autofix/reports/core_operator_patch_candidates/iter1_tuple_tensor_op_Restore_execution_contract_for_the_tuple_consuming_path_by_making_tuple_tensor_op_return_a_tuple_of_two_TorchLikeTensor_objects_so_consume_tensor_tuple_can_subscript_pair_0_and_pair_1_issue.json",
+      "core_operator_patch_candidate_path": "autofix/reports/core_operator_patch_candidates/iter1_tuple_tensor_op_Restore_execution_contract_for_the_tuple_consuming_path_by_making_tuple_tensor_op_return_a_tuple_of_two_TorchLikeTensor_objects_so_consume_tensor_tuple_can_subscript_pair_0_and_pair_1_patch.json"
+    },
+    "applied": false,
+    "applied_count": 0,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"case\": \"FAULT_CASE_007\", \"ok\": true, \"return_type\": \"tuple\", \"value\": 14.712587356567383}\n",
+      "payload": {
+        "case": "FAULT_CASE_007",
+        "ok": true,
+        "value": 14.712587356567383,
+        "return_type": "tuple",
+        "model_variant": "mlp"
+      }
+    }
+  }
+}

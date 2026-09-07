@@ -1,0 +1,92 @@
+{
+  "schema_version": "experiment_e_recalculation_v2",
+  "updated_at": "2026-09-06T23:41:19+08:00",
+  "status": "passed_with_classification_note",
+  "expected_tasks": ["image_mlp", "cnn", "resnet", "transformer_classifier", "tiny_causal_lm"],
+  "expected_seeds": [642, 643, 644],
+  "checks": [
+    {
+      "method": "T-HIER",
+      "status": "passed",
+      "source_summary": "T-HIER/formal_b32d9f4_strict_sync_5x3_20260906/summary.json",
+      "rows": 15,
+      "task_counts": {"image_mlp": 3, "cnn": 3, "resnet": 3, "transformer_classifier": 3, "tiny_causal_lm": 3},
+      "metrics_recomputed": {
+        "compile_success": {"successes": 15, "measurable_runs": 15, "rate": 1.0},
+        "execution_success": {"successes": 15, "measurable_runs": 15, "rate": 1.0},
+        "training_valid": {"successes": 15, "measurable_runs": 15, "rate": 1.0},
+        "strict_success": {"successes": 15, "measurable_runs": 15, "rate": 1.0}
+      },
+      "total_tokens": 287550,
+      "summed_condition_elapsed_sec": 1859.986
+    },
+    {
+      "method": "T-CTE",
+      "status": "passed_with_classification_note",
+      "source_summary": "T-CTE/formal_4508d0e_no_token_cap_5x3_20260906/summary.json",
+      "rows": 15,
+      "task_counts": {"image_mlp": 3, "cnn": 3, "resnet": 3, "transformer_classifier": 3, "tiny_causal_lm": 3},
+      "metrics_recomputed": {
+        "compile_success": {"successes": 15, "measurable_runs": 15, "rate": 1.0},
+        "execution_success": {"successes": 12, "measurable_runs": 15, "rate": 0.8},
+        "training_valid": {"successes": 12, "measurable_runs": 15, "rate": 0.8},
+        "strict_success": {"successes": 8, "measurable_runs": 15, "rate": 0.5333333333333333}
+      },
+      "raw_failure_classes": {"none": 8, "valid_experiment_failure": 5, "environment_or_upstream": 2},
+      "classification_note": "The two environment_or_upstream rows are generated-candidate Conv2D argument errors and are treated as measurable method failures in aggregate interpretation.",
+      "token_usage_kind": "estimated by the CTE runner",
+      "total_tokens": 33702,
+      "summed_condition_elapsed_sec": 2674.736
+    },
+    {
+      "method": "T-DIRECT",
+      "status": "passed",
+      "source_summary": "T-DIRECT/formal_4508d0e_no_token_cap_5x3_20260906/summary.json",
+      "rows": 15,
+      "task_counts": {"image_mlp": 3, "cnn": 3, "resnet": 3, "transformer_classifier": 3, "tiny_causal_lm": 3},
+      "metrics_recomputed": {
+        "compile_success": {"successes": 15, "measurable_runs": 15, "rate": 1.0},
+        "execution_success": {"successes": 13, "measurable_runs": 15, "rate": 0.8666666666666667},
+        "training_valid": {"successes": 13, "measurable_runs": 15, "rate": 0.8666666666666667},
+        "strict_success": {"successes": 7, "measurable_runs": 15, "rate": 0.4666666666666667}
+      },
+      "failure_classes": {"none": 7, "valid_experiment_failure": 8},
+      "total_tokens": 361566,
+      "summed_condition_elapsed_sec": 2546.185
+    },
+    {
+      "method": "T-MSA",
+      "status": "passed",
+      "source_summary": "T-MSA/formal_patched_5261529_5x3/summary.json",
+      "rows": 15,
+      "task_counts": {"image_mlp": 3, "cnn": 3, "resnet": 3, "transformer_classifier": 3, "tiny_causal_lm": 3},
+      "metrics_recomputed": {
+        "compile_success": {"successes": 15, "measurable_runs": 15, "rate": 1.0},
+        "execution_success": {"successes": 15, "measurable_runs": 15, "rate": 1.0},
+        "training_valid": {"successes": 15, "measurable_runs": 15, "rate": 1.0},
+        "strict_success": {"successes": 0, "measurable_runs": 15, "rate": 0.0}
+      },
+      "failure_classes": {"valid_experiment_failure": 15},
+      "total_tokens": 0,
+      "summed_condition_elapsed_sec": 83.785
+    },
+    {
+      "method": "T-X2MS",
+      "status": "blocked",
+      "source_summary": "T-X2MS/summary.json",
+      "planned_runs": 15,
+      "observed_runs": 0,
+      "metrics_recomputed": {
+        "compile_success": null,
+        "execution_success": null,
+        "training_valid": null,
+        "strict_success": null
+      }
+    }
+  ],
+  "integrity": {
+    "all_measurable_methods_have_15_unique_task_seed_rows": true,
+    "raw_candidate_and_verifier_files_modified": false,
+    "historical_cte_summary_excluded": "T-CTE/summary.json"
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Fix the experiment's input contract violation in run_probe FAULT_CASE_005 by passing a mapping with an 'input_ids' key instead of a list, allowing require_mapping to execute without TypeError.",
+    "edits": [
+      {
+        "file": "autofix/generated_faults/candidate/case_767f3f7403d840ba9d3d5906ceee8877.py",
+        "summary": "Fix FAULT_CASE_005 batch to be a dict with 'input_ids' key instead of a list.",
+        "action": "replace",
+        "find_text": "        batch = [torch.arange(4)]",
+        "replace_text": "        batch = {\"input_ids\": torch.arange(4)}",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": true,
+        "error": ""
+      }
+    ],
+    "risk": "Low; one-line change confined to the probe. It relies on the function name and existing code expecting a mapping.",
+    "expected_effect": "Resolves TypeError: list indices must be integers or slices, not str; require_mapping returns 6.0 and FAULT_CASE_005 payload ok=True.",
+    "notes": "The core implementation require_mapping is left untouched; only the experimental batch construction is corrected.",
+    "metadata": {
+      "token_usage": {
+        "prompt_tokens": 2753,
+        "completion_tokens": 5322,
+        "total_tokens": 8075
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 5322,
+          "prompt_tokens": 2753,
+          "total_tokens": 8075,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 5034,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 2369
+        }
+      },
+      "router": {
+        "repair_scope": "candidate",
+        "confidence": 0.94,
+        "reason": "candidate_execution_contract_violation",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "autofix/generated_faults/candidate/case_767f3f7403d840ba9d3d5906ceee8877.py"
+        ],
+        "recommended_validation": [
+          "controlled_fault_probe"
+        ]
+      },
+      "predicted_layer": "execution",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "candidate",
+        "allowed_files": [
+          "autofix/generated_faults/candidate/case_767f3f7403d840ba9d3d5906ceee8877.py"
+        ],
+        "allowed_prefixes": [],
+        "checks": [
+          {
+            "file": "autofix/generated_faults/candidate/case_767f3f7403d840ba9d3d5906ceee8877.py",
+            "action": "replace",
+            "ok": true,
+            "errors": [],
+            "occurrence_count": 1
+          }
+        ],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      }
+    },
+    "applied": true,
+    "applied_count": 1,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"case\": \"FAULT_CASE_005\", \"ok\": true, \"value\": 6.0}\n",
+      "payload": {
+        "case": "FAULT_CASE_005",
+        "ok": true,
+        "value": 6.0,
+        "model_variant": "mlp"
+      }
+    }
+  }
+}

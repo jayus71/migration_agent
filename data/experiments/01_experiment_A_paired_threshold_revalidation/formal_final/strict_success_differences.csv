@@ -1,0 +1,740 @@
+baseline_id,changed,failure_reason,fault_id,instance_id,layer,model_id,strict_success,strict_success_paired,torch4ms_status
+r_exec,True,AttributeError: 'Tensor' object has no attribute 'value',EX-01,EX-01-A,execution,M1,True,False,failed
+r_exec,False,,EX-01,EX-01-B,execution,M2,True,True,ok
+r_exec,False,,EX-02,EX-02-A,execution,M1,True,True,ok
+r_exec,True,"TypeError: For 'MatMulExt', the type of 'x2' should be same as 'x1', but got 'x1' with type Tensor[Float32] and 'x2' with type Tensor[Float16].
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/infer/ops_func_impl//matmul_ext.cc:192 InferType
+",EX-02,EX-02-B,execution,M3,True,False,failed
+r_exec,False,,EX-03,EX-03-A,execution,M1,True,True,ok
+r_exec,False,,EX-03,EX-03-B,execution,M4,True,True,ok
+r_exec,False,,EX-04,EX-04-A,execution,M2,True,True,ok
+r_exec,False,,EX-04,EX-04-B,execution,M3,True,True,ok
+r_exec,False,,EX-05,EX-05-A,execution,M2,True,True,ok
+r_exec,False,,EX-05,EX-05-B,execution,M4,True,True,ok
+r_exec,False,"TypeError: expected Tensor as element 0 in argument 0, but got Tensor",EX-06,EX-06-A,execution,M3,False,False,failed
+r_exec,False,"TypeError: expected Tensor as element 0 in argument 0, but got Tensor",EX-06,EX-06-B,execution,M4,False,False,failed
+r_exec,False,"IndentationError: expected an indented block (mtorch.py, line 980)",EX-07,EX-07-A,execution,M1,False,False,failed
+r_exec,False,"TypeError: For primitive[OneHot], the input argument[off_value] must be a type of {Tensor[Float16], Tensor[Float32], Tensor[Int32], Tensor[Int64]}, but got Tensor[BFloat16].
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/core/utils/check_convert_utils.cc:1042 CheckTensorSubClass
+",EX-07,EX-07-B,execution,M2,False,False,failed
+r_exec,False,"ValueError: For 'Transpose', size of perm should equal to rank of x, but got 2 and 4!
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/view/transpose_strides_calc.cc:61 TransposeBasicTypeCalc
+",EX-08,EX-08-A,execution,M1,False,False,failed
+r_exec,False,"ValueError: For 'Transpose', size of perm should equal to rank of x, but got 2 and 4!
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/view/transpose_strides_calc.cc:61 TransposeBasicTypeCalc
+",EX-08,EX-08-B,execution,M3,False,False,failed
+r_exec,False,,EX-09,EX-09-A,execution,M1,True,True,ok
+r_exec,False,,EX-09,EX-09-B,execution,M4,True,True,ok
+r_exec,True,,EX-10,EX-10-A,execution,M2,True,False,ok
+r_exec,True,,EX-10,EX-10-B,execution,M3,True,False,ok
+r_exec,False,,NU-01,NU-01-A,numerical,M2,True,True,ok
+r_exec,False,,NU-01,NU-01-B,numerical,M4,True,True,ok
+r_exec,False,TypeError: unsupported operand type(s) for -: 'float' and 'NoneType',NU-02,NU-02-A,numerical,M3,False,False,failed
+r_exec,False,,NU-02,NU-02-B,numerical,M4,True,True,ok
+r_exec,False,"ntext', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(594473:129393521411904,MainProcess):2026-08-31-17:13:28.308.945 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-03"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 1.0624159574508667, ""expected_shape"": [1, 2, 3, 5], ""actual_shape"": [1, 2, 3, 5], ""expected_dtype"": ""torch.float32"", ""actual_dtype"": ""torch.float32""}
+",NU-03,NU-03-A,numerical,M1,False,False,failed
+r_exec,False,TypeError: __new__() missing 1 required positional argument: 'env',NU-03,NU-03-B,numerical,M2,False,False,failed
+r_exec,False,,NU-04,NU-04-A,numerical,M1,True,True,ok
+r_exec,False,,NU-04,NU-04-B,numerical,M3,True,True,ok
+r_exec,False,"SyntaxError: invalid syntax (mtorch.py, line 314)",NU-05,NU-05-A,numerical,M1,False,False,failed
+r_exec,False,"ss):2026-08-31-17:14:26.763.294 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(597234:137430733698880,MainProcess):2026-08-31-17:14:26.842.185 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-05"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 0.38156890869140625, ""expected_shape"": [2, 3], ""actual_shape"": [2, 3]}
+",NU-05,NU-05-B,numerical,M4,False,False,failed
+r_exec,False,,NU-06,NU-06-A,numerical,M2,True,True,ok
+r_exec,False,,NU-06,NU-06-B,numerical,M3,True,True,ok
+r_exec,False,"RuntimeError: For 'MatMulExt' op,  shape1 and shape2 must be broadcastable, but got [const vector]{1, 4, 3, 4} and [const vector]{1, 2, 4, 3}
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/infer/ops_func_impl//matmul_ext.cc:64 CheckMatMulShapes
+",NU-07,NU-07-A,numerical,M2,False,False,failed
+r_exec,False,"RuntimeError: For 'MatMulExt' op,  shape1 and shape2 must be broadcastable, but got [const vector]{1, 4, 8, 4} and [const vector]{1, 2, 4, 8}
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/infer/ops_func_impl//matmul_ext.cc:64 CheckMatMulShapes
+",NU-07,NU-07-B,numerical,M4,False,False,failed
+r_exec,False,,GR-01,GR-01-A,gradient_update,M3,True,True,ok
+r_exec,False,,GR-01,GR-01-B,gradient_update,M4,True,True,ok
+r_exec,False,,GR-02,GR-02-A,gradient_update,M1,True,True,ok
+r_exec,False,,GR-02,GR-02-B,gradient_update,M2,True,True,ok
+r_exec,False,,GR-03,GR-03-A,gradient_update,M1,True,True,ok
+r_exec,False,,GR-03,GR-03-B,gradient_update,M3,True,True,ok
+r_exec,True,,GR-04,GR-04-A,gradient_update,M1,True,False,ok
+r_exec,True,,GR-04,GR-04-B,gradient_update,M4,True,False,ok
+r_exec,False,"NING] ME(600611:133776742868800,MainProcess):2026-08-31-17:15:25.785.759 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(600611:133776742868800,MainProcess):2026-08-31-17:15:25.785.988 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(600611:133776742868800,MainProcess):2026-08-31-17:15:25.786.068 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""case"": ""GR-05"", ""model_variant"": ""mlp"", ""ok"": false, ""expected_trainable_names"": [""2.weight"", ""2.bias""], ""actual_trainable_names"": [""0.weight"", ""0.bias"", ""2.weight"", ""2.bias""], ""frozen_grad_absent"": true, ""first_trainable_grad_present"": false, ""error"": """"}
+",GR-05,GR-05-A,gradient_update,M2,False,False,failed
+r_exec,False,"NING] ME(601636:137819073115968,MainProcess):2026-08-31-17:15:42.880.315 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(601636:137819073115968,MainProcess):2026-08-31-17:15:42.880.486 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(601636:137819073115968,MainProcess):2026-08-31-17:15:42.880.538 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""case"": ""GR-05"", ""model_variant"": ""mlp"", ""ok"": false, ""expected_trainable_names"": [""2.weight"", ""2.bias""], ""actual_trainable_names"": [""0.weight"", ""0.bias"", ""2.weight"", ""2.bias""], ""frozen_grad_absent"": true, ""first_trainable_grad_present"": false, ""error"": """"}
+",GR-05,GR-05-B,gradient_update,M3,False,False,failed
+r_exec,False,,GR-06,GR-06-A,gradient_update,M2,True,True,ok
+r_exec,False,,GR-06,GR-06-B,gradient_update,M4,True,True,ok
+r_exec,False,"[WARNING] ME(602282:136554400880448,MainProcess):2026-08-31-17:15:59.388.312 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(602282:136554400880448,MainProcess):2026-08-31-17:15:59.388.499 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(602282:136554400880448,MainProcess):2026-08-31-17:15:59.388.555 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""actual_selected_count"": 2, ""error"": """", ""expected_selected_count"": 1, ""model_variant"": ""mlp"", ""ok"": false, ""parameter_width"": 2, ""selected_requires_grad"": [false, true]}
+",GR-07,GR-07-A,gradient_update,M3,False,False,failed
+r_exec,False,"[WARNING] ME(603134:136207455840064,MainProcess):2026-08-31-17:16:15.933.220 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(603134:136207455840064,MainProcess):2026-08-31-17:16:15.933.409 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(603134:136207455840064,MainProcess):2026-08-31-17:16:15.933.465 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""actual_selected_count"": 2, ""error"": """", ""expected_selected_count"": 1, ""model_variant"": ""mlp"", ""ok"": false, ""parameter_width"": 2, ""selected_requires_grad"": [false, true]}
+",GR-07,GR-07-B,gradient_update,M4,False,False,failed
+r_exec,False,,GR-08,GR-08-A,gradient_update,M1,True,True,ok
+r_exec,False,,GR-08,GR-08-B,gradient_update,M2,True,True,ok
+r_flat,True,AttributeError: 'Tensor' object has no attribute 'value',EX-01,EX-01-A,execution,M1,True,False,failed
+r_flat,True,AttributeError: 'Tensor' object has no attribute 'value',EX-01,EX-01-B,execution,M2,True,False,failed
+r_flat,False,,EX-02,EX-02-A,execution,M1,True,True,ok
+r_flat,True,"TypeError: For 'MatMulExt', the type of 'x2' should be same as 'x1', but got 'x1' with type Tensor[Float32] and 'x2' with type Tensor[Float16].
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/infer/ops_func_impl//matmul_ext.cc:192 InferType
+",EX-02,EX-02-B,execution,M3,True,False,failed
+r_flat,False,,EX-03,EX-03-A,execution,M1,True,True,ok
+r_flat,False,,EX-03,EX-03-B,execution,M4,True,True,ok
+r_flat,False,,EX-04,EX-04-A,execution,M2,True,True,ok
+r_flat,False,,EX-04,EX-04-B,execution,M3,True,True,ok
+r_flat,False,,EX-05,EX-05-A,execution,M2,True,True,ok
+r_flat,False,,EX-05,EX-05-B,execution,M4,True,True,ok
+r_flat,False,"TypeError: expected Tensor as element 0 in argument 0, but got Tensor",EX-06,EX-06-A,execution,M3,False,False,failed
+r_flat,False,"TypeError: expected Tensor as element 0 in argument 0, but got Tensor",EX-06,EX-06-B,execution,M4,False,False,failed
+r_flat,False,"TypeError: For 'MatMulExt', the type of 'x2' should be same as 'x1', but got 'x1' with type Tensor[Float32] and 'x2' with type Tensor[BFloat16].
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/infer/ops_func_impl//matmul_ext.cc:192 InferType
+",EX-07,EX-07-A,execution,M1,False,False,failed
+r_flat,False,"TypeError: For primitive[OneHot], the input argument[off_value] must be a type of {Tensor[Float16], Tensor[Float32], Tensor[Int32], Tensor[Int64]}, but got Tensor[BFloat16].
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/core/utils/check_convert_utils.cc:1042 CheckTensorSubClass
+",EX-07,EX-07-B,execution,M2,False,False,failed
+r_flat,False,"ValueError: For 'Transpose', size of perm should equal to rank of x, but got 2 and 4!
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/view/transpose_strides_calc.cc:61 TransposeBasicTypeCalc
+",EX-08,EX-08-A,execution,M1,False,False,failed
+r_flat,False,"ValueError: For 'Transpose', size of perm should equal to rank of x, but got 2 and 4!
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/view/transpose_strides_calc.cc:61 TransposeBasicTypeCalc
+",EX-08,EX-08-B,execution,M3,False,False,failed
+r_flat,False,,EX-09,EX-09-A,execution,M1,True,True,ok
+r_flat,False,,EX-09,EX-09-B,execution,M4,True,True,ok
+r_flat,True,,EX-10,EX-10-A,execution,M2,True,False,ok
+r_flat,False,,EX-10,EX-10-B,execution,M3,True,True,ok
+r_flat,False,,NU-01,NU-01-A,numerical,M2,True,True,ok
+r_flat,False,,NU-01,NU-01-B,numerical,M4,True,True,ok
+r_flat,True,,NU-02,NU-02-A,numerical,M3,True,False,ok
+r_flat,True,,NU-02,NU-02-B,numerical,M4,True,False,ok
+r_flat,False,"ntext', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(612764:133039929505600,MainProcess):2026-08-31-17:18:32.980.907 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-03"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 1.0624159574508667, ""expected_shape"": [1, 2, 3, 5], ""actual_shape"": [1, 2, 3, 5], ""expected_dtype"": ""torch.float32"", ""actual_dtype"": ""torch.float32""}
+",NU-03,NU-03-A,numerical,M1,False,False,failed
+r_flat,False,"ntext', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(614454:134047100983104,MainProcess):2026-08-31-17:18:52.891.214 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-03"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 1.0624159574508667, ""expected_shape"": [1, 2, 3, 5], ""actual_shape"": [1, 2, 3, 5], ""expected_dtype"": ""torch.float32"", ""actual_dtype"": ""torch.float32""}
+",NU-03,NU-03-B,numerical,M2,False,False,failed
+r_flat,False,,NU-04,NU-04-A,numerical,M1,True,True,ok
+r_flat,False,,NU-04,NU-04-B,numerical,M3,True,True,ok
+r_flat,False,"ss):2026-08-31-17:19:12.835.943 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(615415:128673430087488,MainProcess):2026-08-31-17:19:12.915.902 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-05"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 0.38156890869140625, ""expected_shape"": [2, 3], ""actual_shape"": [2, 3]}
+",NU-05,NU-05-A,numerical,M1,False,False,failed
+r_flat,False,"ss):2026-08-31-17:19:33.310.758 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(616609:130595049428800,MainProcess):2026-08-31-17:19:33.387.390 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-05"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 0.38156890869140625, ""expected_shape"": [2, 3], ""actual_shape"": [2, 3]}
+",NU-05,NU-05-B,numerical,M4,False,False,failed
+r_flat,False,,NU-06,NU-06-A,numerical,M2,True,True,ok
+r_flat,False,,NU-06,NU-06-B,numerical,M3,True,True,ok
+r_flat,False,"RuntimeError: For 'MatMulExt' op,  shape1 and shape2 must be broadcastable, but got [const vector]{1, 4, 3, 4} and [const vector]{1, 2, 4, 3}
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/infer/ops_func_impl//matmul_ext.cc:64 CheckMatMulShapes
+",NU-07,NU-07-A,numerical,M2,False,False,failed
+r_flat,True,,NU-07,NU-07-B,numerical,M4,False,True,ok
+r_flat,False,,GR-01,GR-01-A,gradient_update,M3,True,True,ok
+r_flat,False,,GR-01,GR-01-B,gradient_update,M4,True,True,ok
+r_flat,False,,GR-02,GR-02-A,gradient_update,M1,True,True,ok
+r_flat,False,,GR-02,GR-02-B,gradient_update,M2,True,True,ok
+r_flat,False,,GR-03,GR-03-A,gradient_update,M1,True,True,ok
+r_flat,False,,GR-03,GR-03-B,gradient_update,M3,True,True,ok
+r_flat,False,,GR-04,GR-04-A,gradient_update,M1,True,True,ok
+r_flat,True,,GR-04,GR-04-B,gradient_update,M4,True,False,ok
+r_flat,False,"WARNING] ME(619573:138347343525696,MainProcess):2026-08-31-17:20:31.849.56 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(619573:138347343525696,MainProcess):2026-08-31-17:20:31.851.43 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(619573:138347343525696,MainProcess):2026-08-31-17:20:31.851.96 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""case"": ""GR-05"", ""model_variant"": ""mlp"", ""ok"": false, ""expected_trainable_names"": [""2.weight"", ""2.bias""], ""actual_trainable_names"": [""0.weight"", ""0.bias"", ""2.weight"", ""2.bias""], ""frozen_grad_absent"": true, ""first_trainable_grad_present"": false, ""error"": """"}
+",GR-05,GR-05-A,gradient_update,M2,False,False,failed
+r_flat,False,"NING] ME(620211:127032856119104,MainProcess):2026-08-31-17:20:47.784.286 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(620211:127032856119104,MainProcess):2026-08-31-17:20:47.784.467 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(620211:127032856119104,MainProcess):2026-08-31-17:20:47.784.524 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""case"": ""GR-05"", ""model_variant"": ""mlp"", ""ok"": false, ""expected_trainable_names"": [""2.weight"", ""2.bias""], ""actual_trainable_names"": [""0.weight"", ""0.bias"", ""2.weight"", ""2.bias""], ""frozen_grad_absent"": true, ""first_trainable_grad_present"": false, ""error"": """"}
+",GR-05,GR-05-B,gradient_update,M3,False,False,failed
+r_flat,True,,GR-06,GR-06-A,gradient_update,M2,True,False,ok
+r_flat,False,,GR-06,GR-06-B,gradient_update,M4,True,True,ok
+r_flat,True,,GR-07,GR-07-A,gradient_update,M3,False,True,ok
+r_flat,False,"[WARNING] ME(625290:133889781786432,MainProcess):2026-08-31-17:21:22.489.562 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(625290:133889781786432,MainProcess):2026-08-31-17:21:22.489.774 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(625290:133889781786432,MainProcess):2026-08-31-17:21:22.489.834 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""actual_selected_count"": 2, ""error"": """", ""expected_selected_count"": 1, ""model_variant"": ""mlp"", ""ok"": false, ""parameter_width"": 2, ""selected_requires_grad"": [false, true]}
+",GR-07,GR-07-B,gradient_update,M4,False,False,failed
+r_flat,False,,GR-08,GR-08-A,gradient_update,M1,True,True,ok
+r_flat,False,,GR-08,GR-08-B,gradient_update,M2,True,True,ok
+r_hier,False,,EX-01,EX-01-A,execution,M1,True,True,ok
+r_hier,False,,EX-01,EX-01-B,execution,M2,True,True,ok
+r_hier,False,,EX-02,EX-02-A,execution,M1,True,True,ok
+r_hier,False,,EX-02,EX-02-B,execution,M3,True,True,ok
+r_hier,False,,EX-03,EX-03-A,execution,M1,True,True,ok
+r_hier,False,,EX-03,EX-03-B,execution,M4,True,True,ok
+r_hier,False,,EX-04,EX-04-A,execution,M2,True,True,ok
+r_hier,False,,EX-04,EX-04-B,execution,M3,True,True,ok
+r_hier,True,KeyError: 0,EX-05,EX-05-A,execution,M2,True,False,failed
+r_hier,False,,EX-05,EX-05-B,execution,M4,True,True,ok
+r_hier,True,"TypeError: expected Tensor as element 0 in argument 0, but got Tensor",EX-06,EX-06-A,execution,M3,True,False,failed
+r_hier,True,"TypeError: expected Tensor as element 0 in argument 0, but got Tensor",EX-06,EX-06-B,execution,M4,True,False,failed
+r_hier,False,,EX-07,EX-07-A,execution,M1,True,True,ok
+r_hier,False,,EX-07,EX-07-B,execution,M2,True,True,ok
+r_hier,False,,EX-08,EX-08-A,execution,M1,True,True,ok
+r_hier,False,,EX-08,EX-08-B,execution,M3,True,True,ok
+r_hier,True,,EX-09,EX-09-A,execution,M1,True,False,ok
+r_hier,True,,EX-09,EX-09-B,execution,M4,True,False,ok
+r_hier,True,TypeError: 'TorchLikeTensor' object is not iterable,EX-10,EX-10-A,execution,M2,True,False,failed
+r_hier,True,TypeError: 'TorchLikeTensor' object is not iterable,EX-10,EX-10-B,execution,M3,True,False,failed
+r_hier,False,,NU-01,NU-01-A,numerical,M2,True,True,ok
+r_hier,False,,NU-01,NU-01-B,numerical,M4,True,True,ok
+r_hier,True,TypeError: max() got an unexpected keyword argument 'keep_dims',NU-02,NU-02-A,numerical,M3,True,False,failed
+r_hier,True,TypeError: max() got an unexpected keyword argument 'keep_dims',NU-02,NU-02-B,numerical,M4,True,False,failed
+r_hier,False,,NU-03,NU-03-A,numerical,M1,True,True,ok
+r_hier,False,,NU-03,NU-03-B,numerical,M2,True,True,ok
+r_hier,True,,NU-04,NU-04-A,numerical,M1,True,False,ok
+r_hier,True,,NU-04,NU-04-B,numerical,M3,True,False,ok
+r_hier,False,,NU-05,NU-05-A,numerical,M1,True,True,ok
+r_hier,False,,NU-05,NU-05-B,numerical,M4,True,True,ok
+r_hier,True,,NU-06,NU-06-A,numerical,M2,True,False,ok
+r_hier,True,,NU-06,NU-06-B,numerical,M3,True,False,ok
+r_hier,False,,NU-07,NU-07-A,numerical,M2,True,True,ok
+r_hier,False,,NU-07,NU-07-B,numerical,M4,True,True,ok
+r_hier,False,,GR-01,GR-01-A,gradient_update,M3,True,True,ok
+r_hier,False,,GR-01,GR-01-B,gradient_update,M4,True,True,ok
+r_hier,False,,GR-02,GR-02-A,gradient_update,M1,True,True,ok
+r_hier,False,,GR-02,GR-02-B,gradient_update,M2,True,True,ok
+r_hier,False,,GR-03,GR-03-A,gradient_update,M1,True,True,ok
+r_hier,False,,GR-03,GR-03-B,gradient_update,M3,True,True,ok
+r_hier,False,,GR-04,GR-04-A,gradient_update,M1,True,True,ok
+r_hier,False,,GR-04,GR-04-B,gradient_update,M4,True,True,ok
+r_hier,False,,GR-05,GR-05-A,gradient_update,M2,True,True,ok
+r_hier,False,,GR-05,GR-05-B,gradient_update,M3,True,True,ok
+r_hier,True,,GR-06,GR-06-A,gradient_update,M2,True,False,ok
+r_hier,True,,GR-06,GR-06-B,gradient_update,M4,True,False,ok
+r_hier,True,"[WARNING] ME(639817:123987364591424,MainProcess):2026-08-31-17:26:11.373.482 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(639817:123987364591424,MainProcess):2026-08-31-17:26:11.373.712 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(639817:123987364591424,MainProcess):2026-08-31-17:26:11.373.774 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""actual_selected_count"": 2, ""error"": """", ""expected_selected_count"": 1, ""model_variant"": ""mlp"", ""ok"": false, ""parameter_width"": 2, ""selected_requires_grad"": [false, true]}
+",GR-07,GR-07-A,gradient_update,M3,True,False,failed
+r_hier,True,"[WARNING] ME(640603:125629844514624,MainProcess):2026-08-31-17:26:28.641.358 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(640603:125629844514624,MainProcess):2026-08-31-17:26:28.641.567 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(640603:125629844514624,MainProcess):2026-08-31-17:26:28.641.630 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""actual_selected_count"": 2, ""error"": """", ""expected_selected_count"": 1, ""model_variant"": ""mlp"", ""ok"": false, ""parameter_width"": 2, ""selected_requires_grad"": [false, true]}
+",GR-07,GR-07-B,gradient_update,M4,True,False,failed
+r_hier,False,,GR-08,GR-08-A,gradient_update,M1,True,True,ok
+r_hier,False,,GR-08,GR-08-B,gradient_update,M2,True,True,ok
+r_direct,False,,EX-01,EX-01-A,,,True,True,ok
+r_direct,True,AttributeError: 'Tensor' object has no attribute 'value',EX-01,EX-01-B,,,True,False,failed
+r_direct,False,,EX-02,EX-02-A,,,True,True,ok
+r_direct,False,,EX-02,EX-02-B,,,True,True,ok
+r_direct,False,,EX-03,EX-03-A,,,True,True,ok
+r_direct,False,,EX-03,EX-03-B,,,True,True,ok
+r_direct,False,,EX-04,EX-04-A,,,True,True,ok
+r_direct,False,,EX-04,EX-04-B,,,True,True,ok
+r_direct,True,KeyError: 0,EX-05,EX-05-A,,,True,False,failed
+r_direct,False,,EX-05,EX-05-B,,,True,True,ok
+r_direct,False,,EX-06,EX-06-A,,,True,True,ok
+r_direct,False,,EX-06,EX-06-B,,,True,True,ok
+r_direct,False,,EX-07,EX-07-A,,,True,True,ok
+r_direct,False,"[UInt8]; input[UInt16 Int32 Int64 Int64], output[UInt16]; input[UInt32 Int32 Int64 Int64], output[UInt32]; input[UInt64 Int32 Int64 Int64], output[UInt64]; input[Int8 Int32 Int64 Int64], output[Int8]; input[Int16 Int32 Int64 Int64], output[Int16]; input[Int32 Int32 Int64 Int64], output[Int32]; input[Int64 Int32 Int64 Int64], output[Int64]; input[Float16 Int32 Int64 Int64], output[Float16]; input[Float32 Int32 Int64 Int64], output[Float32]; input[Float64 Int32 Int64 Int64], output[Float64]; input[Bool Int32 Int64 Int64], output[Bool]; input[Complex64 Int32 Int64 Int64], output[Complex64]; input[Complex128 Int32 Int64 Int64], output[Complex128]; , but get input[BFloat16 Int64 Int64 Int64 ] and output[BFloat16 ]
+node: @pynative_kernel_graph4000000000:CNode_1{[0]: ValueNode<Primitive> PrimFunc_Gather, [1]: @pynative_kernel_graph4000000000:param_Parameter_2, [2]: @pynative_kernel_graph4000000000:param_Parameter_3, [3]: ValueNode<Int64Imm> 0, [4]: ValueNode<Int64Imm> 0}
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ccsrc/plugin/cpu/cpu_device_context.cc:432 SetOperatorInfo
+",EX-07,EX-07-B,,,False,False,failed
+r_direct,False,,EX-08,EX-08-A,,,True,True,ok
+r_direct,False,,EX-08,EX-08-B,,,True,True,ok
+r_direct,False,,EX-09,EX-09-A,,,True,True,ok
+r_direct,False,,EX-09,EX-09-B,,,True,True,ok
+r_direct,False,TypeError: 'TorchLikeTensor' object is not iterable,EX-10,EX-10-A,,,False,False,failed
+r_direct,True,,EX-10,EX-10-B,,,True,False,ok
+r_direct,False,,NU-01,NU-01-A,,,False,False,ok
+r_direct,False,,NU-01,NU-01-B,,,False,False,ok
+r_direct,True,,NU-02,NU-02-A,,,True,False,ok
+r_direct,False,,NU-02,NU-02-B,,,True,True,ok
+r_direct,False,"ntext', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(648168:140181010282304,MainProcess):2026-08-31-17:28:48.267.927 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-03"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 1.0624159574508667, ""expected_shape"": [1, 2, 3, 5], ""actual_shape"": [1, 2, 3, 5], ""expected_dtype"": ""torch.float32"", ""actual_dtype"": ""torch.float32""}
+",NU-03,NU-03-A,,,False,False,failed
+r_direct,False,"ntext', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(650359:140434414356288,MainProcess):2026-08-31-17:29:08.333.761 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-03"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 1.0624159574508667, ""expected_shape"": [1, 2, 3, 5], ""actual_shape"": [1, 2, 3, 5], ""expected_dtype"": ""torch.float32"", ""actual_dtype"": ""torch.float32""}
+",NU-03,NU-03-B,,,False,False,failed
+r_direct,False,,NU-04,NU-04-A,,,True,True,ok
+r_direct,False,,NU-04,NU-04-B,,,True,True,ok
+r_direct,False,,NU-05,NU-05-A,,,True,True,ok
+r_direct,False,,NU-05,NU-05-B,,,True,True,ok
+r_direct,False,,NU-06,NU-06-A,,,True,True,ok
+r_direct,False,,NU-06,NU-06-B,,,True,True,ok
+r_direct,False,"RuntimeError: For 'MatMulExt' op,  shape1 and shape2 must be broadcastable, but got [const vector]{1, 4, 3, 4} and [const vector]{1, 2, 4, 3}
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/infer/ops_func_impl//matmul_ext.cc:64 CheckMatMulShapes
+",NU-07,NU-07-A,,,False,False,failed
+r_direct,False,"ntext', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(654520:129302391076672,MainProcess):2026-08-31-17:30:28.849.033 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-07"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 1.8616304397583008, ""expected_shape"": [1, 4, 3, 5], ""actual_shape"": [1, 4, 3, 5], ""expected_dtype"": ""torch.float32"", ""actual_dtype"": ""torch.float32""}
+",NU-07,NU-07-B,,,False,False,failed
+r_direct,False,,GR-01,GR-01-A,,,True,True,ok
+r_direct,False,,GR-01,GR-01-B,,,True,True,ok
+r_direct,False,,GR-02,GR-02-A,,,True,True,ok
+r_direct,False,,GR-02,GR-02-B,,,True,True,ok
+r_direct,False,,GR-03,GR-03-A,,,True,True,ok
+r_direct,False,,GR-03,GR-03-B,,,True,True,ok
+r_direct,False,,GR-04,GR-04-A,,,True,True,ok
+r_direct,False,,GR-04,GR-04-B,,,True,True,ok
+r_direct,False,"WARNING] ME(655658:130188165441344,MainProcess):2026-08-31-17:30:47.528.03 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(655658:130188165441344,MainProcess):2026-08-31-17:30:47.529.86 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(655658:130188165441344,MainProcess):2026-08-31-17:30:47.530.41 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""case"": ""GR-05"", ""model_variant"": ""mlp"", ""ok"": false, ""expected_trainable_names"": [""2.weight"", ""2.bias""], ""actual_trainable_names"": [""0.weight"", ""0.bias"", ""2.weight"", ""2.bias""], ""frozen_grad_absent"": true, ""first_trainable_grad_present"": false, ""error"": """"}
+",GR-05,GR-05-A,,,False,False,failed
+r_direct,False,"NING] ME(656504:124880866461504,MainProcess):2026-08-31-17:31:03.850.773 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(656504:124880866461504,MainProcess):2026-08-31-17:31:03.850.951 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(656504:124880866461504,MainProcess):2026-08-31-17:31:03.851.016 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""case"": ""GR-05"", ""model_variant"": ""mlp"", ""ok"": false, ""expected_trainable_names"": [""2.weight"", ""2.bias""], ""actual_trainable_names"": [""0.weight"", ""0.bias"", ""2.weight"", ""2.bias""], ""frozen_grad_absent"": true, ""first_trainable_grad_present"": false, ""error"": """"}
+",GR-05,GR-05-B,,,False,False,failed
+r_direct,False,,GR-06,GR-06-A,,,True,True,ok
+r_direct,True,,GR-06,GR-06-B,,,True,False,ok
+r_direct,False,,GR-07,GR-07-A,,,True,True,ok
+r_direct,False,,GR-07,GR-07-B,,,True,True,ok
+r_direct,False,,GR-08,GR-08-A,,,True,True,ok
+r_direct,False,,GR-08,GR-08-B,,,True,True,ok
+r_swe,False,,EX-01,EX-01-A,,,True,True,ok
+r_swe,False,,EX-01,EX-01-B,,,True,True,ok
+r_swe,False,,EX-02,EX-02-A,,,True,True,ok
+r_swe,False,,EX-02,EX-02-B,,,True,True,ok
+r_swe,False,,EX-03,EX-03-A,,,True,True,ok
+r_swe,False,,EX-03,EX-03-B,,,True,True,ok
+r_swe,False,,EX-04,EX-04-A,,,True,True,ok
+r_swe,False,,EX-04,EX-04-B,,,True,True,ok
+r_swe,False,,EX-05,EX-05-A,,,True,True,ok
+r_swe,False,,EX-05,EX-05-B,,,True,True,ok
+r_swe,True,"TypeError: expected Tensor as element 0 in argument 0, but got Tensor",EX-06,EX-06-A,,,True,False,failed
+r_swe,True,"TypeError: expected Tensor as element 0 in argument 0, but got Tensor",EX-06,EX-06-B,,,True,False,failed
+r_swe,True,"TypeError: For primitive[OneHot], the input argument[off_value] must be a type of {Tensor[Float16], Tensor[Float32], Tensor[Int32], Tensor[Int64]}, but got Tensor[BFloat16].
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/core/utils/check_convert_utils.cc:1042 CheckTensorSubClass
+",EX-07,EX-07-A,,,True,False,failed
+r_swe,True,"TypeError: For primitive[OneHot], the input argument[off_value] must be a type of {Tensor[Float16], Tensor[Float32], Tensor[Int32], Tensor[Int64]}, but got Tensor[BFloat16].
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/core/utils/check_convert_utils.cc:1042 CheckTensorSubClass
+",EX-07,EX-07-B,,,True,False,failed
+r_swe,True,"ValueError: For 'Transpose', size of perm should equal to rank of x, but got 2 and 4!
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/view/transpose_strides_calc.cc:61 TransposeBasicTypeCalc
+",EX-08,EX-08-A,,,True,False,failed
+r_swe,True,"ValueError: For 'Transpose', size of perm should equal to rank of x, but got 2 and 4!
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/view/transpose_strides_calc.cc:61 TransposeBasicTypeCalc
+",EX-08,EX-08-B,,,True,False,failed
+r_swe,False,,EX-09,EX-09-A,,,True,True,ok
+r_swe,False,,EX-09,EX-09-B,,,True,True,ok
+r_swe,False,,EX-10,EX-10-A,,,True,True,ok
+r_swe,False,,EX-10,EX-10-B,,,True,True,ok
+r_swe,False,,NU-01,NU-01-A,,,True,True,ok
+r_swe,False,,NU-01,NU-01-B,,,True,True,ok
+r_swe,True,TypeError: max() got an unexpected keyword argument 'keep_dims',NU-02,NU-02-A,,,True,False,failed
+r_swe,True,TypeError: max() got an unexpected keyword argument 'keep_dims',NU-02,NU-02-B,,,True,False,failed
+r_swe,True,"ntext', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(664356:137021083326272,MainProcess):2026-08-31-17:33:53.760.375 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-03"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 1.0624159574508667, ""expected_shape"": [1, 2, 3, 5], ""actual_shape"": [1, 2, 3, 5], ""expected_dtype"": ""torch.float32"", ""actual_dtype"": ""torch.float32""}
+",NU-03,NU-03-A,,,True,False,failed
+r_swe,False,"ntext', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(665193:127467749070656,MainProcess):2026-08-31-17:34:13.808.204 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-03"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 1.0624159574508667, ""expected_shape"": [1, 2, 3, 5], ""actual_shape"": [1, 2, 3, 5], ""expected_dtype"": ""torch.float32"", ""actual_dtype"": ""torch.float32""}
+",NU-03,NU-03-B,,,False,False,failed
+r_swe,False,,NU-04,NU-04-A,,,True,True,ok
+r_swe,False,,NU-04,NU-04-B,,,True,True,ok
+r_swe,True,"ss):2026-08-31-17:34:33.619.694 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(666314:127421695637312,MainProcess):2026-08-31-17:34:33.692.430 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-05"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 0.38156890869140625, ""expected_shape"": [2, 3], ""actual_shape"": [2, 3]}
+",NU-05,NU-05-A,,,True,False,failed
+r_swe,True,"ess):2026-08-31-17:34:54.514.26 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(667461:134508853503808,MainProcess):2026-08-31-17:34:54.136.059 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-05"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 0.38156890869140625, ""expected_shape"": [2, 3], ""actual_shape"": [2, 3]}
+",NU-05,NU-05-B,,,True,False,failed
+r_swe,False,,NU-06,NU-06-A,,,True,True,ok
+r_swe,False,,NU-06,NU-06-B,,,True,True,ok
+r_swe,False,"RuntimeError: For 'MatMulExt' op,  shape1 and shape2 must be broadcastable, but got [const vector]{1, 4, 3, 4} and [const vector]{1, 2, 4, 3}
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/infer/ops_func_impl//matmul_ext.cc:64 CheckMatMulShapes
+",NU-07,NU-07-A,,,False,False,failed
+r_swe,False,"RuntimeError: For 'MatMulExt' op,  shape1 and shape2 must be broadcastable, but got [const vector]{1, 4, 8, 4} and [const vector]{1, 2, 4, 8}
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/infer/ops_func_impl//matmul_ext.cc:64 CheckMatMulShapes
+",NU-07,NU-07-B,,,False,False,failed
+r_swe,False,,GR-01,GR-01-A,,,True,True,ok
+r_swe,False,,GR-01,GR-01-B,,,True,True,ok
+r_swe,False,,GR-02,GR-02-A,,,True,True,ok
+r_swe,False,,GR-02,GR-02-B,,,True,True,ok
+r_swe,False,,GR-03,GR-03-A,,,True,True,ok
+r_swe,False,,GR-03,GR-03-B,,,True,True,ok
+r_swe,False,,GR-04,GR-04-A,,,True,True,ok
+r_swe,False,,GR-04,GR-04-B,,,True,True,ok
+r_swe,True,"NING] ME(670223:138635030955840,MainProcess):2026-08-31-17:35:52.748.488 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(670223:138635030955840,MainProcess):2026-08-31-17:35:52.748.663 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(670223:138635030955840,MainProcess):2026-08-31-17:35:52.748.718 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""case"": ""GR-05"", ""model_variant"": ""mlp"", ""ok"": false, ""expected_trainable_names"": [""2.weight"", ""2.bias""], ""actual_trainable_names"": [""0.weight"", ""0.bias"", ""2.weight"", ""2.bias""], ""frozen_grad_absent"": true, ""first_trainable_grad_present"": false, ""error"": """"}
+",GR-05,GR-05-A,,,True,False,failed
+r_swe,False,"NING] ME(670660:134272281212736,MainProcess):2026-08-31-17:36:09.602.403 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(670660:134272281212736,MainProcess):2026-08-31-17:36:09.602.576 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(670660:134272281212736,MainProcess):2026-08-31-17:36:09.602.630 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""case"": ""GR-05"", ""model_variant"": ""mlp"", ""ok"": false, ""expected_trainable_names"": [""2.weight"", ""2.bias""], ""actual_trainable_names"": [""0.weight"", ""0.bias"", ""2.weight"", ""2.bias""], ""frozen_grad_absent"": true, ""first_trainable_grad_present"": false, ""error"": """"}
+",GR-05,GR-05-B,,,False,False,failed
+r_swe,False,,GR-06,GR-06-A,,,True,True,ok
+r_swe,False,,GR-06,GR-06-B,,,True,True,ok
+r_swe,True,"[WARNING] ME(671421:123684354938688,MainProcess):2026-08-31-17:36:26.627.879 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(671421:123684354938688,MainProcess):2026-08-31-17:36:26.628.110 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(671421:123684354938688,MainProcess):2026-08-31-17:36:26.628.197 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""actual_selected_count"": 2, ""error"": """", ""expected_selected_count"": 1, ""model_variant"": ""mlp"", ""ok"": false, ""parameter_width"": 2, ""selected_requires_grad"": [false, true]}
+",GR-07,GR-07-A,,,True,False,failed
+r_swe,True,"[WARNING] ME(672075:129891690366784,MainProcess):2026-08-31-17:36:44.295.04 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(672075:129891690366784,MainProcess):2026-08-31-17:36:44.297.09 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(672075:129891690366784,MainProcess):2026-08-31-17:36:44.297.67 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""actual_selected_count"": 2, ""error"": """", ""expected_selected_count"": 1, ""model_variant"": ""mlp"", ""ok"": false, ""parameter_width"": 2, ""selected_requires_grad"": [false, true]}
+",GR-07,GR-07-B,,,True,False,failed
+r_swe,False,,GR-08,GR-08-A,,,True,True,ok
+r_swe,False,,GR-08,GR-08-B,,,True,True,ok
+r_matchfix,False,,EX-01,EX-01-A,,,True,True,ok
+r_matchfix,False,,EX-01,EX-01-B,,,True,True,ok
+r_matchfix,False,,EX-02,EX-02-A,,,True,True,ok
+r_matchfix,False,,EX-02,EX-02-B,,,True,True,ok
+r_matchfix,False,,EX-03,EX-03-A,,,True,True,ok
+r_matchfix,False,,EX-03,EX-03-B,,,True,True,ok
+r_matchfix,False,,EX-04,EX-04-A,,,True,True,ok
+r_matchfix,False,,EX-04,EX-04-B,,,True,True,ok
+r_matchfix,False,,EX-05,EX-05-A,,,True,True,ok
+r_matchfix,False,,EX-05,EX-05-B,,,True,True,ok
+r_matchfix,True,"TypeError: expected Tensor as element 0 in argument 0, but got Tensor",EX-06,EX-06-A,,,True,False,failed
+r_matchfix,True,"TypeError: expected Tensor as element 0 in argument 0, but got Tensor",EX-06,EX-06-B,,,True,False,failed
+r_matchfix,True,"TypeError: For primitive[OneHot], the input argument[off_value] must be a type of {Tensor[Float16], Tensor[Float32], Tensor[Int32], Tensor[Int64]}, but got Tensor[BFloat16].
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/core/utils/check_convert_utils.cc:1042 CheckTensorSubClass
+",EX-07,EX-07-A,,,True,False,failed
+r_matchfix,True,"TypeError: For primitive[OneHot], the input argument[off_value] must be a type of {Tensor[Float16], Tensor[Float32], Tensor[Int32], Tensor[Int64]}, but got Tensor[BFloat16].
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/core/utils/check_convert_utils.cc:1042 CheckTensorSubClass
+",EX-07,EX-07-B,,,True,False,failed
+r_matchfix,True,"ValueError: For 'Transpose', size of perm should equal to rank of x, but got 2 and 4!
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/view/transpose_strides_calc.cc:61 TransposeBasicTypeCalc
+",EX-08,EX-08-A,,,True,False,failed
+r_matchfix,True,"ValueError: For 'Transpose', size of perm should equal to rank of x, but got 2 and 4!
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/view/transpose_strides_calc.cc:61 TransposeBasicTypeCalc
+",EX-08,EX-08-B,,,True,False,failed
+r_matchfix,False,,EX-09,EX-09-A,,,True,True,ok
+r_matchfix,False,,EX-09,EX-09-B,,,True,True,ok
+r_matchfix,False,,EX-10,EX-10-A,,,True,True,ok
+r_matchfix,False,,EX-10,EX-10-B,,,True,True,ok
+r_matchfix,False,,NU-01,NU-01-A,,,True,True,ok
+r_matchfix,False,,NU-01,NU-01-B,,,True,True,ok
+r_matchfix,True,TypeError: max() got an unexpected keyword argument 'keep_dims',NU-02,NU-02-A,,,True,False,failed
+r_matchfix,False,,NU-02,NU-02-B,,,True,True,ok
+r_matchfix,True,"ntext', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(678332:130233984153408,MainProcess):2026-08-31-17:39:01.135.264 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-03"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 1.0624159574508667, ""expected_shape"": [1, 2, 3, 5], ""actual_shape"": [1, 2, 3, 5], ""expected_dtype"": ""torch.float32"", ""actual_dtype"": ""torch.float32""}
+",NU-03,NU-03-A,,,True,False,failed
+r_matchfix,True,"ntext', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(679417:138464344500032,MainProcess):2026-08-31-17:39:21.629.260 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-03"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 1.0624159574508667, ""expected_shape"": [1, 2, 3, 5], ""actual_shape"": [1, 2, 3, 5], ""expected_dtype"": ""torch.float32"", ""actual_dtype"": ""torch.float32""}
+",NU-03,NU-03-B,,,True,False,failed
+r_matchfix,False,,NU-04,NU-04-A,,,True,True,ok
+r_matchfix,False,,NU-04,NU-04-B,,,True,True,ok
+r_matchfix,True,"ss):2026-08-31-17:39:41.445.144 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(680465:135669399897920,MainProcess):2026-08-31-17:39:41.518.391 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-05"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 0.38156890869140625, ""expected_shape"": [2, 3], ""actual_shape"": [2, 3]}
+",NU-05,NU-05-A,,,True,False,failed
+r_matchfix,True,"ss):2026-08-31-17:40:01.794.571 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+WARNING:root:Duplicate op registration for aten.reshape
+WARNING:root:Duplicate op registration for aten.narrow
+WARNING:root:Duplicate op registration for aten.select
+WARNING:root:Duplicate op registration for aten.index_select
+WARNING:root:Duplicate op registration for aten.masked_fill
+WARNING:root:Duplicate op registration for aten.scatter
+WARNING:root:Duplicate op registration for aten.scatter_add
+[WARNING] ME(681316:135100398585664,MainProcess):2026-08-31-17:40:01.867.896 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+{""case"": ""NU-05"", ""model_variant"": ""mlp"", ""ok"": false, ""finite"": true, ""max_abs_diff"": 0.38156890869140625, ""expected_shape"": [2, 3], ""actual_shape"": [2, 3]}
+",NU-05,NU-05-B,,,True,False,failed
+r_matchfix,False,,NU-06,NU-06-A,,,True,True,ok
+r_matchfix,False,,NU-06,NU-06-B,,,True,True,ok
+r_matchfix,True,"RuntimeError: For 'MatMulExt' op,  shape1 and shape2 must be broadcastable, but got [const vector]{1, 4, 3, 4} and [const vector]{1, 2, 4, 3}
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/infer/ops_func_impl//matmul_ext.cc:64 CheckMatMulShapes
+",NU-07,NU-07-A,,,True,False,failed
+r_matchfix,True,"RuntimeError: For 'MatMulExt' op,  shape1 and shape2 must be broadcastable, but got [const vector]{1, 4, 8, 4} and [const vector]{1, 2, 4, 8}
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ops/infer/ops_func_impl//matmul_ext.cc:64 CheckMatMulShapes
+",NU-07,NU-07-B,,,True,False,failed
+r_matchfix,False,,GR-01,GR-01-A,,,True,True,ok
+r_matchfix,False,,GR-01,GR-01-B,,,True,True,ok
+r_matchfix,False,,GR-02,GR-02-A,,,True,True,ok
+r_matchfix,False,,GR-02,GR-02-B,,,True,True,ok
+r_matchfix,False,,GR-03,GR-03-A,,,True,True,ok
+r_matchfix,False,,GR-03,GR-03-B,,,True,True,ok
+r_matchfix,False,,GR-04,GR-04-A,,,True,True,ok
+r_matchfix,False,,GR-04,GR-04-B,,,True,True,ok
+r_matchfix,False,"NING] ME(684139:133160768825152,MainProcess):2026-08-31-17:41:00.227.594 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(684139:133160768825152,MainProcess):2026-08-31-17:41:00.227.773 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(684139:133160768825152,MainProcess):2026-08-31-17:41:00.227.827 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""case"": ""GR-05"", ""model_variant"": ""mlp"", ""ok"": false, ""expected_trainable_names"": [""2.weight"", ""2.bias""], ""actual_trainable_names"": [""0.weight"", ""0.bias"", ""2.weight"", ""2.bias""], ""frozen_grad_absent"": true, ""first_trainable_grad_present"": false, ""error"": """"}
+",GR-05,GR-05-A,,,False,False,failed
+r_matchfix,False,"NING] ME(684833:135058146215744,MainProcess):2026-08-31-17:41:16.870.805 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(684833:135058146215744,MainProcess):2026-08-31-17:41:16.871.013 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(684833:135058146215744,MainProcess):2026-08-31-17:41:16.871.073 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""case"": ""GR-05"", ""model_variant"": ""mlp"", ""ok"": false, ""expected_trainable_names"": [""2.weight"", ""2.bias""], ""actual_trainable_names"": [""0.weight"", ""0.bias"", ""2.weight"", ""2.bias""], ""frozen_grad_absent"": true, ""first_trainable_grad_present"": false, ""error"": """"}
+",GR-05,GR-05-B,,,False,False,failed
+r_matchfix,False,,GR-06,GR-06-A,,,True,True,ok
+r_matchfix,False,,GR-06,GR-06-B,,,True,True,ok
+r_matchfix,False,"[WARNING] ME(685307:135256125978432,MainProcess):2026-08-31-17:41:33.830.475 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(685307:135256125978432,MainProcess):2026-08-31-17:41:33.830.656 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(685307:135256125978432,MainProcess):2026-08-31-17:41:33.830.712 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""actual_selected_count"": 2, ""error"": """", ""expected_selected_count"": 1, ""model_variant"": ""mlp"", ""ok"": false, ""parameter_width"": 2, ""selected_requires_grad"": [false, true]}
+",GR-07,GR-07-A,,,False,False,failed
+r_matchfix,True,"[WARNING] ME(686050:127715673085760,MainProcess):2026-08-31-17:41:50.461.466 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_target' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(686050:127715673085760,MainProcess):2026-08-31-17:41:50.461.643 [mindspore/context.py:1334] For 'context.set_context', the parameter 'device_id' will be deprecated and removed in a future version. Please use the api mindspore.set_device() instead.
+[WARNING] ME(686050:127715673085760,MainProcess):2026-08-31-17:41:50.461.699 [mindspore/context.py:1578] For 'context.set_context', 'enable_graph_kernel' parameter is deprecated, and will be removed in the next version. Please use jit_config={'jit_level': 'O1'} instead.
+INFO:torch4ms.ms_config:Initialized MindSpore with configuration: {'device_target': 'CPU', 'mode': 0, 'device_id': 0, 'enable_graph_kernel': False}
+{""actual_selected_count"": 2, ""error"": """", ""expected_selected_count"": 1, ""model_variant"": ""mlp"", ""ok"": false, ""parameter_width"": 2, ""selected_requires_grad"": [false, true]}
+",GR-07,GR-07-B,,,True,False,failed
+r_matchfix,False,,GR-08,GR-08-A,,,True,True,ok
+r_matchfix,False,,GR-08,GR-08-B,,,True,True,ok

@@ -6,8 +6,8 @@ plus cross-consistency against the two pre-existing datasets it must agree with.
 Independent of the vendor's own self-checks, which are recomputed here from the
 CSV rather than read from the summary.
 
-Run with the lzf env (base has no pandas):
-    /opt/miniconda3/envs/lzf/bin/python scripts/verify_per_step_divergence.py
+Run after installing requirements-analysis.txt:
+    python scripts/verify_per_step_divergence.py
 """
 import sys
 from pathlib import Path
@@ -15,7 +15,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-B = Path(__file__).resolve().parent.parent / "ascend-torch4ms/experiments/paper_section_65_66"
+B = Path(__file__).resolve().parent.parent / "data/paper_section_65_66"
 NEW = B / "results_section65_per_step_divergence/section65_per_step_divergence_steps50.csv"
 OLD66 = B / "results_realdata_66/section66_realdata_training_consistency_steps_steps50.csv"
 OLD65 = B / "results_section65_signal_sanity_current/section65_signal_effectiveness_table.csv"

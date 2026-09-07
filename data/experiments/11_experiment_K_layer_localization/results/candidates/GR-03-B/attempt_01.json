@@ -1,0 +1,141 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Insert missing optimizer.step() in train_step before zero_grad so parameters actually update.",
+    "edits": [
+      {
+        "file": "autofix/generated_faults/candidate/case_9c8f03b0ace64f03bb1eeaf20c0f47f7.py",
+        "summary": "Call optimizer.step() before zero_grad in train_step",
+        "action": "replace",
+        "find_text": "    loss.backward()\n    optimizer.zero_grad()\n",
+        "replace_text": "    loss.backward()\n    optimizer.step()\n    optimizer.zero_grad()\n",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": true,
+        "error": ""
+      }
+    ],
+    "risk": "low",
+    "expected_effect": "train_step_update_norms will match manual_update_norms and exceed 1e-8, satisfying FAULT_CASE_009 gradient update oracle.",
+    "notes": "The candidate train_step zeroed gradients immediately after backward, discarding accumulated grads without stepping. Adding optimizer.step() before zero_grad aligns it with the manual update sequence.",
+    "metadata": {
+      "token_usage": {
+        "prompt_tokens": 3851,
+        "completion_tokens": 1432,
+        "total_tokens": 5283
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 1432,
+          "prompt_tokens": 3851,
+          "total_tokens": 5283,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1166,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 3467
+        }
+      },
+      "router": {
+        "repair_scope": "candidate",
+        "confidence": 0.94,
+        "reason": "candidate_training_update_mismatch",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "autofix/generated_faults/candidate/case_9c8f03b0ace64f03bb1eeaf20c0f47f7.py"
+        ],
+        "recommended_validation": [
+          "controlled_fault_probe"
+        ]
+      },
+      "predicted_layer": "gradient_update",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "candidate",
+        "allowed_files": [
+          "autofix/generated_faults/candidate/case_9c8f03b0ace64f03bb1eeaf20c0f47f7.py"
+        ],
+        "allowed_prefixes": [],
+        "checks": [
+          {
+            "file": "autofix/generated_faults/candidate/case_9c8f03b0ace64f03bb1eeaf20c0f47f7.py",
+            "action": "replace",
+            "ok": true,
+            "errors": [],
+            "occurrence_count": 1
+          }
+        ],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      }
+    },
+    "applied": true,
+    "applied_count": 1,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"case\": \"FAULT_CASE_009\", \"grad_norms\": {\"fc1.bias\": 0.11717024445533752, \"fc1.weight\": 0.2698088586330414, \"fc2.bias\": 0.18068663775920868, \"fc2.weight\": 0.18059340119361877}, \"loss\": 1.0988887548446655, \"manual_update_norms\": {\"fc1.bias\": 0.02343403920531273, \"fc1.weight\": 0.05396177992224693, \"fc2.bias\": 0.036137327551841736, \"fc2.weight\": 0.036118682473897934}, \"ok\": true, \"train_step_loss\": 1.0988887548446655, \"train_step_update_norms\": {\"fc1.bias\": 0.02343403920531273, \"fc1.weight\": 0.05396177992224693, \"fc2.bias\": 0.036137327551841736, \"fc2.weight\": 0.036118682473897934}, \"trainable\": {\"fc1.bias\": true, \"fc1.weight\": true, \"fc2.bias\": true, \"fc2.weight\": true}}\n",
+      "payload": {
+        "case": "FAULT_CASE_009",
+        "ok": true,
+        "loss": 1.0988887548446655,
+        "train_step_loss": 1.0988887548446655,
+        "grad_norms": {
+          "fc1.weight": 0.2698088586330414,
+          "fc1.bias": 0.11717024445533752,
+          "fc2.weight": 0.18059340119361877,
+          "fc2.bias": 0.18068663775920868
+        },
+        "manual_update_norms": {
+          "fc1.weight": 0.05396177992224693,
+          "fc1.bias": 0.02343403920531273,
+          "fc2.weight": 0.036118682473897934,
+          "fc2.bias": 0.036137327551841736
+        },
+        "train_step_update_norms": {
+          "fc1.weight": 0.05396177992224693,
+          "fc1.bias": 0.02343403920531273,
+          "fc2.weight": 0.036118682473897934,
+          "fc2.bias": 0.036137327551841736
+        },
+        "trainable": {
+          "fc1.weight": true,
+          "fc1.bias": true,
+          "fc2.weight": true,
+          "fc2.bias": true
+        },
+        "model_variant": "transformer"
+      }
+    }
+  }
+}

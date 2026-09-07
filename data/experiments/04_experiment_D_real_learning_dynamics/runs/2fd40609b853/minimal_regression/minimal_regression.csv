@@ -1,0 +1,72 @@
+case,mode,seed,execution_success,training_valid,initial_parameters_identical,reference_loss,candidate_loss,candidate_error,candidate_invalid_reasons
+linear_cross_entropy,pynative,1701,True,True,True,1.4403796195983887,1.4403785467147827,,[]
+conv_batchnorm_relu,pynative,1701,True,True,True,1.4567521810531616,1.4567515850067139,,[]
+basic_block_residual_downsample,pynative,1701,True,True,True,1.1917297840118408,1.1917303800582886,,[]
+mobilenet_inverted_residual,pynative,1701,True,True,True,1.0552139282226562,1.0552157163619995,,[]
+linear_cross_entropy,graph,1701,True,True,True,1.4403796195983887,1.4403785467147827,,[]
+conv_batchnorm_relu,graph,1701,False,False,False,1.4567521810531616,,"RuntimeError: unsupported_graph_mode: MindSpore parser rejected the training closure: TypeError: Only support jit_class instance, but got PythonObject(type: <class 'torch4ms.tensor.Environment'>, value: <torch4ms.tensor.Environment object at 0x7497cff16cd0>)
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ccsrc/frontend/jit/ps/static_analysis/prim.cc:4522 EvalPrim
+
+----------------------------------------------------
+- The Traceback of Net Construct Code:
+----------------------------------------------------
+# 0 In file /media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/ops/composite/base.py:370, 27~53
+                    return grad_(fn)(*args, **kwargs)
+                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+# 1 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:636, 24~52
+            output_ms = model_forward_fn(*ms_params)
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# 2 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:472, 19~71
+            return model_forward_base_fn(*ms_params, *input_tensors_ms)
+                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# 3 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/forward_extractor.py:141~142, 12~44
+            with env:
+ (See file '/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/rank_0/om/analyze_fail.ir' for more details. Get instructions about `analyze_fail.ir` at https://www.mindspore.cn/search?inputValue=analyze_fail.ir)",[]
+basic_block_residual_downsample,graph,1701,False,False,False,1.1917297840118408,,"RuntimeError: unsupported_graph_mode: MindSpore parser rejected the training closure: TypeError: Only support jit_class instance, but got PythonObject(type: <class 'torch4ms.tensor.Environment'>, value: <torch4ms.tensor.Environment object at 0x7497cff16cd0>)
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ccsrc/frontend/jit/ps/static_analysis/prim.cc:4522 EvalPrim
+
+----------------------------------------------------
+- The Traceback of Net Construct Code:
+----------------------------------------------------
+# 0 In file /media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/ops/composite/base.py:370, 27~53
+                    return grad_(fn)(*args, **kwargs)
+                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+# 1 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:636, 24~52
+            output_ms = model_forward_fn(*ms_params)
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# 2 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:472, 19~71
+            return model_forward_base_fn(*ms_params, *input_tensors_ms)
+                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# 3 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/forward_extractor.py:141~142, 12~44
+            with env:
+ (See file '/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/rank_0/om/analyze_fail.ir' for more details. Get instructions about `analyze_fail.ir` at https://www.mindspore.cn/search?inputValue=analyze_fail.ir)",[]
+mobilenet_inverted_residual,graph,1701,False,False,False,1.0552139282226562,,"RuntimeError: unsupported_graph_mode: MindSpore parser rejected the training closure: TypeError: Only support jit_class instance, but got PythonObject(type: <class 'torch4ms.tensor.Environment'>, value: <torch4ms.tensor.Environment object at 0x7497cff16cd0>)
+
+----------------------------------------------------
+- C++ Call Stack: (For framework developers)
+----------------------------------------------------
+mindspore/ccsrc/frontend/jit/ps/static_analysis/prim.cc:4522 EvalPrim
+
+----------------------------------------------------
+- The Traceback of Net Construct Code:
+----------------------------------------------------
+# 0 In file /media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/ops/composite/base.py:370, 27~53
+                    return grad_(fn)(*args, **kwargs)
+                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+# 1 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:636, 24~52
+            output_ms = model_forward_fn(*ms_params)
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# 2 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:472, 19~71
+            return model_forward_base_fn(*ms_params, *input_tensors_ms)
+                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# 3 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/forward_extractor.py:141~142, 12~44
+            with env:
+ (See file '/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/rank_0/om/analyze_fail.ir' for more details. Get instructions about `analyze_fail.ir` at https://www.mindspore.cn/search?inputValue=analyze_fail.ir)",[]

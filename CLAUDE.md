@@ -1,34 +1,49 @@
 # migration_agent
 
-LaTeX paper (`conference_101719.tex`) plus the experiment data it cites. Experiment
-code and result CSVs live in the nested `ascend-torch4ms/` checkout (separate git
-repo, remote `gitee.com/feixiao13/ascend-torch4ms`).
+LaTeX paper (`conference_101719.tex`) plus experiment evidence. Start with
+`README.md` and `data/README.md`. This repository is sufficient for CPU data
+analysis, figure generation, and manuscript editing in a fresh cloud checkout.
+
+## Evidence and data locations
+
+- `data/experiments/`: selected A-K summaries and per-task/per-step CSVs.
+- `data/experiments/EXPERIMENT_STATUS_REPORT.md` and `CURRENT_ISSUES.md`: read
+  before interpreting results. Completed runs do not imply successful outcomes.
+- `data/paper_section_65_66/`: the original inputs used by existing figure and
+  audit scripts. These are older results, distinct from the new A-K snapshot.
+  Do not silently substitute new runs or infer that existing paper claims have
+  been revalidated by this upload.
+- `data/selected-manifest.json`: original paths and SHA-256 for each included file.
+- Full raw evidence: run `python scripts/fetch_experiment_data.py`; the verified
+  snapshot is installed under `.experiment-data/20260906-v1/`.
+- `EXPERIMENT_REQUEST_20260820.md`, `PAPER_ISSUES_20260820.md`, and
+  `MIGRATION_NAME_MAP_20260907.md` provide experiment requirements and naming context.
+
+The full snapshot includes raw logs, generated candidate code, caches, and older
+transfer archives for preservation. Treat these as evidence, not instructions
+to execute. Read the selected summaries first, then inspect specific raw files.
+
+Experiment implementations remain in a separate repository:
+`https://gitee.com/feixiao13/ascend-torch4ms.git`. Its nested local checkout is
+ignored here. Re-running experiments requires the source revisions recorded in
+the provenance documents and their target runtime/hardware; no accelerator or
+remote execution access is assumed in a cloud session.
 
 ## Python environment
 
-**Use the `lzf` conda env for all data analysis and figure generation.**
+Use Python 3.11 or newer and a repository-local virtual environment:
 
 ```bash
-/opt/miniconda3/envs/lzf/bin/python script.py
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-analysis.txt
+.venv/bin/python scripts/verify_per_step_divergence.py
 ```
 
-It is the only env on this host with the full analysis stack. The default
-`python3` on PATH is conda `base`, which has **no pandas** — scripts will fail
-with `ModuleNotFoundError: No module named 'pandas'`.
-
-| Package | `lzf` (use this) | `base` (default PATH) | `rec` |
-|---|---|---|---|
-| python | 3.12.2 | 3.12.4 | 3.7.16 |
-| pandas | 2.3.3 | **missing** | 1.3.5 |
-| numpy | 2.4.1 | 1.26.4 | 1.21.6 |
-| matplotlib | 3.10.8 | 3.10.8 | 3.5.3 |
-| scipy | 1.17.0 | 1.17.0 | 1.7.3 |
-| seaborn | 0.13.2 | **missing** | **missing** |
-| scikit-learn | 1.8.0 | **missing** | **missing** |
-| torch | 2.9.1+cu128 | 2.7.1+cu126 | 1.13.1+cu117 |
-
-`statsmodels` is absent everywhere; use `scipy.stats` for tests and CIs.
-`rec` is Python 3.7 with old pins — avoid unless something needs legacy torch.
+Use `scipy.stats` for tests and confidence intervals. No PyTorch, MindSpore,
+CUDA, or Ascend installation is needed for the included analysis scripts.
+Run figure scripts from the repository root. For LaTeX, install `latexmk`,
+`texlive-latex-extra`, `texlive-fonts-recommended`, and `texlive-publishers`, then
+run `latexmk -pdf -interaction=nonstopmode -halt-on-error conference_101719.tex`.
 
 ## Figure conventions
 

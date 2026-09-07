@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "experiment": "Experiment E / T-HIER strict-verifier synchronized rerun",
+  "run_commit": "b32d9f4a27ed90646943b671d43f8616b4ad73fe",
+  "report_renderer_commit": "18bbf43a70611bf82f930590a7172d0e19b9523e",
+  "branch": "codex/experiment-e-thier-strict-sync-fix",
+  "remote_worktree": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-thier-sync-b32d9f4",
+  "command": "python experiments/baselines/track_a/T-HIER/run_t_hier.py --llm --repeats 3 --seeds 642 643 644 --max-repair-rounds 4 --timeout-sec 300 --output-dir experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/T-HIER/formal_b32d9f4_strict_sync_5x3_20260906",
+  "result_integrity": {
+    "conditions": 15,
+    "expected_conditions": 15,
+    "compile_success": 15,
+    "execution_success": 15,
+    "training_success": 15,
+    "strict_success": 15,
+    "fixer_calls": 0,
+    "max_loss_abs_diff": 3.337860107421875e-06,
+    "max_grad_norm_abs_diff": 4.76837158203125e-07,
+    "max_parameter_update_rel_l2": 0.002856338693775114,
+    "total_tokens": 287550,
+    "summed_condition_elapsed_sec": 1859.986
+  },
+  "report_postprocessing": "summary.md was regenerated from immutable summary.json with report_renderer_commit to restore the omitted final_iter display column; no scientific metric or condition record was changed"
+}

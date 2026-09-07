@@ -1,0 +1,139 @@
+{
+  "experiment": "experiment_A_paired_threshold_revalidation",
+  "commit": "58e9f52054a062157899496cdb865565f5128cfd",
+  "source_commits": {
+    "noncore": "5e5b64150209124d21e54bec74cfcbb7360f5379",
+    "core": "a52fc9620204d284b8b22d05925f755bf33f41db"
+  },
+  "contract": {
+    "loss_abs_threshold": 0.02,
+    "grad_norm_abs_threshold": 0.05,
+    "param_update_rel_l2_threshold": 0.03,
+    "missing_metric_fails": true,
+    "healthy_torch4ms_control_required": true
+  },
+  "total_method_instances": 300,
+  "bridge_backed_method_instances": 300,
+  "strict_paired_successes_formal": 188,
+  "strict_paired_failures_formal": 112,
+  "status_counts": {
+    "measured_torch4ms_bridge_replay": 187,
+    "measured_torch4ms_core_replay": 23,
+    "torch4ms_bridge_candidate_failed": 17,
+    "torch4ms_core_candidate_failed": 73
+  },
+  "method_summary": {
+    "r_exec": {
+      "instances": 50,
+      "strict_success": 33,
+      "strict_success_paired": 27,
+      "candidate_failures": 19
+    },
+    "r_flat": {
+      "instances": 50,
+      "strict_success": 34,
+      "strict_success_paired": 28,
+      "candidate_failures": 17
+    },
+    "r_hier": {
+      "instances": 50,
+      "strict_success": 50,
+      "strict_success_paired": 33,
+      "candidate_failures": 9
+    },
+    "r_direct": {
+      "instances": 50,
+      "strict_success": 40,
+      "strict_success_paired": 35,
+      "candidate_failures": 10
+    },
+    "r_swe": {
+      "instances": 50,
+      "strict_success": 46,
+      "strict_success_paired": 32,
+      "candidate_failures": 18
+    },
+    "r_matchfix": {
+      "instances": 50,
+      "strict_success": 47,
+      "strict_success_paired": 33,
+      "candidate_failures": 17
+    }
+  },
+  "old_vs_paired_decision_changes": 66,
+  "audit": {
+    "method_counts": {
+      "r_direct": 50,
+      "r_exec": 50,
+      "r_flat": 50,
+      "r_hier": 50,
+      "r_matchfix": 50,
+      "r_swe": 50
+    },
+    "unique_instances": 50,
+    "fault_categories": 25,
+    "fault_method_instance_counts": {
+      "EX-01": 12,
+      "EX-02": 12,
+      "EX-03": 12,
+      "EX-04": 12,
+      "EX-05": 12,
+      "EX-06": 12,
+      "EX-07": 12,
+      "EX-08": 12,
+      "EX-09": 12,
+      "EX-10": 12,
+      "GR-01": 12,
+      "GR-02": 12,
+      "GR-03": 12,
+      "GR-04": 12,
+      "GR-05": 12,
+      "GR-06": 12,
+      "GR-07": 12,
+      "GR-08": 12,
+      "NU-01": 12,
+      "NU-02": 12,
+      "NU-03": 12,
+      "NU-04": 12,
+      "NU-05": 12,
+      "NU-06": 12,
+      "NU-07": 12
+    },
+    "model_bindings_valid": 300,
+    "normal_metric_complete": 210,
+    "candidate_failures_with_reason": 90
+  },
+  "provenance": {
+    "generated_at": "2026-09-03T22:00:00+08:00",
+    "llm_used": false,
+    "runtime": {
+      "conda_environment": "mstorch",
+      "python": "3.9.25",
+      "pytorch": "2.8.0+cu128",
+      "mindspore": "2.7.2"
+    },
+    "noncore_run": {
+      "commit": "5e5b64150209124d21e54bec74cfcbb7360f5379",
+      "remote_worktree": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-a-health-5e5b641",
+      "command": "PYTHONPATH=. /media/main/whj/miniconda3/bin/conda run -n mstorch python experiments/experiment_request_20260820/01_experiment_A_paired_threshold_revalidation/run_paired_revalidation.py --formal-bridge-stage3 --output-dir experiments/experiment_request_20260820/01_experiment_A_paired_threshold_revalidation/bridge_stage3",
+      "core_files_clean_after_run": true
+    },
+    "core_run": {
+      "commit": "a52fc9620204d284b8b22d05925f755bf33f41db",
+      "remote_worktree": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-a-core-full-a52fc96",
+      "command": "PYTHONPATH=. /media/main/whj/miniconda3/bin/conda run -n mstorch python experiments/experiment_request_20260820/01_experiment_A_paired_threshold_revalidation/run_core_revalidation.py --output-dir experiments/experiment_request_20260820/01_experiment_A_paired_threshold_revalidation/core_full",
+      "core_files_clean_after_run": true
+    },
+    "combination": {
+      "base_commit": "58e9f52054a062157899496cdb865565f5128cfd",
+      "decision_function": "experiments.paper_section_65_66.run_section66_realdata_training_consistency._strict_pass",
+      "thresholds": {
+        "loss_abs_diff": 0.02,
+        "grad_norm_abs_diff": 0.05,
+        "param_update_rel_l2": 0.03
+      }
+    }
+  },
+  "complete": true,
+  "completion_reason": "All 300 Fixed50 method-instances have clean-control-qualified Torch4MS bridge/core replay conclusions."
+}

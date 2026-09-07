@@ -1,0 +1,166 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Switch run_registered_mean from the dimension-reducing mean.dim registry entry to the full-reduction mean.default entry so FAULT_CASE_006 produces a 0-d scalar and the probe assertion y.ndim == 0 passes.",
+    "edits": [
+      {
+        "file": "autofix/reports/core_operator_patch_candidates/iter1_aten_mean_default_Switch_run_registered_mean_from_the_dimension_reducing_mean_dim_registry_entry_to_the_full_reduction_mean_default_entry_so_FAULT_CASE_006_produces_a_0_d_scalar_and_the_probe_assertion_y_ndim_0_passes_issue.json",
+        "summary": "Write matching core-operator issue proposal for LLM patch candidate dry-run",
+        "action": "write_file",
+        "find_text": "",
+        "replace_text": "{\n  \"kind\": \"torch4ms_core_issue_proposal\",\n  \"status\": \"proposal_only\",\n  \"repair_scope\": \"torch4ms_core_proposal\",\n  \"op_name\": \"unknown_op\",\n  \"error_type\": \"\",\n  \"message\": \"{\\\"case\\\": \\\"FAULT_CASE_006\\\", \\\"ok\\\": false, \\\"shape\\\": [4]}\\n\",\n  \"source_path\": null,\n  \"converted_path\": \"torch4ms/ops/case_b5916836b7cb4777a9026ecf37f3f3a1.py\",\n  \"localization\": {},\n  \"router\": {\n    \"repair_scope\": \"core_operator\",\n    \"confidence\": 0.94,\n    \"reason\": \"core_operator_execution_contract_violation\",\n    \"source\": \"failure_localization\",\n    \"legacy_repair_scope\": \"\",\n    \"recommended_target_files\": [\n      \"torch4ms/ops/case_b5916836b7cb4777a9026ecf37f3f3a1.py\"\n    ],\n    \"recommended_validation\": [\n      \"controlled_fault_probe\"\n    ]\n  },\n  \"repro_path\": \"\",\n  \"next_steps\": [\n    \"Confirm converted code and verifier metadata are correct.\",\n    \"Minimize the failing operation into the repro script.\",\n    \"Only enable torch4ms core edits with an explicit gated apply mode.\"\n  ]\n}",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": false,
+        "error": "No change required."
+      },
+      {
+        "file": "autofix/reports/core_operator_patch_candidates/iter1_aten_mean_default_Switch_run_registered_mean_from_the_dimension_reducing_mean_dim_registry_entry_to_the_full_reduction_mean_default_entry_so_FAULT_CASE_006_produces_a_0_d_scalar_and_the_probe_assertion_y_ndim_0_passes_patch.json",
+        "summary": "Write gated core-operator LLM patch candidate for dry-run evaluation",
+        "action": "write_file",
+        "find_text": "",
+        "replace_text": "{\n  \"kind\": \"torch4ms_core_patch_candidate\",\n  \"proposal_kind\": \"torch4ms_core_issue_proposal\",\n  \"op_name\": \"aten.mean.default\",\n  \"hypothesis\": \"run_registered_mean dispatches to OP_REGISTRY['mean.dim'], which reduces only dim 0 and returns a shape (3,) tensor for a (3,4) input; the probe contract requires a 0-d scalar. Selecting OP_REGISTRY['mean.default'] performs a full reduction and satisfies the contract.\",\n  \"target_files\": [\n    \"torch4ms/ops/case_b5916836b7cb4777a9026ecf37f3f3a1.py\"\n  ],\n  \"edits\": [\n    {\n      \"file\": \"torch4ms/ops/case_b5916836b7cb4777a9026ecf37f3f3a1.py\",\n      \"summary\": \"Use mean.default in run_registered_mean to return a scalar for the no-dim mean case.\",\n      \"action\": \"replace\",\n      \"find_text\": \"def run_registered_mean(x):\\n    return OP_REGISTRY[\\\"mean.dim\\\"](x)\",\n      \"replace_text\": \"def run_registered_mean(x):\\n    return OP_REGISTRY[\\\"mean.default\\\"](x)\",\n      \"append_text\": \"\",\n      \"regex_pattern\": \"\",\n      \"regex_repl\": \"\"\n    }\n  ],\n  \"verify_commands\": [\n    [\n      \"python\",\n      \"-c\",\n      \"from torch4ms.ops.case_b5916836b7cb4777a9026ecf37f3f3a1 import run_probe; r=run_probe('FAULT_CASE_006'); assert r['ok'], r\"\n    ]\n  ],\n  \"proposal_path\": \"autofix/reports/core_operator_patch_candidates/iter1_aten_mean_default_Switch_run_registered_mean_from_the_dimension_reducing_mean_dim_registry_entry_to_the_full_reduction_mean_default_entry_so_FAULT_CASE_006_produces_a_0_d_scalar_and_the_probe_assertion_y_ndim_0_passes_issue.json\",\n  \"source_fixer_iter\": 1,\n  \"source_fixer_strategy\": \"Switch run_registered_mean from the dimension-reducing mean.dim registry entry to the full-reduction mean.default entry so FAULT_CASE_006 produces a 0-d scalar and the probe assertion y.ndim == 0 passes.\",\n  \"dry_run_command\": [\n    \"/media/main/whj/miniconda3/envs/mstorch/bin/python\",\n    \"-m\",\n    \"autofix.examples.run_phase10_core_apply_dry_run\",\n    \"--proposal\",\n    \"autofix/reports/core_operator_patch_candidates/iter1_aten_mean_default_Switch_run_registered_mean_from_the_dimension_reducing_mean_dim_registry_entry_to_the_full_reduction_mean_default_entry_so_FAULT_CASE_006_produces_a_0_d_scalar_and_the_probe_assertion_y_ndim_0_passes_issue.json\",\n    \"--patch\",\n    \"autofix/reports/core_operator_patch_candidates/iter1_aten_mean_default_Switch_run_registered_mean_from_the_dimension_reducing_mean_dim_registry_entry_to_the_full_reduction_mean_default_entry_so_FAULT_CASE_006_produces_a_0_d_scalar_and_the_probe_assertion_y_ndim_0_passes_patch.json\"\n  ]\n}",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": false,
+        "error": "No change required."
+      }
+    ],
+    "risk": "Low: one-line registry key change in the generated candidate; no signature, dtype, or public API changes.",
+    "expected_effect": "FAULT_CASE_006 will print ok: true with shape [], and run_probe will return a payload satisfying the oracle contract.",
+    "notes": "OP_REGISTRY already defines mean.default; the dispatcher was selecting the wrong overload for a full reduction. Proposal is under metadata.core_operator_patch_candidate for gated application.",
+    "metadata": {
+      "core_operator_patch_candidate": {
+        "kind": "torch4ms_core_patch_candidate",
+        "proposal_kind": "torch4ms_core_issue_proposal",
+        "op_name": "aten.mean.default",
+        "hypothesis": "run_registered_mean dispatches to OP_REGISTRY['mean.dim'], which reduces only dim 0 and returns a shape (3,) tensor for a (3,4) input; the probe contract requires a 0-d scalar. Selecting OP_REGISTRY['mean.default'] performs a full reduction and satisfies the contract.",
+        "target_files": [
+          "torch4ms/ops/case_b5916836b7cb4777a9026ecf37f3f3a1.py"
+        ],
+        "edits": [
+          {
+            "file": "torch4ms/ops/case_b5916836b7cb4777a9026ecf37f3f3a1.py",
+            "summary": "Use mean.default in run_registered_mean to return a scalar for the no-dim mean case.",
+            "action": "replace",
+            "find_text": "def run_registered_mean(x):\n    return OP_REGISTRY[\"mean.dim\"](x)",
+            "replace_text": "def run_registered_mean(x):\n    return OP_REGISTRY[\"mean.default\"](x)",
+            "append_text": "",
+            "regex_pattern": "",
+            "regex_repl": ""
+          }
+        ],
+        "verify_commands": [
+          [
+            "python",
+            "-c",
+            "from torch4ms.ops.case_b5916836b7cb4777a9026ecf37f3f3a1 import run_probe; r=run_probe('FAULT_CASE_006'); assert r['ok'], r"
+          ]
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 3141,
+        "completion_tokens": 6392,
+        "total_tokens": 9533
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 6392,
+          "prompt_tokens": 3141,
+          "total_tokens": 9533,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 5812,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 2757
+        }
+      },
+      "router": {
+        "repair_scope": "core_operator",
+        "confidence": 0.94,
+        "reason": "core_operator_execution_contract_violation",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "torch4ms/ops/case_b5916836b7cb4777a9026ecf37f3f3a1.py"
+        ],
+        "recommended_validation": [
+          "controlled_fault_probe"
+        ]
+      },
+      "predicted_layer": "execution",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "core_operator",
+        "allowed_files": [],
+        "allowed_prefixes": [
+          "torch4ms/ops/"
+        ],
+        "checks": [],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      },
+      "core_operator_patch_candidate_gate": {
+        "present": true,
+        "allowed_prefixes": [
+          "torch4ms/ops/"
+        ],
+        "exact_allowed_files": [],
+        "allowed_files": [
+          "torch4ms/ops/case_b5916836b7cb4777a9026ecf37f3f3a1.py"
+        ],
+        "rejected_files": [],
+        "edit_count": 1,
+        "non_none_edit_count": 1,
+        "missing_edits": false,
+        "missing_verify_commands": false,
+        "valid_for_dry_run": true
+      },
+      "core_operator_issue_proposal_path": "autofix/reports/core_operator_patch_candidates/iter1_aten_mean_default_Switch_run_registered_mean_from_the_dimension_reducing_mean_dim_registry_entry_to_the_full_reduction_mean_default_entry_so_FAULT_CASE_006_produces_a_0_d_scalar_and_the_probe_assertion_y_ndim_0_passes_issue.json",
+      "core_operator_patch_candidate_path": "autofix/reports/core_operator_patch_candidates/iter1_aten_mean_default_Switch_run_registered_mean_from_the_dimension_reducing_mean_dim_registry_entry_to_the_full_reduction_mean_default_entry_so_FAULT_CASE_006_produces_a_0_d_scalar_and_the_probe_assertion_y_ndim_0_passes_patch.json"
+    },
+    "applied": false,
+    "applied_count": 0,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"case\": \"FAULT_CASE_006\", \"ok\": true, \"shape\": []}\n",
+      "payload": {
+        "case": "FAULT_CASE_006",
+        "ok": true,
+        "shape": [],
+        "model_variant": "causal_lm"
+      }
+    }
+  }
+}

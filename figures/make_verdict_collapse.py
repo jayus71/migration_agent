@@ -18,7 +18,7 @@ Three panels, each carrying something the others cannot:
       steps, and only for the model whose reference loss travels far enough.
 
 Data source for (b) and (c):
-  ascend-torch4ms/experiments/paper_section_65_66/
+  data/paper_section_65_66/
     results_section65_per_step_divergence/
       section65_per_step_divergence_steps50.csv
 
@@ -29,10 +29,10 @@ Two conventions that matter for honesty:
   - The execution row reports steps 20-50, where its injected fault is live.
     Before step 20 that candidate is healthy by construction.
 
-Run with the lzf env (base has no pandas):
-    /opt/miniconda3/envs/lzf/bin/python figures/make_verdict_collapse.py
+Run from the repository root after installing requirements-analysis.txt:
+    python figures/make_verdict_collapse.py
 """
-import os
+from pathlib import Path
 
 import matplotlib
 matplotlib.use("Agg")
@@ -42,10 +42,9 @@ import pandas as pd
 from matplotlib.colors import LogNorm, TwoSlopeNorm
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch, Rectangle
 
-CSV = os.path.join(
-    "ascend-torch4ms/experiments/paper_section_65_66",
-    "results_section65_per_step_divergence",
-    "section65_per_step_divergence_steps50.csv")
+CSV = (Path(__file__).resolve().parents[1] / "data/paper_section_65_66"
+       / "results_section65_per_step_divergence"
+       / "section65_per_step_divergence_steps50.csv")
 
 THRESHOLD = {"loss_abs_diff": 0.02, "grad_norm_abs_diff": 0.05,
              "param_update_rel_l2": 0.03}

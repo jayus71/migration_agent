@@ -1,0 +1,116 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Fix the FAULT_CASE_005 probe to pass a mapping (dict) as the batch, matching the contract of `require_mapping` which expects `batch[\"input_ids\"]`. Changing the list to a dict is minimal and preserves the intended value of 6.0.",
+    "edits": [
+      {
+        "file": "autofix/generated_faults/candidate/case_34132528228249788b0052c387bfe004.py",
+        "summary": "Change FAULT_CASE_005 batch from a list to a dict to satisfy require_mapping's expectation.",
+        "action": "replace",
+        "find_text": "        batch = [torch.arange(4)]",
+        "replace_text": "        batch = {\"input_ids\": torch.arange(4)}",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": true,
+        "error": ""
+      }
+    ],
+    "risk": "low",
+    "expected_effect": "Resolves the TypeError by ensuring `require_mapping` receives the expected dict type, allowing run_probe to execute successfully for FAULT_CASE_005 and produce the expected result.",
+    "notes": "The failure is caused by the probe passing a list to `require_mapping`, which expects a mapping with key 'input_ids'. The function implementation is correct; the caller (probe) violated the contract. Reverting the probe to a dict is the minimal, contract-respecting fix.",
+    "metadata": {
+      "token_usage": {
+        "prompt_tokens": 2807,
+        "completion_tokens": 4042,
+        "total_tokens": 6849
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 4042,
+          "prompt_tokens": 2807,
+          "total_tokens": 6849,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 3724,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 2423
+        }
+      },
+      "router": {
+        "repair_scope": "candidate",
+        "confidence": 0.94,
+        "reason": "candidate_execution_contract_violation",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "autofix/generated_faults/candidate/case_34132528228249788b0052c387bfe004.py"
+        ],
+        "recommended_validation": [
+          "controlled_fault_probe"
+        ]
+      },
+      "predicted_layer": "execution",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "candidate",
+        "allowed_files": [
+          "autofix/generated_faults/candidate/case_34132528228249788b0052c387bfe004.py"
+        ],
+        "allowed_prefixes": [],
+        "checks": [
+          {
+            "file": "autofix/generated_faults/candidate/case_34132528228249788b0052c387bfe004.py",
+            "action": "replace",
+            "ok": true,
+            "errors": [],
+            "occurrence_count": 1
+          }
+        ],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      }
+    },
+    "applied": true,
+    "applied_count": 1,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"case\": \"FAULT_CASE_005\", \"ok\": true, \"value\": 6.0}\n",
+      "payload": {
+        "case": "FAULT_CASE_005",
+        "ok": true,
+        "value": 6.0,
+        "model_variant": "causal_lm"
+      }
+    }
+  }
+}

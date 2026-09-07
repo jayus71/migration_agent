@@ -1,0 +1,44 @@
+{
+  "captured_at": "2026-09-06T03:26:53+00:00",
+  "commit": "2fd40609b85314400d951a7d6897bfb66a5af558",
+  "branch": "",
+  "python": "3.9.25",
+  "dependencies": {
+    "torch": "2.8.0",
+    "torchvision": "0.23.0",
+    "mindspore": "2.7.2",
+    "numpy": "2.0.2"
+  },
+  "device": "CPU",
+  "primary_execution_mode": "PyNative",
+  "controlled_seeds": [
+    300,
+    301,
+    302
+  ],
+  "real_scale_seeds": [
+    101,
+    202,
+    303
+  ],
+  "data_version": "CIFAR-10/AG News checksums are recorded by the Section 6.6 data validator",
+  "data_dir_supplied": "/media/main/whj/projects/torch4ms/ascend-torch4ms/experiments/paper_section_65_66/data",
+  "real_data_dir_supplied": "/media/main/whj/projects/torch4ms/ascend-torch4ms/experiments/paper_section_65_66/data/cifar10",
+  "invocation_command": [
+    "/media/main/whj/miniconda3/envs/mstorch/bin/python",
+    "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/experiments/experiment_request_20260820/04_experiment_D_real_learning_dynamics/run_experiment_d.py",
+    "--phase",
+    "all",
+    "--resume",
+    "--data-dir",
+    "/media/main/whj/projects/torch4ms/ascend-torch4ms/experiments/paper_section_65_66/data",
+    "--real-data-dir",
+    "/media/main/whj/projects/torch4ms/ascend-torch4ms/experiments/paper_section_65_66/data/cifar10",
+    "--reuse-sweep-from",
+    "experiments/experiment_request_20260820/04_experiment_D_real_learning_dynamics/runs/b1820c37d6a5",
+    "--reuse-controlled-from",
+    "experiments/experiment_request_20260820/04_experiment_D_real_learning_dynamics/runs/b1820c37d6a5",
+    "--reuse-real-from",
+    "experiments/experiment_request_20260820/04_experiment_D_real_learning_dynamics/runs/f4e33a1ed0df"
+  ]
+}

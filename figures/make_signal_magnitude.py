@@ -25,12 +25,13 @@ of the truth.
 import csv
 import os
 import statistics
+from pathlib import Path
 
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-BASE = "ascend-torch4ms/experiments/paper_section_65_66"
+BASE = Path(__file__).resolve().parents[1] / "data/paper_section_65_66"
 ORACLE_CSV = os.path.join(
     BASE, "results_realdata_66",
     "section66_realdata_training_consistency_steps_steps50.csv")

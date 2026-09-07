@@ -1,0 +1,19 @@
+# Failures
+
+- MF-01__r_swe
+- MF-02__r_swe
+- MF-03__r_swe
+- MF-04__r_swe
+- MF-05__r_swe
+- MF-07__r_swe
+- MF-10__r_swe
+- MF-11__r_swe
+- MF-12__r_swe
+- MF-13__r_swe
+- MF-14__r_swe
+- MF-15__r_swe
+- MF-16__r_swe
+- MF-17__r_swe
+- MF-18__r_swe
+- MF-19__r_swe
+- MF-20__r_swe

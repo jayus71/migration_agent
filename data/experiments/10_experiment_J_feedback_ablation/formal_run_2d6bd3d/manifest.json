@@ -1,0 +1,2424 @@
+{
+  "experiment": "experiment_J_feedback_granularity_reverse_order",
+  "commit": "2d6bd3dfd4f3aefdcc1dc6d4d91277f181b141a8",
+  "model": "deepseek-v4-flash",
+  "temperature": "0",
+  "conditions": [
+    "r_exec",
+    "r_binary",
+    "r_stage",
+    "r_flat",
+    "r_hier",
+    "r_reverse"
+  ],
+  "instance_order": [
+    "EX-01-A",
+    "EX-01-B",
+    "EX-02-A",
+    "EX-02-B",
+    "EX-03-A",
+    "EX-03-B",
+    "EX-04-A",
+    "EX-04-B",
+    "EX-05-A",
+    "EX-05-B",
+    "EX-06-A",
+    "EX-06-B",
+    "EX-07-A",
+    "EX-07-B",
+    "EX-08-A",
+    "EX-08-B",
+    "EX-09-A",
+    "EX-09-B",
+    "EX-10-A",
+    "EX-10-B",
+    "NU-01-A",
+    "NU-01-B",
+    "NU-02-A",
+    "NU-02-B",
+    "NU-03-A",
+    "NU-03-B",
+    "NU-04-A",
+    "NU-04-B",
+    "NU-05-A",
+    "NU-05-B",
+    "NU-06-A",
+    "NU-06-B",
+    "NU-07-A",
+    "NU-07-B",
+    "GR-01-A",
+    "GR-01-B",
+    "GR-02-A",
+    "GR-02-B",
+    "GR-03-A",
+    "GR-03-B",
+    "GR-04-A",
+    "GR-04-B",
+    "GR-05-A",
+    "GR-05-B",
+    "GR-06-A",
+    "GR-06-B",
+    "GR-07-A",
+    "GR-07-B",
+    "GR-08-A",
+    "GR-08-B"
+  ],
+  "repair_attempts": 4,
+  "timeout_sec": 300,
+  "started_at": "2026-09-05T14:52:15.451001+00:00",
+  "runs": [
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-01-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-01-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-02-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-02-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-03-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-03-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-04-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-04-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-05-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-05-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-06-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-06-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-07-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-07-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-08-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-08-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-09-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-09-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-10-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "EX-10-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "NU-01-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "NU-01-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "NU-02-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "NU-02-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "NU-03-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "NU-03-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "NU-04-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "NU-04-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "NU-05-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "NU-05-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "NU-06-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "NU-06-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "NU-07-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "NU-07-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-01-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-01-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-02-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-02-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-03-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-03-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-04-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-04-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-05-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-05-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-06-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-06-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-07-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-07-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-08-A",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_binary",
+      "instance_id": "GR-08-B",
+      "status": "complete",
+      "reused": true
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-01-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T14:54:00.939059+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-01-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T14:54:31.258457+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-02-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T14:54:40.521556+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-02-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T14:55:00.657886+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-03-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T14:55:17.335902+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-03-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T14:55:30.729751+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-04-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T14:55:40.560741+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-04-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T14:55:52.861389+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-05-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T14:56:22.777421+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-05-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T14:57:37.525497+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-06-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T15:01:11.243889+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-06-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T15:04:02.928571+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-07-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T15:08:50.236539+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-07-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T15:19:25.161228+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-08-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T15:33:28.309184+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-08-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T15:43:24.330694+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-09-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T15:43:34.413918+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-09-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T15:44:13.578677+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-10-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T15:44:47.244415+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "EX-10-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T15:45:42.265711+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "NU-01-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T15:45:56.555279+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "NU-01-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T15:46:07.760623+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "NU-02-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T15:46:28.906690+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "NU-02-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T15:48:04.962546+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "NU-03-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T15:59:17.322661+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "NU-03-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T16:11:07.891655+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "NU-04-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T16:11:24.975611+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "NU-04-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T16:11:40.845403+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "NU-05-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T16:19:03.316095+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "NU-05-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T16:33:27.336096+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "NU-06-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T16:33:37.785757+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "NU-06-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T16:33:52.172299+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "NU-07-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T16:47:15.936918+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "NU-07-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:00:50.932041+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-01-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:01:18.468358+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-01-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:01:29.504444+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-02-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:02:10.127327+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-02-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:02:26.900637+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-03-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:02:45.642755+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-03-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:03:43.050747+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-04-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:04:10.391475+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-04-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:05:00.705454+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-05-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:06:26.526571+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-05-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:06:46.972448+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-06-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:07:09.179565+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-06-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:07:36.773807+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-07-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:09:38.896514+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-07-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:11:16.282572+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-08-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:11:52.834108+00:00"
+    },
+    {
+      "condition": "r_exec",
+      "instance_id": "GR-08-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:12:05.414135+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-01-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:13:45.262631+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-01-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:14:19.449505+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-02-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:14:58.086167+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-02-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:16:34.339851+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-03-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:19:54.070780+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-03-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:27:30.846933+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-04-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:29:00.637633+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-04-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:30:21.560339+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-05-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:31:39.503436+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-05-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:32:22.791154+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-06-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:33:45.296255+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-06-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:36:57.604856+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-07-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:47:33.425763+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-07-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T17:52:53.843857+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-08-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T18:01:40.720675+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-08-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T18:13:39.469834+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-09-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T18:16:42.025845+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-09-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T18:19:43.466310+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-10-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T18:21:05.254754+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "EX-10-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T18:23:02.411059+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "NU-01-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T18:23:23.324629+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "NU-01-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T18:23:41.585568+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "NU-02-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T18:23:59.681327+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "NU-02-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T18:24:26.723116+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "NU-03-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T18:34:23.748221+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "NU-03-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T18:42:04.093717+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "NU-04-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T18:42:24.455532+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "NU-04-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T18:42:39.388552+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "NU-05-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T18:51:48.459871+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "NU-05-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:01:50.970424+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "NU-06-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:02:19.009260+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "NU-06-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:02:51.889442+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "NU-07-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:12:07.750496+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "NU-07-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:21:16.773813+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-01-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:21:34.869119+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-01-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:21:49.187164+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-02-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:22:22.480769+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-02-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:23:51.334051+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-03-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:24:29.225070+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-03-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:24:51.268758+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-04-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:25:52.308250+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-04-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:27:11.834125+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-05-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:42:50.930177+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-05-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:58:03.466999+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-06-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:58:45.214601+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-06-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T19:59:09.260388+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-07-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:13:22.965950+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-07-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:25:00.192378+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-08-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:25:25.354360+00:00"
+    },
+    {
+      "condition": "r_stage",
+      "instance_id": "GR-08-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:26:43.354720+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-01-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:27:26.813664+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-01-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:27:42.860568+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-02-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:27:53.581804+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-02-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:28:13.579250+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-03-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:28:36.815602+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-03-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:28:59.812093+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-04-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:29:08.266640+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-04-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:29:26.079462+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-05-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:30:45.345771+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-05-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:31:31.264799+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-06-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:34:26.578913+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-06-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:36:57.220636+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-07-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:46:50.980514+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-07-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T20:52:14.710587+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-08-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T21:07:05.315903+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-08-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T21:20:07.346691+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-09-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T21:20:25.225899+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-09-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T21:20:41.841382+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-10-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T21:21:14.330275+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "EX-10-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T21:23:22.596197+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "NU-01-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T21:23:51.702859+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "NU-01-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T21:24:17.473793+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "NU-02-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T21:25:26.731732+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "NU-02-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T21:25:57.090407+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "NU-03-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T21:38:53.981466+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "NU-03-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T21:50:59.560752+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "NU-04-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T21:51:10.875076+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "NU-04-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T21:51:23.285899+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "NU-05-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T22:04:50.894828+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "NU-05-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T22:17:43.985014+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "NU-06-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T22:17:53.702003+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "NU-06-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T22:18:13.132565+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "NU-07-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T22:30:58.937304+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "NU-07-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T22:42:43.526782+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-01-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T22:43:08.516201+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-01-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T22:43:31.409871+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-02-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T22:43:43.287077+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-02-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T22:44:29.776249+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-03-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T22:45:19.005007+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-03-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T22:45:35.734415+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-04-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T22:46:45.986721+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-04-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T22:47:34.188279+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-05-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T23:07:20.849141+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-05-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T23:26:27.295305+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-06-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T23:26:55.335028+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-06-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T23:27:18.477139+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-07-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T23:41:50.691293+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-07-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-05T23:49:46.148986+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-08-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T23:49:58.416179+00:00"
+    },
+    {
+      "condition": "r_flat",
+      "instance_id": "GR-08-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-05T23:50:09.975276+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-01-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:05:07.676692+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-01-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:05:50.358379+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-02-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:06:18.333445+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-02-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:06:52.530977+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-03-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:07:17.386290+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-03-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:07:32.850079+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-04-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:07:52.399737+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-04-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:08:09.252756+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-05-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:08:55.371055+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-05-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:09:49.669451+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-06-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:11:49.008782+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-06-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:12:55.490451+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-07-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:18:41.526510+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-07-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:25:39.520040+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-08-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:29:34.049287+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-08-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:38:50.623148+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-09-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:40:07.522774+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-09-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:41:09.915726+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-10-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:42:01.927954+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "EX-10-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:45:53.866836+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "NU-01-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:46:03.973112+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "NU-01-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:46:18.320879+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "NU-02-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:47:30.323159+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "NU-02-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:49:04.490068+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "NU-03-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:52:50.198218+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "NU-03-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:54:18.566893+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "NU-04-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:54:39.347667+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "NU-04-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:56:40.159480+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "NU-05-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:57:25.520567+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "NU-05-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:57:55.885032+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "NU-06-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:59:04.888334+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "NU-06-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T07:59:51.895496+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "NU-07-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:06:37.834891+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "NU-07-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:10:22.184584+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-01-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:10:31.901502+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-01-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:10:40.813148+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-02-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:10:58.305383+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-02-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:11:12.445302+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-03-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:11:34.360475+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-03-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:12:06.371822+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-04-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:12:15.840134+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-04-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:12:27.858088+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-05-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:17:29.588729+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-05-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:19:20.152192+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-06-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:19:52.226211+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-06-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:20:49.147623+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-07-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:22:31.566037+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-07-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:25:14.023639+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-08-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:25:24.806840+00:00"
+    },
+    {
+      "condition": "r_hier",
+      "instance_id": "GR-08-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:25:48.148656+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-01-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:26:00.121822+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-01-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:26:40.739348+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-02-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:26:55.670541+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-02-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:27:17.103034+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-03-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:27:40.750078+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-03-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:28:03.696721+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-04-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:28:17.036310+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-04-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:28:25.593844+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-05-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:29:14.512203+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-05-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:29:32.862737+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-06-A",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:30:25.529100+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-06-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:32:23.949099+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-07-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:35:07.496783+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-07-B",
+      "status": "complete",
+      "returncode": 1,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:43:12.126502+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-08-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:51:05.893147+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-08-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:55:42.314371+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-09-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:57:51.144395+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-09-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T08:58:38.237835+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-10-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:01:05.858469+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "EX-10-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:03:57.970634+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "NU-01-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:04:17.551442+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "NU-01-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:04:43.938500+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "NU-02-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:05:04.241828+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "NU-02-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:06:14.195301+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "NU-03-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:08:08.951348+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "NU-03-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:12:42.202703+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "NU-04-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:13:30.763374+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "NU-04-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:16:09.300228+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "NU-05-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:17:20.930365+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "NU-05-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:17:58.728321+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "NU-06-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:21:24.358045+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "NU-06-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:21:58.042719+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "NU-07-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:24:17.463803+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "NU-07-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:30:33.976247+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-01-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:30:45.225323+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-01-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:30:57.297781+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-02-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:32:06.955262+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-02-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:32:26.057837+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-03-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:32:40.126370+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-03-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:33:31.684171+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-04-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:33:55.313291+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-04-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:34:09.939012+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-05-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:39:11.818465+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-05-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:45:04.796933+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-06-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:45:30.177465+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-06-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:46:31.606002+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-07-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:50:48.884641+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-07-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:51:38.015362+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-08-A",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:51:50.156088+00:00"
+    },
+    {
+      "condition": "r_reverse",
+      "instance_id": "GR-08-B",
+      "status": "complete",
+      "returncode": 0,
+      "provider_error": false,
+      "finished_at": "2026-09-06T09:52:11.277104+00:00"
+    }
+  ],
+  "condition_provenance": {
+    "r_binary": {
+      "source_root": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-j-1ef4691/experiments/experiment_request_20260820/10_experiment_J_feedback_ablation/formal_run_1ef4691",
+      "source_commit": "1ef469109ce09ba5f4773eac634bcd270e821be2",
+      "validated_instances": 50,
+      "prompt_contract": {
+        "condition": "r_binary",
+        "display_name": "Pass/fail only",
+        "feedback_granularity": "binary",
+        "visible_execution": true,
+        "visible_numerical": true,
+        "visible_gradient_update": true,
+        "hierarchical_routing": false,
+        "feedback_order": [
+          "execution",
+          "numerical",
+          "gradient_update"
+        ],
+        "description": "One strict pass/fail bit without a stage label or metrics."
+      },
+      "imported_at": "2026-09-05T14:53:00.553651+00:00"
+    },
+    "r_hier": {
+      "source_run": "confirmatory_repeat3_hier_first",
+      "source_commit": "2d6bd3dfd4f3aefdcc1dc6d4d91277f181b141a8",
+      "validated_instances": 50,
+      "source_finished_at": "2026-09-06T09:52:11.473339+00:00"
+    },
+    "r_reverse": {
+      "source_run": "confirmatory_repeat3_hier_first",
+      "source_commit": "2d6bd3dfd4f3aefdcc1dc6d4d91277f181b141a8",
+      "validated_instances": 50,
+      "source_finished_at": "2026-09-06T09:52:11.473339+00:00"
+    }
+  },
+  "finished_at": "2026-09-06T09:52:11.473339+00:00",
+  "valid_instances": 300,
+  "total_instances": 300,
+  "complete_conditions": 6,
+  "assembled_at": "2026-09-06T15:42:27.547920+00:00",
+  "assembly_policy": "r_exec/r_binary/r_stage/r_flat from formal run; r_hier/r_reverse from confirmatory repeat 3",
+  "assembled_condition_sources": {
+    "r_exec": "formal_run_2d6bd3d",
+    "r_binary": "formal_run_2d6bd3d",
+    "r_stage": "formal_run_2d6bd3d",
+    "r_flat": "formal_run_2d6bd3d",
+    "r_hier": "confirmatory_repeat3_hier_first",
+    "r_reverse": "confirmatory_repeat3_hier_first"
+  },
+  "source_finished_at": {
+    "formal_run_2d6bd3d": "2026-09-06T02:39:51.551090+00:00",
+    "confirmatory_repeat3_hier_first": "2026-09-06T09:52:11.473339+00:00"
+  }
+}

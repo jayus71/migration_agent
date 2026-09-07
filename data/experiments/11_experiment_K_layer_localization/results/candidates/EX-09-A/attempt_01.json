@@ -1,0 +1,200 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Minimal one-line replacement in run_registered_mean to use the default mean implementation so the probe sees a scalar 0-dim tensor.",
+    "edits": [
+      {
+        "file": "torch4ms/ops/case_7084e06b446148978bdaf56d26f3c03a.py",
+        "summary": "Route mean.dim call to mean.default in run_registered_mean",
+        "action": "none",
+        "find_text": "return OP_REGISTRY[\"mean.dim\"](x)",
+        "replace_text": "return OP_REGISTRY[\"mean.default\"](x)",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": false,
+        "error": "Patch rejected before application: direct core-operator edits are forbidden; use metadata.core_operator_patch_candidate."
+      },
+      {
+        "file": "autofix/reports/core_operator_patch_candidates/iter1_aten_mean_default_Minimal_one_line_replacement_in_run_registered_mean_to_use_the_default_mean_implementation_so_the_probe_sees_a_scalar_0_dim_tensor_issue.json",
+        "summary": "Write matching core-operator issue proposal for LLM patch candidate dry-run",
+        "action": "write_file",
+        "find_text": "",
+        "replace_text": "{\n  \"kind\": \"torch4ms_core_issue_proposal\",\n  \"status\": \"proposal_only\",\n  \"repair_scope\": \"torch4ms_core_proposal\",\n  \"op_name\": \"unknown_op\",\n  \"error_type\": \"\",\n  \"message\": \"{\\\"case\\\": \\\"FAULT_CASE_006\\\", \\\"ok\\\": false, \\\"shape\\\": [4]}\\n\",\n  \"source_path\": null,\n  \"converted_path\": \"torch4ms/ops/case_7084e06b446148978bdaf56d26f3c03a.py\",\n  \"localization\": {},\n  \"router\": {\n    \"repair_scope\": \"core_operator\",\n    \"confidence\": 0.94,\n    \"reason\": \"core_operator_execution_contract_violation\",\n    \"source\": \"failure_localization\",\n    \"legacy_repair_scope\": \"\",\n    \"recommended_target_files\": [\n      \"torch4ms/ops/case_7084e06b446148978bdaf56d26f3c03a.py\"\n    ],\n    \"recommended_validation\": [\n      \"controlled_fault_probe\"\n    ]\n  },\n  \"repro_path\": \"\",\n  \"next_steps\": [\n    \"Confirm converted code and verifier metadata are correct.\",\n    \"Minimize the failing operation into the repro script.\",\n    \"Only enable torch4ms core edits with an explicit gated apply mode.\"\n  ]\n}",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": false,
+        "error": "No change required."
+      },
+      {
+        "file": "autofix/reports/core_operator_patch_candidates/iter1_aten_mean_default_Minimal_one_line_replacement_in_run_registered_mean_to_use_the_default_mean_implementation_so_the_probe_sees_a_scalar_0_dim_tensor_patch.json",
+        "summary": "Write gated core-operator LLM patch candidate for dry-run evaluation",
+        "action": "write_file",
+        "find_text": "",
+        "replace_text": "{\n  \"kind\": \"torch4ms_core_patch_candidate\",\n  \"proposal_kind\": \"torch4ms_core_issue_proposal\",\n  \"op_name\": \"aten.mean.default\",\n  \"hypothesis\": \"run_registered_mean selected the dim-variant mean, returning a non-scalar tensor when no dim argument is supplied; using mean.default restores the 0-dim result required by the probe contract.\",\n  \"target_files\": [\n    \"torch4ms/ops/case_7084e06b446148978bdaf56d26f3c03a.py\"\n  ],\n  \"edits\": [\n    {\n      \"file\": \"torch4ms/ops/case_7084e06b446148978bdaf56d26f3c03a.py\",\n      \"summary\": \"Route mean.dim call to mean.default in run_registered_mean\",\n      \"action\": \"replace\",\n      \"find_text\": \"return OP_REGISTRY[\\\"mean.dim\\\"](x)\",\n      \"replace_text\": \"return OP_REGISTRY[\\\"mean.default\\\"](x)\",\n      \"regex_pattern\": \"\",\n      \"regex_repl\": \"\"\n    }\n  ],\n  \"verify_commands\": [\n    [\n      \"python\",\n      \"-m\",\n      \"autofix.examples.run_phase10_op_probe_suite\",\n      \"--ops\",\n      \"aten.mean.default\",\n      \"--fail-on-candidates\"\n    ]\n  ],\n  \"proposal_path\": \"autofix/reports/core_operator_patch_candidates/iter1_aten_mean_default_Minimal_one_line_replacement_in_run_registered_mean_to_use_the_default_mean_implementation_so_the_probe_sees_a_scalar_0_dim_tensor_issue.json\",\n  \"source_fixer_iter\": 1,\n  \"source_fixer_strategy\": \"Minimal one-line replacement in run_registered_mean to use the default mean implementation so the probe sees a scalar 0-dim tensor.\",\n  \"dry_run_command\": [\n    \"/media/main/whj/miniconda3/envs/mstorch/bin/python\",\n    \"-m\",\n    \"autofix.examples.run_phase10_core_apply_dry_run\",\n    \"--proposal\",\n    \"autofix/reports/core_operator_patch_candidates/iter1_aten_mean_default_Minimal_one_line_replacement_in_run_registered_mean_to_use_the_default_mean_implementation_so_the_probe_sees_a_scalar_0_dim_tensor_issue.json\",\n    \"--patch\",\n    \"autofix/reports/core_operator_patch_candidates/iter1_aten_mean_default_Minimal_one_line_replacement_in_run_registered_mean_to_use_the_default_mean_implementation_so_the_probe_sees_a_scalar_0_dim_tensor_patch.json\"\n  ]\n}",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": false,
+        "error": "No change required."
+      }
+    ],
+    "risk": "Low; only changes the helper's dispatch for mean.dim to mean.default when invoked without explicit dim, preserving registry keys.",
+    "expected_effect": "FAULT_CASE_006 returns ok=true with shape [] and ndim 0.",
+    "notes": "The OP_REGISTRY still contains mean.dim for cases that explicitly need dim; this patch simply calls the existing mean.default entry, which returns a 0-dim tensor as required. | preflight_blocked=1 edit(s); blocked edits were rejected before application; original intent is preserved in metadata.preflight_feedback.",
+    "metadata": {
+      "core_operator_patch_candidate": {
+        "kind": "torch4ms_core_patch_candidate",
+        "proposal_kind": "torch4ms_core_issue_proposal",
+        "op_name": "aten.mean.default",
+        "hypothesis": "run_registered_mean selected the dim-variant mean, returning a non-scalar tensor when no dim argument is supplied; using mean.default restores the 0-dim result required by the probe contract.",
+        "target_files": [
+          "torch4ms/ops/case_7084e06b446148978bdaf56d26f3c03a.py"
+        ],
+        "edits": [
+          {
+            "file": "torch4ms/ops/case_7084e06b446148978bdaf56d26f3c03a.py",
+            "summary": "Route mean.dim call to mean.default in run_registered_mean",
+            "action": "replace",
+            "find_text": "return OP_REGISTRY[\"mean.dim\"](x)",
+            "replace_text": "return OP_REGISTRY[\"mean.default\"](x)",
+            "regex_pattern": "",
+            "regex_repl": ""
+          }
+        ],
+        "verify_commands": [
+          [
+            "python",
+            "-m",
+            "autofix.examples.run_phase10_op_probe_suite",
+            "--ops",
+            "aten.mean.default",
+            "--fail-on-candidates"
+          ]
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 3048,
+        "completion_tokens": 2632,
+        "total_tokens": 5680
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 2632,
+          "prompt_tokens": 3048,
+          "total_tokens": 5680,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 2039,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 2664
+        }
+      },
+      "router": {
+        "repair_scope": "core_operator",
+        "confidence": 0.94,
+        "reason": "core_operator_execution_contract_violation",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "torch4ms/ops/case_7084e06b446148978bdaf56d26f3c03a.py"
+        ],
+        "recommended_validation": [
+          "controlled_fault_probe"
+        ]
+      },
+      "predicted_layer": "execution",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "core_operator",
+        "allowed_files": [],
+        "allowed_prefixes": [
+          "torch4ms/ops/"
+        ],
+        "checks": [
+          {
+            "file": "torch4ms/ops/case_7084e06b446148978bdaf56d26f3c03a.py",
+            "action": "replace",
+            "ok": false,
+            "errors": [
+              "direct core-operator edits are forbidden; use metadata.core_operator_patch_candidate"
+            ],
+            "occurrence_count": 1
+          }
+        ],
+        "blocked_count": 1
+      },
+      "preflight_feedback": {
+        "outcome": "rejected",
+        "blocked_edits": [
+          {
+            "file": "torch4ms/ops/case_7084e06b446148978bdaf56d26f3c03a.py",
+            "original_action": "replace",
+            "find_text": "return OP_REGISTRY[\"mean.dim\"](x)",
+            "occurrence_count": 1,
+            "errors": [
+              "direct core-operator edits are forbidden; use metadata.core_operator_patch_candidate"
+            ]
+          }
+        ]
+      },
+      "core_operator_patch_candidate_gate": {
+        "present": true,
+        "allowed_prefixes": [
+          "torch4ms/ops/"
+        ],
+        "exact_allowed_files": [],
+        "allowed_files": [
+          "torch4ms/ops/case_7084e06b446148978bdaf56d26f3c03a.py"
+        ],
+        "rejected_files": [],
+        "edit_count": 1,
+        "non_none_edit_count": 1,
+        "missing_edits": false,
+        "missing_verify_commands": false,
+        "valid_for_dry_run": true
+      },
+      "core_operator_issue_proposal_path": "autofix/reports/core_operator_patch_candidates/iter1_aten_mean_default_Minimal_one_line_replacement_in_run_registered_mean_to_use_the_default_mean_implementation_so_the_probe_sees_a_scalar_0_dim_tensor_issue.json",
+      "core_operator_patch_candidate_path": "autofix/reports/core_operator_patch_candidates/iter1_aten_mean_default_Minimal_one_line_replacement_in_run_registered_mean_to_use_the_default_mean_implementation_so_the_probe_sees_a_scalar_0_dim_tensor_patch.json"
+    },
+    "applied": false,
+    "applied_count": 0,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"case\": \"FAULT_CASE_006\", \"ok\": true, \"shape\": []}\n",
+      "payload": {
+        "case": "FAULT_CASE_006",
+        "ok": true,
+        "shape": [],
+        "model_variant": "cnn"
+      }
+    }
+  }
+}

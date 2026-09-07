@@ -1,0 +1,76 @@
+{
+  "schema_version": "experiment_e_final_index_v2",
+  "updated_at": "2026-09-06T23:41:19+08:00",
+  "scope": "Experiment E Track A current finalized local result index",
+  "tasks": ["image_mlp", "cnn", "resnet", "transformer_classifier", "tiny_causal_lm"],
+  "seeds": [642, 643, 644],
+  "strict_thresholds": {
+    "loss_abs_diff_max": 0.02,
+    "grad_norm_abs_diff_max": 0.05,
+    "parameter_update_rel_l2_max": 0.03
+  },
+  "methods": {
+    "T-HIER": {
+      "status": "complete",
+      "conditions": 15,
+      "repo_commit": "b32d9f4a27ed90646943b671d43f8616b4ad73fe",
+      "report_renderer_commit": "18bbf43a70611bf82f930590a7172d0e19b9523e",
+      "branch": "codex/experiment-e-thier-strict-sync-fix",
+      "remote_worktree": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-thier-sync-b32d9f4",
+      "source_summary": "T-HIER/formal_b32d9f4_strict_sync_5x3_20260906/summary.json",
+      "run_command": "python experiments/baselines/track_a/T-HIER/run_t_hier.py --llm --repeats 3 --seeds 642 643 644 --max-repair-rounds 4 --timeout-sec 300 --output-dir <OUTPUT_DIR>",
+      "llm_model": "deepseek-v4-flash",
+      "max_tokens": null
+    },
+    "T-DIRECT": {
+      "status": "complete",
+      "conditions": 15,
+      "repo_commit": "4508d0e962d1f27a582b2fcb0a53f1edea5bfb0f",
+      "branch": "codex/experiment-e-final-rerun",
+      "remote_worktree": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f",
+      "source_summary": "T-DIRECT/formal_4508d0e_no_token_cap_5x3_20260906/summary.json",
+      "run_command": "python experiments/baselines/track_a/T-DIRECT/run_t_direct.py --repeats 3 --seeds 642 643 644 --llm --temperature 0.1 --timeout-sec 600 --output-dir <OUTPUT_DIR>",
+      "llm_model": "deepseek-v4-flash",
+      "max_tokens": null,
+      "target": "native MindSpore"
+    },
+    "T-CTE": {
+      "status": "complete",
+      "conditions": 15,
+      "repo_commit": "4508d0e962d1f27a582b2fcb0a53f1edea5bfb0f",
+      "branch": "codex/experiment-e-final-rerun",
+      "remote_worktree": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-final-5f3351f",
+      "cte_commit": "e97e4ff",
+      "cte_server": "127.0.0.1:50053",
+      "source_summary": "T-CTE/formal_4508d0e_no_token_cap_5x3_20260906/summary.json",
+      "run_command": "python experiments/baselines/track_a/T-CTE/run_t_cte.py --repeats 3 --seeds 642 643 644 --cte-server 127.0.0.1:50053 --model deepseek-v4-flash --timeout-sec 600 --output-dir <OUTPUT_DIR>",
+      "llm_model": "deepseek-v4-flash",
+      "max_tokens": null,
+      "target": "native MindSpore"
+    },
+    "T-MSA": {
+      "status": "complete",
+      "conditions": 15,
+      "repo_commit": "52615295ceea067371216564f4310425871b583d",
+      "remote_worktree": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-e-msa-5261529",
+      "source_summary": "T-MSA/formal_patched_5261529_5x3/summary.json",
+      "run_command": null,
+      "run_command_note": "The copied T-MSA artifact does not record one canonical command.",
+      "llm_model": null,
+      "msadapter_version": "v0.6.0",
+      "msadapter_commit": "0a6d11d6d00243141e2bdd01f086782b37b49a21",
+      "compatibility_patch_sha256": "892949be6044c4a395d7e623f925aa2ecec27ff766d2fcd042681e95e248f7fb"
+    },
+    "T-X2MS": {
+      "status": "blocked",
+      "planned_conditions": 15,
+      "observed_conditions": 0,
+      "repo_commit": "d5f75ac95e406a5258e223f0222612bde258af3f",
+      "source_summary": "T-X2MS/summary.json",
+      "exclusion": "environment unavailable; excluded from rate comparisons"
+    }
+  },
+  "historical_artifacts": {
+    "T-CTE/summary.json": "Retained 2026-09-01 result; superseded by methods.T-CTE.source_summary"
+  }
+}

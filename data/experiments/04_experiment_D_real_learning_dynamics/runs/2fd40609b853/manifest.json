@@ -1,0 +1,228 @@
+{
+  "experiment": "experiment_D_real_learning_dynamics",
+  "schema_version": 2,
+  "created_at": "2026-09-06T03:26:53+00:00",
+  "updated_at": "2026-09-06T03:27:07+00:00",
+  "commit": "2fd40609b85314400d951a7d6897bfb66a5af558",
+  "historical_4800_rows_policy": "preserved; new outputs live under a commit-scoped runs directory",
+  "criterion_revision": {
+    "conflict": "candidate absolute loss peak-to-peak < 0.005 conflicts with a clean candidate following a reference whose fixed-probe loss displacement is > 0.05",
+    "implemented_gate": "reference fixed-probe loss displacement > 0.05 and paired residual (loss_torch4ms - loss_torch) peak-to-peak < 0.005"
+  },
+  "preregistered_extended_sweep": {
+    "trigger": "D-S1..D-S4 failed the corrected all-model fixed-probe gate",
+    "rationale": "Batch size 4 produced the strongest weak-model displacement; the finite extension increases steps and/or learning rate uniformly for all four models",
+    "configs": [
+      {
+        "id": "D-S5",
+        "steps": 200,
+        "batch_size": 4,
+        "learning_rate": 0.05
+      },
+      {
+        "id": "D-S6",
+        "steps": 400,
+        "batch_size": 4,
+        "learning_rate": 0.05
+      },
+      {
+        "id": "D-S7",
+        "steps": 200,
+        "batch_size": 4,
+        "learning_rate": 0.1
+      }
+    ]
+  },
+  "thresholds": {
+    "loss_abs": 0.02,
+    "grad_abs": 0.05,
+    "param_rel_l2": 0.03
+  },
+  "real_scale_protocol": {
+    "selected_config": "D-R2",
+    "learning_rate": 0.001,
+    "selection_policy": "D-R1 (lr=0.01) is preserved as a failed 10-step free-running gate. D-R2 pre-registers one uniform lower learning rate for both real models to test cross-backend trajectory stability; no model-specific tuning."
+  },
+  "stages": {
+    "minimal_regression": {
+      "status": "complete",
+      "updated_at": "2026-09-06T03:27:00+00:00",
+      "summary": {
+        "conditions": 8,
+        "execution_success": 5,
+        "training_valid": 5,
+        "pynative_conditions": 4,
+        "pynative_training_valid": 4,
+        "graph_conditions": 4,
+        "graph_training_valid": 1,
+        "graph_unsupported": 3,
+        "initial_parameters_identical": 5
+      },
+      "graph_policy": "Graph Mode is recorded as an additional smoke test. Per the optimization plan, unsupported functional_call/context-manager compilation does not block PyNative formal runs."
+    },
+    "parameter_sweep": {
+      "status": "complete",
+      "updated_at": "2026-09-06T03:27:02+00:00",
+      "passing_configs": [
+        "06_steps400_batch4_lr0.05",
+        "07_steps200_batch4_lr0.10"
+      ],
+      "attempted_configs": [
+        "D-S1",
+        "D-S2",
+        "D-S3",
+        "D-S4",
+        "D-S5",
+        "D-S6",
+        "D-S7"
+      ]
+    },
+    "controlled_24": {
+      "status": "complete",
+      "updated_at": "2026-09-06T03:27:02+00:00",
+      "selected_config": "06_steps400_batch4_lr0.05",
+      "summary": {
+        "conditions": 24,
+        "expected_conditions": 24,
+        "training_valid_conditions": 24,
+        "step_rows": 9600,
+        "max_loss_abs_diff": 4.0531158447265625e-06,
+        "max_grad_norm_abs_diff": 5.4836273193359375e-06,
+        "max_param_update_rel_l2": 0.00011810141008035475,
+        "loss_threshold_exceedances": 0,
+        "grad_threshold_exceedances": 0,
+        "param_threshold_exceedances": 0
+      },
+      "reused_from": {
+        "source_run": "b1820c37d6a5",
+        "source_commit": "b1820c37d6a5d8f2d1439f916d8e65ebae9c0540",
+        "conditions": 24,
+        "step_rows": 9600,
+        "policy": "stream-validated immutable controlled outputs; training was not rerun"
+      }
+    },
+    "real_scale_one_step": {
+      "status": "complete",
+      "updated_at": "2026-09-06T03:27:02+00:00",
+      "expected_conditions": 2,
+      "summary": {
+        "instances": 2,
+        "paired_execution_success": 2,
+        "torch_success": 2,
+        "torch4ms_success": 2,
+        "execution_success": 2,
+        "training_valid": 2,
+        "initial_parameters_identical": 2,
+        "both_parameters_updated": 2
+      },
+      "gate": {
+        "update_parameter_sets_identical": true,
+        "drift_thresholds_applied": false,
+        "passed": true
+      },
+      "reused_from": {
+        "source_run": "f4e33a1ed0df",
+        "source_commit": "f4e33a1ed0df0af83d356fa942999f67877707f7",
+        "policy": "validated immutable real-scale outputs; training was not rerun"
+      }
+    },
+    "real_scale_ten_steps": {
+      "status": "failed_gate",
+      "updated_at": "2026-09-06T03:27:02+00:00",
+      "expected_conditions": 2,
+      "summary": {
+        "instances": 2,
+        "paired_execution_success": 2,
+        "torch_success": 2,
+        "torch4ms_success": 2,
+        "execution_success": 2,
+        "training_valid": 2,
+        "initial_parameters_identical": 2,
+        "both_parameters_updated": 2
+      },
+      "gate": {
+        "update_parameter_sets_identical": true,
+        "drift_thresholds_applied": true,
+        "limits": {
+          "paired_loss_residual_max_abs": 0.02,
+          "paired_fixed_probe_residual_max_abs": 0.02,
+          "val_loss_abs_diff": 0.02,
+          "parameter_update_norm_rel_diff": 0.03
+        },
+        "maxima": {
+          "paired_loss_residual_max_abs": 0.08973050117492676,
+          "paired_fixed_probe_residual_max_abs": 0.01698899269104004,
+          "val_loss_abs_diff": 0.007310914993285955,
+          "parameter_update_norm_rel_diff": 0.01906902967441245
+        },
+        "exceeded": [
+          {
+            "metric": "paired_loss_residual_max_abs",
+            "value": 0.08973050117492676,
+            "limit": 0.02
+          }
+        ],
+        "passed": false
+      },
+      "reused_from": {
+        "source_run": "f4e33a1ed0df",
+        "source_commit": "f4e33a1ed0df0af83d356fa942999f67877707f7",
+        "policy": "validated immutable real-scale outputs; training was not rerun"
+      }
+    }
+  },
+  "invocations": [
+    {
+      "timestamp": "2026-09-06T03:26:53+00:00",
+      "command": [
+        "/media/main/whj/miniconda3/envs/mstorch/bin/python",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/experiments/experiment_request_20260820/04_experiment_D_real_learning_dynamics/run_experiment_d.py",
+        "--phase",
+        "all",
+        "--resume",
+        "--data-dir",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms/experiments/paper_section_65_66/data",
+        "--real-data-dir",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms/experiments/paper_section_65_66/data/cifar10",
+        "--reuse-sweep-from",
+        "experiments/experiment_request_20260820/04_experiment_D_real_learning_dynamics/runs/b1820c37d6a5",
+        "--reuse-controlled-from",
+        "experiments/experiment_request_20260820/04_experiment_D_real_learning_dynamics/runs/b1820c37d6a5",
+        "--reuse-real-from",
+        "experiments/experiment_request_20260820/04_experiment_D_real_learning_dynamics/runs/f4e33a1ed0df"
+      ],
+      "phase": "all",
+      "resume": true
+    }
+  ],
+  "sweep_reuse": {
+    "source_run": "b1820c37d6a5",
+    "source_commit": "b1820c37d6a5d8f2d1439f916d8e65ebae9c0540",
+    "configs": [
+      "D-S1",
+      "D-S2",
+      "D-S3",
+      "D-S4",
+      "D-S5",
+      "D-S6",
+      "D-S7"
+    ],
+    "policy": "validated immutable raw outputs; completed configurations were not rerun"
+  },
+  "controlled_reuse": {
+    "source_run": "b1820c37d6a5",
+    "source_commit": "b1820c37d6a5d8f2d1439f916d8e65ebae9c0540",
+    "conditions": 24,
+    "step_rows": 9600,
+    "policy": "stream-validated immutable controlled outputs; training was not rerun"
+  },
+  "real_scale_reuse": {
+    "source_run": "f4e33a1ed0df",
+    "source_commit": "f4e33a1ed0df0af83d356fa942999f67877707f7",
+    "stages": [
+      "one_step",
+      "ten_steps"
+    ],
+    "published_stage": "ten_steps"
+  }
+}

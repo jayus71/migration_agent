@@ -1,0 +1,4653 @@
+{
+  "experiment": "experiment_D_minimal_regression",
+  "started_at": "2026-09-06T03:26:59+00:00",
+  "completed_at": "2026-09-06T03:26:59+00:00",
+  "wall_time_sec": 4.906024,
+  "cases": [
+    "linear_cross_entropy",
+    "conv_batchnorm_relu",
+    "basic_block_residual_downsample",
+    "mobilenet_inverted_residual"
+  ],
+  "modes": [
+    "pynative",
+    "graph"
+  ],
+  "seed": 1701,
+  "rows": [
+    {
+      "case": "linear_cross_entropy",
+      "mode": "pynative",
+      "seed": 1701,
+      "reference": {
+        "mode": "torch",
+        "execution_success": true,
+        "training_valid": true,
+        "loss": 1.4403796195983887,
+        "initial_parameter_hash": "7392ebbd3a9e3c76f86c3e55c019e690f4fac534a59307bf30059210351c0942",
+        "initial_parameter_names": [
+          "weight",
+          "bias"
+        ],
+        "initial_parameter_shapes": {
+          "weight": [
+            4,
+            8
+          ],
+          "bias": [
+            4
+          ]
+        },
+        "initial_buffer_names": [],
+        "optimizer_param_groups": {
+          "groups": [
+            {
+              "group": 0,
+              "parameter_names": [
+                "weight",
+                "bias"
+              ]
+            }
+          ],
+          "parameter_names": [
+            "weight",
+            "bias"
+          ],
+          "model_parameter_names": [
+            "weight",
+            "bias"
+          ],
+          "frozen_parameter_names": [],
+          "group_count": 1
+        },
+        "gradient_audit": {
+          "entries": [
+            {
+              "name": "weight",
+              "present": true,
+              "shape": [
+                4,
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.9501042366027832,
+              "hash": "d328686970859bcdf295fe422643c258b1beac4b5d4e3e2dadb7cb984df75606"
+            },
+            {
+              "name": "bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.2008974552154541,
+              "hash": "d447516434ecc73b4624f041907f3a48221c69871952839eea941346c09c05cb"
+            }
+          ],
+          "nonempty_gradient_count": 2,
+          "parameter_count": 2,
+          "missing_gradient_names": [],
+          "nonfinite_gradient_names": [],
+          "all_gradients_present": true,
+          "all_gradients_finite": true
+        },
+        "parameter_update_audit": {
+          "entries": [
+            {
+              "name": "bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "bf05e7904d43781b3253d612fcb6dccc1e4a1ee753e38111a29a56a362b3d4e3",
+              "after_hash": "3f6047d1616f58e6ebd827c2c78b6449a5556ee411a44e825c5e4a452f5041a8",
+              "update_l2": 0.0020089762421879216,
+              "update_rel_l2": 0.005642754547579441,
+              "updated": true
+            },
+            {
+              "name": "weight",
+              "shape": [
+                4,
+                8
+              ],
+              "before_hash": "51abd136d087747867269b5ceb40c43c38502c21ca087bf5f595f1b2b57b0852",
+              "after_hash": "013756d38414befb60e7a1f76b4a85c90411bac2c9ec98c537534f098913de9f",
+              "update_l2": 0.009501040378549505,
+              "update_rel_l2": 0.009772171252517215,
+              "updated": true
+            }
+          ],
+          "updated_parameter_names": [
+            "bias",
+            "weight"
+          ],
+          "updated_parameter_count": 2,
+          "parameter_count": 2,
+          "update_l2": 0.00971111496258301,
+          "all_finite": true
+        },
+        "buffer_audit": {
+          "entries": [],
+          "updated_buffer_names": [],
+          "updated_buffer_count": 0,
+          "buffer_count": 0,
+          "all_finite": true
+        },
+        "backward_warnings": [],
+        "training_invalid_reasons": []
+      },
+      "candidate": {
+        "mode": "torch4ms",
+        "execution_mode": "pynative",
+        "execution_success": true,
+        "training_valid": true,
+        "loss": 1.4403785467147827,
+        "initial_parameter_hash": "7392ebbd3a9e3c76f86c3e55c019e690f4fac534a59307bf30059210351c0942",
+        "initial_parameter_names": [
+          "weight",
+          "bias"
+        ],
+        "initial_parameter_shapes": {
+          "weight": [
+            4,
+            8
+          ],
+          "bias": [
+            4
+          ]
+        },
+        "initial_buffer_names": [],
+        "optimizer_param_groups": {
+          "groups": [
+            {
+              "group": 0,
+              "parameter_names": [
+                "weight",
+                "bias"
+              ]
+            }
+          ],
+          "parameter_names": [
+            "weight",
+            "bias"
+          ],
+          "model_parameter_names": [
+            "weight",
+            "bias"
+          ],
+          "frozen_parameter_names": [],
+          "group_count": 1
+        },
+        "gradient_audit": {
+          "entries": [
+            {
+              "name": "weight",
+              "present": true,
+              "shape": [
+                4,
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.9501042366027832,
+              "hash": "d37608277b4cbaa2d66242630ab76a9e1d1dd24344f9bf4ff8f19d084378e14e"
+            },
+            {
+              "name": "bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.20089754462242126,
+              "hash": "4e4f7d2bc531b277c78858e15bfce80e5aac07a59c943f9688ef4cf22fb2601f"
+            }
+          ],
+          "nonempty_gradient_count": 2,
+          "parameter_count": 2,
+          "missing_gradient_names": [],
+          "nonfinite_gradient_names": [],
+          "all_gradients_present": true,
+          "all_gradients_finite": true
+        },
+        "parameter_update_audit": {
+          "entries": [
+            {
+              "name": "bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "bf05e7904d43781b3253d612fcb6dccc1e4a1ee753e38111a29a56a362b3d4e3",
+              "after_hash": "2f3c7dc883f4aa2554033c3805ef958898aa182db2b291d011cab10ccbb515e6",
+              "update_l2": 0.0020089682602807955,
+              "update_rel_l2": 0.005642732128228834,
+              "updated": true
+            },
+            {
+              "name": "weight",
+              "shape": [
+                4,
+                8
+              ],
+              "before_hash": "51abd136d087747867269b5ceb40c43c38502c21ca087bf5f595f1b2b57b0852",
+              "after_hash": "626e08714a267400ec9027a1cbfc9da91989d16cc5c7bfe5a90c97e8a559d64b",
+              "update_l2": 0.009501036787413998,
+              "update_rel_l2": 0.009772167558901593,
+              "updated": true
+            }
+          ],
+          "updated_parameter_names": [
+            "bias",
+            "weight"
+          ],
+          "updated_parameter_count": 2,
+          "parameter_count": 2,
+          "update_l2": 0.009711109797886633,
+          "all_finite": true
+        },
+        "buffer_audit": {
+          "entries": [],
+          "updated_buffer_names": [],
+          "updated_buffer_count": 0,
+          "buffer_count": 0,
+          "all_finite": true
+        },
+        "backward_warnings": [],
+        "training_invalid_reasons": []
+      },
+      "execution_success": true,
+      "training_valid": true,
+      "update_parameter_sets_identical": true,
+      "zero_gradient_parameter_sets_identical": true,
+      "initial_parameters_identical": true
+    },
+    {
+      "case": "conv_batchnorm_relu",
+      "mode": "pynative",
+      "seed": 1701,
+      "reference": {
+        "mode": "torch",
+        "execution_success": true,
+        "training_valid": true,
+        "loss": 1.4567521810531616,
+        "initial_parameter_hash": "ae7ef79187180522782a2cd12e9ecaf6759be2c20cc7a2cdbbe6c664464d1287",
+        "initial_parameter_names": [
+          "0.weight",
+          "0.bias",
+          "1.weight",
+          "1.bias",
+          "4.weight",
+          "4.bias"
+        ],
+        "initial_parameter_shapes": {
+          "0.weight": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "0.bias": [
+            4
+          ],
+          "1.weight": [
+            4
+          ],
+          "1.bias": [
+            4
+          ],
+          "4.weight": [
+            3,
+            256
+          ],
+          "4.bias": [
+            3
+          ]
+        },
+        "initial_buffer_names": [
+          "1.running_mean",
+          "1.running_var",
+          "1.num_batches_tracked"
+        ],
+        "optimizer_param_groups": {
+          "groups": [
+            {
+              "group": 0,
+              "parameter_names": [
+                "0.weight",
+                "0.bias",
+                "1.weight",
+                "1.bias",
+                "4.weight",
+                "4.bias"
+              ]
+            }
+          ],
+          "parameter_names": [
+            "0.weight",
+            "0.bias",
+            "1.weight",
+            "1.bias",
+            "4.weight",
+            "4.bias"
+          ],
+          "model_parameter_names": [
+            "0.weight",
+            "0.bias",
+            "1.weight",
+            "1.bias",
+            "4.weight",
+            "4.bias"
+          ],
+          "frozen_parameter_names": [],
+          "group_count": 1
+        },
+        "gradient_audit": {
+          "entries": [
+            {
+              "name": "0.weight",
+              "present": true,
+              "shape": [
+                4,
+                3,
+                3,
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 1.8493248224258423,
+              "hash": "ee9498aa548a00dc4605b3ad4761948d339eb10c394b4ebef21f4c2ed3991bdd"
+            },
+            {
+              "name": "0.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 5.5380422026019005e-08,
+              "hash": "2ee720ce81c6d2e8e0833c03a811ae6a4bd452ee85b09d2d3d3f9659a43a82dd"
+            },
+            {
+              "name": "1.weight",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.273465633392334,
+              "hash": "a8c2360bb3b952637a2a308e9cb0d142e0bd1fdf9edf0e64e23abaa0e801569c"
+            },
+            {
+              "name": "1.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.22307895123958588,
+              "hash": "a54190fb03e89cc41b99f650395e4f4ced8ea615511b3a0d09ac1325e77a9bd9"
+            },
+            {
+              "name": "4.weight",
+              "present": true,
+              "shape": [
+                3,
+                256
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 5.007734775543213,
+              "hash": "16abbe9ff4aad6c8a35de573bd5fdf2d73c28b39ad1a117df98fb5897490509c"
+            },
+            {
+              "name": "4.bias",
+              "present": true,
+              "shape": [
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.35623544454574585,
+              "hash": "e31e5347b87715c95175b9836c16555e810a58d7df77edc2c85699f2b80433e2"
+            }
+          ],
+          "nonempty_gradient_count": 6,
+          "parameter_count": 6,
+          "missing_gradient_names": [],
+          "nonfinite_gradient_names": [],
+          "all_gradients_present": true,
+          "all_gradients_finite": true
+        },
+        "parameter_update_audit": {
+          "entries": [
+            {
+              "name": "0.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "470c3410356bf055746a7bc31066e305b67719f64228a1a873fa767dacf3f8a8",
+              "after_hash": "470c3410356bf055746a7bc31066e305b67719f64228a1a873fa767dacf3f8a8",
+              "update_l2": 0.0,
+              "update_rel_l2": 0.0,
+              "updated": false
+            },
+            {
+              "name": "0.weight",
+              "shape": [
+                4,
+                3,
+                3,
+                3
+              ],
+              "before_hash": "8d0cbb0b9c1dfc570bdc66f9b073ac75424a2c4b4dce08585f09ab1e92e8f6c3",
+              "after_hash": "33e5db293087340c9714c993dfa8bb124d3af0456c74ddd4e3966ac8cbc5b95a",
+              "update_l2": 0.0184932424124334,
+              "update_rel_l2": 0.016970442933830498,
+              "updated": true
+            },
+            {
+              "name": "1.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "0ff673a6901b3dc741bb1fcf299e670604ff4d82918686e84d4aaa0279f77eb3",
+              "update_l2": 0.002230789418510478,
+              "update_rel_l2": 2230789418.510478,
+              "updated": true
+            },
+            {
+              "name": "1.weight",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "b3a8e21407cfa4e4c2751e53bbe74e81a5c1069e6623d5e9ce3a812d8a926253",
+              "update_l2": 0.002734637108332111,
+              "update_rel_l2": 0.0013673185541660555,
+              "updated": true
+            },
+            {
+              "name": "4.bias",
+              "shape": [
+                3
+              ],
+              "before_hash": "7a47bb93a4f3cde8f5775b9d29793fcf284e68abcaeeb7a03d164002dd4b898d",
+              "after_hash": "027cd5810f09dd353c3cf9164545ff5b36a9a7de2c58a0643b2d7ce16813d4f7",
+              "update_l2": 0.003562354495779389,
+              "update_rel_l2": 0.057235512959603205,
+              "updated": true
+            },
+            {
+              "name": "4.weight",
+              "shape": [
+                3,
+                256
+              ],
+              "before_hash": "54d206893149ae1a6c303b7e8367127630d6335f0da10b8a9c3d8829a8853d4b",
+              "after_hash": "5cac7bc2f09084971dccc9ecd22d88e45566d91c8d7e3195072f8d3f1cbc6ec3",
+              "update_l2": 0.05007735132338335,
+              "update_rel_l2": 0.05050726877366914,
+              "updated": true
+            }
+          ],
+          "updated_parameter_names": [
+            "0.weight",
+            "1.bias",
+            "1.weight",
+            "4.bias",
+            "4.weight"
+          ],
+          "updated_parameter_count": 5,
+          "parameter_count": 6,
+          "update_l2": 0.053617964914645856,
+          "all_finite": true
+        },
+        "buffer_audit": {
+          "entries": [
+            {
+              "name": "1.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "1.running_mean",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "c3f86abd245d671aff6ec6427917033e0a67c9ddce0aad9e17c41c61d7ec7be6",
+              "update_l2": 0.030068467618817176,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "1.running_var",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "9b07b363fcafcf98bb9431ec110504bfbf52bcf303cb4db23936cebba223a42e",
+              "update_l2": 0.1542084077256149,
+              "updated": true,
+              "finite": true
+            }
+          ],
+          "updated_buffer_names": [
+            "1.num_batches_tracked",
+            "1.running_mean",
+            "1.running_var"
+          ],
+          "updated_buffer_count": 3,
+          "buffer_count": 3,
+          "all_finite": true
+        },
+        "backward_warnings": [],
+        "training_invalid_reasons": []
+      },
+      "candidate": {
+        "mode": "torch4ms",
+        "execution_mode": "pynative",
+        "execution_success": true,
+        "training_valid": true,
+        "loss": 1.4567515850067139,
+        "initial_parameter_hash": "ae7ef79187180522782a2cd12e9ecaf6759be2c20cc7a2cdbbe6c664464d1287",
+        "initial_parameter_names": [
+          "0.weight",
+          "0.bias",
+          "1.weight",
+          "1.bias",
+          "4.weight",
+          "4.bias"
+        ],
+        "initial_parameter_shapes": {
+          "0.weight": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "0.bias": [
+            4
+          ],
+          "1.weight": [
+            4
+          ],
+          "1.bias": [
+            4
+          ],
+          "4.weight": [
+            3,
+            256
+          ],
+          "4.bias": [
+            3
+          ]
+        },
+        "initial_buffer_names": [
+          "1.running_mean",
+          "1.running_var",
+          "1.num_batches_tracked"
+        ],
+        "optimizer_param_groups": {
+          "groups": [
+            {
+              "group": 0,
+              "parameter_names": [
+                "0.weight",
+                "0.bias",
+                "1.weight",
+                "1.bias",
+                "4.weight",
+                "4.bias"
+              ]
+            }
+          ],
+          "parameter_names": [
+            "0.weight",
+            "0.bias",
+            "1.weight",
+            "1.bias",
+            "4.weight",
+            "4.bias"
+          ],
+          "model_parameter_names": [
+            "0.weight",
+            "0.bias",
+            "1.weight",
+            "1.bias",
+            "4.weight",
+            "4.bias"
+          ],
+          "frozen_parameter_names": [],
+          "group_count": 1
+        },
+        "gradient_audit": {
+          "entries": [
+            {
+              "name": "0.weight",
+              "present": true,
+              "shape": [
+                4,
+                3,
+                3,
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 1.8493256568908691,
+              "hash": "cf1c64d541d18db91a653e560e2ac9717f6e13d56cf60e8dff70cd50225babaf"
+            },
+            {
+              "name": "0.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 6.420049203370581e-08,
+              "hash": "13840eb03476ee29aba92148f79ea98e549920946127b1ac340e58bf3fa4d5d6"
+            },
+            {
+              "name": "1.weight",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.2734660804271698,
+              "hash": "52355e52b8a7447064c88c34deb831cf229d4793e2ff2e1f33f21490a42dd8ed"
+            },
+            {
+              "name": "1.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.22307918965816498,
+              "hash": "6513e731b5a091bccae5eccf023a2f8f9523460bba3696753230c061f69a49ab"
+            },
+            {
+              "name": "4.weight",
+              "present": true,
+              "shape": [
+                3,
+                256
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 5.007736682891846,
+              "hash": "6fd5383be01dd3ba076ca08b36e470a83f392ed3dedb6c7ca4c43dc553343818"
+            },
+            {
+              "name": "4.bias",
+              "present": true,
+              "shape": [
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.3562355935573578,
+              "hash": "1296e1e6aaac93dede82f18752797da3dfd3c4b7c7707a929622c6189ca7fb0f"
+            }
+          ],
+          "nonempty_gradient_count": 6,
+          "parameter_count": 6,
+          "missing_gradient_names": [],
+          "nonfinite_gradient_names": [],
+          "all_gradients_present": true,
+          "all_gradients_finite": true
+        },
+        "parameter_update_audit": {
+          "entries": [
+            {
+              "name": "0.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "470c3410356bf055746a7bc31066e305b67719f64228a1a873fa767dacf3f8a8",
+              "after_hash": "470c3410356bf055746a7bc31066e305b67719f64228a1a873fa767dacf3f8a8",
+              "update_l2": 0.0,
+              "update_rel_l2": 0.0,
+              "updated": false
+            },
+            {
+              "name": "0.weight",
+              "shape": [
+                4,
+                3,
+                3,
+                3
+              ],
+              "before_hash": "8d0cbb0b9c1dfc570bdc66f9b073ac75424a2c4b4dce08585f09ab1e92e8f6c3",
+              "after_hash": "c9b811bbc64c6ba7dfce4777429375cac5e899efb2847f1bfc1818a0a292f926",
+              "update_l2": 0.018493250481824382,
+              "update_rel_l2": 0.01697045033875907,
+              "updated": true
+            },
+            {
+              "name": "1.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "2498627c3bf98d33922cc9d30a7acfa050ea3b00096ca43943ffbfd0abe788e9",
+              "update_l2": 0.002230791886585405,
+              "update_rel_l2": 2230791886.5854053,
+              "updated": true
+            },
+            {
+              "name": "1.weight",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "ca8dfeef4ec7a7815ab63f1c33a1da5565a4a06e063364f8f9160abad899809b",
+              "update_l2": 0.0027346855591873077,
+              "update_rel_l2": 0.0013673427795936539,
+              "updated": true
+            },
+            {
+              "name": "4.bias",
+              "shape": [
+                3
+              ],
+              "before_hash": "7a47bb93a4f3cde8f5775b9d29793fcf284e68abcaeeb7a03d164002dd4b898d",
+              "after_hash": "0c66f6552a248d2cd070067a00ad067ebf6d2157b285660b43455538e8d314b0",
+              "update_l2": 0.00356235618719506,
+              "update_rel_l2": 0.057235540135181506,
+              "updated": true
+            },
+            {
+              "name": "4.weight",
+              "shape": [
+                3,
+                256
+              ],
+              "before_hash": "54d206893149ae1a6c303b7e8367127630d6335f0da10b8a9c3d8829a8853d4b",
+              "after_hash": "936630700a2bab382fc6abc1083c28d2cd70aabd888f826d4dce86eecf0a1609",
+              "update_l2": 0.05007736505402636,
+              "update_rel_l2": 0.05050728262219065,
+              "updated": true
+            }
+          ],
+          "updated_parameter_names": [
+            "0.weight",
+            "1.bias",
+            "1.weight",
+            "4.bias",
+            "4.weight"
+          ],
+          "updated_parameter_count": 5,
+          "parameter_count": 6,
+          "update_l2": 0.05361798320797835,
+          "all_finite": true
+        },
+        "buffer_audit": {
+          "entries": [
+            {
+              "name": "1.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "1.running_mean",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "e7e690c59a60dd3a1d2f96912de9784d8fa2d1868f98d29c6ae1a17561fd921b",
+              "update_l2": 0.030068467638016717,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "1.running_var",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "96526b26d52c2eae44e729f8ee0607b94c1c48f4203d4fe2d0ab1a4941d8deb4",
+              "update_l2": 0.15438680605040342,
+              "updated": true,
+              "finite": true
+            }
+          ],
+          "updated_buffer_names": [
+            "1.num_batches_tracked",
+            "1.running_mean",
+            "1.running_var"
+          ],
+          "updated_buffer_count": 3,
+          "buffer_count": 3,
+          "all_finite": true
+        },
+        "backward_warnings": [],
+        "training_invalid_reasons": []
+      },
+      "execution_success": true,
+      "training_valid": true,
+      "update_parameter_sets_identical": true,
+      "zero_gradient_parameter_sets_identical": true,
+      "initial_parameters_identical": true
+    },
+    {
+      "case": "basic_block_residual_downsample",
+      "mode": "pynative",
+      "seed": 1701,
+      "reference": {
+        "mode": "torch",
+        "execution_success": true,
+        "training_valid": true,
+        "loss": 1.1917297840118408,
+        "initial_parameter_hash": "83b1fb8747f4a80c99f702555c9df17a1829d0a62934b7adaf9c2a7b68b19b60",
+        "initial_parameter_names": [
+          "0.conv1.weight",
+          "0.bn1.weight",
+          "0.bn1.bias",
+          "0.conv2.weight",
+          "0.bn2.weight",
+          "0.bn2.bias",
+          "0.downsample.0.weight",
+          "0.downsample.1.weight",
+          "0.downsample.1.bias",
+          "3.weight",
+          "3.bias"
+        ],
+        "initial_parameter_shapes": {
+          "0.conv1.weight": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "0.bn1.weight": [
+            4
+          ],
+          "0.bn1.bias": [
+            4
+          ],
+          "0.conv2.weight": [
+            4,
+            4,
+            3,
+            3
+          ],
+          "0.bn2.weight": [
+            4
+          ],
+          "0.bn2.bias": [
+            4
+          ],
+          "0.downsample.0.weight": [
+            4,
+            3,
+            1,
+            1
+          ],
+          "0.downsample.1.weight": [
+            4
+          ],
+          "0.downsample.1.bias": [
+            4
+          ],
+          "3.weight": [
+            3,
+            4
+          ],
+          "3.bias": [
+            3
+          ]
+        },
+        "initial_buffer_names": [
+          "0.bn1.running_mean",
+          "0.bn1.running_var",
+          "0.bn1.num_batches_tracked",
+          "0.bn2.running_mean",
+          "0.bn2.running_var",
+          "0.bn2.num_batches_tracked",
+          "0.downsample.1.running_mean",
+          "0.downsample.1.running_var",
+          "0.downsample.1.num_batches_tracked"
+        ],
+        "optimizer_param_groups": {
+          "groups": [
+            {
+              "group": 0,
+              "parameter_names": [
+                "0.conv1.weight",
+                "0.bn1.weight",
+                "0.bn1.bias",
+                "0.conv2.weight",
+                "0.bn2.weight",
+                "0.bn2.bias",
+                "0.downsample.0.weight",
+                "0.downsample.1.weight",
+                "0.downsample.1.bias",
+                "3.weight",
+                "3.bias"
+              ]
+            }
+          ],
+          "parameter_names": [
+            "0.conv1.weight",
+            "0.bn1.weight",
+            "0.bn1.bias",
+            "0.conv2.weight",
+            "0.bn2.weight",
+            "0.bn2.bias",
+            "0.downsample.0.weight",
+            "0.downsample.1.weight",
+            "0.downsample.1.bias",
+            "3.weight",
+            "3.bias"
+          ],
+          "model_parameter_names": [
+            "0.conv1.weight",
+            "0.bn1.weight",
+            "0.bn1.bias",
+            "0.conv2.weight",
+            "0.bn2.weight",
+            "0.bn2.bias",
+            "0.downsample.0.weight",
+            "0.downsample.1.weight",
+            "0.downsample.1.bias",
+            "3.weight",
+            "3.bias"
+          ],
+          "frozen_parameter_names": [],
+          "group_count": 1
+        },
+        "gradient_audit": {
+          "entries": [
+            {
+              "name": "0.conv1.weight",
+              "present": true,
+              "shape": [
+                4,
+                3,
+                3,
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.394838809967041,
+              "hash": "0a37a27d61046e3eb882e3fbd84bc2de4351d6cfc8555ff6b36066d0553ea117"
+            },
+            {
+              "name": "0.bn1.weight",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.014614428393542767,
+              "hash": "42debc12b9d8e182ffb8016fe6c4f5c70bdd0e42ac046c7a4979a9122132aa3e"
+            },
+            {
+              "name": "0.bn1.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.04557991400361061,
+              "hash": "88b227ec7731843c04a7a2e48f4c05156a1b9eae57d707a8420ea281602beeab"
+            },
+            {
+              "name": "0.conv2.weight",
+              "present": true,
+              "shape": [
+                4,
+                4,
+                3,
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.3592320382595062,
+              "hash": "7a9567d9af560de1a2b1d6e6f73611aa04dc09567a1a1c85fe81f6d3371d8576"
+            },
+            {
+              "name": "0.bn2.weight",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.06159722059965134,
+              "hash": "9706b40a756f5ee6afcc1460ae7ad34d0015450c6eedaa1d0fb1074731979343"
+            },
+            {
+              "name": "0.bn2.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.07812988758087158,
+              "hash": "7731ee50a781563af549c5f6ba77d9d1443ee17057347c4fe53c121c311171ca"
+            },
+            {
+              "name": "0.downsample.0.weight",
+              "present": true,
+              "shape": [
+                4,
+                3,
+                1,
+                1
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.08617165684700012,
+              "hash": "29d9768c1dffc0d2b62a09315bb745281ecffff0f9bc044c814205f2b3482cc8"
+            },
+            {
+              "name": "0.downsample.1.weight",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.05129287391901016,
+              "hash": "8cda7547beeacf716303ee1dfb36fb4faa08a398ed76c033dbed84cf5cbbea95"
+            },
+            {
+              "name": "0.downsample.1.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.07812988758087158,
+              "hash": "7731ee50a781563af549c5f6ba77d9d1443ee17057347c4fe53c121c311171ca"
+            },
+            {
+              "name": "3.weight",
+              "present": true,
+              "shape": [
+                3,
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.35705235600471497,
+              "hash": "24ddf2fd12db527199370e7b1e9e0bdd7ba0ff9a0d9cbbe7461978787a150caf"
+            },
+            {
+              "name": "3.bias",
+              "present": true,
+              "shape": [
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.31793835759162903,
+              "hash": "440fbf042fd4a4b670bc4602b84742b60784273ae69529160408da21347cb8ac"
+            }
+          ],
+          "nonempty_gradient_count": 11,
+          "parameter_count": 11,
+          "missing_gradient_names": [],
+          "nonfinite_gradient_names": [],
+          "all_gradients_present": true,
+          "all_gradients_finite": true
+        },
+        "parameter_update_audit": {
+          "entries": [
+            {
+              "name": "0.bn1.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "ff27b2dfafe227f065688456f1ed2f84d48fcfaf47d370a050fa5a14fbc05ed1",
+              "update_l2": 0.0004557991083140548,
+              "update_rel_l2": 455799108.3140548,
+              "updated": true
+            },
+            {
+              "name": "0.bn1.weight",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "519ef259b273bf87939d16e7ea8ddcd87425e1312882ba9735240d91775c5d4e",
+              "update_l2": 0.00014611758636204277,
+              "update_rel_l2": 7.305879318102138e-05,
+              "updated": true
+            },
+            {
+              "name": "0.bn2.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "8408112846c811b90ce4adf34559dc0a31987dd8566d86226dd984936286d632",
+              "update_l2": 0.0007812988522386651,
+              "update_rel_l2": 781298852.2386651,
+              "updated": true
+            },
+            {
+              "name": "0.bn2.weight",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "fbd302b7bb98a8cfe33f3bfe8343650e77f859e3bb66959415c9fed8f30a398b",
+              "update_l2": 0.0006159220580969606,
+              "update_rel_l2": 0.0003079610290484803,
+              "updated": true
+            },
+            {
+              "name": "0.conv1.weight",
+              "shape": [
+                4,
+                3,
+                3,
+                3
+              ],
+              "before_hash": "8d0cbb0b9c1dfc570bdc66f9b073ac75424a2c4b4dce08585f09ab1e92e8f6c3",
+              "after_hash": "d7f223a02a945b881c265fdaf5534f7650f7d05022c28389c166d87e3278f4e6",
+              "update_l2": 0.0039483842479027115,
+              "update_rel_l2": 0.0036232602193555182,
+              "updated": true
+            },
+            {
+              "name": "0.conv2.weight",
+              "shape": [
+                4,
+                4,
+                3,
+                3
+              ],
+              "before_hash": "e089f09ce7d6f2ccc3fecba1e7112c635997a2b75398a5443ecab89408e597e7",
+              "after_hash": "bac9115fc860b68123beec1d192a2789a4fc80fab0afe64bd58ad658420724a4",
+              "update_l2": 0.0035923220142910356,
+              "update_rel_l2": 0.0030866450078882706,
+              "updated": true
+            },
+            {
+              "name": "0.downsample.0.weight",
+              "shape": [
+                4,
+                3,
+                1,
+                1
+              ],
+              "before_hash": "d14a52ce71cb8436cdb5ad220de9a8809f38dfbc4d3840ca871c4d06148c9469",
+              "after_hash": "2df205586a4f43d2c3766cd5b0d523dd119e2506f24493dc2e897f6b7746e4ac",
+              "update_l2": 0.0008617168601364176,
+              "update_rel_l2": 0.0007596544590820508,
+              "updated": true
+            },
+            {
+              "name": "0.downsample.1.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "8408112846c811b90ce4adf34559dc0a31987dd8566d86226dd984936286d632",
+              "update_l2": 0.0007812988522386651,
+              "update_rel_l2": 781298852.2386651,
+              "updated": true
+            },
+            {
+              "name": "0.downsample.1.weight",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "69586babb0db1912f8ba87bb78514c244d808423a298f1db5dd394a3825eda35",
+              "update_l2": 0.0005129552354267344,
+              "update_rel_l2": 0.0002564776177133672,
+              "updated": true
+            },
+            {
+              "name": "3.bias",
+              "shape": [
+                3
+              ],
+              "before_hash": "cadb1574bec6eca4043485d00bc4ab7c2e8ddaa57c02f03d42f0e133eb756a61",
+              "after_hash": "ca1629a3ee5a6ed92d1fafa94ba12dca0a066a5125f5da54fda3a36e1d898add",
+              "update_l2": 0.0031793892480425925,
+              "update_rel_l2": 0.006690979954335373,
+              "updated": true
+            },
+            {
+              "name": "3.weight",
+              "shape": [
+                3,
+                4
+              ],
+              "before_hash": "16634a82a133f2233d3bfdae3795ff64e31d981b0d2c5d789fb89130c9a76584",
+              "after_hash": "e37976db23e1b70ac62d8375aeb658dffb47a9cd85f6323ce7618f7a59fbb355",
+              "update_l2": 0.003570519720732684,
+              "update_rel_l2": 0.003463910384521672,
+              "updated": true
+            }
+          ],
+          "updated_parameter_names": [
+            "0.bn1.bias",
+            "0.bn1.weight",
+            "0.bn2.bias",
+            "0.bn2.weight",
+            "0.conv1.weight",
+            "0.conv2.weight",
+            "0.downsample.0.weight",
+            "0.downsample.1.bias",
+            "0.downsample.1.weight",
+            "3.bias",
+            "3.weight"
+          ],
+          "updated_parameter_count": 11,
+          "parameter_count": 11,
+          "update_l2": 0.007361157562612326,
+          "all_finite": true
+        },
+        "buffer_audit": {
+          "entries": [
+            {
+              "name": "0.bn1.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.bn1.running_mean",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "c14e2865e945bd7c5777031f8170d87b0cb12e75211e80d6daaf5fbf10de289b",
+              "update_l2": 0.008375225651976714,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.bn1.running_var",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "8f52ff0bb7e74a1c4a658d35848527617e7f1a584493766001d9c69571715e06",
+              "update_l2": 0.15120444734191496,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.bn2.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.bn2.running_mean",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "6c3b68bc6cd84f131d1cb4c8f4d02d47364d738f40eeafd0dce191ea887965bf",
+              "update_l2": 0.03330022761883329,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.bn2.running_var",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "5302746e91d10bfbffb32fdbbf2a4a7cb042178d6ee48ca7f2781e7ce71c6942",
+              "update_l2": 0.17772897728854886,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.downsample.1.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.downsample.1.running_mean",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "6caa72f8549bb95cf926627dfae4503445f86e2f4ae53cdb6288fd27c11c2f89",
+              "update_l2": 0.0072847664346865825,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.downsample.1.running_var",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "b482c14703bb6abd5f6592d34cb93b399f31941cdbb7e813bef6a6b9b01c13ee",
+              "update_l2": 0.14418109419493286,
+              "updated": true,
+              "finite": true
+            }
+          ],
+          "updated_buffer_names": [
+            "0.bn1.num_batches_tracked",
+            "0.bn1.running_mean",
+            "0.bn1.running_var",
+            "0.bn2.num_batches_tracked",
+            "0.bn2.running_mean",
+            "0.bn2.running_var",
+            "0.downsample.1.num_batches_tracked",
+            "0.downsample.1.running_mean",
+            "0.downsample.1.running_var"
+          ],
+          "updated_buffer_count": 9,
+          "buffer_count": 9,
+          "all_finite": true
+        },
+        "backward_warnings": [],
+        "training_invalid_reasons": []
+      },
+      "candidate": {
+        "mode": "torch4ms",
+        "execution_mode": "pynative",
+        "execution_success": true,
+        "training_valid": true,
+        "loss": 1.1917303800582886,
+        "initial_parameter_hash": "83b1fb8747f4a80c99f702555c9df17a1829d0a62934b7adaf9c2a7b68b19b60",
+        "initial_parameter_names": [
+          "0.conv1.weight",
+          "0.bn1.weight",
+          "0.bn1.bias",
+          "0.conv2.weight",
+          "0.bn2.weight",
+          "0.bn2.bias",
+          "0.downsample.0.weight",
+          "0.downsample.1.weight",
+          "0.downsample.1.bias",
+          "3.weight",
+          "3.bias"
+        ],
+        "initial_parameter_shapes": {
+          "0.conv1.weight": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "0.bn1.weight": [
+            4
+          ],
+          "0.bn1.bias": [
+            4
+          ],
+          "0.conv2.weight": [
+            4,
+            4,
+            3,
+            3
+          ],
+          "0.bn2.weight": [
+            4
+          ],
+          "0.bn2.bias": [
+            4
+          ],
+          "0.downsample.0.weight": [
+            4,
+            3,
+            1,
+            1
+          ],
+          "0.downsample.1.weight": [
+            4
+          ],
+          "0.downsample.1.bias": [
+            4
+          ],
+          "3.weight": [
+            3,
+            4
+          ],
+          "3.bias": [
+            3
+          ]
+        },
+        "initial_buffer_names": [
+          "0.bn1.running_mean",
+          "0.bn1.running_var",
+          "0.bn1.num_batches_tracked",
+          "0.bn2.running_mean",
+          "0.bn2.running_var",
+          "0.bn2.num_batches_tracked",
+          "0.downsample.1.running_mean",
+          "0.downsample.1.running_var",
+          "0.downsample.1.num_batches_tracked"
+        ],
+        "optimizer_param_groups": {
+          "groups": [
+            {
+              "group": 0,
+              "parameter_names": [
+                "0.conv1.weight",
+                "0.bn1.weight",
+                "0.bn1.bias",
+                "0.conv2.weight",
+                "0.bn2.weight",
+                "0.bn2.bias",
+                "0.downsample.0.weight",
+                "0.downsample.1.weight",
+                "0.downsample.1.bias",
+                "3.weight",
+                "3.bias"
+              ]
+            }
+          ],
+          "parameter_names": [
+            "0.conv1.weight",
+            "0.bn1.weight",
+            "0.bn1.bias",
+            "0.conv2.weight",
+            "0.bn2.weight",
+            "0.bn2.bias",
+            "0.downsample.0.weight",
+            "0.downsample.1.weight",
+            "0.downsample.1.bias",
+            "3.weight",
+            "3.bias"
+          ],
+          "model_parameter_names": [
+            "0.conv1.weight",
+            "0.bn1.weight",
+            "0.bn1.bias",
+            "0.conv2.weight",
+            "0.bn2.weight",
+            "0.bn2.bias",
+            "0.downsample.0.weight",
+            "0.downsample.1.weight",
+            "0.downsample.1.bias",
+            "3.weight",
+            "3.bias"
+          ],
+          "frozen_parameter_names": [],
+          "group_count": 1
+        },
+        "gradient_audit": {
+          "entries": [
+            {
+              "name": "0.conv1.weight",
+              "present": true,
+              "shape": [
+                4,
+                3,
+                3,
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.39483878016471863,
+              "hash": "ae8cd45a66cc723837d0d30b14efdcfba68cb19f6bd5eca3edbf527367adbf71"
+            },
+            {
+              "name": "0.bn1.weight",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.014614435844123363,
+              "hash": "d343d45658a3717c52dac3027e872135a1d05e3a9d33e98f39293d61aa87010e"
+            },
+            {
+              "name": "0.bn1.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.045579906553030014,
+              "hash": "ba26af667dfdc18e54cc9c892a33a1aa86586ee151ee319531106845c59570d4"
+            },
+            {
+              "name": "0.conv2.weight",
+              "present": true,
+              "shape": [
+                4,
+                4,
+                3,
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.35923194885253906,
+              "hash": "82c530447a2a9fb9306f88b9a2d6e5d91c670674ac0333d7e7f26d95b4b3a3e0"
+            },
+            {
+              "name": "0.bn2.weight",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.061597179621458054,
+              "hash": "1fff820c2f8f32df525d55d24aca4de87d8af6b07c817f854cca5ea1878968c9"
+            },
+            {
+              "name": "0.bn2.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.07812981307506561,
+              "hash": "dabf58a2e1c67082d6ad44d010dc0cc4c9be555cb80b97a05f17523d8a68e014"
+            },
+            {
+              "name": "0.downsample.0.weight",
+              "present": true,
+              "shape": [
+                4,
+                3,
+                1,
+                1
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.08617167174816132,
+              "hash": "c1d09d2f7333aaa0898aded2af757f105694c3103c801f464ae7679cb5a2801a"
+            },
+            {
+              "name": "0.downsample.1.weight",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.05129285529255867,
+              "hash": "f10f72a8f81eb8b8b6c2cb6f81fb044c112c0e1376e78315c7b0ea78c6cb81ec"
+            },
+            {
+              "name": "0.downsample.1.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.07812981307506561,
+              "hash": "dabf58a2e1c67082d6ad44d010dc0cc4c9be555cb80b97a05f17523d8a68e014"
+            },
+            {
+              "name": "3.weight",
+              "present": true,
+              "shape": [
+                3,
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.3570522665977478,
+              "hash": "e06fe5a8d004dcc7e255f4f95e945d6eb06db7172c1df9b3d7bbb8958afa8c31"
+            },
+            {
+              "name": "3.bias",
+              "present": true,
+              "shape": [
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.31793826818466187,
+              "hash": "ae800f3bc620b8fc9c89c59534f53b16cf9af4862abc232d2c185d2e72147213"
+            }
+          ],
+          "nonempty_gradient_count": 11,
+          "parameter_count": 11,
+          "missing_gradient_names": [],
+          "nonfinite_gradient_names": [],
+          "all_gradients_present": true,
+          "all_gradients_finite": true
+        },
+        "parameter_update_audit": {
+          "entries": [
+            {
+              "name": "0.bn1.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "f0abec7d137e9465bfbdbb7b74a689f0bb871704a29968350820f54a53bea93f",
+              "update_l2": 0.0004557990541225189,
+              "update_rel_l2": 455799054.1225189,
+              "updated": true
+            },
+            {
+              "name": "0.bn1.weight",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "519ef259b273bf87939d16e7ea8ddcd87425e1312882ba9735240d91775c5d4e",
+              "update_l2": 0.00014611758636204277,
+              "update_rel_l2": 7.305879318102138e-05,
+              "updated": true
+            },
+            {
+              "name": "0.bn2.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "eb49b32321cc31664c5a4e75466e3757e4470716abe5c8d1e9577d252f809d56",
+              "update_l2": 0.0007812981322434064,
+              "update_rel_l2": 781298132.2434064,
+              "updated": true
+            },
+            {
+              "name": "0.bn2.weight",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "fbd302b7bb98a8cfe33f3bfe8343650e77f859e3bb66959415c9fed8f30a398b",
+              "update_l2": 0.0006159220580969606,
+              "update_rel_l2": 0.0003079610290484803,
+              "updated": true
+            },
+            {
+              "name": "0.conv1.weight",
+              "shape": [
+                4,
+                3,
+                3,
+                3
+              ],
+              "before_hash": "8d0cbb0b9c1dfc570bdc66f9b073ac75424a2c4b4dce08585f09ab1e92e8f6c3",
+              "after_hash": "27707787b9338aaf49f9be4ddb86b918b14eab5bf5391810ff79c712eda01e56",
+              "update_l2": 0.003948383992671824,
+              "update_rel_l2": 0.0036232599851412513,
+              "updated": true
+            },
+            {
+              "name": "0.conv2.weight",
+              "shape": [
+                4,
+                4,
+                3,
+                3
+              ],
+              "before_hash": "e089f09ce7d6f2ccc3fecba1e7112c635997a2b75398a5443ecab89408e597e7",
+              "after_hash": "fff7d19d9eec85c10c9171643c6e2902c7fc46017b26ecaba1e0995620e7170a",
+              "update_l2": 0.0035923202481630673,
+              "update_rel_l2": 0.0030866434903711734,
+              "updated": true
+            },
+            {
+              "name": "0.downsample.0.weight",
+              "shape": [
+                4,
+                3,
+                1,
+                1
+              ],
+              "before_hash": "d14a52ce71cb8436cdb5ad220de9a8809f38dfbc4d3840ca871c4d06148c9469",
+              "after_hash": "2df205586a4f43d2c3766cd5b0d523dd119e2506f24493dc2e897f6b7746e4ac",
+              "update_l2": 0.0008617168601364176,
+              "update_rel_l2": 0.0007596544590820508,
+              "updated": true
+            },
+            {
+              "name": "0.downsample.1.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "eb49b32321cc31664c5a4e75466e3757e4470716abe5c8d1e9577d252f809d56",
+              "update_l2": 0.0007812981322434064,
+              "update_rel_l2": 781298132.2434064,
+              "updated": true
+            },
+            {
+              "name": "0.downsample.1.weight",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "69586babb0db1912f8ba87bb78514c244d808423a298f1db5dd394a3825eda35",
+              "update_l2": 0.0005129552354267344,
+              "update_rel_l2": 0.0002564776177133672,
+              "updated": true
+            },
+            {
+              "name": "3.bias",
+              "shape": [
+                3
+              ],
+              "before_hash": "cadb1574bec6eca4043485d00bc4ab7c2e8ddaa57c02f03d42f0e133eb756a61",
+              "after_hash": "e8cb57f0fb06cb10d0592f305f0951db22aa02f13c013b714d17252b8c2de83a",
+              "update_l2": 0.0031793906225349297,
+              "update_rel_l2": 0.006690982846935165,
+              "updated": true
+            },
+            {
+              "name": "3.weight",
+              "shape": [
+                3,
+                4
+              ],
+              "before_hash": "16634a82a133f2233d3bfdae3795ff64e31d981b0d2c5d789fb89130c9a76584",
+              "after_hash": "e37976db23e1b70ac62d8375aeb658dffb47a9cd85f6323ce7618f7a59fbb355",
+              "update_l2": 0.003570519720732684,
+              "update_rel_l2": 0.003463910384521672,
+              "updated": true
+            }
+          ],
+          "updated_parameter_names": [
+            "0.bn1.bias",
+            "0.bn1.weight",
+            "0.bn2.bias",
+            "0.bn2.weight",
+            "0.conv1.weight",
+            "0.conv2.weight",
+            "0.downsample.0.weight",
+            "0.downsample.1.bias",
+            "0.downsample.1.weight",
+            "3.bias",
+            "3.weight"
+          ],
+          "updated_parameter_count": 11,
+          "parameter_count": 11,
+          "update_l2": 0.007361157001292412,
+          "all_finite": true
+        },
+        "buffer_audit": {
+          "entries": [
+            {
+              "name": "0.bn1.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.bn1.running_mean",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "5ff8e39119ad2330b8768eab6f6e6cea17466806f8566cf637d5c6f022997ace",
+              "update_l2": 0.008375225859339907,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.bn1.running_var",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "7ee331df69fc901fca24d6e3855f4b9c8d1360913f7db649ae1d2d9207b84268",
+              "update_l2": 0.1519634061121071,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.bn2.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.bn2.running_mean",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "f8d168830caa448875325f0ebc90fcf025f3437a625849f2cd4ffa8b564e8530",
+              "update_l2": 0.033300228184818405,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.bn2.running_var",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "77a9e50fe1f5c7b2d7eefa5b4941c85da2e8bdaa85fc833b014615a5ed580502",
+              "update_l2": 0.17807636302586766,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.downsample.1.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.downsample.1.running_mean",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "6caa72f8549bb95cf926627dfae4503445f86e2f4ae53cdb6288fd27c11c2f89",
+              "update_l2": 0.0072847664346865825,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.downsample.1.running_var",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "1c0732f0ab1a04dee8584c1631556e3b631d439b148a01c14d58ad9a10434aa2",
+              "update_l2": 0.14501451638995957,
+              "updated": true,
+              "finite": true
+            }
+          ],
+          "updated_buffer_names": [
+            "0.bn1.num_batches_tracked",
+            "0.bn1.running_mean",
+            "0.bn1.running_var",
+            "0.bn2.num_batches_tracked",
+            "0.bn2.running_mean",
+            "0.bn2.running_var",
+            "0.downsample.1.num_batches_tracked",
+            "0.downsample.1.running_mean",
+            "0.downsample.1.running_var"
+          ],
+          "updated_buffer_count": 9,
+          "buffer_count": 9,
+          "all_finite": true
+        },
+        "backward_warnings": [],
+        "training_invalid_reasons": []
+      },
+      "execution_success": true,
+      "training_valid": true,
+      "update_parameter_sets_identical": true,
+      "zero_gradient_parameter_sets_identical": true,
+      "initial_parameters_identical": true
+    },
+    {
+      "case": "mobilenet_inverted_residual",
+      "mode": "pynative",
+      "seed": 1701,
+      "reference": {
+        "mode": "torch",
+        "execution_success": true,
+        "training_valid": true,
+        "loss": 1.0552139282226562,
+        "initial_parameter_hash": "d6ce4381d9c7b7b646283a89f541fd48e52b944b76a2f5080352fd76ac95250e",
+        "initial_parameter_names": [
+          "0.block.0.weight",
+          "0.block.1.weight",
+          "0.block.1.bias",
+          "0.block.3.weight",
+          "0.block.4.weight",
+          "0.block.4.bias",
+          "0.block.6.weight",
+          "0.block.7.weight",
+          "0.block.7.bias",
+          "3.weight",
+          "3.bias"
+        ],
+        "initial_parameter_shapes": {
+          "0.block.0.weight": [
+            8,
+            4,
+            1,
+            1
+          ],
+          "0.block.1.weight": [
+            8
+          ],
+          "0.block.1.bias": [
+            8
+          ],
+          "0.block.3.weight": [
+            8,
+            1,
+            3,
+            3
+          ],
+          "0.block.4.weight": [
+            8
+          ],
+          "0.block.4.bias": [
+            8
+          ],
+          "0.block.6.weight": [
+            4,
+            8,
+            1,
+            1
+          ],
+          "0.block.7.weight": [
+            4
+          ],
+          "0.block.7.bias": [
+            4
+          ],
+          "3.weight": [
+            3,
+            4
+          ],
+          "3.bias": [
+            3
+          ]
+        },
+        "initial_buffer_names": [
+          "0.block.1.running_mean",
+          "0.block.1.running_var",
+          "0.block.1.num_batches_tracked",
+          "0.block.4.running_mean",
+          "0.block.4.running_var",
+          "0.block.4.num_batches_tracked",
+          "0.block.7.running_mean",
+          "0.block.7.running_var",
+          "0.block.7.num_batches_tracked"
+        ],
+        "optimizer_param_groups": {
+          "groups": [
+            {
+              "group": 0,
+              "parameter_names": [
+                "0.block.0.weight",
+                "0.block.1.weight",
+                "0.block.1.bias",
+                "0.block.3.weight",
+                "0.block.4.weight",
+                "0.block.4.bias",
+                "0.block.6.weight",
+                "0.block.7.weight",
+                "0.block.7.bias",
+                "3.weight",
+                "3.bias"
+              ]
+            }
+          ],
+          "parameter_names": [
+            "0.block.0.weight",
+            "0.block.1.weight",
+            "0.block.1.bias",
+            "0.block.3.weight",
+            "0.block.4.weight",
+            "0.block.4.bias",
+            "0.block.6.weight",
+            "0.block.7.weight",
+            "0.block.7.bias",
+            "3.weight",
+            "3.bias"
+          ],
+          "model_parameter_names": [
+            "0.block.0.weight",
+            "0.block.1.weight",
+            "0.block.1.bias",
+            "0.block.3.weight",
+            "0.block.4.weight",
+            "0.block.4.bias",
+            "0.block.6.weight",
+            "0.block.7.weight",
+            "0.block.7.bias",
+            "3.weight",
+            "3.bias"
+          ],
+          "frozen_parameter_names": [],
+          "group_count": 1
+        },
+        "gradient_audit": {
+          "entries": [
+            {
+              "name": "0.block.0.weight",
+              "present": true,
+              "shape": [
+                8,
+                4,
+                1,
+                1
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.1406237781047821,
+              "hash": "b1a9b2814a8cf3fa7893133d1585fcd3fde3b381ebd7d1fb528d6dff2cec926c"
+            },
+            {
+              "name": "0.block.1.weight",
+              "present": true,
+              "shape": [
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 1.6101461142170592e-06,
+              "hash": "e9d6356ae220bc33989bb4c6c03e81882d0ca3d917509be714df05e489463d20"
+            },
+            {
+              "name": "0.block.1.bias",
+              "present": true,
+              "shape": [
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.01607999950647354,
+              "hash": "24b7dcbbdebb4039aa959a95772d80270db07d84e68df0cd871bfe57c4e8ecc4"
+            },
+            {
+              "name": "0.block.3.weight",
+              "present": true,
+              "shape": [
+                8,
+                1,
+                3,
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.10811914503574371,
+              "hash": "4781172b3b2041c66259cb5f4fd90a8d153d7780c219b2cf096b5d0d1cf34ee9"
+            },
+            {
+              "name": "0.block.4.weight",
+              "present": true,
+              "shape": [
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.012371985241770744,
+              "hash": "a9c20795e41d3bbb15c4775154be28bba29aab2e4116e72b2ed9e62517803c3d"
+            },
+            {
+              "name": "0.block.4.bias",
+              "present": true,
+              "shape": [
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.02429901249706745,
+              "hash": "19d978cf119caaf320828523d6f0210989093d0ee7a33b7e988c1a406ec5cde0"
+            },
+            {
+              "name": "0.block.6.weight",
+              "present": true,
+              "shape": [
+                4,
+                8,
+                1,
+                1
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.08320676535367966,
+              "hash": "f95f24bfdce1f39c61c76045895a1c156ddf5d5c336a51b996b27a6baf68fc70"
+            },
+            {
+              "name": "0.block.7.weight",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.017673969268798828,
+              "hash": "c38a9128cbc0eed8c9e5c1108efa8aff389a37d4776b3aaa46932256145b41ee"
+            },
+            {
+              "name": "0.block.7.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.07637036591768265,
+              "hash": "0edda3f1c8912829ecb25759394bc818f32835e961d53185b30373d156c230bd"
+            },
+            {
+              "name": "3.weight",
+              "present": true,
+              "shape": [
+                3,
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.11325012892484665,
+              "hash": "cea3297aa6e8100127ae828ee212f083c7204e34e0ca6cef3af71b5028daf4ed"
+            },
+            {
+              "name": "3.bias",
+              "present": true,
+              "shape": [
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.199371799826622,
+              "hash": "5131e996cc24dc35775f0457936e423b86908fbeeb871cc8842b88ad3ac337d2"
+            }
+          ],
+          "nonempty_gradient_count": 11,
+          "parameter_count": 11,
+          "missing_gradient_names": [],
+          "nonfinite_gradient_names": [],
+          "all_gradients_present": true,
+          "all_gradients_finite": true
+        },
+        "parameter_update_audit": {
+          "entries": [
+            {
+              "name": "0.block.0.weight",
+              "shape": [
+                8,
+                4,
+                1,
+                1
+              ],
+              "before_hash": "f7b39e4218ae4d3f3b92aef75a1aeb15f695ff0aba2c97dad19899afe9fd9bd7",
+              "after_hash": "7e0f97cf38a1c6b6dd807ac4c1aa20a314921700c14dc55ce2ad5fb9059ae5a2",
+              "update_l2": 0.0014062343452823974,
+              "update_rel_l2": 0.0010227337815874127,
+              "updated": true
+            },
+            {
+              "name": "0.block.1.bias",
+              "shape": [
+                8
+              ],
+              "before_hash": "e902cb1c7fc37117c1e601caa1d4d5511f6595dfb534aea074a7bc23b0e19f3e",
+              "after_hash": "9b9b4a12784bd47d0ebd7faf2a2ede36321d24c05a16972c10fbce5ba215e2ec",
+              "update_l2": 0.00016079997998522002,
+              "update_rel_l2": 160799979.98522002,
+              "updated": true
+            },
+            {
+              "name": "0.block.1.weight",
+              "shape": [
+                8
+              ],
+              "before_hash": "8d8bfb636a0928d6f091d7773b14c32481fcde7c43c5ed0ebd4f0151d198b138",
+              "after_hash": "8d8bfb636a0928d6f091d7773b14c32481fcde7c43c5ed0ebd4f0151d198b138",
+              "update_l2": 0.0,
+              "update_rel_l2": 0.0,
+              "updated": false
+            },
+            {
+              "name": "0.block.3.weight",
+              "shape": [
+                8,
+                1,
+                3,
+                3
+              ],
+              "before_hash": "23a4017953754aeafa09847b1e99b70514ff0106fe7cc03ba21c9b67b81d8ae1",
+              "after_hash": "a3b03e4c6c3b2240b1069764d1ec5412f340baf58628083bfbb312d322f5c3d9",
+              "update_l2": 0.001081190419868572,
+              "update_rel_l2": 0.0006730303782081197,
+              "updated": true
+            },
+            {
+              "name": "0.block.4.bias",
+              "shape": [
+                8
+              ],
+              "before_hash": "e902cb1c7fc37117c1e601caa1d4d5511f6595dfb534aea074a7bc23b0e19f3e",
+              "after_hash": "636d0ba260da821ea17af95d1746164f1c6ce6cacb8b01eb10266fcf6790f9d2",
+              "update_l2": 0.0002429901250984284,
+              "update_rel_l2": 242990125.0984284,
+              "updated": true
+            },
+            {
+              "name": "0.block.4.weight",
+              "shape": [
+                8
+              ],
+              "before_hash": "8d8bfb636a0928d6f091d7773b14c32481fcde7c43c5ed0ebd4f0151d198b138",
+              "after_hash": "90087f34b21809748785e61b9ce5c3b3e95c3e79401e271c4bbe6cdb22be22e8",
+              "update_l2": 0.00012374300367596526,
+              "update_rel_l2": 4.374975851183345e-05,
+              "updated": true
+            },
+            {
+              "name": "0.block.6.weight",
+              "shape": [
+                4,
+                8,
+                1,
+                1
+              ],
+              "before_hash": "09501cc3fc2ad29ef5d0d34eb5b5e902d3f648d205456642fa651c0b76b18071",
+              "after_hash": "953da2e5915d47003fd5fe0502178b6b6652faab274807c6426c9f1c8bda83cb",
+              "update_l2": 0.0008320703535544957,
+              "update_rel_l2": 0.0006985099455281533,
+              "updated": true
+            },
+            {
+              "name": "0.block.7.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "001c5e4a60b04fb669b771246de966eb210075c7c048ab8057baa1e52f8205e1",
+              "update_l2": 0.000763703620027467,
+              "update_rel_l2": 763703620.027467,
+              "updated": true
+            },
+            {
+              "name": "0.block.7.weight",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "cd728a8379e2432a96c98a607000a80ef4b6c18a597743919702b345610bdda1",
+              "update_l2": 0.00017671409131021806,
+              "update_rel_l2": 8.835704565510903e-05,
+              "updated": true
+            },
+            {
+              "name": "3.bias",
+              "shape": [
+                3
+              ],
+              "before_hash": "5a430aca6e3aa37b3b6cb99a4aa59034c2626d13c37b940c70a21f9123dbe8a4",
+              "after_hash": "881020af6427298231f8081d19e1110fa5a57a51c1fbc41ddef87bd383e168c8",
+              "update_l2": 0.001993719913318829,
+              "update_rel_l2": 0.00453035229518661,
+              "updated": true
+            },
+            {
+              "name": "3.weight",
+              "shape": [
+                3,
+                4
+              ],
+              "before_hash": "46658b906ad2252f0db51c845d207aea379a3e6930b8646841ee0dbd70b8fd6c",
+              "after_hash": "5be9f53bdefb092a1ebf5b372311bc97ae99a436b1aff346bc2cabafc876b4ec",
+              "update_l2": 0.0011324944923548688,
+              "update_rel_l2": 0.0012647887819596387,
+              "updated": true
+            }
+          ],
+          "updated_parameter_names": [
+            "0.block.0.weight",
+            "0.block.1.bias",
+            "0.block.3.weight",
+            "0.block.4.bias",
+            "0.block.4.weight",
+            "0.block.6.weight",
+            "0.block.7.bias",
+            "0.block.7.weight",
+            "3.bias",
+            "3.weight"
+          ],
+          "updated_parameter_count": 10,
+          "parameter_count": 11,
+          "update_l2": 0.003132244555241153,
+          "all_finite": true
+        },
+        "buffer_audit": {
+          "entries": [
+            {
+              "name": "0.block.1.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.1.running_mean",
+              "shape": [
+                8
+              ],
+              "before_hash": "e902cb1c7fc37117c1e601caa1d4d5511f6595dfb534aea074a7bc23b0e19f3e",
+              "after_hash": "32bd58c5621cf538191cc3ab7c079ba142fcf78fa99190b01ea6db97c63c18c9",
+              "update_l2": 0.005769318363420686,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.1.running_var",
+              "shape": [
+                8
+              ],
+              "before_hash": "8d8bfb636a0928d6f091d7773b14c32481fcde7c43c5ed0ebd4f0151d198b138",
+              "after_hash": "3b476be57d38297a7b71183650a010c00861001aae3f4289083cff122f8d7a1b",
+              "update_l2": 0.22354603805382453,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.4.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.4.running_mean",
+              "shape": [
+                8
+              ],
+              "before_hash": "e902cb1c7fc37117c1e601caa1d4d5511f6595dfb534aea074a7bc23b0e19f3e",
+              "after_hash": "71dec63f34c58c4a82258edd7b761806f3d6450e6183d012b095090962f9a8fb",
+              "update_l2": 0.04358698376153665,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.4.running_var",
+              "shape": [
+                8
+              ],
+              "before_hash": "8d8bfb636a0928d6f091d7773b14c32481fcde7c43c5ed0ebd4f0151d198b138",
+              "after_hash": "24ca18555e019a3274237b82fce9383a58ffa10ddc8f7b7e717e3c448d52d3dc",
+              "update_l2": 0.25521612523650655,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.7.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.7.running_mean",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "78812f12da9467988aa890d4db2ebff1e824dec1de06ff8d5d065a0fb6fedebc",
+              "update_l2": 0.04285233714872238,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.7.running_var",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "54b85cc776666f27479b7741b1d6b47445e51af90ff2cdc156b4edf0085b6139",
+              "update_l2": 0.17698206146042406,
+              "updated": true,
+              "finite": true
+            }
+          ],
+          "updated_buffer_names": [
+            "0.block.1.num_batches_tracked",
+            "0.block.1.running_mean",
+            "0.block.1.running_var",
+            "0.block.4.num_batches_tracked",
+            "0.block.4.running_mean",
+            "0.block.4.running_var",
+            "0.block.7.num_batches_tracked",
+            "0.block.7.running_mean",
+            "0.block.7.running_var"
+          ],
+          "updated_buffer_count": 9,
+          "buffer_count": 9,
+          "all_finite": true
+        },
+        "backward_warnings": [],
+        "training_invalid_reasons": []
+      },
+      "candidate": {
+        "mode": "torch4ms",
+        "execution_mode": "pynative",
+        "execution_success": true,
+        "training_valid": true,
+        "loss": 1.0552157163619995,
+        "initial_parameter_hash": "d6ce4381d9c7b7b646283a89f541fd48e52b944b76a2f5080352fd76ac95250e",
+        "initial_parameter_names": [
+          "0.block.0.weight",
+          "0.block.1.weight",
+          "0.block.1.bias",
+          "0.block.3.weight",
+          "0.block.4.weight",
+          "0.block.4.bias",
+          "0.block.6.weight",
+          "0.block.7.weight",
+          "0.block.7.bias",
+          "3.weight",
+          "3.bias"
+        ],
+        "initial_parameter_shapes": {
+          "0.block.0.weight": [
+            8,
+            4,
+            1,
+            1
+          ],
+          "0.block.1.weight": [
+            8
+          ],
+          "0.block.1.bias": [
+            8
+          ],
+          "0.block.3.weight": [
+            8,
+            1,
+            3,
+            3
+          ],
+          "0.block.4.weight": [
+            8
+          ],
+          "0.block.4.bias": [
+            8
+          ],
+          "0.block.6.weight": [
+            4,
+            8,
+            1,
+            1
+          ],
+          "0.block.7.weight": [
+            4
+          ],
+          "0.block.7.bias": [
+            4
+          ],
+          "3.weight": [
+            3,
+            4
+          ],
+          "3.bias": [
+            3
+          ]
+        },
+        "initial_buffer_names": [
+          "0.block.1.running_mean",
+          "0.block.1.running_var",
+          "0.block.1.num_batches_tracked",
+          "0.block.4.running_mean",
+          "0.block.4.running_var",
+          "0.block.4.num_batches_tracked",
+          "0.block.7.running_mean",
+          "0.block.7.running_var",
+          "0.block.7.num_batches_tracked"
+        ],
+        "optimizer_param_groups": {
+          "groups": [
+            {
+              "group": 0,
+              "parameter_names": [
+                "0.block.0.weight",
+                "0.block.1.weight",
+                "0.block.1.bias",
+                "0.block.3.weight",
+                "0.block.4.weight",
+                "0.block.4.bias",
+                "0.block.6.weight",
+                "0.block.7.weight",
+                "0.block.7.bias",
+                "3.weight",
+                "3.bias"
+              ]
+            }
+          ],
+          "parameter_names": [
+            "0.block.0.weight",
+            "0.block.1.weight",
+            "0.block.1.bias",
+            "0.block.3.weight",
+            "0.block.4.weight",
+            "0.block.4.bias",
+            "0.block.6.weight",
+            "0.block.7.weight",
+            "0.block.7.bias",
+            "3.weight",
+            "3.bias"
+          ],
+          "model_parameter_names": [
+            "0.block.0.weight",
+            "0.block.1.weight",
+            "0.block.1.bias",
+            "0.block.3.weight",
+            "0.block.4.weight",
+            "0.block.4.bias",
+            "0.block.6.weight",
+            "0.block.7.weight",
+            "0.block.7.bias",
+            "3.weight",
+            "3.bias"
+          ],
+          "frozen_parameter_names": [],
+          "group_count": 1
+        },
+        "gradient_audit": {
+          "entries": [
+            {
+              "name": "0.block.0.weight",
+              "present": true,
+              "shape": [
+                8,
+                4,
+                1,
+                1
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.14062382280826569,
+              "hash": "7feee22a68674e7d27bc23c96283f2d104ea54e5908c744fa47378bd4441282d"
+            },
+            {
+              "name": "0.block.1.weight",
+              "present": true,
+              "shape": [
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 1.6167389276233735e-06,
+              "hash": "9ee3173615acf1d5189c8ec97857d4c7c9fc631b34f5c50756d540d615f73757"
+            },
+            {
+              "name": "0.block.1.bias",
+              "present": true,
+              "shape": [
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.016079992055892944,
+              "hash": "dd84d95f2acb080c2c12bb87009247abe11515e2c98ca552cdc1e62ee2aea289"
+            },
+            {
+              "name": "0.block.3.weight",
+              "present": true,
+              "shape": [
+                8,
+                1,
+                3,
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.1081191673874855,
+              "hash": "3254d20ba02412f0dcb0d00a21afe0058e8f5e7130b438f4542ad8e01e422374"
+            },
+            {
+              "name": "0.block.4.weight",
+              "present": true,
+              "shape": [
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.012372002005577087,
+              "hash": "4ac1bc93441f76380bc3e60968b459a4b2f389a50b46e2ceb9b4cef25a9b9800"
+            },
+            {
+              "name": "0.block.4.bias",
+              "present": true,
+              "shape": [
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.024299008771777153,
+              "hash": "13c186f1ea109b6f1a9342bc8b55e41e8a910cb96f165f785d06d7f440c172e3"
+            },
+            {
+              "name": "0.block.6.weight",
+              "present": true,
+              "shape": [
+                4,
+                8,
+                1,
+                1
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.08320680260658264,
+              "hash": "2a5113d33373b2e9dbac7f090ffbb8e745f6db862dfb284cf11749f341be610a"
+            },
+            {
+              "name": "0.block.7.weight",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.01767398603260517,
+              "hash": "f73b9408c7c123cc69ad601045b4d9c44196954d0c4539579659b73287fba644"
+            },
+            {
+              "name": "0.block.7.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.07637034356594086,
+              "hash": "242191fad2f33dd9fe84fb99ac9c002a7d917a7ec2bfb6e5fd3bbfdb3e7b689c"
+            },
+            {
+              "name": "3.weight",
+              "present": true,
+              "shape": [
+                3,
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.11325014382600784,
+              "hash": "da5339ecbee8c2e66a36960806415a39c7e982c05fda5269616ba1968d586712"
+            },
+            {
+              "name": "3.bias",
+              "present": true,
+              "shape": [
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.199371799826622,
+              "hash": "6743307585997bfdfec03690c29d82d94d9d3f4806c6e812cfbbf4241bbf5dd2"
+            }
+          ],
+          "nonempty_gradient_count": 11,
+          "parameter_count": 11,
+          "missing_gradient_names": [],
+          "nonfinite_gradient_names": [],
+          "all_gradients_present": true,
+          "all_gradients_finite": true
+        },
+        "parameter_update_audit": {
+          "entries": [
+            {
+              "name": "0.block.0.weight",
+              "shape": [
+                8,
+                4,
+                1,
+                1
+              ],
+              "before_hash": "f7b39e4218ae4d3f3b92aef75a1aeb15f695ff0aba2c97dad19899afe9fd9bd7",
+              "after_hash": "54ea1dff3f6ec5694d050424056756cef88d652a75189d32af7ba0f8fcc5d523",
+              "update_l2": 0.001406234606838718,
+              "update_rel_l2": 0.0010227339718135197,
+              "updated": true
+            },
+            {
+              "name": "0.block.1.bias",
+              "shape": [
+                8
+              ],
+              "before_hash": "e902cb1c7fc37117c1e601caa1d4d5511f6595dfb534aea074a7bc23b0e19f3e",
+              "after_hash": "e11b3d5c310c594d21326ab55eb788588d5a34067b55116cd5a45b073534c2fd",
+              "update_l2": 0.00016079991399418024,
+              "update_rel_l2": 160799913.99418023,
+              "updated": true
+            },
+            {
+              "name": "0.block.1.weight",
+              "shape": [
+                8
+              ],
+              "before_hash": "8d8bfb636a0928d6f091d7773b14c32481fcde7c43c5ed0ebd4f0151d198b138",
+              "after_hash": "8d8bfb636a0928d6f091d7773b14c32481fcde7c43c5ed0ebd4f0151d198b138",
+              "update_l2": 0.0,
+              "update_rel_l2": 0.0,
+              "updated": false
+            },
+            {
+              "name": "0.block.3.weight",
+              "shape": [
+                8,
+                1,
+                3,
+                3
+              ],
+              "before_hash": "23a4017953754aeafa09847b1e99b70514ff0106fe7cc03ba21c9b67b81d8ae1",
+              "after_hash": "1ec1d9f2d876b7f23d940cf20504fc7c65de7baf212e1c364411431dedc2be53",
+              "update_l2": 0.0010811897338187935,
+              "update_rel_l2": 0.0006730299511488954,
+              "updated": true
+            },
+            {
+              "name": "0.block.4.bias",
+              "shape": [
+                8
+              ],
+              "before_hash": "e902cb1c7fc37117c1e601caa1d4d5511f6595dfb534aea074a7bc23b0e19f3e",
+              "after_hash": "39e92a2e8c32ca7cc3b1457035159cfd3e83ad2e250d49f14fd5ac3f0f178708",
+              "update_l2": 0.0002429900861629398,
+              "update_rel_l2": 242990086.1629398,
+              "updated": true
+            },
+            {
+              "name": "0.block.4.weight",
+              "shape": [
+                8
+              ],
+              "before_hash": "8d8bfb636a0928d6f091d7773b14c32481fcde7c43c5ed0ebd4f0151d198b138",
+              "after_hash": "90087f34b21809748785e61b9ce5c3b3e95c3e79401e271c4bbe6cdb22be22e8",
+              "update_l2": 0.00012374300367596526,
+              "update_rel_l2": 4.374975851183345e-05,
+              "updated": true
+            },
+            {
+              "name": "0.block.6.weight",
+              "shape": [
+                4,
+                8,
+                1,
+                1
+              ],
+              "before_hash": "09501cc3fc2ad29ef5d0d34eb5b5e902d3f648d205456642fa651c0b76b18071",
+              "after_hash": "d1044e44c5586b4a2207541832400c955865985351a3fb2683c5ce3d8004567a",
+              "update_l2": 0.0008320689843635035,
+              "update_rel_l2": 0.0006985087961138986,
+              "updated": true
+            },
+            {
+              "name": "0.block.7.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "49e066b95dada4a9881091bb620d0af012c541795012633e317676489c4472cc",
+              "update_l2": 0.0007637034145190002,
+              "update_rel_l2": 763703414.5190002,
+              "updated": true
+            },
+            {
+              "name": "0.block.7.weight",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "cd728a8379e2432a96c98a607000a80ef4b6c18a597743919702b345610bdda1",
+              "update_l2": 0.00017671409131021806,
+              "update_rel_l2": 8.835704565510903e-05,
+              "updated": true
+            },
+            {
+              "name": "3.bias",
+              "shape": [
+                3
+              ],
+              "before_hash": "5a430aca6e3aa37b3b6cb99a4aa59034c2626d13c37b940c70a21f9123dbe8a4",
+              "after_hash": "cc78b9a0136322f2bdb8467a2c4fb6c7f4d22d580e6ab8091bce6621fdbc4a32",
+              "update_l2": 0.0019937167603188938,
+              "update_rel_l2": 0.004530345130589216,
+              "updated": true
+            },
+            {
+              "name": "3.weight",
+              "shape": [
+                3,
+                4
+              ],
+              "before_hash": "46658b906ad2252f0db51c845d207aea379a3e6930b8646841ee0dbd70b8fd6c",
+              "after_hash": "5be9f53bdefb092a1ebf5b372311bc97ae99a436b1aff346bc2cabafc876b4ec",
+              "update_l2": 0.0011324944923548688,
+              "update_rel_l2": 0.0012647887819596387,
+              "updated": true
+            }
+          ],
+          "updated_parameter_names": [
+            "0.block.0.weight",
+            "0.block.1.bias",
+            "0.block.3.weight",
+            "0.block.4.bias",
+            "0.block.4.weight",
+            "0.block.6.weight",
+            "0.block.7.bias",
+            "0.block.7.weight",
+            "3.bias",
+            "3.weight"
+          ],
+          "updated_parameter_count": 10,
+          "parameter_count": 11,
+          "update_l2": 0.00313224200869036,
+          "all_finite": true
+        },
+        "buffer_audit": {
+          "entries": [
+            {
+              "name": "0.block.1.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.1.running_mean",
+              "shape": [
+                8
+              ],
+              "before_hash": "e902cb1c7fc37117c1e601caa1d4d5511f6595dfb534aea074a7bc23b0e19f3e",
+              "after_hash": "32bd58c5621cf538191cc3ab7c079ba142fcf78fa99190b01ea6db97c63c18c9",
+              "update_l2": 0.005769318363420686,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.1.running_var",
+              "shape": [
+                8
+              ],
+              "before_hash": "8d8bfb636a0928d6f091d7773b14c32481fcde7c43c5ed0ebd4f0151d198b138",
+              "after_hash": "e74d0e2dd6cafd8b31c515df0de628f942cb0f9494a5ef32aeb0ec691e12e503",
+              "update_l2": 0.22376517181658076,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.4.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.4.running_mean",
+              "shape": [
+                8
+              ],
+              "before_hash": "e902cb1c7fc37117c1e601caa1d4d5511f6595dfb534aea074a7bc23b0e19f3e",
+              "after_hash": "bdf5c888e4f49aeb0579c8efc2b69f3fb9ce4ff30dd7b2151e2015946695b46a",
+              "update_l2": 0.04358698392010877,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.4.running_var",
+              "shape": [
+                8
+              ],
+              "before_hash": "8d8bfb636a0928d6f091d7773b14c32481fcde7c43c5ed0ebd4f0151d198b138",
+              "after_hash": "3f226c82ca050227edfdc484233e0d94933df4b94f98f36a7c037c9409e2e058",
+              "update_l2": 0.25532366315723737,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.7.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.7.running_mean",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "537111f38edea860ef20323d4581e65fb9c01f834da71be0bd0f9e890d2c6b63",
+              "update_l2": 0.0428523373674142,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.7.running_var",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "47fa3564047a2a8d8dbb20859bc626e1991f1d2c5ab783a42c551ec8b69ef2bf",
+              "update_l2": 0.1770713017882432,
+              "updated": true,
+              "finite": true
+            }
+          ],
+          "updated_buffer_names": [
+            "0.block.1.num_batches_tracked",
+            "0.block.1.running_mean",
+            "0.block.1.running_var",
+            "0.block.4.num_batches_tracked",
+            "0.block.4.running_mean",
+            "0.block.4.running_var",
+            "0.block.7.num_batches_tracked",
+            "0.block.7.running_mean",
+            "0.block.7.running_var"
+          ],
+          "updated_buffer_count": 9,
+          "buffer_count": 9,
+          "all_finite": true
+        },
+        "backward_warnings": [],
+        "training_invalid_reasons": []
+      },
+      "execution_success": true,
+      "training_valid": true,
+      "update_parameter_sets_identical": true,
+      "zero_gradient_parameter_sets_identical": true,
+      "initial_parameters_identical": true
+    },
+    {
+      "case": "linear_cross_entropy",
+      "mode": "graph",
+      "seed": 1701,
+      "reference": {
+        "mode": "torch",
+        "execution_success": true,
+        "training_valid": true,
+        "loss": 1.4403796195983887,
+        "initial_parameter_hash": "7392ebbd3a9e3c76f86c3e55c019e690f4fac534a59307bf30059210351c0942",
+        "initial_parameter_names": [
+          "weight",
+          "bias"
+        ],
+        "initial_parameter_shapes": {
+          "weight": [
+            4,
+            8
+          ],
+          "bias": [
+            4
+          ]
+        },
+        "initial_buffer_names": [],
+        "optimizer_param_groups": {
+          "groups": [
+            {
+              "group": 0,
+              "parameter_names": [
+                "weight",
+                "bias"
+              ]
+            }
+          ],
+          "parameter_names": [
+            "weight",
+            "bias"
+          ],
+          "model_parameter_names": [
+            "weight",
+            "bias"
+          ],
+          "frozen_parameter_names": [],
+          "group_count": 1
+        },
+        "gradient_audit": {
+          "entries": [
+            {
+              "name": "weight",
+              "present": true,
+              "shape": [
+                4,
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.9501042366027832,
+              "hash": "d328686970859bcdf295fe422643c258b1beac4b5d4e3e2dadb7cb984df75606"
+            },
+            {
+              "name": "bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.2008974552154541,
+              "hash": "d447516434ecc73b4624f041907f3a48221c69871952839eea941346c09c05cb"
+            }
+          ],
+          "nonempty_gradient_count": 2,
+          "parameter_count": 2,
+          "missing_gradient_names": [],
+          "nonfinite_gradient_names": [],
+          "all_gradients_present": true,
+          "all_gradients_finite": true
+        },
+        "parameter_update_audit": {
+          "entries": [
+            {
+              "name": "bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "bf05e7904d43781b3253d612fcb6dccc1e4a1ee753e38111a29a56a362b3d4e3",
+              "after_hash": "3f6047d1616f58e6ebd827c2c78b6449a5556ee411a44e825c5e4a452f5041a8",
+              "update_l2": 0.0020089762421879216,
+              "update_rel_l2": 0.005642754547579441,
+              "updated": true
+            },
+            {
+              "name": "weight",
+              "shape": [
+                4,
+                8
+              ],
+              "before_hash": "51abd136d087747867269b5ceb40c43c38502c21ca087bf5f595f1b2b57b0852",
+              "after_hash": "013756d38414befb60e7a1f76b4a85c90411bac2c9ec98c537534f098913de9f",
+              "update_l2": 0.009501040378549505,
+              "update_rel_l2": 0.009772171252517215,
+              "updated": true
+            }
+          ],
+          "updated_parameter_names": [
+            "bias",
+            "weight"
+          ],
+          "updated_parameter_count": 2,
+          "parameter_count": 2,
+          "update_l2": 0.00971111496258301,
+          "all_finite": true
+        },
+        "buffer_audit": {
+          "entries": [],
+          "updated_buffer_names": [],
+          "updated_buffer_count": 0,
+          "buffer_count": 0,
+          "all_finite": true
+        },
+        "backward_warnings": [],
+        "training_invalid_reasons": []
+      },
+      "candidate": {
+        "mode": "torch4ms",
+        "execution_mode": "graph",
+        "execution_success": true,
+        "training_valid": true,
+        "loss": 1.4403785467147827,
+        "initial_parameter_hash": "7392ebbd3a9e3c76f86c3e55c019e690f4fac534a59307bf30059210351c0942",
+        "initial_parameter_names": [
+          "weight",
+          "bias"
+        ],
+        "initial_parameter_shapes": {
+          "weight": [
+            4,
+            8
+          ],
+          "bias": [
+            4
+          ]
+        },
+        "initial_buffer_names": [],
+        "optimizer_param_groups": {
+          "groups": [
+            {
+              "group": 0,
+              "parameter_names": [
+                "weight",
+                "bias"
+              ]
+            }
+          ],
+          "parameter_names": [
+            "weight",
+            "bias"
+          ],
+          "model_parameter_names": [
+            "weight",
+            "bias"
+          ],
+          "frozen_parameter_names": [],
+          "group_count": 1
+        },
+        "gradient_audit": {
+          "entries": [
+            {
+              "name": "weight",
+              "present": true,
+              "shape": [
+                4,
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.9501042366027832,
+              "hash": "d37608277b4cbaa2d66242630ab76a9e1d1dd24344f9bf4ff8f19d084378e14e"
+            },
+            {
+              "name": "bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.20089754462242126,
+              "hash": "4e4f7d2bc531b277c78858e15bfce80e5aac07a59c943f9688ef4cf22fb2601f"
+            }
+          ],
+          "nonempty_gradient_count": 2,
+          "parameter_count": 2,
+          "missing_gradient_names": [],
+          "nonfinite_gradient_names": [],
+          "all_gradients_present": true,
+          "all_gradients_finite": true
+        },
+        "parameter_update_audit": {
+          "entries": [
+            {
+              "name": "bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "bf05e7904d43781b3253d612fcb6dccc1e4a1ee753e38111a29a56a362b3d4e3",
+              "after_hash": "2f3c7dc883f4aa2554033c3805ef958898aa182db2b291d011cab10ccbb515e6",
+              "update_l2": 0.0020089682602807955,
+              "update_rel_l2": 0.005642732128228834,
+              "updated": true
+            },
+            {
+              "name": "weight",
+              "shape": [
+                4,
+                8
+              ],
+              "before_hash": "51abd136d087747867269b5ceb40c43c38502c21ca087bf5f595f1b2b57b0852",
+              "after_hash": "626e08714a267400ec9027a1cbfc9da91989d16cc5c7bfe5a90c97e8a559d64b",
+              "update_l2": 0.009501036787413998,
+              "update_rel_l2": 0.009772167558901593,
+              "updated": true
+            }
+          ],
+          "updated_parameter_names": [
+            "bias",
+            "weight"
+          ],
+          "updated_parameter_count": 2,
+          "parameter_count": 2,
+          "update_l2": 0.009711109797886633,
+          "all_finite": true
+        },
+        "buffer_audit": {
+          "entries": [],
+          "updated_buffer_names": [],
+          "updated_buffer_count": 0,
+          "buffer_count": 0,
+          "all_finite": true
+        },
+        "backward_warnings": [],
+        "training_invalid_reasons": []
+      },
+      "execution_success": true,
+      "training_valid": true,
+      "update_parameter_sets_identical": true,
+      "zero_gradient_parameter_sets_identical": true,
+      "initial_parameters_identical": true
+    },
+    {
+      "case": "conv_batchnorm_relu",
+      "mode": "graph",
+      "seed": 1701,
+      "reference": {
+        "mode": "torch",
+        "execution_success": true,
+        "training_valid": true,
+        "loss": 1.4567521810531616,
+        "initial_parameter_hash": "ae7ef79187180522782a2cd12e9ecaf6759be2c20cc7a2cdbbe6c664464d1287",
+        "initial_parameter_names": [
+          "0.weight",
+          "0.bias",
+          "1.weight",
+          "1.bias",
+          "4.weight",
+          "4.bias"
+        ],
+        "initial_parameter_shapes": {
+          "0.weight": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "0.bias": [
+            4
+          ],
+          "1.weight": [
+            4
+          ],
+          "1.bias": [
+            4
+          ],
+          "4.weight": [
+            3,
+            256
+          ],
+          "4.bias": [
+            3
+          ]
+        },
+        "initial_buffer_names": [
+          "1.running_mean",
+          "1.running_var",
+          "1.num_batches_tracked"
+        ],
+        "optimizer_param_groups": {
+          "groups": [
+            {
+              "group": 0,
+              "parameter_names": [
+                "0.weight",
+                "0.bias",
+                "1.weight",
+                "1.bias",
+                "4.weight",
+                "4.bias"
+              ]
+            }
+          ],
+          "parameter_names": [
+            "0.weight",
+            "0.bias",
+            "1.weight",
+            "1.bias",
+            "4.weight",
+            "4.bias"
+          ],
+          "model_parameter_names": [
+            "0.weight",
+            "0.bias",
+            "1.weight",
+            "1.bias",
+            "4.weight",
+            "4.bias"
+          ],
+          "frozen_parameter_names": [],
+          "group_count": 1
+        },
+        "gradient_audit": {
+          "entries": [
+            {
+              "name": "0.weight",
+              "present": true,
+              "shape": [
+                4,
+                3,
+                3,
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 1.8493248224258423,
+              "hash": "ee9498aa548a00dc4605b3ad4761948d339eb10c394b4ebef21f4c2ed3991bdd"
+            },
+            {
+              "name": "0.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 5.5380422026019005e-08,
+              "hash": "2ee720ce81c6d2e8e0833c03a811ae6a4bd452ee85b09d2d3d3f9659a43a82dd"
+            },
+            {
+              "name": "1.weight",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.273465633392334,
+              "hash": "a8c2360bb3b952637a2a308e9cb0d142e0bd1fdf9edf0e64e23abaa0e801569c"
+            },
+            {
+              "name": "1.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.22307895123958588,
+              "hash": "a54190fb03e89cc41b99f650395e4f4ced8ea615511b3a0d09ac1325e77a9bd9"
+            },
+            {
+              "name": "4.weight",
+              "present": true,
+              "shape": [
+                3,
+                256
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 5.007734775543213,
+              "hash": "16abbe9ff4aad6c8a35de573bd5fdf2d73c28b39ad1a117df98fb5897490509c"
+            },
+            {
+              "name": "4.bias",
+              "present": true,
+              "shape": [
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.35623544454574585,
+              "hash": "e31e5347b87715c95175b9836c16555e810a58d7df77edc2c85699f2b80433e2"
+            }
+          ],
+          "nonempty_gradient_count": 6,
+          "parameter_count": 6,
+          "missing_gradient_names": [],
+          "nonfinite_gradient_names": [],
+          "all_gradients_present": true,
+          "all_gradients_finite": true
+        },
+        "parameter_update_audit": {
+          "entries": [
+            {
+              "name": "0.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "470c3410356bf055746a7bc31066e305b67719f64228a1a873fa767dacf3f8a8",
+              "after_hash": "470c3410356bf055746a7bc31066e305b67719f64228a1a873fa767dacf3f8a8",
+              "update_l2": 0.0,
+              "update_rel_l2": 0.0,
+              "updated": false
+            },
+            {
+              "name": "0.weight",
+              "shape": [
+                4,
+                3,
+                3,
+                3
+              ],
+              "before_hash": "8d0cbb0b9c1dfc570bdc66f9b073ac75424a2c4b4dce08585f09ab1e92e8f6c3",
+              "after_hash": "33e5db293087340c9714c993dfa8bb124d3af0456c74ddd4e3966ac8cbc5b95a",
+              "update_l2": 0.0184932424124334,
+              "update_rel_l2": 0.016970442933830498,
+              "updated": true
+            },
+            {
+              "name": "1.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "0ff673a6901b3dc741bb1fcf299e670604ff4d82918686e84d4aaa0279f77eb3",
+              "update_l2": 0.002230789418510478,
+              "update_rel_l2": 2230789418.510478,
+              "updated": true
+            },
+            {
+              "name": "1.weight",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "b3a8e21407cfa4e4c2751e53bbe74e81a5c1069e6623d5e9ce3a812d8a926253",
+              "update_l2": 0.002734637108332111,
+              "update_rel_l2": 0.0013673185541660555,
+              "updated": true
+            },
+            {
+              "name": "4.bias",
+              "shape": [
+                3
+              ],
+              "before_hash": "7a47bb93a4f3cde8f5775b9d29793fcf284e68abcaeeb7a03d164002dd4b898d",
+              "after_hash": "027cd5810f09dd353c3cf9164545ff5b36a9a7de2c58a0643b2d7ce16813d4f7",
+              "update_l2": 0.003562354495779389,
+              "update_rel_l2": 0.057235512959603205,
+              "updated": true
+            },
+            {
+              "name": "4.weight",
+              "shape": [
+                3,
+                256
+              ],
+              "before_hash": "54d206893149ae1a6c303b7e8367127630d6335f0da10b8a9c3d8829a8853d4b",
+              "after_hash": "5cac7bc2f09084971dccc9ecd22d88e45566d91c8d7e3195072f8d3f1cbc6ec3",
+              "update_l2": 0.05007735132338335,
+              "update_rel_l2": 0.05050726877366914,
+              "updated": true
+            }
+          ],
+          "updated_parameter_names": [
+            "0.weight",
+            "1.bias",
+            "1.weight",
+            "4.bias",
+            "4.weight"
+          ],
+          "updated_parameter_count": 5,
+          "parameter_count": 6,
+          "update_l2": 0.053617964914645856,
+          "all_finite": true
+        },
+        "buffer_audit": {
+          "entries": [
+            {
+              "name": "1.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "1.running_mean",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "c3f86abd245d671aff6ec6427917033e0a67c9ddce0aad9e17c41c61d7ec7be6",
+              "update_l2": 0.030068467618817176,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "1.running_var",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "9b07b363fcafcf98bb9431ec110504bfbf52bcf303cb4db23936cebba223a42e",
+              "update_l2": 0.1542084077256149,
+              "updated": true,
+              "finite": true
+            }
+          ],
+          "updated_buffer_names": [
+            "1.num_batches_tracked",
+            "1.running_mean",
+            "1.running_var"
+          ],
+          "updated_buffer_count": 3,
+          "buffer_count": 3,
+          "all_finite": true
+        },
+        "backward_warnings": [],
+        "training_invalid_reasons": []
+      },
+      "candidate": {
+        "mode": "torch4ms",
+        "execution_mode": "graph",
+        "execution_success": false,
+        "training_valid": false,
+        "error": "RuntimeError: unsupported_graph_mode: MindSpore parser rejected the training closure: TypeError: Only support jit_class instance, but got PythonObject(type: <class 'torch4ms.tensor.Environment'>, value: <torch4ms.tensor.Environment object at 0x7497cff16cd0>)\n\n----------------------------------------------------\n- C++ Call Stack: (For framework developers)\n----------------------------------------------------\nmindspore/ccsrc/frontend/jit/ps/static_analysis/prim.cc:4522 EvalPrim\n\n----------------------------------------------------\n- The Traceback of Net Construct Code:\n----------------------------------------------------\n# 0 In file /media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/ops/composite/base.py:370, 27~53\n                    return grad_(fn)(*args, **kwargs)\n                           ^~~~~~~~~~~~~~~~~~~~~~~~~~\n# 1 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:636, 24~52\n            output_ms = model_forward_fn(*ms_params)\n                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 2 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:472, 19~71\n            return model_forward_base_fn(*ms_params, *input_tensors_ms)\n                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 3 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/forward_extractor.py:141~142, 12~44\n            with env:\n (See file '/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/rank_0/om/analyze_fail.ir' for more details. Get instructions about `analyze_fail.ir` at https://www.mindspore.cn/search?inputValue=analyze_fail.ir)",
+        "traceback": "Traceback (most recent call last):\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/__init__.py\", line 507, in _run_backward\n    grads = grad_fn(*ms_inputs, grad_output)\n  File \"/media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/common/api.py\", line 1137, in staging_specialize\n    out = jit_executor(*args, **kwargs)\n  File \"/media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/common/api.py\", line 188, in wrapper\n    results = fn(*arg, **kwargs)\n  File \"/media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/common/api.py\", line 687, in __call__\n    raise err\n  File \"/media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/common/api.py\", line 683, in __call__\n    phase = self.compile(self.fn.__name__, *args_list, **kwargs)\n  File \"/media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/common/api.py\", line 792, in compile\n    is_compile = self._graph_executor.compile(self.fn, compile_args, kwargs, phase, jit_config_dict)\nTypeError: Only support jit_class instance, but got PythonObject(type: <class 'torch4ms.tensor.Environment'>, value: <torch4ms.tensor.Environment object at 0x7497cff16cd0>)\n\n----------------------------------------------------\n- C++ Call Stack: (For framework developers)\n----------------------------------------------------\nmindspore/ccsrc/frontend/jit/ps/static_analysis/prim.cc:4522 EvalPrim\n\n----------------------------------------------------\n- The Traceback of Net Construct Code:\n----------------------------------------------------\n# 0 In file /media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/ops/composite/base.py:370, 27~53\n                    return grad_(fn)(*args, **kwargs)\n                           ^~~~~~~~~~~~~~~~~~~~~~~~~~\n# 1 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:636, 24~52\n            output_ms = model_forward_fn(*ms_params)\n                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 2 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:472, 19~71\n            return model_forward_base_fn(*ms_params, *input_tensors_ms)\n                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 3 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/forward_extractor.py:141~142, 12~44\n            with env:\n (See file '/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/rank_0/om/analyze_fail.ir' for more details. Get instructions about `analyze_fail.ir` at https://www.mindspore.cn/search?inputValue=analyze_fail.ir)\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/experiments/experiment_request_20260820/04_experiment_D_real_learning_dynamics/run_minimal_regression.py\", line 268, in _run_one\n    candidate_result = _run_torch4ms(candidate, inputs.clone(), targets.clone(), learning_rate, mode_name)\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/experiments/experiment_request_20260820/04_experiment_D_real_learning_dynamics/run_minimal_regression.py\", line 226, in _run_torch4ms\n    loss.backward(module=model)\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/tensor.py\", line 607, in backward\n    _ms_backward(\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/__init__.py\", line 372, in backward\n    _run_backward(\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/__init__.py\", line 616, in _run_backward\n    raise RuntimeError(\nRuntimeError: unsupported_graph_mode: MindSpore parser rejected the training closure: TypeError: Only support jit_class instance, but got PythonObject(type: <class 'torch4ms.tensor.Environment'>, value: <torch4ms.tensor.Environment object at 0x7497cff16cd0>)\n\n----------------------------------------------------\n- C++ Call Stack: (For framework developers)\n----------------------------------------------------\nmindspore/ccsrc/frontend/jit/ps/static_analysis/prim.cc:4522 EvalPrim\n\n----------------------------------------------------\n- The Traceback of Net Construct Code:\n----------------------------------------------------\n# 0 In file /media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/ops/composite/base.py:370, 27~53\n                    return grad_(fn)(*args, **kwargs)\n                           ^~~~~~~~~~~~~~~~~~~~~~~~~~\n# 1 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:636, 24~52\n            output_ms = model_forward_fn(*ms_params)\n                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 2 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:472, 19~71\n            return model_forward_base_fn(*ms_params, *input_tensors_ms)\n                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 3 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/forward_extractor.py:141~142, 12~44\n            with env:\n (See file '/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/rank_0/om/analyze_fail.ir' for more details. Get instructions about `analyze_fail.ir` at https://www.mindspore.cn/search?inputValue=analyze_fail.ir)\n"
+      },
+      "execution_success": false,
+      "training_valid": false,
+      "update_parameter_sets_identical": false,
+      "zero_gradient_parameter_sets_identical": true,
+      "initial_parameters_identical": false
+    },
+    {
+      "case": "basic_block_residual_downsample",
+      "mode": "graph",
+      "seed": 1701,
+      "reference": {
+        "mode": "torch",
+        "execution_success": true,
+        "training_valid": true,
+        "loss": 1.1917297840118408,
+        "initial_parameter_hash": "83b1fb8747f4a80c99f702555c9df17a1829d0a62934b7adaf9c2a7b68b19b60",
+        "initial_parameter_names": [
+          "0.conv1.weight",
+          "0.bn1.weight",
+          "0.bn1.bias",
+          "0.conv2.weight",
+          "0.bn2.weight",
+          "0.bn2.bias",
+          "0.downsample.0.weight",
+          "0.downsample.1.weight",
+          "0.downsample.1.bias",
+          "3.weight",
+          "3.bias"
+        ],
+        "initial_parameter_shapes": {
+          "0.conv1.weight": [
+            4,
+            3,
+            3,
+            3
+          ],
+          "0.bn1.weight": [
+            4
+          ],
+          "0.bn1.bias": [
+            4
+          ],
+          "0.conv2.weight": [
+            4,
+            4,
+            3,
+            3
+          ],
+          "0.bn2.weight": [
+            4
+          ],
+          "0.bn2.bias": [
+            4
+          ],
+          "0.downsample.0.weight": [
+            4,
+            3,
+            1,
+            1
+          ],
+          "0.downsample.1.weight": [
+            4
+          ],
+          "0.downsample.1.bias": [
+            4
+          ],
+          "3.weight": [
+            3,
+            4
+          ],
+          "3.bias": [
+            3
+          ]
+        },
+        "initial_buffer_names": [
+          "0.bn1.running_mean",
+          "0.bn1.running_var",
+          "0.bn1.num_batches_tracked",
+          "0.bn2.running_mean",
+          "0.bn2.running_var",
+          "0.bn2.num_batches_tracked",
+          "0.downsample.1.running_mean",
+          "0.downsample.1.running_var",
+          "0.downsample.1.num_batches_tracked"
+        ],
+        "optimizer_param_groups": {
+          "groups": [
+            {
+              "group": 0,
+              "parameter_names": [
+                "0.conv1.weight",
+                "0.bn1.weight",
+                "0.bn1.bias",
+                "0.conv2.weight",
+                "0.bn2.weight",
+                "0.bn2.bias",
+                "0.downsample.0.weight",
+                "0.downsample.1.weight",
+                "0.downsample.1.bias",
+                "3.weight",
+                "3.bias"
+              ]
+            }
+          ],
+          "parameter_names": [
+            "0.conv1.weight",
+            "0.bn1.weight",
+            "0.bn1.bias",
+            "0.conv2.weight",
+            "0.bn2.weight",
+            "0.bn2.bias",
+            "0.downsample.0.weight",
+            "0.downsample.1.weight",
+            "0.downsample.1.bias",
+            "3.weight",
+            "3.bias"
+          ],
+          "model_parameter_names": [
+            "0.conv1.weight",
+            "0.bn1.weight",
+            "0.bn1.bias",
+            "0.conv2.weight",
+            "0.bn2.weight",
+            "0.bn2.bias",
+            "0.downsample.0.weight",
+            "0.downsample.1.weight",
+            "0.downsample.1.bias",
+            "3.weight",
+            "3.bias"
+          ],
+          "frozen_parameter_names": [],
+          "group_count": 1
+        },
+        "gradient_audit": {
+          "entries": [
+            {
+              "name": "0.conv1.weight",
+              "present": true,
+              "shape": [
+                4,
+                3,
+                3,
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.394838809967041,
+              "hash": "0a37a27d61046e3eb882e3fbd84bc2de4351d6cfc8555ff6b36066d0553ea117"
+            },
+            {
+              "name": "0.bn1.weight",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.014614428393542767,
+              "hash": "42debc12b9d8e182ffb8016fe6c4f5c70bdd0e42ac046c7a4979a9122132aa3e"
+            },
+            {
+              "name": "0.bn1.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.04557991400361061,
+              "hash": "88b227ec7731843c04a7a2e48f4c05156a1b9eae57d707a8420ea281602beeab"
+            },
+            {
+              "name": "0.conv2.weight",
+              "present": true,
+              "shape": [
+                4,
+                4,
+                3,
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.3592320382595062,
+              "hash": "7a9567d9af560de1a2b1d6e6f73611aa04dc09567a1a1c85fe81f6d3371d8576"
+            },
+            {
+              "name": "0.bn2.weight",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.06159722059965134,
+              "hash": "9706b40a756f5ee6afcc1460ae7ad34d0015450c6eedaa1d0fb1074731979343"
+            },
+            {
+              "name": "0.bn2.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.07812988758087158,
+              "hash": "7731ee50a781563af549c5f6ba77d9d1443ee17057347c4fe53c121c311171ca"
+            },
+            {
+              "name": "0.downsample.0.weight",
+              "present": true,
+              "shape": [
+                4,
+                3,
+                1,
+                1
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.08617165684700012,
+              "hash": "29d9768c1dffc0d2b62a09315bb745281ecffff0f9bc044c814205f2b3482cc8"
+            },
+            {
+              "name": "0.downsample.1.weight",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.05129287391901016,
+              "hash": "8cda7547beeacf716303ee1dfb36fb4faa08a398ed76c033dbed84cf5cbbea95"
+            },
+            {
+              "name": "0.downsample.1.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.07812988758087158,
+              "hash": "7731ee50a781563af549c5f6ba77d9d1443ee17057347c4fe53c121c311171ca"
+            },
+            {
+              "name": "3.weight",
+              "present": true,
+              "shape": [
+                3,
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.35705235600471497,
+              "hash": "24ddf2fd12db527199370e7b1e9e0bdd7ba0ff9a0d9cbbe7461978787a150caf"
+            },
+            {
+              "name": "3.bias",
+              "present": true,
+              "shape": [
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.31793835759162903,
+              "hash": "440fbf042fd4a4b670bc4602b84742b60784273ae69529160408da21347cb8ac"
+            }
+          ],
+          "nonempty_gradient_count": 11,
+          "parameter_count": 11,
+          "missing_gradient_names": [],
+          "nonfinite_gradient_names": [],
+          "all_gradients_present": true,
+          "all_gradients_finite": true
+        },
+        "parameter_update_audit": {
+          "entries": [
+            {
+              "name": "0.bn1.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "ff27b2dfafe227f065688456f1ed2f84d48fcfaf47d370a050fa5a14fbc05ed1",
+              "update_l2": 0.0004557991083140548,
+              "update_rel_l2": 455799108.3140548,
+              "updated": true
+            },
+            {
+              "name": "0.bn1.weight",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "519ef259b273bf87939d16e7ea8ddcd87425e1312882ba9735240d91775c5d4e",
+              "update_l2": 0.00014611758636204277,
+              "update_rel_l2": 7.305879318102138e-05,
+              "updated": true
+            },
+            {
+              "name": "0.bn2.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "8408112846c811b90ce4adf34559dc0a31987dd8566d86226dd984936286d632",
+              "update_l2": 0.0007812988522386651,
+              "update_rel_l2": 781298852.2386651,
+              "updated": true
+            },
+            {
+              "name": "0.bn2.weight",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "fbd302b7bb98a8cfe33f3bfe8343650e77f859e3bb66959415c9fed8f30a398b",
+              "update_l2": 0.0006159220580969606,
+              "update_rel_l2": 0.0003079610290484803,
+              "updated": true
+            },
+            {
+              "name": "0.conv1.weight",
+              "shape": [
+                4,
+                3,
+                3,
+                3
+              ],
+              "before_hash": "8d0cbb0b9c1dfc570bdc66f9b073ac75424a2c4b4dce08585f09ab1e92e8f6c3",
+              "after_hash": "d7f223a02a945b881c265fdaf5534f7650f7d05022c28389c166d87e3278f4e6",
+              "update_l2": 0.0039483842479027115,
+              "update_rel_l2": 0.0036232602193555182,
+              "updated": true
+            },
+            {
+              "name": "0.conv2.weight",
+              "shape": [
+                4,
+                4,
+                3,
+                3
+              ],
+              "before_hash": "e089f09ce7d6f2ccc3fecba1e7112c635997a2b75398a5443ecab89408e597e7",
+              "after_hash": "bac9115fc860b68123beec1d192a2789a4fc80fab0afe64bd58ad658420724a4",
+              "update_l2": 0.0035923220142910356,
+              "update_rel_l2": 0.0030866450078882706,
+              "updated": true
+            },
+            {
+              "name": "0.downsample.0.weight",
+              "shape": [
+                4,
+                3,
+                1,
+                1
+              ],
+              "before_hash": "d14a52ce71cb8436cdb5ad220de9a8809f38dfbc4d3840ca871c4d06148c9469",
+              "after_hash": "2df205586a4f43d2c3766cd5b0d523dd119e2506f24493dc2e897f6b7746e4ac",
+              "update_l2": 0.0008617168601364176,
+              "update_rel_l2": 0.0007596544590820508,
+              "updated": true
+            },
+            {
+              "name": "0.downsample.1.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "8408112846c811b90ce4adf34559dc0a31987dd8566d86226dd984936286d632",
+              "update_l2": 0.0007812988522386651,
+              "update_rel_l2": 781298852.2386651,
+              "updated": true
+            },
+            {
+              "name": "0.downsample.1.weight",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "69586babb0db1912f8ba87bb78514c244d808423a298f1db5dd394a3825eda35",
+              "update_l2": 0.0005129552354267344,
+              "update_rel_l2": 0.0002564776177133672,
+              "updated": true
+            },
+            {
+              "name": "3.bias",
+              "shape": [
+                3
+              ],
+              "before_hash": "cadb1574bec6eca4043485d00bc4ab7c2e8ddaa57c02f03d42f0e133eb756a61",
+              "after_hash": "ca1629a3ee5a6ed92d1fafa94ba12dca0a066a5125f5da54fda3a36e1d898add",
+              "update_l2": 0.0031793892480425925,
+              "update_rel_l2": 0.006690979954335373,
+              "updated": true
+            },
+            {
+              "name": "3.weight",
+              "shape": [
+                3,
+                4
+              ],
+              "before_hash": "16634a82a133f2233d3bfdae3795ff64e31d981b0d2c5d789fb89130c9a76584",
+              "after_hash": "e37976db23e1b70ac62d8375aeb658dffb47a9cd85f6323ce7618f7a59fbb355",
+              "update_l2": 0.003570519720732684,
+              "update_rel_l2": 0.003463910384521672,
+              "updated": true
+            }
+          ],
+          "updated_parameter_names": [
+            "0.bn1.bias",
+            "0.bn1.weight",
+            "0.bn2.bias",
+            "0.bn2.weight",
+            "0.conv1.weight",
+            "0.conv2.weight",
+            "0.downsample.0.weight",
+            "0.downsample.1.bias",
+            "0.downsample.1.weight",
+            "3.bias",
+            "3.weight"
+          ],
+          "updated_parameter_count": 11,
+          "parameter_count": 11,
+          "update_l2": 0.007361157562612326,
+          "all_finite": true
+        },
+        "buffer_audit": {
+          "entries": [
+            {
+              "name": "0.bn1.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.bn1.running_mean",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "c14e2865e945bd7c5777031f8170d87b0cb12e75211e80d6daaf5fbf10de289b",
+              "update_l2": 0.008375225651976714,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.bn1.running_var",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "8f52ff0bb7e74a1c4a658d35848527617e7f1a584493766001d9c69571715e06",
+              "update_l2": 0.15120444734191496,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.bn2.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.bn2.running_mean",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "6c3b68bc6cd84f131d1cb4c8f4d02d47364d738f40eeafd0dce191ea887965bf",
+              "update_l2": 0.03330022761883329,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.bn2.running_var",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "5302746e91d10bfbffb32fdbbf2a4a7cb042178d6ee48ca7f2781e7ce71c6942",
+              "update_l2": 0.17772897728854886,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.downsample.1.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.downsample.1.running_mean",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "6caa72f8549bb95cf926627dfae4503445f86e2f4ae53cdb6288fd27c11c2f89",
+              "update_l2": 0.0072847664346865825,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.downsample.1.running_var",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "b482c14703bb6abd5f6592d34cb93b399f31941cdbb7e813bef6a6b9b01c13ee",
+              "update_l2": 0.14418109419493286,
+              "updated": true,
+              "finite": true
+            }
+          ],
+          "updated_buffer_names": [
+            "0.bn1.num_batches_tracked",
+            "0.bn1.running_mean",
+            "0.bn1.running_var",
+            "0.bn2.num_batches_tracked",
+            "0.bn2.running_mean",
+            "0.bn2.running_var",
+            "0.downsample.1.num_batches_tracked",
+            "0.downsample.1.running_mean",
+            "0.downsample.1.running_var"
+          ],
+          "updated_buffer_count": 9,
+          "buffer_count": 9,
+          "all_finite": true
+        },
+        "backward_warnings": [],
+        "training_invalid_reasons": []
+      },
+      "candidate": {
+        "mode": "torch4ms",
+        "execution_mode": "graph",
+        "execution_success": false,
+        "training_valid": false,
+        "error": "RuntimeError: unsupported_graph_mode: MindSpore parser rejected the training closure: TypeError: Only support jit_class instance, but got PythonObject(type: <class 'torch4ms.tensor.Environment'>, value: <torch4ms.tensor.Environment object at 0x7497cff16cd0>)\n\n----------------------------------------------------\n- C++ Call Stack: (For framework developers)\n----------------------------------------------------\nmindspore/ccsrc/frontend/jit/ps/static_analysis/prim.cc:4522 EvalPrim\n\n----------------------------------------------------\n- The Traceback of Net Construct Code:\n----------------------------------------------------\n# 0 In file /media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/ops/composite/base.py:370, 27~53\n                    return grad_(fn)(*args, **kwargs)\n                           ^~~~~~~~~~~~~~~~~~~~~~~~~~\n# 1 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:636, 24~52\n            output_ms = model_forward_fn(*ms_params)\n                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 2 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:472, 19~71\n            return model_forward_base_fn(*ms_params, *input_tensors_ms)\n                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 3 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/forward_extractor.py:141~142, 12~44\n            with env:\n (See file '/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/rank_0/om/analyze_fail.ir' for more details. Get instructions about `analyze_fail.ir` at https://www.mindspore.cn/search?inputValue=analyze_fail.ir)",
+        "traceback": "Traceback (most recent call last):\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/__init__.py\", line 507, in _run_backward\n    grads = grad_fn(*ms_inputs, grad_output)\n  File \"/media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/common/api.py\", line 1137, in staging_specialize\n    out = jit_executor(*args, **kwargs)\n  File \"/media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/common/api.py\", line 188, in wrapper\n    results = fn(*arg, **kwargs)\n  File \"/media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/common/api.py\", line 687, in __call__\n    raise err\n  File \"/media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/common/api.py\", line 683, in __call__\n    phase = self.compile(self.fn.__name__, *args_list, **kwargs)\n  File \"/media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/common/api.py\", line 792, in compile\n    is_compile = self._graph_executor.compile(self.fn, compile_args, kwargs, phase, jit_config_dict)\nTypeError: Only support jit_class instance, but got PythonObject(type: <class 'torch4ms.tensor.Environment'>, value: <torch4ms.tensor.Environment object at 0x7497cff16cd0>)\n\n----------------------------------------------------\n- C++ Call Stack: (For framework developers)\n----------------------------------------------------\nmindspore/ccsrc/frontend/jit/ps/static_analysis/prim.cc:4522 EvalPrim\n\n----------------------------------------------------\n- The Traceback of Net Construct Code:\n----------------------------------------------------\n# 0 In file /media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/ops/composite/base.py:370, 27~53\n                    return grad_(fn)(*args, **kwargs)\n                           ^~~~~~~~~~~~~~~~~~~~~~~~~~\n# 1 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:636, 24~52\n            output_ms = model_forward_fn(*ms_params)\n                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 2 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:472, 19~71\n            return model_forward_base_fn(*ms_params, *input_tensors_ms)\n                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 3 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/forward_extractor.py:141~142, 12~44\n            with env:\n (See file '/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/rank_0/om/analyze_fail.ir' for more details. Get instructions about `analyze_fail.ir` at https://www.mindspore.cn/search?inputValue=analyze_fail.ir)\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/experiments/experiment_request_20260820/04_experiment_D_real_learning_dynamics/run_minimal_regression.py\", line 268, in _run_one\n    candidate_result = _run_torch4ms(candidate, inputs.clone(), targets.clone(), learning_rate, mode_name)\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/experiments/experiment_request_20260820/04_experiment_D_real_learning_dynamics/run_minimal_regression.py\", line 226, in _run_torch4ms\n    loss.backward(module=model)\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/tensor.py\", line 607, in backward\n    _ms_backward(\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/__init__.py\", line 372, in backward\n    _run_backward(\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/__init__.py\", line 616, in _run_backward\n    raise RuntimeError(\nRuntimeError: unsupported_graph_mode: MindSpore parser rejected the training closure: TypeError: Only support jit_class instance, but got PythonObject(type: <class 'torch4ms.tensor.Environment'>, value: <torch4ms.tensor.Environment object at 0x7497cff16cd0>)\n\n----------------------------------------------------\n- C++ Call Stack: (For framework developers)\n----------------------------------------------------\nmindspore/ccsrc/frontend/jit/ps/static_analysis/prim.cc:4522 EvalPrim\n\n----------------------------------------------------\n- The Traceback of Net Construct Code:\n----------------------------------------------------\n# 0 In file /media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/ops/composite/base.py:370, 27~53\n                    return grad_(fn)(*args, **kwargs)\n                           ^~~~~~~~~~~~~~~~~~~~~~~~~~\n# 1 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:636, 24~52\n            output_ms = model_forward_fn(*ms_params)\n                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 2 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:472, 19~71\n            return model_forward_base_fn(*ms_params, *input_tensors_ms)\n                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 3 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/forward_extractor.py:141~142, 12~44\n            with env:\n (See file '/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/rank_0/om/analyze_fail.ir' for more details. Get instructions about `analyze_fail.ir` at https://www.mindspore.cn/search?inputValue=analyze_fail.ir)\n"
+      },
+      "execution_success": false,
+      "training_valid": false,
+      "update_parameter_sets_identical": false,
+      "zero_gradient_parameter_sets_identical": true,
+      "initial_parameters_identical": false
+    },
+    {
+      "case": "mobilenet_inverted_residual",
+      "mode": "graph",
+      "seed": 1701,
+      "reference": {
+        "mode": "torch",
+        "execution_success": true,
+        "training_valid": true,
+        "loss": 1.0552139282226562,
+        "initial_parameter_hash": "d6ce4381d9c7b7b646283a89f541fd48e52b944b76a2f5080352fd76ac95250e",
+        "initial_parameter_names": [
+          "0.block.0.weight",
+          "0.block.1.weight",
+          "0.block.1.bias",
+          "0.block.3.weight",
+          "0.block.4.weight",
+          "0.block.4.bias",
+          "0.block.6.weight",
+          "0.block.7.weight",
+          "0.block.7.bias",
+          "3.weight",
+          "3.bias"
+        ],
+        "initial_parameter_shapes": {
+          "0.block.0.weight": [
+            8,
+            4,
+            1,
+            1
+          ],
+          "0.block.1.weight": [
+            8
+          ],
+          "0.block.1.bias": [
+            8
+          ],
+          "0.block.3.weight": [
+            8,
+            1,
+            3,
+            3
+          ],
+          "0.block.4.weight": [
+            8
+          ],
+          "0.block.4.bias": [
+            8
+          ],
+          "0.block.6.weight": [
+            4,
+            8,
+            1,
+            1
+          ],
+          "0.block.7.weight": [
+            4
+          ],
+          "0.block.7.bias": [
+            4
+          ],
+          "3.weight": [
+            3,
+            4
+          ],
+          "3.bias": [
+            3
+          ]
+        },
+        "initial_buffer_names": [
+          "0.block.1.running_mean",
+          "0.block.1.running_var",
+          "0.block.1.num_batches_tracked",
+          "0.block.4.running_mean",
+          "0.block.4.running_var",
+          "0.block.4.num_batches_tracked",
+          "0.block.7.running_mean",
+          "0.block.7.running_var",
+          "0.block.7.num_batches_tracked"
+        ],
+        "optimizer_param_groups": {
+          "groups": [
+            {
+              "group": 0,
+              "parameter_names": [
+                "0.block.0.weight",
+                "0.block.1.weight",
+                "0.block.1.bias",
+                "0.block.3.weight",
+                "0.block.4.weight",
+                "0.block.4.bias",
+                "0.block.6.weight",
+                "0.block.7.weight",
+                "0.block.7.bias",
+                "3.weight",
+                "3.bias"
+              ]
+            }
+          ],
+          "parameter_names": [
+            "0.block.0.weight",
+            "0.block.1.weight",
+            "0.block.1.bias",
+            "0.block.3.weight",
+            "0.block.4.weight",
+            "0.block.4.bias",
+            "0.block.6.weight",
+            "0.block.7.weight",
+            "0.block.7.bias",
+            "3.weight",
+            "3.bias"
+          ],
+          "model_parameter_names": [
+            "0.block.0.weight",
+            "0.block.1.weight",
+            "0.block.1.bias",
+            "0.block.3.weight",
+            "0.block.4.weight",
+            "0.block.4.bias",
+            "0.block.6.weight",
+            "0.block.7.weight",
+            "0.block.7.bias",
+            "3.weight",
+            "3.bias"
+          ],
+          "frozen_parameter_names": [],
+          "group_count": 1
+        },
+        "gradient_audit": {
+          "entries": [
+            {
+              "name": "0.block.0.weight",
+              "present": true,
+              "shape": [
+                8,
+                4,
+                1,
+                1
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.1406237781047821,
+              "hash": "b1a9b2814a8cf3fa7893133d1585fcd3fde3b381ebd7d1fb528d6dff2cec926c"
+            },
+            {
+              "name": "0.block.1.weight",
+              "present": true,
+              "shape": [
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 1.6101461142170592e-06,
+              "hash": "e9d6356ae220bc33989bb4c6c03e81882d0ca3d917509be714df05e489463d20"
+            },
+            {
+              "name": "0.block.1.bias",
+              "present": true,
+              "shape": [
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.01607999950647354,
+              "hash": "24b7dcbbdebb4039aa959a95772d80270db07d84e68df0cd871bfe57c4e8ecc4"
+            },
+            {
+              "name": "0.block.3.weight",
+              "present": true,
+              "shape": [
+                8,
+                1,
+                3,
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.10811914503574371,
+              "hash": "4781172b3b2041c66259cb5f4fd90a8d153d7780c219b2cf096b5d0d1cf34ee9"
+            },
+            {
+              "name": "0.block.4.weight",
+              "present": true,
+              "shape": [
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.012371985241770744,
+              "hash": "a9c20795e41d3bbb15c4775154be28bba29aab2e4116e72b2ed9e62517803c3d"
+            },
+            {
+              "name": "0.block.4.bias",
+              "present": true,
+              "shape": [
+                8
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.02429901249706745,
+              "hash": "19d978cf119caaf320828523d6f0210989093d0ee7a33b7e988c1a406ec5cde0"
+            },
+            {
+              "name": "0.block.6.weight",
+              "present": true,
+              "shape": [
+                4,
+                8,
+                1,
+                1
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.08320676535367966,
+              "hash": "f95f24bfdce1f39c61c76045895a1c156ddf5d5c336a51b996b27a6baf68fc70"
+            },
+            {
+              "name": "0.block.7.weight",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.017673969268798828,
+              "hash": "c38a9128cbc0eed8c9e5c1108efa8aff389a37d4776b3aaa46932256145b41ee"
+            },
+            {
+              "name": "0.block.7.bias",
+              "present": true,
+              "shape": [
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.07637036591768265,
+              "hash": "0edda3f1c8912829ecb25759394bc818f32835e961d53185b30373d156c230bd"
+            },
+            {
+              "name": "3.weight",
+              "present": true,
+              "shape": [
+                3,
+                4
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.11325012892484665,
+              "hash": "cea3297aa6e8100127ae828ee212f083c7204e34e0ca6cef3af71b5028daf4ed"
+            },
+            {
+              "name": "3.bias",
+              "present": true,
+              "shape": [
+                3
+              ],
+              "dtype": "torch.float32",
+              "finite": true,
+              "norm_l2": 0.199371799826622,
+              "hash": "5131e996cc24dc35775f0457936e423b86908fbeeb871cc8842b88ad3ac337d2"
+            }
+          ],
+          "nonempty_gradient_count": 11,
+          "parameter_count": 11,
+          "missing_gradient_names": [],
+          "nonfinite_gradient_names": [],
+          "all_gradients_present": true,
+          "all_gradients_finite": true
+        },
+        "parameter_update_audit": {
+          "entries": [
+            {
+              "name": "0.block.0.weight",
+              "shape": [
+                8,
+                4,
+                1,
+                1
+              ],
+              "before_hash": "f7b39e4218ae4d3f3b92aef75a1aeb15f695ff0aba2c97dad19899afe9fd9bd7",
+              "after_hash": "7e0f97cf38a1c6b6dd807ac4c1aa20a314921700c14dc55ce2ad5fb9059ae5a2",
+              "update_l2": 0.0014062343452823974,
+              "update_rel_l2": 0.0010227337815874127,
+              "updated": true
+            },
+            {
+              "name": "0.block.1.bias",
+              "shape": [
+                8
+              ],
+              "before_hash": "e902cb1c7fc37117c1e601caa1d4d5511f6595dfb534aea074a7bc23b0e19f3e",
+              "after_hash": "9b9b4a12784bd47d0ebd7faf2a2ede36321d24c05a16972c10fbce5ba215e2ec",
+              "update_l2": 0.00016079997998522002,
+              "update_rel_l2": 160799979.98522002,
+              "updated": true
+            },
+            {
+              "name": "0.block.1.weight",
+              "shape": [
+                8
+              ],
+              "before_hash": "8d8bfb636a0928d6f091d7773b14c32481fcde7c43c5ed0ebd4f0151d198b138",
+              "after_hash": "8d8bfb636a0928d6f091d7773b14c32481fcde7c43c5ed0ebd4f0151d198b138",
+              "update_l2": 0.0,
+              "update_rel_l2": 0.0,
+              "updated": false
+            },
+            {
+              "name": "0.block.3.weight",
+              "shape": [
+                8,
+                1,
+                3,
+                3
+              ],
+              "before_hash": "23a4017953754aeafa09847b1e99b70514ff0106fe7cc03ba21c9b67b81d8ae1",
+              "after_hash": "a3b03e4c6c3b2240b1069764d1ec5412f340baf58628083bfbb312d322f5c3d9",
+              "update_l2": 0.001081190419868572,
+              "update_rel_l2": 0.0006730303782081197,
+              "updated": true
+            },
+            {
+              "name": "0.block.4.bias",
+              "shape": [
+                8
+              ],
+              "before_hash": "e902cb1c7fc37117c1e601caa1d4d5511f6595dfb534aea074a7bc23b0e19f3e",
+              "after_hash": "636d0ba260da821ea17af95d1746164f1c6ce6cacb8b01eb10266fcf6790f9d2",
+              "update_l2": 0.0002429901250984284,
+              "update_rel_l2": 242990125.0984284,
+              "updated": true
+            },
+            {
+              "name": "0.block.4.weight",
+              "shape": [
+                8
+              ],
+              "before_hash": "8d8bfb636a0928d6f091d7773b14c32481fcde7c43c5ed0ebd4f0151d198b138",
+              "after_hash": "90087f34b21809748785e61b9ce5c3b3e95c3e79401e271c4bbe6cdb22be22e8",
+              "update_l2": 0.00012374300367596526,
+              "update_rel_l2": 4.374975851183345e-05,
+              "updated": true
+            },
+            {
+              "name": "0.block.6.weight",
+              "shape": [
+                4,
+                8,
+                1,
+                1
+              ],
+              "before_hash": "09501cc3fc2ad29ef5d0d34eb5b5e902d3f648d205456642fa651c0b76b18071",
+              "after_hash": "953da2e5915d47003fd5fe0502178b6b6652faab274807c6426c9f1c8bda83cb",
+              "update_l2": 0.0008320703535544957,
+              "update_rel_l2": 0.0006985099455281533,
+              "updated": true
+            },
+            {
+              "name": "0.block.7.bias",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "001c5e4a60b04fb669b771246de966eb210075c7c048ab8057baa1e52f8205e1",
+              "update_l2": 0.000763703620027467,
+              "update_rel_l2": 763703620.027467,
+              "updated": true
+            },
+            {
+              "name": "0.block.7.weight",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "cd728a8379e2432a96c98a607000a80ef4b6c18a597743919702b345610bdda1",
+              "update_l2": 0.00017671409131021806,
+              "update_rel_l2": 8.835704565510903e-05,
+              "updated": true
+            },
+            {
+              "name": "3.bias",
+              "shape": [
+                3
+              ],
+              "before_hash": "5a430aca6e3aa37b3b6cb99a4aa59034c2626d13c37b940c70a21f9123dbe8a4",
+              "after_hash": "881020af6427298231f8081d19e1110fa5a57a51c1fbc41ddef87bd383e168c8",
+              "update_l2": 0.001993719913318829,
+              "update_rel_l2": 0.00453035229518661,
+              "updated": true
+            },
+            {
+              "name": "3.weight",
+              "shape": [
+                3,
+                4
+              ],
+              "before_hash": "46658b906ad2252f0db51c845d207aea379a3e6930b8646841ee0dbd70b8fd6c",
+              "after_hash": "5be9f53bdefb092a1ebf5b372311bc97ae99a436b1aff346bc2cabafc876b4ec",
+              "update_l2": 0.0011324944923548688,
+              "update_rel_l2": 0.0012647887819596387,
+              "updated": true
+            }
+          ],
+          "updated_parameter_names": [
+            "0.block.0.weight",
+            "0.block.1.bias",
+            "0.block.3.weight",
+            "0.block.4.bias",
+            "0.block.4.weight",
+            "0.block.6.weight",
+            "0.block.7.bias",
+            "0.block.7.weight",
+            "3.bias",
+            "3.weight"
+          ],
+          "updated_parameter_count": 10,
+          "parameter_count": 11,
+          "update_l2": 0.003132244555241153,
+          "all_finite": true
+        },
+        "buffer_audit": {
+          "entries": [
+            {
+              "name": "0.block.1.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.1.running_mean",
+              "shape": [
+                8
+              ],
+              "before_hash": "e902cb1c7fc37117c1e601caa1d4d5511f6595dfb534aea074a7bc23b0e19f3e",
+              "after_hash": "32bd58c5621cf538191cc3ab7c079ba142fcf78fa99190b01ea6db97c63c18c9",
+              "update_l2": 0.005769318363420686,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.1.running_var",
+              "shape": [
+                8
+              ],
+              "before_hash": "8d8bfb636a0928d6f091d7773b14c32481fcde7c43c5ed0ebd4f0151d198b138",
+              "after_hash": "3b476be57d38297a7b71183650a010c00861001aae3f4289083cff122f8d7a1b",
+              "update_l2": 0.22354603805382453,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.4.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.4.running_mean",
+              "shape": [
+                8
+              ],
+              "before_hash": "e902cb1c7fc37117c1e601caa1d4d5511f6595dfb534aea074a7bc23b0e19f3e",
+              "after_hash": "71dec63f34c58c4a82258edd7b761806f3d6450e6183d012b095090962f9a8fb",
+              "update_l2": 0.04358698376153665,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.4.running_var",
+              "shape": [
+                8
+              ],
+              "before_hash": "8d8bfb636a0928d6f091d7773b14c32481fcde7c43c5ed0ebd4f0151d198b138",
+              "after_hash": "24ca18555e019a3274237b82fce9383a58ffa10ddc8f7b7e717e3c448d52d3dc",
+              "update_l2": 0.25521612523650655,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.7.num_batches_tracked",
+              "shape": [],
+              "before_hash": "3344012fd32ff509f3cd7bfa8d5733a358d9f310af436ad8a336cd3bf1da2f31",
+              "after_hash": "9224e1bb901bf2bb938ff983320e52328226af72c126f31903ad6a1f748b848f",
+              "update_l2": 1.0,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.7.running_mean",
+              "shape": [
+                4
+              ],
+              "before_hash": "0b9fc037e8251f382bf3e52978ec8427e5f71b0ba69192a1ef8f853618586d40",
+              "after_hash": "78812f12da9467988aa890d4db2ebff1e824dec1de06ff8d5d065a0fb6fedebc",
+              "update_l2": 0.04285233714872238,
+              "updated": true,
+              "finite": true
+            },
+            {
+              "name": "0.block.7.running_var",
+              "shape": [
+                4
+              ],
+              "before_hash": "0e0c311e2003aad5c94be0b97b82cc0ff003d1eed0917929f5c14c12e8a6defb",
+              "after_hash": "54b85cc776666f27479b7741b1d6b47445e51af90ff2cdc156b4edf0085b6139",
+              "update_l2": 0.17698206146042406,
+              "updated": true,
+              "finite": true
+            }
+          ],
+          "updated_buffer_names": [
+            "0.block.1.num_batches_tracked",
+            "0.block.1.running_mean",
+            "0.block.1.running_var",
+            "0.block.4.num_batches_tracked",
+            "0.block.4.running_mean",
+            "0.block.4.running_var",
+            "0.block.7.num_batches_tracked",
+            "0.block.7.running_mean",
+            "0.block.7.running_var"
+          ],
+          "updated_buffer_count": 9,
+          "buffer_count": 9,
+          "all_finite": true
+        },
+        "backward_warnings": [],
+        "training_invalid_reasons": []
+      },
+      "candidate": {
+        "mode": "torch4ms",
+        "execution_mode": "graph",
+        "execution_success": false,
+        "training_valid": false,
+        "error": "RuntimeError: unsupported_graph_mode: MindSpore parser rejected the training closure: TypeError: Only support jit_class instance, but got PythonObject(type: <class 'torch4ms.tensor.Environment'>, value: <torch4ms.tensor.Environment object at 0x7497cff16cd0>)\n\n----------------------------------------------------\n- C++ Call Stack: (For framework developers)\n----------------------------------------------------\nmindspore/ccsrc/frontend/jit/ps/static_analysis/prim.cc:4522 EvalPrim\n\n----------------------------------------------------\n- The Traceback of Net Construct Code:\n----------------------------------------------------\n# 0 In file /media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/ops/composite/base.py:370, 27~53\n                    return grad_(fn)(*args, **kwargs)\n                           ^~~~~~~~~~~~~~~~~~~~~~~~~~\n# 1 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:636, 24~52\n            output_ms = model_forward_fn(*ms_params)\n                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 2 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:472, 19~71\n            return model_forward_base_fn(*ms_params, *input_tensors_ms)\n                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 3 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/forward_extractor.py:141~142, 12~44\n            with env:\n (See file '/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/rank_0/om/analyze_fail.ir' for more details. Get instructions about `analyze_fail.ir` at https://www.mindspore.cn/search?inputValue=analyze_fail.ir)",
+        "traceback": "Traceback (most recent call last):\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/__init__.py\", line 507, in _run_backward\n    grads = grad_fn(*ms_inputs, grad_output)\n  File \"/media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/common/api.py\", line 1137, in staging_specialize\n    out = jit_executor(*args, **kwargs)\n  File \"/media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/common/api.py\", line 188, in wrapper\n    results = fn(*arg, **kwargs)\n  File \"/media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/common/api.py\", line 687, in __call__\n    raise err\n  File \"/media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/common/api.py\", line 683, in __call__\n    phase = self.compile(self.fn.__name__, *args_list, **kwargs)\n  File \"/media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/common/api.py\", line 792, in compile\n    is_compile = self._graph_executor.compile(self.fn, compile_args, kwargs, phase, jit_config_dict)\nTypeError: Only support jit_class instance, but got PythonObject(type: <class 'torch4ms.tensor.Environment'>, value: <torch4ms.tensor.Environment object at 0x7497cff16cd0>)\n\n----------------------------------------------------\n- C++ Call Stack: (For framework developers)\n----------------------------------------------------\nmindspore/ccsrc/frontend/jit/ps/static_analysis/prim.cc:4522 EvalPrim\n\n----------------------------------------------------\n- The Traceback of Net Construct Code:\n----------------------------------------------------\n# 0 In file /media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/ops/composite/base.py:370, 27~53\n                    return grad_(fn)(*args, **kwargs)\n                           ^~~~~~~~~~~~~~~~~~~~~~~~~~\n# 1 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:636, 24~52\n            output_ms = model_forward_fn(*ms_params)\n                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 2 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:472, 19~71\n            return model_forward_base_fn(*ms_params, *input_tensors_ms)\n                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 3 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/forward_extractor.py:141~142, 12~44\n            with env:\n (See file '/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/rank_0/om/analyze_fail.ir' for more details. Get instructions about `analyze_fail.ir` at https://www.mindspore.cn/search?inputValue=analyze_fail.ir)\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/experiments/experiment_request_20260820/04_experiment_D_real_learning_dynamics/run_minimal_regression.py\", line 268, in _run_one\n    candidate_result = _run_torch4ms(candidate, inputs.clone(), targets.clone(), learning_rate, mode_name)\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/experiments/experiment_request_20260820/04_experiment_D_real_learning_dynamics/run_minimal_regression.py\", line 226, in _run_torch4ms\n    loss.backward(module=model)\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/tensor.py\", line 607, in backward\n    _ms_backward(\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/__init__.py\", line 372, in backward\n    _run_backward(\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/__init__.py\", line 616, in _run_backward\n    raise RuntimeError(\nRuntimeError: unsupported_graph_mode: MindSpore parser rejected the training closure: TypeError: Only support jit_class instance, but got PythonObject(type: <class 'torch4ms.tensor.Environment'>, value: <torch4ms.tensor.Environment object at 0x7497cff16cd0>)\n\n----------------------------------------------------\n- C++ Call Stack: (For framework developers)\n----------------------------------------------------\nmindspore/ccsrc/frontend/jit/ps/static_analysis/prim.cc:4522 EvalPrim\n\n----------------------------------------------------\n- The Traceback of Net Construct Code:\n----------------------------------------------------\n# 0 In file /media/main/whj/miniconda3/envs/mstorch/lib/python3.9/site-packages/mindspore/ops/composite/base.py:370, 27~53\n                    return grad_(fn)(*args, **kwargs)\n                           ^~~~~~~~~~~~~~~~~~~~~~~~~~\n# 1 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:636, 24~52\n            output_ms = model_forward_fn(*ms_params)\n                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 2 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/ms_autograd_function.py:472, 19~71\n            return model_forward_base_fn(*ms_params, *input_tensors_ms)\n                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n# 3 In file /media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/torch4ms/autograd/forward_extractor.py:141~142, 12~44\n            with env:\n (See file '/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-d-ff1047e/rank_0/om/analyze_fail.ir' for more details. Get instructions about `analyze_fail.ir` at https://www.mindspore.cn/search?inputValue=analyze_fail.ir)\n"
+      },
+      "execution_success": false,
+      "training_valid": false,
+      "update_parameter_sets_identical": false,
+      "zero_gradient_parameter_sets_identical": true,
+      "initial_parameters_identical": false
+    }
+  ],
+  "summary": {
+    "conditions": 8,
+    "execution_success": 5,
+    "training_valid": 5,
+    "pynative_conditions": 4,
+    "pynative_training_valid": 4,
+    "graph_conditions": 4,
+    "graph_training_valid": 1,
+    "graph_unsupported": 3,
+    "initial_parameters_identical": 5
+  }
+}

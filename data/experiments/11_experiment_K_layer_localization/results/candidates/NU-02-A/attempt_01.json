@@ -1,0 +1,113 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Stabilize softmax by subtracting the row-wise maximum from logits before exponentiation, preventing overflow in exp() and NaN/Inf outputs.",
+    "edits": [
+      {
+        "file": "autofix/generated_faults/candidate/nu02_candidate_20260822060244_2233394.py",
+        "summary": "Add max subtraction before exp in StableSoftmaxNet.forward to avoid overflow.",
+        "action": "replace",
+        "find_text": "        exp_logits = torch.exp(logits)\n        return exp_logits / exp_logits.sum(dim=-1, keepdim=True)",
+        "replace_text": "        logits = logits - logits.max(dim=-1, keepdim=True).values\n        exp_logits = torch.exp(logits)\n        return exp_logits / exp_logits.sum(dim=-1, keepdim=True)",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": true,
+        "error": ""
+      }
+    ],
+    "risk": "Low. The scaling factor 1000.0 is retained; only the normalization is made numerically stable, which is a standard softmax implementation.",
+    "expected_effect": "The forward pass will produce finite probability distributions, eliminating the infinite output_diff and NaN losses.",
+    "notes": "The original logits scaling is preserved. The max-subtraction technique is a conventional numerical stabilization for softmax and does not alter the mathematical result except for numerical robustness.",
+    "metadata": {
+      "token_usage": {
+        "prompt_tokens": 1534,
+        "completion_tokens": 1991,
+        "total_tokens": 3525
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 1991,
+          "prompt_tokens": 1534,
+          "total_tokens": 3525,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1671,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 1150
+        }
+      },
+      "router": {
+        "repair_scope": "candidate",
+        "confidence": 0.0,
+        "reason": "",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "autofix/generated_faults/candidate/nu02_candidate_20260822060244_2233394.py"
+        ],
+        "recommended_validation": []
+      },
+      "predicted_layer": "numerical",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "candidate",
+        "allowed_files": [
+          "autofix/generated_faults/candidate/nu02_candidate_20260822060244_2233394.py"
+        ],
+        "allowed_prefixes": [],
+        "checks": [
+          {
+            "file": "autofix/generated_faults/candidate/nu02_candidate_20260822060244_2233394.py",
+            "action": "replace",
+            "ok": true,
+            "errors": [],
+            "occurrence_count": 1
+          }
+        ],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      }
+    },
+    "applied": true,
+    "applied_count": 1,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "finite=True row_sum_diff=0.0",
+      "payload": {
+        "finite": true,
+        "row_sum_diff": 0.0,
+        "model_variant": "transformer"
+      }
+    }
+  }
+}

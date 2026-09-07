@@ -1,0 +1,113 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Add max-subtraction to the candidate's softmax normalization so that large logits (including the 1000x scale) produce finite probabilities while preserving the original computation semantics.",
+    "edits": [
+      {
+        "file": "autofix/generated_faults/candidate/nu02_candidate_20260822060300_2233394.py",
+        "summary": "Add max subtraction before exp in StableSoftmaxNet.forward",
+        "action": "replace",
+        "find_text": "        logits = self.proj(x) * 1000.0\n        exp_logits = torch.exp(logits)\n        return exp_logits / exp_logits.sum(dim=-1, keepdim=True)",
+        "replace_text": "        logits = self.proj(x) * 1000.0\n        logits = logits - logits.max(dim=-1, keepdim=True).values\n        exp_logits = torch.exp(logits)\n        return exp_logits / exp_logits.sum(dim=-1, keepdim=True)",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": true,
+        "error": ""
+      }
+    ],
+    "risk": "If the reference did not include the 1000x scale, the output distribution will differ despite being finite. However, this is the minimal change targeting the diagnosed unstable normalization.",
+    "expected_effect": "Candidate forward output becomes finite; softmax probabilities are computed by first centering logits on their row-wise maximum, preventing exp overflow.",
+    "notes": "The edit only touches StableSoftmaxNet.forward and leaves all other model/build code unchanged. It is consistent with restoring a numerically stable normalization implementation.",
+    "metadata": {
+      "token_usage": {
+        "prompt_tokens": 1536,
+        "completion_tokens": 7743,
+        "total_tokens": 9279
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 7743,
+          "prompt_tokens": 1536,
+          "total_tokens": 9279,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 7373,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 1152
+        }
+      },
+      "router": {
+        "repair_scope": "candidate",
+        "confidence": 0.0,
+        "reason": "",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "autofix/generated_faults/candidate/nu02_candidate_20260822060300_2233394.py"
+        ],
+        "recommended_validation": []
+      },
+      "predicted_layer": "numerical",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "candidate",
+        "allowed_files": [
+          "autofix/generated_faults/candidate/nu02_candidate_20260822060300_2233394.py"
+        ],
+        "allowed_prefixes": [],
+        "checks": [
+          {
+            "file": "autofix/generated_faults/candidate/nu02_candidate_20260822060300_2233394.py",
+            "action": "replace",
+            "ok": true,
+            "errors": [],
+            "occurrence_count": 1
+          }
+        ],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      }
+    },
+    "applied": true,
+    "applied_count": 1,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "finite=True row_sum_diff=0.0",
+      "payload": {
+        "finite": true,
+        "row_sum_diff": 0.0,
+        "model_variant": "causal_lm"
+      }
+    }
+  }
+}

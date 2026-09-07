@@ -1,0 +1,170 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Minimal core-operator fix: change candidate mask fill value from 0.0 to -10000.0 to match reference semantics, ensuring masked positions do not contribute after softmax.",
+    "edits": [
+      {
+        "file": "autofix/reports/core_operator_patch_candidates/iter1_aten_masked_fill_default_Minimal_core_operator_fix_change_candidate_mask_fill_value_from_0_0_to_10000_0_to_match_reference_semantics_ensuring_masked_positions_do_not_contribute_after_softmax_issue.json",
+        "summary": "Write matching core-operator issue proposal for LLM patch candidate dry-run",
+        "action": "write_file",
+        "find_text": "",
+        "replace_text": "{\n  \"kind\": \"torch4ms_core_issue_proposal\",\n  \"status\": \"proposal_only\",\n  \"repair_scope\": \"torch4ms_core_proposal\",\n  \"op_name\": \"unknown_op\",\n  \"error_type\": \"\",\n  \"message\": \"{\\\"actual_norm\\\": 1.6470623016357422, \\\"case\\\": \\\"FAULT_CASE_014\\\", \\\"expected_norm\\\": 2.144146680831909, \\\"max_abs_diff\\\": 0.48108360171318054, \\\"ok\\\": false}\\n\",\n  \"source_path\": null,\n  \"converted_path\": \"torch4ms/ops/case_08ac4608880a420ba0faf51be157f067.py\",\n  \"localization\": {},\n  \"router\": {\n    \"repair_scope\": \"core_operator\",\n    \"confidence\": 0.94,\n    \"reason\": \"core_operator_numeric_semantics_mismatch\",\n    \"source\": \"failure_localization\",\n    \"legacy_repair_scope\": \"\",\n    \"recommended_target_files\": [\n      \"torch4ms/ops/case_08ac4608880a420ba0faf51be157f067.py\"\n    ],\n    \"recommended_validation\": [\n      \"controlled_fault_probe\"\n    ]\n  },\n  \"repro_path\": \"\",\n  \"next_steps\": [\n    \"Confirm converted code and verifier metadata are correct.\",\n    \"Minimize the failing operation into the repro script.\",\n    \"Only enable torch4ms core edits with an explicit gated apply mode.\"\n  ]\n}",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": false,
+        "error": "No change required."
+      },
+      {
+        "file": "autofix/reports/core_operator_patch_candidates/iter1_aten_masked_fill_default_Minimal_core_operator_fix_change_candidate_mask_fill_value_from_0_0_to_10000_0_to_match_reference_semantics_ensuring_masked_positions_do_not_contribute_after_softmax_patch.json",
+        "summary": "Write gated core-operator LLM patch candidate for dry-run evaluation",
+        "action": "write_file",
+        "find_text": "",
+        "replace_text": "{\n  \"kind\": \"torch4ms_core_patch_candidate\",\n  \"proposal_kind\": \"torch4ms_core_issue_proposal\",\n  \"op_name\": \"aten.masked_fill.default\",\n  \"hypothesis\": \"Candidate mask fill uses 0.0 fill instead of a large negative (-10000.0), causing masked tokens to retain probability mass in softmax and producing incorrect output in FAULT_CASE_014.\",\n  \"target_files\": [\n    \"torch4ms/ops/case_08ac4608880a420ba0faf51be157f067.py\"\n  ],\n  \"edits\": [\n    {\n      \"file\": \"torch4ms/ops/case_08ac4608880a420ba0faf51be157f067.py\",\n      \"summary\": \"Align candidate mask fill with reference by using -10000.0 instead of 0.0 for masked entries\",\n      \"action\": \"replace\",\n      \"find_text\": \"def _candidate_mask_fill(scores, keep_mask):\\n    return scores.masked_fill(~keep_mask, 0.0)\",\n      \"replace_text\": \"def _candidate_mask_fill(scores, keep_mask):\\n    return scores.masked_fill(~keep_mask, -10000.0)\",\n      \"regex_pattern\": \"\",\n      \"regex_repl\": \"\"\n    }\n  ],\n  \"verify_commands\": [\n    [\n      \"python\",\n      \"-m\",\n      \"autofix.examples.run_phase10_op_probe_suite\",\n      \"--ops\",\n      \"aten.masked_fill.default\",\n      \"--fail-on-candidates\"\n    ]\n  ],\n  \"proposal_path\": \"autofix/reports/core_operator_patch_candidates/iter1_aten_masked_fill_default_Minimal_core_operator_fix_change_candidate_mask_fill_value_from_0_0_to_10000_0_to_match_reference_semantics_ensuring_masked_positions_do_not_contribute_after_softmax_issue.json\",\n  \"source_fixer_iter\": 1,\n  \"source_fixer_strategy\": \"Minimal core-operator fix: change candidate mask fill value from 0.0 to -10000.0 to match reference semantics, ensuring masked positions do not contribute after softmax.\",\n  \"dry_run_command\": [\n    \"/media/main/whj/miniconda3/envs/mstorch/bin/python\",\n    \"-m\",\n    \"autofix.examples.run_phase10_core_apply_dry_run\",\n    \"--proposal\",\n    \"autofix/reports/core_operator_patch_candidates/iter1_aten_masked_fill_default_Minimal_core_operator_fix_change_candidate_mask_fill_value_from_0_0_to_10000_0_to_match_reference_semantics_ensuring_masked_positions_do_not_contribute_after_softmax_issue.json\",\n    \"--patch\",\n    \"autofix/reports/core_operator_patch_candidates/iter1_aten_masked_fill_default_Minimal_core_operator_fix_change_candidate_mask_fill_value_from_0_0_to_10000_0_to_match_reference_semantics_ensuring_masked_positions_do_not_contribute_after_softmax_patch.json\"\n  ]\n}",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": false,
+        "error": "No change required."
+      }
+    ],
+    "risk": "Low. The change is localized to the candidate mask fill helper and aligns with the reference implementation. No sample-specific constants are introduced.",
+    "expected_effect": "FAULT_CASE_014 will report ok=true; candidate output norms and max_abs_diff will match the reference numeric oracle.",
+    "notes": "Root cause: _candidate_mask_fill filled masked entries with 0.0, allowing masked positions to retain non-negligible softmax probability. Reference uses -10000.0 to approximate -inf masking. The fix restores the intended attention mask semantics.",
+    "metadata": {
+      "core_operator_patch_candidate": {
+        "kind": "torch4ms_core_patch_candidate",
+        "proposal_kind": "torch4ms_core_issue_proposal",
+        "op_name": "aten.masked_fill.default",
+        "hypothesis": "Candidate mask fill uses 0.0 fill instead of a large negative (-10000.0), causing masked tokens to retain probability mass in softmax and producing incorrect output in FAULT_CASE_014.",
+        "target_files": [
+          "torch4ms/ops/case_08ac4608880a420ba0faf51be157f067.py"
+        ],
+        "edits": [
+          {
+            "file": "torch4ms/ops/case_08ac4608880a420ba0faf51be157f067.py",
+            "summary": "Align candidate mask fill with reference by using -10000.0 instead of 0.0 for masked entries",
+            "action": "replace",
+            "find_text": "def _candidate_mask_fill(scores, keep_mask):\n    return scores.masked_fill(~keep_mask, 0.0)",
+            "replace_text": "def _candidate_mask_fill(scores, keep_mask):\n    return scores.masked_fill(~keep_mask, -10000.0)",
+            "regex_pattern": "",
+            "regex_repl": ""
+          }
+        ],
+        "verify_commands": [
+          [
+            "python",
+            "-m",
+            "autofix.examples.run_phase10_op_probe_suite",
+            "--ops",
+            "aten.masked_fill.default",
+            "--fail-on-candidates"
+          ]
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 3184,
+        "completion_tokens": 2830,
+        "total_tokens": 6014
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 2830,
+          "prompt_tokens": 3184,
+          "total_tokens": 6014,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 2276,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 2800
+        }
+      },
+      "router": {
+        "repair_scope": "core_operator",
+        "confidence": 0.94,
+        "reason": "core_operator_numeric_semantics_mismatch",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "torch4ms/ops/case_08ac4608880a420ba0faf51be157f067.py"
+        ],
+        "recommended_validation": [
+          "controlled_fault_probe"
+        ]
+      },
+      "predicted_layer": "numerical",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "core_operator",
+        "allowed_files": [],
+        "allowed_prefixes": [
+          "torch4ms/ops/"
+        ],
+        "checks": [],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      },
+      "core_operator_patch_candidate_gate": {
+        "present": true,
+        "allowed_prefixes": [
+          "torch4ms/ops/"
+        ],
+        "exact_allowed_files": [],
+        "allowed_files": [
+          "torch4ms/ops/case_08ac4608880a420ba0faf51be157f067.py"
+        ],
+        "rejected_files": [],
+        "edit_count": 1,
+        "non_none_edit_count": 1,
+        "missing_edits": false,
+        "missing_verify_commands": false,
+        "valid_for_dry_run": true
+      },
+      "core_operator_issue_proposal_path": "autofix/reports/core_operator_patch_candidates/iter1_aten_masked_fill_default_Minimal_core_operator_fix_change_candidate_mask_fill_value_from_0_0_to_10000_0_to_match_reference_semantics_ensuring_masked_positions_do_not_contribute_after_softmax_issue.json",
+      "core_operator_patch_candidate_path": "autofix/reports/core_operator_patch_candidates/iter1_aten_masked_fill_default_Minimal_core_operator_fix_change_candidate_mask_fill_value_from_0_0_to_10000_0_to_match_reference_semantics_ensuring_masked_positions_do_not_contribute_after_softmax_patch.json"
+    },
+    "applied": false,
+    "applied_count": 0,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"actual_norm\": 2.144146680831909, \"case\": \"FAULT_CASE_014\", \"expected_norm\": 2.144146680831909, \"max_abs_diff\": 0.0, \"ok\": true}\n",
+      "payload": {
+        "case": "FAULT_CASE_014",
+        "ok": true,
+        "max_abs_diff": 0.0,
+        "expected_norm": 2.144146680831909,
+        "actual_norm": 2.144146680831909,
+        "model_variant": "transformer"
+      }
+    }
+  }
+}

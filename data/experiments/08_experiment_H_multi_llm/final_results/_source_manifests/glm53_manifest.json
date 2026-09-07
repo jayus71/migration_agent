@@ -1,0 +1,262 @@
+{
+  "experiment": "experiment_H_multi_llm_three_seed",
+  "started_at": "2026-09-03T16:30:08.731654+00:00",
+  "temperature": 0.0,
+  "timeout_sec": 1000,
+  "max_retries": 0,
+  "reasoning_effort": "high",
+  "repair_attempts": 4,
+  "instance_suite": "fixed50",
+  "seeds": [
+    101,
+    202,
+    303
+  ],
+  "methods": [
+    "r_direct"
+  ],
+  "backbones": [
+    "glm-5.3-flash"
+  ],
+  "runs": [
+    {
+      "backbone": "glm-5.3-flash",
+      "model": "glm-5.3-flash",
+      "temperature": 0.0,
+      "reasoning_effort": "high",
+      "seed": 101,
+      "method": "r_direct",
+      "repair_attempts": 4,
+      "output_dir": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-c3ff51a/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_3_flash_incomplete5/glm-5.3-flash/seed_101/r_direct",
+      "command": [
+        "/media/main/whj/miniconda3/envs/mstorch/bin/python",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-58e9f52/autofix/examples/run_external_repair_pilot.py",
+        "--baselines",
+        "r_direct",
+        "--instance-suite",
+        "fixed50",
+        "--repair-attempts",
+        "4",
+        "--output-dir",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-c3ff51a/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_3_flash_incomplete5/glm-5.3-flash/seed_101/r_direct",
+        "--resume",
+        "--continue-partial-attempts",
+        "--stop-on-provider-timeout",
+        "--provider-retries",
+        "3",
+        "--provider-timeout-retries",
+        "1",
+        "--provider-retry-backoff-sec",
+        "15"
+      ],
+      "status": "complete",
+      "provider_failure_instances_before": [
+        "NU-03-B"
+      ],
+      "instance_recoveries": [
+        {
+          "recovery_id": "20260903T163008809952Z",
+          "command": [
+            "/media/main/whj/miniconda3/envs/mstorch/bin/python",
+            "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-58e9f52/autofix/examples/run_external_repair_pilot.py",
+            "--baselines",
+            "r_direct",
+            "--instance-suite",
+            "fixed50",
+            "--repair-attempts",
+            "4",
+            "--output-dir",
+            "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-c3ff51a/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_3_flash_incomplete5/glm-5.3-flash/seed_101/r_direct/.instance_retries/20260903T163008809952Z/output",
+            "--resume",
+            "--continue-partial-attempts",
+            "--stop-on-provider-timeout",
+            "--provider-retries",
+            "3",
+            "--provider-timeout-retries",
+            "1",
+            "--provider-retry-backoff-sec",
+            "15",
+            "--instances",
+            "NU-03-B"
+          ],
+          "returncode": 0,
+          "requested_instances": [
+            "NU-03-B"
+          ],
+          "replaced_instances": [
+            "NU-03-B"
+          ],
+          "failed_instances": [],
+          "backup_dir": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-c3ff51a/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_3_flash_incomplete5/glm-5.3-flash/seed_101/r_direct/recovery_backups/20260903T163008809952Z/r_direct",
+          "staging_dir": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-c3ff51a/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_3_flash_incomplete5/glm-5.3-flash/seed_101/r_direct/.instance_retries/20260903T163008809952Z"
+        }
+      ],
+      "artifact_complete": true,
+      "provider_failure_instances": [],
+      "provider_failure_files": []
+    },
+    {
+      "backbone": "glm-5.3-flash",
+      "model": "glm-5.3-flash",
+      "temperature": 0.0,
+      "reasoning_effort": "high",
+      "seed": 202,
+      "method": "r_direct",
+      "repair_attempts": 4,
+      "output_dir": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-c3ff51a/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_3_flash_incomplete5/glm-5.3-flash/seed_202/r_direct",
+      "command": [
+        "/media/main/whj/miniconda3/envs/mstorch/bin/python",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-58e9f52/autofix/examples/run_external_repair_pilot.py",
+        "--baselines",
+        "r_direct",
+        "--instance-suite",
+        "fixed50",
+        "--repair-attempts",
+        "4",
+        "--output-dir",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-c3ff51a/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_3_flash_incomplete5/glm-5.3-flash/seed_202/r_direct",
+        "--resume",
+        "--continue-partial-attempts",
+        "--stop-on-provider-timeout",
+        "--provider-retries",
+        "3",
+        "--provider-timeout-retries",
+        "1",
+        "--provider-retry-backoff-sec",
+        "15"
+      ],
+      "status": "complete",
+      "provider_failure_instances_before": [
+        "NU-03-B"
+      ],
+      "instance_recoveries": [
+        {
+          "recovery_id": "20260903T184633223145Z",
+          "command": [
+            "/media/main/whj/miniconda3/envs/mstorch/bin/python",
+            "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-58e9f52/autofix/examples/run_external_repair_pilot.py",
+            "--baselines",
+            "r_direct",
+            "--instance-suite",
+            "fixed50",
+            "--repair-attempts",
+            "4",
+            "--output-dir",
+            "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-c3ff51a/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_3_flash_incomplete5/glm-5.3-flash/seed_202/r_direct/.instance_retries/20260903T184633223145Z/output",
+            "--resume",
+            "--continue-partial-attempts",
+            "--stop-on-provider-timeout",
+            "--provider-retries",
+            "3",
+            "--provider-timeout-retries",
+            "1",
+            "--provider-retry-backoff-sec",
+            "15",
+            "--instances",
+            "NU-03-B"
+          ],
+          "returncode": 0,
+          "requested_instances": [
+            "NU-03-B"
+          ],
+          "replaced_instances": [
+            "NU-03-B"
+          ],
+          "failed_instances": [],
+          "backup_dir": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-c3ff51a/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_3_flash_incomplete5/glm-5.3-flash/seed_202/r_direct/recovery_backups/20260903T184633223145Z/r_direct",
+          "staging_dir": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-c3ff51a/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_3_flash_incomplete5/glm-5.3-flash/seed_202/r_direct/.instance_retries/20260903T184633223145Z"
+        }
+      ],
+      "artifact_complete": true,
+      "provider_failure_instances": [],
+      "provider_failure_files": []
+    },
+    {
+      "backbone": "glm-5.3-flash",
+      "model": "glm-5.3-flash",
+      "temperature": 0.0,
+      "reasoning_effort": "high",
+      "seed": 303,
+      "method": "r_direct",
+      "repair_attempts": 4,
+      "output_dir": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-c3ff51a/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_3_flash_incomplete5/glm-5.3-flash/seed_303/r_direct",
+      "command": [
+        "/media/main/whj/miniconda3/envs/mstorch/bin/python",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-58e9f52/autofix/examples/run_external_repair_pilot.py",
+        "--baselines",
+        "r_direct",
+        "--instance-suite",
+        "fixed50",
+        "--repair-attempts",
+        "4",
+        "--output-dir",
+        "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-c3ff51a/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_3_flash_incomplete5/glm-5.3-flash/seed_303/r_direct",
+        "--resume",
+        "--continue-partial-attempts",
+        "--stop-on-provider-timeout",
+        "--provider-retries",
+        "3",
+        "--provider-timeout-retries",
+        "1",
+        "--provider-retry-backoff-sec",
+        "15"
+      ],
+      "status": "complete",
+      "provider_failure_instances_before": [
+        "NU-03-B",
+        "NU-07-A"
+      ],
+      "instance_recoveries": [
+        {
+          "recovery_id": "20260903T152746017952Z",
+          "command": [
+            "/media/main/whj/miniconda3/envs/mstorch/bin/python",
+            "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-58e9f52/autofix/examples/run_external_repair_pilot.py",
+            "--baselines",
+            "r_direct",
+            "--instance-suite",
+            "fixed50",
+            "--repair-attempts",
+            "4",
+            "--output-dir",
+            "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-c3ff51a/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_3_flash_incomplete5/glm-5.3-flash/seed_303/r_direct/.instance_retries/20260903T152746017952Z/output",
+            "--resume",
+            "--continue-partial-attempts",
+            "--stop-on-provider-timeout",
+            "--provider-retries",
+            "3",
+            "--provider-timeout-retries",
+            "1",
+            "--provider-retry-backoff-sec",
+            "15",
+            "--instances",
+            "NU-03-B",
+            "NU-07-A"
+          ],
+          "returncode": 0,
+          "requested_instances": [
+            "NU-03-B",
+            "NU-07-A"
+          ],
+          "replaced_instances": [
+            "NU-03-B",
+            "NU-07-A"
+          ],
+          "failed_instances": [],
+          "backup_dir": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-c3ff51a/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_3_flash_incomplete5/glm-5.3-flash/seed_303/r_direct/recovery_backups/20260903T152746017952Z/r_direct",
+          "staging_dir": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-h-glm53-c3ff51a/experiments/experiment_request_20260820/08_experiment_H_multi_llm/runs_glm5_3_flash_incomplete5/glm-5.3-flash/seed_303/r_direct/.instance_retries/20260903T152746017952Z"
+        }
+      ],
+      "artifact_complete": true,
+      "provider_failure_instances": [],
+      "provider_failure_files": [],
+      "reused_complete_artifact": true
+    }
+  ],
+  "finished_at": "2026-09-03T20:04:00.368942+00:00",
+  "status_counts": {
+    "complete": 3
+  },
+  "complete_conditions": 3,
+  "total_conditions": 3
+}

@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-09-03T22:00:00+08:00",
+  "llm_used": false,
+  "runtime": {
+    "conda_environment": "mstorch",
+    "python": "3.9.25",
+    "pytorch": "2.8.0+cu128",
+    "mindspore": "2.7.2"
+  },
+  "noncore_run": {
+    "commit": "5e5b64150209124d21e54bec74cfcbb7360f5379",
+    "remote_worktree": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-a-health-5e5b641",
+    "command": "PYTHONPATH=. /media/main/whj/miniconda3/bin/conda run -n mstorch python experiments/experiment_request_20260820/01_experiment_A_paired_threshold_revalidation/run_paired_revalidation.py --formal-bridge-stage3 --output-dir experiments/experiment_request_20260820/01_experiment_A_paired_threshold_revalidation/bridge_stage3",
+    "core_files_clean_after_run": true
+  },
+  "core_run": {
+    "commit": "a52fc9620204d284b8b22d05925f755bf33f41db",
+    "remote_worktree": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-a-core-full-a52fc96",
+    "command": "PYTHONPATH=. /media/main/whj/miniconda3/bin/conda run -n mstorch python experiments/experiment_request_20260820/01_experiment_A_paired_threshold_revalidation/run_core_revalidation.py --output-dir experiments/experiment_request_20260820/01_experiment_A_paired_threshold_revalidation/core_full",
+    "core_files_clean_after_run": true
+  },
+  "combination": {
+    "base_commit": "58e9f52054a062157899496cdb865565f5128cfd",
+    "decision_function": "experiments.paper_section_65_66.run_section66_realdata_training_consistency._strict_pass",
+    "thresholds": {
+      "loss_abs_diff": 0.02,
+      "grad_norm_abs_diff": 0.05,
+      "param_update_rel_l2": 0.03
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "created_on": "2026-09-06",
+  "scope": "EXPERIMENT_REQUEST_20260820 Experiment A-K result consolidation",
+  "git_merge_performed": false,
+  "source_results_modified": false,
+  "new_e_t_hier_summary_markdown_regenerated_from_immutable_json": true,
+  "experiment_j_local_view_reassembled_from_immutable_runs": true,
+  "historical_experiment_d_rows_overwritten": false,
+  "result_package_totals_excluding_transfer_archive_and_local_docs": {
+    "files": 10053,
+    "bytes": 551836313
+  },
+  "experiment_i_transfer": {
+    "archive": "09_experiment_I_real_translation/experiment_I_runs_real_core_v3_8c5c635.tar.gz",
+    "sha256": "76cd770fee5cf01e65445d0451e426eb85d755212d042b5574a206d8e9e467b2",
+    "archive_bytes": 7685103,
+    "extracted_files": 1738,
+    "extracted_bytes": 36539596,
+    "verified": true
+  },
+  "experiment_e_t_hier_rerun": {
+    "run_commit": "b32d9f4a27ed90646943b671d43f8616b4ad73fe",
+    "report_renderer_commit": "18bbf43a70611bf82f930590a7172d0e19b9523e",
+    "archive": "05_experiment_E_track_a_rerun/T-HIER/experiment_E_T_HIER_b32d9f4_20260906.tar.gz",
+    "sha256": "e977e644d214e80f9e98b592c61d55105331a437bdf18911e30e542aa7543a0b",
+    "archive_bytes": 172221,
+    "result_files": 157,
+    "result_bytes": 928714,
+    "conditions": 15,
+    "strict_success": 15,
+    "verified": true
+  },
+  "experiment_j_assembly": {
+    "commit": "2d6bd3dfd4f3aefdcc1dc6d4d91277f181b141a8",
+    "path": "10_experiment_J_feedback_ablation/formal_run_2d6bd3d",
+    "formal_run_conditions": ["r_exec", "r_binary", "r_stage", "r_flat"],
+    "confirmatory_repeat3_conditions": ["r_hier", "r_reverse"],
+    "conditions": 6,
+    "instances": 300,
+    "r_hier_strict_success": 48,
+    "r_reverse_strict_success": 48,
+    "provider_errors": 0,
+    "verified": true
+  },
+  "validation": {
+    "package_file_and_byte_pairs_all_match": true,
+    "reproduce_files_contain_no_personal_absolute_paths": true,
+    "key_counts": {
+      "A_paired_metric_rows": 210,
+      "A_total_method_instances": 300,
+      "B_instance_rows": 360,
+      "C_conditions": 72,
+      "C_step_rows": 3600,
+      "D_controlled_step_rows": 9600,
+      "E_T_HIER_fixed_conditions": 15,
+      "E_T_HIER_fixed_strict_success": 15,
+      "G_instance_rows": 120,
+      "H_conditions": 27,
+      "I_method_task_rows": 20,
+      "J_conditions": 6,
+      "J_instances": 300,
+      "J_r_hier_strict_success": 48,
+      "J_r_reverse_strict_success": 48,
+      "K_instance_rows": 50
+    }
+  },
+  "packages": [
+    {"experiment": "A", "status": "complete", "path": "01_experiment_A_paired_threshold_revalidation/formal_final"},
+    {"experiment": "B", "status": "complete", "path": "02_experiment_B_fixed60/formal_summary_f065b61"},
+    {"experiment": "C", "status": "complete", "path": "03_experiment_C_gradient_and_parameter_faults"},
+    {"experiment": "D", "status": "controlled_complete_real_scale_blocked", "path": "04_experiment_D_real_learning_dynamics/runs/2fd40609b853"},
+    {"experiment": "E", "status": "partial_t_hier_fixed_15_of_15_t_x2ms_unmeasured", "path": "05_experiment_E_track_a_rerun"},
+    {"experiment": "F", "status": "merged_into_D_and_I", "path": "06_experiment_F_merged_into_D_and_I"},
+    {"experiment": "G", "status": "complete", "path": "07_experiment_G_multi_fault/results_six_methods_corrected"},
+    {"experiment": "H", "status": "complete_with_configuration_warnings", "path": "08_experiment_H_multi_llm/final_results"},
+    {"experiment": "I", "status": "complete_negative_for_r_hier_repair_claim", "path": "09_experiment_I_real_translation/runs_real_core_v3"},
+    {"experiment": "J", "status": "complete_third_repeat_hier_reverse_tied_ordering_claim_not_supported", "path": "10_experiment_J_feedback_ablation/formal_run_2d6bd3d"},
+    {"experiment": "K", "status": "complete", "path": "11_experiment_K_layer_localization"}
+  ]
+}

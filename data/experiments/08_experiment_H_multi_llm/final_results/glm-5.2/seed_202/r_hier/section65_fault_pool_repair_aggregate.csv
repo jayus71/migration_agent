@@ -1,0 +1,7 @@
+layer,scope,real_llm,instances,passed,success_rate,repair_at_1,repair_at_2,repair_at_4,median_rounds,fault_triggered,restored_or_isolated,patch_count,failed_faults
+execution,candidate,True,10,10,1.0,1.0,1.0,1.0,1.0,10,10,10,
+execution,core_operator,True,10,7,0.7,0.6,0.6,0.7,1.0,10,10,6,EX-06-B;EX-08-A;EX-08-B
+gradient_update,candidate,True,12,12,1.0,1.0,1.0,1.0,1.0,12,12,12,
+gradient_update,core_autograd_optimizer,True,4,3,0.75,0.5,0.5,0.75,1.0,4,4,7,GR-07-A
+numerical,candidate,True,4,4,1.0,1.0,1.0,1.0,1.0,4,4,4,
+numerical,core_operator,True,10,9,0.9,0.6,0.7,0.9,1.0,10,10,9,NU-03-A

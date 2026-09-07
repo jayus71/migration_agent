@@ -1,0 +1,120 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "repair permute dimension list to match 4D input",
+    "edits": [
+      {
+        "file": "autofix/generated_faults/candidate/case_440b273aec424fa99decd1daf4d64ef3.py",
+        "summary": "Fix project_high_rank permute to include the fourth dimension index",
+        "action": "replace",
+        "find_text": "def project_high_rank(x):\n    projected = x.permute(0, 2, 1)\n    return projected.reshape(x.shape[0] * x.shape[2], x.shape[1], x.shape[3])",
+        "replace_text": "def project_high_rank(x):\n    projected = x.permute(0, 2, 1, 3)\n    return projected.reshape(x.shape[0] * x.shape[2], x.shape[1], x.shape[3])",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": true,
+        "error": ""
+      }
+    ],
+    "risk": "low",
+    "expected_effect": "FAULT_CASE_003 passes with output shape (8,3,5) and no permute dim mismatch error",
+    "notes": "The original permute list length 3 is invalid for 4D tensor; adding dimension index 3 yields correct reordering and reshape.",
+    "metadata": {
+      "token_usage": {
+        "prompt_tokens": 2873,
+        "completion_tokens": 1370,
+        "total_tokens": 4243
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 1370,
+          "prompt_tokens": 2873,
+          "total_tokens": 4243,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1057,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 2489
+        }
+      },
+      "router": {
+        "repair_scope": "candidate",
+        "confidence": 0.94,
+        "reason": "candidate_execution_contract_violation",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "autofix/generated_faults/candidate/case_440b273aec424fa99decd1daf4d64ef3.py"
+        ],
+        "recommended_validation": [
+          "controlled_fault_probe"
+        ]
+      },
+      "predicted_layer": "execution",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "candidate",
+        "allowed_files": [
+          "autofix/generated_faults/candidate/case_440b273aec424fa99decd1daf4d64ef3.py"
+        ],
+        "allowed_prefixes": [],
+        "checks": [
+          {
+            "file": "autofix/generated_faults/candidate/case_440b273aec424fa99decd1daf4d64ef3.py",
+            "action": "replace",
+            "ok": true,
+            "errors": [],
+            "occurrence_count": 1
+          }
+        ],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      }
+    },
+    "applied": true,
+    "applied_count": 1,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"case\": \"FAULT_CASE_003\", \"ok\": true, \"shape\": [8, 3, 5]}\n",
+      "payload": {
+        "case": "FAULT_CASE_003",
+        "ok": true,
+        "shape": [
+          8,
+          3,
+          5
+        ],
+        "model_variant": "cnn"
+      }
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Restore the missing residual skip connection in CandidateResidual.forward so the candidate output matches the reference oracle.",
+    "edits": [
+      {
+        "file": "autofix/generated_faults/candidate/case_f1cfac498ad34d3086fc5a8d9935e156.py",
+        "summary": "Add skip connection in CandidateResidual.forward.",
+        "action": "replace",
+        "find_text": "class CandidateResidual(nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.fc = nn.Linear(4, 4)\n        self.skip = nn.Linear(4, 4)\n\n    def forward(self, x):\n        hidden = torch.relu(self.fc(x))\n        return hidden",
+        "replace_text": "class CandidateResidual(nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.fc = nn.Linear(4, 4)\n        self.skip = nn.Linear(4, 4)\n\n    def forward(self, x):\n        hidden = torch.relu(self.fc(x))\n        return hidden + self.skip(x)",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": true,
+        "error": ""
+      }
+    ],
+    "risk": "low",
+    "expected_effect": "CandidateResidual will return fc_relu(x) + skip(x), matching ReferenceResidual and resolving the forward numeric mismatch for FAULT_CASE_013.",
+    "notes": "The only semantic difference between CandidateResidual and ReferenceResidual is the omitted skip addition. The other candidate helper functions match their reference counterparts, so this single targeted edit should make the probe pass.",
+    "metadata": {
+      "token_usage": {
+        "prompt_tokens": 2945,
+        "completion_tokens": 1522,
+        "total_tokens": 4467
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 1522,
+          "prompt_tokens": 2945,
+          "total_tokens": 4467,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1125,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 2561
+        }
+      },
+      "router": {
+        "repair_scope": "candidate",
+        "confidence": 0.94,
+        "reason": "candidate_numeric_semantics_mismatch",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "autofix/generated_faults/candidate/case_f1cfac498ad34d3086fc5a8d9935e156.py"
+        ],
+        "recommended_validation": [
+          "controlled_fault_probe"
+        ]
+      },
+      "predicted_layer": "numerical",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "candidate",
+        "allowed_files": [
+          "autofix/generated_faults/candidate/case_f1cfac498ad34d3086fc5a8d9935e156.py"
+        ],
+        "allowed_prefixes": [],
+        "checks": [
+          {
+            "file": "autofix/generated_faults/candidate/case_f1cfac498ad34d3086fc5a8d9935e156.py",
+            "action": "replace",
+            "ok": true,
+            "errors": [],
+            "occurrence_count": 1
+          }
+        ],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      }
+    },
+    "applied": true,
+    "applied_count": 1,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"actual_norm\": 7.3509650230407715, \"case\": \"FAULT_CASE_013\", \"expected_norm\": 7.3509650230407715, \"max_abs_diff\": 0.0, \"ok\": true}\n",
+      "payload": {
+        "case": "FAULT_CASE_013",
+        "ok": true,
+        "max_abs_diff": 0.0,
+        "expected_norm": 7.3509650230407715,
+        "actual_norm": 7.3509650230407715,
+        "model_variant": "mlp"
+      }
+    }
+  }
+}

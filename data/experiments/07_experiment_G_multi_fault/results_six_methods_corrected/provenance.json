@@ -1,0 +1,40 @@
+{
+  "experiment": "experiment_G_multi_fault_six_methods_corrected",
+  "model": "deepseek-v4-flash",
+  "temperature": 0.1,
+  "seed": 101,
+  "attempt_budget": 4,
+  "verifier_contract": {
+    "execution": "boundary_op+dtype_sensitive_matmul+gather_tokens",
+    "numerical_max_abs": 1e-06,
+    "gradient_update_max_abs": 1e-06,
+    "all_injected_faults_must_trigger_independently": true
+  },
+  "baseline_sources": {
+    "r_exec": {
+      "commit": "c490f77",
+      "remote_result": "results_remaining_corrected/r_exec"
+    },
+    "r_flat": {
+      "commit": "c490f77",
+      "remote_result": "results_remaining_corrected/r_flat (MF-01--04) + results_r_flat_resume_mf05/r_flat (MF-05--20)"
+    },
+    "r_hier": {
+      "commit": "fb7c5f9",
+      "remote_result": "results_hier_direct_corrected/r_hier"
+    },
+    "r_direct": {
+      "commit": "fb7c5f9",
+      "remote_result": "results_hier_direct_corrected/r_direct"
+    },
+    "r_swe": {
+      "commit": "c490f77",
+      "remote_result": "results_external_resume/r_swe"
+    },
+    "r_matchfix": {
+      "commit": "079a59a",
+      "remote_result": "results_matchfix_pytorch_source/r_matchfix"
+    }
+  },
+  "matchfix_clean_target_reference_provided": false
+}

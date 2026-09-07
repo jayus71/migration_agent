@@ -1,0 +1,51 @@
+{
+  "schema_version": "experiment_e_normalized_v1",
+  "method": "T-X2MS",
+  "status": "blocked",
+  "planned_runs": 15,
+  "observed_runs": 0,
+  "repo_commit": "d5f75ac95e406a5258e223f0222612bde258af3f",
+  "source_manifest": "F:\\torchax\\autofix\\experiment-e-cte-msadapter\\experiments\\experiment_request_20260820\\05_experiment_E_track_a_rerun\\T-X2MS\\raw\\x2ms_inputs\\manifest.json",
+  "prepared_tasks": 5,
+  "run_command": "python experiments/baselines/track_a/T-X2MS/run_t_x2ms.py --prepare-only --output-dir experiments/experiment_request_20260820/05_experiment_E_track_a_rerun/T-X2MS/prepared_inputs_d5f75ac_20260901",
+  "failure_class": "environment_or_upstream",
+  "error": "Server preflight found no npu-smi, /usr/local/Ascend, CANN set_env.sh, MindStudio, or X2MindSpore executable; the local Windows host has wsl.exe but no installed distro.",
+  "missing_components": [
+    "Ascend training device driver and firmware",
+    "Ascend-cann-toolkit",
+    "MindStudio with X2MindSpore",
+    "X2MindSpore conversion executable"
+  ],
+  "official_sources": [
+    "https://www.hiascend.com/document/detail/zh/mindstudio/500/quickstart/migrationtoolms_000002.html",
+    "https://www.hiascend.com/document/detail/en/mindstudio/600/quickstart/migrationtoolms_000003.html"
+  ],
+  "metrics": {
+    "compile_success": {
+      "successes": null,
+      "measurable_runs": 0,
+      "total_runs": 0,
+      "rate": null
+    },
+    "execution_success": {
+      "successes": null,
+      "measurable_runs": 0,
+      "total_runs": 0,
+      "rate": null
+    },
+    "training_success": {
+      "successes": null,
+      "measurable_runs": 0,
+      "total_runs": 0,
+      "rate": null
+    },
+    "strict_success": {
+      "successes": null,
+      "measurable_runs": 0,
+      "total_runs": 0,
+      "rate": null
+    }
+  },
+  "paper_main_table_eligible": false,
+  "rows": []
+}

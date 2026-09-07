@@ -11,7 +11,7 @@ Its rendered PDF/PNG were deleted; run this script if you need them back.
 
 Reads the 4800-row per-step result set directly so the figure cannot drift from
 the data:
-  ascend-torch4ms/experiments/paper_section_65_66/
+  data/paper_section_65_66/
     results_section65_per_step_divergence/
       section65_per_step_divergence_steps50.csv
 
@@ -36,20 +36,20 @@ The gradient quantity does not exist under this fault (no backward pass runs), s
 it is drawn in a separate "n/a" band rather than at zero -- plotting it low would
 read as "does not fire", the opposite of the truth.
 
-Run with the lzf env (base has no pandas):
-    /opt/miniconda3/envs/lzf/bin/python figures/make_divergence_trajectory.py
+Run from the repository root after installing requirements-analysis.txt:
+    python figures/make_divergence_trajectory.py
 """
 import os
+from pathlib import Path
 
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pandas as pd
 
-CSV = os.path.join(
-    "ascend-torch4ms/experiments/paper_section_65_66",
-    "results_section65_per_step_divergence",
-    "section65_per_step_divergence_steps50.csv")
+CSV = (Path(__file__).resolve().parents[1] / "data/paper_section_65_66"
+       / "results_section65_per_step_divergence"
+       / "section65_per_step_divergence_steps50.csv")
 
 # quantity -> detection threshold (from the run's raw JSON "thresholds")
 THRESHOLD = {"loss_abs_diff": 0.02, "grad_norm_abs_diff": 0.05,

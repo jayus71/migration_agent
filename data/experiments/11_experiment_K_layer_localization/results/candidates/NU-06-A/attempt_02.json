@@ -1,0 +1,167 @@
+{
+  "attempt": 2,
+  "generation": {
+    "iter": 2,
+    "strategy": "Correct the candidate rotary embedding operator's rotation sign from '-' to '+' so it matches the reference RoPE implementation and standard rotary embedding semantics.",
+    "edits": [
+      {
+        "file": "autofix/reports/core_operator_patch_candidates/iter2_rope_default_Correct_the_candidate_rotary_embedding_operator_s_rotation_sign_from_to_so_it_matches_the_reference_RoPE_implementation_and_standard_rotary_embedding_semantics_issue.json",
+        "summary": "Write matching core-operator issue proposal for LLM patch candidate dry-run",
+        "action": "write_file",
+        "find_text": "",
+        "replace_text": "{\n  \"kind\": \"torch4ms_core_issue_proposal\",\n  \"status\": \"proposal_only\",\n  \"repair_scope\": \"torch4ms_core_proposal\",\n  \"op_name\": \"unknown_op\",\n  \"error_type\": \"\",\n  \"message\": \"{\\\"actual_norm\\\": 5.90731954574585, \\\"case\\\": \\\"FAULT_CASE_015\\\", \\\"expected_norm\\\": 5.970496654510498, \\\"max_abs_diff\\\": 1.3935869932174683, \\\"ok\\\": false}\\n\",\n  \"source_path\": null,\n  \"converted_path\": \"torch4ms/ops/case_08c2485811134e7c9353d7ddec3b6925.py\",\n  \"localization\": {},\n  \"router\": {\n    \"repair_scope\": \"core_operator\",\n    \"confidence\": 0.94,\n    \"reason\": \"core_operator_numeric_semantics_mismatch\",\n    \"source\": \"failure_localization\",\n    \"legacy_repair_scope\": \"\",\n    \"recommended_target_files\": [\n      \"torch4ms/ops/case_08c2485811134e7c9353d7ddec3b6925.py\"\n    ],\n    \"recommended_validation\": [\n      \"controlled_fault_probe\"\n    ]\n  },\n  \"repro_path\": \"\",\n  \"next_steps\": [\n    \"Confirm converted code and verifier metadata are correct.\",\n    \"Minimize the failing operation into the repro script.\",\n    \"Only enable torch4ms core edits with an explicit gated apply mode.\"\n  ]\n}",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": false,
+        "error": "No change required."
+      },
+      {
+        "file": "autofix/reports/core_operator_patch_candidates/iter2_rope_default_Correct_the_candidate_rotary_embedding_operator_s_rotation_sign_from_to_so_it_matches_the_reference_RoPE_implementation_and_standard_rotary_embedding_semantics_patch.json",
+        "summary": "Write gated core-operator LLM patch candidate for dry-run evaluation",
+        "action": "write_file",
+        "find_text": "",
+        "replace_text": "{\n  \"kind\": \"torch4ms_core_patch_candidate\",\n  \"proposal_kind\": \"torch4ms_core_issue_proposal\",\n  \"op_name\": \"rope.default\",\n  \"hypothesis\": \"The rotary embedding operator in the candidate file applies the wrong sign when combining the rotated half with the original input. This sign flip produces finite but incorrect output for FAULT_CASE_015.\",\n  \"target_files\": [\n    \"torch4ms/ops/case_08c2485811134e7c9353d7ddec3b6925.py\"\n  ],\n  \"edits\": [\n    {\n      \"file\": \"torch4ms/ops/case_08c2485811134e7c9353d7ddec3b6925.py\",\n      \"summary\": \"Change rotary embedding rotation sign from minus to plus\",\n      \"action\": \"replace\",\n      \"find_text\": \"def _candidate_rope(x, cos, sin):\\n    return x * cos - _rotate_half(x) * sin\",\n      \"replace_text\": \"def _candidate_rope(x, cos, sin):\\n    return x * cos + _rotate_half(x) * sin\",\n      \"regex_pattern\": \"\",\n      \"regex_repl\": \"\"\n    }\n  ],\n  \"verify_commands\": [\n    [\n      \"python\",\n      \"-c\",\n      \"from torch4ms.ops.case_08c2485811134e7c9353d7ddec3b6925 import run_probe; import sys; sys.exit(0 if run_probe('FAULT_CASE_015')['ok'] else 1)\"\n    ]\n  ],\n  \"proposal_path\": \"autofix/reports/core_operator_patch_candidates/iter2_rope_default_Correct_the_candidate_rotary_embedding_operator_s_rotation_sign_from_to_so_it_matches_the_reference_RoPE_implementation_and_standard_rotary_embedding_semantics_issue.json\",\n  \"source_fixer_iter\": 2,\n  \"source_fixer_strategy\": \"Correct the candidate rotary embedding operator's rotation sign from '-' to '+' so it matches the reference RoPE implementation and standard rotary embedding semantics.\",\n  \"dry_run_command\": [\n    \"/media/main/whj/miniconda3/envs/mstorch/bin/python\",\n    \"-m\",\n    \"autofix.examples.run_phase10_core_apply_dry_run\",\n    \"--proposal\",\n    \"autofix/reports/core_operator_patch_candidates/iter2_rope_default_Correct_the_candidate_rotary_embedding_operator_s_rotation_sign_from_to_so_it_matches_the_reference_RoPE_implementation_and_standard_rotary_embedding_semantics_issue.json\",\n    \"--patch\",\n    \"autofix/reports/core_operator_patch_candidates/iter2_rope_default_Correct_the_candidate_rotary_embedding_operator_s_rotation_sign_from_to_so_it_matches_the_reference_RoPE_implementation_and_standard_rotary_embedding_semantics_patch.json\"\n  ]\n}",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": false,
+        "error": "No change required."
+      }
+    ],
+    "risk": "low",
+    "expected_effect": "FAULT_CASE_015 probe will produce values numerically aligned with the reference oracle; max_abs_diff will fall within the 1e-6 tolerance.",
+    "notes": "The failure is isolated to the `_candidate_rope` path. The candidate uses `x * cos - rotate_half(x) * sin`, while the reference uses `x * cos + rotate_half(x) * sin`. This sign difference explains the finite numeric divergence. This is a minimal, high-confidence core-operator patch.",
+    "metadata": {
+      "core_operator_patch_candidate": {
+        "kind": "torch4ms_core_patch_candidate",
+        "proposal_kind": "torch4ms_core_issue_proposal",
+        "op_name": "rope.default",
+        "hypothesis": "The rotary embedding operator in the candidate file applies the wrong sign when combining the rotated half with the original input. This sign flip produces finite but incorrect output for FAULT_CASE_015.",
+        "target_files": [
+          "torch4ms/ops/case_08c2485811134e7c9353d7ddec3b6925.py"
+        ],
+        "edits": [
+          {
+            "file": "torch4ms/ops/case_08c2485811134e7c9353d7ddec3b6925.py",
+            "summary": "Change rotary embedding rotation sign from minus to plus",
+            "action": "replace",
+            "find_text": "def _candidate_rope(x, cos, sin):\n    return x * cos - _rotate_half(x) * sin",
+            "replace_text": "def _candidate_rope(x, cos, sin):\n    return x * cos + _rotate_half(x) * sin",
+            "regex_pattern": "",
+            "regex_repl": ""
+          }
+        ],
+        "verify_commands": [
+          [
+            "python",
+            "-c",
+            "from torch4ms.ops.case_08c2485811134e7c9353d7ddec3b6925 import run_probe; import sys; sys.exit(0 if run_probe('FAULT_CASE_015')['ok'] else 1)"
+          ]
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 6287,
+        "completion_tokens": 2676,
+        "total_tokens": 8963
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 2676,
+          "prompt_tokens": 6287,
+          "total_tokens": 8963,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 2132,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 5903
+        }
+      },
+      "router": {
+        "repair_scope": "core_operator",
+        "confidence": 0.94,
+        "reason": "core_operator_numeric_semantics_mismatch",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "torch4ms/ops/case_08c2485811134e7c9353d7ddec3b6925.py"
+        ],
+        "recommended_validation": [
+          "controlled_fault_probe"
+        ]
+      },
+      "predicted_layer": "numerical",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "core_operator",
+        "allowed_files": [],
+        "allowed_prefixes": [
+          "torch4ms/ops/"
+        ],
+        "checks": [],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      },
+      "core_operator_patch_candidate_gate": {
+        "present": true,
+        "allowed_prefixes": [
+          "torch4ms/ops/"
+        ],
+        "exact_allowed_files": [],
+        "allowed_files": [
+          "torch4ms/ops/case_08c2485811134e7c9353d7ddec3b6925.py"
+        ],
+        "rejected_files": [],
+        "edit_count": 1,
+        "non_none_edit_count": 1,
+        "missing_edits": false,
+        "missing_verify_commands": false,
+        "valid_for_dry_run": true
+      },
+      "core_operator_issue_proposal_path": "autofix/reports/core_operator_patch_candidates/iter2_rope_default_Correct_the_candidate_rotary_embedding_operator_s_rotation_sign_from_to_so_it_matches_the_reference_RoPE_implementation_and_standard_rotary_embedding_semantics_issue.json",
+      "core_operator_patch_candidate_path": "autofix/reports/core_operator_patch_candidates/iter2_rope_default_Correct_the_candidate_rotary_embedding_operator_s_rotation_sign_from_to_so_it_matches_the_reference_RoPE_implementation_and_standard_rotary_embedding_semantics_patch.json"
+    },
+    "applied": false,
+    "applied_count": 0,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"actual_norm\": 5.970496654510498, \"case\": \"FAULT_CASE_015\", \"expected_norm\": 5.970496654510498, \"max_abs_diff\": 0.0, \"ok\": true}\n",
+      "payload": {
+        "case": "FAULT_CASE_015",
+        "ok": true,
+        "max_abs_diff": 0.0,
+        "expected_norm": 5.970496654510498,
+        "actual_norm": 5.970496654510498,
+        "model_variant": "mlp"
+      }
+    }
+  }
+}

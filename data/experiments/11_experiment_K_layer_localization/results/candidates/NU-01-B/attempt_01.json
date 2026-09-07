@@ -1,0 +1,118 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Restore the residual connection in CandidateResidual.forward to match the reference semantics.",
+    "edits": [
+      {
+        "file": "autofix/generated_faults/candidate/case_7acc13bbf7464b61823d3e4c1c9c39ad.py",
+        "summary": "Add the learnable skip connection to CandidateResidual.forward.",
+        "action": "replace",
+        "find_text": "class CandidateResidual(nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.fc = nn.Linear(4, 4)\n        self.skip = nn.Linear(4, 4)\n\n    def forward(self, x):\n        hidden = torch.relu(self.fc(x))\n        return hidden",
+        "replace_text": "class CandidateResidual(nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.fc = nn.Linear(4, 4)\n        self.skip = nn.Linear(4, 4)\n\n    def forward(self, x):\n        hidden = torch.relu(self.fc(x))\n        return hidden + self.skip(x)",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": true,
+        "error": ""
+      }
+    ],
+    "risk": "low",
+    "expected_effect": "The candidate residual probe will produce the same output as the reference, eliminating the forward numeric mismatch.",
+    "notes": "The candidate module defines self.skip but does not use it; adding the skip connection aligns it with ReferenceResidual and the original PyTorch semantics.",
+    "metadata": {
+      "token_usage": {
+        "prompt_tokens": 2975,
+        "completion_tokens": 817,
+        "total_tokens": 3792
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 817,
+          "prompt_tokens": 2975,
+          "total_tokens": 3792,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 444,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 2591
+        }
+      },
+      "router": {
+        "repair_scope": "candidate",
+        "confidence": 0.94,
+        "reason": "candidate_numeric_semantics_mismatch",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "autofix/generated_faults/candidate/case_7acc13bbf7464b61823d3e4c1c9c39ad.py"
+        ],
+        "recommended_validation": [
+          "controlled_fault_probe"
+        ]
+      },
+      "predicted_layer": "numerical",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "candidate",
+        "allowed_files": [
+          "autofix/generated_faults/candidate/case_7acc13bbf7464b61823d3e4c1c9c39ad.py"
+        ],
+        "allowed_prefixes": [],
+        "checks": [
+          {
+            "file": "autofix/generated_faults/candidate/case_7acc13bbf7464b61823d3e4c1c9c39ad.py",
+            "action": "replace",
+            "ok": true,
+            "errors": [],
+            "occurrence_count": 1
+          }
+        ],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      }
+    },
+    "applied": true,
+    "applied_count": 1,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"actual_norm\": 16.91322898864746, \"case\": \"FAULT_CASE_013\", \"expected_norm\": 16.91322898864746, \"max_abs_diff\": 0.0, \"ok\": true}\n",
+      "payload": {
+        "case": "FAULT_CASE_013",
+        "ok": true,
+        "max_abs_diff": 0.0,
+        "expected_norm": 16.91322898864746,
+        "actual_norm": 16.91322898864746,
+        "model_variant": "causal_lm"
+      }
+    }
+  }
+}

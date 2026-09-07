@@ -1,0 +1,137 @@
+{
+  "experiment": "experiment_J",
+  "metadata": {
+    "commit": "2d6bd3dfd4f3aefdcc1dc6d4d91277f181b141a8",
+    "model": "deepseek-v4-flash",
+    "temperature": "0",
+    "repair_attempts": 4,
+    "timeout_sec": 300,
+    "condition_provenance": {
+      "r_binary": {
+        "source_root": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-j-1ef4691/experiments/experiment_request_20260820/10_experiment_J_feedback_ablation/formal_run_1ef4691",
+        "source_commit": "1ef469109ce09ba5f4773eac634bcd270e821be2",
+        "validated_instances": 50,
+        "prompt_contract": {
+          "condition": "r_binary",
+          "display_name": "Pass/fail only",
+          "feedback_granularity": "binary",
+          "visible_execution": true,
+          "visible_numerical": true,
+          "visible_gradient_update": true,
+          "hierarchical_routing": false,
+          "feedback_order": [
+            "execution",
+            "numerical",
+            "gradient_update"
+          ],
+          "description": "One strict pass/fail bit without a stage label or metrics."
+        },
+        "imported_at": "2026-09-05T14:53:00.553651+00:00"
+      },
+      "r_hier": {
+        "source_run": "confirmatory_repeat3_hier_first",
+        "source_commit": "2d6bd3dfd4f3aefdcc1dc6d4d91277f181b141a8",
+        "validated_instances": 50,
+        "source_finished_at": "2026-09-06T09:52:11.473339+00:00"
+      },
+      "r_reverse": {
+        "source_run": "confirmatory_repeat3_hier_first",
+        "source_commit": "2d6bd3dfd4f3aefdcc1dc6d4d91277f181b141a8",
+        "validated_instances": 50,
+        "source_finished_at": "2026-09-06T09:52:11.473339+00:00"
+      }
+    }
+  },
+  "conditions": [
+    {
+      "condition": "r_exec",
+      "meaning": "Execution-only feedback: the Fixer sees runtime success/failure, exception type, and traceback. Numerical and gradient/update defects that execute normally do not trigger repair.",
+      "total": 50,
+      "passed": 33,
+      "repair_rate": 0.66,
+      "repair_at_1": 0.64,
+      "repair_at_2": 0.64,
+      "repair_at_4": 0.66,
+      "llm_calls": 47,
+      "prompt_tokens": 100542,
+      "completion_tokens": 135410,
+      "total_tokens": 235952,
+      "wall_time_sec": 8282.718659
+    },
+    {
+      "condition": "r_binary",
+      "meaning": "Strict aggregate binary feedback: the verifier checks execution, numerical, and gradient/update signals, then exposes only one overall pass/fail bit to the Fixer. It exposes no failing stage, metric, step, tensor, parameter, or repair route.",
+      "total": 50,
+      "passed": 34,
+      "repair_rate": 0.68,
+      "repair_at_1": 0.64,
+      "repair_at_2": 0.68,
+      "repair_at_4": 0.68,
+      "llm_calls": 44,
+      "prompt_tokens": 79675,
+      "completion_tokens": 668127,
+      "total_tokens": 747802,
+      "wall_time_sec": 13964.308355
+    },
+    {
+      "condition": "r_stage",
+      "meaning": "Stage-label feedback: the verifier checks all three layers and exposes only the first failing stage label, without numerical or tensor/parameter details.",
+      "total": 50,
+      "passed": 34,
+      "repair_rate": 0.68,
+      "repair_at_1": 0.64,
+      "repair_at_2": 0.66,
+      "repair_at_4": 0.68,
+      "llm_calls": 45,
+      "prompt_tokens": 94432,
+      "completion_tokens": 533784,
+      "total_tokens": 628216,
+      "wall_time_sec": 11614.196143000003
+    },
+    {
+      "condition": "r_flat",
+      "meaning": "Flat full feedback: execution, numerical, and gradient/update evidence is exposed as an unordered metric collection, without first-failure localization or routing.",
+      "total": 50,
+      "passed": 34,
+      "repair_rate": 0.68,
+      "repair_at_1": 0.64,
+      "repair_at_2": 0.68,
+      "repair_at_4": 0.68,
+      "llm_calls": 44,
+      "prompt_tokens": 111415,
+      "completion_tokens": 318985,
+      "total_tokens": 430400,
+      "wall_time_sec": 12143.669297
+    },
+    {
+      "condition": "r_hier",
+      "meaning": "Hierarchical LADDER feedback: full evidence is ordered execution -> numerical -> gradient/update with first-failure localization and repair routing.",
+      "total": 50,
+      "passed": 48,
+      "repair_rate": 0.96,
+      "repair_at_1": 0.72,
+      "repair_at_2": 0.88,
+      "repair_at_4": 0.96,
+      "llm_calls": 42,
+      "prompt_tokens": 167277,
+      "completion_tokens": 160035,
+      "total_tokens": 327312,
+      "wall_time_sec": 4810.853630999999
+    },
+    {
+      "condition": "r_reverse",
+      "meaning": "Reverse hierarchical feedback: the same full evidence and routing as r_hier is presented gradient/update -> numerical -> execution.",
+      "total": 50,
+      "passed": 48,
+      "repair_rate": 0.96,
+      "repair_at_1": 0.7,
+      "repair_at_2": 0.82,
+      "repair_at_4": 0.96,
+      "llm_calls": 46,
+      "prompt_tokens": 158814,
+      "completion_tokens": 145374,
+      "total_tokens": 304188,
+      "wall_time_sec": 5121.100676
+    }
+  ]
+}

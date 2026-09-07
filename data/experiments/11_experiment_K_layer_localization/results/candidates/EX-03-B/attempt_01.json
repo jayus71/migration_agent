@@ -1,0 +1,120 @@
+{
+  "attempt": 1,
+  "generation": {
+    "iter": 1,
+    "strategy": "Fix the 4D permute call in project_high_rank so that the permutation is applied over all four input dimensions, allowing the subsequent reshape to produce the expected (8, 3, 5) tensor.",
+    "edits": [
+      {
+        "file": "autofix/generated_faults/candidate/case_0a3712415e3949309de623f10ca776bd.py",
+        "summary": "Update permute dimensions to match 4D input in project_high_rank.",
+        "action": "replace",
+        "find_text": "def project_high_rank(x):\n    projected = x.permute(0, 2, 1)\n    return projected.reshape(x.shape[0] * x.shape[2], x.shape[1], x.shape[3])",
+        "replace_text": "def project_high_rank(x):\n    projected = x.permute(0, 2, 1, 3)\n    return projected.reshape(x.shape[0] * x.shape[2], x.shape[1], x.shape[3])",
+        "append_text": "",
+        "regex_pattern": "",
+        "regex_repl": "",
+        "applied": true,
+        "error": ""
+      }
+    ],
+    "risk": "low",
+    "expected_effect": "FAULT_CASE_003 no longer raises RuntimeError; permute produces shape (2,4,3,5) and reshape returns (8,3,5) as required by the probe contract.",
+    "notes": "Only the candidate file is modified. The replacement uses the exact current source context and makes the minimal change to the permute dimensions.",
+    "metadata": {
+      "token_usage": {
+        "prompt_tokens": 2932,
+        "completion_tokens": 1011,
+        "total_tokens": 3943
+      },
+      "llm_call": {
+        "enabled": true,
+        "attempted": true,
+        "sdk_available": true,
+        "api_key_present": true,
+        "base_url": "https://api.deepseek.com",
+        "base_url_present": true,
+        "model": "deepseek-v4-flash",
+        "model_present": true,
+        "ready": true,
+        "error_type": "",
+        "error_message": "",
+        "success": true,
+        "usage": {
+          "completion_tokens": 1011,
+          "prompt_tokens": 2932,
+          "total_tokens": 3943,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 651,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 2548
+        }
+      },
+      "router": {
+        "repair_scope": "candidate",
+        "confidence": 0.94,
+        "reason": "candidate_execution_contract_violation",
+        "source": "failure_localization",
+        "legacy_repair_scope": "",
+        "recommended_target_files": [
+          "autofix/generated_faults/candidate/case_0a3712415e3949309de623f10ca776bd.py"
+        ],
+        "recommended_validation": [
+          "controlled_fault_probe"
+        ]
+      },
+      "predicted_layer": "execution",
+      "diagnosis_complete": true,
+      "patch_preflight": {
+        "strict_scope": true,
+        "scope": "candidate",
+        "allowed_files": [
+          "autofix/generated_faults/candidate/case_0a3712415e3949309de623f10ca776bd.py"
+        ],
+        "allowed_prefixes": [],
+        "checks": [
+          {
+            "file": "autofix/generated_faults/candidate/case_0a3712415e3949309de623f10ca776bd.py",
+            "action": "replace",
+            "ok": true,
+            "errors": [],
+            "occurrence_count": 1
+          }
+        ],
+        "blocked_count": 0
+      },
+      "preflight_feedback": {
+        "outcome": "accepted",
+        "blocked_edits": []
+      }
+    },
+    "applied": true,
+    "applied_count": 1,
+    "apply_errors": []
+  },
+  "validation": {
+    "status": "verified_restored",
+    "probe": {
+      "returncode": 0,
+      "passed": true,
+      "output": "{\"case\": \"FAULT_CASE_003\", \"ok\": true, \"shape\": [8, 3, 5]}\n",
+      "payload": {
+        "case": "FAULT_CASE_003",
+        "ok": true,
+        "shape": [
+          8,
+          3,
+          5
+        ],
+        "model_variant": "causal_lm"
+      }
+    }
+  }
+}
