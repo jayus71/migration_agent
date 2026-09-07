@@ -73,11 +73,13 @@ ax.annotate("gap here", xy=(2 + 0.35, 81.3), xytext=(2 + 0.35, 108),
             arrowprops=dict(arrowstyle="-|>", color="#d03b3b",
                             linewidth=0.8, mutation_scale=6))
 
-leg = ax.legend(fontsize=5.6, loc="lower left", frameon=True, framealpha=0.92,
-                edgecolor="#dcdcdc", ncol=2, handlelength=1.0, handletextpad=0.3,
-                borderpad=0.4, labelspacing=0.35, columnspacing=0.8)
+leg = ax.legend(fontsize=5.6, loc="upper center", bbox_to_anchor=(0.5, 1.22),
+                frameon=True, framealpha=0.92, edgecolor="#dcdcdc", ncol=3,
+                handlelength=1.0, handletextpad=0.3, borderpad=0.4,
+                labelspacing=0.35, columnspacing=0.8)
 leg.get_frame().set_linewidth(0.6)
 
-fig.tight_layout(pad=0.3)
+fig.tight_layout(pad=0.3, rect=[0, 0, 1, 0.88])
 fig.savefig("figures/gain_by_stage.pdf", bbox_inches="tight")
-print("wrote figures/gain_by_stage.pdf")
+fig.savefig("figures/gain_by_stage.png", dpi=200, bbox_inches="tight")
+print("wrote figures/gain_by_stage.pdf + .png")

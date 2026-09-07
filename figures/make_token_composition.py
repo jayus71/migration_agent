@@ -88,11 +88,12 @@ for i, (name, p, c, fam) in enumerate(METHODS):
                 f"prompt {pm:.0f}x  compl. {cm:.1f}x",
                 ha="left", va="top", fontsize=5.2, color=MUTED, zorder=4)
 
-leg = ax.legend(fontsize=6.5, loc="lower right", frameon=True, framealpha=0.92,
-                edgecolor="#dcdcdc", handlelength=1.2, handletextpad=0.4,
-                borderpad=0.4)
+leg = ax.legend(fontsize=6.5, loc="upper center", bbox_to_anchor=(0.55, 1.12),
+                frameon=True, framealpha=0.92, edgecolor="#dcdcdc", ncol=2,
+                handlelength=1.2, handletextpad=0.4, borderpad=0.4)
 leg.get_frame().set_linewidth(0.6)
 
-fig.tight_layout(pad=0.3)
+fig.tight_layout(pad=0.3, rect=[0, 0, 1, 0.92])
 fig.savefig("figures/token_composition.pdf", bbox_inches="tight")
-print("wrote figures/token_composition.pdf")
+fig.savefig("figures/token_composition.png", dpi=200, bbox_inches="tight")
+print("wrote figures/token_composition.pdf + .png")
