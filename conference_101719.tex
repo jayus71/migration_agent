@@ -85,7 +85,7 @@ We introduce LADDER (Layered Differential Diagnosis for Execution Repair). Given
 This paper makes three contributions:
 \begin{itemize}
   \item We reframe fault localization for migration repair as verification design, replacing a single whole-program verdict with an ordered triple of training-stage signals whose earliest disagreement identifies the defect class and the repair it requires.
-  \item We realize this diagnosis as LADDER, a three-agent framework in which a verifier localizes the failing stage from paired executions, a fixer edits at that stage, and an orchestrator bounds and rolls back retries; because the signals derive from training semantics, one loop serves multiple target frameworks.
+  \item We realize this diagnosis as LADDER, an agentic repair framework that turns each stage-level verdict into a targeted edit under bounded retries, and, because the signals derive from training semantics, applies unchanged across target frameworks.
   \item We evaluate LADDER on real MindSpore and JAX migration failures and show that stage-ordered verification repairs instances a whole-program verdict leaves unresolved while accurately localizing the failing stage.
 \end{itemize}
 
