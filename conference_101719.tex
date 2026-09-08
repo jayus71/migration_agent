@@ -49,16 +49,14 @@ first stage at which the two diverge, whether in execution,
 forward values, or gradients and updates.  That divergence
 point identifies the defect class and tells a fixer exactly
 what to repair, while an orchestrator bounds retries and
-rolls back failed attempts.  The same loop applies to
-MindSpore and JAX targets with only the execution adapter
-changed.  On 50 real MindSpore migration failures LADDER
-repairs every instance within four attempts at $29\times$
-lower token cost than the strongest baseline, and transfers
-unchanged to JAX.  The three signals locate the failing stage
-with 96\% accuracy across three fault classes.  Ablation
-confirms that ordering the signals by training stage drives
-the gain; presenting them without ordering repairs only 34 of
-50 instances, while ordering them repairs all 50.
+rolls back failed attempts.  Because the verification loop is parameterized only by an
+execution adapter, it generalizes across target frameworks
+without modification.  On 50 real MindSpore migration
+failures spanning three fault classes, LADDER repairs every
+instance within four attempts at substantially lower token
+cost than the strongest baseline.  Ablation shows that
+aligning the diagnostic signals with the causal order of
+training stages is the decisive design choice.
 \end{abstract}
 
 \begin{IEEEkeywords}
