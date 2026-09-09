@@ -1,0 +1,14 @@
+% Reference snippet; the manuscript embeds this environment directly.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/gradient_drift.pdf}
+\caption{Gradient and update checks detect injected faults at the first training step, before the mean loss difference exceeds its threshold. Panels (a) and (b) show incorrect gradients and incorrect parameter updates, respectively. Each panel includes 12 runs across four model families and three seeds, with the translated model training independently of the source. The corresponding check detects the fault at step~1 in every run. The mean loss difference first exceeds its threshold at steps 31 and 18, respectively. Lines show mean differences divided by their detection thresholds; shaded bands show minima and maxima. The dashed line at 1 marks the detection threshold.}
+\label{fig:gradient-drift}
+\end{figure}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/repair_comparison.pdf}
+\caption{Repair acceptance on 50 MindSpore instances, using the checks for each fault described in Section~\ref{sec:setup}. (a) Acceptance on the first attempt against total tokens divided by repairs accepted within four attempts, on a logarithmic cost axis. (b) Cumulative acceptance on the same 50 instances at budgets of one, two, and four attempts. Markers show measured results at these budgets; connecting lines are visual guides. External baselines are from Table~\ref{tab:main-results}(a); reduced feedback conditions are from Table~\ref{tab:feedback-ablation}. The All signals condition reports execution status, forward values, and gradients and updates without identifying the first failing stage or specifying which stage to repair.}
+\label{fig:repair-comparison}
+\end{figure*}

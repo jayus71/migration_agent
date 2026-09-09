@@ -71,15 +71,36 @@ the local papers, `pypdf`, and Poppler; see the analysis notes for the procedure
 ## Figures and PDF
 
 ```bash
-.venv/bin/python figures/make_verdict_collapse.py
-.venv/bin/python figures/make_cost_quality.py
+.venv/bin/python figures/make_gradient_drift.py
+.venv/bin/python figures/make_repair_comparison.py
+.venv/bin/python figures/make_jax_table.py
+.venv/bin/python -m unittest discover -s tests
 latexmk -pdf -interaction=nonstopmode -halt-on-error conference_101719.tex
 ```
 
 LaTeX requires `latexmk`, `texlive-latex-extra`, `texlive-fonts-recommended`, and
-`texlive-publishers` (Debian/Ubuntu package names). Figure scripts use the original
-paper inputs under `data/paper_section_65_66/`. The newer A-K archive is separate:
-the upload preserves results and does not reconcile the paper's claims with them.
+`texlive-publishers` (Debian/Ubuntu package names). Figure scripts require NumPy,
+pandas, and Matplotlib and export vector PDFs plus 300-dpi PNGs. The manuscript
+uses the original 50-instance fault-check acceptance counts, including 50/50 for
+LADDER; these counts do not assert all-step paired-threshold compliance. The
+12-task signal ablation and the diagnostic studies use separate measurements.
+See [figure inputs and provenance](data/paper_figures/README.md) for source CSVs,
+checksums, scoring definitions, and links to the archived diagnostic data.
+
+The abstract states cross-framework effectiveness on MindSpore and JAX. The three
+manuscript figures show gradient drift, the repair architecture, and cost with
+cumulative repair acceptance at the recorded 1-, 2-, and 4-attempt budgets.
+The main results table combines MindSpore and JAX in two sections with separate
+column layouts and single-line headings. MindSpore retains all breakdowns;
+JAX shows its measured fault stages, CNN/MLP results, acceptance, and token cost.
+Its rows are generated from the original Track C records. The table note states
+the different attempt budgets and defines token cost per accepted repair.
+Fault signatures,
+localization, and the separate 12-task signal-composition results are described
+in the text. Their plotting scripts and assets remain available in `figures/`
+but are not included in the manuscript. Generated figure assets are tracked;
+the compiled manuscript `conference_101719.pdf` remains local and is ignored by
+Git.
 
 ## Re-running experiments
 
