@@ -35,23 +35,22 @@ anonymous@example.com}}
 \maketitle
 
 \begin{abstract}
-Large language models can translate deep learning training
-programs across frameworks, but an executable translation may still
-compute incorrect gradients or update the wrong parameters. These
-faults can remain hidden when verification checks only forward values,
-and an overall pass or fail result provides little guidance on where
-to repair. Training stages depend on one another, so the earliest disagreement
-between source and target executions can help distinguish operator
-errors from failures in differentiation or optimization. In this paper, we
-propose MARS, a multi-agent repair system that uses layered diagnosis
-to repair migrated training code. An orchestrator coordinates three agents
-for translation, verification, and repair. The translator produces an
-initial target program. The verifier compares execution status, forward
-values, gradients, and parameter updates between source and target
-programs in training order. The resulting diagnosis directs the repair agent
-to the affected computation and supplies the measurements needed to
-revise the code. After each edit, the orchestrator invokes verification
-again and uses the updated diagnosis to coordinate further repair
+Migrating deep learning training code across frameworks requires
+preserving the computations that determine learning. Large language models
+can generate executable translations, but agreement in forward values can
+conceal incorrect gradients or parameter updates. Verification must therefore
+expose failures across training stages and provide evidence for choosing a
+repair. An error in forward computation can also change gradients and
+parameter updates, so later discrepancies need to be interpreted in context.
+These stages depend on one another, so the earliest disagreement
+between source and target executions offers a diagnostic signal for locating
+the computation to repair. In this paper, we propose MARS, a multi-agent
+repair system that uses this dependency structure to organize verification
+evidence. MARS compares execution status, forward values, gradients, and
+parameter updates in training order. The resulting diagnosis combines the
+first failing stage with the measurements needed to guide a code edit.
+Three specialized agents translate, verify, and repair the program under
+an orchestrator that uses updated diagnoses to coordinate subsequent repair
 within a fixed attempt budget. On 50 MindSpore fault instances, MARS
 achieves full acceptance within four attempts, with 84\% accepted on
 the first attempt and approximately 29-fold lower token cost per accepted
@@ -66,9 +65,11 @@ cross-framework migration, training-code translation, layered feedback, program 
 
 \section{Introduction}
 
-Large language model (LLM) agents support code migration by translating programs and iteratively repairing them with execution feedback~\cite{he-etal-2025-execoder,guan2025repotransagent,ibrahimzada2025matchfixagent}. Migrating deep learning training code from PyTorch to MindSpore or JAX also requires preserving the computations that determine learning. A translated program may execute while producing different forward values, match the source loss but compute incorrect gradients, or update a different parameter set despite plausible gradients. Frameworks differ in operator conventions, differentiation interfaces, and optimizer semantics, so execution success alone does not establish correct training behavior~\cite{paszke2019pytorch,mindspore2020whitepaper,google2025torchax}. An overall pass or fail result does not distinguish these failures or indicate which computation the agent should correct. Effective repair requires feedback that detects discrepancies in training behavior and relates them to the code requiring an edit.
+Large language models (LLMs) support code translation across programming languages, reducing the manual effort needed to reuse existing implementations~\cite{he-etal-2025-execoder,macedo2024intertrans}. For deep learning, migration makes training programs available in another framework and its software and hardware ecosystem. Moving a program from PyTorch to MindSpore or JAX involves tensor computations, automatic differentiation, and optimizer behavior. The objective is to preserve the learning process implemented by the source program when it executes in the target runtime.
 
-Agreement in forward values can conceal faults in the computations that follow them. In Fig.~\ref{fig:gradient-drift}, the corresponding gradient or parameter update check detects each injected fault at step~1 in every run, whereas the mean loss difference crosses its threshold only at steps 31 and 18 in panels (a) and (b), respectively. Incorrect updates accumulate before their effects become apparent in the loss. Comparing gradients and parameter updates makes these faults observable, and the dependencies between training stages give the measurements a diagnostic order. Execution failures must be resolved before numerical agreement can be assessed. Once forward values agree, discrepancies in gradients or parameter updates point to differentiation, parameter registration, or optimizer behavior. Reporting the earliest disagreement in this order directs the agent to the computation requiring correction and provides a basis for choosing its next edit.
+An executable translation can still change this learning process. It may produce different forward values, match the source loss but compute incorrect gradients, or update a different parameter set despite plausible gradients. Such failures arise from differences in operator conventions, differentiation interfaces, and optimizer semantics~\cite{paszke2019pytorch,mindspore2020whitepaper,google2025torchax}. Correct training behavior depends on several computations that execute in sequence. Verification must cover these computations and relate a detected discrepancy to the part of the program that requires correction.
+
+Existing translation and repair systems provide several forms of evidence for making code edits. Unit tests check translated behavior~\cite{roziere2021unittests}, and interactive repair agents inspect source code and execution results~\cite{yang2024sweagent}. RepoTransAgent combines repository context, test failures, and reflection during refinement~\cite{guan2025repotransagent}. MatchFixAgent supplies reports from multiple semantic analyses to an agent that generates tests and repairs translations~\cite{ibrahimzada2025matchfixagent}. These systems organize feedback around tests, repository context, or general semantic properties. For training-code migration, the remaining question is how to interpret the evidence using the dependencies between training computations, so that a repair agent can distinguish the stage requiring correction from discrepancies in later stages.
 
 \begin{figure}[t]
 \centering
@@ -77,38 +78,43 @@ Agreement in forward values can conceal faults in the computations that follow t
 \label{fig:gradient-drift}
 \end{figure}
 
-We propose MARS (Multi-Agent Repair System), which uses layered diagnosis to coordinate translation, verification, and repair. The translator agent supplies an initial target program. The verifier agent compares it with the source in training order and reports the earliest failing stage together with the measurements that explain the discrepancy. The repair agent uses this diagnosis to edit the affected code. An orchestrator coordinates the three agents and invokes verification after each edit, using the updated diagnosis to guide subsequent attempts within a fixed budget. Experiments on MindSpore and JAX evaluate the same diagnostic signals and repair procedure across target frameworks. On the 50-instance MindSpore repair set, MARS achieves full acceptance within four attempts with approximately 29-fold lower token cost per accepted repair than MatchFixAgent. Ablations show that identifying the failing stage and supplying repair guidance improve acceptance beyond providing all measured signals together. This paper makes three contributions.
+Fig.~\ref{fig:gradient-drift} shows why earlier observations alone cannot resolve this question. The corresponding gradient or parameter update check detects each injected fault at step~1 in every run. The mean loss difference crosses its threshold only at steps 31 and 18 in panels (a) and (b), respectively. Incorrect updates therefore affect the training process before their accumulated effects become apparent in the loss. This example establishes the need to examine the training stage in which a discrepancy occurs, even when an earlier observation remains within tolerance.
+
+The dependencies between training stages provide an order for interpreting these discrepancies. Execution failures must be resolved before numerical agreement can be assessed. An error in forward computation can also change gradients and parameter updates, while agreement in forward values allows later discrepancies to direct attention to differentiation or optimizer behavior. We therefore treat the first failing training stage as a diagnostic signal for repair. The additional measurements expose faults, and their order helps determine which computation the repair agent should inspect.
+
+We introduce MARS (Multi-Agent Repair System), which implements this principle through layered diagnosis and a multi-agent repair framework. The verifier compares execution status, forward values, gradients, and parameter updates in training order, and reports the first failing stage with its measurements. A translator agent provides the initial target program, and a repair agent uses the diagnosis to edit the affected code. An orchestrator coordinates the three agents and supplies updated verification results for subsequent attempts. Experiments on MindSpore and JAX examine repair effectiveness, diagnosis, and the contribution of the feedback design. On the 50-instance MindSpore repair set, MARS achieves full acceptance within four attempts with approximately 29-fold lower token cost per accepted repair than MatchFixAgent. This paper makes three contributions.
 \begin{itemize}
-  \item We develop layered training diagnosis that checks execution, forward values, gradients, and parameter updates in training order and reports the earliest disagreement to guide repair.
-  \item We introduce MARS, a multi-agent system that coordinates translation, verification, and repair around this diagnosis, linking code edits to updated verification within a fixed attempt budget.
-  \item We evaluate MARS on MindSpore and JAX, demonstrating improved repair acceptance and lower token cost, and analyze the roles of diagnostic signal coverage and guidance for the failing stage.
+  \item We formulate training-code repair through diagnosis along ordered training computations, using the first failing stage to connect verification evidence with a repair target.
+  \item We develop MARS, a layered multi-agent repair framework in which an orchestrator coordinates specialized translator, verifier, and repair agents around this diagnosis.
+  \item We evaluate repair effectiveness and cross-framework applicability on MindSpore and JAX, and analyze diagnostic accuracy, signal coverage, and guidance for the failing stage.
 \end{itemize}
 
 \section{Related Work}
-We group related work by how it obtains repair feedback, covering validation by overall outcome, fault localization through search, and conversion tools or tests of individual properties.
+We organize related work by the evidence supplied for repair and how that evidence is used. The organization of diagnostic information and the division of work among agents address different aspects of a repair system.
 
-\paragraph{Validation by overall outcome}
-Most translation systems validate a translation by one pass or fail result for the whole program. Early neural translation learned from multilingual corpora without direct supervision~\cite{roziere2020transcoder}. Later work used automated unit tests to validate translations and supervise training on the model's own outputs~\cite{roziere2021unittests}, and compiler representations reduced semantic gaps between source and target languages~\cite{szafraniec2023compiler}. Recent systems using LLMs improve validation through executability representations, intermediate translation paths, and repository context~\cite{he-etal-2025-execoder,macedo2024intertrans,guan2025repotransagent}. MatchFixAgent distributes equivalence checking across specialized agents within a repository and repairs code that causes differences in behavior~\cite{ibrahimzada2025matchfixagent}. These methods expand the evidence behind an overall verification result. MARS includes the failing training stage in that result so the repair agent can select an edit from the diagnosis.
+\paragraph{Translation and verification evidence}
+Neural code translation uses multilingual corpora, automated tests, and compiler representations to learn or validate translations~\cite{roziere2020transcoder,roziere2021unittests,szafraniec2023compiler}. ExeCoder represents functional semantics, syntax structure, and variable dependencies to improve translation~\cite{he-etal-2025-execoder}. InterTrans explores intermediate translation paths~\cite{macedo2024intertrans}. RepoTransAgent uses retrieved context, test failures, and reflection to refine translations~\cite{guan2025repotransagent}. MatchFixAgent combines analysis of control flow, data flow, input and output behavior, libraries, exceptions, and specifications with test generation and repair~\cite{ibrahimzada2025matchfixagent}. These methods provide representations, tests, or explanatory reports that help establish functional equivalence. MARS organizes paired training measurements by their computational dependencies and supplies the first failing stage as additional repair information.
 
-\paragraph{Fault localization through search}
-Automated program repair uses tests or semantic constraints to locate faults and guide patch generation~\cite{nguyen2013semfix}. Pretrained language models improve patch generation and enable iterative repair from execution feedback~\cite{xia2023aprplm}. Agents such as SWE-agent edit repository code through interactive tools and tests~\cite{yang2024sweagent}. Reflection and agent methods feed critiques in natural language, debugging traces, or executable code actions back into generation~\cite{shinn2023reflexion,chen2023selfdebugging,wang2024codeact}, while systems with multiple agents assign specialized roles and structure their interaction~\cite{qian2023chatdev,hong2023metagpt,wu2023autogen,chen2023agentverse}. Locating the failing training stage remains part of this search. Providing that stage directly from paired executions reduces the search required by MARS's repair loop.
+\paragraph{Interactive program repair}
+Automated program repair uses tests or semantic constraints to locate faults and guide patch generation~\cite{nguyen2013semfix}, while pretrained language models support patch generation from code and failure evidence~\cite{xia2023aprplm}. SWE-agent provides tools for repository navigation, editing, and test execution~\cite{yang2024sweagent}. Reflection, self-debugging, and executable code actions allow agents to use critiques and execution results during further repair~\cite{shinn2023reflexion,chen2023selfdebugging,wang2024codeact}. These workflows allow an agent to investigate a failure and revise its hypothesis. MARS provides a training-stage diagnosis and the corresponding measurements before the next edit, directing that investigation to the computation implicated by verification.
 
-\paragraph{Conversion and tests of individual properties}
-Conversion tools and differential tests compare a translation with a reference at a chosen interface. MindConverter targets migration from other frameworks to MindSpore~\cite{mindspore2023mindconverter}. Ivy\footnote{\url{https://github.com/unifyai/ivy}} and \texttt{torch2jax}\footnote{\url{https://github.com/rdyro/torch2jax}} convert PyTorch computations to JAX, while TorchAX preserves the PyTorch programming interface over a JAX backend~\cite{google2025torchax}. Differential testing compares semantically related executions and has exposed bugs in compilers and program analysis~\cite{yang2011csmith,le2014emi}. Testing of deep learning systems extends this idea to behavioral coverage and comparisons between networks~\cite{pei2017deepxplore,ma2018deepgauge}. MARS uses comparisons between source and target executions to distinguish execution failures from failures during forward or backward computation. It checks these stages in order to identify the earliest disagreement.
+\paragraph{Conversion and differential testing}
+Conversion tools provide mappings between framework interfaces. MindConverter targets MindSpore~\cite{mindspore2023mindconverter}; Ivy\footnote{\url{https://github.com/unifyai/ivy}} and \texttt{torch2jax}\footnote{\url{https://github.com/rdyro/torch2jax}} convert computations to JAX, while TorchAX exposes the PyTorch interface over a JAX backend~\cite{google2025torchax}. Differential testing compares related executions to expose compiler and program behavior differences~\cite{yang2011csmith,le2014emi}. Tests of deep learning systems also examine behavioral coverage and differences between networks~\cite{pei2017deepxplore,ma2018deepgauge}. Such comparisons depend on which observations are selected. MARS includes gradients and parameter updates, and uses the order of training computations to turn the observed differences into a repair target.
+
+\paragraph{Multi-agent systems}
+ChatDev and MetaGPT distribute software development among specialized roles~\cite{qian2023chatdev,hong2023metagpt}; AutoGen and AgentVerse organize communication and cooperation among agents~\cite{wu2023autogen,chen2023agentverse}. RepoTransAgent and MatchFixAgent apply specialization to repository context and translation verification, respectively~\cite{guan2025repotransagent,ibrahimzada2025matchfixagent}. Role decomposition determines how work is assigned, while a diagnostic structure determines what information guides a repair. MARS combines these two design choices by passing layered training diagnoses between specialized translation, verification, and repair agents under an orchestrator.
 
 \section{Method}
 
-\subsection{Task and Verification}
-Given a training program $P$ in a source framework $F_s$ and a target framework $F_t$, the migration task is to produce a translation $\hat{P}$ that executes under $F_t$ while preserving the training behavior checked in our experiments. We check compatibility of tensors and modules, agreement in forward values and losses, comparable gradients, and parameter updates with comparable direction and magnitude. We evaluate this task on \texttt{torch4ms}/MindSpore and TorchAX/JAX.
+\subsection{Problem Setup}
+Given a training program $P$ in a source framework $F_s$ and a target framework $F_t$, migration produces a target program $\hat{P}$ that preserves the source's training computations. We examine execution, forward values, gradients, and parameter updates. The repair task takes the source program, an initial target implementation, and the code the repair agent is permitted to edit. It returns a revised implementation that passes the specified verification checks. The permitted code can include the translated program or the framework implementation needed to execute it.
 
-We evaluate a translation by running the source and translated programs with controlled inputs, synchronized initialization, and matched optimizer settings. Let $\mathcal{O}_{t}(P)$ denote the recorded state at training step $t$, including execution status, selected outputs or losses, gradients, and statistics of parameter updates. A translation passes when $\mathcal{O}_{t}(\hat{P})$ remains within predefined tolerances of $\mathcal{O}_{t}(P)$ for the checked steps. The adapters report these results in a common format so that the same signals apply to different target runtimes.
+The verifier runs the source and target programs with controlled inputs, synchronized initialization, and matched optimizer settings. Let $\mathcal{O}_{t}(P)$ denote the observations at training step $t$, including execution status, selected outputs or losses, gradients, and parameter updates. Differences between $\mathcal{O}_{t}(P)$ and $\mathcal{O}_{t}(\hat{P})$ provide the evidence for diagnosis. Section~\ref{sec:setup} specifies the checked conditions, tolerances, and repair acceptance criteria used in the evaluation.
 
-\subsection{What Makes a Diagnosis Useful}
-Let $\mathcal{C}=(c_1,c_2,c_3)$ be the signals for execution, forward values, and gradients and updates, and let $\mathrm{fail}(\hat{P})\subseteq\mathcal{C}$ be the signals that detect a failure in the translation. The verifier maps $\hat{P}$ to the feedback supplied to the repair agent. Validation by overall outcome uses
-\begin{equation}
-v_{\mathrm{single}}(\hat{P}) = \mathbf{1}\!\left[\mathrm{fail}(\hat{P}) \neq \emptyset\right],
-\end{equation}
-which represents every failure with the same value. MARS reports the first failing signal,
+\subsection{Layered Diagnosis}
+MARS interprets verification evidence in the order required by training computation. Execution failures prevent numerical comparison. A discrepancy in forward computation can propagate to gradients and parameter updates, so several failing measurements may reflect the same earlier error. When forward values agree, discrepancies in gradients or parameter updates direct attention to differentiation or optimizer behavior. This dependency structure determines which failing signal guides the next repair.
+
+Let $\mathcal{C}=(c_1,c_2,c_3)$ be the ordered signals for execution, forward values, and gradients and parameter updates. Let $\mathrm{fail}(\hat{P})\subseteq\mathcal{C}$ contain the signals that detect a failure in the target implementation. MARS reports the first failing signal,
 \begin{equation}
 v_{\mathrm{mars}}(\hat{P}) =
 \begin{cases}
@@ -116,23 +122,13 @@ v_{\mathrm{mars}}(\hat{P}) =
 \text{verified}, & \text{otherwise},
 \end{cases}
 \end{equation}
-together with the metrics that produced it. Each index identifies a different repair action. Index 1 points to compatibility or operator lowering, index 2 to operator semantics, and index 3 to differentiation, parameter registration, or optimizer behavior. Two translations with the same $v_{\mathrm{single}}$ but different $v_{\mathrm{mars}}$ require different edits. Fig.~\ref{fig:gradient-drift} illustrates this distinction. A check of forward values alone accepts a translation with faulty gradients for tens of steps. The verifier therefore includes the index and the corresponding measurements in the feedback sent to the repair agent.
+together with the measurements that produced it, available module locations, and exception details when execution fails. The stage index identifies the type of computation to inspect; the accompanying evidence guides the specific code edit. Index 1 directs attention to execution compatibility or operator implementation, index 2 to forward operator semantics, and index 3 to differentiation, parameter registration, or optimizer behavior. Later signals can provide supporting evidence for the diagnosis. The resulting feedback connects a detected discrepancy to a repair action.
 
-\subsection{Layered Feedback}
+\subsection{Diagnostic Signals}
 \label{sec:hierarchy}
 
-\paragraph{Ordering}
-MARS checks training code in the order its computation requires. The translation must execute, then preserve the forward computation, then preserve the backward and update behavior that determines learning. Each check depends on the preceding check passing,
-\[
-\text{execution} \rightarrow \text{forward values} \rightarrow \text{gradients and updates}.
-\]
-The first failing stage determines the repair target. Later signals may provide supporting evidence for that diagnosis.
-
-\paragraph{Common adapter}
-Each target framework supplies an execution adapter that runs the translation and reports execution status, selected forward values, gradients, and parameter updates in a common format. The adapter handles the details of each runtime, keeping the signals and their order unchanged.
-
 \paragraph{Execution signal}
-The execution signal determines whether $\hat{P}$ completes the required training step under the target backend. It records where execution fails, including module construction, data movement, forward execution, loss computation, backward execution, and optimizer updates, together with the exception and operator details when available. This information identifies failures in compatibility, operator lowering, device placement, data type, shape, or parameter registration. The check fails when execution raises an exception. Omitting a backward call can therefore pass the execution check, leaving the missing gradients and updates to be detected at the third stage.
+The verifier checks whether $\hat{P}$ completes the training step under the target runtime. When execution fails, it records the operation, exception, and location available from the run. Failures can occur during module construction, data movement, forward computation, loss computation, backward computation, or parameter updates. These observations direct repair toward compatibility, operator implementation, device placement, data type, shape, or parameter registration. Numerical measurements are unavailable after an execution failure. Omitting a backward call can pass the execution check, leaving missing gradients and parameter updates to be detected by the third signal.
 
 \paragraph{Signal for forward values}
 Once both executions complete, the signal for forward values compares logits, selected intermediate activations, and losses under controlled inputs $(x,y)$ and synchronized initialization. The simplest comparison uses the loss difference,
@@ -140,10 +136,10 @@ Once both executions complete, the signal for forward values compares logits, se
 \Delta_{\mathrm{loss}} =
 \left| L(P; x, y) - L(\hat{P}; x, y) \right|.
 \end{equation}
-When intermediate outputs are available, the verifier also compares outputs and individual modules to locate the earliest module whose difference exceeds tolerance. These comparisons locate mismatches in operators, reductions, broadcasting, normalization, or loss computation that would otherwise appear only in the final loss.
+When intermediate outputs are available, the verifier also locates the earliest module whose difference exceeds tolerance. These comparisons provide evidence of mismatches in operators, reductions, broadcasting, normalization, or loss computation that would otherwise appear only in the final loss.
 
 \paragraph{Gradient and parameter update signal}
-The gradient and parameter update signal determines whether the translation preserves backward and optimizer behavior. Two programs may produce similar forward losses while computing different gradients, updating different parameter subsets, or applying optimizer state differently. The verifier compares gradient norms and parameter updates using
+The gradient and parameter update signal compares backward computation and optimizer behavior. The verifier measures differences in gradient norms and relative differences in parameter updates using
 \begin{equation}
 \Delta_{\mathrm{grad}} =
 \left|
@@ -156,9 +152,9 @@ The gradient and parameter update signal determines whether the translation pres
 \frac{\|\Delta \theta - \Delta \hat{\theta}\|_2}
 {\|\Delta \theta\|_2 + \epsilon}.
 \end{equation}
-Beyond aggregate norms, the verifier records missing gradients, parameters with zero gradients, mismatches in parameter names, and update outliers. A normal forward loss with missing gradients indicates a defect in automatic differentiation or parameter registration. Aligned gradients with divergent updates indicate a defect in optimizer state or parameter updates.
+Here $\Delta\theta$ and $\Delta\hat{\theta}$ are the source and target parameter updates, and $\epsilon$ prevents division by zero. The verifier also records missing gradients, parameters with zero gradients, mismatches in parameter names, and update outliers. Missing target gradients for parameters differentiated in the source direct attention to automatic differentiation or parameter registration. Matching gradient measurements with divergent parameter updates direct attention to optimizer behavior.
 
-\subsection{Repair Loop}
+\subsection{Multi-Agent Repair}
 
 \begin{figure*}[t]
 \centering
@@ -167,11 +163,11 @@ Beyond aggregate norms, the verifier records missing gradients, parameters with 
 \label{fig:architecture}
 \end{figure*}
 
-The repair loop in Fig.~\ref{fig:architecture} runs through an execution adapter. The primary adapter uses \texttt{torch4ms}, which provides the PyTorch programming interface and dispatches operators, backward execution, and optimizer behavior to implementations in MindSpore.\footnote{The primary prototype repository is available at \url{https://gitee.com/feixiao13/ascend-torch4ms.git}.} The second adapter uses TorchAX with JAX automatic differentiation and Optax updates. Both report execution status, forward values, gradient measurements, and statistics of parameter updates to the verifier.
+The three agents in Fig.~\ref{fig:architecture} use the diagnosis to connect verification with code generation. The translator receives the source program and target framework information and supplies an initial target program. The verifier runs the paired comparisons and produces the layered diagnosis. The repair agent receives the diagnosis, the permitted code, and feedback from the previous attempt, and produces an edit directed at the failing computation.
 
-The translator agent supplies the initial program, the verifier agent identifies the first failing stage, and the repair agent edits the permitted code using that diagnosis. The orchestrator coordinates these three agents, repeats verification after each edit, and enforces the attempt budget. It retains edits that improve the verification score and rolls back those that do not.
+The orchestrator manages the interaction among these three agents. It invokes verification after an edit and uses the new report to evaluate the change. It retains edits that improve the verification score and rolls back those that do not, passing the previous attempt's outcome into subsequent repair. Verification success ends the loop; otherwise, the updated diagnosis guides further repair within the attempt budget. Each repair decision therefore uses evidence from the current execution and the preceding modification.
 
-For each checked training step, we synchronize inputs, initialization, and optimizer settings between the source and translated programs. We record execution status, differences in loss and optional module outputs, differences in gradient norms, and relative $\ell_2$ differences in parameter updates. The verifier reports unavailable measurements when execution fails. Acceptance follows the checks specified for each experiment in Section~\ref{sec:setup}.
+Execution adapters provide the observations used by the verifier in a common format. The primary adapter uses \texttt{torch4ms}, which provides the PyTorch programming interface and dispatches operators, backward computation, and optimizer behavior to MindSpore implementations.\footnote{The primary prototype repository is available at \url{https://gitee.com/feixiao13/ascend-torch4ms.git}.} The second adapter uses TorchAX with JAX automatic differentiation and Optax updates. Both supply execution status, forward values, gradients, and parameter updates, allowing the diagnostic order and repair procedure to remain the same across target frameworks.
 
 \section{Evaluation}
 
@@ -182,17 +178,13 @@ The evaluation answers four questions.
 \begin{itemize}
   \item[\textbf{RQ1}] How does MARS compare with existing repair systems on repair acceptance under a fixed budget?
   \item[\textbf{RQ2}] Can the three signals distinguish fault classes and locate the failing stage?
-  \item[\textbf{RQ3}] How do signal coverage and repair guidance for each stage affect acceptance?
-  \item[\textbf{RQ4}] Does the repair loop generalize to a second target framework and to different prompt configurations?
+  \item[\textbf{RQ3}] How do signal coverage, guidance for the failing stage, and framework documentation affect repair?
+  \item[\textbf{RQ4}] Does the same diagnosis and repair procedure apply across target frameworks?
 \end{itemize}
 
 We collected fault categories by migrating PyTorch training programs to the two target frameworks and recording the failures. The recurring failures fall into 25 categories, grouped by the stage at which they occur and the framework mechanism responsible. Ten categories cause execution failures, seven affect forward values, and eight affect gradients or parameter updates. The latter 15 produce executable programs with incorrect training behavior. We reproduce each observed category by injecting the fault into a correct implementation. This gives each instance a known fault location for evaluating diagnosis and reduces the variation present in failures collected directly from migrations. Creating instances of each category on two model families gives a set of 50 instances across CNN, image MLP, Transformer classifier, and tiny causal LM. The JAX set follows the same construction and contains six MLP and CNN faults across the three stages.
 
 The required repair location specifies which code must change to correct a fault. One group permits changes only to the translated program. A second also permits changes to operator implementations in the compatibility layer, and a third additionally permits changes to that layer's automatic differentiation and optimizer code. An edit to code above the fault can hide its effect while leaving the faulty code unchanged. We identify the required repair location for each instance and restrict the repair agent to that code.
-
-RQ1 compares MARS with direct LLM repair and with the external systems SWE-agent and MatchFixAgent; the JAX study of RQ4 adds the conversion tools Ivy and \texttt{torch2jax}. RQ3 compares reduced feedback configurations, defined in Section~\ref{sec:ablations}. The MindSpore repair comparisons use the same LLM (\texttt{deepseek-v4-flash}), decoding temperature (0.1), budget of four attempts, and faulty translations. These settings hold the model and budget fixed when comparing feedback. The JAX study uses the same LLM and allows MARS up to three repair rounds, while Direct LLM and each conversion tool run once. MatchFixAgent additionally receives the correct implementation of the changed function. This reference is available only to that baseline and gives it more information than MARS receives.
-
-We also evaluate complete migration from PyTorch source programs to MindSpore on five held-out tasks: image MLP, CNN, ResNet, Transformer classifier, and tiny causal language model. Each method is evaluated with three seeds. MARS allows an initial translation followed by up to four repair rounds; Direct LLM and CodeTransEngine translate once. MSAdapter uses one candidate per task, with a common CPU compatibility patch. This study checks whether the resulting programs complete training and preserve paired loss, gradient, and parameter update measurements.
 
 \begin{table*}[t]
 \caption{Repair results on 50 MindSpore fault instances within four attempts.}
@@ -220,19 +212,21 @@ MatchFixAgent$^\dagger$ & 20/20 & 14/14 & 13/16 & 26/26 & 20/20 & 1/4 & 13/13 & 
 \end{minipage}
 \end{table*}
 
+RQ1 compares MARS with direct LLM repair and with the external systems SWE-agent and MatchFixAgent; the JAX study of RQ4 adds the conversion tools Ivy and \texttt{torch2jax}. RQ3 compares reduced feedback configurations, defined in Section~\ref{sec:ablations}. The MindSpore repair comparisons use the same LLM (\texttt{deepseek-v4-flash}), decoding temperature (0.1), budget of four attempts, and faulty translations. These settings hold the model and budget fixed when comparing feedback. The JAX study uses the same LLM and allows MARS up to three repair rounds, while Direct LLM and each conversion tool run once. MatchFixAgent additionally receives the correct implementation of the changed function. This reference is available only to that baseline and gives it more information than MARS receives.
+
+We also evaluate complete migration from PyTorch source programs to MindSpore on five held-out tasks: image MLP, CNN, ResNet, Transformer classifier, and tiny causal language model. Each method is evaluated with three seeds. MARS allows an initial translation followed by up to four repair rounds; Direct LLM and CodeTransEngine translate once. MSAdapter uses one candidate per task, with a common CPU compatibility patch. This study checks whether the resulting programs complete training and preserve paired loss, gradient, and parameter update measurements.
+
+The framework-documentation studies vary the information supplied to the repair agent or the translator in separate experiments. The repair study holds the translator fixed and crosses pass/fail or layered feedback with documentation present or absent. Its 24 tasks require edits to the translated program, operator code, or automatic differentiation and optimizer code, under four repair rounds. The translation study disables repair and evaluates five held-out tasks with three repeats per condition.
+
 Repair acceptance on the set of 50 instances uses checks specific to each injected fault. We report acceptance within one attempt and within a budget of four attempts. Keeping all measured differences between the source and target within their thresholds at every training step is a separate diagnostic criterion. These comparisons use $\Delta_{\mathrm{loss}}\leq0.02$, $\Delta_{\mathrm{grad}}\leq0.05$, and $\Delta_{\mathrm{param}}\leq0.03$, with the quantities defined in Section~\ref{sec:hierarchy}. These studies compare controlled executions; longer training runs and additional framework pairs remain for future evaluation. We also record edits outside the repair agent's permitted code. Token cost per accepted repair is total prompt plus completion tokens over all attempted instances divided by the number accepted. Elapsed time per accepted repair uses the same denominator.
-
-All correct reference translations in the diagnostic study pass the checks. We trained CNN, MLP, Transformer, and tiny causal LM models for 50 steps over three seeds. Differences between the source and translated models remain below the diagnostic thresholds at every checked step. The maximum loss difference is $3.815\times10^{-6}$, and mean differences in gradient norms and parameter updates stay below $4\times10^{-8}$ and $3.9\times10^{-6}$.
-
-We measure detection independently of repair to determine whether each signal identifies its intended fault class. The study covers four model families and three seeds for each of the three fault classes. The intended signal detects all 36 injected faults. An incorrect forward value can also perturb gradients and trigger later signals. Reporting the earliest disagreement keeps the diagnosis at the stage where the fault occurs. On the tiny causal LM, for example, the forward comparison detects the forward fault even though the gradient signal remains below threshold.
 
 \subsection{RQ1: Overall Repair Effectiveness}
 \label{sec:main-results}
-Layered diagnosis improves both early repair acceptance and the result reached within the attempt budget. On the 50 MindSpore instances in Table~\ref{tab:main-results}, MARS's first-attempt acceptance exceeds the strongest external baseline by 10 percentage points. Fig.~\ref{fig:repair-comparison} shows that subsequent attempts preserve this advantage: MARS approaches full acceptance by the second attempt and resolves the remaining instance within four. The diagnosis therefore helps across the repair process, including cases that require revision of an initial edit.
+MARS achieves higher repair acceptance under the shared attempt budget. On the 50 MindSpore instances in Table~\ref{tab:main-results}, its first-attempt acceptance is 84\%, compared with 74\% for MatchFixAgent, the strongest external baseline. The cumulative results in Fig.~\ref{fig:repair-comparison} show that this advantage persists as the budget increases: MARS approaches full acceptance by the second attempt and resolves the remaining instance within four. The benefit is visible both when a repair must succeed immediately and when further revision is allowed.
 
-The remaining difficulty for external agents lies primarily in repairing the target implementation. SWE-agent and MatchFixAgent resolve every fault confined to the translated program, but leave faults in automatic differentiation or optimizer code unresolved. These faults concern alignment between gradients and parameters, where a program can execute and produce a plausible loss despite incorrect learning behavior. MARS resolves all four such instances, including an instance missed by every baseline. This pattern connects the repair advantage to the backward and update behavior that the layered verifier explicitly checks. Section~\ref{sec:ablations} examines the effect of supplying that diagnosis to the repair agent.
+The difference between systems is concentrated in faults that require changes to the target implementation. SWE-agent and MatchFixAgent resolve every fault confined to the translated program, but leave faults in automatic differentiation or optimizer code unresolved. These faults affect the relation between gradients and parameters, where an executable program can produce a plausible loss despite incorrect learning behavior. MARS resolves all four such instances, including an instance missed by every baseline. This pattern identifies the training computations that account for the remaining repair difficulty. Section~\ref{sec:ablations} examines the contribution of diagnosis and repair guidance.
 
-Higher acceptance is accompanied by lower repair cost. MARS uses approximately 29-fold fewer tokens and 3.4-fold less elapsed time per accepted repair than MatchFixAgent. Because both measures include unsuccessful attempts, they account for the cost of the full repair process. The cost and acceptance curves in Fig.~\ref{fig:repair-comparison} show that MARS attains higher acceptance at a lower token cost under the same attempt budget.
+Higher acceptance is accompanied by lower repair cost. MARS uses approximately 29-fold fewer tokens and 3.4-fold less elapsed time per accepted repair than MatchFixAgent. Both measures include unsuccessful attempts and therefore account for the cost of reaching accepted repairs across the task set.
 
 \begin{figure*}[t]
 \centering
@@ -241,28 +235,13 @@ Higher acceptance is accompanied by lower repair cost. MARS uses approximately 2
 \label{fig:repair-comparison}
 \end{figure*}
 
-\subsection{RQ2: Fault Characterization}
+\subsection{RQ2: Diagnosis Analysis}
 \label{sec:fault-characterization}
 
-\paragraph{Detection by fault type}
-We isolate each fault's effect by synchronizing the translated model with the source at each checked step, over 50 steps, four model families, and three seeds. Execution faults cause the runtime check to fail, after which the numerical metrics are unavailable. Faults in forward computation cross the loss threshold and can also affect gradients and updates. Gradient faults leave the loss below threshold but affect gradients and updates; update faults affect only the update comparison. We record whether any run crosses each threshold. Runs without faults pass every check. The first failing check identifies the stage to repair.
+\paragraph{Verification of correct translations}
+All correct reference translations in the diagnostic study pass the checks. We trained CNN, MLP, Transformer, and tiny causal LM models for 50 steps over three seeds. Differences between the source and translated models remain below the diagnostic thresholds at every checked step. The maximum loss difference is $3.815\times10^{-6}$, and mean differences in gradient norms and parameter updates stay below $4\times10^{-8}$ and $3.9\times10^{-6}$.
 
-\paragraph{Detection latency}
-Incorrect gradients and parameter updates can affect learning before they produce a detectable loss difference. In Fig.~\ref{fig:gradient-drift}, the translated model retains its own state across steps, so incorrect updates accumulate and affect later forward computations. The corresponding gradient or update check detects each fault immediately, while the mean loss difference crosses its threshold only after further training. The study covers four model families and three seeds for each fault type, giving 24 runs. This delay explains why agreement in forward values alone provides incomplete feedback for repairing training code.
-
-\paragraph{Fault localization}
-MARS reports the first failing check to classify faults in execution, forward computation, or gradients and parameter updates. On the set of 50 instances used to evaluate localization, this rule classifies 48 of 50 faults correctly (96\% accuracy). Both misclassified instances involve overflow during mixed precision computation. They crash before producing a loss value, so the execution check catches them before the forward comparison can run. MARS correctly localizes all execution faults (20/20) and all gradient and parameter update faults (16/16).
-
-\subsection{RQ3: Ablation of the Layered Feedback}
-\label{sec:ablations}
-We examine which faults each signal detects and how guidance for each stage affects repair in two studies. Table~\ref{tab:feedback-ablation} compares feedback configurations on the set of 50 instances. A separate matched study adds signals one at a time on 12 tasks.
-
-The study on 50 instances holds the tasks, attempt budget, and LLM fixed. Feedback from execution alone reports runtime status. The All signals condition supplies all three signals together without identifying the first failing stage or specifying which stage to repair. MARS supplies the stage diagnosis and the corresponding repair guidance. The comparison varies stage selection and repair guidance together.
-
-Supplying all measured signals adds only one accepted repair over execution feedback alone. Stage selection and repair guidance account for the larger gain in Table~\ref{tab:feedback-ablation}, and all 16 additional repairs occur in adapter code. Both the All signals condition and MARS resolve the faults confined to the translated program; their difference emerges when an error must be traced into operator implementations or automatic differentiation and optimizer code. Organizing the measurements into a diagnosis helps the repair agent act on these failures. The improvement in first-attempt acceptance and the lower token cost show that this guidance also reduces the cost of reaching an accepted repair.
-
-The separate 12-task study explains why all three signals are needed. With one fault per stage across four model families and a budget of four rounds, execution feedback repairs the four execution faults. Adding forward comparisons exposes and repairs the four forward faults, while gradient and parameter update feedback enables repair of the remaining four. Acceptance thus increases from 4/12 to 8/12 to 12/12, with every accepted repair completing in the first round. Here the additional signals change which faults the agent can address, rather than how many iterations it needs for a fault it already detects.
-
+% Declare the later tables early enough for IEEEtran to place them near their analyses.
 \begin{table}[tb]
 \caption{Effect of diagnosis and repair guidance on the 50 MindSpore instances.}
 \label{tab:feedback-ablation}
@@ -283,46 +262,6 @@ All signals       & 34/50 & 66\% & 26/26 & 8/20  & 0/4 & 5.3K \\
 \footnotesize All conditions allow four attempts and use the acceptance criteria in Section~\ref{sec:setup}. The All signals condition supplies three signals without guidance on which stage to repair; MARS adds stage selection and targeted guidance. Counts grouped by repair location sum to the accepted count. Token cost includes all attempts, divided by accepted repairs.
 \end{flushleft}
 \end{table}
-
-\subsection{RQ4: Generalization}
-\label{sec:generalization}
-
-\begin{table*}[t]
-\caption{Verification of complete MindSpore translations and repairs to JAX programs.}
-\label{tab:framework-results}
-\centering
-\footnotesize
-\setlength{\tabcolsep}{2pt}
-\renewcommand{\arraystretch}{1.12}
-\begin{minipage}[t]{0.40\textwidth}
-\textit{(a) MindSpore translation, 5 tasks and 3 seeds}\par\vspace{3pt}
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcc@{}}
-\toprule
-\textbf{Method}\vphantom{\thead{Forward\\computation\\faults}} & \thead{Training\\completed} & \thead{Verification\\passed} \\
-\midrule
-\input{figures/TABLE_mindspore_translation_rows.tex}
-\end{tabular*}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.57\textwidth}
-\textit{(b) JAX repair, 6 fault instances}\par\vspace{3pt}
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc@{}}
-\toprule
-\textbf{Method} & \thead{Execution\\faults} & \thead{Forward\\computation\\faults} & \thead{Gradient and\\parameter\\update faults} & \thead{Accepted\\repairs} \\
-\midrule
-\input{figures/TABLE_jax_rows.tex}
-\end{tabular*}
-\end{minipage}
-\par\vspace{4pt}
-\begin{minipage}{\textwidth}
-\footnotesize (a) Counts use 15 task--seed conditions. Training completed requires observed gradients and parameter updates; verification additionally checks paired numerical agreement. MARS permits four repair rounds after translation; its initial candidates all pass without repair. Direct LLM and CodeTransEngine translate once; MSAdapter uses one candidate per task. (b) Each stage contains one MLP and one CNN fault in the translated program. MARS permits three rounds; the other methods run once. Every accepted repair finishes in round one and passes training verification on three seeds.
-\end{minipage}
-\end{table*}
-
-\paragraph{Complete migration to MindSpore}
-Completing a training update does not ensure that a translation preserves the source computation. Table~\ref{tab:framework-results}(a) makes this distinction visible for MSAdapter: every candidate produces gradients and parameter updates, yet none passes paired verification. Its relative parameter update differences range from 1.38 to 2.81, well above the threshold of 0.03. Direct LLM and CodeTransEngine also lose accepted cases when moving from executable training to numerical agreement. These results explain the need to verify the training behavior of an executable translation. MARS's initial translations pass both checks on these tasks without invoking the repair agent.
-
-\paragraph{Generalization Across Frameworks}
-The same diagnostic signals and repair procedure remain effective with JAX as the target framework. In Table~\ref{tab:framework-results}(b), MARS repairs faults at all three stages in one round. The additional repair over Direct LLM concerns forward computation in the CNN, showing that the diagnosis remains useful when the target operator implementations change. Ivy and \texttt{torch2jax} execute some programs and pass selected forward checks, but none of their outputs passes final training verification. This progression again separates execution compatibility from preservation of learning behavior. MARS also uses fewer tokens per accepted repair than Direct LLM, 2.9K versus 15.0K, including the tokens spent on unsuccessful attempts.
 
 \begin{table}[tb]
 \caption{Effect of framework documentation on iterative repair and translation in a single attempt.}
@@ -361,16 +300,77 @@ On  & 15 & 100.0\% & 100.0\% & 100.0\% & 100.0\% \\
 \end{flushleft}
 \end{table}
 
+\begin{table*}[t]
+\caption{Verification of complete MindSpore translations and repairs to JAX programs.}
+\label{tab:framework-results}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{minipage}[t]{0.40\textwidth}
+\textit{(a) MindSpore translation, 5 tasks and 3 seeds}\par\vspace{3pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcc@{}}
+\toprule
+\textbf{Method}\vphantom{\thead{Forward\\computation\\faults}} & \thead{Training\\completed} & \thead{Verification\\passed} \\
+\midrule
+\input{figures/TABLE_mindspore_translation_rows.tex}
+\end{tabular*}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.57\textwidth}
+\textit{(b) JAX repair, 6 fault instances}\par\vspace{3pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcccc@{}}
+\toprule
+\textbf{Method} & \thead{Execution\\faults} & \thead{Forward\\computation\\faults} & \thead{Gradient and\\parameter\\update faults} & \thead{Accepted\\repairs} \\
+\midrule
+\input{figures/TABLE_jax_rows.tex}
+\end{tabular*}
+\end{minipage}
+\par\vspace{4pt}
+\begin{minipage}{\textwidth}
+\footnotesize (a) Counts use 15 task--seed conditions. Training completed requires observed gradients and parameter updates; verification additionally checks paired numerical agreement. MARS permits four repair rounds after translation; its initial candidates all pass without repair. Direct LLM and CodeTransEngine translate once; MSAdapter uses one candidate per task. (b) Each stage contains one MLP and one CNN fault in the translated program. MARS permits three rounds; the other methods run once. Every accepted repair finishes in round one and passes training verification on three seeds.
+\end{minipage}
+\end{table*}
+
+\paragraph{Detection by fault type}
+The signals distinguish failures in different training computations. We isolate each fault's effect by synchronizing the translated model with the source at each checked step, over 50 steps, four model families, and three seeds. The intended signal detects all 36 injected faults across the three fault classes. Execution failures leave numerical measurements unavailable. Forward faults cross the loss threshold and can also affect gradients and parameter updates. Gradient faults leave the loss below threshold but affect gradients and parameter updates; parameter update faults affect only the update comparison. These patterns explain the diagnostic order: a discrepancy in an earlier computation can cause several later measurements to fail. On the tiny causal LM, the forward comparison detects the forward fault even though the gradient signal remains below threshold.
+
+\paragraph{Detection latency}
+Incorrect gradients and parameter updates can affect learning before they produce a detectable loss difference. In Fig.~\ref{fig:gradient-drift}, the translated model retains its own state across steps, so incorrect updates accumulate and affect later forward computations. The corresponding gradient or parameter update check detects each fault immediately, while the mean loss difference crosses its threshold only after further training. The study covers four model families and three seeds for each fault type, giving 24 runs. This delay explains why agreement in forward values alone provides incomplete feedback for repairing training code.
+
+\paragraph{Fault localization}
+The first failing check agrees with the fault-stage labels on 48 of 50 instances (96\% accuracy). The two disagreements involve overflow during mixed precision computation. Execution fails before a loss can be compared, so the execution signal reports the fault before the forward comparison can run. The diagnosis follows how the fault manifests in execution, which explains these differences from the injected-stage labels. MARS correctly localizes all execution faults (20/20) and all gradient and parameter update faults (16/16).
+
+\subsection{RQ3: Ablation Study}
+\label{sec:ablations}
+Signal coverage determines which discrepancies are available to the repair agent, while stage selection and repair guidance determine how the agent uses them. We examine these roles in a separate 12-task study and the feedback comparison on 50 instances in Table~\ref{tab:feedback-ablation}. The framework-documentation study examines whether information about the target framework has the same effect as a diagnosis of the current failure.
+
+\paragraph{Signal coverage}
+The 12-task study shows that each additional signal enables repair of faults that earlier observations do not expose. With one fault per stage across four model families and a budget of four rounds, execution feedback repairs the four execution faults. Adding forward comparisons enables repair of the four forward faults, and gradient and parameter update feedback enables repair of the remaining four. Acceptance increases from 4/12 to 8/12 to 12/12, with every accepted repair completing in the first round. The change concerns which faults the feedback makes accessible to repair, rather than the number of iterations needed for an already detected fault.
+
+\paragraph{Stage selection and repair guidance}
+The 50-instance comparison holds the tasks, attempt budget, and LLM fixed. Execution only reports runtime status. All signals supplies all three signals without identifying the first failing stage or specifying which stage to repair. MARS adds stage selection and corresponding repair guidance. This comparison evaluates the two additions together.
+
+Organizing the measurements into a diagnosis has a larger effect than supplying the measurements together. All signals adds only one accepted repair over execution feedback alone. MARS accepts 16 additional repairs over All signals, all in adapter code. Both conditions resolve the faults confined to the translated program; their difference emerges when repair requires examining operator implementations or automatic differentiation and optimizer code. The higher first-attempt acceptance and lower token cost further show that stage selection and guidance help the agent use the measurements to reach an accepted edit.
+
 \paragraph{Framework documentation}
-Framework documentation supplies operator conventions and optimizer interfaces, while a diagnosis identifies the computation that failed in a particular program. We examine their roles by providing documentation to the repair agent or the translator in separate experiments. The repair study holds the translator fixed and crosses pass/fail or layered feedback with documentation present or absent. Its 24 tasks require edits to the translated program, operator code, or automatic differentiation and optimizer code, under four repair rounds. The translation study disables repair and evaluates five held-out tasks with three repeats per condition.
+Framework documentation and a failure diagnosis supply different information. Documentation describes operator conventions and optimizer interfaces, while diagnosis connects the current discrepancy to the computation requiring an edit. Table~\ref{tab:guidance-ablations} examines documentation during repair and initial translation separately.
 
-During repair, documentation improves adherence to the permitted editing scope without consistently improving acceptance. In Table~\ref{tab:guidance-ablations}(a), it eliminates edits outside operator code while leaving the number of accepted operator repairs unchanged. It also reduces acceptance for faults in the translated program, and neither documentation condition resolves the automatic differentiation and optimizer faults. The pass/fail conditions accept no repairs, whereas layered feedback supports repair with documentation present or absent. These outcomes distinguish information about framework conventions from the diagnosis needed to act on a specific fault.
+During repair, documentation improves adherence to the permitted editing scope without consistently improving acceptance. In Table~\ref{tab:guidance-ablations}(a), it eliminates edits outside operator code while leaving the number of accepted operator repairs unchanged. It reduces acceptance for faults in the translated program, and neither documentation condition resolves the automatic differentiation and optimizer faults. Layered feedback supports repair with documentation present or absent, whereas the pass/fail conditions accept no repairs. Framework conventions alone do not supply the evidence needed to diagnose the current failure.
 
-Documentation has a more direct effect on initial translation. Without it, most generated programs fail to compile; with it, all translations pass training verification in one attempt (Table~\ref{tab:guidance-ablations}(b)). Supplying the target conventions before code generation prevents failures that would otherwise enter the repair loop. Once a faulty program exists, the layered diagnosis provides the program-specific evidence needed to choose an edit.
+Documentation has a more direct effect on initial translation. Without it, most generated programs fail to compile; with it, all translations pass training verification in one attempt (Table~\ref{tab:guidance-ablations}(b)). These results support supplying target framework conventions during code generation. During repair, the diagnostic measurements instead identify the discrepancy in the program being revised.
+
+\subsection{RQ4: Generalization}
+\label{sec:generalization}
+
+\paragraph{Complete migration to MindSpore}
+The two outcome columns in Table~\ref{tab:framework-results}(a) show why completing training and preserving the source computation require separate checks. The gap between these outcomes is visible for MSAdapter and the translation baselines.
+
+\paragraph{Generalization Across Frameworks}
+The same diagnostic order applies when JAX replaces MindSpore as the target framework. In Table~\ref{tab:framework-results}(b), MARS repairs faults in execution, forward computation, and gradients and parameter updates. The extra accepted repair over Direct LLM concerns forward computation in the CNN. The execution adapter changes how the observations are collected, while the diagnosis retains its interpretation in terms of training stages.
 
 \section{Conclusion}
 
-We introduced MARS, a framework that repairs training code across deep learning frameworks through layered diagnosis. Specifically, MARS checks execution, forward values, gradients, and parameter updates in training order, then uses the first failing stage to guide repair. This design detects faults that forward checks miss and turns verification results into guidance for editing the affected computation. Experiments on MindSpore and JAX demonstrate that MARS improves repair acceptance and reduces token cost while applying the same diagnosis and repair procedure across target frameworks.
+We introduced MARS, a multi-agent repair system that uses the order of training computations to diagnose migration failures. The first failing stage connects verification evidence to a computation that requires correction, including faults that remain hidden in forward observations. MARS turns this diagnosis into code edits through specialized translation, verification, and repair agents coordinated by an orchestrator. Experiments on MindSpore and JAX show improved repair acceptance and lower token cost with the same diagnosis and repair procedure across target frameworks.
 
 \section*{Acknowledgment}
 This work was supported by CAAI Huawei MindSpore Open Fund, and developed on OpenI Community.

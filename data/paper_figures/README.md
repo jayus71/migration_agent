@@ -57,7 +57,7 @@ The table reports accepted counts by fault stage and overall. Its note states
 the budgets and that all accepted repairs finish in the first round.
 
 Token cost includes all attempted instances. MARS uses 17,543 / 6 = 2,923.8
-tokens per accepted repair (2.9K in the text); Direct LLM uses 74,841 / 5 =
+tokens per accepted repair (2.9K when rounded); Direct LLM uses 74,841 / 5 =
 14,968.2 (15.0K). Ivy and torch2jax use no LLM tokens and accept no repairs, so
 their cost per accepted repair is undefined. The table omits the cost column;
 it does not substitute zero for this undefined ratio.

@@ -99,7 +99,7 @@ A separate table combines complete MindSpore migration, including MSAdapter,
 with JAX fault repair in two panels. Their task pools, verification criteria,
 and attempt budgets remain separate. The MindSpore translation rows come from
 Experiment E's current provenance index; JAX rows come from the original Track C
-records. JAX token costs are discussed in the text. Table headings use complete
+records. The JAX discussion explains the diagnostic interpretation across runtimes. Table headings use complete
 terms with line breaks where needed.
 Fault signatures,
 localization, and the separate 12-task signal-composition results are described
