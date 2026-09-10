@@ -66,10 +66,10 @@ class PaperFigureLayoutTests(unittest.TestCase):
                 np.testing.assert_allclose(lines[label].get_ydata(),
                                            (means[column] / THRESHOLDS[column]).clip(lower=1e-7))
             labels = {label.get_text(): label for label in ax.texts}
-            first = labels[f"{check} check detects fault\nat step 1"]
+            first = labels["Detected at step 1"]
             self.assertEqual(first.xy[0], 1)
             self.assertAlmostEqual(first.xy[1], means.loc[1, metric] / THRESHOLDS[metric])
-            loss = labels[f"Mean loss difference\nexceeds threshold\nat step {loss_step}"]
+            loss = labels[f"Mean loss difference\ncrosses at step {loss_step}"]
             self.assertEqual(loss.xy[0], loss_step)
             self.assertAlmostEqual(loss.xy[1], means.loc[loss_step, "loss_abs_diff"]
                                    / THRESHOLDS["loss_abs_diff"])

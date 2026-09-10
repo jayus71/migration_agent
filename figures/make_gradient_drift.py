@@ -20,7 +20,7 @@ PANELS = [
 def build_figure(frame=None):
     if frame is None:
         frame = pd.read_csv(GRADIENT_STEPS)
-    fig, axes = plt.subplots(2, 1, figsize=(3.5, 3.8), sharex=True, sharey=True)
+    fig, axes = plt.subplots(2, 1, figsize=(3.5, 2.7), sharex=True, sharey=True)
     for ax, (fault, diagnostic, panel, check) in zip(axes, PANELS):
         subset = frame[frame.fault.eq(fault) & frame.coupling.eq("free-running")]
         runs = subset.groupby(["model", "seed"])
@@ -56,15 +56,15 @@ def build_figure(frame=None):
         first_loss = int(loss_crossings.index.min())
 
         diagnostic_color = METRICS[diagnostic][1]
-        ax.annotate(f"{check} check detects fault\nat step {first_detection}",
+        ax.annotate(f"Detected at step {first_detection}",
                     xy=(first_detection, means[diagnostic].loc[first_detection]),
                     xytext=(0.10, 0.96), textcoords="axes fraction",
-                    ha="left", va="top", color=diagnostic_color, fontsize=8,
+                    ha="left", va="top", color=diagnostic_color, fontsize=7.5,
                     arrowprops=dict(arrowstyle="->", color=diagnostic_color,
                                     linewidth=0.8, shrinkA=3, shrinkB=3),
                     bbox=dict(facecolor="white", edgecolor="none", pad=1))
         ax.axvline(first_loss, color=GRAY, linewidth=0.6, linestyle=":")
-        ax.annotate(f"Mean loss difference\nexceeds threshold\nat step {first_loss}",
+        ax.annotate(f"Mean loss difference\ncrosses at step {first_loss}",
                     xy=(first_loss, means["loss_abs_diff"].loc[first_loss]),
                     xytext=(0.98, 0.07), textcoords="axes fraction",
                     ha="right", va="bottom", color=BLUE, fontsize=7.5,
@@ -75,7 +75,9 @@ def build_figure(frame=None):
         ax.annotate("Detection threshold", xy=(50, 1), xytext=(0, -4),
                     textcoords="offset points", ha="right", va="top", fontsize=7,
                     color=GRAY, bbox=dict(facecolor="white", edgecolor="none", pad=1))
-        ax.text(0, 1.04, panel, transform=ax.transAxes, va="bottom", fontsize=8.5)
+        ax.text(0.98, 0.98, panel, transform=ax.transAxes,
+                ha="right", va="top", fontsize=8,
+                bbox=dict(facecolor="white", edgecolor="none", pad=0.5))
         ax.set_yscale("log")
         ax.set_ylim(1e-6, 1e4)
         ax.set_yticks([1e-6, 1e-3, 1, 1e4])
@@ -88,7 +90,7 @@ def build_figure(frame=None):
                   borderaxespad=0.5, labelspacing=0.4)
     axes[-1].set_xlabel("Training step")
     axes[-1].set_xticks([1, 10, 20, 30, 40, 50])
-    fig.subplots_adjust(left=0.18, right=0.99, bottom=0.11, top=0.94, hspace=0.30)
+    fig.subplots_adjust(left=0.18, right=0.99, bottom=0.15, top=0.99, hspace=0.15)
     return fig
 
 

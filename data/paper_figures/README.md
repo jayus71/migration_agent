@@ -4,6 +4,10 @@ These CSV files are byte-for-byte copies of original experiment summaries. They
 make the figure scripts runnable from this repository without the ignored local
 `ascend-torch4ms` checkout. No result values or validation decisions were changed.
 
+The manuscript now names the method MARS (Multi-Agent Repair System). Its
+archived identifiers remain `r_hier`, `c_hier`, and `T-HIER`; earlier drafts
+called the same method LADDER. Only presentation labels are renamed.
+
 | Snapshot | Original path in the experiment repository | SHA-256 |
 | --- | --- | --- |
 | `fixed50_original_summary.csv` | `experiments/baselines/full_hier_fixed50/summary.csv` | `db4dd52fa1892ee53ec377ff3c5907779611689692d59b75e9c3c01f0f2ddd0e` |
@@ -28,7 +32,7 @@ checkpoints are plotted; connecting lines do not supply a third-attempt result.
 The signal ablation uses a separate set of 12 tasks per feedback condition.
 Its 4/8/12 counts must not be combined with the Fixed50 pool.
 
-## JAX main-table rows
+## JAX repair rows
 
 The JAX snapshot comes from `codex/track-c-torchax-autofix` at `3352f71` in the
 experiment repository. It contains 24 records, one for each of four methods on
@@ -38,7 +42,7 @@ passes training verification on three seeds. This is separate from the Fixed50
 fault-specific acceptance criterion.
 
 Run `python figures/make_jax_table.py` to regenerate `figures/TABLE_jax_rows.tex`,
-which the manuscript includes in the lower part of the main table. All numeric
+which the manuscript includes in the JAX panel of the framework comparison. All numeric
 cells come from the snapshot. The repair-location mapping follows
 `autofix/faults/injection.py::_prepare_torchax_compat`, which accepts only
 candidate-program faults. Adapter operator, autodiff/optimizer, Transformer,
@@ -46,16 +50,35 @@ and language-model categories have no JAX instances. The JAX panel omits those
 columns and states the common candidate-program scope in the table note.
 
 The Track C README and each method's `summary.json` record different budgets.
-LADDER allows up to three rounds; Direct LLM and each converter run once. All
+MARS allows up to three rounds; Direct LLM and each converter run once. All
 accepted results finish in round one. The CSV's `repair_at_4` field is computed
 from the successful round index; it does not record a shared four-attempt run.
-The table therefore reports first-attempt and overall acceptance, with the
-budgets stated in its note.
+The table reports accepted counts by fault stage and overall. Its note states
+the budgets and that all accepted repairs finish in the first round.
 
-Token cost includes all attempted instances. LADDER uses 17,543 / 6 = 2,923.8
-tokens per accepted repair (2.9K in the table); Direct LLM uses 74,841 / 5 =
+Token cost includes all attempted instances. MARS uses 17,543 / 6 = 2,923.8
+tokens per accepted repair (2.9K in the text); Direct LLM uses 74,841 / 5 =
 14,968.2 (15.0K). Ivy and torch2jax use no LLM tokens and accept no repairs, so
-their cost per accepted repair is undefined and marked `n/a`.
+their cost per accepted repair is undefined. The table omits the cost column;
+it does not substitute zero for this undefined ratio.
+
+## MindSpore translation rows
+
+`figures/make_mindspore_translation_table.py` reads the current `source_summary`
+paths in `data/experiments/05_experiment_E_track_a_rerun/final/run_manifest.json`.
+It generates `figures/TABLE_mindspore_translation_rows.tex` from the 15 measured
+task--seed rows for each of Direct LLM, CodeTransEngine, MSAdapter, and MARS.
+It checks the task grid, matching source-program hashes, recorded revisions,
+and measured training and acceptance flags. Historical summaries outside those
+indexed paths are not used. See Experiment E's `README.md` for source precedence.
+
+This panel measures complete translation on five source tasks and three seeds.
+It is separate from the original 50-instance repair pool. Training completion
+requires gradients and parameter updates; acceptance additionally requires
+paired numerical agreement. MARS permits four repair rounds after translation,
+but its initial translations pass without invoking repair. The other methods
+translate once; MSAdapter uses one candidate per task. X2MindSpore remains
+unmeasured in this snapshot and is excluded from rate comparisons.
 
 ## Other inputs
 

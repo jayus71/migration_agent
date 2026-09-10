@@ -23,14 +23,10 @@ class JaxTableTests(unittest.TestCase):
         rows = [line.removesuffix(r" \\").split(" & ")
                 for line in rendered.splitlines() if " & " in line]
         expected = [
-            ["Direct LLM", "2/2", "1/2", "2/2", "2/3", "3/3",
-             r"83.3\%", r"83.3\%", "15.0K"],
-            ["Ivy", "0/2", "0/2", "0/2", "0/3", "0/3",
-             r"0\%", r"0\%", r"$\mathrm{n/a}$"],
-            [r"\texttt{torch2jax}", "0/2", "0/2", "0/2", "0/3", "0/3",
-             r"0\%", r"0\%", r"$\mathrm{n/a}$"],
-            ["LADDER", "2/2", "2/2", "2/2", "3/3", "3/3",
-             r"100\%", r"100\%", "2.9K"],
+            ["Direct LLM", "2/2", "1/2", "2/2", "5/6"],
+            ["Ivy", "0/2", "0/2", "0/2", "0/6"],
+            [r"\texttt{torch2jax}", "0/2", "0/2", "0/2", "0/6"],
+            ["MARS", "2/2", "2/2", "2/2", "6/6"],
         ]
         self.assertEqual(rows, expected)
 
@@ -66,26 +62,27 @@ class JaxTableTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     table.read_results(path)
 
-    def test_manuscript_uses_compact_panels_and_single_line_headers(self):
+    def test_manuscript_keeps_experiment_pools_separate(self):
         manuscript = (ROOT / "conference_101719.tex").read_text()
-        self.assertNotIn("tab:jax-transfer", manuscript)
         self.assertIn(r"\input{figures/TABLE_jax_rows.tex}", manuscript)
-        self.assertIn(r"Table~\ref{tab:main-results}(a)", manuscript)
-        self.assertIn(r"Table~\ref{tab:main-results}(b)", manuscript)
+        self.assertNotIn(r"\ref{tab:main-results}(a)", manuscript)
+        self.assertNotIn(r"\ref{tab:main-results}(b)", manuscript)
         main_table = manuscript.split(r"\label{tab:main-results}", 1)[1].split(r"\end{table*}", 1)[0]
-        self.assertNotIn(r"\hdr", main_table)
-        self.assertNotIn("Tokens per repair", main_table)
-        self.assertEqual(main_table.count(r"\multirow{2}{*}{\textbf{Tokens}}"), 2)
-        self.assertEqual(main_table.count(r"\begin{tabular*}"), 2)
-        jax = main_table.split(r"\textit{(b) JAX", 1)[1]
-        self.assertNotIn(r"\textbf{Program}", jax)
-        self.assertNotIn(r"\textbf{Transformer}", jax)
+        self.assertNotIn("TABLE_jax_rows", main_table)
+        self.assertNotIn("MSAdapter", main_table)
+        framework = manuscript.split(r"\label{tab:framework-results}", 1)[1].split(r"\end{table*}", 1)[0]
+        self.assertIn("15 task--seed conditions", framework)
+        self.assertIn("6 fault instances", framework)
+        self.assertIn("TABLE_mindspore_translation_rows", framework)
+        self.assertIn("TABLE_jax_rows", framework)
+        self.assertNotIn("Grad./upd.", manuscript)
+        self.assertNotIn("optim.", manuscript)
 
     def test_jax_rows_do_not_pad_unevaluated_categories(self):
         for line in table.build_rows().splitlines():
             if " & " in line:
                 cells = line.removesuffix(r" \\").split(" & ")
-                self.assertEqual(len(cells), 9)
+                self.assertEqual(len(cells), 5)
                 self.assertNotIn("-", cells)
 
 
