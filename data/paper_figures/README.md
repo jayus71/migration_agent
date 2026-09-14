@@ -42,11 +42,11 @@ passes training verification on three seeds. This is separate from the Fixed50
 fault-specific acceptance criterion.
 
 Run `python figures/make_jax_table.py` to regenerate `figures/TABLE_jax_rows.tex`,
-which the manuscript includes in the JAX panel of the framework comparison. All numeric
+which the manuscript includes in the JAX repair table. All numeric
 cells come from the snapshot. The repair-location mapping follows
 `autofix/faults/injection.py::_prepare_torchax_compat`, which accepts only
 candidate-program faults. Adapter operator, autodiff/optimizer, Transformer,
-and language-model categories have no JAX instances. The JAX panel omits those
+and language-model categories have no JAX instances. The JAX table omits those
 columns and states the common candidate-program scope in the table note.
 
 The Track C README and each method's `summary.json` record different budgets.
@@ -63,6 +63,10 @@ their cost per accepted repair is undefined. The table omits the cost column;
 it does not substitute zero for this undefined ratio.
 
 ## MindSpore translation rows
+
+This comparison is excluded from the current manuscript. Its archived data and
+generator remain available here. It is separate from the translator documentation
+ablation retained in Table III(b).
 
 `figures/make_mindspore_translation_table.py` reads the current `source_summary`
 paths in `data/experiments/05_experiment_E_track_a_rerun/final/run_manifest.json`.

@@ -70,10 +70,14 @@ class JaxTableTests(unittest.TestCase):
         main_table = manuscript.split(r"\label{tab:main-results}", 1)[1].split(r"\end{table*}", 1)[0]
         self.assertNotIn("TABLE_jax_rows", main_table)
         self.assertNotIn("MSAdapter", main_table)
-        framework = manuscript.split(r"\label{tab:framework-results}", 1)[1].split(r"\end{table*}", 1)[0]
-        self.assertIn("15 task--seed conditions", framework)
-        self.assertIn("6 fault instances", framework)
-        self.assertIn("TABLE_mindspore_translation_rows", framework)
+        framework = manuscript.split(r"\label{tab:framework-results}", 1)[1].split(r"\end{table}", 1)[0]
+        self.assertIn("six instances overall", framework)
+        self.assertIn("up to three repair rounds", framework)
+        self.assertIn(r"Direct LLM, Ivy, and \texttt{torch2jax} run once", framework)
+        self.assertIn("training verification on three seeds", framework)
+        self.assertIn("all accepted repairs finish in the first round", framework)
+        self.assertNotIn("TABLE_mindspore_translation_rows", manuscript)
+        self.assertNotIn("15 task--seed conditions", framework)
         self.assertIn("TABLE_jax_rows", framework)
         self.assertNotIn("Grad./upd.", manuscript)
         self.assertNotIn("optim.", manuscript)

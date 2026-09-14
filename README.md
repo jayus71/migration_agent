@@ -76,7 +76,6 @@ the local papers, `pypdf`, and Poppler; see the analysis notes for the procedure
 .venv/bin/python figures/make_gradient_drift.py
 .venv/bin/python figures/make_repair_comparison.py
 .venv/bin/python figures/make_jax_table.py
-.venv/bin/python figures/make_mindspore_translation_table.py
 .venv/bin/python figures/update_overview_labels.py
 .venv/bin/python -m unittest discover -s tests
 latexmk -pdf -interaction=nonstopmode -halt-on-error conference_101719.tex
@@ -95,11 +94,11 @@ The abstract states cross-framework effectiveness on MindSpore and JAX. The thre
 manuscript figures show gradient drift, the repair architecture, and cost with
 cumulative repair acceptance at the recorded 1-, 2-, and 4-attempt budgets.
 The main results table reports the original 50-instance MindSpore repair study.
-A separate table combines complete MindSpore migration, including MSAdapter,
-with JAX fault repair in two panels. Their task pools, verification criteria,
-and attempt budgets remain separate. The MindSpore translation rows come from
-Experiment E's current provenance index; JAX rows come from the original Track C
-records. The JAX discussion explains the diagnostic interpretation across runtimes. Table headings use complete
+A separate table reports JAX fault repair from the original Track C records.
+The JAX discussion explains the diagnostic interpretation across runtimes.
+The complete MindSpore translation comparison is excluded from the manuscript;
+the separate translator documentation ablation remains in Table III(b).
+Table headings use complete
 terms with line breaks where needed.
 Fault signatures,
 localization, and the separate 12-task signal-composition results are described
