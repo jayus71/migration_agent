@@ -1,0 +1,7 @@
+baseline_id,display_name,instances,strict_success,strict_success_rate,repair_at_1,repair_at_2,repair_at_4,execution_success,execution_instances,numerical_success,numerical_instances,gradient_update_success,gradient_update_instances,model_binding_valid,model_binding_invalid,environment_failures,wall_time_sec,mean_wall_time_sec,mean_wall_time_per_success_sec,prompt_tokens,completion_tokens,total_tokens
+r_exec,R-EXEC,50,33,0.66,0.58,0.64,0.66,14,20,7,14,12,16,50,0,0,2014.969698,40.299394,61.059688,108268,46470,154738
+r_flat,R-FLAT,50,34,0.68,0.66,0.66,0.68,14,20,8,14,12,16,50,0,0,2803.20268,56.064054,82.447138,111443,69022,180465
+r_hier,R-HIER,50,50,1.0,0.84,0.98,1.0,20,20,14,14,16,16,50,0,0,1091.452228,21.829045,21.829045,147251,43337,190588
+r_direct,Direct LLM Repair,50,40,0.8,0.72,0.76,0.8,18,20,8,14,14,16,50,0,0,2169.162235,43.383245,54.229056,1406260,176605,1582865
+r_swe,SWE-agent v1.1.0,50,46,0.92,0.72,0.84,0.92,20,20,11,14,15,16,50,0,0,6375.127305,127.502546,138.589724,7512497,122519,7635016
+r_matchfix,MatchFixAgent 66a52a5,50,47,0.94,0.74,0.86,0.94,20,20,14,14,13,16,50,0,0,3485.822924,69.716458,74.166445,4739352,465789,5205141

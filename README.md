@@ -1,6 +1,8 @@
-# LADDER / migration_agent
+# MARS / migration_agent
 
 Paper sources and experiment evidence for cross-framework training-code repair.
+MARS stands for Multi-Agent Repair System, the method phrase in the current
+paper title. Earlier drafts used LADDER for the same method.
 This checkout supports cloud-based manuscript editing and CPU result analysis.
 The repository and its experiment-data Release are public.
 
@@ -71,15 +73,43 @@ the local papers, `pypdf`, and Poppler; see the analysis notes for the procedure
 ## Figures and PDF
 
 ```bash
-.venv/bin/python figures/make_verdict_collapse.py
-.venv/bin/python figures/make_cost_quality.py
+.venv/bin/python figures/make_gradient_drift.py
+.venv/bin/python figures/make_repair_comparison.py
+.venv/bin/python figures/make_jax_table.py
+.venv/bin/python figures/update_overview_labels.py
+.venv/bin/python -m unittest discover -s tests
 latexmk -pdf -interaction=nonstopmode -halt-on-error conference_101719.tex
 ```
 
 LaTeX requires `latexmk`, `texlive-latex-extra`, `texlive-fonts-recommended`, and
-`texlive-publishers` (Debian/Ubuntu package names). Figure scripts use the original
-paper inputs under `data/paper_section_65_66/`. The newer A-K archive is separate:
-the upload preserves results and does not reconcile the paper's claims with them.
+`texlive-publishers` (Debian/Ubuntu package names). Figure scripts require NumPy,
+pandas, and Matplotlib and export vector PDFs plus 300-dpi PNGs. The manuscript
+uses the original 50-instance fault-check acceptance counts, including 50/50 for
+MARS; these counts do not assert all-step paired-threshold compliance. The
+12-task signal ablation and the diagnostic studies use separate measurements.
+See [figure inputs and provenance](data/paper_figures/README.md) for source CSVs,
+checksums, scoring definitions, and links to the archived diagnostic data.
+
+The abstract states cross-framework effectiveness on MindSpore and JAX. The three
+manuscript figures show gradient drift, the repair architecture, and cost with
+cumulative repair acceptance at the recorded 1-, 2-, and 4-attempt budgets.
+The main results table reports the original 50-instance MindSpore repair study.
+A separate table reports JAX fault repair from the original Track C records.
+The JAX discussion explains the diagnostic interpretation across runtimes.
+The complete MindSpore translation comparison is excluded from the manuscript;
+the separate translator documentation ablation remains in Table III(b).
+Table headings use complete
+terms with line breaks where needed.
+Fault signatures,
+localization, and the separate 12-task signal-composition results are described
+in the text. Their plotting scripts and assets remain available in `figures/`
+but are not included in the manuscript. Generated figure assets are tracked;
+the compiled manuscript `conference_101719.pdf` remains local and is ignored by
+Git. The overview retains its existing layout. `update_overview_labels.py`
+updates agent roles, diagnostic labels, and target runtimes from the original
+PNG in `figures_to_be_redrawed/`, using Pillow and Arial Narrow (or DejaVu Sans
+Condensed). The editable PowerPoint and vector overview remain deferred to the
+separate diagram revision.
 
 ## Re-running experiments
 

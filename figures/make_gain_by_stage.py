@@ -1,90 +1,42 @@
 #!/usr/bin/env python3
-"""Where the gain comes from: methods converge at execution, diverge at gradients.
-
-Data from Table I of the manuscript. Six methods, three fault stages. Hard-coded
-to match the table; the figure cannot drift from it.
-
-Source: conference_101719.tex, Table tab:main-results.
-"""
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
+"""Original Fixed50 acceptance by fault stage, from the archived summary."""
 import numpy as np
 
-# Table I, by fault stage.  (repaired, total) per method per stage.
-METHODS = [
-    ("Execution-only",     [14, 20], [ 7, 14], [12, 16]),
-    ("Unordered",          [14, 20], [ 8, 14], [12, 16]),
-    ("Direct LLM",         [18, 20], [ 8, 14], [14, 16]),
-    ("SWE-agent",          [20, 20], [11, 14], [15, 16]),
-    ("MatchFixAgent",      [20, 20], [14, 14], [13, 16]),
-    ("LADDER",             [20, 20], [14, 14], [16, 16]),
-]
+from paper_data import METHODS, METHOD_LABELS, STAGES, fixed50
+from paper_plot_style import BLUE, GREEN, INK, ORANGE, plt, save_figure
 
-STAGES = ["Execution\n(20)", "Forward values\n(14)", "Gradients, updates\n(16)"]
-TOTALS = [20, 14, 16]
+COLORS = ["#eeeeee", "#bbbbbb", "#86bfdc", ORANGE, GREEN, BLUE]
+HATCHES = ["...", "//", "\\\\", "xx", "--", ""]
 
-INK = "#1a1a1a"
-MUTED = "#5c5c5c"
-EDGE = "#9a9a9a"
 
-# Colors: reduced = light gray, baselines = medium gray shades, ours = dark
-PAL = {
-    "Execution-only":  "#c6dbef",
-    "Unordered":       "#9ecae1",
-    "Direct LLM":      "#6baed6",
-    "SWE-agent":       "#4292c6",
-    "MatchFixAgent":   "#2171b5",
-    "LADDER":          "#08306b",
-}
+def draw_gain_by_stage(ax):
+    frame = fixed50()
+    x = np.arange(len(STAGES))
+    width = 0.13
+    for i, (method, label, color, hatch) in enumerate(zip(METHODS, METHOD_LABELS, COLORS, HATCHES)):
+        row = frame.loc[method]
+        rates = [100 * row[f"{stage}_success"] / row[f"{stage}_instances"] for stage in STAGES]
+        ax.bar(x + (i - 2.5) * width, rates, width * 0.92, label=label,
+               color=color, hatch=hatch, edgecolor=INK, linewidth=0.4, zorder=3)
+    totals = [int(frame.iloc[0][f"{stage}_instances"]) for stage in STAGES]
+    labels = ["Execution", "Forward values", "Gradients, updates"]
+    ax.set_xticks(x, [f"{label}\n(n = {total})" for label, total in zip(labels, totals)])
+    ax.set_ylim(0, 105)
+    ax.set_yticks([0, 25, 50, 75, 100])
+    ax.set_ylabel("Accepted within four attempts (%)")
+    ax.grid(axis="y", linewidth=0.4, color="#dddddd")
+    ax.set_axisbelow(True)
+    ax.legend(loc="lower center", bbox_to_anchor=(0.5, 1.015), ncol=3,
+              frameon=False, handlelength=1.3, columnspacing=0.9,
+              handletextpad=0.4, borderaxespad=0)
 
-fig, ax = plt.subplots(figsize=(3.4, 3.2))
 
-n_methods = len(METHODS)
-n_stages = len(STAGES)
-x = np.arange(n_stages)
-total_width = 0.78
-width = total_width / n_methods
+def main():
+    fig, ax = plt.subplots(figsize=(3.6, 2.8))
+    draw_gain_by_stage(ax)
+    fig.subplots_adjust(left=0.15, right=0.99, bottom=0.16, top=0.78)
+    save_figure(fig, "gain_by_stage")
 
-for i, (name, *stages) in enumerate(METHODS):
-    rates = [s[0] / s[1] * 100 for s in stages]
-    offset = (i - (n_methods - 1) / 2) * width
-    bars = ax.bar(x + offset, rates, width * 0.92, color=PAL[name],
-                  edgecolor="white", linewidth=0.4, label=name, zorder=3)
 
-ax.set_xticks(x)
-ax.set_xticklabels(STAGES, fontsize=7.2, color=INK)
-ax.set_ylabel("Repair rate (%)", fontsize=7.5, color=INK)
-ax.set_ylim(0, 115)
-ax.set_yticks([0, 25, 50, 75, 100])
-ax.tick_params(labelsize=7, color=EDGE)
-ax.grid(True, axis="y", linestyle="-", linewidth=0.5, color="#e2e2e2", zorder=0)
-ax.set_axisbelow(True)
-for side in ("top", "right"):
-    ax.spines[side].set_visible(False)
-for side in ("left", "bottom"):
-    ax.spines[side].set_color(EDGE)
-    ax.spines[side].set_linewidth(0.7)
-
-# Annotation: bracket showing the gap between LADDER (100%) and the weakest
-# methods (Exec-only / Unordered at 75%) in the gradient/update stage.
-bracket_x = 2 + total_width / 2 + 0.08
-ax.plot([bracket_x, bracket_x], [75, 100], color="#d03b3b", linewidth=1.0,
-        zorder=5, clip_on=False)
-ax.plot([bracket_x - 0.04, bracket_x], [75, 75], color="#d03b3b",
-        linewidth=1.0, zorder=5, clip_on=False)
-ax.plot([bracket_x - 0.04, bracket_x], [100, 100], color="#d03b3b",
-        linewidth=1.0, zorder=5, clip_on=False)
-ax.text(bracket_x + 0.06, 87.5, "25 pp\ngap", fontsize=6, color="#d03b3b",
-        fontweight="bold", ha="left", va="center")
-
-leg = ax.legend(fontsize=5.6, loc="upper center", bbox_to_anchor=(0.42, 1.35),
-                frameon=True, framealpha=0.92, edgecolor="#dcdcdc", ncol=3,
-                handlelength=1.0, handletextpad=0.3, borderpad=0.4,
-                labelspacing=0.35, columnspacing=0.8)
-leg.get_frame().set_linewidth(0.6)
-
-fig.tight_layout(pad=0.3, rect=[0, 0, 1, 0.82])
-fig.savefig("figures/gain_by_stage.pdf", bbox_inches="tight")
-fig.savefig("figures/gain_by_stage.png", dpi=200, bbox_inches="tight")
-print("wrote figures/gain_by_stage.pdf + .png")
+if __name__ == "__main__":
+    main()
