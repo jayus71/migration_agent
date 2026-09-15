@@ -72,6 +72,12 @@ the local papers, `pypdf`, and Poppler; see the analysis notes for the procedure
 
 ## Figures and PDF
 
+The manuscript uses the official ICLR 2027 template in anonymous review mode.
+The initial submission has a nine-page main-text limit; references and the AI
+use statement are excluded. The AI use statement is intentionally blank for
+the authors to complete. See [ICLR template notes](docs/iclr-2027-template.md)
+for the template source, build instructions, and current page count.
+
 ```bash
 .venv/bin/python figures/make_gradient_drift.py
 .venv/bin/python figures/make_repair_comparison.py
@@ -81,8 +87,8 @@ the local papers, `pypdf`, and Poppler; see the analysis notes for the procedure
 latexmk -pdf -interaction=nonstopmode -halt-on-error conference_101719.tex
 ```
 
-LaTeX requires `latexmk`, `texlive-latex-extra`, `texlive-fonts-recommended`, and
-`texlive-publishers` (Debian/Ubuntu package names). Figure scripts require NumPy,
+LaTeX requires `latexmk`, `texlive-latex-extra`, and `texlive-fonts-recommended`
+(Debian/Ubuntu package names). Figure scripts require NumPy,
 pandas, and Matplotlib and export vector PDFs plus 300-dpi PNGs. The manuscript
 uses the original 50-instance fault-check acceptance counts, including 50/50 for
 MARS; these counts do not assert all-step paired-threshold compliance. The

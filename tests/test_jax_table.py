@@ -67,7 +67,7 @@ class JaxTableTests(unittest.TestCase):
         self.assertIn(r"\input{figures/TABLE_jax_rows.tex}", manuscript)
         self.assertNotIn(r"\ref{tab:main-results}(a)", manuscript)
         self.assertNotIn(r"\ref{tab:main-results}(b)", manuscript)
-        main_table = manuscript.split(r"\label{tab:main-results}", 1)[1].split(r"\end{table*}", 1)[0]
+        main_table = manuscript.split(r"\label{tab:main-results}", 1)[1].split(r"\end{table}", 1)[0]
         self.assertNotIn("TABLE_jax_rows", main_table)
         self.assertNotIn("MSAdapter", main_table)
         framework = manuscript.split(r"\label{tab:framework-results}", 1)[1].split(r"\end{table}", 1)[0]
