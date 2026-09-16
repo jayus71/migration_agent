@@ -18,7 +18,7 @@ LOCALIZATION = (ROOT / "data/experiments/11_experiment_K_layer_localization/resu
                 / "section65_fault_pool_localization_confusion_matrix.csv")
 METHODS = ["r_exec", "r_flat", "r_direct", "r_swe", "r_matchfix", "r_hier"]
 METHOD_LABELS = ["Execution only", "All signals", "Direct LLM",
-                 "SWE-agent", "MatchFixAgent", "MARS"]
+                 "SWE-agent", "MatchFixAgent", "LaDiM"]
 STAGES = ["execution", "numerical", "gradient_update"]
 
 

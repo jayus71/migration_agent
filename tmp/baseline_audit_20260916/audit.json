@@ -1,0 +1,3482 @@
+{
+  "source": "ascend-torch4ms/experiments/baselines/full_hier_fixed50",
+  "methods": {
+    "r_hier": {
+      "first_accepted": 42,
+      "final_accepted": 50,
+      "summary_usage": {
+        "prompt_tokens": 147251,
+        "completion_tokens": 43337,
+        "total_tokens": 190588
+      },
+      "raw_usage": {
+        "prompt_tokens": 486359,
+        "completion_tokens": 102880,
+        "total_tokens": 589239
+      },
+      "first_usage": {
+        "prompt_tokens": 335951,
+        "completion_tokens": 73803,
+        "total_tokens": 409754
+      },
+      "raw_tokens_per_accepted_repair": 11784.78,
+      "recorded_api_calls": 59,
+      "first_failure_counts": {},
+      "first_failures": [],
+      "per_instance": [
+        {
+          "instance": "EX-01-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 3585,
+          "raw_usage": {
+            "prompt_tokens": 2694,
+            "completion_tokens": 891,
+            "total_tokens": 3585
+          },
+          "first_usage": {
+            "prompt_tokens": 2694,
+            "completion_tokens": 891,
+            "total_tokens": 3585
+          }
+        },
+        {
+          "instance": "EX-01-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 3397,
+          "raw_usage": {
+            "prompt_tokens": 2672,
+            "completion_tokens": 725,
+            "total_tokens": 3397
+          },
+          "first_usage": {
+            "prompt_tokens": 2672,
+            "completion_tokens": 725,
+            "total_tokens": 3397
+          }
+        },
+        {
+          "instance": "EX-02-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 3622,
+          "raw_usage": {
+            "prompt_tokens": 2712,
+            "completion_tokens": 910,
+            "total_tokens": 3622
+          },
+          "first_usage": {
+            "prompt_tokens": 2712,
+            "completion_tokens": 910,
+            "total_tokens": 3622
+          }
+        },
+        {
+          "instance": "EX-02-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 3834,
+          "raw_usage": {
+            "prompt_tokens": 2778,
+            "completion_tokens": 1056,
+            "total_tokens": 3834
+          },
+          "first_usage": {
+            "prompt_tokens": 2778,
+            "completion_tokens": 1056,
+            "total_tokens": 3834
+          }
+        },
+        {
+          "instance": "EX-03-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 3640,
+          "raw_usage": {
+            "prompt_tokens": 2776,
+            "completion_tokens": 864,
+            "total_tokens": 3640
+          },
+          "first_usage": {
+            "prompt_tokens": 2776,
+            "completion_tokens": 864,
+            "total_tokens": 3640
+          }
+        },
+        {
+          "instance": "EX-03-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 3814,
+          "raw_usage": {
+            "prompt_tokens": 2862,
+            "completion_tokens": 952,
+            "total_tokens": 3814
+          },
+          "first_usage": {
+            "prompt_tokens": 2862,
+            "completion_tokens": 952,
+            "total_tokens": 3814
+          }
+        },
+        {
+          "instance": "EX-04-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 3116,
+          "raw_usage": {
+            "prompt_tokens": 2685,
+            "completion_tokens": 431,
+            "total_tokens": 3116
+          },
+          "first_usage": {
+            "prompt_tokens": 2685,
+            "completion_tokens": 431,
+            "total_tokens": 3116
+          }
+        },
+        {
+          "instance": "EX-04-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 3125,
+          "raw_usage": {
+            "prompt_tokens": 2719,
+            "completion_tokens": 406,
+            "total_tokens": 3125
+          },
+          "first_usage": {
+            "prompt_tokens": 2719,
+            "completion_tokens": 406,
+            "total_tokens": 3125
+          }
+        },
+        {
+          "instance": "EX-05-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 3744,
+          "raw_usage": {
+            "prompt_tokens": 2692,
+            "completion_tokens": 1052,
+            "total_tokens": 3744
+          },
+          "first_usage": {
+            "prompt_tokens": 2692,
+            "completion_tokens": 1052,
+            "total_tokens": 3744
+          }
+        },
+        {
+          "instance": "EX-05-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 3608,
+          "raw_usage": {
+            "prompt_tokens": 2773,
+            "completion_tokens": 835,
+            "total_tokens": 3608
+          },
+          "first_usage": {
+            "prompt_tokens": 2773,
+            "completion_tokens": 835,
+            "total_tokens": 3608
+          }
+        },
+        {
+          "instance": "EX-06-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 0,
+          "raw_usage": {
+            "prompt_tokens": 17452,
+            "completion_tokens": 3107,
+            "total_tokens": 20559
+          },
+          "first_usage": {
+            "prompt_tokens": 17452,
+            "completion_tokens": 3107,
+            "total_tokens": 20559
+          }
+        },
+        {
+          "instance": "EX-06-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 0,
+          "raw_usage": {
+            "prompt_tokens": 17452,
+            "completion_tokens": 2715,
+            "total_tokens": 20167
+          },
+          "first_usage": {
+            "prompt_tokens": 17452,
+            "completion_tokens": 2715,
+            "total_tokens": 20167
+          }
+        },
+        {
+          "instance": "EX-07-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 0,
+          "raw_usage": {
+            "prompt_tokens": 12968,
+            "completion_tokens": 1818,
+            "total_tokens": 14786
+          },
+          "first_usage": {
+            "prompt_tokens": 12968,
+            "completion_tokens": 1818,
+            "total_tokens": 14786
+          }
+        },
+        {
+          "instance": "EX-07-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 0,
+          "raw_usage": {
+            "prompt_tokens": 12968,
+            "completion_tokens": 1547,
+            "total_tokens": 14515
+          },
+          "first_usage": {
+            "prompt_tokens": 12968,
+            "completion_tokens": 1547,
+            "total_tokens": 14515
+          }
+        },
+        {
+          "instance": "EX-08-A",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 0,
+          "raw_usage": {
+            "prompt_tokens": 35691,
+            "completion_tokens": 7555,
+            "total_tokens": 43246
+          },
+          "first_usage": {
+            "prompt_tokens": 13403,
+            "completion_tokens": 4404,
+            "total_tokens": 17807
+          }
+        },
+        {
+          "instance": "EX-08-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 0,
+          "raw_usage": {
+            "prompt_tokens": 35137,
+            "completion_tokens": 6011,
+            "total_tokens": 41148
+          },
+          "first_usage": {
+            "prompt_tokens": 13403,
+            "completion_tokens": 2487,
+            "total_tokens": 15890
+          }
+        },
+        {
+          "instance": "EX-09-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 5797,
+          "raw_usage": {
+            "prompt_tokens": 2985,
+            "completion_tokens": 2812,
+            "total_tokens": 5797
+          },
+          "first_usage": {
+            "prompt_tokens": 2985,
+            "completion_tokens": 2812,
+            "total_tokens": 5797
+          }
+        },
+        {
+          "instance": "EX-09-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 4366,
+          "raw_usage": {
+            "prompt_tokens": 3054,
+            "completion_tokens": 1312,
+            "total_tokens": 4366
+          },
+          "first_usage": {
+            "prompt_tokens": 3054,
+            "completion_tokens": 1312,
+            "total_tokens": 4366
+          }
+        },
+        {
+          "instance": "EX-10-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 5027,
+          "raw_usage": {
+            "prompt_tokens": 2893,
+            "completion_tokens": 2134,
+            "total_tokens": 5027
+          },
+          "first_usage": {
+            "prompt_tokens": 2893,
+            "completion_tokens": 2134,
+            "total_tokens": 5027
+          }
+        },
+        {
+          "instance": "EX-10-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 6574,
+          "raw_usage": {
+            "prompt_tokens": 2985,
+            "completion_tokens": 3589,
+            "total_tokens": 6574
+          },
+          "first_usage": {
+            "prompt_tokens": 2985,
+            "completion_tokens": 3589,
+            "total_tokens": 6574
+          }
+        },
+        {
+          "instance": "GR-01-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 4722,
+          "raw_usage": {
+            "prompt_tokens": 4298,
+            "completion_tokens": 424,
+            "total_tokens": 4722
+          },
+          "first_usage": {
+            "prompt_tokens": 4298,
+            "completion_tokens": 424,
+            "total_tokens": 4722
+          }
+        },
+        {
+          "instance": "GR-01-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 4782,
+          "raw_usage": {
+            "prompt_tokens": 4259,
+            "completion_tokens": 523,
+            "total_tokens": 4782
+          },
+          "first_usage": {
+            "prompt_tokens": 4259,
+            "completion_tokens": 523,
+            "total_tokens": 4782
+          }
+        },
+        {
+          "instance": "GR-02-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 4488,
+          "raw_usage": {
+            "prompt_tokens": 3741,
+            "completion_tokens": 747,
+            "total_tokens": 4488
+          },
+          "first_usage": {
+            "prompt_tokens": 3741,
+            "completion_tokens": 747,
+            "total_tokens": 4488
+          }
+        },
+        {
+          "instance": "GR-02-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 4447,
+          "raw_usage": {
+            "prompt_tokens": 3733,
+            "completion_tokens": 714,
+            "total_tokens": 4447
+          },
+          "first_usage": {
+            "prompt_tokens": 3733,
+            "completion_tokens": 714,
+            "total_tokens": 4447
+          }
+        },
+        {
+          "instance": "GR-03-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 5545,
+          "raw_usage": {
+            "prompt_tokens": 3747,
+            "completion_tokens": 1798,
+            "total_tokens": 5545
+          },
+          "first_usage": {
+            "prompt_tokens": 3747,
+            "completion_tokens": 1798,
+            "total_tokens": 5545
+          }
+        },
+        {
+          "instance": "GR-03-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 5012,
+          "raw_usage": {
+            "prompt_tokens": 3736,
+            "completion_tokens": 1276,
+            "total_tokens": 5012
+          },
+          "first_usage": {
+            "prompt_tokens": 3736,
+            "completion_tokens": 1276,
+            "total_tokens": 5012
+          }
+        },
+        {
+          "instance": "GR-04-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 5077,
+          "raw_usage": {
+            "prompt_tokens": 4340,
+            "completion_tokens": 737,
+            "total_tokens": 5077
+          },
+          "first_usage": {
+            "prompt_tokens": 4340,
+            "completion_tokens": 737,
+            "total_tokens": 5077
+          }
+        },
+        {
+          "instance": "GR-04-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 5897,
+          "raw_usage": {
+            "prompt_tokens": 4346,
+            "completion_tokens": 1551,
+            "total_tokens": 5897
+          },
+          "first_usage": {
+            "prompt_tokens": 4346,
+            "completion_tokens": 1551,
+            "total_tokens": 5897
+          }
+        },
+        {
+          "instance": "GR-05-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_autograd_optimizer",
+          "summary_tokens": 0,
+          "raw_usage": {
+            "prompt_tokens": 16218,
+            "completion_tokens": 3654,
+            "total_tokens": 19872
+          },
+          "first_usage": {
+            "prompt_tokens": 16218,
+            "completion_tokens": 3654,
+            "total_tokens": 19872
+          }
+        },
+        {
+          "instance": "GR-05-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_autograd_optimizer",
+          "summary_tokens": 0,
+          "raw_usage": {
+            "prompt_tokens": 36206,
+            "completion_tokens": 4194,
+            "total_tokens": 40400
+          },
+          "first_usage": {
+            "prompt_tokens": 16244,
+            "completion_tokens": 1634,
+            "total_tokens": 17878
+          }
+        },
+        {
+          "instance": "GR-06-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 5049,
+          "raw_usage": {
+            "prompt_tokens": 3721,
+            "completion_tokens": 1328,
+            "total_tokens": 5049
+          },
+          "first_usage": {
+            "prompt_tokens": 3721,
+            "completion_tokens": 1328,
+            "total_tokens": 5049
+          }
+        },
+        {
+          "instance": "GR-06-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 5033,
+          "raw_usage": {
+            "prompt_tokens": 3711,
+            "completion_tokens": 1322,
+            "total_tokens": 5033
+          },
+          "first_usage": {
+            "prompt_tokens": 3711,
+            "completion_tokens": 1322,
+            "total_tokens": 5033
+          }
+        },
+        {
+          "instance": "GR-07-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_autograd_optimizer",
+          "summary_tokens": 17577,
+          "raw_usage": {
+            "prompt_tokens": 15817,
+            "completion_tokens": 1760,
+            "total_tokens": 17577
+          },
+          "first_usage": {
+            "prompt_tokens": 15817,
+            "completion_tokens": 1760,
+            "total_tokens": 17577
+          }
+        },
+        {
+          "instance": "GR-07-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_autograd_optimizer",
+          "summary_tokens": 18240,
+          "raw_usage": {
+            "prompt_tokens": 15819,
+            "completion_tokens": 2421,
+            "total_tokens": 18240
+          },
+          "first_usage": {
+            "prompt_tokens": 15819,
+            "completion_tokens": 2421,
+            "total_tokens": 18240
+          }
+        },
+        {
+          "instance": "GR-08-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 4444,
+          "raw_usage": {
+            "prompt_tokens": 3751,
+            "completion_tokens": 693,
+            "total_tokens": 4444
+          },
+          "first_usage": {
+            "prompt_tokens": 3751,
+            "completion_tokens": 693,
+            "total_tokens": 4444
+          }
+        },
+        {
+          "instance": "GR-08-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 4575,
+          "raw_usage": {
+            "prompt_tokens": 3725,
+            "completion_tokens": 850,
+            "total_tokens": 4575
+          },
+          "first_usage": {
+            "prompt_tokens": 3725,
+            "completion_tokens": 850,
+            "total_tokens": 4575
+          }
+        },
+        {
+          "instance": "NU-01-A",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 8445,
+          "raw_usage": {
+            "prompt_tokens": 6917,
+            "completion_tokens": 1528,
+            "total_tokens": 8445
+          },
+          "first_usage": {
+            "prompt_tokens": 2857,
+            "completion_tokens": 615,
+            "total_tokens": 3472
+          }
+        },
+        {
+          "instance": "NU-01-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 8883,
+          "raw_usage": {
+            "prompt_tokens": 6920,
+            "completion_tokens": 1963,
+            "total_tokens": 8883
+          },
+          "first_usage": {
+            "prompt_tokens": 2860,
+            "completion_tokens": 520,
+            "total_tokens": 3380
+          }
+        },
+        {
+          "instance": "NU-02-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 2522,
+          "raw_usage": {
+            "prompt_tokens": 1455,
+            "completion_tokens": 1067,
+            "total_tokens": 2522
+          },
+          "first_usage": {
+            "prompt_tokens": 1455,
+            "completion_tokens": 1067,
+            "total_tokens": 2522
+          }
+        },
+        {
+          "instance": "NU-02-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 2250,
+          "raw_usage": {
+            "prompt_tokens": 1457,
+            "completion_tokens": 793,
+            "total_tokens": 2250
+          },
+          "first_usage": {
+            "prompt_tokens": 1457,
+            "completion_tokens": 793,
+            "total_tokens": 2250
+          }
+        },
+        {
+          "instance": "NU-03-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 0,
+          "raw_usage": {
+            "prompt_tokens": 11863,
+            "completion_tokens": 940,
+            "total_tokens": 12803
+          },
+          "first_usage": {
+            "prompt_tokens": 11863,
+            "completion_tokens": 940,
+            "total_tokens": 12803
+          }
+        },
+        {
+          "instance": "NU-03-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 0,
+          "raw_usage": {
+            "prompt_tokens": 25003,
+            "completion_tokens": 2811,
+            "total_tokens": 27814
+          },
+          "first_usage": {
+            "prompt_tokens": 11863,
+            "completion_tokens": 1112,
+            "total_tokens": 12975
+          }
+        },
+        {
+          "instance": "NU-04-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 3916,
+          "raw_usage": {
+            "prompt_tokens": 3152,
+            "completion_tokens": 764,
+            "total_tokens": 3916
+          },
+          "first_usage": {
+            "prompt_tokens": 3152,
+            "completion_tokens": 764,
+            "total_tokens": 3916
+          }
+        },
+        {
+          "instance": "NU-04-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 4156,
+          "raw_usage": {
+            "prompt_tokens": 3113,
+            "completion_tokens": 1043,
+            "total_tokens": 4156
+          },
+          "first_usage": {
+            "prompt_tokens": 3113,
+            "completion_tokens": 1043,
+            "total_tokens": 4156
+          }
+        },
+        {
+          "instance": "NU-05-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 0,
+          "raw_usage": {
+            "prompt_tokens": 12443,
+            "completion_tokens": 772,
+            "total_tokens": 13215
+          },
+          "first_usage": {
+            "prompt_tokens": 12443,
+            "completion_tokens": 772,
+            "total_tokens": 13215
+          }
+        },
+        {
+          "instance": "NU-05-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 0,
+          "raw_usage": {
+            "prompt_tokens": 12449,
+            "completion_tokens": 804,
+            "total_tokens": 13253
+          },
+          "first_usage": {
+            "prompt_tokens": 12449,
+            "completion_tokens": 804,
+            "total_tokens": 13253
+          }
+        },
+        {
+          "instance": "NU-06-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 3740,
+          "raw_usage": {
+            "prompt_tokens": 3093,
+            "completion_tokens": 647,
+            "total_tokens": 3740
+          },
+          "first_usage": {
+            "prompt_tokens": 3093,
+            "completion_tokens": 647,
+            "total_tokens": 3740
+          }
+        },
+        {
+          "instance": "NU-06-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 4539,
+          "raw_usage": {
+            "prompt_tokens": 3120,
+            "completion_tokens": 1419,
+            "total_tokens": 4539
+          },
+          "first_usage": {
+            "prompt_tokens": 3120,
+            "completion_tokens": 1419,
+            "total_tokens": 4539
+          }
+        },
+        {
+          "instance": "NU-07-A",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 0,
+          "raw_usage": {
+            "prompt_tokens": 59315,
+            "completion_tokens": 15786,
+            "total_tokens": 75101
+          },
+          "first_usage": {
+            "prompt_tokens": 14047,
+            "completion_tokens": 5406,
+            "total_tokens": 19453
+          }
+        },
+        {
+          "instance": "NU-07-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 0,
+          "raw_usage": {
+            "prompt_tokens": 33943,
+            "completion_tokens": 7829,
+            "total_tokens": 41772
+          },
+          "first_usage": {
+            "prompt_tokens": 14047,
+            "completion_tokens": 2422,
+            "total_tokens": 16469
+          }
+        }
+      ],
+      "paired_comparison_with_hier": {
+        "hier_first_only": [],
+        "baseline_first_only": []
+      }
+    },
+    "r_swe": {
+      "first_accepted": 36,
+      "final_accepted": 46,
+      "summary_usage": {
+        "prompt_tokens": 7512497,
+        "completion_tokens": 122519,
+        "total_tokens": 7635016
+      },
+      "raw_usage": {
+        "prompt_tokens": 7512497,
+        "completion_tokens": 122519,
+        "total_tokens": 7635016
+      },
+      "first_usage": {
+        "prompt_tokens": 4295550,
+        "completion_tokens": 77323,
+        "total_tokens": 4372873
+      },
+      "raw_tokens_per_accepted_repair": 165978.60869565216,
+      "recorded_api_calls": 877,
+      "first_failure_counts": {
+        "no_patch_format": 4,
+        "patch_functional_failure": 3,
+        "no_patch_call_limit": 6,
+        "functional_pass_scope_rejection": 1
+      },
+      "first_failures": [
+        {
+          "instance": "EX-03-B",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-03-B__tiny_causal_lm__execution__EX-03__r_swe.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 2543,
+            "completion_tokens": 260,
+            "total_tokens": 2803
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "exit_status": "exit_format",
+          "classification": "no_patch_format"
+        },
+        {
+          "instance": "EX-07-B",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-07-B__image_mlp__execution__EX-07__r_swe.json",
+          "edits": [
+            {
+              "file": "torch4ms/ops/mtorch.py",
+              "action": "repository_patch",
+              "applied": true,
+              "error": ""
+            }
+          ],
+          "first_usage": {
+            "prompt_tokens": 71109,
+            "completion_tokens": 2192,
+            "total_tokens": 73301
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "exit_status": "submitted (exit_cost)",
+          "classification": "patch_functional_failure"
+        },
+        {
+          "instance": "EX-08-A",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-08-A__cnn__execution__EX-08__r_swe.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 92779,
+            "completion_tokens": 993,
+            "total_tokens": 93772
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "exit_status": "exit_format",
+          "classification": "no_patch_format"
+        },
+        {
+          "instance": "EX-08-B",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-08-B__transformer_classifier__execution__EX-08__r_swe.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 60016,
+            "completion_tokens": 2240,
+            "total_tokens": 62256
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "exit_status": "exit_cost",
+          "classification": "no_patch_call_limit"
+        },
+        {
+          "instance": "EX-09-B",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-09-B__tiny_causal_lm__execution__EX-09__r_swe.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 7538,
+            "completion_tokens": 202,
+            "total_tokens": 7740
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "exit_status": "exit_format",
+          "classification": "no_patch_format"
+        },
+        {
+          "instance": "GR-05-B",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-05-B__transformer_classifier__gradient_update__GR-05__r_swe.json",
+          "edits": [
+            {
+              "file": "torch4ms/autograd/__init__.py",
+              "action": "repository_patch",
+              "applied": true,
+              "error": ""
+            },
+            {
+              "file": "torch4ms/autograd/forward_extractor.py",
+              "action": "repository_patch",
+              "applied": true,
+              "error": ""
+            }
+          ],
+          "first_usage": {
+            "prompt_tokens": 153428,
+            "completion_tokens": 1478,
+            "total_tokens": 154906
+          },
+          "validation_status": "verified_restored",
+          "out_of_scope_edit_count": 1,
+          "final_accepted": false,
+          "exit_status": "submitted (exit_cost)",
+          "classification": "functional_pass_scope_rejection"
+        },
+        {
+          "instance": "NU-02-B",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-02-B__tiny_causal_lm__numerical__NU-02__r_swe.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 20335,
+            "completion_tokens": 1683,
+            "total_tokens": 22018
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "exit_status": "exit_cost",
+          "classification": "no_patch_call_limit"
+        },
+        {
+          "instance": "NU-03-A",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-03-A__cnn__numerical__NU-03__r_swe.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 374888,
+            "completion_tokens": 1138,
+            "total_tokens": 376026
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "exit_status": "exit_cost",
+          "classification": "no_patch_call_limit"
+        },
+        {
+          "instance": "NU-03-B",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-03-B__image_mlp__numerical__NU-03__r_swe.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 305555,
+            "completion_tokens": 1376,
+            "total_tokens": 306931
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": false,
+          "exit_status": "exit_cost",
+          "classification": "no_patch_call_limit"
+        },
+        {
+          "instance": "NU-05-A",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-05-A__cnn__numerical__NU-05__r_swe.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 354771,
+            "completion_tokens": 1198,
+            "total_tokens": 355969
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "exit_status": "exit_cost",
+          "classification": "no_patch_call_limit"
+        },
+        {
+          "instance": "NU-05-B",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-05-B__tiny_causal_lm__numerical__NU-05__r_swe.json",
+          "edits": [
+            {
+              "file": "torch4ms/ops/mtorch.py",
+              "action": "repository_patch",
+              "applied": true,
+              "error": ""
+            }
+          ],
+          "first_usage": {
+            "prompt_tokens": 293113,
+            "completion_tokens": 2584,
+            "total_tokens": 295697
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "exit_status": "submitted (exit_cost)",
+          "classification": "patch_functional_failure"
+        },
+        {
+          "instance": "NU-06-B",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-06-B__transformer_classifier__numerical__NU-06__r_swe.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 93441,
+            "completion_tokens": 3721,
+            "total_tokens": 97162
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "exit_status": "exit_cost",
+          "classification": "no_patch_call_limit"
+        },
+        {
+          "instance": "NU-07-A",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-07-A__image_mlp__numerical__NU-07__r_swe.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 8104,
+            "completion_tokens": 352,
+            "total_tokens": 8456
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": false,
+          "exit_status": "exit_format",
+          "classification": "no_patch_format"
+        },
+        {
+          "instance": "NU-07-B",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-07-B__tiny_causal_lm__numerical__NU-07__r_swe.json",
+          "edits": [
+            {
+              "file": "torch4ms/ops/mtorch.py",
+              "action": "repository_patch",
+              "applied": true,
+              "error": ""
+            }
+          ],
+          "first_usage": {
+            "prompt_tokens": 85601,
+            "completion_tokens": 4670,
+            "total_tokens": 90271
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 1,
+          "final_accepted": false,
+          "exit_status": "submitted (exit_cost)",
+          "classification": "patch_functional_failure"
+        }
+      ],
+      "per_instance": [
+        {
+          "instance": "EX-01-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 34194,
+          "raw_usage": {
+            "prompt_tokens": 32640,
+            "completion_tokens": 1554,
+            "total_tokens": 34194
+          },
+          "first_usage": {
+            "prompt_tokens": 32640,
+            "completion_tokens": 1554,
+            "total_tokens": 34194
+          }
+        },
+        {
+          "instance": "EX-01-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 45552,
+          "raw_usage": {
+            "prompt_tokens": 44165,
+            "completion_tokens": 1387,
+            "total_tokens": 45552
+          },
+          "first_usage": {
+            "prompt_tokens": 44165,
+            "completion_tokens": 1387,
+            "total_tokens": 45552
+          }
+        },
+        {
+          "instance": "EX-02-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 14026,
+          "raw_usage": {
+            "prompt_tokens": 13387,
+            "completion_tokens": 639,
+            "total_tokens": 14026
+          },
+          "first_usage": {
+            "prompt_tokens": 13387,
+            "completion_tokens": 639,
+            "total_tokens": 14026
+          }
+        },
+        {
+          "instance": "EX-02-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 28954,
+          "raw_usage": {
+            "prompt_tokens": 27812,
+            "completion_tokens": 1142,
+            "total_tokens": 28954
+          },
+          "first_usage": {
+            "prompt_tokens": 27812,
+            "completion_tokens": 1142,
+            "total_tokens": 28954
+          }
+        },
+        {
+          "instance": "EX-03-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 13131,
+          "raw_usage": {
+            "prompt_tokens": 11782,
+            "completion_tokens": 1349,
+            "total_tokens": 13131
+          },
+          "first_usage": {
+            "prompt_tokens": 11782,
+            "completion_tokens": 1349,
+            "total_tokens": 13131
+          }
+        },
+        {
+          "instance": "EX-03-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 48876,
+          "raw_usage": {
+            "prompt_tokens": 46786,
+            "completion_tokens": 2090,
+            "total_tokens": 48876
+          },
+          "first_usage": {
+            "prompt_tokens": 2543,
+            "completion_tokens": 260,
+            "total_tokens": 2803
+          }
+        },
+        {
+          "instance": "EX-04-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 36965,
+          "raw_usage": {
+            "prompt_tokens": 35686,
+            "completion_tokens": 1279,
+            "total_tokens": 36965
+          },
+          "first_usage": {
+            "prompt_tokens": 35686,
+            "completion_tokens": 1279,
+            "total_tokens": 36965
+          }
+        },
+        {
+          "instance": "EX-04-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 32410,
+          "raw_usage": {
+            "prompt_tokens": 31046,
+            "completion_tokens": 1364,
+            "total_tokens": 32410
+          },
+          "first_usage": {
+            "prompt_tokens": 31046,
+            "completion_tokens": 1364,
+            "total_tokens": 32410
+          }
+        },
+        {
+          "instance": "EX-05-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 30076,
+          "raw_usage": {
+            "prompt_tokens": 29126,
+            "completion_tokens": 950,
+            "total_tokens": 30076
+          },
+          "first_usage": {
+            "prompt_tokens": 29126,
+            "completion_tokens": 950,
+            "total_tokens": 30076
+          }
+        },
+        {
+          "instance": "EX-05-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 37547,
+          "raw_usage": {
+            "prompt_tokens": 36455,
+            "completion_tokens": 1092,
+            "total_tokens": 37547
+          },
+          "first_usage": {
+            "prompt_tokens": 36455,
+            "completion_tokens": 1092,
+            "total_tokens": 37547
+          }
+        },
+        {
+          "instance": "EX-06-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 786603,
+          "raw_usage": {
+            "prompt_tokens": 785284,
+            "completion_tokens": 1319,
+            "total_tokens": 786603
+          },
+          "first_usage": {
+            "prompt_tokens": 785284,
+            "completion_tokens": 1319,
+            "total_tokens": 786603
+          }
+        },
+        {
+          "instance": "EX-06-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 155095,
+          "raw_usage": {
+            "prompt_tokens": 153728,
+            "completion_tokens": 1367,
+            "total_tokens": 155095
+          },
+          "first_usage": {
+            "prompt_tokens": 153728,
+            "completion_tokens": 1367,
+            "total_tokens": 155095
+          }
+        },
+        {
+          "instance": "EX-07-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 78273,
+          "raw_usage": {
+            "prompt_tokens": 76197,
+            "completion_tokens": 2076,
+            "total_tokens": 78273
+          },
+          "first_usage": {
+            "prompt_tokens": 76197,
+            "completion_tokens": 2076,
+            "total_tokens": 78273
+          }
+        },
+        {
+          "instance": "EX-07-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 210509,
+          "raw_usage": {
+            "prompt_tokens": 203451,
+            "completion_tokens": 7058,
+            "total_tokens": 210509
+          },
+          "first_usage": {
+            "prompt_tokens": 71109,
+            "completion_tokens": 2192,
+            "total_tokens": 73301
+          }
+        },
+        {
+          "instance": "EX-08-A",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 312171,
+          "raw_usage": {
+            "prompt_tokens": 306095,
+            "completion_tokens": 6076,
+            "total_tokens": 312171
+          },
+          "first_usage": {
+            "prompt_tokens": 92779,
+            "completion_tokens": 993,
+            "total_tokens": 93772
+          }
+        },
+        {
+          "instance": "EX-08-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 141556,
+          "raw_usage": {
+            "prompt_tokens": 137571,
+            "completion_tokens": 3985,
+            "total_tokens": 141556
+          },
+          "first_usage": {
+            "prompt_tokens": 60016,
+            "completion_tokens": 2240,
+            "total_tokens": 62256
+          }
+        },
+        {
+          "instance": "EX-09-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 27013,
+          "raw_usage": {
+            "prompt_tokens": 25966,
+            "completion_tokens": 1047,
+            "total_tokens": 27013
+          },
+          "first_usage": {
+            "prompt_tokens": 25966,
+            "completion_tokens": 1047,
+            "total_tokens": 27013
+          }
+        },
+        {
+          "instance": "EX-09-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 44190,
+          "raw_usage": {
+            "prompt_tokens": 43046,
+            "completion_tokens": 1144,
+            "total_tokens": 44190
+          },
+          "first_usage": {
+            "prompt_tokens": 7538,
+            "completion_tokens": 202,
+            "total_tokens": 7740
+          }
+        },
+        {
+          "instance": "EX-10-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 37461,
+          "raw_usage": {
+            "prompt_tokens": 36952,
+            "completion_tokens": 509,
+            "total_tokens": 37461
+          },
+          "first_usage": {
+            "prompt_tokens": 36952,
+            "completion_tokens": 509,
+            "total_tokens": 37461
+          }
+        },
+        {
+          "instance": "EX-10-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 47740,
+          "raw_usage": {
+            "prompt_tokens": 46143,
+            "completion_tokens": 1597,
+            "total_tokens": 47740
+          },
+          "first_usage": {
+            "prompt_tokens": 46143,
+            "completion_tokens": 1597,
+            "total_tokens": 47740
+          }
+        },
+        {
+          "instance": "GR-01-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 44211,
+          "raw_usage": {
+            "prompt_tokens": 41508,
+            "completion_tokens": 2703,
+            "total_tokens": 44211
+          },
+          "first_usage": {
+            "prompt_tokens": 41508,
+            "completion_tokens": 2703,
+            "total_tokens": 44211
+          }
+        },
+        {
+          "instance": "GR-01-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 39552,
+          "raw_usage": {
+            "prompt_tokens": 38131,
+            "completion_tokens": 1421,
+            "total_tokens": 39552
+          },
+          "first_usage": {
+            "prompt_tokens": 38131,
+            "completion_tokens": 1421,
+            "total_tokens": 39552
+          }
+        },
+        {
+          "instance": "GR-02-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 53918,
+          "raw_usage": {
+            "prompt_tokens": 52601,
+            "completion_tokens": 1317,
+            "total_tokens": 53918
+          },
+          "first_usage": {
+            "prompt_tokens": 52601,
+            "completion_tokens": 1317,
+            "total_tokens": 53918
+          }
+        },
+        {
+          "instance": "GR-02-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 40448,
+          "raw_usage": {
+            "prompt_tokens": 37924,
+            "completion_tokens": 2524,
+            "total_tokens": 40448
+          },
+          "first_usage": {
+            "prompt_tokens": 37924,
+            "completion_tokens": 2524,
+            "total_tokens": 40448
+          }
+        },
+        {
+          "instance": "GR-03-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 45912,
+          "raw_usage": {
+            "prompt_tokens": 44420,
+            "completion_tokens": 1492,
+            "total_tokens": 45912
+          },
+          "first_usage": {
+            "prompt_tokens": 44420,
+            "completion_tokens": 1492,
+            "total_tokens": 45912
+          }
+        },
+        {
+          "instance": "GR-03-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 50286,
+          "raw_usage": {
+            "prompt_tokens": 48495,
+            "completion_tokens": 1791,
+            "total_tokens": 50286
+          },
+          "first_usage": {
+            "prompt_tokens": 48495,
+            "completion_tokens": 1791,
+            "total_tokens": 50286
+          }
+        },
+        {
+          "instance": "GR-04-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 37451,
+          "raw_usage": {
+            "prompt_tokens": 36531,
+            "completion_tokens": 920,
+            "total_tokens": 37451
+          },
+          "first_usage": {
+            "prompt_tokens": 36531,
+            "completion_tokens": 920,
+            "total_tokens": 37451
+          }
+        },
+        {
+          "instance": "GR-04-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 26939,
+          "raw_usage": {
+            "prompt_tokens": 25676,
+            "completion_tokens": 1263,
+            "total_tokens": 26939
+          },
+          "first_usage": {
+            "prompt_tokens": 25676,
+            "completion_tokens": 1263,
+            "total_tokens": 26939
+          }
+        },
+        {
+          "instance": "GR-05-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_autograd_optimizer",
+          "summary_tokens": 133961,
+          "raw_usage": {
+            "prompt_tokens": 130302,
+            "completion_tokens": 3659,
+            "total_tokens": 133961
+          },
+          "first_usage": {
+            "prompt_tokens": 130302,
+            "completion_tokens": 3659,
+            "total_tokens": 133961
+          }
+        },
+        {
+          "instance": "GR-05-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": false,
+          "scope": "core_autograd_optimizer",
+          "summary_tokens": 154906,
+          "raw_usage": {
+            "prompt_tokens": 153428,
+            "completion_tokens": 1478,
+            "total_tokens": 154906
+          },
+          "first_usage": {
+            "prompt_tokens": 153428,
+            "completion_tokens": 1478,
+            "total_tokens": 154906
+          }
+        },
+        {
+          "instance": "GR-06-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 25435,
+          "raw_usage": {
+            "prompt_tokens": 24375,
+            "completion_tokens": 1060,
+            "total_tokens": 25435
+          },
+          "first_usage": {
+            "prompt_tokens": 24375,
+            "completion_tokens": 1060,
+            "total_tokens": 25435
+          }
+        },
+        {
+          "instance": "GR-06-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 56886,
+          "raw_usage": {
+            "prompt_tokens": 55358,
+            "completion_tokens": 1528,
+            "total_tokens": 56886
+          },
+          "first_usage": {
+            "prompt_tokens": 55358,
+            "completion_tokens": 1528,
+            "total_tokens": 56886
+          }
+        },
+        {
+          "instance": "GR-07-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_autograd_optimizer",
+          "summary_tokens": 84668,
+          "raw_usage": {
+            "prompt_tokens": 82584,
+            "completion_tokens": 2084,
+            "total_tokens": 84668
+          },
+          "first_usage": {
+            "prompt_tokens": 82584,
+            "completion_tokens": 2084,
+            "total_tokens": 84668
+          }
+        },
+        {
+          "instance": "GR-07-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_autograd_optimizer",
+          "summary_tokens": 69020,
+          "raw_usage": {
+            "prompt_tokens": 67822,
+            "completion_tokens": 1198,
+            "total_tokens": 69020
+          },
+          "first_usage": {
+            "prompt_tokens": 67822,
+            "completion_tokens": 1198,
+            "total_tokens": 69020
+          }
+        },
+        {
+          "instance": "GR-08-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 50149,
+          "raw_usage": {
+            "prompt_tokens": 48760,
+            "completion_tokens": 1389,
+            "total_tokens": 50149
+          },
+          "first_usage": {
+            "prompt_tokens": 48760,
+            "completion_tokens": 1389,
+            "total_tokens": 50149
+          }
+        },
+        {
+          "instance": "GR-08-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 44733,
+          "raw_usage": {
+            "prompt_tokens": 43347,
+            "completion_tokens": 1386,
+            "total_tokens": 44733
+          },
+          "first_usage": {
+            "prompt_tokens": 43347,
+            "completion_tokens": 1386,
+            "total_tokens": 44733
+          }
+        },
+        {
+          "instance": "NU-01-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 53664,
+          "raw_usage": {
+            "prompt_tokens": 52047,
+            "completion_tokens": 1617,
+            "total_tokens": 53664
+          },
+          "first_usage": {
+            "prompt_tokens": 52047,
+            "completion_tokens": 1617,
+            "total_tokens": 53664
+          }
+        },
+        {
+          "instance": "NU-01-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 47087,
+          "raw_usage": {
+            "prompt_tokens": 45461,
+            "completion_tokens": 1626,
+            "total_tokens": 47087
+          },
+          "first_usage": {
+            "prompt_tokens": 45461,
+            "completion_tokens": 1626,
+            "total_tokens": 47087
+          }
+        },
+        {
+          "instance": "NU-02-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 29385,
+          "raw_usage": {
+            "prompt_tokens": 27081,
+            "completion_tokens": 2304,
+            "total_tokens": 29385
+          },
+          "first_usage": {
+            "prompt_tokens": 27081,
+            "completion_tokens": 2304,
+            "total_tokens": 29385
+          }
+        },
+        {
+          "instance": "NU-02-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 73279,
+          "raw_usage": {
+            "prompt_tokens": 67738,
+            "completion_tokens": 5541,
+            "total_tokens": 73279
+          },
+          "first_usage": {
+            "prompt_tokens": 20335,
+            "completion_tokens": 1683,
+            "total_tokens": 22018
+          }
+        },
+        {
+          "instance": "NU-03-A",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 691256,
+          "raw_usage": {
+            "prompt_tokens": 688551,
+            "completion_tokens": 2705,
+            "total_tokens": 691256
+          },
+          "first_usage": {
+            "prompt_tokens": 374888,
+            "completion_tokens": 1138,
+            "total_tokens": 376026
+          }
+        },
+        {
+          "instance": "NU-03-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": false,
+          "scope": "core_operator",
+          "summary_tokens": 1072210,
+          "raw_usage": {
+            "prompt_tokens": 1064998,
+            "completion_tokens": 7212,
+            "total_tokens": 1072210
+          },
+          "first_usage": {
+            "prompt_tokens": 305555,
+            "completion_tokens": 1376,
+            "total_tokens": 306931
+          }
+        },
+        {
+          "instance": "NU-04-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 32293,
+          "raw_usage": {
+            "prompt_tokens": 31053,
+            "completion_tokens": 1240,
+            "total_tokens": 32293
+          },
+          "first_usage": {
+            "prompt_tokens": 31053,
+            "completion_tokens": 1240,
+            "total_tokens": 32293
+          }
+        },
+        {
+          "instance": "NU-04-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 37377,
+          "raw_usage": {
+            "prompt_tokens": 36152,
+            "completion_tokens": 1225,
+            "total_tokens": 37377
+          },
+          "first_usage": {
+            "prompt_tokens": 36152,
+            "completion_tokens": 1225,
+            "total_tokens": 37377
+          }
+        },
+        {
+          "instance": "NU-05-A",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 812867,
+          "raw_usage": {
+            "prompt_tokens": 808975,
+            "completion_tokens": 3892,
+            "total_tokens": 812867
+          },
+          "first_usage": {
+            "prompt_tokens": 354771,
+            "completion_tokens": 1198,
+            "total_tokens": 355969
+          }
+        },
+        {
+          "instance": "NU-05-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 356940,
+          "raw_usage": {
+            "prompt_tokens": 352588,
+            "completion_tokens": 4352,
+            "total_tokens": 356940
+          },
+          "first_usage": {
+            "prompt_tokens": 293113,
+            "completion_tokens": 2584,
+            "total_tokens": 295697
+          }
+        },
+        {
+          "instance": "NU-06-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 17150,
+          "raw_usage": {
+            "prompt_tokens": 16332,
+            "completion_tokens": 818,
+            "total_tokens": 17150
+          },
+          "first_usage": {
+            "prompt_tokens": 16332,
+            "completion_tokens": 818,
+            "total_tokens": 17150
+          }
+        },
+        {
+          "instance": "NU-06-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 135116,
+          "raw_usage": {
+            "prompt_tokens": 130020,
+            "completion_tokens": 5096,
+            "total_tokens": 135116
+          },
+          "first_usage": {
+            "prompt_tokens": 93441,
+            "completion_tokens": 3721,
+            "total_tokens": 97162
+          }
+        },
+        {
+          "instance": "NU-07-A",
+          "official_first_acceptance": false,
+          "official_final_acceptance": false,
+          "scope": "core_operator",
+          "summary_tokens": 461833,
+          "raw_usage": {
+            "prompt_tokens": 456097,
+            "completion_tokens": 5736,
+            "total_tokens": 461833
+          },
+          "first_usage": {
+            "prompt_tokens": 8104,
+            "completion_tokens": 352,
+            "total_tokens": 8456
+          }
+        },
+        {
+          "instance": "NU-07-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": false,
+          "scope": "core_operator",
+          "summary_tokens": 693742,
+          "raw_usage": {
+            "prompt_tokens": 680824,
+            "completion_tokens": 12918,
+            "total_tokens": 693742
+          },
+          "first_usage": {
+            "prompt_tokens": 85601,
+            "completion_tokens": 4670,
+            "total_tokens": 90271
+          }
+        }
+      ],
+      "paired_comparison_with_hier": {
+        "hier_first_only": [
+          "EX-03-B",
+          "EX-07-B",
+          "EX-09-B",
+          "NU-02-B",
+          "NU-03-A",
+          "NU-05-A",
+          "NU-05-B",
+          "NU-06-B"
+        ],
+        "baseline_first_only": [
+          "NU-01-A",
+          "NU-01-B"
+        ]
+      }
+    },
+    "r_matchfix": {
+      "first_accepted": 37,
+      "final_accepted": 47,
+      "summary_usage": {
+        "prompt_tokens": 4739352,
+        "completion_tokens": 465789,
+        "total_tokens": 5205141
+      },
+      "raw_usage": {
+        "prompt_tokens": 4739352,
+        "completion_tokens": 465789,
+        "total_tokens": 5205141
+      },
+      "first_usage": {
+        "prompt_tokens": 2375192,
+        "completion_tokens": 319573,
+        "total_tokens": 2694765
+      },
+      "raw_tokens_per_accepted_repair": 110747.68085106384,
+      "recorded_api_calls": 491,
+      "first_failure_counts": {
+        "valid_json_missing_wrapper_tags": 11,
+        "single_function_incomplete_repair": 2
+      },
+      "first_failures": [
+        {
+          "instance": "EX-02-B",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-02-B__transformer_classifier__execution__EX-02__r_matchfix.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 5724,
+            "completion_tokens": 5319,
+            "total_tokens": 11043
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "parser_explanation": "200: Model did not return a response in the expected format, e.g., <final_response_format>{MODEL RESPONSE}</final_response_format>",
+          "classification": "valid_json_missing_wrapper_tags"
+        },
+        {
+          "instance": "EX-06-A",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-06-A__transformer_classifier__execution__EX-06__r_matchfix.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 723015,
+            "completion_tokens": 11733,
+            "total_tokens": 734748
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "parser_explanation": "200: Model did not return a response in the expected format, e.g., <final_response_format>{MODEL RESPONSE}</final_response_format>",
+          "classification": "valid_json_missing_wrapper_tags"
+        },
+        {
+          "instance": "EX-06-B",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-06-B__tiny_causal_lm__execution__EX-06__r_matchfix.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 723103,
+            "completion_tokens": 13919,
+            "total_tokens": 737022
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "parser_explanation": "200: Model did not return a response in the expected format, e.g., <final_response_format>{MODEL RESPONSE}</final_response_format>",
+          "classification": "valid_json_missing_wrapper_tags"
+        },
+        {
+          "instance": "EX-07-A",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-07-A__cnn__execution__EX-07__r_matchfix.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 13257,
+            "completion_tokens": 10740,
+            "total_tokens": 23997
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "parser_explanation": "200: Model did not return a response in the expected format, e.g., <final_response_format>{MODEL RESPONSE}</final_response_format>",
+          "classification": "valid_json_missing_wrapper_tags"
+        },
+        {
+          "instance": "EX-10-A",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-10-A__image_mlp__execution__EX-10__r_matchfix.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 5616,
+            "completion_tokens": 3159,
+            "total_tokens": 8775
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "parser_explanation": "200: Model did not return a response in the expected format, e.g., <final_response_format>{MODEL RESPONSE}</final_response_format>",
+          "classification": "valid_json_missing_wrapper_tags"
+        },
+        {
+          "instance": "EX-10-B",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-10-B__transformer_classifier__execution__EX-10__r_matchfix.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 5456,
+            "completion_tokens": 3857,
+            "total_tokens": 9313
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "parser_explanation": "200: Model did not return a response in the expected format, e.g., <final_response_format>{MODEL RESPONSE}</final_response_format>",
+          "classification": "valid_json_missing_wrapper_tags"
+        },
+        {
+          "instance": "GR-02-A",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-02-A__cnn__gradient_update__GR-02__r_matchfix.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 8580,
+            "completion_tokens": 7840,
+            "total_tokens": 16420
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "parser_explanation": "200: Model did not return a response in the expected format, e.g., <final_response_format>{MODEL RESPONSE}</final_response_format>",
+          "classification": "valid_json_missing_wrapper_tags"
+        },
+        {
+          "instance": "GR-03-A",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-03-A__cnn__gradient_update__GR-03__r_matchfix.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 8067,
+            "completion_tokens": 4651,
+            "total_tokens": 12718
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "parser_explanation": "200: Model did not return a response in the expected format, e.g., <final_response_format>{MODEL RESPONSE}</final_response_format>",
+          "classification": "valid_json_missing_wrapper_tags"
+        },
+        {
+          "instance": "GR-05-A",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-05-A__image_mlp__gradient_update__GR-05__r_matchfix.json",
+          "edits": [
+            {
+              "file": "torch4ms/autograd/forward_extractor.py",
+              "action": "replace_function",
+              "function": "get_trainable_params",
+              "applied": true
+            }
+          ],
+          "first_usage": {
+            "prompt_tokens": 7905,
+            "completion_tokens": 4515,
+            "total_tokens": 12420
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": false,
+          "parser_explanation": "The source method filters out parameters that do not require gradients (`requires_grad=False`), while the target method returns all parameters regardless of gradient requirement. This leads to different output lists when parameters with `requires_grad=False` are present, which violates functional equivalence. The ordinary test contract confirms this discrepancy.",
+          "classification": "single_function_incomplete_repair"
+        },
+        {
+          "instance": "GR-05-B",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-05-B__transformer_classifier__gradient_update__GR-05__r_matchfix.json",
+          "edits": [
+            {
+              "file": "torch4ms/autograd/forward_extractor.py",
+              "action": "replace_function",
+              "function": "get_trainable_params",
+              "applied": true
+            }
+          ],
+          "first_usage": {
+            "prompt_tokens": 7375,
+            "completion_tokens": 4347,
+            "total_tokens": 11722
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": false,
+          "parser_explanation": "The target implementation returns all parameters regardless of the 'requires_grad' attribute, while the source implementation correctly filters to return only parameters with requires_grad=True. This discrepancy causes the target to include non-trainable parameters, violating the specification as shown in the ordinary test failure.",
+          "classification": "single_function_incomplete_repair"
+        },
+        {
+          "instance": "GR-07-A",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-07-A__transformer_classifier__gradient_update__GR-07__r_matchfix.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 12946,
+            "completion_tokens": 7755,
+            "total_tokens": 20701
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": false,
+          "parser_explanation": "200: Model did not return a response in the expected format, e.g., <final_response_format>{MODEL RESPONSE}</final_response_format>",
+          "classification": "valid_json_missing_wrapper_tags"
+        },
+        {
+          "instance": "NU-02-A",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-02-A__transformer_classifier__numerical__NU-02__r_matchfix.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 7681,
+            "completion_tokens": 5388,
+            "total_tokens": 13069
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "parser_explanation": "200: Model did not return a response in the expected format, e.g., <final_response_format>{MODEL RESPONSE}</final_response_format>",
+          "classification": "valid_json_missing_wrapper_tags"
+        },
+        {
+          "instance": "NU-04-B",
+          "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-04-B__transformer_classifier__numerical__NU-04__r_matchfix.json",
+          "edits": [],
+          "first_usage": {
+            "prompt_tokens": 5732,
+            "completion_tokens": 4837,
+            "total_tokens": 10569
+          },
+          "validation_status": "rolled_back",
+          "out_of_scope_edit_count": 0,
+          "final_accepted": true,
+          "parser_explanation": "200: Model did not return a response in the expected format, e.g., <final_response_format>{MODEL RESPONSE}</final_response_format>",
+          "classification": "valid_json_missing_wrapper_tags"
+        }
+      ],
+      "per_instance": [
+        {
+          "instance": "EX-01-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 11321,
+          "raw_usage": {
+            "prompt_tokens": 5957,
+            "completion_tokens": 5364,
+            "total_tokens": 11321
+          },
+          "first_usage": {
+            "prompt_tokens": 5957,
+            "completion_tokens": 5364,
+            "total_tokens": 11321
+          }
+        },
+        {
+          "instance": "EX-01-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 9406,
+          "raw_usage": {
+            "prompt_tokens": 6434,
+            "completion_tokens": 2972,
+            "total_tokens": 9406
+          },
+          "first_usage": {
+            "prompt_tokens": 6434,
+            "completion_tokens": 2972,
+            "total_tokens": 9406
+          }
+        },
+        {
+          "instance": "EX-02-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 15729,
+          "raw_usage": {
+            "prompt_tokens": 8252,
+            "completion_tokens": 7477,
+            "total_tokens": 15729
+          },
+          "first_usage": {
+            "prompt_tokens": 8252,
+            "completion_tokens": 7477,
+            "total_tokens": 15729
+          }
+        },
+        {
+          "instance": "EX-02-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 34916,
+          "raw_usage": {
+            "prompt_tokens": 17200,
+            "completion_tokens": 17716,
+            "total_tokens": 34916
+          },
+          "first_usage": {
+            "prompt_tokens": 5724,
+            "completion_tokens": 5319,
+            "total_tokens": 11043
+          }
+        },
+        {
+          "instance": "EX-03-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 14263,
+          "raw_usage": {
+            "prompt_tokens": 8213,
+            "completion_tokens": 6050,
+            "total_tokens": 14263
+          },
+          "first_usage": {
+            "prompt_tokens": 8213,
+            "completion_tokens": 6050,
+            "total_tokens": 14263
+          }
+        },
+        {
+          "instance": "EX-03-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 14754,
+          "raw_usage": {
+            "prompt_tokens": 8803,
+            "completion_tokens": 5951,
+            "total_tokens": 14754
+          },
+          "first_usage": {
+            "prompt_tokens": 8803,
+            "completion_tokens": 5951,
+            "total_tokens": 14754
+          }
+        },
+        {
+          "instance": "EX-04-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 11303,
+          "raw_usage": {
+            "prompt_tokens": 7733,
+            "completion_tokens": 3570,
+            "total_tokens": 11303
+          },
+          "first_usage": {
+            "prompt_tokens": 7733,
+            "completion_tokens": 3570,
+            "total_tokens": 11303
+          }
+        },
+        {
+          "instance": "EX-04-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 11039,
+          "raw_usage": {
+            "prompt_tokens": 7097,
+            "completion_tokens": 3942,
+            "total_tokens": 11039
+          },
+          "first_usage": {
+            "prompt_tokens": 7097,
+            "completion_tokens": 3942,
+            "total_tokens": 11039
+          }
+        },
+        {
+          "instance": "EX-05-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 33601,
+          "raw_usage": {
+            "prompt_tokens": 27185,
+            "completion_tokens": 6416,
+            "total_tokens": 33601
+          },
+          "first_usage": {
+            "prompt_tokens": 27185,
+            "completion_tokens": 6416,
+            "total_tokens": 33601
+          }
+        },
+        {
+          "instance": "EX-05-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 33330,
+          "raw_usage": {
+            "prompt_tokens": 26939,
+            "completion_tokens": 6391,
+            "total_tokens": 33330
+          },
+          "first_usage": {
+            "prompt_tokens": 26939,
+            "completion_tokens": 6391,
+            "total_tokens": 33330
+          }
+        },
+        {
+          "instance": "EX-06-A",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 1479268,
+          "raw_usage": {
+            "prompt_tokens": 1455778,
+            "completion_tokens": 23490,
+            "total_tokens": 1479268
+          },
+          "first_usage": {
+            "prompt_tokens": 723015,
+            "completion_tokens": 11733,
+            "total_tokens": 734748
+          }
+        },
+        {
+          "instance": "EX-06-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 2202880,
+          "raw_usage": {
+            "prompt_tokens": 2173373,
+            "completion_tokens": 29507,
+            "total_tokens": 2202880
+          },
+          "first_usage": {
+            "prompt_tokens": 723103,
+            "completion_tokens": 13919,
+            "total_tokens": 737022
+          }
+        },
+        {
+          "instance": "EX-07-A",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 69755,
+          "raw_usage": {
+            "prompt_tokens": 41736,
+            "completion_tokens": 28019,
+            "total_tokens": 69755
+          },
+          "first_usage": {
+            "prompt_tokens": 13257,
+            "completion_tokens": 10740,
+            "total_tokens": 23997
+          }
+        },
+        {
+          "instance": "EX-07-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 22417,
+          "raw_usage": {
+            "prompt_tokens": 14304,
+            "completion_tokens": 8113,
+            "total_tokens": 22417
+          },
+          "first_usage": {
+            "prompt_tokens": 14304,
+            "completion_tokens": 8113,
+            "total_tokens": 22417
+          }
+        },
+        {
+          "instance": "EX-08-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 24197,
+          "raw_usage": {
+            "prompt_tokens": 17085,
+            "completion_tokens": 7112,
+            "total_tokens": 24197
+          },
+          "first_usage": {
+            "prompt_tokens": 17085,
+            "completion_tokens": 7112,
+            "total_tokens": 24197
+          }
+        },
+        {
+          "instance": "EX-08-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 20667,
+          "raw_usage": {
+            "prompt_tokens": 15108,
+            "completion_tokens": 5559,
+            "total_tokens": 20667
+          },
+          "first_usage": {
+            "prompt_tokens": 15108,
+            "completion_tokens": 5559,
+            "total_tokens": 20667
+          }
+        },
+        {
+          "instance": "EX-09-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 10898,
+          "raw_usage": {
+            "prompt_tokens": 6546,
+            "completion_tokens": 4352,
+            "total_tokens": 10898
+          },
+          "first_usage": {
+            "prompt_tokens": 6546,
+            "completion_tokens": 4352,
+            "total_tokens": 10898
+          }
+        },
+        {
+          "instance": "EX-09-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 12494,
+          "raw_usage": {
+            "prompt_tokens": 6719,
+            "completion_tokens": 5775,
+            "total_tokens": 12494
+          },
+          "first_usage": {
+            "prompt_tokens": 6719,
+            "completion_tokens": 5775,
+            "total_tokens": 12494
+          }
+        },
+        {
+          "instance": "EX-10-A",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 18717,
+          "raw_usage": {
+            "prompt_tokens": 12006,
+            "completion_tokens": 6711,
+            "total_tokens": 18717
+          },
+          "first_usage": {
+            "prompt_tokens": 5616,
+            "completion_tokens": 3159,
+            "total_tokens": 8775
+          }
+        },
+        {
+          "instance": "EX-10-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 19046,
+          "raw_usage": {
+            "prompt_tokens": 11414,
+            "completion_tokens": 7632,
+            "total_tokens": 19046
+          },
+          "first_usage": {
+            "prompt_tokens": 5456,
+            "completion_tokens": 3857,
+            "total_tokens": 9313
+          }
+        },
+        {
+          "instance": "GR-01-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 15574,
+          "raw_usage": {
+            "prompt_tokens": 8555,
+            "completion_tokens": 7019,
+            "total_tokens": 15574
+          },
+          "first_usage": {
+            "prompt_tokens": 8555,
+            "completion_tokens": 7019,
+            "total_tokens": 15574
+          }
+        },
+        {
+          "instance": "GR-01-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 16705,
+          "raw_usage": {
+            "prompt_tokens": 8316,
+            "completion_tokens": 8389,
+            "total_tokens": 16705
+          },
+          "first_usage": {
+            "prompt_tokens": 8316,
+            "completion_tokens": 8389,
+            "total_tokens": 16705
+          }
+        },
+        {
+          "instance": "GR-02-A",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 32625,
+          "raw_usage": {
+            "prompt_tokens": 18493,
+            "completion_tokens": 14132,
+            "total_tokens": 32625
+          },
+          "first_usage": {
+            "prompt_tokens": 8580,
+            "completion_tokens": 7840,
+            "total_tokens": 16420
+          }
+        },
+        {
+          "instance": "GR-02-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 17156,
+          "raw_usage": {
+            "prompt_tokens": 10096,
+            "completion_tokens": 7060,
+            "total_tokens": 17156
+          },
+          "first_usage": {
+            "prompt_tokens": 10096,
+            "completion_tokens": 7060,
+            "total_tokens": 17156
+          }
+        },
+        {
+          "instance": "GR-03-A",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 38629,
+          "raw_usage": {
+            "prompt_tokens": 24727,
+            "completion_tokens": 13902,
+            "total_tokens": 38629
+          },
+          "first_usage": {
+            "prompt_tokens": 8067,
+            "completion_tokens": 4651,
+            "total_tokens": 12718
+          }
+        },
+        {
+          "instance": "GR-03-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 15950,
+          "raw_usage": {
+            "prompt_tokens": 9514,
+            "completion_tokens": 6436,
+            "total_tokens": 15950
+          },
+          "first_usage": {
+            "prompt_tokens": 9514,
+            "completion_tokens": 6436,
+            "total_tokens": 15950
+          }
+        },
+        {
+          "instance": "GR-04-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 11851,
+          "raw_usage": {
+            "prompt_tokens": 7297,
+            "completion_tokens": 4554,
+            "total_tokens": 11851
+          },
+          "first_usage": {
+            "prompt_tokens": 7297,
+            "completion_tokens": 4554,
+            "total_tokens": 11851
+          }
+        },
+        {
+          "instance": "GR-04-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 11211,
+          "raw_usage": {
+            "prompt_tokens": 7370,
+            "completion_tokens": 3841,
+            "total_tokens": 11211
+          },
+          "first_usage": {
+            "prompt_tokens": 7370,
+            "completion_tokens": 3841,
+            "total_tokens": 11211
+          }
+        },
+        {
+          "instance": "GR-05-A",
+          "official_first_acceptance": false,
+          "official_final_acceptance": false,
+          "scope": "core_autograd_optimizer",
+          "summary_tokens": 53276,
+          "raw_usage": {
+            "prompt_tokens": 29886,
+            "completion_tokens": 23390,
+            "total_tokens": 53276
+          },
+          "first_usage": {
+            "prompt_tokens": 7905,
+            "completion_tokens": 4515,
+            "total_tokens": 12420
+          }
+        },
+        {
+          "instance": "GR-05-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": false,
+          "scope": "core_autograd_optimizer",
+          "summary_tokens": 49972,
+          "raw_usage": {
+            "prompt_tokens": 28861,
+            "completion_tokens": 21111,
+            "total_tokens": 49972
+          },
+          "first_usage": {
+            "prompt_tokens": 7375,
+            "completion_tokens": 4347,
+            "total_tokens": 11722
+          }
+        },
+        {
+          "instance": "GR-06-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 13750,
+          "raw_usage": {
+            "prompt_tokens": 7170,
+            "completion_tokens": 6580,
+            "total_tokens": 13750
+          },
+          "first_usage": {
+            "prompt_tokens": 7170,
+            "completion_tokens": 6580,
+            "total_tokens": 13750
+          }
+        },
+        {
+          "instance": "GR-06-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 10695,
+          "raw_usage": {
+            "prompt_tokens": 7160,
+            "completion_tokens": 3535,
+            "total_tokens": 10695
+          },
+          "first_usage": {
+            "prompt_tokens": 7160,
+            "completion_tokens": 3535,
+            "total_tokens": 10695
+          }
+        },
+        {
+          "instance": "GR-07-A",
+          "official_first_acceptance": false,
+          "official_final_acceptance": false,
+          "scope": "core_autograd_optimizer",
+          "summary_tokens": 85213,
+          "raw_usage": {
+            "prompt_tokens": 55663,
+            "completion_tokens": 29550,
+            "total_tokens": 85213
+          },
+          "first_usage": {
+            "prompt_tokens": 12946,
+            "completion_tokens": 7755,
+            "total_tokens": 20701
+          }
+        },
+        {
+          "instance": "GR-07-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_autograd_optimizer",
+          "summary_tokens": 21863,
+          "raw_usage": {
+            "prompt_tokens": 15211,
+            "completion_tokens": 6652,
+            "total_tokens": 21863
+          },
+          "first_usage": {
+            "prompt_tokens": 15211,
+            "completion_tokens": 6652,
+            "total_tokens": 21863
+          }
+        },
+        {
+          "instance": "GR-08-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 13136,
+          "raw_usage": {
+            "prompt_tokens": 7640,
+            "completion_tokens": 5496,
+            "total_tokens": 13136
+          },
+          "first_usage": {
+            "prompt_tokens": 7640,
+            "completion_tokens": 5496,
+            "total_tokens": 13136
+          }
+        },
+        {
+          "instance": "GR-08-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 11653,
+          "raw_usage": {
+            "prompt_tokens": 7406,
+            "completion_tokens": 4247,
+            "total_tokens": 11653
+          },
+          "first_usage": {
+            "prompt_tokens": 7406,
+            "completion_tokens": 4247,
+            "total_tokens": 11653
+          }
+        },
+        {
+          "instance": "NU-01-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 14266,
+          "raw_usage": {
+            "prompt_tokens": 7953,
+            "completion_tokens": 6313,
+            "total_tokens": 14266
+          },
+          "first_usage": {
+            "prompt_tokens": 7953,
+            "completion_tokens": 6313,
+            "total_tokens": 14266
+          }
+        },
+        {
+          "instance": "NU-01-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 12589,
+          "raw_usage": {
+            "prompt_tokens": 7833,
+            "completion_tokens": 4756,
+            "total_tokens": 12589
+          },
+          "first_usage": {
+            "prompt_tokens": 7833,
+            "completion_tokens": 4756,
+            "total_tokens": 12589
+          }
+        },
+        {
+          "instance": "NU-02-A",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 26914,
+          "raw_usage": {
+            "prompt_tokens": 16579,
+            "completion_tokens": 10335,
+            "total_tokens": 26914
+          },
+          "first_usage": {
+            "prompt_tokens": 7681,
+            "completion_tokens": 5388,
+            "total_tokens": 13069
+          }
+        },
+        {
+          "instance": "NU-02-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "candidate",
+          "summary_tokens": 16940,
+          "raw_usage": {
+            "prompt_tokens": 9096,
+            "completion_tokens": 7844,
+            "total_tokens": 16940
+          },
+          "first_usage": {
+            "prompt_tokens": 9096,
+            "completion_tokens": 7844,
+            "total_tokens": 16940
+          }
+        },
+        {
+          "instance": "NU-03-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 113974,
+          "raw_usage": {
+            "prompt_tokens": 105636,
+            "completion_tokens": 8338,
+            "total_tokens": 113974
+          },
+          "first_usage": {
+            "prompt_tokens": 105636,
+            "completion_tokens": 8338,
+            "total_tokens": 113974
+          }
+        },
+        {
+          "instance": "NU-03-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 112638,
+          "raw_usage": {
+            "prompt_tokens": 106070,
+            "completion_tokens": 6568,
+            "total_tokens": 112638
+          },
+          "first_usage": {
+            "prompt_tokens": 106070,
+            "completion_tokens": 6568,
+            "total_tokens": 112638
+          }
+        },
+        {
+          "instance": "NU-04-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 10539,
+          "raw_usage": {
+            "prompt_tokens": 6604,
+            "completion_tokens": 3935,
+            "total_tokens": 10539
+          },
+          "first_usage": {
+            "prompt_tokens": 6604,
+            "completion_tokens": 3935,
+            "total_tokens": 10539
+          }
+        },
+        {
+          "instance": "NU-04-B",
+          "official_first_acceptance": false,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 21682,
+          "raw_usage": {
+            "prompt_tokens": 12901,
+            "completion_tokens": 8781,
+            "total_tokens": 21682
+          },
+          "first_usage": {
+            "prompt_tokens": 5732,
+            "completion_tokens": 4837,
+            "total_tokens": 10569
+          }
+        },
+        {
+          "instance": "NU-05-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 94474,
+          "raw_usage": {
+            "prompt_tokens": 86718,
+            "completion_tokens": 7756,
+            "total_tokens": 94474
+          },
+          "first_usage": {
+            "prompt_tokens": 86718,
+            "completion_tokens": 7756,
+            "total_tokens": 94474
+          }
+        },
+        {
+          "instance": "NU-05-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 96140,
+          "raw_usage": {
+            "prompt_tokens": 88038,
+            "completion_tokens": 8102,
+            "total_tokens": 96140
+          },
+          "first_usage": {
+            "prompt_tokens": 88038,
+            "completion_tokens": 8102,
+            "total_tokens": 96140
+          }
+        },
+        {
+          "instance": "NU-06-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 12696,
+          "raw_usage": {
+            "prompt_tokens": 6352,
+            "completion_tokens": 6344,
+            "total_tokens": 12696
+          },
+          "first_usage": {
+            "prompt_tokens": 6352,
+            "completion_tokens": 6344,
+            "total_tokens": 12696
+          }
+        },
+        {
+          "instance": "NU-06-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 9576,
+          "raw_usage": {
+            "prompt_tokens": 6536,
+            "completion_tokens": 3040,
+            "total_tokens": 9576
+          },
+          "first_usage": {
+            "prompt_tokens": 6536,
+            "completion_tokens": 3040,
+            "total_tokens": 9576
+          }
+        },
+        {
+          "instance": "NU-07-A",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 88072,
+          "raw_usage": {
+            "prompt_tokens": 73927,
+            "completion_tokens": 14145,
+            "total_tokens": 88072
+          },
+          "first_usage": {
+            "prompt_tokens": 73927,
+            "completion_tokens": 14145,
+            "total_tokens": 88072
+          }
+        },
+        {
+          "instance": "NU-07-B",
+          "official_first_acceptance": true,
+          "official_final_acceptance": true,
+          "scope": "core_operator",
+          "summary_tokens": 85381,
+          "raw_usage": {
+            "prompt_tokens": 73862,
+            "completion_tokens": 11519,
+            "total_tokens": 85381
+          },
+          "first_usage": {
+            "prompt_tokens": 73862,
+            "completion_tokens": 11519,
+            "total_tokens": 85381
+          }
+        }
+      ],
+      "paired_comparison_with_hier": {
+        "hier_first_only": [
+          "EX-02-B",
+          "EX-06-A",
+          "EX-06-B",
+          "EX-07-A",
+          "EX-10-A",
+          "EX-10-B",
+          "GR-02-A",
+          "GR-03-A",
+          "GR-05-A",
+          "GR-07-A",
+          "NU-02-A",
+          "NU-04-B"
+        ],
+        "baseline_first_only": [
+          "EX-08-A",
+          "EX-08-B",
+          "NU-01-A",
+          "NU-01-B",
+          "NU-03-B",
+          "NU-07-A",
+          "NU-07-B"
+        ]
+      }
+    }
+  },
+  "token_omissions": [
+    {
+      "instance": "EX-06-A",
+      "summary_tokens": 0,
+      "raw_usage": {
+        "prompt_tokens": 17452,
+        "completion_tokens": 3107,
+        "total_tokens": 20559
+      },
+      "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-06-A.json"
+    },
+    {
+      "instance": "EX-06-B",
+      "summary_tokens": 0,
+      "raw_usage": {
+        "prompt_tokens": 17452,
+        "completion_tokens": 2715,
+        "total_tokens": 20167
+      },
+      "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-06-B.json"
+    },
+    {
+      "instance": "EX-07-A",
+      "summary_tokens": 0,
+      "raw_usage": {
+        "prompt_tokens": 12968,
+        "completion_tokens": 1818,
+        "total_tokens": 14786
+      },
+      "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-07-A.json"
+    },
+    {
+      "instance": "EX-07-B",
+      "summary_tokens": 0,
+      "raw_usage": {
+        "prompt_tokens": 12968,
+        "completion_tokens": 1547,
+        "total_tokens": 14515
+      },
+      "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-07-B.json"
+    },
+    {
+      "instance": "EX-08-A",
+      "summary_tokens": 0,
+      "raw_usage": {
+        "prompt_tokens": 35691,
+        "completion_tokens": 7555,
+        "total_tokens": 43246
+      },
+      "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-08-A.json"
+    },
+    {
+      "instance": "EX-08-B",
+      "summary_tokens": 0,
+      "raw_usage": {
+        "prompt_tokens": 35137,
+        "completion_tokens": 6011,
+        "total_tokens": 41148
+      },
+      "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-08-B.json"
+    },
+    {
+      "instance": "GR-05-A",
+      "summary_tokens": 0,
+      "raw_usage": {
+        "prompt_tokens": 16218,
+        "completion_tokens": 3654,
+        "total_tokens": 19872
+      },
+      "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-05-A.json"
+    },
+    {
+      "instance": "GR-05-B",
+      "summary_tokens": 0,
+      "raw_usage": {
+        "prompt_tokens": 36206,
+        "completion_tokens": 4194,
+        "total_tokens": 40400
+      },
+      "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-05-B.json"
+    },
+    {
+      "instance": "NU-03-A",
+      "summary_tokens": 0,
+      "raw_usage": {
+        "prompt_tokens": 11863,
+        "completion_tokens": 940,
+        "total_tokens": 12803
+      },
+      "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-03-A.json"
+    },
+    {
+      "instance": "NU-03-B",
+      "summary_tokens": 0,
+      "raw_usage": {
+        "prompt_tokens": 25003,
+        "completion_tokens": 2811,
+        "total_tokens": 27814
+      },
+      "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-03-B.json"
+    },
+    {
+      "instance": "NU-05-A",
+      "summary_tokens": 0,
+      "raw_usage": {
+        "prompt_tokens": 12443,
+        "completion_tokens": 772,
+        "total_tokens": 13215
+      },
+      "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-05-A.json"
+    },
+    {
+      "instance": "NU-05-B",
+      "summary_tokens": 0,
+      "raw_usage": {
+        "prompt_tokens": 12449,
+        "completion_tokens": 804,
+        "total_tokens": 13253
+      },
+      "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-05-B.json"
+    },
+    {
+      "instance": "NU-07-A",
+      "summary_tokens": 0,
+      "raw_usage": {
+        "prompt_tokens": 59315,
+        "completion_tokens": 15786,
+        "total_tokens": 75101
+      },
+      "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-07-A.json"
+    },
+    {
+      "instance": "NU-07-B",
+      "summary_tokens": 0,
+      "raw_usage": {
+        "prompt_tokens": 33943,
+        "completion_tokens": 7829,
+        "total_tokens": 41772
+      },
+      "raw_report": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-07-B.json"
+    }
+  ],
+  "shared_baseline_first_failures": [
+    "GR-05-B"
+  ],
+  "matchfix_component_usage": {
+    "control_flow": {
+      "prompt_tokens": 9140,
+      "completion_tokens": 2914,
+      "total_tokens": 12054
+    },
+    "data_flow": {
+      "prompt_tokens": 3824736,
+      "completion_tokens": 30259,
+      "total_tokens": 3854995
+    },
+    "io": {
+      "prompt_tokens": 108850,
+      "completion_tokens": 47594,
+      "total_tokens": 156444
+    },
+    "library_equivalence": {
+      "prompt_tokens": 104105,
+      "completion_tokens": 42755,
+      "total_tokens": 146860
+    },
+    "exception_error": {
+      "prompt_tokens": 105638,
+      "completion_tokens": 50347,
+      "total_tokens": 155985
+    },
+    "spec": {
+      "prompt_tokens": 105784,
+      "completion_tokens": 60573,
+      "total_tokens": 166357
+    },
+    "test_repair": {
+      "prompt_tokens": 242727,
+      "completion_tokens": 200539,
+      "total_tokens": 443266
+    },
+    "verdict": {
+      "prompt_tokens": 238372,
+      "completion_tokens": 30808,
+      "total_tokens": 269180
+    }
+  },
+  "source_hashes": {
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-01-A.json": "da3da61627e870e3323a8ed57e79712825ff576d416728bbe143a46df1c5e244",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-01-B.json": "891bc30aed17ed974015c91436330b847728de7933b89cab570e4c01cf5ca40a",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-02-A.json": "1f53a71f70f88bf64e2a8d6fb2510c9e645d4e41faf0fe000d03573085fa3d2c",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-02-B.json": "504d571746b2796011767be47df7a0471923d60abb474fea88e1d9558ec38566",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-03-A.json": "eb8f84aa09bf13cd59b01b9a09dccb9c445dc4c0f3a4fb1b5e5588f03c8a9fc2",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-03-B.json": "ae635bf2cb9c178e485d08270f6d3f1553d9ca8a6694e4570fb99a4c557a3b5d",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-04-A.json": "5f34dd7e4ff78f3ec7940be990ec06b4770b4ea65e6395d6b875d4a731f7903f",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-04-B.json": "4be64741faea42ddb8980fd1f7c1df4bbd91b76c4c6983d8b55e914cddb1e683",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-05-A.json": "c3faf295c00fd487a0f30f7ac0c57ef49555af1bdb7747163c40004a6329c63c",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-05-B.json": "623a24353418a1278183b42c1b5fddb68b94c8b1d1d6286a7153936ddf900f68",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-06-A.json": "fc4dd31f92fb4895b50795e3f01492f77f939d15c6ff485362a624fd2ddccef3",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-06-B.json": "e5e8f41bb4f64f96cd4ebe7165806ecbb998a2bb6bb073a745a6658af7775e06",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-07-A.json": "7d916dba509e037636d8776009bab7fc81f950109e3295c692cd298183db9dd6",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-07-B.json": "85b1d42ed00ac43112d29e19872b23c4e9b15716561d00ab25633cba85b80ec3",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-08-A.json": "7a9bb401704e9fa8c436fd5303bba1f3db3dfad5f5fbf4ad47d5bc4e02482503",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-08-B.json": "7f329ee7521b4648194f6500c42d4b44515e53f709be39b76d37412a6377f2a2",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-09-A.json": "6e949f77b073e49fccbbf6d400466333ad4a6c11281e4a96bb5212d6bec258c8",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-09-B.json": "8c0b6a9fa3af33d7e239a2305e2b29fa3a61dcde5f8537fe0d30e0855cd6ec7e",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-10-A.json": "a8ba849eab6598d758a1efaa75ceb995d8e8dca29c1e73a3517277fbce6fb430",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/EX-10-B.json": "f40855e360865b60aaa0c20651f133df83a6726830b7204a9e6e337f1cf2bb49",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-01-A.json": "4733808af37ce430bc0be97c6a5972d82bb84bab59fb7474068b08061a4b4d28",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-01-B.json": "f771cd2ced1498d0cd9728621311abc4ae9deb5fa51c859b5f94ad77fe3fbd0d",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-02-A.json": "20d885bb8ead9671e534dc5419119a4b357a85c226540b66d38463347fe030a6",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-02-B.json": "73e86737c1f74d29e4680e92239c2abe93902a5a1d85683e985dc394fdc46cfe",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-03-A.json": "e114fc0c189018384cd375e2a8a25b8a1c476dfb384fece476aaed0120a9cf2e",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-03-B.json": "208cbf4f715dd07913a499e6cb28814babe2e0184414b23f2599417b6896dc4b",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-04-A.json": "c8980773cdc92300ccf2db0a3308ec5afe4a092fddbeaffa287851965d38cde8",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-04-B.json": "acc4fa98726b90abe0768ff72faf8b16249fc2f4950c4dc1b22375c14981ec06",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-05-A.json": "44e3f5696f1228536f8d8344c2c1c3d0380f1ccf0dce4a9ee96404dc98d3a5fd",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-05-B.json": "a09740fd630c89deef2986e5c711236fdb2b0040345a5ded068689a217b23401",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-06-A.json": "46b060ec23f5c2e33dd92635a18259689353dda9f3f41e6b9097854e8d5a877e",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-06-B.json": "d1771e35b02e0107971d074d4b69d0abb7e3445adf8aa72c714f4019d6f8a5a5",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-07-A.json": "9b6293e3c2a569d1b4fdf3af66427e11f9edb22e44c539e5901e049e43e8a5ca",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-07-B.json": "c7bebde6909bdae1ab45d81f4d74c44938ac3cd5157816c681b1cc374ba8932c",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-08-A.json": "bb6697415c179a89f23774247053feabbfc23d8c9676c82a6a77d87457f3419d",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/GR-08-B.json": "c8eab16cdb33cee6055cfa12204992b6f8d4599bd85654e85efa30fbab8c237f",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-01-A.json": "6dfc3f262b1d32807ef5eb136721eeb4464333d1149b519b1e90bbf002df825a",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-01-B.json": "c6e9dc28ed1fbf4da2af9f4643813c0d855155563d9de600b5c5160a41595fd1",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-02-A.json": "6a4e0e1c6781ea8628c09476801dee65c15bfecec1675f8d0116f42a9ec29016",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-02-B.json": "e4bae35ad84731a8f6499c7aa8e33dd5517ba48dafaf8b30050ba5f9c65bf0c2",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-03-A.json": "79e1eaad1f138694eec5e6dff9b878f456cefd4ecacc1a84df13bc8baa2e8952",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-03-B.json": "10d40cdd20a55960116e5f9a54d35c788ac5c0933224ead7d7ff61684ff45b34",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-04-A.json": "6affc2d43e655abb510e3bc913c269e19c16948616dd124d704d222175fae4bf",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-04-B.json": "ec0d325aa4bd7ee4a462e8a53b0c2e6af0038eaff9b9b148e593d88ac6285087",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-05-A.json": "fd0112d95cc0cc517ff8035411e1d2891be7b242104658e124d109c0810a1409",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-05-B.json": "ab7951a61a1793f499cc7ba62cc68cfc322a73671a0d48e4c645fbe8dcd4433b",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-06-A.json": "511e87261945377fdf18d2ce3b2dbeaf7b8d2e05b18e78696c063d76c97bf3fc",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-06-B.json": "951f38c366237d538fb3afe461a44ea0bef421344b56a690793e4ce2debecca1",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-07-A.json": "ef0647945d53cb798b46b40b21848d7904cc23003e8c42f71323893958a33498",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-07-B.json": "7eb171d12847d1d88c43f7dafc91ec69d49e3134737b813ea1f592308195c48a",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-01-A__cnn__execution__EX-01__r_swe.json": "92f99a488b02dde107ca8afc7ffb8b74726d1a57aea44fb38cec808960c88b02",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-01-B__image_mlp__execution__EX-01__r_swe.json": "dc4016a6ecf85d44763d436026975d15734ccce452724cc344ef27ea5a513baa",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-02-A__cnn__execution__EX-02__r_swe.json": "54f7fa1dd3e910784dcd1251f2086ee62e485a1104180005833c4085e6460bad",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-02-B__transformer_classifier__execution__EX-02__r_swe.json": "cf711f1fc3ec194ba15e41a90ca08d29584dd53ae352c3d9caa20c9bc5069ef3",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-03-A__cnn__execution__EX-03__r_swe.json": "56cd66f4427cf9594bae699bf3885529c2fcf7f37ca578b6d6dcebf3fc9b12fb",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-03-B__tiny_causal_lm__execution__EX-03__r_swe.json": "9c6f5bea87ba300a80b4d2402c12ac9aa3dc37382b4a8275d46601a76ec53d20",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-04-A__image_mlp__execution__EX-04__r_swe.json": "445eb9d55357d977374b85cdc4133066da4a45be6a28401a97653ae26a29fe07",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-04-B__transformer_classifier__execution__EX-04__r_swe.json": "738d4ba04354f4ce7f627967bbcd87f1a5a18872bbb1d4f8166e402e5aa917cf",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-05-A__image_mlp__execution__EX-05__r_swe.json": "83e566912111712229b7b21c7ab58a71899f4cb7a9712144e5af9725456ca4a1",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-05-B__tiny_causal_lm__execution__EX-05__r_swe.json": "d2f7fae103660ee2b75d85b5e5c921b15c17623c356c0caf6b2bd2fe5caf454f",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-06-A__transformer_classifier__execution__EX-06__r_swe.json": "4746eaaa589f8b0a9e5ee6049f06a5edd630da6887e985f4e50b3613bc81984b",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-06-B__tiny_causal_lm__execution__EX-06__r_swe.json": "9d09c7ad48fe60be1e9349db970222dc33fc3f30c799a72b3dcd0cffc90d73fc",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-07-A__cnn__execution__EX-07__r_swe.json": "0c48861f892ce963fb890885c525dde0c2424797838978767d33ded8d68e1330",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-07-B__image_mlp__execution__EX-07__r_swe.json": "c385e1426be83ea74d3a84a14c5a004bd0ba76b4ed08b018c4aee307b033987b",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-08-A__cnn__execution__EX-08__r_swe.json": "b702526b7f13516444a69c9d0b319ca65ea8338c1b3ecc36d145cfa299cd4b8b",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-08-B__transformer_classifier__execution__EX-08__r_swe.json": "afb6a0ba8f0203b40aefdc62eb8ee77a018458e45e38d14f4749f617a827773a",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-09-A__cnn__execution__EX-09__r_swe.json": "716610e9312f802707969a85aecc0eed173c5f59242734f84ec4b2cec2a34289",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-09-B__tiny_causal_lm__execution__EX-09__r_swe.json": "72b0a77a058f2fb674b115b9ee228ea349f19ce635e2f56a8b589477d57b1417",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-10-A__image_mlp__execution__EX-10__r_swe.json": "2170bb214276c323bb44017548be1a7d75da86f389e3de1bdd6c0808c0d12a6c",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/EX-10-B__transformer_classifier__execution__EX-10__r_swe.json": "6b57d76fa3cc8e4c30dc64e4ff15cc479a23f70d1fac65707b7b00a6aa7311f8",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-01-A__transformer_classifier__gradient_update__GR-01__r_swe.json": "cbd8b5de2108746cb432c9d1473d7aefa4244d0208de38728b1c0c0f9151e568",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-01-B__tiny_causal_lm__gradient_update__GR-01__r_swe.json": "c731dfa256950f863c6faac28457f016f0230716c19dd5d0de31198211b3f515",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-02-A__cnn__gradient_update__GR-02__r_swe.json": "5452d5fa84b5bfb6968a6e1747f3ebcaaa63f621555d1f4ddf53e3651621a7db",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-02-B__image_mlp__gradient_update__GR-02__r_swe.json": "52d457e8d661827d7bdaf34c671a513dc16904ddc98ac19e387dee98e9a09721",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-03-A__cnn__gradient_update__GR-03__r_swe.json": "3deb5bf42c197660de89d42b04be4b9c994ab71d95199309b9633919d958ff1e",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-03-B__transformer_classifier__gradient_update__GR-03__r_swe.json": "58fa6cbc051975039531f80b1c63349e5d6e47a969e1e452d4538dc1557e5808",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-04-A__cnn__gradient_update__GR-04__r_swe.json": "e614ca0a52c172ebbb3968550c71bba35707280287fedaea92667ce92eefe980",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-04-B__tiny_causal_lm__gradient_update__GR-04__r_swe.json": "794a32a19b6bfc01b3dff35f30e8a50a1eb60c6ffae0711dba8c1b4b630da773",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-05-A__image_mlp__gradient_update__GR-05__r_swe.json": "2f757b9299ddaf6bd25460e7ab41bc9fd0ff2aa255921e81d25f105fd8f2d7aa",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-05-B__transformer_classifier__gradient_update__GR-05__r_swe.json": "a16914b20462583a3e2fdd394d0d65395871f1841a1efd4e77ac87f83fc356cc",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-06-A__image_mlp__gradient_update__GR-06__r_swe.json": "b5dcef5694aaf6a3a842e8bd0b34487aa2734b886eef0adf75659beab0ef9eaf",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-06-B__tiny_causal_lm__gradient_update__GR-06__r_swe.json": "99b2d1c97bf4659ba74bb302be11a1a37ad75691a9db633bb9618f1ca07e0b9d",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-07-A__transformer_classifier__gradient_update__GR-07__r_swe.json": "cd9802845baf3aa9525951bad5dcb15559d9487d37c6228fd67719c6900160e0",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-07-B__tiny_causal_lm__gradient_update__GR-07__r_swe.json": "c8f347e1066241a90cb630914d1911362456c22f170a78000a2c4d7b824244af",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-08-A__cnn__gradient_update__GR-08__r_swe.json": "3e18af52cf3b86bcb7679174ac69e37c9fa971c7bae21b2d0bde51ddbe500294",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/GR-08-B__image_mlp__gradient_update__GR-08__r_swe.json": "de19be786ecd1d84075b7f2dba8af572d005d40897586b8429bdf1a52d003a79",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-01-A__image_mlp__numerical__NU-01__r_swe.json": "150652f61f659be9179e64ad87157467d8360e3951eb777d447e959fb79f9b5f",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-01-B__tiny_causal_lm__numerical__NU-01__r_swe.json": "b1c028c3f29f7cceb67d1a4647d1352c74a5f85462a1a79780746c68924db1f2",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-02-A__transformer_classifier__numerical__NU-02__r_swe.json": "0885494a8c698cc9dd6b15b78b5d12552890e4e80633148ad20d025c8e3e0df7",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-02-B__tiny_causal_lm__numerical__NU-02__r_swe.json": "73465e723210c0c31430548b39b325cef1ffc6a63984e87ccf50ae1cac41978a",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-03-A__cnn__numerical__NU-03__r_swe.json": "934548ffb582a1cd0af0b8a718d72e67f589f4f329bd071e83b64cebadb96bd5",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-03-B__image_mlp__numerical__NU-03__r_swe.json": "4c72724f2c539e512f2b28acd57f11a75e04f5226c5b74044c980f5496729e86",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-04-A__cnn__numerical__NU-04__r_swe.json": "11f67f6cb10118631195f55f1f54fb5d34630e6707f998717ff7fb5c8cd11b75",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-04-B__transformer_classifier__numerical__NU-04__r_swe.json": "9e7edf15ed842af5b26787efe572b2bb2a4a19a98deb26dd2ebd61249aa1f183",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-05-A__cnn__numerical__NU-05__r_swe.json": "b0c4b0d81eadb5ed0ad2f1f1d5cb57e27f2911dd559296f5f9983eeee4d82f77",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-05-B__tiny_causal_lm__numerical__NU-05__r_swe.json": "35d0744d897702824fe8a8b39cfeac73f9e32a31bdf7fbed1e3e9465e80fdd15",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-06-A__image_mlp__numerical__NU-06__r_swe.json": "b95e055622f17d5c7f3e52bc50e28dce88678ad8a5d3a0159ef3030dfdf7d186",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-06-B__transformer_classifier__numerical__NU-06__r_swe.json": "5a547e8b0ceea9e8344eb15519788906f4f605002e650781e3fdb736a4c03d78",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-07-A__image_mlp__numerical__NU-07__r_swe.json": "342f6940ac2f37b3117c129c70fcc8570a4c9d6dcc2bff63ccde21964b249c25",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-07-B__tiny_causal_lm__numerical__NU-07__r_swe.json": "eca9d1207e4bc4331f36fa9f00f1ec433f20c6a787d75e5763d3def44819c1ed",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-01-A__cnn__execution__EX-01__r_matchfix.json": "30395d0bb26a9b6dbca08f3c6f72f7ab2f1016e27448ce4c748f9fe09b1e2dcd",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-01-B__image_mlp__execution__EX-01__r_matchfix.json": "6a399bf127254eb789b7305344d9a1508c14434918a2fc5a6c923cd226458da5",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-02-A__cnn__execution__EX-02__r_matchfix.json": "a22bd6fa39c44383cc898019545d08badafbafddd0c46c23fd83e21059830545",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-02-B__transformer_classifier__execution__EX-02__r_matchfix.json": "bbdf7719b7f9e126d1992b0c2198a514ffacb659613101d226f7b427d99eace2",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-03-A__cnn__execution__EX-03__r_matchfix.json": "cf7eb33dcc4d1cf1531ccbf70abbe1011dea0e59116d037a88d4e02d6a9a49d7",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-03-B__tiny_causal_lm__execution__EX-03__r_matchfix.json": "2619106c086fa261dbbdcedfa4fa4432fbf3523fe02f38929b326e425a861dbc",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-04-A__image_mlp__execution__EX-04__r_matchfix.json": "760b2f983b4980d569fa23ff137f5b807e180c6c2df5bc71f89be27cba0480d7",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-04-B__transformer_classifier__execution__EX-04__r_matchfix.json": "191bfaa677115f3feb9fad245978fa976f574cc629a2114e971f6214c0243738",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-05-A__image_mlp__execution__EX-05__r_matchfix.json": "86e459c56c0a0e2c812ec50dbc565e4d5136c43a38a97b1b74ec9de5c5d356ee",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-05-B__tiny_causal_lm__execution__EX-05__r_matchfix.json": "312229b8331df1ba74311fef8faf6d960706cc7a8c514497a102b701ef6d4182",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-06-A__transformer_classifier__execution__EX-06__r_matchfix.json": "20a7091196a0c68cafa4fdb2c9c82ce9b42d535a0099e1055a3bece4d982b124",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-06-B__tiny_causal_lm__execution__EX-06__r_matchfix.json": "a96e0b6b1887bd44fa9dffd01002afdd93521adb0c5eae8ff825668b0a148d50",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-07-A__cnn__execution__EX-07__r_matchfix.json": "053275ba98e3046a2976addf2f0b41bcbd46407d400f7a073d41eac49c3d48bd",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-07-B__image_mlp__execution__EX-07__r_matchfix.json": "26bc52342f13044e4e982762c04c878561ea4bdb8690a1ea3c864652940bf2ed",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-08-A__cnn__execution__EX-08__r_matchfix.json": "426d2af9f1b14c819bf55ab555b9479b2f49c0ac3102fbcc443af6921beefbd5",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-08-B__transformer_classifier__execution__EX-08__r_matchfix.json": "16b1b28aae43a54529dc70a0a666008ed7b85aeb4aad621e6a227ad45caa9e52",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-09-A__cnn__execution__EX-09__r_matchfix.json": "78307bc48b9ad1075755d155ff9cef5b764d4281694a92d50efc7101698fc3b2",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-09-B__tiny_causal_lm__execution__EX-09__r_matchfix.json": "401040d49d42a2f497a80f09630a0c5889c986060bedec223c4763211685ba12",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-10-A__image_mlp__execution__EX-10__r_matchfix.json": "db1d22c6d0c8bd676f45f6374a0d332c1424a4ee3a3d046bdabdb8849cfd07ce",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/EX-10-B__transformer_classifier__execution__EX-10__r_matchfix.json": "d324008215dbffe88bbfd1960140cf362c7b8cbe049e0db51d31b79c8a323726",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-01-A__transformer_classifier__gradient_update__GR-01__r_matchfix.json": "4997808cee68538ef655eef5d0e82be5f5d134b96abcc8c91974c9096166c480",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-01-B__tiny_causal_lm__gradient_update__GR-01__r_matchfix.json": "a675b1058571e52b7b0493efba07a87b14f44078ef2929d10abd63ef5fef4c2f",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-02-A__cnn__gradient_update__GR-02__r_matchfix.json": "d1bb090ae356ee3fc54cf718ddd7938788c5299fd16c9f9bda41df350b3b6ac4",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-02-B__image_mlp__gradient_update__GR-02__r_matchfix.json": "c0e70091a769f3cfbf38a75b0fc58b1b4632bfd4a188384a531b42c4b1f2a7a5",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-03-A__cnn__gradient_update__GR-03__r_matchfix.json": "319358e40bc309e60a323b10402a07f27716d401aaf236f7bd6d408774527a06",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-03-B__transformer_classifier__gradient_update__GR-03__r_matchfix.json": "de8d6980a3df2f8ab7ae21510b40a3e20f914408b235f0a35cd0154f4c00e74e",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-04-A__cnn__gradient_update__GR-04__r_matchfix.json": "4f8b34509d8f77ad4f491825d216cf6c981262a80966023867708618e926bb3b",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-04-B__tiny_causal_lm__gradient_update__GR-04__r_matchfix.json": "2d975a09a2c5e71ce79b2873ade9f5b148099dbd530aeeea7021e340e6af4881",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-05-A__image_mlp__gradient_update__GR-05__r_matchfix.json": "8395fb5e6b32128f5103acdf03e331c36073aece3cf90ae66f815f51e0fd3bb1",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-05-B__transformer_classifier__gradient_update__GR-05__r_matchfix.json": "6e612a19507f65663627f807af60c7da110fd94d5c38d655441acd4d965dd9df",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-06-A__image_mlp__gradient_update__GR-06__r_matchfix.json": "6d740b5d104ae93f741eae0fbacff8db77d722a6c71dae93a64914395809d273",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-06-B__tiny_causal_lm__gradient_update__GR-06__r_matchfix.json": "5087715f256715346de65092134b49ba2fa89bc01327c2857605e88f821b9413",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-07-A__transformer_classifier__gradient_update__GR-07__r_matchfix.json": "09c2919f984c7ec32fdb76e2266b9f52a74a94495a28e75643e689169654d760",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-07-B__tiny_causal_lm__gradient_update__GR-07__r_matchfix.json": "1a4ca7f6faca132d90906553ef8fd0f2dd7d13fbd3f27ae5227e808ae7d1de92",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-08-A__cnn__gradient_update__GR-08__r_matchfix.json": "f7c86aea107c98354396f795152c6aae1aa117e3733df20ad4b17474180ed72b",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/GR-08-B__image_mlp__gradient_update__GR-08__r_matchfix.json": "64a222796cae9a75050ffe258e2a12d71d980d65e1a2b4e2615e5d3be42cfe44",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-01-A__image_mlp__numerical__NU-01__r_matchfix.json": "6b611f759a40b5a2816747c0ed641fe2f0078c4b0c5f0ea8c7cf65d37b6a4f5a",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-01-B__tiny_causal_lm__numerical__NU-01__r_matchfix.json": "cf28efcd1e59a93b429899504c9cced0471ccf48a4cbd87d8296f47eb4b60bd0",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-02-A__transformer_classifier__numerical__NU-02__r_matchfix.json": "094cd5c5e57b30bfc3c8a90d8883e7417b0675bd7dabdeed199df946eecd29a8",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-02-B__tiny_causal_lm__numerical__NU-02__r_matchfix.json": "3f5ff302aa364b9c7d98db215f78e85a6b4e7b41f3ef3565dbb05c5e43067f80",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-03-A__cnn__numerical__NU-03__r_matchfix.json": "16ce4e865ab33d3d89481fbc79d9e7cbea5585badd52209a7cabe04fe234f0b7",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-03-B__image_mlp__numerical__NU-03__r_matchfix.json": "994cef7e1c7b8e8293b5a7de0a94b2e4800fcd96ea15d624f8a04a3b29c0b9be",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-04-A__cnn__numerical__NU-04__r_matchfix.json": "35f27a89fb6f47ae95d6e1749835ea9c41e54c2139ff6e35c88db77d45e7561a",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-04-B__transformer_classifier__numerical__NU-04__r_matchfix.json": "df7cd1b8428ee3c26b7b822b5f6ffe773a66935759b3eb240bac4124b6901a8c",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-05-A__cnn__numerical__NU-05__r_matchfix.json": "b2e07aff7ae3d64f1da2792d95b12f209df952a176718df11a2a722c1edb5aaf",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-05-B__tiny_causal_lm__numerical__NU-05__r_matchfix.json": "d75a63b38c9015d9f90aabc4175fbdde19c87692460841507ed185627c81288f",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-06-A__image_mlp__numerical__NU-06__r_matchfix.json": "7d009499d5fab18197682667629aa34ca054d3ca3e5d0703130616f5cb71d598",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-06-B__transformer_classifier__numerical__NU-06__r_matchfix.json": "53a94c96e969468f5281fffe3da62b5352f65c54415f16a3a9934718be077b5b",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-07-A__image_mlp__numerical__NU-07__r_matchfix.json": "01632281f0d45a03f733f2787dc14cf6c9fa496973ae34b0605b5acdeb388174",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-07-B__tiny_causal_lm__numerical__NU-07__r_matchfix.json": "1fc98d05326dd3b754804d7cf11403ab4b4204a19cab2942be602353e5120ed6",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/instances.csv": "1446a91cabe8b3feb5fb9c2caa0e2b7ab7786bfab124d53293f26976333b23b7",
+    "ascend-torch4ms/experiments/baselines/full_hier_fixed50/summary.csv": "db4dd52fa1892ee53ec377ff3c5907779611689692d59b75e9c3c01f0f2ddd0e",
+    "data/paper_figures/fixed50_original_summary.csv": "db4dd52fa1892ee53ec377ff3c5907779611689692d59b75e9c3c01f0f2ddd0e",
+    "ascend-torch4ms/autofix/examples/run_external_repair_pilot.py": "bd1b6985b29459784cd025150f66b8729907b7a14cc9fcfd098fa2442ffc6d77",
+    "ascend-torch4ms/experiments/paper_section_65_66/summarize_track_b_fixed50.py": "5b3f9f319460c764530f0b0cd9fae047b8e4d58e28a31eb5806fea16bf7b0be0"
+  }
+}

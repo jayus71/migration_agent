@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "data/experiments/05_experiment_E_track_a_rerun/final"
 OUTPUT = ROOT / "figures/TABLE_mindspore_translation_rows.tex"
 METHODS = {"T-DIRECT": "Direct LLM", "T-CTE": "CodeTransEngine",
-           "T-MSA": "MSAdapter", "T-HIER": "MARS"}
+           "T-MSA": "MSAdapter", "T-HIER": "LaDiM"}
 
 
 def read_results(source=SOURCE):

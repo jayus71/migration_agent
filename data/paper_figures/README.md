@@ -4,9 +4,9 @@ These CSV files are byte-for-byte copies of original experiment summaries. They
 make the figure scripts runnable from this repository without the ignored local
 `ascend-torch4ms` checkout. No result values or validation decisions were changed.
 
-The manuscript now names the method MARS (Multi-Agent Repair System). Its
+The manuscript now names the method LaDiM (Layered Diagnosis for Multi-Agent Code Migration). Its
 archived identifiers remain `r_hier`, `c_hier`, and `T-HIER`; earlier drafts
-called the same method LADDER. Only presentation labels are renamed.
+called the same method MARS and LADDER. Only presentation labels are renamed.
 
 | Snapshot | Original path in the experiment repository | SHA-256 |
 | --- | --- | --- |
@@ -42,36 +42,63 @@ passes training verification on three seeds. This is separate from the Fixed50
 fault-specific acceptance criterion.
 
 Run `python figures/make_jax_table.py` to regenerate `figures/TABLE_jax_rows.tex`,
-which the manuscript includes in the JAX repair table. All numeric
+which `make_results_tables.py` embeds in `TABLE_main_rows.tex` for the JAX panel
+of the main repair table. Regenerate both files after a table-generator change. All numeric
 cells come from the snapshot. The repair-location mapping follows
 `autofix/faults/injection.py::_prepare_torchax_compat`, which accepts only
 candidate-program faults. Adapter operator, autodiff/optimizer, Transformer,
-and language-model categories have no JAX instances. The JAX table omits those
-columns and states the common candidate-program scope in the table note.
+and language-model categories have no JAX instances. The main table reports acceptance and cost, with the common candidate-program scope stated in the JAX panel note.
 
 The Track C README and each method's `summary.json` record different budgets.
-MARS allows up to three rounds; Direct LLM and each converter run once. All
+LaDiM allows up to three rounds; Direct LLM and each converter run once. All
 accepted results finish in round one. The CSV's `repair_at_4` field is computed
 from the successful round index; it does not record a shared four-attempt run.
-The table reports accepted counts by fault stage and overall. Its note states
-the budgets and that all accepted repairs finish in the first round.
+The table reports accepted counts, first-attempt acceptance, tokens per accepted repair,
+and seconds per accepted repair. Its note states the budgets and that all accepted
+repairs finish in the first round.
 
-Token cost includes all attempted instances. MARS uses 17,543 / 6 = 2,923.8
+Token cost includes all attempted instances. LaDiM uses 17,543 / 6 = 2,923.8
 tokens per accepted repair (2.9K when rounded); Direct LLM uses 74,841 / 5 =
 14,968.2 (15.0K). Ivy and torch2jax use no LLM tokens and accept no repairs, so
-their cost per accepted repair is undefined. The table omits the cost column;
-it does not substitute zero for this undefined ratio.
+their cost per accepted repair is undefined. The table marks both token and time cost per accepted repair as `n/a` for these
+methods. Elapsed time sums the tracked instance rows: 478.842334 seconds for
+LaDiM and 885.591825 for Direct LLM, giving 79.8 and 177.1 seconds per accepted
+repair, respectively. Failed attempts contribute to both totals.
+
+## Main results and feedback ablations
+
+`figures/make_results_tables.py` generates `TABLE_main_rows.tex` from the original
+Fixed50 summary, `TABLE_signal_rows.tex` from the separate 12-task signal study,
+and `TABLE_feedback_rows.tex` from the tracked Experiment J summary under
+`data/experiments/10_experiment_J_feedback_ablation/formal_run_2d6bd3d/`.
+The three inputs retain their own acceptance criteria, budgets, and denominators.
+
+Experiment J uses temperature 0 and paired-threshold acceptance. The archived
+summary uses the initial evaluation for execution-only, pass/fail, stage-label,
+and flat feedback, and the third confirmation run for LaDiM and reverse
+presentation. The main ablation table reports accepted repairs, first-attempt acceptance,
+tokens per accepted repair, and seconds per accepted repair for LaDiM and four
+reduced-feedback variants. The paper identifies the LaDiM result as its third run
+and gives all three order comparisons in the appendix (44/49, 47/46, and 48/48,
+each out of 50).
+Reverse presentation preserves diagnosis and routing. The component table leaves
+unmeasured guidance, repair-history, and rollback controls as `--`.
+
+The original Fixed50 feedback table and fault/model/location breakdown remain in
+the appendix. Figure 3 continues to use the original Fixed50 data for all curves.
+See [metric definitions and evidence gaps](../../docs/metrics-and-ablation-revision.md)
+for the source papers, metric choices, and proposed subset design.
 
 ## MindSpore translation rows
 
 This comparison is excluded from the current manuscript. Its archived data and
 generator remain available here. It is separate from the translator documentation
-ablation retained in Table III(b).
+ablation retained in Appendix A.
 
 `figures/make_mindspore_translation_table.py` reads the current `source_summary`
 paths in `data/experiments/05_experiment_E_track_a_rerun/final/run_manifest.json`.
 It generates `figures/TABLE_mindspore_translation_rows.tex` from the 15 measured
-task--seed rows for each of Direct LLM, CodeTransEngine, MSAdapter, and MARS.
+task--seed rows for each of Direct LLM, CodeTransEngine, MSAdapter, and LaDiM.
 It checks the task grid, matching source-program hashes, recorded revisions,
 and measured training and acceptance flags. Historical summaries outside those
 indexed paths are not used. See Experiment E's `README.md` for source precedence.
@@ -79,10 +106,28 @@ indexed paths are not used. See Experiment E's `README.md` for source precedence
 This panel measures complete translation on five source tasks and three seeds.
 It is separate from the original 50-instance repair pool. Training completion
 requires gradients and parameter updates; acceptance additionally requires
-paired numerical agreement. MARS permits four repair rounds after translation,
+paired numerical agreement. LaDiM permits four repair rounds after translation,
 but its initial translations pass without invoking repair. The other methods
 translate once; MSAdapter uses one candidate per task. X2MindSpore remains
 unmeasured in this snapshot and is excluded from rate comparisons.
+
+## Framework documentation studies
+
+Appendix A retains both documentation panels from the original manuscript. The
+repair panel uses the separate 24-task study in
+`ascend-torch4ms/experiments/paper_section_63_64/results_section641_multiscope_v1/`.
+It varies feedback and the repair guide across four conditions, each with a
+four-attempt budget. Execution-only pass/fail feedback does not invoke repair
+for numerical or gradient faults that complete execution. These conditions use
+their own task configuration and feedback implementation, separate from Fixed50.
+
+The translation panel uses
+`ascend-torch4ms/experiments/paper_section_63_64/results_section642_translator_guide_ablation_v4/`.
+It evaluates five held-out tasks with three repeats per documentation condition,
+one translator call per run, and repair disabled. Training completion requires a
+non-empty gradient and a non-zero parameter update; it does not measure paired
+numerical agreement. See `docs/paper-revision-plan-and-data.md` for the original
+source index. Moving these results to the appendix does not change any values.
 
 ## Other inputs
 

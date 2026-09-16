@@ -23,10 +23,10 @@ class JaxTableTests(unittest.TestCase):
         rows = [line.removesuffix(r" \\").split(" & ")
                 for line in rendered.splitlines() if " & " in line]
         expected = [
-            ["Direct LLM", "2/2", "1/2", "2/2", "5/6"],
-            ["Ivy", "0/2", "0/2", "0/2", "0/6"],
-            [r"\texttt{torch2jax}", "0/2", "0/2", "0/2", "0/6"],
-            ["MARS", "2/2", "2/2", "2/2", "6/6"],
+            ["Direct LLM", "5/6", r"83.3\%", "15.0K", "177.1"],
+            ["Ivy", "0/6", r"0.0\%", "n/a", "n/a"],
+            [r"\texttt{torch2jax}", "0/6", r"0.0\%", "n/a", "n/a"],
+            ["LaDiM", "6/6", r"100.0\%", "2.9K", "79.8"],
         ]
         self.assertEqual(rows, expected)
 
@@ -50,7 +50,8 @@ class JaxTableTests(unittest.TestCase):
     def test_rejects_invalid_snapshot_rows(self):
         original = table.read_results()
         for field, value in [("model", "transformer"), ("strict_success", ""),
-                             ("repair_attempts", "4"), ("total_tokens", "0")]:
+                             ("repair_attempts", "4"), ("total_tokens", "0"),
+                             ("wall_time_sec", "nan")]:
             with self.subTest(field=field), tempfile.TemporaryDirectory() as directory:
                 changed = copy.deepcopy(original)
                 changed[0][field] = value
@@ -64,21 +65,19 @@ class JaxTableTests(unittest.TestCase):
 
     def test_manuscript_keeps_experiment_pools_separate(self):
         manuscript = (ROOT / "conference_101719.tex").read_text()
-        self.assertIn(r"\input{figures/TABLE_jax_rows.tex}", manuscript)
-        self.assertNotIn(r"\ref{tab:main-results}(a)", manuscript)
-        self.assertNotIn(r"\ref{tab:main-results}(b)", manuscript)
         main_table = manuscript.split(r"\label{tab:main-results}", 1)[1].split(r"\end{table}", 1)[0]
-        self.assertNotIn("TABLE_jax_rows", main_table)
+        self.assertIn("TABLE_main_rows", main_table)
+        generated = (ROOT / "figures/TABLE_main_rows.tex").read_text()
+        self.assertIn(table.build_rows().rstrip(), generated)
         self.assertNotIn("MSAdapter", main_table)
-        framework = manuscript.split(r"\label{tab:framework-results}", 1)[1].split(r"\end{table}", 1)[0]
-        self.assertIn("six instances overall", framework)
-        self.assertIn("up to three repair rounds", framework)
-        self.assertIn(r"Direct LLM, Ivy, and \texttt{torch2jax} run once", framework)
-        self.assertIn("training verification on three seeds", framework)
-        self.assertIn("all accepted repairs finish in the first round", framework)
+        self.assertIn("(a) MindSpore: 50 instances, up to four attempts", main_table)
+        self.assertIn("(b) JAX: six instances", generated)
+        self.assertIn("up to three repair rounds", main_table)
+        self.assertIn(r"Direct LLM, Ivy, and \texttt{torch2jax} run once", main_table)
+        self.assertIn("training verification on three seeds", main_table)
+        self.assertIn("all accepted repairs finish in the first round", generated)
         self.assertNotIn("TABLE_mindspore_translation_rows", manuscript)
-        self.assertNotIn("15 task--seed conditions", framework)
-        self.assertIn("TABLE_jax_rows", framework)
+        self.assertNotIn("15 task--seed conditions", main_table)
         self.assertNotIn("Grad./upd.", manuscript)
         self.assertNotIn("optim.", manuscript)
 

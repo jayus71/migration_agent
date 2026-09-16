@@ -23,7 +23,7 @@ class MindSporeTranslationTableTests(unittest.TestCase):
         self.assertEqual(cells, [["Direct LLM", "13/15", "7/15"],
                                  ["CodeTransEngine", "12/15", "8/15"],
                                  ["MSAdapter", "15/15", "0/15"],
-                                 ["MARS", "15/15", "15/15"]])
+                                 ["LaDiM", "15/15", "15/15"]])
         self.assertNotIn("T-X2MS", results)
 
     def test_generated_file_is_current(self):

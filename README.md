@@ -1,8 +1,8 @@
-# MARS / migration_agent
+# LaDiM / migration_agent
 
 Paper sources and experiment evidence for cross-framework training-code repair.
-MARS stands for Multi-Agent Repair System, the method phrase in the current
-paper title. Earlier drafts used LADDER for the same method.
+LaDiM stands for Layered Diagnosis for Multi-Agent Code Migration, the current
+paper title. Earlier drafts used MARS and LADDER for the same method.
 This checkout supports cloud-based manuscript editing and CPU result analysis.
 The repository and its experiment-data Release are public.
 
@@ -30,6 +30,7 @@ download hosts if the cloud environment restricts networking.
 - [Data layout and provenance](data/README.md)
 - [Experiment requirements](EXPERIMENT_REQUEST_20260820.md)
 - [Manuscript sources](conference_101719.tex)
+- [Result metrics and component ablations](docs/metrics-and-ablation-revision.md)
 
 Selected summaries and analysis tables are included in Git. To inspect all raw
 logs, trajectories, and generated candidates, download the complete snapshot:
@@ -82,16 +83,18 @@ for the template source, build instructions, and current page count.
 .venv/bin/python figures/make_gradient_drift.py
 .venv/bin/python figures/make_repair_comparison.py
 .venv/bin/python figures/make_jax_table.py
+.venv/bin/python figures/make_results_tables.py
 .venv/bin/python figures/update_overview_labels.py
 .venv/bin/python -m unittest discover -s tests
 latexmk -pdf -interaction=nonstopmode -halt-on-error conference_101719.tex
 ```
 
 LaTeX requires `latexmk`, `texlive-latex-extra`, and `texlive-fonts-recommended`
-(Debian/Ubuntu package names). Figure scripts require NumPy,
+(Debian/Ubuntu package names). The overview exporter also requires Inkscape.
+Figure scripts require NumPy,
 pandas, and Matplotlib and export vector PDFs plus 300-dpi PNGs. The manuscript
 uses the original 50-instance fault-check acceptance counts, including 50/50 for
-MARS; these counts do not assert all-step paired-threshold compliance. The
+LaDiM; these counts do not assert all-step paired-threshold compliance. The
 12-task signal ablation and the diagnostic studies use separate measurements.
 See [figure inputs and provenance](data/paper_figures/README.md) for source CSVs,
 checksums, scoring definitions, and links to the archived diagnostic data.
@@ -99,23 +102,29 @@ checksums, scoring definitions, and links to the archived diagnostic data.
 The abstract states cross-framework effectiveness on MindSpore and JAX. The three
 manuscript figures show gradient drift, the repair architecture, and cost with
 cumulative repair acceptance at the recorded 1-, 2-, and 4-attempt budgets.
-The main results table reports the original 50-instance MindSpore repair study.
-A separate table reports JAX fault repair from the original Track C records.
+The main table reports acceptance, first-attempt acceptance, tokens, and elapsed
+time per accepted repair in separate MindSpore (50 instances) and JAX (six
+instances) panels. The component ablation table uses Experiment J and marks
+unmeasured controls with `--`. Original fault/model/location results and feedback
+comparisons remain in Appendix B; the 12-task signal study and all three
+presentation-order comparisons appear in Appendix C.
 The JAX discussion explains the diagnostic interpretation across runtimes.
+The experiment section presents setup, repair effectiveness and efficiency,
+generalization across frameworks, diagnosis analysis, and ablations in that order.
 The complete MindSpore translation comparison is excluded from the manuscript;
-the separate translator documentation ablation remains in Table III(b).
+the separate repair and translator documentation studies appear in Appendix A,
+with a short discussion in the main-text ablation section.
 Table headings use complete
 terms with line breaks where needed.
 Fault signatures,
-localization, and the separate 12-task signal-composition results are described
-in the text. Their plotting scripts and assets remain available in `figures/`
+localization, and signal composition are analyzed in the text. Their plotting scripts and assets remain available in `figures/`
 but are not included in the manuscript. Generated figure assets are tracked;
 the compiled manuscript `conference_101719.pdf` remains local and is ignored by
-Git. The overview retains its existing layout. `update_overview_labels.py`
-updates agent roles, diagnostic labels, and target runtimes from the original
-PNG in `figures_to_be_redrawed/`, using Pillow and Arial Narrow (or DejaVu Sans
-Condensed). The editable PowerPoint and vector overview remain deferred to the
-separate diagram revision.
+Git. The overview retains its existing layout. Its editable source is
+`figures/架构图0914.svg`. `update_overview_labels.py` exports both the vector PDF
+included by LaTeX and the PNG from this SVG through Inkscape. Under WSL it uses
+the installed Windows fonts to preserve the source typography. The PowerPoint
+version remains deferred to the separate diagram revision.
 
 ## Re-running experiments
 
