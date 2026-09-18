@@ -81,9 +81,9 @@ for the template source, build instructions, and current page count.
 
 ```bash
 .venv/bin/python figures/make_gradient_drift.py
+.venv/bin/python scripts/build_maintext_results_bundle.py --recovery output/maintext-ablations-20260918/recovery_final.json
 .venv/bin/python figures/make_repair_comparison.py
-.venv/bin/python figures/make_jax_table.py
-.venv/bin/python figures/make_results_tables.py
+.venv/bin/python figures/make_slim_v4_overview.py
 .venv/bin/python figures/update_overview_labels.py
 .venv/bin/python -m unittest discover -s tests
 latexmk -pdf -interaction=nonstopmode -halt-on-error conference_101719.tex
@@ -93,40 +93,39 @@ LaTeX requires `latexmk`, `texlive-latex-extra`, and `texlive-fonts-recommended`
 (Debian/Ubuntu package names). The overview exporter also requires Inkscape.
 Figure scripts require NumPy,
 pandas, and Matplotlib and export vector PDFs plus 300-dpi PNGs. The manuscript
-uses the original 50-instance fault-check acceptance counts, including 50/50 for
-LaDiM; these counts do not assert all-step paired-threshold compliance. The
-12-task signal ablation and the diagnostic studies use separate measurements.
+uses the autonomous slim-v4 results: 45/50 fault-specific acceptance on Fixed50
+and four repairs among five faulty Natural10 translations. Five initially healthy
+translations remain accepted. The component, 16-instance training-signal, JAX,
+and diagnostic studies retain their respective protocols and scoring definitions.
 See [figure inputs and provenance](data/paper_figures/README.md) for source CSVs,
 checksums, scoring definitions, and links to the archived diagnostic data.
 
 The abstract states cross-framework effectiveness on MindSpore and JAX. The three
 manuscript figures show gradient drift, the repair architecture, and cost with
 cumulative repair acceptance at the recorded 1-, 2-, and 4-attempt budgets.
-The main table reports acceptance, first-attempt acceptance, tokens, and elapsed
-time per accepted repair in separate MindSpore (50 instances) and JAX (six
-instances) panels. The component ablation table uses Experiment J and marks
-unmeasured controls with `--`. Original fault/model/location results and feedback
-comparisons remain in Appendix B; the 12-task signal study and all three
-presentation-order comparisons appear in Appendix C.
-The JAX discussion explains the diagnostic interpretation across runtimes.
-The experiment section presents setup, repair effectiveness and efficiency,
-generalization across frameworks, diagnosis analysis, and ablations in that order.
-The complete MindSpore translation comparison is excluded from the manuscript;
-the separate repair and translator documentation studies appear in Appendix A,
-with a short discussion in the main-text ablation section.
-Table headings use complete
-terms with line breaks where needed.
-Fault signatures,
-localization, and signal composition are analyzed in the text. Their plotting scripts and assets remain available in `figures/`
-but are not included in the manuscript. Generated figure assets are tracked;
+The experiment section contains Main Experiments, Analysis Experiments, and
+Ablation Studies. Analyses cover task overlap, retry recovery, cost, unresolved
+faults, signal detection latency, and generalization across frameworks. The
+component reference and the completed JAX and training-signal studies use
+original v4; their identity is preserved after selecting slim v4. Historical
+guided experiments remain separately labeled in the appendix. Current evidence
+and implementation provenance are indexed in
+`docs/maintext-results-20260918.md` and `docs/frozen-method-v4-20260918.md`.
+Generated figure assets are tracked;
 the compiled manuscript `conference_101719.pdf` remains local and is ignored by
-Git. The overview retains its existing layout. Its editable source is
-`figures/架构图0914.svg`. `update_overview_labels.py` exports both the vector PDF
-included by LaTeX and the PNG from this SVG through Inkscape. Under WSL it uses
-the installed Windows fonts to preserve the source typography. The PowerPoint
-version remains deferred to the separate diagram revision.
+Git. `figures/make_slim_v4_overview.py` generates the current diagram as editable
+PowerPoint shapes and connectors in `hierarchical_feedback_architecture.pptx`
+and as `slim_v4_overview.svg` from one layout. `update_overview_labels.py` exports
+the matching vector PDF and PNG through Inkscape. The earlier overview SVG is
+preserved as a historical asset.
 
 ## Re-running experiments
+
+The September 17-18 code and evidence checkpoint includes the selected
+`output/maintext-results-20260918/` tables and their source summaries. The explicit
+allowlist in `.gitignore` keeps these small evidence files in Git while raw
+archives, runtime snapshots, rendered review pages, and `tmp/` stay local.
+See [checkpoint contents and checks](docs/checkpoint-20260918.md).
 
 Experiment implementations live in the separate
 [ascend-torch4ms repository](https://gitee.com/feixiao13/ascend-torch4ms).

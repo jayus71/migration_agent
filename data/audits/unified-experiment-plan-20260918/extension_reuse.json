@@ -1,0 +1,2138 @@
+{
+  "real_model_calls": 0,
+  "candidate_executions": 0,
+  "freeze_agreement": {
+    "sources": {
+      "old_equal": true,
+      "intertrans_equal": true
+    },
+    "protocol_sha256": {
+      "old_equal": true,
+      "intertrans_equal": false
+    },
+    "interface_sha256": {
+      "old_equal": true,
+      "intertrans_equal": true
+    },
+    "index_sha256": {
+      "old_equal": true,
+      "intertrans_equal": true
+    }
+  },
+  "protocol_text_changes": {
+    "interface": {
+      "direct": "pairing/training_interface.md",
+      "intertrans": "training_interface.txt"
+    },
+    "max_output_tokens": {
+      "direct": null,
+      "intertrans": 131072
+    }
+  },
+  "protocol_compatibility": "Same source, interface bytes, reference index, seeds and acceptance scope; interface path renamed and max_output_tokens made explicit.",
+  "task_count": 18,
+  "conditions": 108,
+  "action_counts": {
+    "reuse_existing": 36,
+    "new_condition_for_current_protocol": 72
+  },
+  "by_method": {
+    "direct_llm": {
+      "reuse_existing": 18
+    },
+    "direct_llm_matchfixagent": {
+      "new_condition_for_current_protocol": 18
+    },
+    "direct_llm_sweagent": {
+      "new_condition_for_current_protocol": 18
+    },
+    "direct_llm_test_repair": {
+      "new_condition_for_current_protocol": 18
+    },
+    "full_method": {
+      "new_condition_for_current_protocol": 18
+    },
+    "intertrans": {
+      "reuse_existing": 18
+    }
+  },
+  "evidence": {
+    "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/freeze.json": "b5619ba67d036d2430cd2f0f1c6ee02039c254025824bb0aeff8bccdada465f2",
+    "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/freeze.json": "b5619ba67d036d2430cd2f0f1c6ee02039c254025824bb0aeff8bccdada465f2",
+    "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_summary.json": "7202b42dc5c72cf38de85fde7040a60741be8275f1c5496bb5b26c8fc1fd686d",
+    "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/freeze.json": "868090dcc9bfb3c60827889e1b80b6dc6a4b380becf87cc26dbb52e1d376c654",
+    "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/paper_results.json": "8692dc42e05a2290a5b953fb7a1ec74e34a74012cfaed6176323ebac53608c81"
+  },
+  "rows": [
+    {
+      "task": "d2l_lenet",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/d2l_lenet/initial/candidate.py",
+      "candidate_sha256": "ca01755813ef654a19ecccd4327146f5a421809ade2566f37be82f528629f2ec",
+      "source_sha256": "26678dbb7fef421a0efde00cbb88b7ded06b69b60e00b087c72bf12d94d1353b",
+      "request_sha256": "ecd9aa89fda66712686c1d13a6735046803e9386fc3ce40909289aa478141a0e",
+      "response_sha256": "2c759e7449111ab47a7ac41b098e9ff1569915f890ee0d2819d9029a1f313ee8",
+      "response_id": "215cae5b-fc9e-411d-8247-4606b25d714f",
+      "usage": {
+        "completion_tokens": 13232,
+        "prompt_tokens": 4573,
+        "total_tokens": 17805,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 11943,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4352
+        },
+        "prompt_cache_hit_tokens": 4352,
+        "prompt_cache_miss_tokens": 221
+      }
+    },
+    {
+      "task": "d2l_lenet",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "SUCCESS",
+        "best_iter": 2,
+        "best_score": 0.04090860561494093,
+        "repair_budget": 4,
+        "repair_attempts": 1
+      },
+      "old_accepted": true,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_lenet/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "ca01755813ef654a19ecccd4327146f5a421809ade2566f37be82f528629f2ec",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_lenet/result.json",
+      "old_result_sha256": "c9875c71a93a4a20af21780feb70ce040d935cc577e05e29ba5b3e44b6420828",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_lenet",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_lenet/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "ca01755813ef654a19ecccd4327146f5a421809ade2566f37be82f528629f2ec",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_lenet/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_lenet",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_lenet/candidate_0.py",
+      "old_initial_sha256": "157d4ec55c09fcf5ae383d8b2f62f88f9d63e82cfe595b9bfd29126e3de4f3ce",
+      "current_initial_sha256": "ca01755813ef654a19ecccd4327146f5a421809ade2566f37be82f528629f2ec",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_lenet/result.json",
+      "old_result_sha256": "87fe283000d0af6c3d8cf97660e56b0e72baa65f506821c5355b44d2b280bdfa",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_lenet",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": true,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_lenet/candidate_0.py",
+      "old_initial_sha256": "157d4ec55c09fcf5ae383d8b2f62f88f9d63e82cfe595b9bfd29126e3de4f3ce",
+      "current_initial_sha256": "ca01755813ef654a19ecccd4327146f5a421809ade2566f37be82f528629f2ec",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_lenet/result.json",
+      "old_result_sha256": "46a6a49a2b3fc946cc7a46ddcd0b2160cf80264227a23e7aa6eba573058048d6",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_lenet",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/d2l_lenet/result.json",
+      "result_sha256": "757cb7cc892ad52f61b217de05cac78ed9a2530888769606903a24b0ebfa5b8d"
+    },
+    {
+      "task": "d2l_linear_regression_djl",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/d2l_linear_regression_djl/initial/candidate.py",
+      "candidate_sha256": "880afc91ce63beb67961ed0bf69d7d8c7d17fc464c56601e7887dfc9910b2cbf",
+      "source_sha256": "7f9cadf224c9a1a39e2c1cf78bd645e86b9b79b0265405e0be87d50664b23ad9",
+      "request_sha256": "c69ef0c9047a3b06482c3de692257628443d7cadea61b0095db8c0cc1f52c0ff",
+      "response_sha256": "51f8440c49a4a0c5696a75890e0bd1575d0d88e6a92491628781a62273133c36",
+      "response_id": "c275f543-e318-4e81-8740-54d2492a8d37",
+      "usage": {
+        "completion_tokens": 20302,
+        "prompt_tokens": 3672,
+        "total_tokens": 23974,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 19319,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3456
+        },
+        "prompt_cache_hit_tokens": 3456,
+        "prompt_cache_miss_tokens": 216
+      }
+    },
+    {
+      "task": "d2l_linear_regression_djl",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "SUCCESS",
+        "best_iter": 3,
+        "best_score": 0.0,
+        "repair_budget": 4,
+        "repair_attempts": 2
+      },
+      "old_accepted": true,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_linear_regression_djl/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "880afc91ce63beb67961ed0bf69d7d8c7d17fc464c56601e7887dfc9910b2cbf",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_linear_regression_djl/result.json",
+      "old_result_sha256": "1911e33a99a7070690dd0ad1efa1defa7a39b7e7ef8fb45156d9d6ecdf63593e",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_linear_regression_djl",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_linear_regression_djl/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "880afc91ce63beb67961ed0bf69d7d8c7d17fc464c56601e7887dfc9910b2cbf",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_linear_regression_djl/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_linear_regression_djl",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_linear_regression_djl/candidate_0.py",
+      "old_initial_sha256": "c5c31a5303359d5eb3a5db8181f448f57b2cd50e2ffb9bc472821c273d289e62",
+      "current_initial_sha256": "880afc91ce63beb67961ed0bf69d7d8c7d17fc464c56601e7887dfc9910b2cbf",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_linear_regression_djl/result.json",
+      "old_result_sha256": "0a1c2d5017825095a0b3075b07652b3b70ae6089cb152b037cf7831509c81ea5",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_linear_regression_djl",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_linear_regression_djl/candidate_0.py",
+      "old_initial_sha256": "c5c31a5303359d5eb3a5db8181f448f57b2cd50e2ffb9bc472821c273d289e62",
+      "current_initial_sha256": "880afc91ce63beb67961ed0bf69d7d8c7d17fc464c56601e7887dfc9910b2cbf",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_linear_regression_djl/result.json",
+      "old_result_sha256": "faa32520b45a2f85c8682423049ffed9688dc7a2e82d2f3709e02117b0e17776",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_linear_regression_djl",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/d2l_linear_regression_djl/result.json",
+      "result_sha256": "6f7e0b9da25f286554535d55c660e9be047fb83ead05255ff2e3f60efc1cf31f"
+    },
+    {
+      "task": "d2l_linear_regression_scratch",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": true,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/d2l_linear_regression_scratch/initial/candidate.py",
+      "candidate_sha256": "d4e486fe205eeeeceb8c7c5795a6d4e8569a60a4aba70ab3423bda95342b962f",
+      "source_sha256": "775f6f3ec96e4c721c6681964f894e051b16e171426546b579badd3c70974da1",
+      "request_sha256": "d6b031592ddc13c714d5e49082c41f9d1241dbde8deb99dd75e335a3c9b226b2",
+      "response_sha256": "361440cb35e50625641b29f6475e9d5199fbb2d63db067dd83a5276d2f0ef75c",
+      "response_id": "6824ddd9-620c-47cf-b3da-4fafadfa5fbf",
+      "usage": {
+        "completion_tokens": 15797,
+        "prompt_tokens": 5077,
+        "total_tokens": 20874,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 14405,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4864
+        },
+        "prompt_cache_hit_tokens": 4864,
+        "prompt_cache_miss_tokens": 213
+      }
+    },
+    {
+      "task": "d2l_linear_regression_scratch",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "SUCCESS",
+        "best_iter": 2,
+        "best_score": 0.0,
+        "repair_budget": 4,
+        "repair_attempts": 1
+      },
+      "old_accepted": true,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_linear_regression_scratch/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "d4e486fe205eeeeceb8c7c5795a6d4e8569a60a4aba70ab3423bda95342b962f",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_linear_regression_scratch/result.json",
+      "old_result_sha256": "19032ff053f509d41d55382111f9f2918165024002237c25d2f73e1582899cdf",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_linear_regression_scratch",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_linear_regression_scratch/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "d4e486fe205eeeeceb8c7c5795a6d4e8569a60a4aba70ab3423bda95342b962f",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_linear_regression_scratch/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_linear_regression_scratch",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": true,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_linear_regression_scratch/candidate_0.py",
+      "old_initial_sha256": "7237576dd74bb2bb0e87c2c3b162d0a6a54e4157fb76bfa6dcc7e1ef1478d29d",
+      "current_initial_sha256": "d4e486fe205eeeeceb8c7c5795a6d4e8569a60a4aba70ab3423bda95342b962f",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_linear_regression_scratch/result.json",
+      "old_result_sha256": "03c5465735333a9eb610a77f68b1a48bda3e931bf3ade9840a50bc229e17ef69",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_linear_regression_scratch",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": true,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_linear_regression_scratch/candidate_0.py",
+      "old_initial_sha256": "7237576dd74bb2bb0e87c2c3b162d0a6a54e4157fb76bfa6dcc7e1ef1478d29d",
+      "current_initial_sha256": "d4e486fe205eeeeceb8c7c5795a6d4e8569a60a4aba70ab3423bda95342b962f",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_linear_regression_scratch/result.json",
+      "old_result_sha256": "1606515fc20aba8bed6deb2bb9f364fc6b8a8a294711a5703d1fc0f76ab5def8",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_linear_regression_scratch",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": true,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/d2l_linear_regression_scratch/result.json",
+      "result_sha256": "acdfeeab18b3b3c71017abd4f01d8547ec2529f25bfd4b4afece3a44dee488de"
+    },
+    {
+      "task": "d2l_mlp_djl",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/d2l_mlp_djl/initial/candidate.py",
+      "candidate_sha256": "e11084a4459cf55659287941a47afd95158123c40e85e774c7751d59c4bcdab1",
+      "source_sha256": "2e4252e8d663244f75d7105b86e4e50074a2688799f2e6c91a8943ab659c5cfb",
+      "request_sha256": "f11e8d8d123d479c9382204bc83dee165f43d74c545aff870a0f538625b8c025",
+      "response_sha256": "da62b7b7bb72c004b79664609c494775ba96af6e4438b16c4a6f0671f55ef08a",
+      "response_id": "356fb8a3-9547-43ad-8891-4c6712298d4b",
+      "usage": {
+        "completion_tokens": 19325,
+        "prompt_tokens": 2355,
+        "total_tokens": 21680,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 17631,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2176
+        },
+        "prompt_cache_hit_tokens": 2176,
+        "prompt_cache_miss_tokens": 179
+      }
+    },
+    {
+      "task": "d2l_mlp_djl",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "SUCCESS",
+        "best_iter": 1,
+        "best_score": 0.0,
+        "repair_budget": 4,
+        "repair_attempts": 0
+      },
+      "old_accepted": true,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_mlp_djl/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "e11084a4459cf55659287941a47afd95158123c40e85e774c7751d59c4bcdab1",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_mlp_djl/result.json",
+      "old_result_sha256": "05bcebdc46d3ab777b8e3d03d66fd4b279664e94aac774321d1a0a72c72800eb",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_mlp_djl",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_mlp_djl/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "e11084a4459cf55659287941a47afd95158123c40e85e774c7751d59c4bcdab1",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_mlp_djl/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_mlp_djl",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_mlp_djl/candidate_0.py",
+      "old_initial_sha256": "29d638faf6c874f5e8f3138511a5294a1a76074c827a15f9c3b5f5d34a9b2bbb",
+      "current_initial_sha256": "e11084a4459cf55659287941a47afd95158123c40e85e774c7751d59c4bcdab1",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_mlp_djl/result.json",
+      "old_result_sha256": "c7026e3aa13fba0f9907b39cd8151ced1dafe954b3383adc7fbf11524d725d1c",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_mlp_djl",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": true,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_mlp_djl/candidate_0.py",
+      "old_initial_sha256": "29d638faf6c874f5e8f3138511a5294a1a76074c827a15f9c3b5f5d34a9b2bbb",
+      "current_initial_sha256": "e11084a4459cf55659287941a47afd95158123c40e85e774c7751d59c4bcdab1",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_mlp_djl/result.json",
+      "old_result_sha256": "b7c416856ca8bc5bd2fd93c291dcda026ef54f76d7f8bb7e0973a06e3c662ed1",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_mlp_djl",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/d2l_mlp_djl/result.json",
+      "result_sha256": "436b5433b912358ca6f562c8325a2392e42f65d9d79048a12dc57c30d2a5a65e"
+    },
+    {
+      "task": "d2l_mlp_scratch",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/d2l_mlp_scratch/initial/candidate.py",
+      "candidate_sha256": "f31cb0400da213ba845b48226bf4d4cb1201d4f6288ecb7e5b0b35b6125e42a4",
+      "source_sha256": "a4339edd49f55335f5c1732cb73b2bcb72bc6a96ad32f4598db01d5406e77780",
+      "request_sha256": "5ebf9a6a94d44110620d151d12fb0c6750a8782b631f4589e5521954e3fa6274",
+      "response_sha256": "e189124a06bfaf40df15a13dee1ecf171cc629743ba0fd1787b44343c1059d35",
+      "response_id": "36e30f53-3872-4f1f-860d-9dbb82eef8b8",
+      "usage": {
+        "completion_tokens": 18670,
+        "prompt_tokens": 3165,
+        "total_tokens": 21835,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 17133,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2944
+        },
+        "prompt_cache_hit_tokens": 2944,
+        "prompt_cache_miss_tokens": 221
+      }
+    },
+    {
+      "task": "d2l_mlp_scratch",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "STOP_PROVIDER_FAILURE",
+        "best_iter": 1,
+        "best_score": 1050.0,
+        "repair_budget": 4,
+        "repair_attempts": 1
+      },
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_mlp_scratch/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "f31cb0400da213ba845b48226bf4d4cb1201d4f6288ecb7e5b0b35b6125e42a4",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_mlp_scratch/result.json",
+      "old_result_sha256": "07339082215b80923abac7dc4e5a02c8645fe13bb60d3aaa92bf559ac3c17b35",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_mlp_scratch",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_mlp_scratch/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "f31cb0400da213ba845b48226bf4d4cb1201d4f6288ecb7e5b0b35b6125e42a4",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_mlp_scratch/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_mlp_scratch",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_mlp_scratch/candidate_0.py",
+      "old_initial_sha256": "0b9c426d474e01ecec179e6c9316a86c338f2bdfad55a2c1eee38f117447e134",
+      "current_initial_sha256": "f31cb0400da213ba845b48226bf4d4cb1201d4f6288ecb7e5b0b35b6125e42a4",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_mlp_scratch/result.json",
+      "old_result_sha256": "aac3b3f7b0c51edd0c0e1421e4f5c5b83eabae32c413c76756332f19c6c66e9f",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_mlp_scratch",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_mlp_scratch/candidate_0.py",
+      "old_initial_sha256": "0b9c426d474e01ecec179e6c9316a86c338f2bdfad55a2c1eee38f117447e134",
+      "current_initial_sha256": "f31cb0400da213ba845b48226bf4d4cb1201d4f6288ecb7e5b0b35b6125e42a4",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_mlp_scratch/result.json",
+      "old_result_sha256": "918168cfd9cf01eb538edd49041f209cac3240ded7f25d6d34c77c5851d986ea",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_mlp_scratch",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/d2l_mlp_scratch/result.json",
+      "result_sha256": "d400f55c0025172889cac62c7242b5782e20effe06a3f9d7955c37d9cab5fdef"
+    },
+    {
+      "task": "d2l_rnn_concise",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/d2l_rnn_concise/initial/candidate.py",
+      "candidate_sha256": "eb86ff246739c387617a70eccc971e4393b8b2c9e02efc167d47477bcd92f4a2",
+      "source_sha256": "4c04168e18b85cd05b7a7b9ba63658ccf40f811069b1b784afa9d4e792ab1668",
+      "request_sha256": "26f6e998723c2696279b1b3d4e9b05389a07629f204a3909ec52493351dcdc5f",
+      "response_sha256": "70a82a89d8d8b0c5ebfefe63a54e23a88ff90165d107bed2138e31aecee0d2a6",
+      "response_id": "d3ba2e3e-718e-4d65-b76c-cd7990229284",
+      "usage": {
+        "completion_tokens": 19138,
+        "prompt_tokens": 6412,
+        "total_tokens": 25550,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 16720,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 6272
+        },
+        "prompt_cache_hit_tokens": 6272,
+        "prompt_cache_miss_tokens": 140
+      }
+    },
+    {
+      "task": "d2l_rnn_concise",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "STOP_PROVIDER_FAILURE",
+        "best_iter": 1,
+        "best_score": 146810.28669384413,
+        "repair_budget": 4,
+        "repair_attempts": 1
+      },
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_rnn_concise/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "eb86ff246739c387617a70eccc971e4393b8b2c9e02efc167d47477bcd92f4a2",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_rnn_concise/result.json",
+      "old_result_sha256": "7606fe3db4829616693f72bb5cbd4d8b85df1628d1981350f59656b19aa2dfb1",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_rnn_concise",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_rnn_concise/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "eb86ff246739c387617a70eccc971e4393b8b2c9e02efc167d47477bcd92f4a2",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_rnn_concise/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_rnn_concise",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_rnn_concise/candidate_0.py",
+      "old_initial_sha256": "aedc8d28a6e33ef1807c58bf6e8bb1e43b4ba372b0347f1dadb82195fe612b4b",
+      "current_initial_sha256": "eb86ff246739c387617a70eccc971e4393b8b2c9e02efc167d47477bcd92f4a2",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_rnn_concise/result.json",
+      "old_result_sha256": "7cd975353b03fb6a4d8cb243fc1d5f08fff6d571f67f7fe58710d780a8985e42",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_rnn_concise",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": true,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_rnn_concise/candidate_0.py",
+      "old_initial_sha256": "aedc8d28a6e33ef1807c58bf6e8bb1e43b4ba372b0347f1dadb82195fe612b4b",
+      "current_initial_sha256": "eb86ff246739c387617a70eccc971e4393b8b2c9e02efc167d47477bcd92f4a2",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_rnn_concise/result.json",
+      "old_result_sha256": "85ba77e9eb66a65772e857f2e8bb3deac69262bb32b56aecde05393c60576cd6",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_rnn_concise",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/d2l_rnn_concise/result.json",
+      "result_sha256": "e847f349f79acb4f8de74be515578d70706c0174e9dbfb5380d9113468af4a6b"
+    },
+    {
+      "task": "d2l_softmax_regression_djl",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/d2l_softmax_regression_djl/initial/candidate.py",
+      "candidate_sha256": "e7c57c5c96693535bac4ef49480b2ef8d68597d85f6025fb76f19e3f1b64c98b",
+      "source_sha256": "c0dc2f5f780142e8f0faec7c5dd4cf1405522424cf72117f7e9d26383b021a51",
+      "request_sha256": "7a8d13da81b56e39c0c9730c30f3fef2df1a2fe1d6ce27e58c57deec19aacf19",
+      "response_sha256": "443fffa99f6f309f468dd7353cdb8821b5d9c9e31c3a1c13092cdf687860240e",
+      "response_id": "1003fd72-0670-4e98-b8cb-e92a8208bc5d",
+      "usage": {
+        "completion_tokens": 16395,
+        "prompt_tokens": 2982,
+        "total_tokens": 19377,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 15345,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2816
+        },
+        "prompt_cache_hit_tokens": 2816,
+        "prompt_cache_miss_tokens": 166
+      }
+    },
+    {
+      "task": "d2l_softmax_regression_djl",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "SUCCESS",
+        "best_iter": 1,
+        "best_score": 0.016356135560775142,
+        "repair_budget": 4,
+        "repair_attempts": 0
+      },
+      "old_accepted": true,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_softmax_regression_djl/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "e7c57c5c96693535bac4ef49480b2ef8d68597d85f6025fb76f19e3f1b64c98b",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_softmax_regression_djl/result.json",
+      "old_result_sha256": "e970586f2e64521ada99fadc213714efc9f69e2bde134452cdf960c8f9e2d841",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_softmax_regression_djl",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_softmax_regression_djl/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "e7c57c5c96693535bac4ef49480b2ef8d68597d85f6025fb76f19e3f1b64c98b",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_softmax_regression_djl/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_softmax_regression_djl",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": true,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_softmax_regression_djl/candidate_0.py",
+      "old_initial_sha256": "d74f092b75ae7bc2d7cadd9ca5aa7eea16aad2ca43577bee7d64b4f8b7b1ee6b",
+      "current_initial_sha256": "e7c57c5c96693535bac4ef49480b2ef8d68597d85f6025fb76f19e3f1b64c98b",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_softmax_regression_djl/result.json",
+      "old_result_sha256": "f56d323952649bcd0b9a54645f574e2cd8ed4f6d9e86bb4685c7b02119a2b9f0",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_softmax_regression_djl",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": true,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_softmax_regression_djl/candidate_0.py",
+      "old_initial_sha256": "d74f092b75ae7bc2d7cadd9ca5aa7eea16aad2ca43577bee7d64b4f8b7b1ee6b",
+      "current_initial_sha256": "e7c57c5c96693535bac4ef49480b2ef8d68597d85f6025fb76f19e3f1b64c98b",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_softmax_regression_djl/result.json",
+      "old_result_sha256": "f7591abe2168bd41bbca671cdba3a08ecb69152dbd74b52becaf58eef5bef6d9",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_softmax_regression_djl",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/d2l_softmax_regression_djl/result.json",
+      "result_sha256": "9af086aa4ce94b765e751c7525324e5d02984789320c6c7cebd42b27e29ea75b"
+    },
+    {
+      "task": "d2l_softmax_regression_scratch",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/d2l_softmax_regression_scratch/initial/candidate.py",
+      "candidate_sha256": "4e9fd5443d9069d00e47989283b100f4b172bcdd26f80f044ee09ae6747f7db4",
+      "source_sha256": "25e0c656788a650c0f93643da524c7250f204158724de77bec4bb40f05eaf27b",
+      "request_sha256": "18a930dd84ce382db0ea3e3ada7b58a2159e0959110349bd959bd006a4f4ab6f",
+      "response_sha256": "c8bd72bb7f56efd8d9bfdd8da27e864259bdcdbe479c471890739b75862c603c",
+      "response_id": "6875c851-a329-4031-9382-595469e5fe8f",
+      "usage": {
+        "completion_tokens": 20999,
+        "prompt_tokens": 6383,
+        "total_tokens": 27382,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 19524,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 6144
+        },
+        "prompt_cache_hit_tokens": 6144,
+        "prompt_cache_miss_tokens": 239
+      }
+    },
+    {
+      "task": "d2l_softmax_regression_scratch",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "STOP_PROVIDER_FAILURE",
+        "best_iter": null,
+        "best_score": null,
+        "repair_budget": 4,
+        "repair_attempts": 0
+      },
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_softmax_regression_scratch/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "4e9fd5443d9069d00e47989283b100f4b172bcdd26f80f044ee09ae6747f7db4",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/d2l_softmax_regression_scratch/result.json",
+      "old_result_sha256": "69f7e02130a1c7d12d94b2c55aca73df3128fe6284eb2321d766e645a3a4fc99",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_softmax_regression_scratch",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_softmax_regression_scratch/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "4e9fd5443d9069d00e47989283b100f4b172bcdd26f80f044ee09ae6747f7db4",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/d2l_softmax_regression_scratch/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_softmax_regression_scratch",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_softmax_regression_scratch/candidate_0.py",
+      "old_initial_sha256": "b761e9519e88fed471bd71c776758ba47885aa097625cb61a544446a7e54d258",
+      "current_initial_sha256": "4e9fd5443d9069d00e47989283b100f4b172bcdd26f80f044ee09ae6747f7db4",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/d2l_softmax_regression_scratch/result.json",
+      "old_result_sha256": "9963272778fcf847c278b6c484541b1107f30c0e3fe6a27ee9f9be0b27a514a2",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_softmax_regression_scratch",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": true,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_softmax_regression_scratch/candidate_0.py",
+      "old_initial_sha256": "b761e9519e88fed471bd71c776758ba47885aa097625cb61a544446a7e54d258",
+      "current_initial_sha256": "4e9fd5443d9069d00e47989283b100f4b172bcdd26f80f044ee09ae6747f7db4",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/d2l_softmax_regression_scratch/result.json",
+      "old_result_sha256": "2e7e56704aab57d746e5f6bf17c4b5aabbd053633c7055f25ffdf27914e484cf",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "d2l_softmax_regression_scratch",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/d2l_softmax_regression_scratch/result.json",
+      "result_sha256": "c2c17f0cf575d29d2f61d21a1d6656b21c51c93cba853bf02cb7363ba6962166"
+    },
+    {
+      "task": "djl_train_airfoil_tabnet",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/djl_train_airfoil_tabnet/initial/candidate.py",
+      "candidate_sha256": "21828f4a1624bcc509ac3c452a757b77b9a8456f50b5d933c64c6ee6a4d29324",
+      "source_sha256": "840a54b9509d797942ff1b52fab6314d5fc916b824649a65c1c4f573c2500d9f",
+      "request_sha256": "12022d4fb246ec73d272ebf8f01870fb8bded3b9c7aeeb2738301cf330d4ac5a",
+      "response_sha256": "ec4323e135303d2325553136ed4809dbbe573cbd38492168cbad303adfb850d1",
+      "response_id": "4f69e8b9-ffa9-47f8-b906-88e136b90d2c",
+      "usage": {
+        "completion_tokens": 63877,
+        "prompt_tokens": 12596,
+        "total_tokens": 76473,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 60877,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 12416
+        },
+        "prompt_cache_hit_tokens": 12416,
+        "prompt_cache_miss_tokens": 180
+      }
+    },
+    {
+      "task": "djl_train_airfoil_tabnet",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "STOP_PROVIDER_FAILURE",
+        "best_iter": 1,
+        "best_score": 1050.0,
+        "repair_budget": 4,
+        "repair_attempts": 1
+      },
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_airfoil_tabnet/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "21828f4a1624bcc509ac3c452a757b77b9a8456f50b5d933c64c6ee6a4d29324",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_airfoil_tabnet/result.json",
+      "old_result_sha256": "cbc84b9cb42a4558fb7eb0ff32c0e3fe5cc1b08efefa5bf463cff9d3df83e973",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_airfoil_tabnet",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_airfoil_tabnet/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "21828f4a1624bcc509ac3c452a757b77b9a8456f50b5d933c64c6ee6a4d29324",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_airfoil_tabnet/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_airfoil_tabnet",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_airfoil_tabnet/candidate_0.py",
+      "old_initial_sha256": "09b5cb8e1bd6fd530b6e3226feb1d385f55673ba9d2efe8430d46e9ebcd5b6a4",
+      "current_initial_sha256": "21828f4a1624bcc509ac3c452a757b77b9a8456f50b5d933c64c6ee6a4d29324",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_airfoil_tabnet/result.json",
+      "old_result_sha256": "aac20776f299bee85f53f7a82979aaf2f03b892586eae1fd8876a0650ccc03ee",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_airfoil_tabnet",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_airfoil_tabnet/candidate_0.py",
+      "old_initial_sha256": "09b5cb8e1bd6fd530b6e3226feb1d385f55673ba9d2efe8430d46e9ebcd5b6a4",
+      "current_initial_sha256": "21828f4a1624bcc509ac3c452a757b77b9a8456f50b5d933c64c6ee6a4d29324",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_airfoil_tabnet/result.json",
+      "old_result_sha256": "062e47b5da31daece3a96bd9218a592a34728ea05740f4284f78d3f6f288f282",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_airfoil_tabnet",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/djl_train_airfoil_tabnet/result.json",
+      "result_sha256": "02de54a40df47b2bb8f8a9f48fed2c2f34d47b3ac22b82ed0bfb2024a309de77"
+    },
+    {
+      "task": "djl_train_captcha",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/djl_train_captcha/initial/candidate.py",
+      "candidate_sha256": "63956c66c007ade270f9883d0cf912830df8642cd15c7bda989ab89a7f19fbda",
+      "source_sha256": "4dab9e235d456d9f5aeb50bea5a8cc1eff299309afd54dba3a969a7e76be13cc",
+      "request_sha256": "d39e92d83fcc918be9cbbbaab1875aa5dbdca3a3da7ae0c94ebb3902bc6b1651",
+      "response_sha256": "09138d6265329cbd73982b93d40e54a602ace111f01c7f866d1308935fd30e06",
+      "response_id": "e2dcfca6-69ea-4d54-b2c9-3a48f4faee56",
+      "usage": {
+        "completion_tokens": 30996,
+        "prompt_tokens": 23920,
+        "total_tokens": 54916,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 28792,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 23680
+        },
+        "prompt_cache_hit_tokens": 23680,
+        "prompt_cache_miss_tokens": 240
+      }
+    },
+    {
+      "task": "djl_train_captcha",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "STOP_PROVIDER_FAILURE",
+        "best_iter": null,
+        "best_score": null,
+        "repair_budget": 4,
+        "repair_attempts": 0
+      },
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_captcha/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "63956c66c007ade270f9883d0cf912830df8642cd15c7bda989ab89a7f19fbda",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_captcha/result.json",
+      "old_result_sha256": "8123755b249f20ddc50c658a1a6a3b3c71538caaccfcbde964ff3724d0eccf86",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_captcha",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_captcha/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "63956c66c007ade270f9883d0cf912830df8642cd15c7bda989ab89a7f19fbda",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_captcha/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_captcha",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_captcha/candidate_0.py",
+      "old_initial_sha256": "38774f54268ab799213b63c644bb85be6888206f94f521f94da1c1e3eaf5aafc",
+      "current_initial_sha256": "63956c66c007ade270f9883d0cf912830df8642cd15c7bda989ab89a7f19fbda",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_captcha/result.json",
+      "old_result_sha256": "47ae1071954fea6390cbd78c69b50b69a11136bc7b502bfe6f0e5455df66c6f3",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_captcha",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_captcha/candidate_0.py",
+      "old_initial_sha256": "38774f54268ab799213b63c644bb85be6888206f94f521f94da1c1e3eaf5aafc",
+      "current_initial_sha256": "63956c66c007ade270f9883d0cf912830df8642cd15c7bda989ab89a7f19fbda",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_captcha/result.json",
+      "old_result_sha256": "c6a359dd4e1acfdfc84b3110f8ef58688a50871d622334be3cfe7736b4223bc6",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_captcha",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/djl_train_captcha/result.json",
+      "result_sha256": "bd4e4576374c385d25f29500afa9f95ef268e7d79a8eafaf810c4f0ea561a293"
+    },
+    {
+      "task": "djl_train_mnist_lstm",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/djl_train_mnist_lstm/initial/candidate.py",
+      "candidate_sha256": "b1534bf6e9a09fa0ae13a3294a11ce616655ec9eca97465cbdc6b96b68f25569",
+      "source_sha256": "b944121baf3d75af11b6a87a1b974f711928ef767c7557944cdc3a188244e6c4",
+      "request_sha256": "51c23490a9914bcbc0c6ab1a1d559e857794fbfdd04ad09db6edb37ee84e687f",
+      "response_sha256": "66223dfb3c8caf0338f77e9238863d8492be184c1979052991dcc6e7649f80d7",
+      "response_id": "019ec649-f8b2-4b08-a74a-6567f88d86b7",
+      "usage": {
+        "completion_tokens": 27951,
+        "prompt_tokens": 2586,
+        "total_tokens": 30537,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 26471,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2432
+        },
+        "prompt_cache_hit_tokens": 2432,
+        "prompt_cache_miss_tokens": 154
+      }
+    },
+    {
+      "task": "djl_train_mnist_lstm",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "STOP_PROVIDER_FAILURE",
+        "best_iter": 1,
+        "best_score": 1050.0,
+        "repair_budget": 4,
+        "repair_attempts": 1
+      },
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_mnist_lstm/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "b1534bf6e9a09fa0ae13a3294a11ce616655ec9eca97465cbdc6b96b68f25569",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_mnist_lstm/result.json",
+      "old_result_sha256": "9b9fa7b91476a3b87b077473adf614c3216f8e73428f2e9e5e31760b0fc35be3",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_mnist_lstm",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_mnist_lstm/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "b1534bf6e9a09fa0ae13a3294a11ce616655ec9eca97465cbdc6b96b68f25569",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_mnist_lstm/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_mnist_lstm",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_mnist_lstm/candidate_0.py",
+      "old_initial_sha256": "8d12f18e2717962cad4be6d2dbd06cbab4c0b6d5a72cfe9d3e41f76fb418535e",
+      "current_initial_sha256": "b1534bf6e9a09fa0ae13a3294a11ce616655ec9eca97465cbdc6b96b68f25569",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_mnist_lstm/result.json",
+      "old_result_sha256": "c2e81ccc5fb23a53dd1ec45cd8a26a98174883e093440e5820e04d58070b3f29",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_mnist_lstm",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_mnist_lstm/candidate_0.py",
+      "old_initial_sha256": "8d12f18e2717962cad4be6d2dbd06cbab4c0b6d5a72cfe9d3e41f76fb418535e",
+      "current_initial_sha256": "b1534bf6e9a09fa0ae13a3294a11ce616655ec9eca97465cbdc6b96b68f25569",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_mnist_lstm/result.json",
+      "old_result_sha256": "8947633c3f1b71aa17a7742fc8937609ab69462150d254c9e63d0b73ceaa6bbc",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_mnist_lstm",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/djl_train_mnist_lstm/result.json",
+      "result_sha256": "726027a74b0b959d711dd9dd1891f328d727e1b4d004de2a6754d90038741cbf"
+    },
+    {
+      "task": "djl_train_mnist_mlp",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/djl_train_mnist_mlp/initial/candidate.py",
+      "candidate_sha256": "19c1d351ddd4b2de2f2fea3ffc00a265c3f32b4dbe13b4c1991d978b7e4ada06",
+      "source_sha256": "12b5f3e1592ab7291642e20b44dcc755cffdbb89279db06392e58833e26a3ba4",
+      "request_sha256": "88ad939af13875bed1a9d3d8f68409e1d3d1b7ebf09f34dd2816720f747366ed",
+      "response_sha256": "23b6b7184960d3df6adf3281a3b02a0690f5229a3f96b5b75d6276c9273be765",
+      "response_id": "8d46af36-c5c8-4fa3-a28e-d7852e511a50",
+      "usage": {
+        "completion_tokens": 26417,
+        "prompt_tokens": 2218,
+        "total_tokens": 28635,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 25036,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 2048
+        },
+        "prompt_cache_hit_tokens": 2048,
+        "prompt_cache_miss_tokens": 170
+      }
+    },
+    {
+      "task": "djl_train_mnist_mlp",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "STOP_PROVIDER_FAILURE",
+        "best_iter": 1,
+        "best_score": 1050.0,
+        "repair_budget": 4,
+        "repair_attempts": 1
+      },
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_mnist_mlp/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "19c1d351ddd4b2de2f2fea3ffc00a265c3f32b4dbe13b4c1991d978b7e4ada06",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_mnist_mlp/result.json",
+      "old_result_sha256": "d53b0a28c184190bd45ccad222612bfba2f217bd48b603c214d897afa1d0a10d",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_mnist_mlp",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_mnist_mlp/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "19c1d351ddd4b2de2f2fea3ffc00a265c3f32b4dbe13b4c1991d978b7e4ada06",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_mnist_mlp/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_mnist_mlp",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_mnist_mlp/candidate_0.py",
+      "old_initial_sha256": "f418d08e90b61c1265f42c6fda992b074aef822f04c425185c821ebb60572d92",
+      "current_initial_sha256": "19c1d351ddd4b2de2f2fea3ffc00a265c3f32b4dbe13b4c1991d978b7e4ada06",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_mnist_mlp/result.json",
+      "old_result_sha256": "9a1da7dbd7056fdcea198bf90aaa6900088ea28c52b2e48fcbc910ac025e7fe6",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_mnist_mlp",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_mnist_mlp/candidate_0.py",
+      "old_initial_sha256": "f418d08e90b61c1265f42c6fda992b074aef822f04c425185c821ebb60572d92",
+      "current_initial_sha256": "19c1d351ddd4b2de2f2fea3ffc00a265c3f32b4dbe13b4c1991d978b7e4ada06",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_mnist_mlp/result.json",
+      "old_result_sha256": "5d3c1670c7e5c68fd6e58d287f5fb40ba931a2ec4aa93276bdd8a3b0b3b600c6",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_mnist_mlp",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/djl_train_mnist_mlp/result.json",
+      "result_sha256": "01720ea4091a3633fc77bba4d77e3e7beb314fb779fdb276140b7afb0c7e64be"
+    },
+    {
+      "task": "djl_train_optimizers",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/djl_train_optimizers/initial/candidate.py",
+      "candidate_sha256": "cee8f9fc69ca4266b84e11c8cc3259aae360402c89d0b78313e00723fbd4453a",
+      "source_sha256": "a338e6916ffb52e2bbbfbbaec675e3b5c36c6b44e6e373b65cc4bbcfdb0f098d",
+      "request_sha256": "f9a5c82641e6ca43c4aa5260be9e67b72c009950bb367565b1af3399e8f45cc4",
+      "response_sha256": "cc2537ac6687d99b568f797c84d7929730696c349c1fc5995188ba449ffb39af",
+      "response_id": "3714da20-b233-42d0-93fe-0b33d09eaad2",
+      "usage": {
+        "completion_tokens": 41127,
+        "prompt_tokens": 21228,
+        "total_tokens": 62355,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 38185,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 20992
+        },
+        "prompt_cache_hit_tokens": 20992,
+        "prompt_cache_miss_tokens": 236
+      }
+    },
+    {
+      "task": "djl_train_optimizers",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "STOP_PROVIDER_FAILURE",
+        "best_iter": 1,
+        "best_score": 1050.0,
+        "repair_budget": 4,
+        "repair_attempts": 3
+      },
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_optimizers/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "cee8f9fc69ca4266b84e11c8cc3259aae360402c89d0b78313e00723fbd4453a",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_optimizers/result.json",
+      "old_result_sha256": "40f0eff6882e41f65185191b4cf567bd88c2654efaabdaf71d025436cc4f5a2a",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_optimizers",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_optimizers/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "cee8f9fc69ca4266b84e11c8cc3259aae360402c89d0b78313e00723fbd4453a",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_optimizers/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_optimizers",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_optimizers/candidate_0.py",
+      "old_initial_sha256": "33b9836415810e2de062a2c12f292f028011c6bb86efd6d9f85e787336924c2c",
+      "current_initial_sha256": "cee8f9fc69ca4266b84e11c8cc3259aae360402c89d0b78313e00723fbd4453a",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_optimizers/result.json",
+      "old_result_sha256": "54e87ffcfa47242aad7911db96ede7232dfd3582151ac1b36beccdbc989fc42b",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_optimizers",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_optimizers/candidate_0.py",
+      "old_initial_sha256": "33b9836415810e2de062a2c12f292f028011c6bb86efd6d9f85e787336924c2c",
+      "current_initial_sha256": "cee8f9fc69ca4266b84e11c8cc3259aae360402c89d0b78313e00723fbd4453a",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_optimizers/result.json",
+      "old_result_sha256": "81419112f9dce36ab546963b88c9137591da153a1dfde9905e3be7006dbe441f",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_optimizers",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/djl_train_optimizers/result.json",
+      "result_sha256": "ee6e25dbdc43d97a520dd059aa17646ea5a6c829e27cadfa08dea8062aa9ebc8"
+    },
+    {
+      "task": "djl_train_pikachu",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/djl_train_pikachu/initial/candidate.py",
+      "candidate_sha256": "f1d9cc7a52ffe0e7e1079baa25a6e94c158a74d8403aa2311a785d731d8ee7d4",
+      "source_sha256": "ec127dcec3d98f1533abf80e89b9281af8a4ab87ee614e7366b428a912f6ce7c",
+      "request_sha256": "6650692a46c2064aa1427187939f5be556a601d18ab4482428faf9baafac8398",
+      "response_sha256": "2be075f009a1fdc9527be4f5c1b9f836a6bee2716d927c7275053bb8637907fe",
+      "response_id": "ebb147a5-4abf-4905-958f-b5c5ae169572",
+      "usage": {
+        "completion_tokens": 53529,
+        "prompt_tokens": 8159,
+        "total_tokens": 61688,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 50115,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 7936
+        },
+        "prompt_cache_hit_tokens": 7936,
+        "prompt_cache_miss_tokens": 223
+      }
+    },
+    {
+      "task": "djl_train_pikachu",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "STOP_PROVIDER_FAILURE",
+        "best_iter": 1,
+        "best_score": 15024710.434349656,
+        "repair_budget": 4,
+        "repair_attempts": 2
+      },
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_pikachu/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "f1d9cc7a52ffe0e7e1079baa25a6e94c158a74d8403aa2311a785d731d8ee7d4",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_pikachu/result.json",
+      "old_result_sha256": "1d9f0856fbe64f4ada97baab5b861c2ce06034a0aa1ac80f7bd7071eff0e9e95",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_pikachu",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_pikachu/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "f1d9cc7a52ffe0e7e1079baa25a6e94c158a74d8403aa2311a785d731d8ee7d4",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_pikachu/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_pikachu",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "initial_infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_pikachu/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "f1d9cc7a52ffe0e7e1079baa25a6e94c158a74d8403aa2311a785d731d8ee7d4",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_pikachu/result.json",
+      "old_result_sha256": "931660fbdc98d69c31fdfcf88888e07b861c60435bfd986d1e1157b53b31770b",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_pikachu",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "initial_infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_pikachu/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "f1d9cc7a52ffe0e7e1079baa25a6e94c158a74d8403aa2311a785d731d8ee7d4",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_pikachu/result.json",
+      "old_result_sha256": "931660fbdc98d69c31fdfcf88888e07b861c60435bfd986d1e1157b53b31770b",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_pikachu",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/djl_train_pikachu/result.json",
+      "result_sha256": "32fd80bf76db88226c000d663b9738d44a29fcb68e0c37ee35eb551cbed5cc35"
+    },
+    {
+      "task": "djl_train_resnet_cifar10",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/djl_train_resnet_cifar10/initial/candidate.py",
+      "candidate_sha256": "a77711650c763e6fa175576e8136f704a43732b81294edf1207c6f643be81178",
+      "source_sha256": "d3dbb3f074768710e42d6f726890a8099c39d39089d3dbd342305dccb7f76572",
+      "request_sha256": "fa5116f8552978a32255ee37ee92b4d24eb2035426812719603bc0fbd1fbbfd6",
+      "response_sha256": "b33b2b673accd87507215a24bb75214ee99b2c4080fc398e76453785361f8a23",
+      "response_id": "cc0a6c1c-39ae-46e1-92b8-c8011ec1114f",
+      "usage": {
+        "completion_tokens": 37834,
+        "prompt_tokens": 21190,
+        "total_tokens": 59024,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 35113,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 20992
+        },
+        "prompt_cache_hit_tokens": 20992,
+        "prompt_cache_miss_tokens": 198
+      }
+    },
+    {
+      "task": "djl_train_resnet_cifar10",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "STOP_PROVIDER_FAILURE",
+        "best_iter": 1,
+        "best_score": 1050.0,
+        "repair_budget": 4,
+        "repair_attempts": 2
+      },
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_resnet_cifar10/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "a77711650c763e6fa175576e8136f704a43732b81294edf1207c6f643be81178",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_resnet_cifar10/result.json",
+      "old_result_sha256": "be6c21ec167242d6e99279bf410b216d68453051ad2b18b5ea9fffce36bc49d6",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_resnet_cifar10",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_resnet_cifar10/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "a77711650c763e6fa175576e8136f704a43732b81294edf1207c6f643be81178",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_resnet_cifar10/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_resnet_cifar10",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_resnet_cifar10/candidate_0.py",
+      "old_initial_sha256": "952724351f10a03ebf17b8a5de0d01294628de6e95514e230585ce7320d0d4f1",
+      "current_initial_sha256": "a77711650c763e6fa175576e8136f704a43732b81294edf1207c6f643be81178",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_resnet_cifar10/result.json",
+      "old_result_sha256": "9472a6ba3153c76666cd6afe4d5a3543ab7dd8ce2a87bf1295703b027ff1defb",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_resnet_cifar10",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_resnet_cifar10/candidate_0.py",
+      "old_initial_sha256": "952724351f10a03ebf17b8a5de0d01294628de6e95514e230585ce7320d0d4f1",
+      "current_initial_sha256": "a77711650c763e6fa175576e8136f704a43732b81294edf1207c6f643be81178",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_resnet_cifar10/result.json",
+      "old_result_sha256": "1ead912049352c48c81a6ddb48b50833789c6e070ef4eb01bc4fbc3d7e224af5",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_resnet_cifar10",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/djl_train_resnet_cifar10/result.json",
+      "result_sha256": "f456774634f5ad9b6c5e53a02719db5f45aeed8dba8329fbf8075ccdcf9b5dd7"
+    },
+    {
+      "task": "djl_train_seq2seq",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/djl_train_seq2seq/initial/candidate.py",
+      "candidate_sha256": "c9e88a6cd201b6cd28f7fae62ecdf55cc20de6c41042060b940151a9227eccb3",
+      "source_sha256": "72c9adeaaad177daf4479e5285233145904ed7fc290f8d4629ee0734a752f7cc",
+      "request_sha256": "8202ff3077a5ee8da0fc6f0cd8edc08dc85817b10d998abe31eff1d6623b8bd7",
+      "response_sha256": "e173e73907b8b584bca9918d056af69122d30c927dbc2f993c38f6c48eab6cea",
+      "response_id": "cd943e1b-2154-4dcf-bfa8-f68184f66a9b",
+      "usage": {
+        "completion_tokens": 46084,
+        "prompt_tokens": 4190,
+        "total_tokens": 50274,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 43200,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 3968
+        },
+        "prompt_cache_hit_tokens": 3968,
+        "prompt_cache_miss_tokens": 222
+      }
+    },
+    {
+      "task": "djl_train_seq2seq",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "STOP_PROVIDER_FAILURE",
+        "best_iter": 1,
+        "best_score": 1050.0,
+        "repair_budget": 4,
+        "repair_attempts": 1
+      },
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_seq2seq/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "c9e88a6cd201b6cd28f7fae62ecdf55cc20de6c41042060b940151a9227eccb3",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_seq2seq/result.json",
+      "old_result_sha256": "e0edf59cc6da9623ae45912b97104e984636912570d0b17c8d1383f76f0248e9",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_seq2seq",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_seq2seq/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "c9e88a6cd201b6cd28f7fae62ecdf55cc20de6c41042060b940151a9227eccb3",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_seq2seq/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_seq2seq",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_seq2seq/candidate_0.py",
+      "old_initial_sha256": "5b1c21adeab22a2e18c2f5b4b9d8952fd827f88c9ed14f4a19a0c8bf7cb806fa",
+      "current_initial_sha256": "c9e88a6cd201b6cd28f7fae62ecdf55cc20de6c41042060b940151a9227eccb3",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_seq2seq/result.json",
+      "old_result_sha256": "fc10a6e949d4c35cd54d10cde02c9d807173824403e171e322177f28b826f455",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_seq2seq",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_seq2seq/candidate_0.py",
+      "old_initial_sha256": "5b1c21adeab22a2e18c2f5b4b9d8952fd827f88c9ed14f4a19a0c8bf7cb806fa",
+      "current_initial_sha256": "c9e88a6cd201b6cd28f7fae62ecdf55cc20de6c41042060b940151a9227eccb3",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_seq2seq/result.json",
+      "old_result_sha256": "88e25df027138702bb17a3f7b29d944b9a89e8c9db1be53c1a22631b11333e1c",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_seq2seq",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/djl_train_seq2seq/result.json",
+      "result_sha256": "185afead442d0ad94a13adfd8c20360c1a135ada2b596ca395cb4452cc41960b"
+    },
+    {
+      "task": "djl_train_timeseries",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/djl_train_timeseries/initial/candidate.py",
+      "candidate_sha256": "fbf9d19c67c86f642dfddc0a5cbe7e03b7703e616a2908d86468238b98ae9146",
+      "source_sha256": "e2473b6473800d9ff9560747225129a6f913007bc2e86577375bb946480f7a7e",
+      "request_sha256": "9e8597e9cf0aa5acb471a3417d14e578f3847e20c91bd8b41ed481cb16061250",
+      "response_sha256": "21f663b7e01db56da9ef9ffdf60f757ae51823b9504a235d9eb432266a78918f",
+      "response_id": "0ee6095d-5dfc-404c-b1ac-a6b2a78e178d",
+      "usage": {
+        "completion_tokens": 59687,
+        "prompt_tokens": 4862,
+        "total_tokens": 64549,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 57276,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 4608
+        },
+        "prompt_cache_hit_tokens": 4608,
+        "prompt_cache_miss_tokens": 254
+      }
+    },
+    {
+      "task": "djl_train_timeseries",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "STOP_PROVIDER_FAILURE",
+        "best_iter": 1,
+        "best_score": 1050.0,
+        "repair_budget": 4,
+        "repair_attempts": 1
+      },
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_timeseries/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "fbf9d19c67c86f642dfddc0a5cbe7e03b7703e616a2908d86468238b98ae9146",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_train_timeseries/result.json",
+      "old_result_sha256": "722446aa2a6c5dde37a64e013a7f087a81b956b9041e54fc798d54782ba1e17e",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_timeseries",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_timeseries/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "fbf9d19c67c86f642dfddc0a5cbe7e03b7703e616a2908d86468238b98ae9146",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_train_timeseries/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_timeseries",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_timeseries/candidate_0.py",
+      "old_initial_sha256": "648a771de1a23ccd611e62fe324f25d651bf30a44b801ceedbe42d88a6b1d9c2",
+      "current_initial_sha256": "fbf9d19c67c86f642dfddc0a5cbe7e03b7703e616a2908d86468238b98ae9146",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_train_timeseries/result.json",
+      "old_result_sha256": "a5503d7a09a5e0f163c222ae72ee9dabb18db386d29b6a9e3313d26a69882fa4",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_timeseries",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_timeseries/candidate_0.py",
+      "old_initial_sha256": "648a771de1a23ccd611e62fe324f25d651bf30a44b801ceedbe42d88a6b1d9c2",
+      "current_initial_sha256": "fbf9d19c67c86f642dfddc0a5cbe7e03b7703e616a2908d86468238b98ae9146",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_train_timeseries/result.json",
+      "old_result_sha256": "8bf7b61661cbab470a366ffe25b75a94960c83cfd91538afb46a21e10a730012",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_train_timeseries",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/djl_train_timeseries/result.json",
+      "result_sha256": "bb78b7889493a2e4ca0849683df26cc9632543cb84e6f4019cca542ad7d37d06"
+    },
+    {
+      "task": "djl_transfer_fresh_fruit",
+      "method": "direct_llm",
+      "action": "reuse_existing",
+      "accepted": false,
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-remediation-3eb9150/artifacts/n18_prepared_20260917/direct_llm/djl_transfer_fresh_fruit/initial/candidate.py",
+      "candidate_sha256": "498d0d4f2099613288e45837427deac8b37440b3f8d2c33d82839b1c28e49174",
+      "source_sha256": "449585de38f141e492a301015bc687c8278f079809c47f90139eb664ad914931",
+      "request_sha256": "976861420671e46ccb5b379c3fc3f71a80b86afde44c873daa0b2ff28cdafb6d",
+      "response_sha256": "019b11ae06dcbe32b7f9bbba9ff9fc22e03c122597322359a51803b51da97a2c",
+      "response_id": "12862bdc-a984-4248-870e-85131bafecb6",
+      "usage": {
+        "completion_tokens": 20215,
+        "prompt_tokens": 6647,
+        "total_tokens": 26862,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 17135,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 6400
+        },
+        "prompt_cache_hit_tokens": 6400,
+        "prompt_cache_miss_tokens": 247
+      }
+    },
+    {
+      "task": "djl_transfer_fresh_fruit",
+      "method": "full_method",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run",
+        "different_method_implementation"
+      ],
+      "old_status": {
+        "status": "SUCCESS",
+        "best_iter": 2,
+        "best_score": 0.5933639090788595,
+        "repair_budget": 4,
+        "repair_attempts": 1
+      },
+      "old_accepted": true,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_transfer_fresh_fruit/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "498d0d4f2099613288e45837427deac8b37440b3f8d2c33d82839b1c28e49174",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/full_method/djl_transfer_fresh_fruit/result.json",
+      "old_result_sha256": "c05cbd21ad61b836bc78e5fc4de5c5264f4da481980dfc960ef4b86a66af2851",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_transfer_fresh_fruit",
+      "method": "direct_llm_test_repair",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": null,
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_transfer_fresh_fruit/candidate_0.py",
+      "old_initial_sha256": null,
+      "current_initial_sha256": "498d0d4f2099613288e45837427deac8b37440b3f8d2c33d82839b1c28e49174",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_test_repair/djl_transfer_fresh_fruit/result.json",
+      "old_result_sha256": null,
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_transfer_fresh_fruit",
+      "method": "direct_llm_sweagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate",
+        "no_complete_evaluated_old_run"
+      ],
+      "old_status": "infrastructure_error",
+      "old_accepted": null,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_transfer_fresh_fruit/candidate_0.py",
+      "old_initial_sha256": "016c8d13835f5231260e7cd3c894c77e1085da04200e7135d0abde04694d6360",
+      "current_initial_sha256": "498d0d4f2099613288e45837427deac8b37440b3f8d2c33d82839b1c28e49174",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_sweagent/djl_transfer_fresh_fruit/result.json",
+      "old_result_sha256": "9129da3fe4c822d935fc9b22dd231242f5e26bb56cacf385404f5ad7f206afd5",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_transfer_fresh_fruit",
+      "method": "direct_llm_matchfixagent",
+      "action": "new_condition_for_current_protocol",
+      "reasons": [
+        "different_or_missing_shared_initial_candidate"
+      ],
+      "old_status": "evaluated",
+      "old_accepted": false,
+      "old_initial_candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_transfer_fresh_fruit/candidate_0.py",
+      "old_initial_sha256": "016c8d13835f5231260e7cd3c894c77e1085da04200e7135d0abde04694d6360",
+      "current_initial_sha256": "498d0d4f2099613288e45837427deac8b37440b3f8d2c33d82839b1c28e49174",
+      "initial_candidate_equal": false,
+      "old_result": "/media/main/whj/projects/torch4ms/ascend-torch4ms-n18-348e8cd/artifacts/n18_training/direct_llm_matchfixagent/djl_transfer_fresh_fruit/result.json",
+      "old_result_sha256": "d2ba40be00abeeb16e1cdd2b562520b4b852c25040afa1a263bb8e5a18a90624",
+      "old_evidence_retained": true
+    },
+    {
+      "task": "djl_transfer_fresh_fruit",
+      "method": "intertrans",
+      "action": "reuse_existing",
+      "accepted": false,
+      "result": "/media/main/whj/projects/torch4ms/intertrans-completion-20260918/intertrans/djl_transfer_fresh_fruit/result.json",
+      "result_sha256": "14c9cdc243b72a54642332d50603931a33b7bb7e8d76da340fc5571f3ac9fa15"
+    }
+  ]
+}

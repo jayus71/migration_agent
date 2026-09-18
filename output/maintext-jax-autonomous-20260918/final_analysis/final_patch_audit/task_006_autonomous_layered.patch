@@ -1,0 +1,11 @@
+--- initial/candidate.py
++++ final/candidate.py
+@@ -17,7 +17,7 @@
+         self.fc = nn.Linear(3 * 4 * 4, 4)
+ 
+     def forward(self, inputs):
+-        hidden = F.relu(self.conv(inputs)).detach()
++        hidden = F.relu(self.conv(inputs))
+         hidden = hidden.reshape(hidden.shape[0], -1)
+         logits = self.fc(hidden)
+         return logits

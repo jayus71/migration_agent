@@ -107,11 +107,18 @@ class PaperFigureLayoutTests(unittest.TestCase):
         fig = build_figure()
         ax = fig.axes[1]
         self.assert_labels_do_not_overlap(fig, ax)
-        self.assertEqual(len(ax.lines), len(METHOD_LABELS))
-        for line, label, (_, rates) in zip(ax.lines, METHOD_LABELS, budget_acceptance().iterrows()):
+        labels = ['SWE-agent', 'Direct', 'LaDiM (slim v4)']
+        counts = [[28, 29, 29], [24, 31, 35], [29, 41, 45]]
+        self.assertEqual(len(ax.lines), len(labels))
+        for line, label, accepted in zip(ax.lines, labels, counts):
             self.assertEqual(line.get_label(), label)
             self.assertEqual(list(line.get_xdata()), [1, 2, 4])
-            self.assertEqual(list(line.get_ydata()), list(rates * 100))
+            self.assertEqual(list(line.get_ydata()), [n * 2 for n in accepted])
+        fig.canvas.draw()
+        renderer = fig.canvas.get_renderer()
+        legend_box = ax.get_legend().get_window_extent(renderer)
+        for label in ax.texts:
+            self.assertFalse(label.get_window_extent(renderer).overlaps(legend_box))
 
     def test_standalone_budget_labels(self):
         fig, ax = plt.subplots(figsize=(3.6, 2.8))

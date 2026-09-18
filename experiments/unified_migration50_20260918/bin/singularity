@@ -1,0 +1,35 @@
+#!/media/main/whj/miniconda3/envs/mstorch/bin/python
+"""Translate the native engine's fixed Singularity invocation to Docker isolation."""
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+args = sys.argv[1:]
+if not args or args.pop(0) != 'exec':
+    raise SystemExit('Only the native exec transport is supported')
+options = {}
+flags = {'--writable-tmpfs', '--no-privs', '--no-home', '--containall'}
+while args and args[0].startswith('--'):
+    key = args.pop(0)
+    if key in flags:
+        options[key] = True
+    elif key in ('--memory', '--network', '--cpus', '--bind'):
+        options[key] = args.pop(0)
+    else:
+        raise SystemExit('Unsupported native transport option: ' + key)
+if options.get('--network') != 'none' or not all(options.get(key) for key in flags):
+    raise SystemExit('Expected native isolation settings')
+source, target, mode = options['--bind'].rsplit(':', 2)
+if target != '/code' or mode != 'ro' or not Path(source).is_dir():
+    raise SystemExit('Expected read-only code mount')
+runtime = '/media/main/whj/miniconda3/envs/mstorch'
+command = ['docker', 'run', '--rm', '--network=none', '--read-only', '--cap-drop=ALL',
+           '--security-opt=no-new-privileges', '--pids-limit=128',
+           '--memory=' + options['--memory'], '--cpus=' + options['--cpus'],
+           '--user', f'{os.getuid()}:{os.getgid()}', '--tmpfs', '/tmp:rw,nosuid,nodev,size=512m',
+           '--env', 'PYTHONHOME=/runtime', '--env', 'LD_LIBRARY_PATH=/runtime/lib',
+           '--mount', f'type=bind,src={Path(source).resolve()},dst=/code,readonly',
+           '--mount', f'type=bind,src={runtime},dst=/runtime,readonly',
+           *args]
+raise SystemExit(subprocess.run(command).returncode)

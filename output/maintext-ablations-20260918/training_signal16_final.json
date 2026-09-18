@@ -1,0 +1,3299 @@
+{
+  "root": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2",
+  "condition_count": 64,
+  "groups": {
+    "execution": {
+      "planned": 16,
+      "statuses": {
+        "completed": 16
+      },
+      "complete": true,
+      "accepted": 4,
+      "accepted_rate": 0.25,
+      "initially_healthy": 0,
+      "healthy_preserved": 0,
+      "initially_failed": 16,
+      "actual_faults_repaired": 4,
+      "controller_accepted": 16,
+      "controller_acceptance_failed_full_predicate": 12,
+      "initially_accepted_by_available_checks": 12,
+      "accepted_at_1": 4,
+      "accepted_at_2": 4,
+      "accepted_at_4": 4,
+      "calls": 145,
+      "usage": {
+        "prompt_tokens": 2004180,
+        "completion_tokens": 84735,
+        "unknown_usage_calls": 0
+      },
+      "total_tokens": 2088915,
+      "tokens_per_accepted": 522228.75,
+      "seconds_per_accepted": 265.71356440524687,
+      "events": {
+        "api_start": 145,
+        "context_input": 145,
+        "tool": 223,
+        "role_handoff": 4,
+        "stage_end": 20,
+        "observation": 20,
+        "stage_start": 20,
+        "stage_progress_checkpoint": 15,
+        "handoff_evidence_compaction": 4
+      },
+      "actual_models": {
+        "deepseek-flash": 145
+      },
+      "conditions_with_multiple_attempts": 0,
+      "conditions_with_history_reset": 0,
+      "conditions_with_progress_omission": 0,
+      "schema_feedback_count": 1,
+      "request_treatment_violations": [],
+      "ledger_mismatches": [],
+      "rows": [
+        {
+          "task": "task_001",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 13,
+          "usage": {
+            "prompt_tokens": 252615,
+            "completion_tokens": 4764,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 13,
+            "context_input": 13,
+            "tool": 18,
+            "role_handoff": 1,
+            "stage_end": 2,
+            "observation": 2,
+            "stage_start": 2,
+            "stage_progress_checkpoint": 1,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 13
+          },
+          "wall_time_sec": 81.0826412870083,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_001/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_002",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 60939,
+            "completion_tokens": 2541,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 8,
+            "context_input": 8,
+            "tool": 10,
+            "observation": 1,
+            "stage_start": 1,
+            "stage_end": 1,
+            "stage_progress_checkpoint": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 40.39646544796415,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_002/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_003",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 81129,
+            "completion_tokens": 4011,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 8,
+            "tool": 11,
+            "api_start": 8,
+            "stage_progress_checkpoint": 1,
+            "observation": 1,
+            "stage_start": 1,
+            "stage_end": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 44.78697071399074,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_003/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_004",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 7,
+          "usage": {
+            "prompt_tokens": 105362,
+            "completion_tokens": 3975,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 7,
+            "api_start": 7,
+            "tool": 11,
+            "stage_progress_checkpoint": 1,
+            "stage_end": 1,
+            "observation": 1,
+            "stage_start": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 7
+          },
+          "wall_time_sec": 57.14877118699951,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_004/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_005",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 12,
+          "usage": {
+            "prompt_tokens": 218566,
+            "completion_tokens": 8340,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 12,
+            "api_start": 12,
+            "stage_end": 2,
+            "tool": 23,
+            "observation": 2,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "stage_progress_checkpoint": 1,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 1,
+          "actual_models": {
+            "deepseek-flash": 12
+          },
+          "wall_time_sec": 89.89552033797372,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_005/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_006",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 125427,
+            "completion_tokens": 6215,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 8,
+            "tool": 13,
+            "api_start": 8,
+            "stage_end": 1,
+            "observation": 1,
+            "stage_start": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 73.2302916009794,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_006/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_007",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 77265,
+            "completion_tokens": 4590,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 8,
+            "tool": 13,
+            "api_start": 8,
+            "stage_end": 1,
+            "stage_progress_checkpoint": 1,
+            "observation": 1,
+            "stage_start": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 49.16219231899595,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_007/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_008",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 73833,
+            "completion_tokens": 4131,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 8,
+            "api_start": 8,
+            "tool": 13,
+            "stage_progress_checkpoint": 1,
+            "stage_end": 1,
+            "observation": 1,
+            "stage_start": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 56.493779801006895,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_008/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_009",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 13,
+          "usage": {
+            "prompt_tokens": 198305,
+            "completion_tokens": 5041,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 13,
+            "api_start": 13,
+            "tool": 17,
+            "observation": 2,
+            "stage_end": 2,
+            "role_handoff": 1,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 13
+          },
+          "wall_time_sec": 78.86040146701271,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_009/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_010",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 109596,
+            "completion_tokens": 6174,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 8,
+            "context_input": 8,
+            "tool": 14,
+            "stage_end": 1,
+            "observation": 1,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 73.1282789449906,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_010/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_011",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 97310,
+            "completion_tokens": 6628,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 8,
+            "api_start": 8,
+            "tool": 13,
+            "stage_end": 1,
+            "observation": 1,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 85.3331327320193,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_011/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_012",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 120412,
+            "completion_tokens": 6546,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 8,
+            "context_input": 8,
+            "tool": 13,
+            "stage_end": 1,
+            "observation": 1,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 64.03236252098577,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_012/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_013",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 12,
+          "usage": {
+            "prompt_tokens": 214282,
+            "completion_tokens": 5134,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 12,
+            "tool": 17,
+            "api_start": 12,
+            "observation": 2,
+            "stage_progress_checkpoint": 1,
+            "stage_end": 2,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 12
+          },
+          "wall_time_sec": 72.37672406301135,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_013/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_014",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 98245,
+            "completion_tokens": 7634,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 8,
+            "api_start": 8,
+            "tool": 12,
+            "stage_end": 1,
+            "observation": 1,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 73.32136754202656,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_014/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_015",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 71923,
+            "completion_tokens": 3961,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 8,
+            "tool": 11,
+            "api_start": 8,
+            "stage_progress_checkpoint": 1,
+            "observation": 1,
+            "stage_start": 1,
+            "stage_end": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 61.43760923302034,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_015/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_016",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 98971,
+            "completion_tokens": 5050,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 8,
+            "context_input": 8,
+            "tool": 14,
+            "stage_end": 1,
+            "observation": 1,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 62.167748423002195,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution/conditions/task_016/autonomous_layered/result.json"
+        }
+      ]
+    },
+    "execution_forward": {
+      "planned": 16,
+      "statuses": {
+        "completed": 16
+      },
+      "complete": true,
+      "accepted": 8,
+      "accepted_rate": 0.5,
+      "initially_healthy": 0,
+      "healthy_preserved": 0,
+      "initially_failed": 16,
+      "actual_faults_repaired": 8,
+      "controller_accepted": 16,
+      "controller_acceptance_failed_full_predicate": 8,
+      "initially_accepted_by_available_checks": 8,
+      "accepted_at_1": 8,
+      "accepted_at_2": 8,
+      "accepted_at_4": 8,
+      "calls": 168,
+      "usage": {
+        "prompt_tokens": 2496189,
+        "completion_tokens": 107022,
+        "unknown_usage_calls": 0
+      },
+      "total_tokens": 2603211,
+      "tokens_per_accepted": 325401.375,
+      "seconds_per_accepted": 157.86564891711168,
+      "events": {
+        "stage_end": 24,
+        "context_input": 168,
+        "api_start": 168,
+        "tool": 235,
+        "role_handoff": 8,
+        "observation": 24,
+        "stage_progress_checkpoint": 17,
+        "stage_start": 24,
+        "handoff_evidence_compaction": 8
+      },
+      "actual_models": {
+        "deepseek-flash": 168
+      },
+      "conditions_with_multiple_attempts": 0,
+      "conditions_with_history_reset": 0,
+      "conditions_with_progress_omission": 0,
+      "schema_feedback_count": 0,
+      "request_treatment_violations": [],
+      "ledger_mismatches": [],
+      "rows": [
+        {
+          "task": "task_001",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 15,
+          "usage": {
+            "prompt_tokens": 338533,
+            "completion_tokens": 6300,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "stage_end": 2,
+            "context_input": 15,
+            "api_start": 15,
+            "tool": 23,
+            "role_handoff": 1,
+            "observation": 2,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 15
+          },
+          "wall_time_sec": 81.73829651100095,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_001/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_002",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 14,
+          "usage": {
+            "prompt_tokens": 254092,
+            "completion_tokens": 10840,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 14,
+            "api_start": 14,
+            "tool": 19,
+            "stage_end": 2,
+            "stage_progress_checkpoint": 1,
+            "observation": 2,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 14
+          },
+          "wall_time_sec": 129.3898096359917,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_002/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_003",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 61812,
+            "completion_tokens": 4423,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 8,
+            "tool": 11,
+            "api_start": 8,
+            "stage_progress_checkpoint": 1,
+            "observation": 1,
+            "stage_start": 1,
+            "stage_end": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 58.629173599008936,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_003/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_004",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 102624,
+            "completion_tokens": 7607,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 8,
+            "tool": 11,
+            "api_start": 8,
+            "stage_progress_checkpoint": 1,
+            "observation": 1,
+            "stage_start": 1,
+            "stage_end": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 69.22139972896548,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_004/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_005",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 15,
+          "usage": {
+            "prompt_tokens": 262369,
+            "completion_tokens": 7832,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 15,
+            "context_input": 15,
+            "tool": 19,
+            "stage_end": 2,
+            "observation": 2,
+            "stage_progress_checkpoint": 1,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 15
+          },
+          "wall_time_sec": 94.80435780598782,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_005/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_006",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 13,
+          "usage": {
+            "prompt_tokens": 214933,
+            "completion_tokens": 7173,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 13,
+            "api_start": 13,
+            "tool": 15,
+            "observation": 2,
+            "stage_progress_checkpoint": 2,
+            "stage_end": 2,
+            "handoff_evidence_compaction": 1,
+            "stage_start": 2,
+            "role_handoff": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 13
+          },
+          "wall_time_sec": 92.68351013096981,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_006/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_007",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 79482,
+            "completion_tokens": 6130,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 8,
+            "tool": 11,
+            "api_start": 8,
+            "stage_progress_checkpoint": 1,
+            "observation": 1,
+            "stage_start": 1,
+            "stage_end": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 60.35805287200492,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_007/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_008",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 96095,
+            "completion_tokens": 6628,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 8,
+            "context_input": 8,
+            "tool": 14,
+            "stage_progress_checkpoint": 1,
+            "stage_end": 1,
+            "observation": 1,
+            "stage_start": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 79.10318507399643,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_008/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_009",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 13,
+          "usage": {
+            "prompt_tokens": 238684,
+            "completion_tokens": 6818,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 13,
+            "context_input": 13,
+            "tool": 20,
+            "role_handoff": 1,
+            "stage_end": 2,
+            "observation": 2,
+            "stage_start": 2,
+            "stage_progress_checkpoint": 1,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 13
+          },
+          "wall_time_sec": 80.01397014700342,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_009/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_010",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 10,
+          "usage": {
+            "prompt_tokens": 76366,
+            "completion_tokens": 3695,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 10,
+            "tool": 10,
+            "stage_end": 2,
+            "observation": 2,
+            "api_start": 10,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "stage_progress_checkpoint": 1,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 10
+          },
+          "wall_time_sec": 74.11565464403247,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_010/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_011",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 70135,
+            "completion_tokens": 6205,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 8,
+            "tool": 13,
+            "api_start": 8,
+            "stage_end": 1,
+            "stage_progress_checkpoint": 1,
+            "observation": 1,
+            "stage_start": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 62.886531847994775,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_011/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_012",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 56479,
+            "completion_tokens": 4494,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 8,
+            "context_input": 8,
+            "tool": 12,
+            "stage_end": 1,
+            "stage_progress_checkpoint": 1,
+            "observation": 1,
+            "stage_start": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 53.53255022200756,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_012/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_013",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 13,
+          "usage": {
+            "prompt_tokens": 242185,
+            "completion_tokens": 5921,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 13,
+            "context_input": 13,
+            "stage_end": 2,
+            "tool": 19,
+            "role_handoff": 1,
+            "observation": 2,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 13
+          },
+          "wall_time_sec": 82.79105408099713,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_013/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_014",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 11,
+          "usage": {
+            "prompt_tokens": 167987,
+            "completion_tokens": 7470,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 11,
+            "context_input": 11,
+            "tool": 15,
+            "role_handoff": 1,
+            "stage_end": 2,
+            "observation": 2,
+            "stage_start": 2,
+            "stage_progress_checkpoint": 1,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 11
+          },
+          "wall_time_sec": 95.54001097299624,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_014/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_015",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 122780,
+            "completion_tokens": 10630,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 8,
+            "api_start": 8,
+            "tool": 11,
+            "observation": 1,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 1,
+            "stage_end": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 84.30402124597458,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_015/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_016",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 111633,
+            "completion_tokens": 4856,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 8,
+            "api_start": 8,
+            "tool": 12,
+            "stage_end": 1,
+            "observation": 1,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 63.81361281796126,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward/conditions/task_016/autonomous_layered/result.json"
+        }
+      ]
+    },
+    "execution_forward_gradient": {
+      "planned": 16,
+      "statuses": {
+        "completed": 16
+      },
+      "complete": true,
+      "accepted": 12,
+      "accepted_rate": 0.75,
+      "initially_healthy": 0,
+      "healthy_preserved": 0,
+      "initially_failed": 16,
+      "actual_faults_repaired": 12,
+      "controller_accepted": 16,
+      "controller_acceptance_failed_full_predicate": 4,
+      "initially_accepted_by_available_checks": 4,
+      "accepted_at_1": 11,
+      "accepted_at_2": 12,
+      "accepted_at_4": 12,
+      "calls": 184,
+      "usage": {
+        "prompt_tokens": 3179699,
+        "completion_tokens": 123174,
+        "unknown_usage_calls": 0
+      },
+      "total_tokens": 3302873,
+      "tokens_per_accepted": 275239.4166666667,
+      "seconds_per_accepted": 111.97933483633096,
+      "events": {
+        "context_input": 184,
+        "api_start": 184,
+        "stage_end": 29,
+        "tool": 244,
+        "observation": 29,
+        "stage_progress_checkpoint": 16,
+        "role_handoff": 12,
+        "stage_start": 29,
+        "handoff_evidence_compaction": 12,
+        "repair_loop_checkpoint": 1
+      },
+      "actual_models": {
+        "deepseek-flash": 184
+      },
+      "conditions_with_multiple_attempts": 1,
+      "conditions_with_history_reset": 0,
+      "conditions_with_progress_omission": 0,
+      "schema_feedback_count": 0,
+      "request_treatment_violations": [],
+      "ledger_mismatches": [],
+      "rows": [
+        {
+          "task": "task_001",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 14,
+          "usage": {
+            "prompt_tokens": 176628,
+            "completion_tokens": 4190,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 14,
+            "api_start": 14,
+            "stage_end": 2,
+            "tool": 17,
+            "observation": 2,
+            "stage_progress_checkpoint": 1,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 14
+          },
+          "wall_time_sec": 74.75098750198958,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_001/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_002",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 12,
+          "usage": {
+            "prompt_tokens": 140800,
+            "completion_tokens": 6314,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 12,
+            "context_input": 12,
+            "tool": 16,
+            "observation": 2,
+            "stage_end": 2,
+            "role_handoff": 1,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 12
+          },
+          "wall_time_sec": 86.42343839397654,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_002/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_003",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 9,
+          "usage": {
+            "prompt_tokens": 125739,
+            "completion_tokens": 9119,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 9,
+            "context_input": 9,
+            "observation": 2,
+            "tool": 13,
+            "role_handoff": 1,
+            "stage_end": 2,
+            "handoff_evidence_compaction": 1,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 2
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 9
+          },
+          "wall_time_sec": 85.5498933820054,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_003/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_004",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 89078,
+            "completion_tokens": 5205,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 8,
+            "context_input": 8,
+            "tool": 12,
+            "stage_end": 1,
+            "observation": 1,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 62.654913211008534,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_004/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_005",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 13,
+          "usage": {
+            "prompt_tokens": 310219,
+            "completion_tokens": 7102,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 13,
+            "api_start": 13,
+            "tool": 18,
+            "role_handoff": 1,
+            "stage_end": 2,
+            "observation": 2,
+            "stage_start": 2,
+            "stage_progress_checkpoint": 1,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 13
+          },
+          "wall_time_sec": 79.20210430503357,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_005/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_006",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 13,
+          "usage": {
+            "prompt_tokens": 192668,
+            "completion_tokens": 6305,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 13,
+            "api_start": 13,
+            "tool": 15,
+            "observation": 2,
+            "stage_progress_checkpoint": 1,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "stage_end": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 13
+          },
+          "wall_time_sec": 89.1510397529928,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_006/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_007",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 2,
+          "initially_accepted": false,
+          "accepted_at": 2,
+          "calls": 19,
+          "usage": {
+            "prompt_tokens": 553093,
+            "completion_tokens": 16648,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 19,
+            "context_input": 19,
+            "stage_end": 3,
+            "tool": 23,
+            "role_handoff": 1,
+            "repair_loop_checkpoint": 1,
+            "observation": 3,
+            "stage_start": 3,
+            "stage_progress_checkpoint": 1,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 19
+          },
+          "wall_time_sec": 138.8733922149986,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_007/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_008",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 100697,
+            "completion_tokens": 7069,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 8,
+            "context_input": 8,
+            "tool": 13,
+            "stage_end": 1,
+            "observation": 1,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 65.68484142096713,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_008/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_009",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 13,
+          "usage": {
+            "prompt_tokens": 254071,
+            "completion_tokens": 7204,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 13,
+            "api_start": 13,
+            "tool": 20,
+            "stage_progress_checkpoint": 1,
+            "stage_end": 2,
+            "role_handoff": 1,
+            "observation": 2,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 13
+          },
+          "wall_time_sec": 81.20212447096128,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_009/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_010",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 13,
+          "usage": {
+            "prompt_tokens": 210307,
+            "completion_tokens": 6531,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 13,
+            "context_input": 13,
+            "tool": 14,
+            "observation": 2,
+            "role_handoff": 1,
+            "stage_end": 2,
+            "stage_progress_checkpoint": 1,
+            "handoff_evidence_compaction": 1,
+            "stage_start": 2
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 13
+          },
+          "wall_time_sec": 98.1411300440086,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_010/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_011",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 10,
+          "usage": {
+            "prompt_tokens": 172408,
+            "completion_tokens": 10085,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 10,
+            "api_start": 10,
+            "tool": 11,
+            "observation": 2,
+            "stage_end": 2,
+            "stage_progress_checkpoint": 1,
+            "handoff_evidence_compaction": 1,
+            "stage_start": 2,
+            "role_handoff": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 10
+          },
+          "wall_time_sec": 98.28796564304503,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_011/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_012",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 95547,
+            "completion_tokens": 7926,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 8,
+            "tool": 11,
+            "api_start": 8,
+            "stage_progress_checkpoint": 1,
+            "observation": 1,
+            "stage_start": 1,
+            "stage_end": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 69.10165905195754,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_012/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_013",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 12,
+          "usage": {
+            "prompt_tokens": 273059,
+            "completion_tokens": 9001,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 12,
+            "api_start": 12,
+            "stage_end": 2,
+            "tool": 21,
+            "observation": 2,
+            "stage_progress_checkpoint": 1,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 12
+          },
+          "wall_time_sec": 87.48197912203614,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_013/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_014",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 14,
+          "usage": {
+            "prompt_tokens": 238074,
+            "completion_tokens": 7211,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 14,
+            "api_start": 14,
+            "stage_end": 2,
+            "tool": 17,
+            "observation": 2,
+            "stage_progress_checkpoint": 1,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 14
+          },
+          "wall_time_sec": 88.90540368499933,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_014/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_015",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 10,
+          "usage": {
+            "prompt_tokens": 149304,
+            "completion_tokens": 7348,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 10,
+            "api_start": 10,
+            "stage_start": 2,
+            "stage_end": 2,
+            "tool": 12,
+            "observation": 2,
+            "handoff_evidence_compaction": 1,
+            "role_handoff": 1,
+            "stage_progress_checkpoint": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 10
+          },
+          "wall_time_sec": 75.83540668198839,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_015/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_016",
+          "status": "completed",
+          "accepted": false,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": true,
+          "attempts": 0,
+          "initially_accepted": false,
+          "accepted_at": null,
+          "calls": 8,
+          "usage": {
+            "prompt_tokens": 98007,
+            "completion_tokens": 5916,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 8,
+            "api_start": 8,
+            "tool": 11,
+            "observation": 1,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 1,
+            "stage_end": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 8
+          },
+          "wall_time_sec": 62.505739154003095,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/execution_forward_gradient/conditions/task_016/autonomous_layered/result.json"
+        }
+      ]
+    },
+    "all_observations": {
+      "planned": 16,
+      "statuses": {
+        "completed": 16
+      },
+      "complete": true,
+      "accepted": 16,
+      "accepted_rate": 1.0,
+      "initially_healthy": 0,
+      "healthy_preserved": 0,
+      "initially_failed": 16,
+      "actual_faults_repaired": 16,
+      "controller_accepted": 16,
+      "controller_acceptance_failed_full_predicate": 0,
+      "initially_accepted_by_available_checks": 0,
+      "accepted_at_1": 16,
+      "accepted_at_2": 16,
+      "accepted_at_4": 16,
+      "calls": 193,
+      "usage": {
+        "prompt_tokens": 3291755,
+        "completion_tokens": 127205,
+        "unknown_usage_calls": 0
+      },
+      "total_tokens": 3418960,
+      "tokens_per_accepted": 213685.0,
+      "seconds_per_accepted": 86.5064038856217,
+      "events": {
+        "context_input": 193,
+        "api_start": 193,
+        "tool": 247,
+        "observation": 32,
+        "stage_end": 32,
+        "stage_progress_checkpoint": 15,
+        "role_handoff": 16,
+        "stage_start": 32,
+        "handoff_evidence_compaction": 16
+      },
+      "actual_models": {
+        "deepseek-flash": 193
+      },
+      "conditions_with_multiple_attempts": 0,
+      "conditions_with_history_reset": 0,
+      "conditions_with_progress_omission": 0,
+      "schema_feedback_count": 1,
+      "request_treatment_violations": [],
+      "ledger_mismatches": [],
+      "rows": [
+        {
+          "task": "task_001",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 14,
+          "usage": {
+            "prompt_tokens": 231998,
+            "completion_tokens": 8330,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 14,
+            "api_start": 14,
+            "tool": 18,
+            "observation": 2,
+            "stage_end": 2,
+            "stage_progress_checkpoint": 1,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 14
+          },
+          "wall_time_sec": 98.21813548001228,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_001/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_002",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 15,
+          "usage": {
+            "prompt_tokens": 255183,
+            "completion_tokens": 9022,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 15,
+            "api_start": 15,
+            "role_handoff": 1,
+            "tool": 18,
+            "stage_end": 2,
+            "handoff_evidence_compaction": 1,
+            "observation": 2,
+            "stage_start": 2
+          },
+          "schema_feedback": 1,
+          "actual_models": {
+            "deepseek-flash": 15
+          },
+          "wall_time_sec": 104.02624945202842,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_002/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_003",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 10,
+          "usage": {
+            "prompt_tokens": 96687,
+            "completion_tokens": 6607,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "observation": 2,
+            "context_input": 10,
+            "tool": 10,
+            "api_start": 10,
+            "stage_end": 2,
+            "handoff_evidence_compaction": 1,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "stage_progress_checkpoint": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 10
+          },
+          "wall_time_sec": 79.85862543497933,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_003/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_004",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 12,
+          "usage": {
+            "prompt_tokens": 209275,
+            "completion_tokens": 6504,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 12,
+            "api_start": 12,
+            "tool": 15,
+            "observation": 2,
+            "stage_end": 2,
+            "stage_progress_checkpoint": 1,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 12
+          },
+          "wall_time_sec": 77.3829544520122,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_004/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_005",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 12,
+          "usage": {
+            "prompt_tokens": 213122,
+            "completion_tokens": 6785,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 12,
+            "context_input": 12,
+            "tool": 18,
+            "stage_end": 2,
+            "role_handoff": 1,
+            "observation": 2,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 12
+          },
+          "wall_time_sec": 83.57915314601269,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_005/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_006",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 10,
+          "usage": {
+            "prompt_tokens": 104227,
+            "completion_tokens": 6159,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 10,
+            "observation": 2,
+            "api_start": 10,
+            "stage_end": 2,
+            "tool": 12,
+            "stage_start": 2,
+            "role_handoff": 1,
+            "stage_progress_checkpoint": 1,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 10
+          },
+          "wall_time_sec": 73.19032813800732,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_006/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_007",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 12,
+          "usage": {
+            "prompt_tokens": 174033,
+            "completion_tokens": 8376,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 12,
+            "api_start": 12,
+            "tool": 16,
+            "observation": 2,
+            "stage_end": 2,
+            "stage_progress_checkpoint": 1,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 12
+          },
+          "wall_time_sec": 89.66986137797358,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_007/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_008",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 12,
+          "usage": {
+            "prompt_tokens": 175903,
+            "completion_tokens": 7383,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 12,
+            "api_start": 12,
+            "tool": 15,
+            "observation": 2,
+            "stage_end": 2,
+            "stage_progress_checkpoint": 1,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 12
+          },
+          "wall_time_sec": 76.88582464295905,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_008/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_009",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 13,
+          "usage": {
+            "prompt_tokens": 264596,
+            "completion_tokens": 7035,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "stage_start": 2,
+            "context_input": 13,
+            "api_start": 13,
+            "tool": 22,
+            "role_handoff": 1,
+            "handoff_evidence_compaction": 1,
+            "observation": 2,
+            "stage_end": 2,
+            "stage_progress_checkpoint": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 13
+          },
+          "wall_time_sec": 74.89310702501098,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_009/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_010",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 13,
+          "usage": {
+            "prompt_tokens": 265289,
+            "completion_tokens": 8193,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 13,
+            "api_start": 13,
+            "tool": 16,
+            "observation": 2,
+            "stage_progress_checkpoint": 1,
+            "stage_end": 2,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 13
+          },
+          "wall_time_sec": 86.30047256400576,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_010/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_011",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 11,
+          "usage": {
+            "prompt_tokens": 298448,
+            "completion_tokens": 13613,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 11,
+            "tool": 18,
+            "observation": 2,
+            "api_start": 11,
+            "stage_progress_checkpoint": 1,
+            "stage_end": 2,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 11
+          },
+          "wall_time_sec": 113.83281826396706,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_011/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_012",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 12,
+          "usage": {
+            "prompt_tokens": 221495,
+            "completion_tokens": 8635,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 12,
+            "api_start": 12,
+            "tool": 15,
+            "observation": 2,
+            "stage_end": 2,
+            "stage_progress_checkpoint": 1,
+            "role_handoff": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 12
+          },
+          "wall_time_sec": 84.45850408996921,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_012/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_013",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 12,
+          "usage": {
+            "prompt_tokens": 202058,
+            "completion_tokens": 7253,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 12,
+            "api_start": 12,
+            "role_handoff": 1,
+            "tool": 14,
+            "handoff_evidence_compaction": 1,
+            "stage_end": 2,
+            "observation": 2,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 2
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 12
+          },
+          "wall_time_sec": 91.62637336796615,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_013/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_014",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 13,
+          "usage": {
+            "prompt_tokens": 199916,
+            "completion_tokens": 5058,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 13,
+            "api_start": 13,
+            "role_handoff": 1,
+            "tool": 14,
+            "stage_end": 2,
+            "handoff_evidence_compaction": 1,
+            "observation": 2,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 2
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 13
+          },
+          "wall_time_sec": 73.89062960399315,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_014/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_015",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 10,
+          "usage": {
+            "prompt_tokens": 135554,
+            "completion_tokens": 9233,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "context_input": 10,
+            "api_start": 10,
+            "stage_start": 2,
+            "tool": 11,
+            "observation": 2,
+            "handoff_evidence_compaction": 1,
+            "stage_end": 2,
+            "role_handoff": 1,
+            "stage_progress_checkpoint": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 10
+          },
+          "wall_time_sec": 85.23290024703601,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_015/autonomous_layered/result.json"
+        },
+        {
+          "task": "task_016",
+          "status": "completed",
+          "accepted": true,
+          "controller_accepted": true,
+          "initially_accepted_by_available_checks": false,
+          "attempts": 1,
+          "initially_accepted": false,
+          "accepted_at": 1,
+          "calls": 12,
+          "usage": {
+            "prompt_tokens": 243971,
+            "completion_tokens": 9019,
+            "unknown_usage_calls": 0
+          },
+          "events": {
+            "api_start": 12,
+            "context_input": 12,
+            "tool": 15,
+            "stage_end": 2,
+            "observation": 2,
+            "role_handoff": 1,
+            "stage_progress_checkpoint": 1,
+            "stage_start": 2,
+            "handoff_evidence_compaction": 1
+          },
+          "schema_feedback": 0,
+          "actual_models": {
+            "deepseek-flash": 12
+          },
+          "wall_time_sec": 91.05652488401392,
+          "ledger_mismatch": false,
+          "request_treatment_violations": [],
+          "path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/training_signal16_v2/all_observations/conditions/task_016/autonomous_layered/result.json"
+        }
+      ]
+    }
+  },
+  "generated_at": "2026-09-18T04:06:23.500225+00:00",
+  "final_audit": [
+    {
+      "task": "task_001",
+      "variant": "execution",
+      "model_family": "cnn",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "b5ac26302397fb465429f49264827a682e4a211cb06100d4eb1e95bee1b51703"
+    },
+    {
+      "task": "task_002",
+      "variant": "execution",
+      "model_family": "cnn",
+      "private_construction": "forward",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "e378e0d5da9a3071ba0562dd77340a4293899cc9adeb8bb8668ddd860b2a051e"
+    },
+    {
+      "task": "task_003",
+      "variant": "execution",
+      "model_family": "cnn",
+      "private_construction": "gradient",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "ab92e5a24f1b83c1e89b92fab8e5ca5d2d0b7446a831744a81e6dc820385119e"
+    },
+    {
+      "task": "task_004",
+      "variant": "execution",
+      "model_family": "cnn",
+      "private_construction": "update",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "cc88c25223e611eed77e42f65abab7da2465607fab5ec36ad77ff5cf2ae8ed85"
+    },
+    {
+      "task": "task_005",
+      "variant": "execution",
+      "model_family": "mlp",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "7e2994610d6f93c621115b85c33282ebedff1a3aff89cddbd21286984cfa0c6f"
+    },
+    {
+      "task": "task_006",
+      "variant": "execution",
+      "model_family": "mlp",
+      "private_construction": "forward",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "45eaed8dd039387441bec743abae6cb42f8ecf1a2452a7b34bab1ac115c3f159"
+    },
+    {
+      "task": "task_007",
+      "variant": "execution",
+      "model_family": "mlp",
+      "private_construction": "gradient",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "faca2a3054c6d39c1c71f1265e2e258a1673fb81a49aaa6d6dbfe1b9fbbd2472"
+    },
+    {
+      "task": "task_008",
+      "variant": "execution",
+      "model_family": "mlp",
+      "private_construction": "update",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "9ba011e2a86b8b2c46d599a18f75b2a587d6a0e91f7e5d7b36970f59560f3d70"
+    },
+    {
+      "task": "task_009",
+      "variant": "execution",
+      "model_family": "transformer",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "ed17f72dbef73b06957d3224e102bd04bd6f8aed3eeb7ffb8b30bdcbf76a001d"
+    },
+    {
+      "task": "task_010",
+      "variant": "execution",
+      "model_family": "transformer",
+      "private_construction": "forward",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "f9ff1b5b4e955ef0c6f60a9debac821c0229406f4301f83a677ce9ea88041fd3"
+    },
+    {
+      "task": "task_011",
+      "variant": "execution",
+      "model_family": "transformer",
+      "private_construction": "gradient",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "e5e5d847179243b60302b85319dfa755f6a4a504299b4ded43bafe58f764759d"
+    },
+    {
+      "task": "task_012",
+      "variant": "execution",
+      "model_family": "transformer",
+      "private_construction": "update",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "5ee65aefbe009060ab513fe8664397544daaf4500d82560ad05d15f3001858e8"
+    },
+    {
+      "task": "task_013",
+      "variant": "execution",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "028c85f281bb5f41ef49a9d49179eb0e820178b5052afb9d97e0468e135c1bc9"
+    },
+    {
+      "task": "task_014",
+      "variant": "execution",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "forward",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "1c1f75abf3581346e894fa212e3faac6eb67170263da14e4a24afb110dbffad0"
+    },
+    {
+      "task": "task_015",
+      "variant": "execution",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "gradient",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "127bc00669fd47ed572f3a3c5fe153a4f39bec5a9da11c04a17b4e8b2ec2505c"
+    },
+    {
+      "task": "task_016",
+      "variant": "execution",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "update",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "1474bc6fab7408b9a21f74de19fd9a8ed1bcaca31686238eb288dbe340b5fe9c"
+    },
+    {
+      "task": "task_001",
+      "variant": "execution_forward",
+      "model_family": "cnn",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "266b0fbbf9869e8ba16324233e5db3f830921182f8766508ea5647ef66180050"
+    },
+    {
+      "task": "task_002",
+      "variant": "execution_forward",
+      "model_family": "cnn",
+      "private_construction": "forward",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "b30531a267cd049d8e079315f61f1a6fc89ae96cd08170040008554437676326"
+    },
+    {
+      "task": "task_003",
+      "variant": "execution_forward",
+      "model_family": "cnn",
+      "private_construction": "gradient",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "c4bcb90883558d63edfa7737d269219e6ca97620bc3ff76a1228107a5f080e3a"
+    },
+    {
+      "task": "task_004",
+      "variant": "execution_forward",
+      "model_family": "cnn",
+      "private_construction": "update",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "19e1e74aa1e28a31880ec84515f459a3db6b0c8b4234a4ecbff2e51fec13f731"
+    },
+    {
+      "task": "task_005",
+      "variant": "execution_forward",
+      "model_family": "mlp",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "96f2db961871738c6fc6ba5d96791eb7fdcb43e50e30d76461f684c380ed59ed"
+    },
+    {
+      "task": "task_006",
+      "variant": "execution_forward",
+      "model_family": "mlp",
+      "private_construction": "forward",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "d1f8a57d18b3cc4463b866e16430f4306b41f72521237043f71a18bfd5b20611"
+    },
+    {
+      "task": "task_007",
+      "variant": "execution_forward",
+      "model_family": "mlp",
+      "private_construction": "gradient",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "49f1256fc26a988fa7370e31a078d3168462f01b771cb4df3bd1a8ac135f66b2"
+    },
+    {
+      "task": "task_008",
+      "variant": "execution_forward",
+      "model_family": "mlp",
+      "private_construction": "update",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "3487e468154ba79e4d90cc1ffe85043a8dfc1540745003bf75c7969fc549a762"
+    },
+    {
+      "task": "task_009",
+      "variant": "execution_forward",
+      "model_family": "transformer",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "a5eb0f24f70336f65cb341ff6b66bd4ef3aa41f31eee0ed2918478d4e4ea05e9"
+    },
+    {
+      "task": "task_010",
+      "variant": "execution_forward",
+      "model_family": "transformer",
+      "private_construction": "forward",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "0526c086b689e30db774a6c0bb211628467ceb8b1c553f7bcf11c1ff47fbc972"
+    },
+    {
+      "task": "task_011",
+      "variant": "execution_forward",
+      "model_family": "transformer",
+      "private_construction": "gradient",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "44db8343df3f4f6d3030971b4a3aecd123c5f0e78007879e874a8bb0ff1ef578"
+    },
+    {
+      "task": "task_012",
+      "variant": "execution_forward",
+      "model_family": "transformer",
+      "private_construction": "update",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "bd01563966130e62e07cd4959c846f05946d132805c4d9180e804d3a6cbafc26"
+    },
+    {
+      "task": "task_013",
+      "variant": "execution_forward",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "1c969791101758db34f8a6641948afb51971fe38643b1fbfcc4a7879a596b449"
+    },
+    {
+      "task": "task_014",
+      "variant": "execution_forward",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "forward",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "8b05bd9e921a799216c0bc7351c3abcd8b33dbcff487913a7086925c11e10b06"
+    },
+    {
+      "task": "task_015",
+      "variant": "execution_forward",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "gradient",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "4af640e6a666e9e6ee2fdca03c0d466eeb808194fe0d75aa51cdda1627907871"
+    },
+    {
+      "task": "task_016",
+      "variant": "execution_forward",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "update",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "e74ac0fd411bb8d800406602a32826c915bfde292a17a0fe7570a9ff20ca79e6"
+    },
+    {
+      "task": "task_001",
+      "variant": "execution_forward_gradient",
+      "model_family": "cnn",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "cc729888d824914df07980cd188eba463a50750fca597080b488aa76397eb1e0"
+    },
+    {
+      "task": "task_002",
+      "variant": "execution_forward_gradient",
+      "model_family": "cnn",
+      "private_construction": "forward",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "f65289c1641ae6e13cd4bca0f8bf2356291850fc722b94a36a687b11e3b2d048"
+    },
+    {
+      "task": "task_003",
+      "variant": "execution_forward_gradient",
+      "model_family": "cnn",
+      "private_construction": "gradient",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "d58e4c221eebce53187407fbc9d2bb8c9532b953ff6bbca337979a0646570131"
+    },
+    {
+      "task": "task_004",
+      "variant": "execution_forward_gradient",
+      "model_family": "cnn",
+      "private_construction": "update",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "08cb0ee52b579b7f804814740e101969218e1c7ac32536d9830345b420257edb"
+    },
+    {
+      "task": "task_005",
+      "variant": "execution_forward_gradient",
+      "model_family": "mlp",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "ec6cf2a1f46ef5c78361b9a8c1319329dfdff1225b1ecf186ec917877a29b807"
+    },
+    {
+      "task": "task_006",
+      "variant": "execution_forward_gradient",
+      "model_family": "mlp",
+      "private_construction": "forward",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "53019c2cc8da08ee2c398b14a89916ba67daafc21980c2feb924ed3dad384c34"
+    },
+    {
+      "task": "task_007",
+      "variant": "execution_forward_gradient",
+      "model_family": "mlp",
+      "private_construction": "gradient",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "0c3132b0997343b9a9dd27577fd4cb9ba66d4d7e87c8f8614dd376d4e60e7c9f"
+    },
+    {
+      "task": "task_008",
+      "variant": "execution_forward_gradient",
+      "model_family": "mlp",
+      "private_construction": "update",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "15a124709b47aa8df9b3cc28bd55ee182a88cb0afb875a7d5e34f63578f2e984"
+    },
+    {
+      "task": "task_009",
+      "variant": "execution_forward_gradient",
+      "model_family": "transformer",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "a89336dc9722f3b330fe9830d341971b3ad997882e41c5294c2d20711dee7f6f"
+    },
+    {
+      "task": "task_010",
+      "variant": "execution_forward_gradient",
+      "model_family": "transformer",
+      "private_construction": "forward",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "28c928ea9f58cbd7c0c1607eb35018664a2881845be07806f702e66463688b8d"
+    },
+    {
+      "task": "task_011",
+      "variant": "execution_forward_gradient",
+      "model_family": "transformer",
+      "private_construction": "gradient",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "65463d8f17a74381eac95a56ea79771958d1629b5c4fb635372020e18517aaa6"
+    },
+    {
+      "task": "task_012",
+      "variant": "execution_forward_gradient",
+      "model_family": "transformer",
+      "private_construction": "update",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "22905a48314369c10c5722d6ac371ac8aa55e63a1b9929aae2c182c6d243e845"
+    },
+    {
+      "task": "task_013",
+      "variant": "execution_forward_gradient",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "8207e3c6c580feb81aa2776f27fa017bcd764e39f596faa7a249b059854fb143"
+    },
+    {
+      "task": "task_014",
+      "variant": "execution_forward_gradient",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "forward",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "cfbc7cc8b5634ac4774c9bee92ec4d7c70a52e57168b011af0e135c11677eca9"
+    },
+    {
+      "task": "task_015",
+      "variant": "execution_forward_gradient",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "gradient",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "83447ae34ee0f21a752bdfa2efe5e7b1093e181bea4f33705098f40bab9347ba"
+    },
+    {
+      "task": "task_016",
+      "variant": "execution_forward_gradient",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "update",
+      "accepted": false,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "7c9ff060c46da9546ba74b58ebc66deec9b6c7b4525589275eed4b8460e9130e"
+    },
+    {
+      "task": "task_001",
+      "variant": "all_observations",
+      "model_family": "cnn",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "82c95fab554c0dfdc98e4512ff1c00d32233956bbdac51306fea853ab996a46d"
+    },
+    {
+      "task": "task_002",
+      "variant": "all_observations",
+      "model_family": "cnn",
+      "private_construction": "forward",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "530428cbdf09788703c706dca3568dd47c976a03c029b63f3f7e882f1aa0db71"
+    },
+    {
+      "task": "task_003",
+      "variant": "all_observations",
+      "model_family": "cnn",
+      "private_construction": "gradient",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "9381a14a331b0cd608a624fa104e5aecee218c6f4b9d27af14154395aa7ad3b9"
+    },
+    {
+      "task": "task_004",
+      "variant": "all_observations",
+      "model_family": "cnn",
+      "private_construction": "update",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "d22fb61c556503d5cc206580e709ac80f2d91ed522c3dea92a23a6e6bfb9fa95"
+    },
+    {
+      "task": "task_005",
+      "variant": "all_observations",
+      "model_family": "mlp",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "2241964d3b85602c2d9f162907b71150536810794d09089aa0489994025c4c8c"
+    },
+    {
+      "task": "task_006",
+      "variant": "all_observations",
+      "model_family": "mlp",
+      "private_construction": "forward",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "8a79219384c3c0bd1351b7eadcaf724cde6ba16af90b7ddaed7353242ef6ef17"
+    },
+    {
+      "task": "task_007",
+      "variant": "all_observations",
+      "model_family": "mlp",
+      "private_construction": "gradient",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "87ca01bd716c66e98e3f22a5e556910febecebf6935445a2c4cb98af348cb3ea"
+    },
+    {
+      "task": "task_008",
+      "variant": "all_observations",
+      "model_family": "mlp",
+      "private_construction": "update",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "04e6890caafdf97a78e134c0ee10db99c8157092cda57f8721ca5048c7232177"
+    },
+    {
+      "task": "task_009",
+      "variant": "all_observations",
+      "model_family": "transformer",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "f46fe6e037f5b4a38ab3a6711695e35629f442542ef00ccc4240ab97cf366a51"
+    },
+    {
+      "task": "task_010",
+      "variant": "all_observations",
+      "model_family": "transformer",
+      "private_construction": "forward",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "4afc1e0d871405967222e7900f2de08bcf66f57dee10049dd840091492bd4b87"
+    },
+    {
+      "task": "task_011",
+      "variant": "all_observations",
+      "model_family": "transformer",
+      "private_construction": "gradient",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "2c78c04f68f19b02ca874c538968542c93d6b8085ece10d5d3690c73b92bcfb8"
+    },
+    {
+      "task": "task_012",
+      "variant": "all_observations",
+      "model_family": "transformer",
+      "private_construction": "update",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "614619c37d36a853fd58a0d981ad98ed65313b863b9558ad83691a3ea24257da"
+    },
+    {
+      "task": "task_013",
+      "variant": "all_observations",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "execution",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "84ff1770e86e56e2e20650285fe166d4e990390b0e2d85d4303c5c8a4e788333"
+    },
+    {
+      "task": "task_014",
+      "variant": "all_observations",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "forward",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "f63b7104d74d1884ea4cb0194e5b33db061fa5d6bf669fa8fa214b5cf2691e6c"
+    },
+    {
+      "task": "task_015",
+      "variant": "all_observations",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "gradient",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "9925b2fee9c841dad34b0bad57aca5e35253da150d48fc4e2fddf74675265384"
+    },
+    {
+      "task": "task_016",
+      "variant": "all_observations",
+      "model_family": "tiny_causal_lm",
+      "private_construction": "update",
+      "accepted": true,
+      "controller_accepted": true,
+      "backend_observed": [
+        true,
+        true,
+        true
+      ],
+      "result_sha256": "eb9ba972351f08b8b8fe555f4b43326ff058d41c3b2bec28df8983e40c5cc9a2"
+    }
+  ],
+  "violations": [],
+  "interpretation": "Four actual models, four declared program mutations, and four cumulative public-feedback settings. The visible checks control repair triggering and stopping; full three-seed checks score final acceptance. Additional scratch tests remain available. This is separate from the original three-fixture signal study."
+}

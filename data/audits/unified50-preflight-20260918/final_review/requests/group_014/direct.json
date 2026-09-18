@@ -1,0 +1,19 @@
+{
+  "model": "deepseek-v4-flash",
+  "temperature": 0,
+  "thinking": {
+    "type": "enabled"
+  },
+  "reasoning_effort": "high",
+  "max_tokens": 131072,
+  "messages": [
+    {
+      "role": "system",
+      "content": "Translate the complete Python module from PyTorch to native MindSpore. Preserve its public interfaces and behavior, including differentiation and training. Use the supplied source and public task contract. Return only the complete Python module. Keep model parameter names and shapes so the common evaluator can supply identical initial values. The candidate must execute its tensor computations with MindSpore on CPU."
+    },
+    {
+      "role": "user",
+      "content": "{\"source_reference\": \"source.py\", \"target_framework\": \"MindSpore\", \"public_interfaces\": [\"build_model\"], \"semantics\": \"Compute a linear projection times 1000 followed by finite, normalized softmax probabilities along the final axis.\", \"model_variant\": \"causal_lm\", \"editable\": [\"candidate.py\", \"torch4ms/**/*.py\"], \"tests\": [\"public\"], \"seed\": 101, \"evaluation\": {\"final_seeds\": [101, 202, 303], \"initial_state\": \"explicit_parameter_value_alignment\", \"forward_atol\": 0.0001, \"forward_rtol\": 0.0001, \"gradient_atol\": 0.0001, \"gradient_rtol\": 0.001, \"update_atol\": 1e-05, \"update_rtol\": 0.001, \"bf16_atol\": 0.01, \"backend_execution_required\": true}}\n\nsource.py:\nfrom __future__ import annotations\n\nMODEL_VARIANT = 'causal_lm'\nimport torch\nimport torch.nn as nn\n\n\nclass StableSoftmaxNet(nn.Module):\n    def __init__(self, num_classes: int = 4) -> None:\n        super().__init__()\n        self.proj = nn.Linear(4, num_classes)\n\n    def forward(self, x: torch.Tensor) -> torch.Tensor:\n        return torch.softmax(self.proj(x) * 1000.0, dim=-1)\n\n\ndef build_model(params: dict | None = None) -> nn.Module:\n    params = params or {}\n    return StableSoftmaxNet(num_classes=int(params.get('num_classes', 4)))\n"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "timestamp": "2026-09-18T10:23:41.494135+00:00",
+  "scheduler_pid": 59104,
+  "workers": 4,
+  "total": 391,
+  "finished": 4,
+  "needs_inspection": 0,
+  "pending": 383,
+  "global_api_pause": false,
+  "blocked_methods": [],
+  "active": [
+    {
+      "job": "cross__task_001__ladim",
+      "pid": 59488,
+      "process_alive": true
+    },
+    {
+      "job": "cross__task_001__swe",
+      "pid": 59490,
+      "process_alive": true
+    },
+    {
+      "job": "cross__task_001__matchfix",
+      "pid": 62718,
+      "process_alive": true
+    },
+    {
+      "job": "matchfix_investigation__group_001__matchfix",
+      "pid": 65236,
+      "process_alive": true
+    }
+  ],
+  "state": "running",
+  "scheduler_alive": true,
+  "outcomes": {
+    "completed/False": 2,
+    "completed/True": 2
+  },
+  "inspection": [],
+  "recorded_response_files": 73,
+  "response_models": {
+    "deepseek-flash": 72
+  },
+  "observed_provider_usage": {
+    "prompt_tokens": 1006822,
+    "completion_tokens": 124533,
+    "total_tokens": 1131355
+  },
+  "response_errors": 0,
+  "usage_scope": "Recorded agent and translation responses only; ordinary repair has a separate native ledger."
+}

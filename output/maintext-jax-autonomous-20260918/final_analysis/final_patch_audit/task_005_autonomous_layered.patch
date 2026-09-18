@@ -1,0 +1,11 @@
+--- initial/candidate.py
++++ final/candidate.py
+@@ -20,7 +20,7 @@
+         hidden = F.relu(self.conv(inputs))
+         hidden = hidden.reshape(hidden.shape[0], -1)
+         logits = self.fc(hidden)
+-        return logits * 1.75
++        return logits
+ 
+ 
+ def build_model():

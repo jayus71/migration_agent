@@ -1,0 +1,143 @@
+{
+  "config": {
+    "kind": "paired_code_report",
+    "source_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-natural-baselines-20260917/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_baselines_20260917/I-08/r_matchfix/workspace/source.py",
+    "converted_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-natural-baselines-20260917/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_baselines_20260917/I-08/r_matchfix/workspace/candidate.py",
+    "source_entry": "build_model",
+    "converted_entry": "build_model",
+    "source_train_entry": "train_one_step",
+    "converted_train_entry": "train_one_step",
+    "mode": "train",
+    "batch_mode": "classification",
+    "input_shape": [
+      2,
+      15
+    ],
+    "use_torch4ms_env": true,
+    "sync_initial_state": true
+  },
+  "results": {
+    "torch": {
+      "mode": "torch",
+      "status": "ok",
+      "losses": [
+        1.5309827327728271
+      ],
+      "grad_norms": [
+        1.427499532699585
+      ],
+      "error": "",
+      "backend_execution": {
+        "required": false
+      }
+    },
+    "torch4ms": {
+      "mode": "torch4ms",
+      "status": "ok",
+      "losses": [
+        1.5309813022613525
+      ],
+      "grad_norms": [
+        1.3815383911132812
+      ],
+      "error": "",
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 8,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "comparison": {
+    "last_step_abs_loss_diff": 1.430511474609375e-06,
+    "last_step_abs_grad_norm_diff": 0.04596114158630371,
+    "param_update_rel_l2": 0.7711267081348738,
+    "parameter_update_diagnostics": {
+      "parameters": [
+        {
+          "name": "encoder.0.weight",
+          "reference_update_norm": 0.012248214334249496,
+          "candidate_update_norm": 1.8868575352826156e-05,
+          "update_diff_norm": 0.012246575206518173,
+          "update_rel_l2": 0.9998661740653406
+        },
+        {
+          "name": "encoder.0.bias",
+          "reference_update_norm": 0.00316177518106997,
+          "candidate_update_norm": 4.47518232249422e-06,
+          "update_diff_norm": 0.0031622787937521935,
+          "update_rel_l2": 1.0001592813066151
+        },
+        {
+          "name": "encoder.2.weight",
+          "reference_update_norm": 0.006325588095933199,
+          "candidate_update_norm": 0.006325588095933199,
+          "update_diff_norm": 0.0,
+          "update_rel_l2": 0.0
+        },
+        {
+          "name": "encoder.2.bias",
+          "reference_update_norm": 0.0019984247628599405,
+          "candidate_update_norm": 0.0019984247628599405,
+          "update_diff_norm": 0.0,
+          "update_rel_l2": 0.0
+        },
+        {
+          "name": "decoder.weight",
+          "reference_update_norm": 0.004003297071903944,
+          "candidate_update_norm": 0.004003297071903944,
+          "update_diff_norm": 0.0,
+          "update_rel_l2": 0.0
+        },
+        {
+          "name": "decoder.bias",
+          "reference_update_norm": 0.001996835693717003,
+          "candidate_update_norm": 0.001996835693717003,
+          "update_diff_norm": 0.0,
+          "update_rel_l2": 0.0
+        },
+        {
+          "name": "head.weight",
+          "reference_update_norm": 0.006325353402644396,
+          "candidate_update_norm": 0.006325353402644396,
+          "update_diff_norm": 0.0,
+          "update_rel_l2": 0.0
+        },
+        {
+          "name": "head.bias",
+          "reference_update_norm": 0.0022337904665619135,
+          "candidate_update_norm": 0.0022337904665619135,
+          "update_diff_norm": 0.0,
+          "update_rel_l2": 0.0
+        }
+      ]
+    }
+  },
+  "layer_outputs": {
+    "torch": {
+      "encoder.0": 0.21846672892570496,
+      "encoder.1": 0.17819494009017944,
+      "encoder.2": -0.05332817882299423,
+      "decoder": -0.05724359676241875,
+      "head": -0.20201411843299866
+    },
+    "torch4ms": {
+      "encoder.0": 0.21846672892570496,
+      "encoder.1": 0.17819495499134064,
+      "encoder.2": -0.05332817882299423,
+      "decoder": -0.057243604212999344,
+      "head": -0.20201411843299866
+    }
+  }
+}

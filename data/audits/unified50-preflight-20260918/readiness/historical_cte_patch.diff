@@ -1,0 +1,13 @@
+diff --git a/algo/algo.go b/algo/algo.go
+index 9a0b7be..3f59fdc 100644
+--- a/algo/algo.go
++++ b/algo/algo.go
+@@ -1197,7 +1197,7 @@ func AttachTargetSignatureFromRequest(translationEdge *TranslationEdge, translat
+ func AttachTestSuiteFromRequest(translationEdge *TranslationEdge, translationRequest *TranslationRequest) {
+ 
+ 	if translationRequest.TestSuite == nil || len(translationRequest.TestSuite.UnitTestSuite) == 0 && len(translationRequest.TestSuite.FuzzySuite) == 0 {
+-		panic("Please provide unit tests")
++		return
+ 	}
+ 
+ 	//Fuzzy tests are language independent so we can evaluate all of them

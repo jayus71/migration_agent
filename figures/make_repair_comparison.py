@@ -3,9 +3,10 @@
 from make_cost_quality import draw_cost_quality
 from make_repair_by_budget import draw_repair_by_budget
 from paper_plot_style import panel_label, plt, save_figure
+from make_slim_results import build_figure as build_slim_figure
 
 
-def build_figure():
+def build_historical_figure():
     # Match ICLR's 5.5-inch text width so labels retain their intended size.
     fig, axes = plt.subplots(1, 2, figsize=(5.5, 2.8))
     draw_cost_quality(axes[0])
@@ -22,6 +23,10 @@ def build_figure():
                  ha="left", va="bottom", fontsize=9, fontweight="bold")
     fig.subplots_adjust(left=0.09, right=0.99, bottom=0.22, top=0.76, wspace=0.5)
     return fig
+
+
+def build_figure():
+    return build_slim_figure()
 
 
 def main():

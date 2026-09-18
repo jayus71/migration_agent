@@ -1,5 +1,27 @@
 # Inputs for manuscript figures and tables
 
+## Current autonomous comparison (2026-09-18)
+
+The main manuscript now selects slim v4 (`without_edit_format_feedback`).
+`scripts/build_maintext_results_bundle.py` exports the audited selected runs to
+`output/maintext-results-20260918/slim_main.csv` and paired baseline overlap to
+`slim_baseline_overlap.csv`. Its `evidence_index.json` records source hashes.
+Run the exporter with `--recovery output/maintext-ablations-20260918/recovery_final.json`,
+then run `figures/make_slim_results.py` (also invoked by
+`figures/make_repair_comparison.py`) to regenerate the main table and figure.
+The cumulative Fixed50 counts are 29, 41, and 45 at one, two, and four submissions.
+Natural10 includes five initially healthy programs and four actual repairs.
+JAX and training-signal evidence still uses original v4. New MatchFixAgent and
+InterTrans results remain pending and are excluded from the new main comparison.
+
+`figures/make_slim_v4_overview.py` defines the current method diagram and creates
+both the editable PowerPoint and SVG. `figures/update_overview_labels.py` exports
+its vector PDF and PNG. The diagram shows autonomous investigation, evidence
+handoff, retained repair history and external acceptance, without deterministic
+category routing or score-based rollback.
+
+## Historical guided snapshots
+
 These CSV files are byte-for-byte copies of original experiment summaries. They
 make the figure scripts runnable from this repository without the ignored local
 `ascend-torch4ms` checkout. No result values or validation decisions were changed.

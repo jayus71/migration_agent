@@ -1,0 +1,21 @@
+task_id,method,original_strict_success,corrected_strict_success,initial_failure_layer,backend_observed,execution_status,candidate_sha256,error
+I-01,r_hier,True,True,none,True,ok,4d7f98ac5b112ced4fd3889b8ace2846f62ca5f4e6a177daf613a2739dff0648,
+I-01,r_direct,True,True,none,True,ok,4d7f98ac5b112ced4fd3889b8ace2846f62ca5f4e6a177daf613a2739dff0648,
+I-02,r_hier,False,False,execution,False,failed,a127cae6c5201d2a35c80f8f8d0db62ae23ead7287bfe249d2745afd8f65c081,OperatorNotFound('Operator with name lstm has no lowering and cannot fallback to PyTorch native implementation')
+I-02,r_direct,False,False,execution,False,failed,0ceafdc82fed1564d0bec2be65f3ebc3d40985ccc4008b116da837bd919d0964,OperatorNotFound('Operator with name lstm has no lowering and cannot fallback to PyTorch native implementation')
+I-03,r_hier,False,False,execution,False,failed,eb78a637ea88bba847f6fe7a94cbf6d547982665d4bcf807a437a0b43ee9402a,OperatorNotFound('Operator with name gru has no lowering and cannot fallback to PyTorch native implementation')
+I-03,r_direct,False,False,execution,False,failed,e91aa494ddaf4fab7b6445de99bf00e18eafb4a13ac330d86f4e90f0193e04c8,TargetBackendNotObserved('target_backend_not_observed: no MindSpore gradient computation for the evaluated model and returned training loss; ordinary PyTorch training does not satisfy the migration contract')
+I-04,r_hier,True,True,none,True,ok,e8bcb7c6d3f8d887d1a9a4c57838ce28c28cf785107d61da126b766fce717246,
+I-04,r_direct,True,True,none,True,ok,e8bcb7c6d3f8d887d1a9a4c57838ce28c28cf785107d61da126b766fce717246,
+I-05,r_hier,True,True,none,True,ok,c099c04944014055c26e8271399a7399222e1ca34a3a04a1460f24bdc37715fd,
+I-05,r_direct,True,True,none,True,ok,c099c04944014055c26e8271399a7399222e1ca34a3a04a1460f24bdc37715fd,
+I-06,r_hier,True,True,none,True,ok,b5032796d91ed95d7da0d6463cbca6490f8c4b72edd9fca65a30f3bb8f6574d3,
+I-06,r_direct,True,True,none,True,ok,b5032796d91ed95d7da0d6463cbca6490f8c4b72edd9fca65a30f3bb8f6574d3,
+I-07,r_hier,False,False,execution,False,failed,74d4946eb68a5cf3590432319eb71c787d29474ff3368327eac5d3e5cde73c66,RecursionError('maximum recursion depth exceeded while calling a Python object')
+I-07,r_direct,True,False,execution,False,failed,8eb1478986cff2236a8f1a797202f0a13a125ddacb503b624d4817304648ae11,TargetBackendNotObserved('target_backend_not_observed: no MindSpore gradient computation for the evaluated model and returned training loss; ordinary PyTorch training does not satisfy the migration contract')
+I-08,r_hier,False,False,gradient_update,True,ok,59df8647dfdaee2a8d4bfd78394ebcc941b5d6bf1f06c66afc94b8e45b1e59ec,
+I-08,r_direct,False,False,gradient_update,False,failed,3ab4ef84a78e4bf7c30659d83003705c2096b795b9f5b42f414107633a058694,TargetBackendNotObserved('target_backend_not_observed: no MindSpore gradient computation for the evaluated model and returned training loss; ordinary PyTorch training does not satisfy the migration contract')
+I-09,r_hier,False,False,gradient_update,True,ok,aba21d3a7863db2c4fbec7f1fe8f8b000a6ef88232af3ffa9d8e4a552b3eb690,
+I-09,r_direct,True,False,gradient_update,False,failed,e4f610cbe78fa9333bd450f127217a8cb71cc847f9d9ba2c18455c00526101df,TargetBackendNotObserved('target_backend_not_observed: no MindSpore gradient computation for the evaluated model and returned training loss; ordinary PyTorch training does not satisfy the migration contract')
+I-10,r_hier,True,True,none,True,ok,c8cedb606102a081090766a0bd99db78130fd52796403d4daadb990c776723e8,
+I-10,r_direct,True,True,none,True,ok,c8cedb606102a081090766a0bd99db78130fd52796403d4daadb990c776723e8,

@@ -1,0 +1,11 @@
+--- initial/candidate.py
++++ final/candidate.py
+@@ -17,7 +17,7 @@
+         self.fc2 = nn.Linear(12, 4)
+ 
+     def forward(self, inputs):
+-        hidden = F.relu(self.fc1(inputs)).detach()
++        hidden = F.relu(self.fc1(inputs))
+         logits = self.fc2(hidden)
+         return logits
+ 

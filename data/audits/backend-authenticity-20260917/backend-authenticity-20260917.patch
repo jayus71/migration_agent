@@ -1,0 +1,417 @@
+diff --git a/autofix/verifiers/paired_code_report.py b/autofix/verifiers/paired_code_report.py
+index 742c8ce..a4caa2e 100644
+--- a/autofix/verifiers/paired_code_report.py
++++ b/autofix/verifiers/paired_code_report.py
+@@ -27,6 +27,7 @@ def generate_paired_code_harness(params: dict[str, Any], harness_path: Path, rep
+ 
+ def _render_harness(params: dict[str, Any]) -> str:
+     payload = json.dumps(params, indent=2, ensure_ascii=True)
++    backend_observer_source = Path(__file__).with_name("backend_execution.py").read_text(encoding="utf-8")
+     return f'''from __future__ import annotations
+ 
+ import argparse
+@@ -39,6 +40,8 @@ from typing import Any
+ 
+ PARAMS = json.loads({payload!r})
+ 
++{backend_observer_source}
++
+ 
+ def _load_module(path_text: str, name: str) -> Any:
+     path = Path(path_text)
+@@ -319,12 +322,20 @@ def _run_side(
+     layers, handles = _attach_hooks(model, bool(params.get("collect_layers", True)), int(params.get("max_layers", 64)))
+     losses = []
+     grads = []
++    backend_observer = None
+     try:
++        if label == "torch4ms" and mode == "train":
++            backend_observer = TargetBackendObserver(model)
++            backend_observer.start()
+         model.train(mode == "train")
+         if mode == "train" and train_entry:
+             for x, y in batches:
+                 x, y = x.to(device), y.to(device)
++                if backend_observer is not None:
++                    backend_observer.begin_step()
+                 loss_value = _call_train_entry(module, train_entry, model, x, y, params)
++                if backend_observer is not None:
++                    backend_observer.check_step(_to_float(loss_value))
+                 losses.append(_to_float(loss_value))
+                 grads.append(_grad_norm(model))
+         elif use_torch4ms:
+@@ -338,9 +349,13 @@ def _run_side(
+                 for x, y in batches:
+                     x, y = x.to(device), y.to(device)
+                     if mode == "train":
++                        if backend_observer is not None:
++                            backend_observer.begin_step()
+                         wrapped = extract_and_wrap_loss_fn(model, criterion, x, y)
+                         loss = wrapped.output
+                         loss.backward(module=model)
++                        if backend_observer is not None:
++                            backend_observer.check_step(_to_float(loss))
+                         grads.append(_grad_norm(model))
+                         losses.append(_to_float(loss))
+                         optimizer.step()
+@@ -354,10 +369,14 @@ def _run_side(
+             for x, y in batches:
+                 x, y = x.to(device), y.to(device)
+                 if mode == "train":
++                    if backend_observer is not None:
++                        backend_observer.begin_step()
+                     optimizer.zero_grad()
+                     logits = model(x)
+                     loss = criterion(logits, y)
+                     loss.backward()
++                    if backend_observer is not None:
++                        backend_observer.check_step(_to_float(loss))
+                     grads.append(_grad_norm(model))
+                     losses.append(float(loss.detach().item()))
+                     optimizer.step()
+@@ -367,12 +386,14 @@ def _run_side(
+                         loss = criterion(logits, y)
+                     losses.append(float(loss.detach().item()))
+                     grads.append(0.0)
+-        return {{"mode": label, "status": "ok", "losses": losses, "grad_norms": grads, "error": ""}}, _clone_state(model), dict(layers)
++        return {{"mode": label, "status": "ok", "losses": losses, "grad_norms": grads, "error": "", "backend_execution": backend_observer.report() if backend_observer is not None else {{"required": False}}}}, _clone_state(model), dict(layers)
+     except BaseException as exc:
+         if isinstance(exc, KeyboardInterrupt):
+             raise
+-        return {{"mode": label, "status": "failed", "losses": losses, "grad_norms": grads, "error": repr(exc)}}, _clone_state(model), dict(layers)
++        return {{"mode": label, "status": "failed", "losses": losses, "grad_norms": grads, "error": repr(exc), "backend_execution": backend_observer.report() if backend_observer is not None else {{"required": label == "torch4ms" and mode == "train"}}}}, _clone_state(model), dict(layers)
+     finally:
++        if backend_observer is not None:
++            backend_observer.stop()
+         _remove_hooks(handles)
+ 
+ 
+diff --git a/autofix/verifiers/backend_execution.py b/autofix/verifiers/backend_execution.py
+new file mode 100644
+index 0000000..6221f78
+--- /dev/null
++++ b/autofix/verifiers/backend_execution.py
+@@ -0,0 +1,96 @@
++"""Runtime provenance for paired torch4ms training, independent of imports.
++
++This observes the existing candidate; it never wraps its training in an adapter
++environment or changes its optimizer.  The supported backend is the torch4ms
++autograd bridge used by paired_code_report.  Native MindSpore programs use the
++separate native MindSpore verifier.
++"""
++import math
++import sys
++
++
++class TargetBackendNotObserved(RuntimeError):
++    pass
++
++
++class TargetBackendObserver:
++    """Require MindSpore gradients for this model and this returned loss."""
++
++    def __init__(self, model):
++        import mindspore
++        import torch4ms.autograd as autograd
++        from torch4ms.tensor import Tensor
++
++        self.model = model
++        self.ms_tensor = mindspore.Tensor
++        self.target_tensor = Tensor
++        self.parameter_ids = {id(p) for p in model.parameters()}
++        self.codes = {
++            autograd._run_backward.__code__: "backward",
++            autograd._run_grad.__code__: "grad",
++        }
++        self.previous_profile = None
++        self.events = []
++        self.steps = []
++
++    def start(self):
++        self.previous_profile = sys.getprofile()
++        sys.setprofile(self._profile)
++
++    def stop(self):
++        sys.setprofile(self.previous_profile)
++
++    def begin_step(self):
++        self.events = []
++
++    def _belongs_to_model(self, frame):
++        if frame.f_locals.get("module") is self.model:
++            return True
++        caller = frame.f_back
++        if caller is not None and caller.f_locals.get("module") is self.model:
++            return True
++        inputs = frame.f_locals.get("inputs", ())
++        known_ids = self.parameter_ids | {
++            id(p) for p in getattr(self.model, "_torch4ms_param_tensor_cache", ())
++        }
++        return any(id(p) in known_ids for p in inputs)
++
++    def _profile(self, frame, event, arg):
++        if self.previous_profile is not None:
++            self.previous_profile(frame, event, arg)
++        if event != "return" or frame.f_code not in self.codes:
++            return
++        if not self._belongs_to_model(frame):
++            return
++        # These locals are the actual result of MindSpore GradOperation, not a
++        # candidate-supplied flag, import, or a call to an unrelated target op.
++        gradients = frame.f_locals.get("grads", ())
++        if isinstance(gradients, self.ms_tensor):
++            gradients = (gradients,)
++        if not isinstance(gradients, (tuple, list)):
++            return
++        count = sum(isinstance(g, self.ms_tensor) for g in gradients)
++        outputs = frame.f_locals.get("tensors", frame.f_locals.get("outputs", ()))
++        if count and len(outputs) == 1 and isinstance(outputs[0], self.target_tensor):
++            self.events.append((outputs[0], count, self.codes[frame.f_code]))
++
++    def check_step(self, loss):
++        """Validate target gradient provenance before the next training step."""
++        value = float(loss)
++        matches = []
++        for output, count, method in self.events:
++            # Read the underlying MindSpore scalar without invoking dispatch.
++            observed = float(output._elem.asnumpy().reshape(-1)[0])
++            if math.isclose(value, observed, rel_tol=1e-6, abs_tol=1e-8):
++                matches.append({"gradient_tensors": count, "autograd": method})
++        evidence = {"step": len(self.steps) + 1, "observed": bool(matches), "events": matches}
++        self.steps.append(evidence)
++        if not matches:
++            raise TargetBackendNotObserved(
++                "target_backend_not_observed: no MindSpore gradient computation "
++                "for the evaluated model and returned training loss; ordinary "
++                "PyTorch training does not satisfy the migration contract"
++            )
++
++    def report(self):
++        return {"required": True, "backend": "torch4ms/MindSpore", "steps": self.steps}
+diff --git a/test/test_paired_backend_execution.py b/test/test_paired_backend_execution.py
+new file mode 100644
+index 0000000..8141335
+--- /dev/null
++++ b/test/test_paired_backend_execution.py
+@@ -0,0 +1,119 @@
++"""Integration tests: execute actual PyTorch and MindSpore on tiny models."""
++import sys
++import types
++import unittest
++
++import mindspore as ms
++import torch
++import torch.nn as nn
++import torch4ms
++from torch4ms.autograd.ms_autograd_function import extract_and_wrap_loss_fn
++from torch4ms.optim import Torch4msOptimizer
++
++from autofix.verifiers.paired_code_report import _render_harness
++
++
++def source_train(model, x, y, lr=1e-3):
++    optimizer = torch.optim.SGD(model.parameters(), lr=lr)
++    optimizer.zero_grad()
++    loss = nn.CrossEntropyLoss()(model(x), y)
++    loss.backward()
++    optimizer.step()
++    return float(loss.detach().item())
++
++
++def imported_only_train(model, x, y, lr=1e-3):
++    import torch4ms  # An import cannot establish execution provenance.
++    return source_train(model, x, y, lr)
++
++
++def unrelated_target_op_train(model, x, y, lr=1e-3):
++    ms.ops.sin(ms.Tensor([1.0]))
++    return source_train(model, x, y, lr)
++
++
++def target_train(model, x, y, lr=1e-3):
++    # Native torch optimizer writeback is part of the supported adapter.
++    optimizer = Torch4msOptimizer(torch.optim.SGD(model.parameters(), lr=lr), model)
++    with torch4ms.default_env():
++        optimizer.zero_grad()
++        loss = extract_and_wrap_loss_fn(model, nn.CrossEntropyLoss(), x, y).output
++        loss.backward(module=model)
++        optimizer.step()
++        optimizer.zero_grad()  # Provenance must survive legitimate grad clearing.
++        return float(loss.detach().item())
++
++
++def unrelated_target_backward_train(model, x, y, lr=1e-3):
++    other_model = nn.Linear(3, 2)
++    target_train(other_model, x, y, lr)
++    return source_train(model, x, y, lr)
++
++
++class PairedBackendExecutionTest(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        cls.ns = {"__name__": "paired_backend_test_harness"}
++        exec(compile(_render_harness({}), "paired_backend_test_harness.py", "exec"), cls.ns)
++
++    def run_side(self, train, label="torch4ms", use_env=True, entry="train_one_step", steps=1):
++        torch.manual_seed(13)
++        model = nn.Linear(3, 2)
++        module = types.SimpleNamespace(train_one_step=train)
++        batches = [(torch.randn(4, 3), torch.tensor([0, 1, 1, 0])) for _ in range(steps)]
++        params = {"mode": "train", "device": "cpu", "lr": 0.01, "collect_layers": False}
++        previous = sys.getprofile()
++        result, _, _ = self.ns["_run_side"](label, module, model, batches, params, use_env, entry)
++        self.assertIs(sys.getprofile(), previous)
++        return result
++
++    def assert_rejected(self, train, **kwargs):
++        result = self.run_side(train, **kwargs)
++        self.assertEqual(result["status"], "failed", result)
++        self.assertIn("target_backend_not_observed", result["error"])
++
++    def test_source_training_is_allowed_for_reference(self):
++        self.assertEqual(self.run_side(source_train, label="torch", use_env=False)["status"], "ok")
++
++    def test_pure_source_training_is_rejected_for_target(self):
++        self.assert_rejected(source_train)
++
++    def test_import_does_not_count(self):
++        self.assert_rejected(imported_only_train)
++
++    def test_unrelated_target_operator_does_not_count(self):
++        self.assert_rejected(unrelated_target_op_train)
++
++    def test_unrelated_model_backward_does_not_count(self):
++        self.assert_rejected(unrelated_target_backward_train)
++
++    def test_disabling_auto_environment_does_not_disable_contract(self):
++        self.assert_rejected(source_train, use_env=False)
++
++    def test_managed_native_training_is_rejected(self):
++        self.assert_rejected(source_train, use_env=False, entry="")
++
++    def test_candidate_owned_target_training_passes(self):
++        result = self.run_side(target_train)
++        self.assertEqual(result["status"], "ok", result)
++        self.assertTrue(result["backend_execution"]["steps"][0]["observed"])
++
++    def test_harness_owned_target_training_passes(self):
++        result = self.run_side(target_train, entry="")
++        self.assertEqual(result["status"], "ok", result)
++
++    def test_target_first_step_cannot_cover_source_second_step(self):
++        calls = []
++
++        def mixed_train(model, x, y, lr=1e-3):
++            train = source_train if calls else target_train
++            calls.append(True)
++            return train(model, x, y, lr)
++
++        result = self.run_side(mixed_train, steps=2)
++        self.assertEqual(result["status"], "failed", result)
++        self.assertEqual([s["observed"] for s in result["backend_execution"]["steps"]], [True, False])
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/experiments/audit_experiment_i_backend.py b/experiments/audit_experiment_i_backend.py
+new file mode 100644
+index 0000000..559bc12
+--- /dev/null
++++ b/experiments/audit_experiment_i_backend.py
+@@ -0,0 +1,96 @@
++"""Recheck archived candidates without a translator or repair LLM call."""
++import ast
++import csv
++import hashlib
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++
++from autofix.verifiers.paired_code_report import generate_paired_code_harness
++
++
++REPO = Path(__file__).resolve().parents[1]
++ORIGINAL_REPO = REPO.parent / "ascend-torch4ms-exp-i-core-8c5c635"
++RUN = ORIGINAL_REPO / "experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3"
++OUT = REPO / "experiments/backend_authenticity_audit_20260917"
++
++
++def sha(path):
++    return hashlib.sha256(path.read_bytes()).hexdigest()
++
++
++def run_one(row, stage):
++    folder = RUN / "tasks" / row["task_id"] / row["method"]
++    candidate = folder / f"candidate_{stage}.py"
++    trace = json.loads((folder / "run_trace.json").read_text())
++    params = dict(trace["config"]["params"])
++    params.update(source_path=str(folder / "source.py"), converted_path=str(candidate))
++    dest = OUT / row["task_id"] / row["method"] / stage
++    dest.mkdir(parents=True, exist_ok=True)
++    harness = dest / "harness.py"
++    report = dest / "report.json"
++    generate_paired_code_harness(params, harness, report)
++    env = dict(os.environ)
++    # Finals use the exact method-local adapter snapshot; initial translations
++    # use the unchanged original repo matching their common initial core tree.
++    adapter_root = folder if stage == "final" else ORIGINAL_REPO
++    env.update(PYTHONPATH=str(adapter_root) + os.pathsep + str(REPO), PYTHONDONTWRITEBYTECODE="1")
++    with (dest / "run.log").open("w") as log:
++        try:
++            process = subprocess.run([sys.executable, str(harness)], cwd=dest, env=env,
++                                     stdout=log, stderr=subprocess.STDOUT, timeout=180)
++            returncode = process.returncode
++        except subprocess.TimeoutExpired:
++            returncode = "timeout"
++    result = json.loads(report.read_text()) if report.exists() else {}
++    target = result.get("results", {}).get("torch4ms", {})
++    original_accepted = row["strict_success"] == "True"
++    backend = target.get("backend_execution", {})
++    observed = bool(backend.get("steps")) and all(s["observed"] for s in backend["steps"])
++    train = next(n for n in ast.parse(candidate.read_text()).body if isinstance(n, ast.FunctionDef) and n.name == "train_one_step")
++    item = {
++        "task_id": row["task_id"], "method": row["method"], "stage": stage,
++        "original_strict_success": original_accepted,
++        "initial_failure_layer": row["natural_initial_failure_layer"],
++        "candidate_sha256": sha(candidate), "source_sha256": sha(folder / "source.py"),
++        "candidate": str(candidate), "training_entry": ast.unparse(train),
++        "returncode": returncode, "execution_status": target.get("status", "missing_report"),
++        "backend_observed": observed, "backend_execution": backend,
++        "error": target.get("error", ""), "comparison": result.get("comparison"),
++        "report": str(report),
++    }
++    if stage == "final":
++        item["corrected_strict_success"] = original_accepted and observed and target.get("status") == "ok"
++    return item
++
++
++def main():
++    OUT.mkdir(parents=True, exist_ok=True)
++    rows = list(csv.DictReader((RUN / "summary.csv").open()))
++    original_summary_sha = sha(RUN / "summary.csv")
++    results = []
++    for row in rows:
++        stages = ["initial", "final"] if row["method"] == "r_direct" else ["final"]
++        for stage in stages:
++            item = run_one(row, stage)
++            results.append(item)
++            (OUT / "audit.json").write_text(json.dumps({"original_summary_sha256": original_summary_sha, "results": results}, indent=2))
++            print(item["task_id"], item["method"], stage, item["execution_status"], item["backend_observed"], flush=True)
++    assert sha(RUN / "summary.csv") == original_summary_sha
++    finals = [r for r in results if r["stage"] == "final"]
++    columns = ["task_id", "method", "original_strict_success", "corrected_strict_success", "initial_failure_layer", "backend_observed", "execution_status", "candidate_sha256", "error"]
++    with (OUT / "corrected_scores.csv").open("w") as file:
++        writer = csv.DictWriter(file, fieldnames=columns, extrasaction="ignore")
++        writer.writeheader()
++        writer.writerows(finals)
++    for method in ("r_hier", "r_direct"):
++        group = [r for r in finals if r["method"] == method]
++        failed_initial = [r for r in group if r["initial_failure_layer"] != "none"]
++        print(method, "accepted", sum(r["corrected_strict_success"] for r in group), "/", len(group),
++              "repaired", sum(r["corrected_strict_success"] for r in failed_initial), "/", len(failed_initial))
++
++
++if __name__ == "__main__":
++    main()

@@ -1,0 +1,114 @@
+diff --git a/autofix/autonomous/baselines.py b/autofix/autonomous/baselines.py
+index e5d18f9..658a8ca 100644
+--- a/autofix/autonomous/baselines.py
++++ b/autofix/autonomous/baselines.py
+@@ -39,8 +39,8 @@ SEMANTIC_ROLES = (
+ 
+ BACKEND_CONTRACT = """
+ The target training must execute its forward pass, gradients and parameter
+-updates through the designated target backend, torch4ms/MindSpore for this task.
+-Native PyTorch serves as the reference and cannot replace target training.
++updates through the target framework declared in task.json.
++The complete source defines intended behavior.
+ Preserve genuine computation; do not hard-code verifier outputs, bypass backend
+ execution, or manipulate acceptance instrumentation.
+ """
+@@ -183,13 +183,15 @@ class MatchFixSharedTools:
+         source = self.agent.tools.execute("read", {"path": "source.py"}, readonly=True)
+         target = self.agent.tools.execute("read", {"path": "candidate.py"}, readonly=True)
+         del source, target
++        contract = json.loads((root / 'task.json').read_text(encoding='utf-8'))
+         return {"id": "public-migration", "project": "public-migration",
+                 "source_path": "source.py", "target_path": "candidate.py",
+                 "source_function": (root / "source.py").read_text(encoding="utf-8").splitlines(),
+                 "target_function": (root / "candidate.py").read_text(encoding="utf-8").splitlines(),
+-                "ground_truth_target_function": "", "source_language": "python",
+-                "target_language": "python", "source_framework": "pytorch",
+-                "target_framework": "torch4ms", "pairing_contract": "whole_module_training_migration",
++                "ground_truth_target_function": "", "source_language": contract.get('source_language', 'python'),
++                "target_language": contract.get('target_language', 'python'),
++                "source_framework": contract.get('source_framework', 'pytorch'),
++                "target_framework": contract.get('target_framework', 'torch4ms'), "pairing_contract": "whole_module_training_migration",
+                 "result": "review"}
+ 
+     def _error_response(self, reason: str) -> tuple[bool, dict[str, Any]]:
+@@ -599,7 +601,8 @@ def _worker_main(input_path: str) -> None:
+             ModelUtils.prompt_model = backend("model")
+             ModelUtils.prompt_agent = backend("agent")
+             configs = {"agent_name": "match_agent", "mcp_config_file": "", "credential_file": "",
+-                       "project_name": "public-migration", "source_language": "python", "target_language": "python",
++                       "project_name": "public-migration", "source_language": payload['fragment'].get('source_language', 'python'),
++                       "target_language": payload['fragment'].get('target_language', 'python'),
+                        "tool_name": "shared_tools_migration", "tool_source_projects_path": ".",
+                        "tool_target_projects_path": ".", "tool_results_path": str(work), "max_retries": 1,
+                        "available_credentials": [], "sub_agents": {}, "vendor": "openai"}
+diff --git a/autofix/autonomous/swe_upstream.py b/autofix/autonomous/swe_upstream.py
+index 5df83e5..6e9d473 100644
+--- a/autofix/autonomous/swe_upstream.py
++++ b/autofix/autonomous/swe_upstream.py
+@@ -317,11 +317,36 @@ class SWEAgentNative:
+                         return
+                     time.sleep(.005)
+                 raise RuntimeError("Native worker did not acknowledge process freeze")
+-            for pid in sorted(new, key=lambda value: value != self.process.pid):
++            parents = {}
++            for pid in new:
++                try:
++                    parents[pid] = int((Path('/proc') / str(pid) / 'stat').read_text().rsplit(')', 1)[1].split()[1])
++                except (OSError, ValueError, IndexError):
++                    pass
++            def depth(pid):
++                visited = set()
++                while pid in parents and pid not in visited:
++                    visited.add(pid)
++                    pid = parents[pid]
++                return len(visited)
++            # Stop waiting parents before children; otherwise bash can consume
++            # a child's stop notification before its own SIGSTOP takes effect.
++            for pid in sorted(new, key=depth):
+                 try:
+                     fd = _pidfd_open(pid)
+                     _pidfd_signal(fd, signal.SIGSTOP)
+                     self._paused[pid] = fd
++                    deadline = time.monotonic() + 2
++                    while True:
++                        try:
++                            state = (Path('/proc') / str(pid) / 'stat').read_text().rsplit(')', 1)[1].split()[0]
++                        except FileNotFoundError:
++                            break
++                        if state in {'T', 't', 'Z', 'X'}:
++                            break
++                        if time.monotonic() >= deadline:
++                            raise RuntimeError('Native process did not acknowledge suspension')
++                        time.sleep(.001)
+                 except ProcessLookupError:
+                     continue
+         raise RuntimeError("Native worker process tree did not stabilize")
+@@ -346,6 +371,17 @@ class SWEAgentNative:
+             fd = self._paused[pid]
+             try:
+                 _pidfd_signal(fd, signal.SIGCONT)
++                deadline = time.monotonic() + 2
++                while True:
++                    try:
++                        state = (Path('/proc') / str(pid) / 'stat').read_text().rsplit(')', 1)[1].split()[0]
++                    except FileNotFoundError:
++                        break
++                    if state not in {'T', 't'}:
++                        break
++                    if time.monotonic() >= deadline:
++                        raise RuntimeError('Native process did not acknowledge continuation')
++                    time.sleep(.001)
+             except ProcessLookupError:
+                 pass
+             finally:
+@@ -645,7 +681,8 @@ def _worker(config: dict) -> None:
+     contract += ("source.py and task.json define intended behavior. " if config["has_source"] else
+                  "task.json defines the public task and acceptance contract. No reference implementation is supplied. ")
+     if migration:
+-        contract += ("Target forward values, gradients and parameter updates must execute through torch4ms/MindSpore; "
++        declared = json.loads((Path(config['workspace']) / 'task.json').read_text()).get('target_framework', 'torch4ms/MindSpore')
++        contract += (f"Target forward values, gradients and parameter updates must execute through {declared}; "
+                      "preserve genuine target computation and public acceptance instrumentation. ")
+     else:
+         contract += "Preserve the public API and behavior specified by the task; do not manipulate acceptance instrumentation. "

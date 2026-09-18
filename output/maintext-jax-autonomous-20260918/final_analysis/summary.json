@@ -1,0 +1,59 @@
+{
+  "run": "/media/main/whj/projects/torch4ms/experiments/maintext_jax_autonomous_20260918/formal_v5",
+  "summaries": [
+    {
+      "method": "autonomous_layered",
+      "planned": 6,
+      "recorded": 6,
+      "completed": 6,
+      "complete": true,
+      "accepted": 6,
+      "first_attempt_accepted": 6,
+      "known_total_tokens": 674009,
+      "unknown_usage_calls": 0,
+      "tokens_per_accepted": 112334.83333333333,
+      "wall_time_sec": 1816.378661711933,
+      "seconds_per_accepted": 302.72977695198887,
+      "calls": 76
+    },
+    {
+      "method": "direct_shared_tools",
+      "planned": 6,
+      "recorded": 6,
+      "completed": 6,
+      "complete": true,
+      "accepted": 6,
+      "first_attempt_accepted": 6,
+      "known_total_tokens": 353311,
+      "unknown_usage_calls": 0,
+      "tokens_per_accepted": 58885.166666666664,
+      "wall_time_sec": 823.2178253169986,
+      "seconds_per_accepted": 137.20297088616644,
+      "calls": 57
+    },
+    {
+      "method": "ivy",
+      "planned": 6,
+      "recorded": 6,
+      "completed": 6,
+      "accepted": 0,
+      "unavailable": 0,
+      "known_total_tokens": 0,
+      "calls": 0,
+      "candidate_wall_time_sec": 561.9348068979452,
+      "clean_gate_wall_time_sec": 191.6631748789805
+    },
+    {
+      "method": "torch2jax",
+      "planned": 6,
+      "recorded": 6,
+      "completed": 6,
+      "accepted": 0,
+      "unavailable": 0,
+      "known_total_tokens": 0,
+      "calls": 0,
+      "candidate_wall_time_sec": 39.234046417986974,
+      "clean_gate_wall_time_sec": 15.929649554018397
+    }
+  ]
+}

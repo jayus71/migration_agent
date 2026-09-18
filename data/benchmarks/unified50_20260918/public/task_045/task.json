@@ -1,0 +1,37 @@
+{
+  "source_reference": "source.py",
+  "target_framework": "MindSpore",
+  "public_interfaces": [
+    "_batch",
+    "_optimizer",
+    "apply_external_trainable_grads",
+    "build_model",
+    "train_step"
+  ],
+  "semantics": "Train every parameter of the two-layer model using mean squared error and SGD with learning rate 0.2. train_step performs backward and parameter update, then clears gradients. External gradients bind by parameter name and apply only to trainable parameters.",
+  "model_variant": "mlp",
+  "editable": [
+    "candidate.py",
+    "torch4ms/**/*.py"
+  ],
+  "tests": [
+    "public"
+  ],
+  "seed": 101,
+  "evaluation": {
+    "final_seeds": [
+      101,
+      202,
+      303
+    ],
+    "initial_state": "explicit_parameter_value_alignment",
+    "forward_atol": 0.0001,
+    "forward_rtol": 0.0001,
+    "gradient_atol": 0.0001,
+    "gradient_rtol": 0.001,
+    "update_atol": 1e-05,
+    "update_rtol": 0.001,
+    "bf16_atol": 0.01,
+    "backend_execution_required": true
+  }
+}

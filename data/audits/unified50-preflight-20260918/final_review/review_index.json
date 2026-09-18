@@ -1,0 +1,32 @@
+{
+  "formal_execution_authorized": false,
+  "real_model_calls": 0,
+  "main_manifest_sha256": "783dc9ead3169fcbbb19eeac626709b29c5bd0e3f80be37a928f8abadd70f865",
+  "cross_language_manifest_sha256": "625e1ca4949c8f0482895a310a34728b0bfabd7f9a6db0cee1640beb0dab3cb6",
+  "analysis_manifests": {
+    "continuous_role": "39528abd13b1c56bcdef6c904636f30b43c97d0852d0d49b93a7d72914e9fbad",
+    "matchfix_investigation": "515240334cdfb7b16ce669cac07aac194686611d6c0c91c866e71377b7a811a9",
+    "swe_investigation": "81e580d718e7312f8284536cd9341af5b039851f702327798f39c837288b19e9",
+    "without_progress_prompt": "d399f9442237d038d9963ea66750d5cb71624fb8cdb42ae9083ff3afac0af9a8",
+    "without_repair_history": "c0b6e6960e517819bc3189bdb1e3c24fa9d8f96bccdc8f85b065bd1ca4884624"
+  },
+  "main_display_cells": 300,
+  "main_distinct_method_conditions": 174,
+  "cross_language_reused": 36,
+  "cross_language_pending": 72,
+  "plugin_pending_optional": 58,
+  "final_ablation_pending_optional": 87,
+  "jax": {
+    "reuse_existing": 12,
+    "current_method_optional": 6,
+    "new_runs_prepared": false,
+    "decision": "Retain the actual completed implementation; do not rerun JAX for a version label."
+  },
+  "historical_evidence": {
+    "original_repair50": 150,
+    "paired_source12": 24,
+    "natural_translations": "retain completed results",
+    "training_signal_controls": 64,
+    "full_model_migration": 60
+  }
+}

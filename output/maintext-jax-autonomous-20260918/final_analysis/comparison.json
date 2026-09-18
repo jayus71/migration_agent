@@ -1,0 +1,648 @@
+{
+  "run": "/media/main/whj/projects/torch4ms/experiments/maintext_jax_autonomous_20260918/formal_v5",
+  "benchmark": "track_c_six_autonomous",
+  "manifest_sha256": "c02524ceefa24abacf65fb281a27e46ef2cbc855c335b90e8fdbff79367193c6",
+  "complete": true,
+  "all_terminal": true,
+  "methods": {
+    "autonomous_layered": {
+      "planned": 6,
+      "completed": 6,
+      "complete": true,
+      "pending": [],
+      "noncompleted_terminal": {},
+      "accepted": 6,
+      "acceptance_rate": 1.0,
+      "accepted_by_attempt": {
+        "1": 6,
+        "2": 6,
+        "4": 6
+      },
+      "initially_failed": 6,
+      "repaired_initially_failed": 6,
+      "initially_healthy": 0,
+      "retained_healthy": 0,
+      "calls": 76,
+      "prompt_tokens": 624463,
+      "completion_tokens": 49546,
+      "unknown_usage_calls": 0,
+      "total_tokens": 674009,
+      "missing_ledgers": [],
+      "tokens_per_accepted": 112334.83333333333,
+      "wall_time_sum_sec": 1816.378661711933
+    },
+    "direct_shared_tools": {
+      "planned": 6,
+      "completed": 6,
+      "complete": true,
+      "pending": [],
+      "noncompleted_terminal": {},
+      "accepted": 6,
+      "acceptance_rate": 1.0,
+      "accepted_by_attempt": {
+        "1": 6,
+        "2": 6,
+        "4": 6
+      },
+      "initially_failed": 6,
+      "repaired_initially_failed": 6,
+      "initially_healthy": 0,
+      "retained_healthy": 0,
+      "calls": 57,
+      "prompt_tokens": 309997,
+      "completion_tokens": 43314,
+      "unknown_usage_calls": 0,
+      "total_tokens": 353311,
+      "missing_ledgers": [],
+      "tokens_per_accepted": 58885.166666666664,
+      "wall_time_sum_sec": 823.2178253169986
+    }
+  },
+  "paired_with_autonomous_layered": {
+    "direct_shared_tools": {
+      "complete": true,
+      "ours_only": [],
+      "other_only": [],
+      "both_accepted": [
+        "task_001",
+        "task_002",
+        "task_003",
+        "task_004",
+        "task_005",
+        "task_006"
+      ],
+      "neither_accepted": [],
+      "initial_outcome_mismatches": []
+    }
+  },
+  "records": [
+    {
+      "task": "task_001",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "initially_accepted": false,
+      "accepted": true,
+      "first_accepted_attempt": 1,
+      "attempts": 1,
+      "stage_statuses": [
+        "invalid_final"
+      ],
+      "last_changed_files": [
+        "candidate.py"
+      ],
+      "calls": 12,
+      "usage": {
+        "prompt_tokens": 110146,
+        "completion_tokens": 13937,
+        "total_tokens": 124083,
+        "budget_output_tokens": 13937,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 8007,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 517.3646163170342
+      },
+      "wall_time_sec": 517.3636146869976
+    },
+    {
+      "task": "task_002",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "initially_accepted": false,
+      "accepted": true,
+      "first_accepted_attempt": 1,
+      "attempts": 1,
+      "stage_statuses": [
+        "completed"
+      ],
+      "last_changed_files": [
+        "candidate.py"
+      ],
+      "calls": 14,
+      "usage": {
+        "prompt_tokens": 109573,
+        "completion_tokens": 5995,
+        "total_tokens": 115568,
+        "budget_output_tokens": 5995,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 1400,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 228.1568798859953
+      },
+      "wall_time_sec": 228.15589137299685
+    },
+    {
+      "task": "task_003",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "initially_accepted": false,
+      "accepted": true,
+      "first_accepted_attempt": 1,
+      "attempts": 1,
+      "stage_statuses": [
+        "invalid_final"
+      ],
+      "last_changed_files": [
+        "candidate.py"
+      ],
+      "calls": 13,
+      "usage": {
+        "prompt_tokens": 117265,
+        "completion_tokens": 9726,
+        "total_tokens": 126991,
+        "budget_output_tokens": 9726,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 4175,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 508.8833170469734
+      },
+      "wall_time_sec": 508.88231876294594
+    },
+    {
+      "task": "task_004",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "initially_accepted": false,
+      "accepted": true,
+      "first_accepted_attempt": 1,
+      "attempts": 1,
+      "stage_statuses": [
+        "invalid_final"
+      ],
+      "last_changed_files": [
+        "candidate.py"
+      ],
+      "calls": 14,
+      "usage": {
+        "prompt_tokens": 109779,
+        "completion_tokens": 6236,
+        "total_tokens": 116015,
+        "budget_output_tokens": 6236,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 1652,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 222.66904091200558
+      },
+      "wall_time_sec": 222.66807495598914
+    },
+    {
+      "task": "task_005",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "initially_accepted": false,
+      "accepted": true,
+      "first_accepted_attempt": 1,
+      "attempts": 1,
+      "stage_statuses": [
+        "invalid_final"
+      ],
+      "last_changed_files": [
+        "candidate.py"
+      ],
+      "calls": 10,
+      "usage": {
+        "prompt_tokens": 62778,
+        "completion_tokens": 4996,
+        "total_tokens": 67774,
+        "budget_output_tokens": 4996,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 1553,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 219.69435606501065
+      },
+      "wall_time_sec": 219.69335896300618
+    },
+    {
+      "task": "task_006",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "initially_accepted": false,
+      "accepted": true,
+      "first_accepted_attempt": 1,
+      "attempts": 1,
+      "stage_statuses": [
+        "invalid_final"
+      ],
+      "last_changed_files": [
+        "candidate.py"
+      ],
+      "calls": 13,
+      "usage": {
+        "prompt_tokens": 114922,
+        "completion_tokens": 8656,
+        "total_tokens": 123578,
+        "budget_output_tokens": 8656,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 3016,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 119.61639850900974
+      },
+      "wall_time_sec": 119.61540296999738
+    },
+    {
+      "task": "task_001",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "initially_accepted": false,
+      "accepted": true,
+      "first_accepted_attempt": 1,
+      "attempts": 1,
+      "stage_statuses": [
+        "completed"
+      ],
+      "last_changed_files": [
+        "candidate.py"
+      ],
+      "calls": 10,
+      "usage": {
+        "prompt_tokens": 48731,
+        "completion_tokens": 7678,
+        "total_tokens": 56409,
+        "budget_output_tokens": 7678,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 2528,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 354.5895462409826
+      },
+      "wall_time_sec": 354.58854598301696
+    },
+    {
+      "task": "task_002",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "initially_accepted": false,
+      "accepted": true,
+      "first_accepted_attempt": 1,
+      "attempts": 1,
+      "stage_statuses": [
+        "completed"
+      ],
+      "last_changed_files": [
+        "candidate.py"
+      ],
+      "calls": 10,
+      "usage": {
+        "prompt_tokens": 53817,
+        "completion_tokens": 8269,
+        "total_tokens": 62086,
+        "budget_output_tokens": 8269,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 3554,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 95.01937002997147
+      },
+      "wall_time_sec": 95.01840180699946
+    },
+    {
+      "task": "task_003",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "initially_accepted": false,
+      "accepted": true,
+      "first_accepted_attempt": 1,
+      "attempts": 1,
+      "stage_statuses": [
+        "completed"
+      ],
+      "last_changed_files": [
+        "candidate.py"
+      ],
+      "calls": 10,
+      "usage": {
+        "prompt_tokens": 58387,
+        "completion_tokens": 6142,
+        "total_tokens": 64529,
+        "budget_output_tokens": 6142,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 1216,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 83.39928695803974
+      },
+      "wall_time_sec": 83.39839036599733
+    },
+    {
+      "task": "task_004",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "initially_accepted": false,
+      "accepted": true,
+      "first_accepted_attempt": 1,
+      "attempts": 1,
+      "stage_statuses": [
+        "completed"
+      ],
+      "last_changed_files": [
+        "candidate.py"
+      ],
+      "calls": 8,
+      "usage": {
+        "prompt_tokens": 30441,
+        "completion_tokens": 3445,
+        "total_tokens": 33886,
+        "budget_output_tokens": 3445,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 1064,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 64.4750173020293
+      },
+      "wall_time_sec": 64.47400653699879
+    },
+    {
+      "task": "task_005",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "initially_accepted": false,
+      "accepted": true,
+      "first_accepted_attempt": 1,
+      "attempts": 1,
+      "stage_statuses": [
+        "completed"
+      ],
+      "last_changed_files": [
+        "candidate.py"
+      ],
+      "calls": 9,
+      "usage": {
+        "prompt_tokens": 53072,
+        "completion_tokens": 7529,
+        "total_tokens": 60601,
+        "budget_output_tokens": 7529,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 2999,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 114.79425969294971
+      },
+      "wall_time_sec": 114.79327699600253
+    },
+    {
+      "task": "task_006",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "initially_accepted": false,
+      "accepted": true,
+      "first_accepted_attempt": 1,
+      "attempts": 1,
+      "stage_statuses": [
+        "completed"
+      ],
+      "last_changed_files": [
+        "candidate.py"
+      ],
+      "calls": 10,
+      "usage": {
+        "prompt_tokens": 65549,
+        "completion_tokens": 10251,
+        "total_tokens": 75800,
+        "budget_output_tokens": 10251,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 6083,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 110.94619744998636
+      },
+      "wall_time_sec": 110.94520362798357
+    }
+  ],
+  "unexpected_results": [],
+  "raw_ledger_audits": {
+    "task_001/autonomous_layered": {
+      "available": true,
+      "observed": {
+        "calls": 12,
+        "prompt_tokens": 110146,
+        "completion_tokens": 13937,
+        "unknown_usage_calls": 0
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ],
+      "mismatches": {}
+    },
+    "task_002/autonomous_layered": {
+      "available": true,
+      "observed": {
+        "calls": 14,
+        "prompt_tokens": 109573,
+        "completion_tokens": 5995,
+        "unknown_usage_calls": 0
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ],
+      "mismatches": {}
+    },
+    "task_003/autonomous_layered": {
+      "available": true,
+      "observed": {
+        "calls": 13,
+        "prompt_tokens": 117265,
+        "completion_tokens": 9726,
+        "unknown_usage_calls": 0
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ],
+      "mismatches": {}
+    },
+    "task_004/autonomous_layered": {
+      "available": true,
+      "observed": {
+        "calls": 14,
+        "prompt_tokens": 109779,
+        "completion_tokens": 6236,
+        "unknown_usage_calls": 0
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ],
+      "mismatches": {}
+    },
+    "task_005/autonomous_layered": {
+      "available": true,
+      "observed": {
+        "calls": 10,
+        "prompt_tokens": 62778,
+        "completion_tokens": 4996,
+        "unknown_usage_calls": 0
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ],
+      "mismatches": {}
+    },
+    "task_006/autonomous_layered": {
+      "available": true,
+      "observed": {
+        "calls": 13,
+        "prompt_tokens": 114922,
+        "completion_tokens": 8656,
+        "unknown_usage_calls": 0
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ],
+      "mismatches": {}
+    },
+    "task_001/direct_shared_tools": {
+      "available": true,
+      "observed": {
+        "calls": 10,
+        "prompt_tokens": 48731,
+        "completion_tokens": 7678,
+        "unknown_usage_calls": 0
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ],
+      "mismatches": {}
+    },
+    "task_002/direct_shared_tools": {
+      "available": true,
+      "observed": {
+        "calls": 10,
+        "prompt_tokens": 53817,
+        "completion_tokens": 8269,
+        "unknown_usage_calls": 0
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ],
+      "mismatches": {}
+    },
+    "task_003/direct_shared_tools": {
+      "available": true,
+      "observed": {
+        "calls": 10,
+        "prompt_tokens": 58387,
+        "completion_tokens": 6142,
+        "unknown_usage_calls": 0
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ],
+      "mismatches": {}
+    },
+    "task_004/direct_shared_tools": {
+      "available": true,
+      "observed": {
+        "calls": 8,
+        "prompt_tokens": 30441,
+        "completion_tokens": 3445,
+        "unknown_usage_calls": 0
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ],
+      "mismatches": {}
+    },
+    "task_005/direct_shared_tools": {
+      "available": true,
+      "observed": {
+        "calls": 9,
+        "prompt_tokens": 53072,
+        "completion_tokens": 7529,
+        "unknown_usage_calls": 0
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ],
+      "mismatches": {}
+    },
+    "task_006/direct_shared_tools": {
+      "available": true,
+      "observed": {
+        "calls": 10,
+        "prompt_tokens": 65549,
+        "completion_tokens": 10251,
+        "unknown_usage_calls": 0
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ],
+      "mismatches": {}
+    }
+  },
+  "counting": "Fixed manifest task set; terminal costs include failures; incomplete or unknown-usage cost ratios are null. Healthy inputs are separate from repaired failures. Paired lists from incomplete grids are provisional."
+}

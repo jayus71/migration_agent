@@ -1,0 +1,2002 @@
+{
+  "purpose": "Discussion inventory, not an experiment manifest or launch authorization",
+  "model_calls": 0,
+  "candidate_executions": 0,
+  "task_count": 50,
+  "source_status_counts": {
+    "needs_authoring": 38,
+    "existing_authored_native_source": 12
+  },
+  "public_input_form_counts": {
+    "synthetic_pytorch_fixture_without_independent_original_source": 34,
+    "public_native_workload_can_be_authored_for_new_protocol": 12,
+    "adapter_specific_interface_without_native_source_pair": 4
+  },
+  "retained_original_repair_runs": 150,
+  "retained_paired_repair_runs": 24,
+  "retained_original_acceptance": {
+    "LaDiM": 45,
+    "SWE-agent": 29,
+    "Direct": 35
+  },
+  "retained_paired_acceptance": {
+    "autonomous_layered": 12,
+    "matchfix_full_orchestration": 11
+  },
+  "evidence_files": {
+    "public_inputs": {
+      "path": "/home/jayus71/code/migration_agent-matchfix-source-pairs-20260918/data/audits/matchfix-source-pairs-20260918/public_input_audit.json",
+      "sha256": "5b5514788a5693eeeb0e080b3f7091f4afe22bca3f900c723a53f0c036a5f1fd"
+    },
+    "original_comparison": {
+      "path": "/home/jayus71/code/migration_agent/output/autonomous-verifier-20260917/autonomous_recovery_comparison_final.json",
+      "sha256": "c0b4a1b7afef5de42a57b08c3fa8681a85c08c0d80ce68e4b02fecd34311f814"
+    },
+    "selected_method": {
+      "path": "/home/jayus71/code/migration_agent/output/maintext-ablations-20260918/recovery_final.json",
+      "sha256": "6d09ffb3ec6c379d1261be2887f3a4322ec60d94e521a42bf07a140dcd0c86ff"
+    },
+    "paired_repair": {
+      "path": "/home/jayus71/code/migration_agent/output/paired12-matchfix-20260918-v1/paper_results.json",
+      "sha256": "f066b33438a2e1c8264a0a96f2ce2ec9fbdd5a851b76bb8da44875d2b400643c"
+    }
+  },
+  "records": [
+    {
+      "task": "task_001",
+      "candidate_sha256": "409c8e996b55018b9b94e8ff19cf583d42e4d947c1cfcff58fb1943a2921049a",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_001/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_001/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_001/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_002",
+      "candidate_sha256": "7bd0fa6ff2e26c9fcd5d70704ec116a38668fdf9277b56784134f2a2d243df68",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_002/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_002/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_002/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_003",
+      "candidate_sha256": "784b7d46135e80bf2c09d64dbfdb3dc11e92ee2b249bc32cf94e7ea56277097e",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_003/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_003/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_003/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_004",
+      "candidate_sha256": "dac78edf17ea3e49358aa0fed3c203725ba4e0f59af1557af4e9377fa7c764b4",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_004/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_004/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_004/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_005",
+      "candidate_sha256": "e6c982aea8ed4e5acbd2114cdfceb3fe9af42c2ea51168ff5520ef78fa2742bc",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_005/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_005/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_005/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_006",
+      "candidate_sha256": "9fbad93d72e1c79681e44556098b7966af93c0e438c0a8bfe6a935e1fc7d6f32",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_006/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_006/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_006/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_007",
+      "candidate_sha256": "33ec989f5030a4d7d97d097506985ae3f90dc46182b3a5e71c9c5a1fc241bed2",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_007/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_007/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_007/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_008",
+      "candidate_sha256": "1328319c642fbe28dbe8c62e302df326760596c7346fff0b1bd3cf8f2d0caeaf",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_008/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_008/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_008/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_009",
+      "candidate_sha256": "38ff195d7bba48b212fbb9276378d3a5c0ab2a484028437f7d25e35fef68927b",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_009/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_009/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_009/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_010",
+      "candidate_sha256": "63f29f7d907db36bc1e5a9bebb0e840615112d1b9e5cc256d2acf7c6348efb60",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_010/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_010/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_010/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_011",
+      "candidate_sha256": "ac4667c6fc19fbdd88f246686a91bd85e8513b2d8378a2c893f0fdc7c66b8d63",
+      "public_input_form": "public_native_workload_can_be_authored_for_new_protocol",
+      "source": {
+        "status": "existing_authored_native_source",
+        "sha256": "e588d48fc3429177d8145b2eaf809c2b584215372a04e83f216bd2029e27f959",
+        "path": "output/paired12-matchfix-20260918-v1/private_inputs/task_011/source.py"
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_011/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_011/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_011/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {
+        "autonomous_layered": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_011/autonomous_layered/result.json",
+          "result_sha256": "71d6af7be157831992e5b826ad5b2546daff54118e62631a514f72058ac3c458"
+        },
+        "matchfix_full_orchestration": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": false,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_011/matchfix_full_orchestration/result.json",
+          "result_sha256": "e974c53fffa3d36f1b6644f317154094caac000b28bc246e2a4016d6e997bf78"
+        }
+      },
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_012",
+      "candidate_sha256": "ac4667c6fc19fbdd88f246686a91bd85e8513b2d8378a2c893f0fdc7c66b8d63",
+      "public_input_form": "public_native_workload_can_be_authored_for_new_protocol",
+      "source": {
+        "status": "existing_authored_native_source",
+        "sha256": "e588d48fc3429177d8145b2eaf809c2b584215372a04e83f216bd2029e27f959",
+        "path": "output/paired12-matchfix-20260918-v1/private_inputs/task_012/source.py"
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_012/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_012/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_012/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {
+        "autonomous_layered": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_012/autonomous_layered/result.json",
+          "result_sha256": "b54a38d0e06f07ab4f81903fed5a4c134dccbb470c21c98296fe0835561f2a2a"
+        },
+        "matchfix_full_orchestration": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_012/matchfix_full_orchestration/result.json",
+          "result_sha256": "a1ff1289ac2e035e9d16feb99a18d053140c0b6f88a4c1d46483969494ee6197"
+        }
+      },
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_013",
+      "candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "public_input_form": "public_native_workload_can_be_authored_for_new_protocol",
+      "source": {
+        "status": "existing_authored_native_source",
+        "sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+        "path": "output/paired12-matchfix-20260918-v1/private_inputs/task_013/source.py"
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_013/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_013/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_013/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {
+        "autonomous_layered": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_013/autonomous_layered/result.json",
+          "result_sha256": "2c79675b0bf9d184bce2c2bd2a0779f7841dc44eff30a3a2e34658a0158baa29"
+        },
+        "matchfix_full_orchestration": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_013/matchfix_full_orchestration/result.json",
+          "result_sha256": "88e22182af5e0622576f8a8633dfdf6a982428772511edcc3d035fe05c463e4c"
+        }
+      },
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_014",
+      "candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "public_input_form": "public_native_workload_can_be_authored_for_new_protocol",
+      "source": {
+        "status": "existing_authored_native_source",
+        "sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+        "path": "output/paired12-matchfix-20260918-v1/private_inputs/task_014/source.py"
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_014/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_014/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_014/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {
+        "autonomous_layered": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_014/autonomous_layered/result.json",
+          "result_sha256": "46d0fab9406ee44af1fb15d06e27e3e03f1d9dd2f1a900abf5d4db919454e9cd"
+        },
+        "matchfix_full_orchestration": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_014/matchfix_full_orchestration/result.json",
+          "result_sha256": "38476768e21ee9d35b6201fe1d49f78c74b455dd8ecb4033791f9e87a3c1fa3c"
+        }
+      },
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_015",
+      "candidate_sha256": "d801c2cc50e300ec48c02a865f8d0c1147fc98e6dcac38917d00a502fafd9185",
+      "public_input_form": "public_native_workload_can_be_authored_for_new_protocol",
+      "source": {
+        "status": "existing_authored_native_source",
+        "sha256": "77ff06aa7d0253608d909257392de990279719be343e9c21b94fd1b5034ecf43",
+        "path": "output/paired12-matchfix-20260918-v1/private_inputs/task_015/source.py"
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_015/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_015/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_015/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {
+        "autonomous_layered": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_015/autonomous_layered/result.json",
+          "result_sha256": "bd93ca4ebaa77a3a099a50b9512ec11dc5b770b3702de335ea527bf76154a7d7"
+        },
+        "matchfix_full_orchestration": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_015/matchfix_full_orchestration/result.json",
+          "result_sha256": "d2a99de7e1f6a2331ff7a1e611fd48f7120d9fb4d619ce545cf87293e8c3e2c3"
+        }
+      },
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_016",
+      "candidate_sha256": "d801c2cc50e300ec48c02a865f8d0c1147fc98e6dcac38917d00a502fafd9185",
+      "public_input_form": "public_native_workload_can_be_authored_for_new_protocol",
+      "source": {
+        "status": "existing_authored_native_source",
+        "sha256": "77ff06aa7d0253608d909257392de990279719be343e9c21b94fd1b5034ecf43",
+        "path": "output/paired12-matchfix-20260918-v1/private_inputs/task_016/source.py"
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_016/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_016/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_016/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {
+        "autonomous_layered": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_016/autonomous_layered/result.json",
+          "result_sha256": "4c97471cc8c6082ac59d7c6fc00707fb484fbd91b98026c3efaa21573f58ad4a"
+        },
+        "matchfix_full_orchestration": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_016/matchfix_full_orchestration/result.json",
+          "result_sha256": "8fa0407228d16273090f9e72da1c63b80ab920549bd380179398b4ab82e2ee56"
+        }
+      },
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_017",
+      "candidate_sha256": "34f229a0d4d3153285181804187979e8fbb6080266bf17cbdc6fc7d6cb0858d6",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_017/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_017/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_017/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_018",
+      "candidate_sha256": "c878a9e9463d231ea01a76a5e598182a66ec7208a31953793befb9cdae651198",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_018/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_018/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_018/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_019",
+      "candidate_sha256": "6dbd6a371dd0fcc96885ddbfd268cfb06e16380c80d911dd8bd80c1772ae0769",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_019/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_019/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_019/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_020",
+      "candidate_sha256": "9fc2aec303d2ed61a5d866ee27dc7d1be78f276c1e83cfb20e6a0a7bc386db78",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_020/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_020/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_020/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_021",
+      "candidate_sha256": "e92ee6405fa25d37c7bd91a5b6057ce84b5a9b815b8f3b3b117da12d3854a9cf",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_021/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_021/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_021/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_022",
+      "candidate_sha256": "579d5a87350e7191295b810a77d62e946326c9f2f3e8273744757bd3c97f9bf2",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_022/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_022/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_022/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_023",
+      "candidate_sha256": "61fc3711ff72475c33597687e9e709370fe4082914c8c2635fda38f3a19a95c3",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_023/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_023/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_023/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_024",
+      "candidate_sha256": "63c5135b889321f2b70c1e0efa25cc9ab434d882206f4eac878a5047dc125cc3",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_024/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_024/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_024/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_025",
+      "candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "public_input_form": "public_native_workload_can_be_authored_for_new_protocol",
+      "source": {
+        "status": "existing_authored_native_source",
+        "sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+        "path": "output/paired12-matchfix-20260918-v1/private_inputs/task_025/source.py"
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_025/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_025/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_025/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {
+        "autonomous_layered": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_025/autonomous_layered/result.json",
+          "result_sha256": "7d4db85d367816fdc03bea8a2bf43a376a8dd128bcf08fd3ef5a86c429618277"
+        },
+        "matchfix_full_orchestration": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_025/matchfix_full_orchestration/result.json",
+          "result_sha256": "7d6c905088ce2d1f401b088a4e5d75c72f6bfe85f2fa812ccc813dbdc5790fe1"
+        }
+      },
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_026",
+      "candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "public_input_form": "public_native_workload_can_be_authored_for_new_protocol",
+      "source": {
+        "status": "existing_authored_native_source",
+        "sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+        "path": "output/paired12-matchfix-20260918-v1/private_inputs/task_026/source.py"
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_026/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_026/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_026/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {
+        "autonomous_layered": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_026/autonomous_layered/result.json",
+          "result_sha256": "a0d124357d23b1833721abe28166e6d376f3e244ceba4e274c846a140b75a8b3"
+        },
+        "matchfix_full_orchestration": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_026/matchfix_full_orchestration/result.json",
+          "result_sha256": "81b5d98f52d5d74f116e2b9770c0123eed697d02da34c2fcd40a13dcc69c659c"
+        }
+      },
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_027",
+      "candidate_sha256": "065dfc047dd2a05eb8eccc7bb07b9269302c99f09584d5633f135c2095e22162",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_027/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_027/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_027/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_028",
+      "candidate_sha256": "c706ef58ebe2c78a93b28cc21bffe5724276a1af97e5a94a56a8f4bd97653e27",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/fixed50_v3/without_edit_format_feedback/conditions/task_028/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_028/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_028/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_029",
+      "candidate_sha256": "d801c2cc50e300ec48c02a865f8d0c1147fc98e6dcac38917d00a502fafd9185",
+      "public_input_form": "public_native_workload_can_be_authored_for_new_protocol",
+      "source": {
+        "status": "existing_authored_native_source",
+        "sha256": "77ff06aa7d0253608d909257392de990279719be343e9c21b94fd1b5034ecf43",
+        "path": "output/paired12-matchfix-20260918-v1/private_inputs/task_029/source.py"
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_029/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_029/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_029/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {
+        "autonomous_layered": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_029/autonomous_layered/result.json",
+          "result_sha256": "863ff4990ab70871e1fcd8faa8352454142d11b2386937e1e6b763c41493e3b6"
+        },
+        "matchfix_full_orchestration": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_029/matchfix_full_orchestration/result.json",
+          "result_sha256": "94ffb90e5f2811b6b71b0aacd55fb5bcc250d99a91a9c97c3025b1b2bc95e11e"
+        }
+      },
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_030",
+      "candidate_sha256": "d801c2cc50e300ec48c02a865f8d0c1147fc98e6dcac38917d00a502fafd9185",
+      "public_input_form": "public_native_workload_can_be_authored_for_new_protocol",
+      "source": {
+        "status": "existing_authored_native_source",
+        "sha256": "77ff06aa7d0253608d909257392de990279719be343e9c21b94fd1b5034ecf43",
+        "path": "output/paired12-matchfix-20260918-v1/private_inputs/task_030/source.py"
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_030/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_030/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_030/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {
+        "autonomous_layered": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_030/autonomous_layered/result.json",
+          "result_sha256": "91c9c233cfd68cd2e7756235dd46160eb7e9524e4ced9ffeee117ed3185bbca2"
+        },
+        "matchfix_full_orchestration": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_030/matchfix_full_orchestration/result.json",
+          "result_sha256": "ae624ead60b54a3b265abf006bf53220fca97719cdf91928f189c77b976705a7"
+        }
+      },
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_031",
+      "candidate_sha256": "a5d85404ccd514f8879567d39e7ccf2093feabb4194ea032d050de3626da6a40",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_031/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_031/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_031/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_032",
+      "candidate_sha256": "f0d941ee647f7340653c8520b2c28fb1a26ad4f6616b5e82ccffd3497ccb9ded",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_032/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_032/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_032/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_033",
+      "candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "public_input_form": "public_native_workload_can_be_authored_for_new_protocol",
+      "source": {
+        "status": "existing_authored_native_source",
+        "sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+        "path": "output/paired12-matchfix-20260918-v1/private_inputs/task_033/source.py"
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_033/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_033/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_033/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {
+        "autonomous_layered": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_033/autonomous_layered/result.json",
+          "result_sha256": "f3f82e09b2c962f8c2aa2159ffa9515d02f376ae231200dc47d47a07c9bab544"
+        },
+        "matchfix_full_orchestration": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_033/matchfix_full_orchestration/result.json",
+          "result_sha256": "534f3269e46c90ebb8b1f32132663a6cdb238dd2031d5965f8ec9a2aabea8fe6"
+        }
+      },
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_034",
+      "candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "public_input_form": "public_native_workload_can_be_authored_for_new_protocol",
+      "source": {
+        "status": "existing_authored_native_source",
+        "sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+        "path": "output/paired12-matchfix-20260918-v1/private_inputs/task_034/source.py"
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_034/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_034/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_034/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {
+        "autonomous_layered": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_034/autonomous_layered/result.json",
+          "result_sha256": "4baf01ad436c850da6c92758566c3d323ca63320d82496a85d2f02b2e5c3dd95"
+        },
+        "matchfix_full_orchestration": {
+          "action": "reuse_in_original_paired_repair_protocol",
+          "accepted": true,
+          "result_path": "output/paired12-matchfix-20260918-v1/conditions/task_034/matchfix_full_orchestration/result.json",
+          "result_sha256": "efeb021956b74c39f1f20d6817527603199e8745dc9fc3e3d57d540fcd14e7f8"
+        }
+      },
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_035",
+      "candidate_sha256": "d802d874981e87e4dde51dbdc633cf95bbc0d75d2b2c90e093b5394da5fe1bf7",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_035/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_035/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_035/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_036",
+      "candidate_sha256": "022c7d863b16a9610b53a9e845f4fd78dc0cd751719d2bd18444c86a97cc4953",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_036/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_036/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_036/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_037",
+      "candidate_sha256": "a7d02bf2034d792915adbd6d4453fe88df24cafd4e6a7a6ab63d2ec2999cdff0",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_037/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_037/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_037/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_038",
+      "candidate_sha256": "86b070e68be413759d43cfbf45888dc3754ce940ee8bd44cd3477c428f28ec33",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_038/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_038/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_038/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_039",
+      "candidate_sha256": "8b8d78f97f1ca5347a276afa457aa3dcbce7d59ea46e81eac2a33fd72e865946",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_039/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_039/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_039/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_040",
+      "candidate_sha256": "bc13d98af543989c4b3355f17390022dba6fccad4f6e13573c0e2f64c33d0080",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_040/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_040/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_040/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_041",
+      "candidate_sha256": "503908e58c40566f122708f09079ac0ddbe47071082140cb20eacfded1a14ab3",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_041/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_041/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_041/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_042",
+      "candidate_sha256": "4a3185dc6dcb0e13429df7d55247cfdc44f3d683a891c8618e5d1e17933d0b90",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_042/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_042/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_042/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_043",
+      "candidate_sha256": "c385c964390d073102393baab29d666979bda79242d58b993d454756ebe9fd4d",
+      "public_input_form": "adapter_specific_interface_without_native_source_pair",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_043/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_043/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_fixed50_20260917/formal_v3/conditions/task_043/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_044",
+      "candidate_sha256": "c385c964390d073102393baab29d666979bda79242d58b993d454756ebe9fd4d",
+      "public_input_form": "adapter_specific_interface_without_native_source_pair",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_044/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_recovery_20260917/round1/Fixed50/formal_v3/conditions/task_044/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_recovery_20260917/round1/Fixed50/formal_v3/conditions/task_044/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_045",
+      "candidate_sha256": "b6f1684a4af8cda7e1cd1688b5be85cb9df0822c463099178c339db6bb682a7c",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_045/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_recovery_20260917/round1/Fixed50/formal_v3/conditions/task_045/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_recovery_20260917/round1/Fixed50/formal_v3/conditions/task_045/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_046",
+      "candidate_sha256": "e21ebe6614e41291c07877b11e9eaba7e4c72bf7c954ebeb7168b9980286212f",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_046/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_recovery_20260917/round1/Fixed50/formal_v3/conditions/task_046/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": false,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_recovery_20260917/round1/Fixed50/formal_v3/conditions/task_046/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_047",
+      "candidate_sha256": "6a28e85df3ed2b902d761478b9101ee317c77151b59cf0c7efad195d07064cb9",
+      "public_input_form": "adapter_specific_interface_without_native_source_pair",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_047/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_recovery_20260917/round1/Fixed50/formal_v3/conditions/task_047/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_recovery_20260917/round1/Fixed50/formal_v3/conditions/task_047/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_048",
+      "candidate_sha256": "6a28e85df3ed2b902d761478b9101ee317c77151b59cf0c7efad195d07064cb9",
+      "public_input_form": "adapter_specific_interface_without_native_source_pair",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_048/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_recovery_20260917/round1/Fixed50/formal_v3/conditions/task_048/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_recovery_20260917/round1/Fixed50/formal_v3/conditions/task_048/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_049",
+      "candidate_sha256": "685fed5d3d3ab0249c030a77945f637936c9e371b9d3753f8cde634664ab4b80",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_049/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_recovery_20260917/round1/Fixed50/formal_v3/conditions/task_049/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_recovery_20260917/round1/Fixed50/formal_v3/conditions/task_049/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    },
+    {
+      "task": "task_050",
+      "candidate_sha256": "e8802c5be456caf39ec0ecaea83e7e2bcfad36f2a167d35fbecc13f773582355",
+      "public_input_form": "synthetic_pytorch_fixture_without_independent_original_source",
+      "source": {
+        "status": "needs_authoring",
+        "sha256": null,
+        "path": null
+      },
+      "original_repair": {
+        "LaDiM": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/recovery_round1/fixed50_v3/without_edit_format_feedback/conditions/task_050/autonomous_layered/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "SWE-agent": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_recovery_20260917/round1/Fixed50/formal_v3/conditions/task_050/swe_native_isolated/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        },
+        "Direct": {
+          "action": "reuse_in_original_repair_protocol",
+          "accepted": true,
+          "result_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_recovery_20260917/round1/Fixed50/formal_v3/conditions/task_050/direct_shared_tools/result.json",
+          "end_to_end_reuse": "not_established_different_input_and_generation_protocol"
+        }
+      },
+      "paired_repair": {},
+      "proposed_end_to_end": {
+        "action": "await_source_contract_and_protocol_freeze",
+        "compatible_existing_runs_verified": 0,
+        "automatic_dispatch": false
+      }
+    }
+  ]
+}

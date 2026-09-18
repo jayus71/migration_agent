@@ -1,0 +1,2442 @@
+{
+  "audit_date": "2026-09-17",
+  "scope": "Source and existing saved-prompt audit only; no model calls or new repair experiments.",
+  "refs": {
+    "fixed50": "3454be4e1e58f4889e362bd33289d49f98ebbcf6",
+    "experiment_j": "2d6bd3dfd4f3aefdcc1dc6d4d91277f181b141a8",
+    "local_head": "f3c84bb20ad585f1d28c0ea1d1f1e903cd51c20f"
+  },
+  "versions": {
+    "fixed50": {
+      "catalog": [
+        {
+          "fault_id": "EX-01",
+          "layer": "execution",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "EX-01",
+          "oracle": "candidate tensor boundary type probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "An operator returns a raw tensor where downstream code expects a wrapper object."
+        },
+        {
+          "fault_id": "EX-02",
+          "layer": "execution",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "EX-02",
+          "oracle": "candidate dtype-sensitive matmul probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "A dtype-sensitive matmul receives mismatched FP32/BF16 operands."
+        },
+        {
+          "fault_id": "EX-03",
+          "layer": "execution",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "EX-03",
+          "oracle": "candidate high-rank permutation probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "High-dimensional transpose uses an incomplete permutation."
+        },
+        {
+          "fault_id": "EX-04",
+          "layer": "execution",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "EX-04",
+          "oracle": "candidate index dtype probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "Tensor indexing uses floating-point indices instead of integer indices."
+        },
+        {
+          "fault_id": "EX-05",
+          "layer": "execution",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "EX-05",
+          "oracle": "candidate input container contract probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "A migrated helper passes a list where downstream code expects a mapping."
+        },
+        {
+          "fault_id": "EX-06",
+          "layer": "execution",
+          "scope": "core_operator",
+          "runner": "core_tensor_boundary",
+          "target_files": [
+            "torch4ms/tensor.py"
+          ],
+          "oracle": "tensor boundary type probe",
+          "mutation_kind": "core snapshot text mutation",
+          "notes": "Generic torch4ms dispatch output conversion boundary."
+        },
+        {
+          "fault_id": "EX-07",
+          "layer": "execution",
+          "scope": "core_operator",
+          "runner": "core_qwen",
+          "runner_case": "EX-07",
+          "target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "oracle": "BF16 embedding private probe",
+          "mutation_kind": "natural/core controlled fault",
+          "notes": "Qwen-derived BF16 embedding one_hot/matmul dtype path."
+        },
+        {
+          "fault_id": "EX-08",
+          "layer": "execution",
+          "scope": "core_operator",
+          "runner": "core_attention",
+          "runner_case": "EX-08",
+          "target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "oracle": "SDPA boundary private probe",
+          "mutation_kind": "natural/core controlled fault",
+          "notes": "Qwen-derived SDPA conversion, rank-aware transpose, and output wrapping."
+        },
+        {
+          "fault_id": "EX-09",
+          "layer": "execution",
+          "scope": "core_operator",
+          "runner": "controlled_cases",
+          "runner_case": "EX-09",
+          "oracle": "core overload registry contract probe",
+          "mutation_kind": "generated temporary core-level controlled fault",
+          "notes": "Operator dispatches to the wrong overload variant."
+        },
+        {
+          "fault_id": "EX-10",
+          "layer": "execution",
+          "scope": "core_operator",
+          "runner": "controlled_cases",
+          "runner_case": "EX-10",
+          "oracle": "core tuple/Tensor return protocol probe",
+          "mutation_kind": "generated temporary core-level controlled fault",
+          "notes": "Operator returns a wrapped tensor where downstream code expects a tuple."
+        },
+        {
+          "fault_id": "NU-01",
+          "layer": "numerical",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "NU-01",
+          "oracle": "candidate residual numeric probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "Forward path omits a residual branch."
+        },
+        {
+          "fault_id": "NU-02",
+          "layer": "numerical",
+          "scope": "candidate",
+          "runner": "candidate_softmax",
+          "oracle": "paired numeric softmax probe",
+          "mutation_kind": "generated candidate fixture",
+          "notes": "Unstable exp/sum softmax replaced by stable torch.softmax."
+        },
+        {
+          "fault_id": "NU-03",
+          "layer": "numerical",
+          "scope": "core_operator",
+          "runner": "core_qwen",
+          "runner_case": "NU-03",
+          "target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "oracle": "boolean SDPA mask private probe",
+          "mutation_kind": "core snapshot text mutation",
+          "notes": "Boolean attention mask keep semantics."
+        },
+        {
+          "fault_id": "NU-04",
+          "layer": "numerical",
+          "scope": "core_operator",
+          "runner": "controlled_cases",
+          "runner_case": "NU-04",
+          "oracle": "core mask fill value numeric probe",
+          "mutation_kind": "generated temporary core-level controlled fault",
+          "notes": "Mask fill uses an insufficient value so masked positions affect probabilities."
+        },
+        {
+          "fault_id": "NU-05",
+          "layer": "numerical",
+          "scope": "core_operator",
+          "runner": "core_attention",
+          "runner_case": "NU-05",
+          "target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "oracle": "SDPA scaling private probe",
+          "mutation_kind": "core snapshot text mutation",
+          "notes": "Missing 1/sqrt(d) SDPA scaling."
+        },
+        {
+          "fault_id": "NU-06",
+          "layer": "numerical",
+          "scope": "core_operator",
+          "runner": "controlled_cases",
+          "runner_case": "NU-06",
+          "oracle": "core RoPE pairing numeric probe",
+          "mutation_kind": "generated temporary core-level controlled fault",
+          "notes": "RoPE rotation uses the wrong sign or pairing."
+        },
+        {
+          "fault_id": "NU-07",
+          "layer": "numerical",
+          "scope": "core_operator",
+          "runner": "core_qwen",
+          "runner_case": "NU-07",
+          "target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "oracle": "GQA KV repeat private probe",
+          "mutation_kind": "core snapshot text mutation",
+          "notes": "Qwen-derived grouped-query attention KV repeat semantics."
+        },
+        {
+          "fault_id": "GR-01",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "candidate_training",
+          "runner_case": "GR-01",
+          "oracle": "candidate gradient/update probe",
+          "mutation_kind": "generated candidate source mutation",
+          "notes": "Detached hidden activation removes first-layer gradients."
+        },
+        {
+          "fault_id": "GR-02",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "GR-02",
+          "oracle": "candidate parameter-update probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "Gradients are cleared after backward before optimizer.step."
+        },
+        {
+          "fault_id": "GR-03",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "GR-03",
+          "oracle": "candidate parameter-update probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "optimizer.step is missing from the train step."
+        },
+        {
+          "fault_id": "GR-04",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "candidate_training",
+          "runner_case": "GR-04",
+          "oracle": "candidate gradient/update probe",
+          "mutation_kind": "generated candidate source mutation",
+          "notes": "Wrong final-layer requires_grad freeze."
+        },
+        {
+          "fault_id": "GR-05",
+          "layer": "gradient_update",
+          "scope": "core_autograd_optimizer",
+          "runner": "core_gradient_mapping",
+          "target_files": [
+            "torch4ms/autograd/forward_extractor.py",
+            "torch4ms/autograd/__init__.py"
+          ],
+          "oracle": "trainable gradient mapping private probe",
+          "mutation_kind": "natural/core controlled fault",
+          "notes": "Trainable-parameter gradient extraction/writeback mapping."
+        },
+        {
+          "fault_id": "GR-06",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "GR-06",
+          "oracle": "candidate trainability and update probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "The target trainable layer is incorrectly frozen."
+        },
+        {
+          "fault_id": "GR-07",
+          "layer": "gradient_update",
+          "scope": "core_autograd_optimizer",
+          "runner": "core_optimizer_mapping",
+          "runner_case": "GR-07",
+          "target_files": [
+            "torch4ms/optim/optimizer.py"
+          ],
+          "oracle": "core trainable gradient order mapping probe",
+          "mutation_kind": "controlled core optimizer trainable-parameter filter mutation",
+          "notes": "The optimizer keeps frozen parameters in its gradient/update order instead of the trainable-only order."
+        },
+        {
+          "fault_id": "GR-08",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "GR-08",
+          "oracle": "candidate optimizer param-group coverage probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "The optimizer omits a trainable parameter group."
+        }
+      ],
+      "families": {
+        "candidate_softmax": {
+          "file": "autofix/faults/candidate_softmax.py",
+          "fault_ids": [
+            "NU-02"
+          ],
+          "source_sha256": "2f6ea1a35542a49153753b2121b95a5997faf4c3e395ce6e9eb1d8938e59bfd3",
+          "report_functions": [
+            {
+              "name": "layered_diagnosis_report",
+              "line": 160,
+              "sha256": "2912c25754ce2943fe5cb2f8310c5e484452dd78024308a87a84031981aa0929"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "candidate_training": {
+          "file": "autofix/faults/candidate_training.py",
+          "fault_ids": [
+            "GR-01",
+            "GR-04"
+          ],
+          "source_sha256": "6b5acbef9d59495a1d5ab00a172c4c44f4b14c94a58fcc77424843ec7402a9e7",
+          "report_functions": [
+            {
+              "name": "report_for_candidate",
+              "line": 340,
+              "sha256": "e193a80914e37c4a40b52fe0987f61bdb7a21e0d983b11cae22d9ec6088e07e9"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "controlled_cases": {
+          "file": "autofix/faults/controlled_cases.py",
+          "fault_ids": [
+            "EX-01",
+            "EX-02",
+            "EX-03",
+            "EX-04",
+            "EX-05",
+            "EX-09",
+            "EX-10",
+            "NU-01",
+            "NU-04",
+            "NU-06",
+            "GR-02",
+            "GR-03",
+            "GR-06",
+            "GR-08"
+          ],
+          "source_sha256": "83b122ae6fdff00c270b4dc8b278e067fcf433e6f360793c508ac7c52428a5c0",
+          "report_functions": [
+            {
+              "name": "_report",
+              "line": 879,
+              "sha256": "e259fabfd84cade8eae74c65a1ef55dced24d6ae8b8c96b2705e17b93fe3fa26"
+            }
+          ],
+          "diagnosis_basis": "preselected layer/scope and general hints"
+        },
+        "core_attention": {
+          "file": "autofix/faults/core_attention.py",
+          "fault_ids": [
+            "EX-08",
+            "NU-05"
+          ],
+          "source_sha256": "e5fce774ec37c6ff91fe4f61a9fbb59e75bb29050406d57c129233f53a9f7c39",
+          "report_functions": [
+            {
+              "name": "_report",
+              "line": 144,
+              "sha256": "73a7ecc49230439017e91c6bf416e7fdf3c32afb90141762249c48fe3c97ddeb"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "core_gradient_mapping": {
+          "file": "autofix/faults/core_gradient_mapping.py",
+          "fault_ids": [
+            "GR-05"
+          ],
+          "source_sha256": "52bebe831333043dc9355a3efadba7b843da30e061588e952b3bf2a2fd64d038",
+          "report_functions": [
+            {
+              "name": "_report",
+              "line": 133,
+              "sha256": "0ee4a353f079f77133705f62ccf59192d823b1664b7788663a7b2d8f75858f34"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "core_optimizer_mapping": {
+          "file": "autofix/faults/core_optimizer_mapping.py",
+          "fault_ids": [
+            "GR-07"
+          ],
+          "source_sha256": "cb968a38c089c2e368d98fd5f54e0bc3670613966aad18b0897c3e3423b0b389",
+          "report_functions": [
+            {
+              "name": "_report",
+              "line": 97,
+              "sha256": "5406b8bf24b23713734fc549022df8b90a2a1fd27c2b43898a49ab99f16fbd0c"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "core_qwen": {
+          "file": "autofix/faults/core_qwen.py",
+          "fault_ids": [
+            "EX-07",
+            "NU-03",
+            "NU-07"
+          ],
+          "source_sha256": "67ed80afa5779805658b02e91326df9a76456df79760346090f28eb1e4b82945",
+          "report_functions": [
+            {
+              "name": "_report",
+              "line": 156,
+              "sha256": "df047038945a1ec6d02cd0f80d88138aec08969d53401ac3602cd6e07fdef309"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "core_tensor_boundary": {
+          "file": "autofix/faults/core_tensor_boundary.py",
+          "fault_ids": [
+            "EX-06"
+          ],
+          "source_sha256": "24894493444091449f1ac53eb8ac8a4f5d2865b709bf43f29997baf1ba1b19f9",
+          "report_functions": [
+            {
+              "name": "_boundary_report",
+              "line": 95,
+              "sha256": "db3a9fa2698954dfc37078380d3e14453321f5ad157702732a69bb9b62a98a55"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        }
+      },
+      "counts_by_layer": {
+        "execution": 10,
+        "numerical": 7,
+        "gradient_update": 8
+      }
+    },
+    "experiment_j": {
+      "catalog": [
+        {
+          "fault_id": "EX-01",
+          "layer": "execution",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "EX-01",
+          "oracle": "candidate tensor boundary type probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "An operator returns a raw tensor where downstream code expects a wrapper object."
+        },
+        {
+          "fault_id": "EX-02",
+          "layer": "execution",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "EX-02",
+          "oracle": "candidate dtype-sensitive matmul probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "A dtype-sensitive matmul receives mismatched FP32/BF16 operands."
+        },
+        {
+          "fault_id": "EX-03",
+          "layer": "execution",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "EX-03",
+          "oracle": "candidate high-rank permutation probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "High-dimensional transpose uses an incomplete permutation."
+        },
+        {
+          "fault_id": "EX-04",
+          "layer": "execution",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "EX-04",
+          "oracle": "candidate index dtype probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "Tensor indexing uses floating-point indices instead of integer indices."
+        },
+        {
+          "fault_id": "EX-05",
+          "layer": "execution",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "EX-05",
+          "oracle": "candidate input container contract probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "A migrated helper passes a list where downstream code expects a mapping."
+        },
+        {
+          "fault_id": "EX-06",
+          "layer": "execution",
+          "scope": "core_operator",
+          "runner": "core_tensor_boundary",
+          "target_files": [
+            "torch4ms/tensor.py"
+          ],
+          "oracle": "tensor boundary type probe",
+          "mutation_kind": "core snapshot text mutation",
+          "notes": "Generic torch4ms dispatch output conversion boundary."
+        },
+        {
+          "fault_id": "EX-07",
+          "layer": "execution",
+          "scope": "core_operator",
+          "runner": "core_qwen",
+          "runner_case": "EX-07",
+          "target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "oracle": "BF16 embedding private probe",
+          "mutation_kind": "natural/core controlled fault",
+          "notes": "Qwen-derived BF16 embedding one_hot/matmul dtype path."
+        },
+        {
+          "fault_id": "EX-08",
+          "layer": "execution",
+          "scope": "core_operator",
+          "runner": "core_attention",
+          "runner_case": "EX-08",
+          "target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "oracle": "SDPA boundary private probe",
+          "mutation_kind": "natural/core controlled fault",
+          "notes": "Qwen-derived SDPA conversion, rank-aware transpose, and output wrapping."
+        },
+        {
+          "fault_id": "EX-09",
+          "layer": "execution",
+          "scope": "core_operator",
+          "runner": "controlled_cases",
+          "runner_case": "EX-09",
+          "oracle": "core overload registry contract probe",
+          "mutation_kind": "generated temporary core-level controlled fault",
+          "notes": "Operator dispatches to the wrong overload variant."
+        },
+        {
+          "fault_id": "EX-10",
+          "layer": "execution",
+          "scope": "core_operator",
+          "runner": "controlled_cases",
+          "runner_case": "EX-10",
+          "oracle": "core tuple/Tensor return protocol probe",
+          "mutation_kind": "generated temporary core-level controlled fault",
+          "notes": "Operator returns a wrapped tensor where downstream code expects a tuple."
+        },
+        {
+          "fault_id": "NU-01",
+          "layer": "numerical",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "NU-01",
+          "oracle": "candidate residual numeric probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "Forward path omits a residual branch."
+        },
+        {
+          "fault_id": "NU-02",
+          "layer": "numerical",
+          "scope": "candidate",
+          "runner": "candidate_softmax",
+          "oracle": "paired numeric softmax probe",
+          "mutation_kind": "generated candidate fixture",
+          "notes": "Unstable exp/sum softmax replaced by stable torch.softmax."
+        },
+        {
+          "fault_id": "NU-03",
+          "layer": "numerical",
+          "scope": "core_operator",
+          "runner": "core_qwen",
+          "runner_case": "NU-03",
+          "target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "oracle": "boolean SDPA mask private probe",
+          "mutation_kind": "core snapshot text mutation",
+          "notes": "Boolean attention mask keep semantics."
+        },
+        {
+          "fault_id": "NU-04",
+          "layer": "numerical",
+          "scope": "core_operator",
+          "runner": "controlled_cases",
+          "runner_case": "NU-04",
+          "oracle": "core mask fill value numeric probe",
+          "mutation_kind": "generated temporary core-level controlled fault",
+          "notes": "Mask fill uses an insufficient value so masked positions affect probabilities."
+        },
+        {
+          "fault_id": "NU-05",
+          "layer": "numerical",
+          "scope": "core_operator",
+          "runner": "core_attention",
+          "runner_case": "NU-05",
+          "target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "oracle": "SDPA scaling private probe",
+          "mutation_kind": "core snapshot text mutation",
+          "notes": "Missing 1/sqrt(d) SDPA scaling."
+        },
+        {
+          "fault_id": "NU-06",
+          "layer": "numerical",
+          "scope": "core_operator",
+          "runner": "controlled_cases",
+          "runner_case": "NU-06",
+          "oracle": "core RoPE pairing numeric probe",
+          "mutation_kind": "generated temporary core-level controlled fault",
+          "notes": "RoPE rotation uses the wrong sign or pairing."
+        },
+        {
+          "fault_id": "NU-07",
+          "layer": "numerical",
+          "scope": "core_operator",
+          "runner": "core_qwen",
+          "runner_case": "NU-07",
+          "target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "oracle": "GQA KV repeat private probe",
+          "mutation_kind": "core snapshot text mutation",
+          "notes": "Qwen-derived grouped-query attention KV repeat semantics."
+        },
+        {
+          "fault_id": "GR-01",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "candidate_training",
+          "runner_case": "GR-01",
+          "oracle": "candidate gradient/update probe",
+          "mutation_kind": "generated candidate source mutation",
+          "notes": "Detached hidden activation removes first-layer gradients."
+        },
+        {
+          "fault_id": "GR-02",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "GR-02",
+          "oracle": "candidate parameter-update probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "Gradients are cleared after backward before optimizer.step."
+        },
+        {
+          "fault_id": "GR-03",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "GR-03",
+          "oracle": "candidate parameter-update probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "optimizer.step is missing from the train step."
+        },
+        {
+          "fault_id": "GR-04",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "candidate_training",
+          "runner_case": "GR-04",
+          "oracle": "candidate gradient/update probe",
+          "mutation_kind": "generated candidate source mutation",
+          "notes": "Wrong final-layer requires_grad freeze."
+        },
+        {
+          "fault_id": "GR-05",
+          "layer": "gradient_update",
+          "scope": "core_autograd_optimizer",
+          "runner": "core_gradient_mapping",
+          "target_files": [
+            "torch4ms/autograd/forward_extractor.py",
+            "torch4ms/autograd/__init__.py"
+          ],
+          "oracle": "trainable gradient mapping private probe",
+          "mutation_kind": "natural/core controlled fault",
+          "notes": "Trainable-parameter gradient extraction/writeback mapping."
+        },
+        {
+          "fault_id": "GR-06",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "GR-06",
+          "oracle": "candidate trainability and update probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "The target trainable layer is incorrectly frozen."
+        },
+        {
+          "fault_id": "GR-07",
+          "layer": "gradient_update",
+          "scope": "core_autograd_optimizer",
+          "runner": "core_optimizer_mapping",
+          "runner_case": "GR-07",
+          "target_files": [
+            "torch4ms/optim/optimizer.py"
+          ],
+          "oracle": "core trainable gradient order mapping probe",
+          "mutation_kind": "controlled core optimizer trainable-parameter filter mutation",
+          "notes": "The optimizer keeps frozen parameters in its gradient/update order instead of the trainable-only order."
+        },
+        {
+          "fault_id": "GR-08",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "GR-08",
+          "oracle": "candidate optimizer param-group coverage probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "The optimizer omits a trainable parameter group."
+        }
+      ],
+      "families": {
+        "candidate_softmax": {
+          "file": "autofix/faults/candidate_softmax.py",
+          "fault_ids": [
+            "NU-02"
+          ],
+          "source_sha256": "2f6ea1a35542a49153753b2121b95a5997faf4c3e395ce6e9eb1d8938e59bfd3",
+          "report_functions": [
+            {
+              "name": "layered_diagnosis_report",
+              "line": 160,
+              "sha256": "2912c25754ce2943fe5cb2f8310c5e484452dd78024308a87a84031981aa0929"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "candidate_training": {
+          "file": "autofix/faults/candidate_training.py",
+          "fault_ids": [
+            "GR-01",
+            "GR-04"
+          ],
+          "source_sha256": "6b5acbef9d59495a1d5ab00a172c4c44f4b14c94a58fcc77424843ec7402a9e7",
+          "report_functions": [
+            {
+              "name": "report_for_candidate",
+              "line": 340,
+              "sha256": "e193a80914e37c4a40b52fe0987f61bdb7a21e0d983b11cae22d9ec6088e07e9"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "controlled_cases": {
+          "file": "autofix/faults/controlled_cases.py",
+          "fault_ids": [
+            "EX-01",
+            "EX-02",
+            "EX-03",
+            "EX-04",
+            "EX-05",
+            "EX-09",
+            "EX-10",
+            "NU-01",
+            "NU-04",
+            "NU-06",
+            "GR-02",
+            "GR-03",
+            "GR-06",
+            "GR-08"
+          ],
+          "source_sha256": "152239e2dac6c5929bad9a8d00c8ea434662e3802f765eff0be5d490b460f79d",
+          "report_functions": [
+            {
+              "name": "_report",
+              "line": 879,
+              "sha256": "e259fabfd84cade8eae74c65a1ef55dced24d6ae8b8c96b2705e17b93fe3fa26"
+            }
+          ],
+          "diagnosis_basis": "preselected layer/scope and general hints"
+        },
+        "core_attention": {
+          "file": "autofix/faults/core_attention.py",
+          "fault_ids": [
+            "EX-08",
+            "NU-05"
+          ],
+          "source_sha256": "e5fce774ec37c6ff91fe4f61a9fbb59e75bb29050406d57c129233f53a9f7c39",
+          "report_functions": [
+            {
+              "name": "_report",
+              "line": 144,
+              "sha256": "73a7ecc49230439017e91c6bf416e7fdf3c32afb90141762249c48fe3c97ddeb"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "core_gradient_mapping": {
+          "file": "autofix/faults/core_gradient_mapping.py",
+          "fault_ids": [
+            "GR-05"
+          ],
+          "source_sha256": "52bebe831333043dc9355a3efadba7b843da30e061588e952b3bf2a2fd64d038",
+          "report_functions": [
+            {
+              "name": "_report",
+              "line": 133,
+              "sha256": "0ee4a353f079f77133705f62ccf59192d823b1664b7788663a7b2d8f75858f34"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "core_optimizer_mapping": {
+          "file": "autofix/faults/core_optimizer_mapping.py",
+          "fault_ids": [
+            "GR-07"
+          ],
+          "source_sha256": "cb968a38c089c2e368d98fd5f54e0bc3670613966aad18b0897c3e3423b0b389",
+          "report_functions": [
+            {
+              "name": "_report",
+              "line": 97,
+              "sha256": "5406b8bf24b23713734fc549022df8b90a2a1fd27c2b43898a49ab99f16fbd0c"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "core_qwen": {
+          "file": "autofix/faults/core_qwen.py",
+          "fault_ids": [
+            "EX-07",
+            "NU-03",
+            "NU-07"
+          ],
+          "source_sha256": "67ed80afa5779805658b02e91326df9a76456df79760346090f28eb1e4b82945",
+          "report_functions": [
+            {
+              "name": "_report",
+              "line": 156,
+              "sha256": "df047038945a1ec6d02cd0f80d88138aec08969d53401ac3602cd6e07fdef309"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "core_tensor_boundary": {
+          "file": "autofix/faults/core_tensor_boundary.py",
+          "fault_ids": [
+            "EX-06"
+          ],
+          "source_sha256": "24894493444091449f1ac53eb8ac8a4f5d2865b709bf43f29997baf1ba1b19f9",
+          "report_functions": [
+            {
+              "name": "_boundary_report",
+              "line": 95,
+              "sha256": "db3a9fa2698954dfc37078380d3e14453321f5ad157702732a69bb9b62a98a55"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        }
+      },
+      "counts_by_layer": {
+        "execution": 10,
+        "numerical": 7,
+        "gradient_update": 8
+      }
+    },
+    "local_head": {
+      "catalog": [
+        {
+          "fault_id": "EX-01",
+          "layer": "execution",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "EX-01",
+          "oracle": "candidate tensor boundary type probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "An operator returns a raw tensor where downstream code expects a wrapper object."
+        },
+        {
+          "fault_id": "EX-02",
+          "layer": "execution",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "EX-02",
+          "oracle": "candidate dtype-sensitive matmul probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "A dtype-sensitive matmul receives mismatched FP32/BF16 operands."
+        },
+        {
+          "fault_id": "EX-03",
+          "layer": "execution",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "EX-03",
+          "oracle": "candidate high-rank permutation probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "High-dimensional transpose uses an incomplete permutation."
+        },
+        {
+          "fault_id": "EX-04",
+          "layer": "execution",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "EX-04",
+          "oracle": "candidate index dtype probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "Tensor indexing uses floating-point indices instead of integer indices."
+        },
+        {
+          "fault_id": "EX-05",
+          "layer": "execution",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "EX-05",
+          "oracle": "candidate input container contract probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "A migrated helper passes a list where downstream code expects a mapping."
+        },
+        {
+          "fault_id": "EX-06",
+          "layer": "execution",
+          "scope": "core_operator",
+          "runner": "core_tensor_boundary",
+          "target_files": [
+            "torch4ms/tensor.py"
+          ],
+          "oracle": "tensor boundary type probe",
+          "mutation_kind": "core snapshot text mutation",
+          "notes": "Generic torch4ms dispatch output conversion boundary."
+        },
+        {
+          "fault_id": "EX-07",
+          "layer": "execution",
+          "scope": "core_operator",
+          "runner": "core_qwen",
+          "runner_case": "EX-07",
+          "target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "oracle": "BF16 embedding private probe",
+          "mutation_kind": "natural/core controlled fault",
+          "notes": "Qwen-derived BF16 embedding one_hot/matmul dtype path."
+        },
+        {
+          "fault_id": "EX-08",
+          "layer": "execution",
+          "scope": "core_operator",
+          "runner": "core_attention",
+          "runner_case": "EX-08",
+          "target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "oracle": "SDPA boundary private probe",
+          "mutation_kind": "natural/core controlled fault",
+          "notes": "Qwen-derived SDPA conversion, rank-aware transpose, and output wrapping."
+        },
+        {
+          "fault_id": "EX-09",
+          "layer": "execution",
+          "scope": "core_operator",
+          "runner": "controlled_cases",
+          "runner_case": "EX-09",
+          "oracle": "core overload registry contract probe",
+          "mutation_kind": "generated temporary core-level controlled fault",
+          "notes": "Operator dispatches to the wrong overload variant."
+        },
+        {
+          "fault_id": "EX-10",
+          "layer": "execution",
+          "scope": "core_operator",
+          "runner": "controlled_cases",
+          "runner_case": "EX-10",
+          "oracle": "core tuple/Tensor return protocol probe",
+          "mutation_kind": "generated temporary core-level controlled fault",
+          "notes": "Operator returns a wrapped tensor where downstream code expects a tuple."
+        },
+        {
+          "fault_id": "NU-01",
+          "layer": "numerical",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "NU-01",
+          "oracle": "candidate residual numeric probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "Forward path omits a residual branch."
+        },
+        {
+          "fault_id": "NU-02",
+          "layer": "numerical",
+          "scope": "candidate",
+          "runner": "candidate_softmax",
+          "oracle": "paired numeric softmax probe",
+          "mutation_kind": "generated candidate fixture",
+          "notes": "Unstable exp/sum softmax replaced by stable torch.softmax."
+        },
+        {
+          "fault_id": "NU-03",
+          "layer": "numerical",
+          "scope": "core_operator",
+          "runner": "core_qwen",
+          "runner_case": "NU-03",
+          "target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "oracle": "boolean SDPA mask private probe",
+          "mutation_kind": "core snapshot text mutation",
+          "notes": "Boolean attention mask keep semantics."
+        },
+        {
+          "fault_id": "NU-04",
+          "layer": "numerical",
+          "scope": "core_operator",
+          "runner": "controlled_cases",
+          "runner_case": "NU-04",
+          "oracle": "core mask fill value numeric probe",
+          "mutation_kind": "generated temporary core-level controlled fault",
+          "notes": "Mask fill uses an insufficient value so masked positions affect probabilities."
+        },
+        {
+          "fault_id": "NU-05",
+          "layer": "numerical",
+          "scope": "core_operator",
+          "runner": "core_attention",
+          "runner_case": "NU-05",
+          "target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "oracle": "SDPA scaling private probe",
+          "mutation_kind": "core snapshot text mutation",
+          "notes": "Missing 1/sqrt(d) SDPA scaling."
+        },
+        {
+          "fault_id": "NU-06",
+          "layer": "numerical",
+          "scope": "core_operator",
+          "runner": "controlled_cases",
+          "runner_case": "NU-06",
+          "oracle": "core RoPE pairing numeric probe",
+          "mutation_kind": "generated temporary core-level controlled fault",
+          "notes": "RoPE rotation uses the wrong sign or pairing."
+        },
+        {
+          "fault_id": "NU-07",
+          "layer": "numerical",
+          "scope": "core_operator",
+          "runner": "core_qwen",
+          "runner_case": "NU-07",
+          "target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "oracle": "GQA KV repeat private probe",
+          "mutation_kind": "core snapshot text mutation",
+          "notes": "Qwen-derived grouped-query attention KV repeat semantics."
+        },
+        {
+          "fault_id": "GR-01",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "candidate_training",
+          "runner_case": "GR-01",
+          "oracle": "candidate gradient/update probe",
+          "mutation_kind": "generated candidate source mutation",
+          "notes": "Detached hidden activation removes first-layer gradients."
+        },
+        {
+          "fault_id": "GR-02",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "GR-02",
+          "oracle": "candidate parameter-update probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "Gradients are cleared after backward before optimizer.step."
+        },
+        {
+          "fault_id": "GR-03",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "GR-03",
+          "oracle": "candidate parameter-update probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "optimizer.step is missing from the train step."
+        },
+        {
+          "fault_id": "GR-04",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "candidate_training",
+          "runner_case": "GR-04",
+          "oracle": "candidate gradient/update probe",
+          "mutation_kind": "generated candidate source mutation",
+          "notes": "Wrong final-layer requires_grad freeze."
+        },
+        {
+          "fault_id": "GR-05",
+          "layer": "gradient_update",
+          "scope": "core_autograd_optimizer",
+          "runner": "core_gradient_mapping",
+          "target_files": [
+            "torch4ms/autograd/forward_extractor.py",
+            "torch4ms/autograd/__init__.py"
+          ],
+          "oracle": "trainable gradient mapping private probe",
+          "mutation_kind": "natural/core controlled fault",
+          "notes": "Trainable-parameter gradient extraction/writeback mapping."
+        },
+        {
+          "fault_id": "GR-06",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "GR-06",
+          "oracle": "candidate trainability and update probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "The target trainable layer is incorrectly frozen."
+        },
+        {
+          "fault_id": "GR-07",
+          "layer": "gradient_update",
+          "scope": "core_autograd_optimizer",
+          "runner": "core_optimizer_mapping",
+          "runner_case": "GR-07",
+          "target_files": [
+            "torch4ms/optim/optimizer.py"
+          ],
+          "oracle": "core trainable gradient order mapping probe",
+          "mutation_kind": "controlled core optimizer trainable-parameter filter mutation",
+          "notes": "The optimizer keeps frozen parameters in its gradient/update order instead of the trainable-only order."
+        },
+        {
+          "fault_id": "GR-08",
+          "layer": "gradient_update",
+          "scope": "candidate",
+          "runner": "controlled_cases",
+          "runner_case": "GR-08",
+          "oracle": "candidate optimizer param-group coverage probe",
+          "mutation_kind": "generated controlled fault",
+          "notes": "The optimizer omits a trainable parameter group."
+        }
+      ],
+      "families": {
+        "candidate_softmax": {
+          "file": "autofix/faults/candidate_softmax.py",
+          "fault_ids": [
+            "NU-02"
+          ],
+          "source_sha256": "2f6ea1a35542a49153753b2121b95a5997faf4c3e395ce6e9eb1d8938e59bfd3",
+          "report_functions": [
+            {
+              "name": "layered_diagnosis_report",
+              "line": 160,
+              "sha256": "2912c25754ce2943fe5cb2f8310c5e484452dd78024308a87a84031981aa0929"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "candidate_training": {
+          "file": "autofix/faults/candidate_training.py",
+          "fault_ids": [
+            "GR-01",
+            "GR-04"
+          ],
+          "source_sha256": "6b5acbef9d59495a1d5ab00a172c4c44f4b14c94a58fcc77424843ec7402a9e7",
+          "report_functions": [
+            {
+              "name": "report_for_candidate",
+              "line": 340,
+              "sha256": "e193a80914e37c4a40b52fe0987f61bdb7a21e0d983b11cae22d9ec6088e07e9"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "controlled_cases": {
+          "file": "autofix/faults/controlled_cases.py",
+          "fault_ids": [
+            "EX-01",
+            "EX-02",
+            "EX-03",
+            "EX-04",
+            "EX-05",
+            "EX-09",
+            "EX-10",
+            "NU-01",
+            "NU-04",
+            "NU-06",
+            "GR-02",
+            "GR-03",
+            "GR-06",
+            "GR-08"
+          ],
+          "source_sha256": "83b122ae6fdff00c270b4dc8b278e067fcf433e6f360793c508ac7c52428a5c0",
+          "report_functions": [
+            {
+              "name": "_report",
+              "line": 879,
+              "sha256": "e259fabfd84cade8eae74c65a1ef55dced24d6ae8b8c96b2705e17b93fe3fa26"
+            }
+          ],
+          "diagnosis_basis": "preselected layer/scope and general hints"
+        },
+        "core_attention": {
+          "file": "autofix/faults/core_attention.py",
+          "fault_ids": [
+            "EX-08",
+            "NU-05"
+          ],
+          "source_sha256": "e5fce774ec37c6ff91fe4f61a9fbb59e75bb29050406d57c129233f53a9f7c39",
+          "report_functions": [
+            {
+              "name": "_report",
+              "line": 144,
+              "sha256": "73a7ecc49230439017e91c6bf416e7fdf3c32afb90141762249c48fe3c97ddeb"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "core_gradient_mapping": {
+          "file": "autofix/faults/core_gradient_mapping.py",
+          "fault_ids": [
+            "GR-05"
+          ],
+          "source_sha256": "52bebe831333043dc9355a3efadba7b843da30e061588e952b3bf2a2fd64d038",
+          "report_functions": [
+            {
+              "name": "_report",
+              "line": 133,
+              "sha256": "0ee4a353f079f77133705f62ccf59192d823b1664b7788663a7b2d8f75858f34"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "core_optimizer_mapping": {
+          "file": "autofix/faults/core_optimizer_mapping.py",
+          "fault_ids": [
+            "GR-07"
+          ],
+          "source_sha256": "cb968a38c089c2e368d98fd5f54e0bc3670613966aad18b0897c3e3423b0b389",
+          "report_functions": [
+            {
+              "name": "_report",
+              "line": 97,
+              "sha256": "5406b8bf24b23713734fc549022df8b90a2a1fd27c2b43898a49ab99f16fbd0c"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "core_qwen": {
+          "file": "autofix/faults/core_qwen.py",
+          "fault_ids": [
+            "EX-07",
+            "NU-03",
+            "NU-07"
+          ],
+          "source_sha256": "67ed80afa5779805658b02e91326df9a76456df79760346090f28eb1e4b82945",
+          "report_functions": [
+            {
+              "name": "_report",
+              "line": 156,
+              "sha256": "df047038945a1ec6d02cd0f80d88138aec08969d53401ac3602cd6e07fdef309"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        },
+        "core_tensor_boundary": {
+          "file": "autofix/faults/core_tensor_boundary.py",
+          "fault_ids": [
+            "EX-06"
+          ],
+          "source_sha256": "24894493444091449f1ac53eb8ac8a4f5d2865b709bf43f29997baf1ba1b19f9",
+          "report_functions": [
+            {
+              "name": "_boundary_report",
+              "line": 95,
+              "sha256": "db3a9fa2698954dfc37078380d3e14453321f5ad157702732a69bb9b62a98a55"
+            }
+          ],
+          "diagnosis_basis": "fault-family-specific predefined diagnosis/hints"
+        }
+      },
+      "counts_by_layer": {
+        "execution": 10,
+        "numerical": 7,
+        "gradient_update": 8
+      }
+    }
+  },
+  "existing_without_guidance_audit": {
+    "archive": "output/component-ablation-20260917/formal_v2.tar.gz",
+    "archive_sha256": "8d96fee85dd4d9c73058ca1d4a544ad19d85316386e331937dd976d55d439f1c",
+    "first_prompts": [
+      {
+        "instance_id": "EX-01-A",
+        "archive_member": "formal_v2/without_guidance/EX-01-A/audit/prompt_01.json",
+        "file_sha256": "24696cc25ebbf18820ba84989ee0cac53f3bdd1fbf7e2d315bd89631bbf6bbc5",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "candidate_execution",
+          "failure_type": "candidate_execution_contract_violation",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_6decfe1acca446379bb520937b8ba536.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-01-B",
+        "archive_member": "formal_v2/without_guidance/EX-01-B/audit/prompt_01.json",
+        "file_sha256": "1455efe3a4df50d154c6b52b1fe320f12d59fe0cdb3523000750121c008b99a1",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "candidate_execution",
+          "failure_type": "candidate_execution_contract_violation",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_d8a5209aaad345d197386124cb5040da.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-02-A",
+        "archive_member": "formal_v2/without_guidance/EX-02-A/audit/prompt_01.json",
+        "file_sha256": "de74eb94e1c4b281497984e440cd351dfd56f9f1f74b2bc8b33057a3b6ba7766",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "candidate_execution",
+          "failure_type": "candidate_execution_contract_violation",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_6ac9fd5bfabd43dab2dbd5138dcc037d.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-02-B",
+        "archive_member": "formal_v2/without_guidance/EX-02-B/audit/prompt_01.json",
+        "file_sha256": "c3e3ac657bace08e0d565e7062bc7cc261ee881b2e214db6260e40b8520af8fb",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "candidate_execution",
+          "failure_type": "candidate_execution_contract_violation",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_14dfe7de2e83413c840760011e94138e.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-03-A",
+        "archive_member": "formal_v2/without_guidance/EX-03-A/audit/prompt_01.json",
+        "file_sha256": "fb92c2b6e6fa037afafc7423badbf0df32f831aa775385fe5ba84242bea20ee4",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "candidate_execution",
+          "failure_type": "candidate_execution_contract_violation",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_7729a4b93282406aa12e09564352380d.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-03-B",
+        "archive_member": "formal_v2/without_guidance/EX-03-B/audit/prompt_01.json",
+        "file_sha256": "bb0c511058fc3a2da2b29129b460a71f58cec73e9043eec025debfd60a69b709",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "candidate_execution",
+          "failure_type": "candidate_execution_contract_violation",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_5e9fe1fe97414707a6f2077285c81de9.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-04-A",
+        "archive_member": "formal_v2/without_guidance/EX-04-A/audit/prompt_01.json",
+        "file_sha256": "8cbae7da6659298da3d0bf1c827fa42c911fd8935b7cef21ec6ec2deb59ab7fe",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "candidate_execution",
+          "failure_type": "candidate_execution_contract_violation",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_fb59c13a8fbe4b99ad3a1757a496aa55.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-04-B",
+        "archive_member": "formal_v2/without_guidance/EX-04-B/audit/prompt_01.json",
+        "file_sha256": "152d997fb318ac5e2e8f28d304af15f1a02273cfd8563c7635dd500e77234f65",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "candidate_execution",
+          "failure_type": "candidate_execution_contract_violation",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_5a0cd8c74b9b46d08b4d91268bf0d3c3.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-05-A",
+        "archive_member": "formal_v2/without_guidance/EX-05-A/audit/prompt_01.json",
+        "file_sha256": "fbfbca77089f6ce17fdcc1ec632feec0f41e3518bae4dbcd964ccd75f34318f3",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "candidate_execution",
+          "failure_type": "candidate_execution_contract_violation",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_22761493161c426b8ab1e0c241a38882.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-05-B",
+        "archive_member": "formal_v2/without_guidance/EX-05-B/audit/prompt_01.json",
+        "file_sha256": "2d01f3eaac61ccee4ce049620541fbe27af7a2ab2249037d96f3f6430ae3648f",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "candidate_execution",
+          "failure_type": "candidate_execution_contract_violation",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_b9de30156df14969a37fb48e5309066c.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-06-A",
+        "archive_member": "formal_v2/without_guidance/EX-06-A/audit/prompt_01.json",
+        "file_sha256": "a41dc4b700c51479b494e3747a05d621e24d1d872f53f214fc5f9bf2217ed975",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "tensor_boundary",
+          "failure_type": "tensor_boundary_type_mismatch",
+          "observed_operator": "aten.relu.default",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.9,
+          "recommended_target_files": [
+            "torch4ms/tensor.py"
+          ]
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-06-B",
+        "archive_member": "formal_v2/without_guidance/EX-06-B/audit/prompt_01.json",
+        "file_sha256": "9a043bc7006f33372d59bf01394b055f5911e686a2024a9d7e6d34b2604ea052",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "tensor_boundary",
+          "failure_type": "tensor_boundary_type_mismatch",
+          "observed_operator": "aten.relu.default",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.9,
+          "recommended_target_files": [
+            "torch4ms/tensor.py"
+          ]
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-07-A",
+        "archive_member": "formal_v2/without_guidance/EX-07-A/audit/prompt_01.json",
+        "file_sha256": "0eb3c7197968d5f4beaf12403e9184786c9468e2371ffa35fddc49713cb56d60",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "execution",
+          "failure_type": "unsupported_bf16_embedding_kernel_dtype",
+          "observed_operator": "torch.nn.functional.embedding",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.98,
+          "recommended_target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "source_symbols": [
+            "functional_embedding"
+          ],
+          "read_only_source_symbols": {
+            "torch4ms/tensor.py": [
+              "ms2t_iso"
+            ]
+          }
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-07-B",
+        "archive_member": "formal_v2/without_guidance/EX-07-B/audit/prompt_01.json",
+        "file_sha256": "32b114fd875f50752367b2c97d5e7f530e5c1bb4fb77731ab583e172f03d2a62",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "execution",
+          "failure_type": "unsupported_bf16_embedding_kernel_dtype",
+          "observed_operator": "torch.nn.functional.embedding",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.98,
+          "recommended_target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "source_symbols": [
+            "functional_embedding"
+          ],
+          "read_only_source_symbols": {
+            "torch4ms/tensor.py": [
+              "ms2t_iso"
+            ]
+          }
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-08-A",
+        "archive_member": "formal_v2/without_guidance/EX-08-A/audit/prompt_01.json",
+        "file_sha256": "d9c24534f1ee369fae00deb3cf92ff2efea9cef8e7fc4c5c606348142666a9da",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "execution",
+          "failure_type": "operator_rank_semantics_mismatch",
+          "observed_operator": "torch.nn.functional.scaled_dot_product_attention",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.98,
+          "recommended_target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "source_symbols": [
+            "_sdpa_reference",
+            "_to_ms_tensor_general",
+            "scaled_dot_product_attention"
+          ],
+          "read_only_source_symbols": {
+            "torch4ms/tensor.py": [
+              "ms2t_iso"
+            ]
+          }
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-08-B",
+        "archive_member": "formal_v2/without_guidance/EX-08-B/audit/prompt_01.json",
+        "file_sha256": "0c671b35ae3e94110b0cfa8a09f3096dfee5c248e6a73c35e6606737d3f1c107",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "execution",
+          "failure_type": "operator_rank_semantics_mismatch",
+          "observed_operator": "torch.nn.functional.scaled_dot_product_attention",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.98,
+          "recommended_target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "source_symbols": [
+            "_sdpa_reference",
+            "_to_ms_tensor_general",
+            "scaled_dot_product_attention"
+          ],
+          "read_only_source_symbols": {
+            "torch4ms/tensor.py": [
+              "ms2t_iso"
+            ]
+          }
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-09-A",
+        "archive_member": "formal_v2/without_guidance/EX-09-A/audit/prompt_01.json",
+        "file_sha256": "d9f26994e7e355c9ece414158366adaf74a60f275455faccb05dd135f8a763cd",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "core_execution",
+          "failure_type": "core_operator_execution_contract_violation",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "torch4ms/ops/case_7c8a38c0afa0462885b67337bb4b5381.py"
+          ],
+          "core_implementation_suspicious": true
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-09-B",
+        "archive_member": "formal_v2/without_guidance/EX-09-B/audit/prompt_01.json",
+        "file_sha256": "5a0c4b2cfffe9c4affe09649f88305c5ae7ac81a96da47730f01170c53b33402",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "core_execution",
+          "failure_type": "core_operator_execution_contract_violation",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "torch4ms/ops/case_12addaaaeba349a2a6820efdf71a657c.py"
+          ],
+          "core_implementation_suspicious": true
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-10-A",
+        "archive_member": "formal_v2/without_guidance/EX-10-A/audit/prompt_01.json",
+        "file_sha256": "5ee838db132e6204d110ded9c9091e01ff6f26890d26741f361634b3ba68e237",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "core_execution",
+          "failure_type": "core_operator_execution_contract_violation",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "torch4ms/ops/case_82afdc656fe5482abece01bdc4f7592c.py"
+          ],
+          "core_implementation_suspicious": true
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "EX-10-B",
+        "archive_member": "formal_v2/without_guidance/EX-10-B/audit/prompt_01.json",
+        "file_sha256": "f2a41cdd84866d09eef149be29de6e2e3bbf711b8e024edcc27691f52a4fd172",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "core_execution",
+          "failure_type": "core_operator_execution_contract_violation",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "torch4ms/ops/case_ed8c38d8e4a04c768bb2699fe183c5d8.py"
+          ],
+          "core_implementation_suspicious": true
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "GR-01-A",
+        "archive_member": "formal_v2/without_guidance/GR-01-A/audit/prompt_01.json",
+        "file_sha256": "e57afbe5963e59b7ce6a96586c5846352a8ca51e1a9b0f63ce8f0fe996cee908",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient_update_oracle",
+          "failure_type": "candidate_training_semantics_mismatch",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.97,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_48ac32eb71834bbea1ec737915024d97.py"
+          ]
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "GR-01-B",
+        "archive_member": "formal_v2/without_guidance/GR-01-B/audit/prompt_01.json",
+        "file_sha256": "5e2b0089b48cd1bd4d01b42f624fdd99090a625d13c18e359a9a820e1addddd4",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient_update_oracle",
+          "failure_type": "candidate_training_semantics_mismatch",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.97,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_8bf63c1705b94904bf537d206a326207.py"
+          ]
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "GR-02-A",
+        "archive_member": "formal_v2/without_guidance/GR-02-A/audit/prompt_01.json",
+        "file_sha256": "669dcde36ab25c1f3e21791087b2239cf3d29671a584cb9fc3dbe857aca360a3",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient_update_oracle",
+          "failure_type": "candidate_training_update_mismatch",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_7411428ea60a4ee488b56399a268eb23.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "GR-02-B",
+        "archive_member": "formal_v2/without_guidance/GR-02-B/audit/prompt_01.json",
+        "file_sha256": "3880fb79ec939c91734be3eae9a121b10854a138e763e1b5fef43ae31c203872",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient_update_oracle",
+          "failure_type": "candidate_training_update_mismatch",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_d1e3eaf468b14f699c52b74b0721edc2.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "GR-03-A",
+        "archive_member": "formal_v2/without_guidance/GR-03-A/audit/prompt_01.json",
+        "file_sha256": "7c059d2f57f85cf0395cff026a3a18640ffb531c6f7ac09c5a0c730c23567034",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient_update_oracle",
+          "failure_type": "candidate_training_update_mismatch",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_027368a351244d3c89b03b9a91439558.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "GR-03-B",
+        "archive_member": "formal_v2/without_guidance/GR-03-B/audit/prompt_01.json",
+        "file_sha256": "ecc29183006a2a762537ab2947f12c6ddd7f77dee53bb847574ce83716f658f7",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient_update_oracle",
+          "failure_type": "candidate_training_update_mismatch",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_2fa54de3358f403eaeb7414626c58223.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "GR-04-A",
+        "archive_member": "formal_v2/without_guidance/GR-04-A/audit/prompt_01.json",
+        "file_sha256": "634cfe67a18701bcffedcfae93aa779308f6345f765f4718096deb9dadb487be",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient_update_oracle",
+          "failure_type": "candidate_training_semantics_mismatch",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.97,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_7bf902776c05479f8acd39ccdd16fcef.py"
+          ]
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "GR-04-B",
+        "archive_member": "formal_v2/without_guidance/GR-04-B/audit/prompt_01.json",
+        "file_sha256": "96d9d301ea029bf6bc3051951a3d3ecceb5095648222ed72b7dd0f6cc6ecc1c9",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient_update_oracle",
+          "failure_type": "candidate_training_semantics_mismatch",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.97,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_0cc5551e9cdb4f8fa287510730d8b128.py"
+          ]
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "GR-05-A",
+        "archive_member": "formal_v2/without_guidance/GR-05-A/audit/prompt_01.json",
+        "file_sha256": "d29a12940467669a83329f7fd210f62dfd28eb60567f3b26285a33f1420cf6ac",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient",
+          "failure_type": "trainable_parameter_mapping_mismatch",
+          "observed_operator": "autograd.trainable_parameter_mapping",
+          "repair_scope": "core_autograd_optimizer",
+          "scope_confidence": 0.99,
+          "recommended_target_files": [
+            "torch4ms/autograd/forward_extractor.py",
+            "torch4ms/autograd/__init__.py"
+          ]
+        },
+        "predefined_extra_fields": {
+          "param_update_diagnostics": {
+            "first_parameter_with_update_mismatch": "0.weight",
+            "optimizer_param_mapping_suspicious": true
+          },
+          "autograd_bridge_probe_run": {
+            "attempted": true,
+            "returncode": 0,
+            "bridge_ok": true,
+            "probe_kind": "gr05_private_oracle_preflight"
+          }
+        }
+      },
+      {
+        "instance_id": "GR-05-B",
+        "archive_member": "formal_v2/without_guidance/GR-05-B/audit/prompt_01.json",
+        "file_sha256": "6cfda67c4b0d2fd8d7813a70a1546a3fba02b6ce73f50c25c504f4decb32882c",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient",
+          "failure_type": "trainable_parameter_mapping_mismatch",
+          "observed_operator": "autograd.trainable_parameter_mapping",
+          "repair_scope": "core_autograd_optimizer",
+          "scope_confidence": 0.99,
+          "recommended_target_files": [
+            "torch4ms/autograd/forward_extractor.py",
+            "torch4ms/autograd/__init__.py"
+          ]
+        },
+        "predefined_extra_fields": {
+          "param_update_diagnostics": {
+            "first_parameter_with_update_mismatch": "0.weight",
+            "optimizer_param_mapping_suspicious": true
+          },
+          "autograd_bridge_probe_run": {
+            "attempted": true,
+            "returncode": 0,
+            "bridge_ok": true,
+            "probe_kind": "gr05_private_oracle_preflight"
+          }
+        }
+      },
+      {
+        "instance_id": "GR-06-A",
+        "archive_member": "formal_v2/without_guidance/GR-06-A/audit/prompt_01.json",
+        "file_sha256": "1afae7e39cf189cc8f091d4b8a1b4c282af05bf4b304cb1ddfdd78371f47ea69",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient_update_oracle",
+          "failure_type": "candidate_training_update_mismatch",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_1242de85299d4ab5aabbee7172af4217.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "GR-06-B",
+        "archive_member": "formal_v2/without_guidance/GR-06-B/audit/prompt_01.json",
+        "file_sha256": "8f127619f9ddc567d882081f22eff5a3183f2a220c79edf3017e83e4a357be5d",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient_update_oracle",
+          "failure_type": "candidate_training_update_mismatch",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_66b7d7e7d619474a8c0eb4b13e1c8eb8.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "GR-07-A",
+        "archive_member": "formal_v2/without_guidance/GR-07-A/audit/prompt_01.json",
+        "file_sha256": "d4c6b7b5c590f7991945f626057835d3ffe34445df8f72137d9b1bfc2d59a9d5",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient_update",
+          "failure_type": "optimizer_trainable_parameter_mapping_mismatch",
+          "observed_operator": "Optimizer.__init__",
+          "repair_scope": "core_autograd_optimizer",
+          "scope_confidence": 0.99,
+          "recommended_target_files": [
+            "torch4ms/optim/optimizer.py"
+          ]
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "GR-07-B",
+        "archive_member": "formal_v2/without_guidance/GR-07-B/audit/prompt_01.json",
+        "file_sha256": "72a0060a6218f1acf018a94588291e098097c75b313d90004a11694d01f35cc7",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient_update",
+          "failure_type": "optimizer_trainable_parameter_mapping_mismatch",
+          "observed_operator": "Optimizer.__init__",
+          "repair_scope": "core_autograd_optimizer",
+          "scope_confidence": 0.99,
+          "recommended_target_files": [
+            "torch4ms/optim/optimizer.py"
+          ]
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "GR-08-A",
+        "archive_member": "formal_v2/without_guidance/GR-08-A/audit/prompt_01.json",
+        "file_sha256": "08434b61a1b5e18fdd796c01c4905d90cb04a84b55de2d5d8d570d55b5ff3a5e",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient_update_oracle",
+          "failure_type": "candidate_training_update_mismatch",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_12cc2666d04042f294a4f44f132a10aa.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "GR-08-B",
+        "archive_member": "formal_v2/without_guidance/GR-08-B/audit/prompt_01.json",
+        "file_sha256": "d7481ba81fb910962ddbaeb3fbf4ee1f0fba6d98eda20fe373e9d9cb84e25ff5",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "gradient_update_oracle",
+          "failure_type": "candidate_training_update_mismatch",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_f637f980df6147929cad464ef521ddde.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "NU-01-A",
+        "archive_member": "formal_v2/without_guidance/NU-01-A/audit/prompt_01.json",
+        "file_sha256": "a9df71d1de34d2e90a84475f4890155e8553a5336555fc8b10cebd8c4bebb9b5",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "forward_numeric",
+          "failure_type": "candidate_numeric_semantics_mismatch",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_cdfbaa3fcdd74f96bf746b6421deb1f2.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "NU-01-B",
+        "archive_member": "formal_v2/without_guidance/NU-01-B/audit/prompt_01.json",
+        "file_sha256": "74af86c333ac41accda68a9e6772902f147b9df126be49fde5c8d302e4d5ef23",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "forward_numeric",
+          "failure_type": "candidate_numeric_semantics_mismatch",
+          "repair_scope": "candidate",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/case_5ffcb83bcdbc4dbf8cd348757d9a0dad.py"
+          ],
+          "core_implementation_suspicious": false
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "NU-02-A",
+        "archive_member": "formal_v2/without_guidance/NU-02-A/audit/prompt_01.json",
+        "file_sha256": "dde645698c569ccf9aa93a607cfa35090df94e6cc8bc5fbe36d1dc4cd28e6cb3",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "repair_scope": "candidate",
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/nu02_candidate_20260917053957_1284505.py"
+          ],
+          "candidate_functions": [
+            "StableSoftmaxNet.forward"
+          ]
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "NU-02-B",
+        "archive_member": "formal_v2/without_guidance/NU-02-B/audit/prompt_01.json",
+        "file_sha256": "0a81a16ffcb35861c9035f6a760b299efb70199a28d2b5d525b7ce6dc27cbbc5",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "repair_scope": "candidate",
+          "recommended_target_files": [
+            "autofix/generated_faults/candidate/nu02_candidate_20260917054024_1285183.py"
+          ],
+          "candidate_functions": [
+            "StableSoftmaxNet.forward"
+          ]
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "NU-03-A",
+        "archive_member": "formal_v2/without_guidance/NU-03-A/audit/prompt_01.json",
+        "file_sha256": "88e41341e1401de48047dfbc034fd49717c224319b61c15e6fa8fd5a3a125545",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "numerical",
+          "failure_type": "attention_bool_mask_semantics_mismatch",
+          "observed_operator": "torch.nn.functional.scaled_dot_product_attention",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.98,
+          "recommended_target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "source_symbols": [
+            "_sdpa_reference",
+            "_to_ms_tensor_general",
+            "scaled_dot_product_attention"
+          ],
+          "read_only_source_symbols": {
+            "torch4ms/tensor.py": [
+              "ms2t_iso"
+            ]
+          }
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "NU-03-B",
+        "archive_member": "formal_v2/without_guidance/NU-03-B/audit/prompt_01.json",
+        "file_sha256": "51fd49077631c51ce50193f4ab529a4fe39c481764068b70c70c411e4a8f5d4a",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "numerical",
+          "failure_type": "attention_bool_mask_semantics_mismatch",
+          "observed_operator": "torch.nn.functional.scaled_dot_product_attention",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.98,
+          "recommended_target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "source_symbols": [
+            "_sdpa_reference",
+            "_to_ms_tensor_general",
+            "scaled_dot_product_attention"
+          ],
+          "read_only_source_symbols": {
+            "torch4ms/tensor.py": [
+              "ms2t_iso"
+            ]
+          }
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "NU-04-A",
+        "archive_member": "formal_v2/without_guidance/NU-04-A/audit/prompt_01.json",
+        "file_sha256": "08c5fe5c02c362623cdc30fc1cd78f7c1671714adab9ed0682806ca749a51e88",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "core_forward_numeric",
+          "failure_type": "core_operator_numeric_semantics_mismatch",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "torch4ms/ops/case_9d9049f5249740d090c5de010712128f.py"
+          ],
+          "core_implementation_suspicious": true
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "NU-04-B",
+        "archive_member": "formal_v2/without_guidance/NU-04-B/audit/prompt_01.json",
+        "file_sha256": "0bcf662a743d4ec4125f4d767ae3e015825a15e007a5d6e72e8c55ebd4ecc63d",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "core_forward_numeric",
+          "failure_type": "core_operator_numeric_semantics_mismatch",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "torch4ms/ops/case_5a6d34b8e2f1412ab16b7a5756db5672.py"
+          ],
+          "core_implementation_suspicious": true
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "NU-05-A",
+        "archive_member": "formal_v2/without_guidance/NU-05-A/audit/prompt_01.json",
+        "file_sha256": "bc56efc31842181b2bd5a8ad8d46cc8db25abea167466b07fe88559f977ff4a3",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "numerical",
+          "failure_type": "attention_scale_mismatch",
+          "observed_operator": "torch.nn.functional.scaled_dot_product_attention",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.98,
+          "recommended_target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "source_symbols": [
+            "_sdpa_reference",
+            "_to_ms_tensor_general",
+            "scaled_dot_product_attention"
+          ],
+          "read_only_source_symbols": {
+            "torch4ms/tensor.py": [
+              "ms2t_iso"
+            ]
+          }
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "NU-05-B",
+        "archive_member": "formal_v2/without_guidance/NU-05-B/audit/prompt_01.json",
+        "file_sha256": "0f88454861af53092349cd71942340c741abbc6d2150197bfa7fefb45164044e",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "numerical",
+          "failure_type": "attention_scale_mismatch",
+          "observed_operator": "torch.nn.functional.scaled_dot_product_attention",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.98,
+          "recommended_target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "source_symbols": [
+            "_sdpa_reference",
+            "_to_ms_tensor_general",
+            "scaled_dot_product_attention"
+          ],
+          "read_only_source_symbols": {
+            "torch4ms/tensor.py": [
+              "ms2t_iso"
+            ]
+          }
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "NU-06-A",
+        "archive_member": "formal_v2/without_guidance/NU-06-A/audit/prompt_01.json",
+        "file_sha256": "718b758318d03e994520b9a929077d6d2a8e192c1331afc89f21bd9883e90656",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "core_forward_numeric",
+          "failure_type": "core_operator_numeric_semantics_mismatch",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "torch4ms/ops/case_6a47b7a6a47b44a19f9b84ceede4d61f.py"
+          ],
+          "core_implementation_suspicious": true
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "NU-06-B",
+        "archive_member": "formal_v2/without_guidance/NU-06-B/audit/prompt_01.json",
+        "file_sha256": "9aefb6b6293db400fc6478b802477502aa5b9e684b594c693f3e3b6e82365bf1",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "core_forward_numeric",
+          "failure_type": "core_operator_numeric_semantics_mismatch",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.94,
+          "recommended_target_files": [
+            "torch4ms/ops/case_409c3aa1734f4e3cb5053fe5cf95234e.py"
+          ],
+          "core_implementation_suspicious": true
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "NU-07-A",
+        "archive_member": "formal_v2/without_guidance/NU-07-A/audit/prompt_01.json",
+        "file_sha256": "47271b18fc53ef44232684d479ffdbec7a24914dfbd5048c015fa55b85bc7b24",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "execution",
+          "failure_type": "gqa_head_repeat_mismatch",
+          "observed_operator": "torch.nn.functional.scaled_dot_product_attention",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.98,
+          "recommended_target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "source_symbols": [
+            "_sdpa_reference",
+            "_to_ms_tensor_general",
+            "scaled_dot_product_attention"
+          ],
+          "read_only_source_symbols": {
+            "torch4ms/tensor.py": [
+              "ms2t_iso"
+            ]
+          }
+        },
+        "predefined_extra_fields": {}
+      },
+      {
+        "instance_id": "NU-07-B",
+        "archive_member": "formal_v2/without_guidance/NU-07-B/audit/prompt_01.json",
+        "file_sha256": "4193b3e1e0150aa3c7d357326911d1b25dd5d50ce481cc22575a52d36c31b691",
+        "model": "deepseek-v4-flash",
+        "prompt_hash_matches": true,
+        "root_cause_ranked": [],
+        "fix_hints": [],
+        "failure_localization": {
+          "failure_stage": "execution",
+          "failure_type": "gqa_head_repeat_mismatch",
+          "observed_operator": "torch.nn.functional.scaled_dot_product_attention",
+          "repair_scope": "core_operator",
+          "scope_confidence": 0.98,
+          "recommended_target_files": [
+            "torch4ms/ops/mtorch.py"
+          ],
+          "source_symbols": [
+            "_sdpa_reference",
+            "_to_ms_tensor_general",
+            "scaled_dot_product_attention"
+          ],
+          "read_only_source_symbols": {
+            "torch4ms/tensor.py": [
+              "ms2t_iso"
+            ]
+          }
+        },
+        "predefined_extra_fields": {}
+      }
+    ],
+    "summary": [
+      {
+        "condition": "full",
+        "planned": 50,
+        "completed": 50,
+        "accepted": 50,
+        "complete": true,
+        "total_tokens": 491526,
+        "elapsed_sec": 969.4288432169706,
+        "tokens_per_accepted_repair": 9830.52,
+        "seconds_per_accepted_repair": 19.388576864339413,
+        "accepted_at_1": 49,
+        "repair_at_1": 0.98,
+        "accepted_at_2": 50,
+        "repair_at_2": 1.0,
+        "accepted_at_4": 50,
+        "repair_at_4": 1.0
+      },
+      {
+        "condition": "without_guidance",
+        "planned": 50,
+        "completed": 50,
+        "accepted": 50,
+        "complete": true,
+        "total_tokens": 577848,
+        "elapsed_sec": 1470.4270457571838,
+        "tokens_per_accepted_repair": 11556.96,
+        "seconds_per_accepted_repair": 29.408540915143675,
+        "accepted_at_1": 46,
+        "repair_at_1": 0.92,
+        "accepted_at_2": 50,
+        "repair_at_2": 1.0,
+        "accepted_at_4": 50,
+        "repair_at_4": 1.0
+      }
+    ],
+    "summary_matches_local": true,
+    "counts": {
+      "first_prompts": 50,
+      "root_causes_empty": 50,
+      "hints_empty": 50,
+      "retained_failure_type": 48,
+      "retained_target_files": 50,
+      "prompt_hashes_match": 50
+    }
+  },
+  "remote_main_readonly_check": {
+    "path": "/media/main/whj/projects/torch4ms/ascend-torch4ms",
+    "head": "29149ba178310e81d5b8aa2124cdfdef828096fe",
+    "verifier_sha256": "e68f8ae7168300be9babcd7d90cd21b7586fad36486e429b5550272a88ce4cfa",
+    "observation": "Inspected current files. Generic execution/source-pattern classification and repair-scope routing exist; no registry-based 25-class inference path was found."
+  }
+}

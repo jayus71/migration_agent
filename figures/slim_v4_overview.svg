@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="545" viewBox="0 0 1200 545">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#46535F" />
+    </marker>
+  </defs>
+  <text x="16.0" y="40.55555555555556" fill="#17212B" font-family="Times New Roman, serif" font-size="30.555555555555557" font-weight="bold">LaDiM: autonomous investigation and repair</text>
+  <rect x="15.0" y="80.0" width="310.0" height="165" fill="#F1F3F5" stroke="#A8B2BB" stroke-width="1.4" />
+  <text x="31.0" y="117.0" fill="#17212B" font-family="Times New Roman, serif" font-size="25.0" font-weight="bold">Public inputs</text>
+  <text x="31.0" y="164.44444444444446" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Source program when available</text>
+  <text x="31.0" y="190.83333333333334" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Initial candidate and library</text>
+  <text x="31.0" y="217.22222222222223" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Public task contract</text>
+  <rect x="400" y="80.0" width="325.0" height="165" fill="#E8F2F9" stroke="#A8B2BB" stroke-width="1.4" />
+  <text x="416.0" y="117.0" fill="#17212B" font-family="Times New Roman, serif" font-size="25.0" font-weight="bold">Independent Verifier</text>
+  <text x="416.0" y="164.44444444444446" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Read and search public code</text>
+  <text x="416.0" y="190.83333333333334" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Run tests; write scratch tests</text>
+  <text x="416.0" y="217.22222222222223" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Infer hypotheses and locations</text>
+  <rect x="800" y="80.0" width="370.0" height="165" fill="#EDF5EC" stroke="#A8B2BB" stroke-width="1.4" />
+  <text x="816.0" y="117.0" fill="#17212B" font-family="Times New Roman, serif" font-size="25.0" font-weight="bold">Fixer</text>
+  <text x="816.0" y="164.44444444444446" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Inspect the verifier's evidence</text>
+  <text x="816.0" y="190.83333333333334" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Edit candidate or library</text>
+  <text x="816.0" y="217.22222222222223" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Retain history across retries</text>
+  <rect x="15.0" y="330.0" width="310.0" height="165" fill="#F1F3F5" stroke="#A8B2BB" stroke-width="1.4" />
+  <text x="31.0" y="367.0" fill="#17212B" font-family="Times New Roman, serif" font-size="25.0" font-weight="bold">Target execution</text>
+  <text x="31.0" y="414.44444444444446" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">MindSpore via torch4ms</text>
+  <text x="31.0" y="440.83333333333337" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">JAX via TorchAX</text>
+  <text x="31.0" y="467.22222222222223" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Observe actual backend execution</text>
+  <rect x="400" y="330.0" width="325.0" height="165" fill="#FFF2DF" stroke="#A8B2BB" stroke-width="1.4" />
+  <text x="416.0" y="367.0" fill="#17212B" font-family="Times New Roman, serif" font-size="25.0" font-weight="bold">External acceptance</text>
+  <text x="416.0" y="414.44444444444446" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Execution and forward values</text>
+  <text x="416.0" y="440.83333333333337" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Gradients and parameter updates</text>
+  <text x="416.0" y="467.22222222222223" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Contract and confirmation checks</text>
+  <rect x="800" y="330.0" width="370.0" height="165" fill="#F1F3F5" stroke="#A8B2BB" stroke-width="1.4" />
+  <text x="816.0" y="367.0" fill="#17212B" font-family="Times New Roman, serif" font-size="25.0" font-weight="bold">Workspace and history</text>
+  <text x="816.0" y="414.44444444444446" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Current candidate and library</text>
+  <text x="816.0" y="440.83333333333337" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Recorded edits and observations</text>
+  <text x="816.0" y="467.22222222222223" fill="#17212B" font-family="Times New Roman, serif" font-size="19.444444444444443" font-weight="normal">Shared lifetime budget</text>
+  <polyline points="325.0,170.0 400,170.0" fill="none" stroke="#46535F" stroke-width="2.1" marker-end="url(#arrow)" />
+  <polyline points="725.0,170.0 800,170.0" fill="none" stroke="#46535F" stroke-width="2.1" marker-end="url(#arrow)" />
+  <text x="728.0" y="137.27777777777777" fill="#17212B" font-family="Times New Roman, serif" font-size="15.277777777777779" font-weight="normal">evidence</text>
+  <polyline points="985.0,245.00000000000003 985.0,330.0" fill="none" stroke="#46535F" stroke-width="2.1" marker-end="url(#arrow)" />
+  <text x="999.0" y="281.27777777777777" fill="#17212B" font-family="Times New Roman, serif" font-size="15.277777777777779" font-weight="normal">syntax-checked edits</text>
+  <polyline points="800,434.99999999999994 725.0,434.99999999999994" fill="none" stroke="#46535F" stroke-width="2.1" marker-end="url(#arrow)" />
+  <polyline points="325.0,409.99999999999994 400,409.99999999999994" fill="none" stroke="#46535F" stroke-width="2.1" marker-end="url(#arrow)" />
+  <polyline points="725.0,365.0 761.0,365.0 761.0,204.99999999999997 800,204.99999999999997" fill="none" stroke="#46535F" stroke-width="2.1" marker-end="url(#arrow)" />
+  <text x="530.0" y="272.6666666666667" fill="#17212B" font-family="Times New Roman, serif" font-size="16.666666666666668" font-weight="normal">failed checks</text>
+  <text x="530.0" y="296.27777777777777" fill="#17212B" font-family="Times New Roman, serif" font-size="16.666666666666668" font-weight="normal">and measurements</text>
+  <text x="210.0" y="528.8333333333334" fill="#17212B" font-family="Times New Roman, serif" font-size="20.833333333333332" font-weight="normal">Accept after passing checks; stop when the shared budget is exhausted.</text>
+</svg>

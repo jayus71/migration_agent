@@ -21,8 +21,12 @@ included file's source path, destination, size, and SHA-256.
 The Git selection contains Markdown/JSON files up to 1 MiB and CSVs up to 5 MiB,
 excluding raw execution directories and raw JSON. The exact rule is in
 `scripts/prepare_experiment_data.py`. Large parameter audits and generated code
-remain available in the complete snapshot. Original documents are unchanged, so
-links to omitted raw files and historical machine paths may require the full
+remain available in the complete snapshot. The two top-level status documents,
+`CURRENT_ISSUES.md` and `EXPERIMENT_STATUS_REPORT.md`, include subsequent progress
+updates. Their manifest entries retain the original snapshot size and hash as
+`source_size` and `source_sha256`; `size` and `sha256` describe the maintained Git
+copies. Other selected documents remain unchanged. Links to omitted raw files
+and historical machine paths may require the full
 snapshot or refer to machines that are not available in a cloud session.
 
 ## Full snapshot

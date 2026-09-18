@@ -9,6 +9,13 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{needspace}
+\usepackage{listings}
+\lstdefinestyle{repaircode}{
+  language=Python, basicstyle=\footnotesize\ttfamily,
+  columns=fullflexible, keepspaces=true, showstringspaces=false,
+  frame=tb, rulecolor=\color{black!40}, framerule=0.4pt,
+  aboveskip=3pt, belowskip=6pt, xleftmargin=3pt, xrightmargin=3pt
+}
 % Two-line table header on a common baseline with single-line headers.
 % \shortstack centres vertically, which leaves stacked and unstacked headers
 % sitting on different baselines in the same row.
@@ -37,16 +44,16 @@ updates are incorrect. Checking these stages exposes such faults, but error
 propagation can produce multiple discrepancies and obscure which computation
 needs repair. We propose LaDiM, a multi-agent repair system that uses
 dependencies between training stages to organize verification evidence into
-layered diagnoses. Its verifier compares execution status, forward values,
-gradients, and parameter updates in training order, and reports the first
-failing stage together with the supporting measurements. The translator
+layered diagnoses. Its verifier investigates execution status, forward values,
+gradients, and parameter updates, then records hypotheses and code locations
+supported by observed measurements. The translator
 supplies an initial target program, and the repair agent uses this diagnosis
 to edit the permitted code. An orchestrator coordinates translation,
 verification, and repair, using updated diagnoses after each edit to guide
 subsequent attempts within a fixed budget. On 50 MindSpore fault instances,
-LaDiM achieves full acceptance within four attempts, with 84\% accepted on
-the first attempt and approximately 29-fold lower token cost per accepted
-repair than the strongest state-of-the-art baseline tested.
+LaDiM accepts 45 within four submissions, compared with 29 for SWE-agent
+and 35 for a shared-tools Direct control. It also repairs four of five
+faulty natural translations while retaining all five healthy translations.
 Experiments on MindSpore and JAX demonstrate the effectiveness of the same
 diagnosis and repair procedure across target frameworks.
 \end{abstract}
@@ -62,14 +69,14 @@ Migrating deep learning training code makes existing programs available in anoth
 \label{fig:gradient-drift}
 \end{figure}
 
-The evidence available to translation and repair systems does not directly identify this origin. Unit tests check translated behavior~\citep{roziere2021unittests}; interactive agents inspect code and execution results~\citep{yang2024sweagent}; RepoTransAgent combines repository context, test failures, and reflection~\citep{guan2025repotransagent}; and MatchFixAgent supplies reports from multiple semantic analyses to guide test generation and repair~\citep{ibrahimzada2025matchfixagent}. These approaches leave the repair process to infer how discrepancies depend on one another during training. A forward error can change both gradients and parameter updates, while an incorrect update affects later forward computations as training continues. Figure~\ref{fig:gradient-drift} shows the resulting delay: the gradient or parameter update check detects every injected fault at step~1, whereas the mean loss difference crosses its threshold only at steps 31 and 18 in panels (a) and (b). The faulty computation is observable well before its accumulated effect on loss. We use these dependencies to interpret verification results in training order. Execution must succeed before numerical comparisons are available; once forward values agree, later discrepancies direct attention to differentiation or optimizer behavior. Selecting the first failing stage gives the repair agent a computation to inspect even when several measurements disagree.
+The evidence available to translation and repair systems does not directly identify this origin. Unit tests check translated behavior~\citep{roziere2021unittests}; interactive agents inspect code and execution results~\citep{yang2024sweagent}; RepoTransAgent combines repository context, test failures, and reflection~\citep{guan2025repotransagent}; and MatchFixAgent supplies reports from multiple semantic analyses to guide test generation and repair~\citep{ibrahimzada2025matchfixagent}. These approaches leave the repair process to infer how discrepancies depend on one another during training. A forward error can change both gradients and parameter updates, while an incorrect update affects later forward computations as training continues. Figure~\ref{fig:gradient-drift} shows the resulting delay: the gradient or parameter update check detects every injected fault at step~1, whereas the mean loss difference crosses its threshold only at steps 31 and 18 in panels (a) and (b). The faulty computation is observable well before its accumulated effect on loss. Execution must succeed before numerical comparisons are available; once forward values agree, later discrepancies motivate investigation of differentiation or optimizer behavior. These relationships make training measurements useful evidence for an agent that must identify an unknown fault.
 
-We introduce LaDiM (Layered Diagnosis for Multi-Agent Code Migration), which reports this stage together with its supporting measurements as a layered diagnosis. A translator supplies the initial target program, a verifier produces the diagnosis, and a repair agent uses it to edit the affected code. An orchestrator coordinates these agents and updates the diagnosis after each edit. Experiments on MindSpore and JAX examine repair effectiveness, diagnostic accuracy, and feedback design. On the 50-instance MindSpore set, LaDiM achieves full acceptance within four attempts with approximately 29-fold lower token cost per accepted repair than MatchFixAgent. This paper makes three contributions.
+We introduce LaDiM (Layered Diagnosis for Multi-Agent Code Migration), which separates evidence gathering from repair. A translator supplies the initial target program. An independent verifier reads public code, runs tests, and records supported hypotheses and locations. A repair agent receives this investigation and revises the implementation, retaining its observations across attempts. The orchestrator controls acceptance through external tests. Experiments on MindSpore and JAX examine repair effectiveness, training signals, and repair history. The selected slim v4 configuration accepts 45 of 50 injected MindSpore faults and repairs four of five faulty natural translations. This paper makes three contributions.
 
 \begin{itemize}
-  \item We formulate training-code repair through diagnosis along ordered training computations, using the first failing stage to connect verification evidence with a repair target.
-  \item We develop LaDiM, a layered multi-agent repair framework in which an orchestrator coordinates specialized translator, verifier, and repair agents around this diagnosis.
-  \item We evaluate repair effectiveness and cross-framework applicability on MindSpore and JAX, and analyze diagnostic accuracy, signal coverage, and guidance for the failing stage.
+  \item We formulate training-code repair using execution, forward values, gradients, and parameter updates as evidence for investigating unknown faults.
+  \item We develop LaDiM, a multi-agent repair framework with an independent investigation, explicit evidence handoff, and a shared acceptance and retry loop.
+  \item We evaluate repair effectiveness and cross-framework applicability on MindSpore and JAX, and analyze retry behavior, repair history, and training-signal coverage.
 \end{itemize}
 
 \section{Related Work}
@@ -78,10 +85,10 @@ We introduce LaDiM (Layered Diagnosis for Multi-Agent Code Migration), which rep
 Neural translation methods learn code mappings from multilingual corpora and incorporate automated tests or compiler representations to improve translations~\citep{roziere2020transcoder,roziere2021unittests,szafraniec2023compiler}. ExeCoder encodes functional semantics, syntax structure, and variable dependencies~\citep{he-etal-2025-execoder}; InterTrans explores intermediate translation paths~\citep{macedo2024intertrans}; and RepoTransAgent uses repository context, test failures, and reflection to refine translated code~\citep{guan2025repotransagent}. Framework migration tools supply mappings between programming interfaces: MindConverter targets MindSpore~\citep{mindspore2023mindconverter}, Ivy\footnote{\url{https://github.com/unifyai/ivy}} and \texttt{torch2jax}\footnote{\url{https://github.com/rdyro/torch2jax}} convert computations to JAX, and TorchAX exposes the PyTorch interface over a JAX backend~\citep{google2025torchax}. Executable translations can still compute incorrect forward values, gradients, or parameter updates. LaDiM addresses these training faults through semantic repair of both the translated program and the compatibility-layer implementations on which it depends.
 
 \paragraph{Differential Testing and Deep Learning Verification.}
-Differential testing exposes compiler and program faults through disagreement between related executions~\citep{yang2011csmith,le2014emi}. DeepXplore combines neuron coverage with differences between the outputs of functionally similar networks to search for inputs that expose erroneous behavior~\citep{pei2017deepxplore}. DeepGauge develops testing criteria at multiple granularities to assess how thoroughly a test set exercises a deep learning system~\citep{ma2018deepgauge}. These studies examine test adequacy and behavioral differences, providing ways to select inputs and identify inconsistent observations. Cross-framework training repair also requires interpreting the dependencies between observations: a forward error can propagate to gradients and parameter updates, so several discrepancies may originate from one faulty computation. LaDiM turns these measurements into a layered diagnosis by checking execution, forward values, gradients, and parameter updates in training order. The first failing stage and its supporting measurements identify the computation to inspect, connecting differential verification to a repair target.
+Differential testing exposes compiler and program faults through disagreement between related executions~\citep{yang2011csmith,le2014emi}. DeepXplore combines neuron coverage with differences between the outputs of functionally similar networks to search for inputs that expose erroneous behavior~\citep{pei2017deepxplore}. DeepGauge develops testing criteria at multiple granularities to assess how thoroughly a test set exercises a deep learning system~\citep{ma2018deepgauge}. These studies examine test adequacy and behavioral differences, providing ways to select inputs and identify inconsistent observations. Cross-framework training repair also requires interpreting the dependencies between observations: a forward error can propagate to gradients and parameter updates, so several discrepancies may originate from one faulty computation. LaDiM supplies measurements from these stages to an autonomous verifier, which examines code and runs further tests to develop a diagnosis and locate a repair target.
 
 \paragraph{Automated Program Repair and LLM Agents.}
-Automated program repair uses tests or semantic constraints to guide patch generation~\citep{nguyen2013semfix}, and pretrained language models generate patches from code and failure evidence~\citep{xia2023aprplm}. Interactive agents extend this process through repository navigation, editing, and execution, as in SWE-agent~\citep{yang2024sweagent}, or through reflection, self-debugging, and executable code actions~\citep{shinn2023reflexion,chen2023selfdebugging,wang2024codeact}. Multi-agent systems distribute these activities among specialized roles: ChatDev and MetaGPT organize software development~\citep{qian2023chatdev,hong2023metagpt}, while AutoGen and AgentVerse support agent communication and cooperation~\citep{wu2023autogen,chen2023agentverse}. For translation repair, MatchFixAgent combines semantic validation with autonomous patch generation~\citep{ibrahimzada2025matchfixagent}. Its analyzers examine control flow, data flow, input and output behavior, libraries, exceptions, and specifications; their reports guide test generation, patching, and equivalence judgments. This decomposition organizes verification by semantic aspect. LaDiM organizes the repair loop around dependencies between training computations, using the layered diagnosis as the interface between translation, verification, and repair agents. After each edit, the orchestrator obtains a new diagnosis and uses the first failing stage and its measurements to guide the next repair.
+Automated program repair uses tests or semantic constraints to guide patch generation~\citep{nguyen2013semfix}, and pretrained language models generate patches from code and failure evidence~\citep{xia2023aprplm}. Interactive agents extend this process through repository navigation, editing, and execution, as in SWE-agent~\citep{yang2024sweagent}, or through reflection, self-debugging, and executable code actions~\citep{shinn2023reflexion,chen2023selfdebugging,wang2024codeact}. Multi-agent systems distribute these activities among specialized roles: ChatDev and MetaGPT organize software development~\citep{qian2023chatdev,hong2023metagpt}, while AutoGen and AgentVerse support agent communication and cooperation~\citep{wu2023autogen,chen2023agentverse}. For translation repair, MatchFixAgent combines semantic validation with autonomous patch generation~\citep{ibrahimzada2025matchfixagent}. Its analyzers examine control flow, data flow, input and output behavior, libraries, exceptions, and specifications; their reports guide test generation, patching, and equivalence judgments. LaDiM focuses on training measurements and their use across repair attempts. The verifier's investigation forms an evidence record for the repair agent, which compares new measurements with earlier observations when an edit fails acceptance.
 
 \section{Method}
 
@@ -89,7 +96,7 @@ Automated program repair uses tests or semantic constraints to guide patch gener
 \begin{figure}[!t]
 \centering
 \includegraphics[width=\textwidth]{figures/hierarchical_feedback_architecture.pdf}
-\caption{LaDiM's repair loop. An orchestrator coordinates the translator, verifier, and repair agents. The verifier's diagnosis guides edits to the permitted code, followed by verification of the updated program. The \texttt{torch4ms}/MindSpore and TorchAX/JAX implementations use the same diagnostic signals and repair procedure.}
+\caption{LaDiM's repair loop. The verifier investigates public code and measurements before handing its evidence to the fixer. The controller evaluates each submitted workspace and returns failures for subsequent attempts. The \texttt{torch4ms}/MindSpore and TorchAX/JAX implementations expose the same types of training observations.}
 \label{fig:architecture}
 \end{figure}
 
@@ -97,15 +104,11 @@ Automated program repair uses tests or semantic constraints to guide patch gener
 Given a training program $P$ in a source framework $F_s$ and a target framework $F_t$, migration produces a target program $\hat{P}$ that preserves the source's training computations. We examine execution, forward values, gradients, and parameter updates. The repair task takes the source program, an initial target implementation, and the code the repair agent is permitted to edit. It returns a revised implementation that passes the specified verification checks. The permitted code can include the translated program or the framework implementation needed to execute it. The verifier runs the source and target programs with controlled inputs, synchronized initialization, and matched optimizer settings. Let $\mathcal{O}_{t}(P)$ denote the observations at training step $t$, including execution status, selected outputs or losses, gradients, and parameter updates. Differences between $\mathcal{O}_{t}(P)$ and $\mathcal{O}_{t}(\hat{P})$ provide the evidence for diagnosis. Section~\ref{sec:setup} specifies the checked conditions, tolerances, and repair acceptance criteria used in the experiments.
 
 \subsection{Layered Diagnosis}
-LaDiM interprets verification evidence in the order required by training computation. Execution failures prevent numerical comparison. A discrepancy in forward computation can propagate to gradients and parameter updates, so several failing measurements may reflect the same earlier error. When forward values agree, discrepancies in gradients or parameter updates direct attention to differentiation or optimizer behavior. We select the stage that fails first. Let $\mathcal{C}=(c_1,c_2,c_3)$ be the ordered diagnostic signals for execution, forward values, and gradients and parameter updates. Let $\mathrm{fail}(\hat{P})\subseteq\mathcal{C}$ contain the signals that detect a failure in the target implementation. LaDiM identifies the first failing stage,
+LaDiM exposes measurements from successive training computations. Execution failures prevent numerical comparison. A discrepancy in forward computation can propagate to gradients and parameter updates, so several failing measurements may reflect the same earlier error. The autonomous verifier investigates these measurements using the public task contract, candidate, target library, and a legitimate source program when available. It can read and search code, execute supplied tests, and create scratch tests while production code remains read-only. Its output is an evidence record,
 \begin{equation}
-v_{\mathrm{LaDiM}}(\hat{P}) =
-\begin{cases}
-\min\left\{\, i : c_i \in \mathrm{fail}(\hat{P}) \,\right\}, & \mathrm{fail}(\hat{P}) \neq \emptyset,\\
-\text{verified}, & \text{otherwise},
-\end{cases}
+D = \{\text{observations},\ \text{hypotheses},\ \text{locations},\ \text{uncertainty}\}.
 \end{equation}
-and reports the measurements, available module locations, and exception details that support this choice. The selected stage and this evidence form the layered diagnosis. Supplied with the editable code, they guide repair toward execution compatibility or operator implementation at index 1, forward operator semantics at index 2, and differentiation, parameter registration, or optimizer behavior at index 3. Later signals can still provide supporting evidence for the edit.
+Each supported location is linked to an observation or inspected code, and a hypothesis can include a test that would refute it. The default output requires no category. Categories are retained for experimental analysis, while the agent chooses what to inspect and edit from the available evidence. The controller supplies no fault-dependent routing or repair guidance. The independent repair role receives the recorded investigation, including tool observations, and can test its hypotheses before editing.
 
 \subsection{Diagnostic Signals}
 \label{sec:hierarchy}
@@ -134,95 +137,102 @@ Here $\Delta\theta$ and $\Delta\hat{\theta}$ are the source and target parameter
 
 \subsection{Multi-Agent Repair}
 
-The translator in Figure~\ref{fig:architecture} receives the source program and target framework information and produces the initial target program. The verifier runs the paired executions, and the repair agent uses the resulting diagnosis, the permitted code, and feedback from the previous attempt to edit the failing computation. The orchestrator maintains the program state and attempt budget, invoking verification after each edit. If an edit improves the verification score, it is retained; otherwise, the orchestrator rolls it back. The next attempt receives the updated diagnosis and the preceding edit's outcome, so a change in the failing stage redirects repair to the newly implicated computation. The loop ends when verification succeeds or the budget is exhausted.
+The translator in Figure~\ref{fig:architecture} receives the source program and target framework information and produces the initial target program. The verifier investigates the candidate, and the repair agent uses the resulting evidence and the permitted code to make changes. Both roles use the same read, list, search, edit, and test tools, with production edits disabled during diagnosis. Syntax validation rejects an invalid edit transaction before changing files. Accepted edit transactions remain in the workspace across attempts, and the repair conversation retains observations and earlier hypotheses. The orchestrator evaluates each submitted workspace and returns measured failures for the next attempt. Progress reminders expose remaining calls within the shared budget. The loop ends when acceptance and confirmation checks succeed or the budget is exhausted.
 
-The verifier collects observations through execution adapters. The primary adapter, \texttt{torch4ms}, exposes the PyTorch interface and dispatches operators, backward computation, and optimizer behavior to MindSpore implementations.\ificlrfinal\footnote{The primary prototype repository is available at \url{https://gitee.com/feixiao13/ascend-torch4ms.git}.}\fi{} The second uses TorchAX with JAX automatic differentiation and Optax updates. Both return execution status, forward values, gradients, and parameter updates in a common format, so the same diagnosis and repair procedure applies to both targets.
+The verifier collects observations through execution adapters. The primary adapter, \texttt{torch4ms}, exposes the PyTorch interface and dispatches target forward and backward computations to MindSpore; the evaluated training path applies PyTorch optimizer updates to the adapter's parameters.\ificlrfinal\footnote{The primary prototype repository is available at \url{https://gitee.com/feixiao13/ascend-torch4ms.git}.}\fi{} The second uses TorchAX with JAX automatic differentiation and Optax updates. Both return execution status, forward values, gradients, and parameter updates in a common format. Backend checks verify actual target computation, and external acceptance checks remain separate from the agent's self-reported diagnosis.
 
 \section{Experiments}
 
 \subsection{Experimental Setup}
 \label{sec:setup}
-We constructed the repair set from failures recorded while migrating PyTorch training programs to MindSpore and JAX. The failures fall into 25 recurring categories: ten cause execution failures, seven affect forward values, and eight affect gradients or parameter updates. The latter 15 leave the program executable. We reproduce each category by injecting the observed fault into a correct implementation, giving it a known location for evaluating diagnosis and reducing the variation in failures collected directly from migrations. Instantiating each category on two model families yields 50 instances across CNN, image MLP, Transformer classifier, and tiny causal LM. The JAX set uses the same construction for six MLP and CNN faults across the three stages. We also identify the code that must change to correct each fault. Depending on this repair location, the permitted edits cover the translated program, additionally include operator implementations in the compatibility layer, or extend to that layer's automatic differentiation and optimizer code. We restrict each repair to its permitted code because an edit above the fault can hide its effect while leaving the faulty implementation unchanged.
+We evaluate repair on two MindSpore sets. Fixed50 contains 50 injected faults across CNN, image MLP, Transformer classifier, and small causal language models. Its 25 fault categories comprise ten execution categories, seven forward-value categories, and eight gradient or parameter-update categories, with two instances per category. Acceptance uses each instance's original fault-specific checks. Natural10 reuses ten initial translations from the framework-documentation study without injecting faults or translating them again. Five initially fail and five are healthy. Its acceptance checks source--target forward values, gradients, and parameter updates under matched initialization and inputs, with final confirmation on three seeds. We report actual repairs and healthy-program retention separately.
 
-We compare LaDiM with direct LLM repair, SWE-agent, and MatchFixAgent, and examine reduced feedback configurations in Section~\ref{sec:ablations}. The main MindSpore comparison uses the same faulty translations, LLM (\texttt{deepseek-v4-flash}), temperature (0.1), and four-attempt budget. MatchFixAgent also receives the correct implementation of the changed function, a reference supplied only to that baseline. The JAX comparison uses the same LLM and includes Ivy and \texttt{torch2jax}; LaDiM has up to three repair rounds, while Direct LLM and each conversion tool run once. On the 50-instance set, acceptance means passing the checks specific to the injected fault, and we report it after one attempt and within four attempts. The diagnostic studies separately check that every measured source--target difference stays within its threshold at every training step: $\Delta_{\mathrm{loss}}\leq0.02$, $\Delta_{\mathrm{grad}}\leq0.05$, and $\Delta_{\mathrm{param}}\leq0.03$, as defined in Section~\ref{sec:hierarchy}. We record edits outside the permitted code and measure cost across all attempted instances, including unsuccessful repairs. Tokens per accepted repair divide total prompt and completion tokens by the accepted count; elapsed time uses the same denominator. These studies use controlled executions; longer training runs and additional framework pairs remain for future evaluation.
+The main method is slim v4, which removes the original v4 configuration's advance editing examples and extra format-correction feedback while retaining native tool schemas and validation. We compare it with SWE-agent 1.1.0 and a Direct control that uses the shared repair tools. Natural10 also includes MatchFixAgent's full upstream orchestration with a shared DeepSeek tool backend. All methods receive the same initial candidate for each task and use the configured DeepSeek repair backend with up to four submission checkpoints. Fault categories, fault locations, reference repairs, and healthy target implementations remain private; legitimate source programs are available where the task defines them. The MindSpore path executes target forward and backward computations in MindSpore through \texttt{torch4ms}; parameter updates in this evaluation use the PyTorch optimizer on the adapter's parameters.
 
-\subsection{Repair Effectiveness and Efficiency}
+The original v4 configuration remains the reference for component ablations and is the version evaluated in the JAX and training-signal studies. We select complete runs under the recorded infrastructure-recovery rules and retain completed failures. Token cost sums prompt and completion tokens over every call in the selected runs, including failed repairs, then divides by the accepted count. Interrupted predecessor runs are archived separately; some have unavailable usage. Additional paired-input MatchFixAgent and InterTrans evaluations are pending.
+
+\subsection{Main Experiments}
 \label{sec:main-results}
 
 \begin{table}[!htb]
-\caption{Repair acceptance and cost on MindSpore and JAX. Each panel uses its own instance set and recorded attempt budget.}
+\caption{Autonomous repair on MindSpore. Fixed50 uses fault-specific acceptance within four submissions. Natural10 separates repairs of initially faulty programs from retention of healthy programs.}
 \label{tab:main-results}
 \centering
 \small
 \setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.1}
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}
 \toprule
-\textbf{Method} & \thead{Accepted\\repairs} & \thead{First-attempt\\acceptance} & \thead{Tokens per\\accepted repair} & \thead{Seconds per\\accepted repair} \\
+\textbf{Method} & \thead{Fixed50\\accepted} & \thead{Accepted by\\1 / 2 / 4} & \thead{Tokens per\\accepted repair} & \thead{Natural10\\repaired / healthy} \\
 \midrule
-\multicolumn{5}{l}{\textit{(a) MindSpore: 50 instances, up to four attempts}} \\
-\input{figures/TABLE_main_rows.tex}
+\input{figures/TABLE_slim_main_rows.tex}
 \end{tabular*}
 \par\vspace{4pt}
 \begin{minipage}{\linewidth}
-\footnotesize MindSpore acceptance uses the checks for each injected fault. JAX acceptance requires training verification on three seeds for each instance; its six instances cover MLP and CNN at all three fault stages, with edits confined to the translated program. LaDiM permits up to three repair rounds on JAX, while Direct LLM, Ivy, and \texttt{torch2jax} run once. Costs sum all attempted instances, including failures, and divide by accepted repairs; n/a denotes an undefined cost when no repair is accepted. $^\dagger$Only MatchFixAgent receives the correct implementation of the changed function.
+\footnotesize Natural10 denominators are five initially faulty and five initially healthy programs. Costs cover all 50 Fixed50 runs. Submission counts are external checkpoints; native agents may perform multiple internal actions before submitting. MatchFixAgent requires a source--target pair, unavailable in the original Fixed50 inputs. LaDiM uses slim v4; the component reference uses original v4.
 \end{minipage}
 \end{table}
-LaDiM repairs all 50 MindSpore instances within four attempts, with 84\% accepted on the first attempt compared with 74\% for MatchFixAgent (Table~\ref{tab:main-results}). The repair-location breakdown in Appendix~\ref{sec:repair-breakdown} places its remaining advantage over the external repair systems in adapter code: SWE-agent and MatchFixAgent resolve every fault confined to the translated program but miss faults in automatic differentiation or optimizer implementations. Here a program may execute and produce a plausible loss while relating gradients to parameters incorrectly. LaDiM resolves all four such instances, including one missed by every baseline. The cumulative results in Figure~\ref{fig:repair-comparison} show that most repairs require little iteration: LaDiM approaches full acceptance by the second attempt and resolves the last instance within four. It also uses approximately 29-fold fewer tokens and 3.4-fold less elapsed time per accepted repair than MatchFixAgent, with both measures counting unsuccessful attempts. The combination of higher first-attempt acceptance and lower total cost motivates the comparison of diagnosis and repair guidance in Section~\ref{sec:ablations}.
+
+LaDiM accepts 45/50 Fixed50 instances, compared with 29/50 for SWE-agent and 35/50 for Direct (Table~\ref{tab:main-results}). The paired outcomes clarify this difference: LaDiM accepts every instance accepted by either baseline, plus 16 beyond SWE-agent and ten beyond Direct. The five remaining failures are shared with both baselines. On Natural10, LaDiM repairs four of the five initially faulty programs and retains all five healthy programs, giving 9/10 total acceptance. SWE-agent, Direct, and MatchFixAgent retain the healthy programs and repair none of the five faults. This distinction matters because half of Natural10 requires no corrective edit.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/repair_comparison.pdf}
-\caption{Repair cost and acceptance on the 50 MindSpore instances. (a) First-attempt acceptance versus total tokens divided by repairs accepted within four attempts. (b) Cumulative acceptance at the recorded budgets of one, two, and four attempts; connecting lines are visual guides. All six curves use the original MindSpore experiment in Table~\ref{tab:main-results}(a) and Appendix~\ref{sec:repair-breakdown}.}
+\caption{Fixed50 results for slim v4 and the completed autonomous baselines. (a) First-submission acceptance against total selected-run tokens per accepted repair. (b) Cumulative acceptance at the measured budgets of one, two, and four submissions. Connecting lines are visual guides.}
 \label{fig:repair-comparison}
 \end{figure}
 
-\subsection{Generalization Across Frameworks}
-\label{sec:generalization}
-
-The same diagnosis and repair procedure applies to JAX in Table~\ref{tab:main-results}(b). LaDiM repairs all six faults across execution, forward values, and gradients and parameter updates; its additional accepted repair over Direct LLM corrects forward computation in the CNN. All accepted repairs finish in the first round. LaDiM uses 2.9K tokens per accepted repair compared with 15.0K for Direct LLM. The adapter collects observations through the JAX runtime, and the verifier interprets them in the same training order used for MindSpore.
-
-\subsection{Diagnosis Analysis}
+\subsection{Analysis Experiments}
 \label{sec:fault-characterization}
 
-The diagnostic signals distinguish the effects of faults along the training computation. Correct reference translations of CNN, MLP, Transformer, and tiny causal LM models pass every check over 50 steps and three seeds: the maximum loss difference is $3.815\times10^{-6}$, and mean differences in gradient norms and parameter updates remain below $4\times10^{-8}$ and $3.9\times10^{-6}$. We isolate injected faults by synchronizing the translated model with the source at each checked step, again using 50 steps, four model families, and three seeds. The intended signal detects all 36 faults across the three classes. Execution failures leave numerical measurements unavailable; forward faults cross the loss threshold and can also affect gradients and updates; gradient faults preserve loss agreement but affect gradients and updates; and update faults affect only the update comparison. The tiny causal LM further shows why the measurements are complementary: its forward fault crosses the loss threshold even though the gradient signal stays below threshold. Selecting the first failing stage localizes 48 of 50 instances correctly (96\%), including all execution faults (20/20) and all gradient and parameter update faults (16/16). The two disagreements with the injected-stage labels arise from mixed precision overflow: execution fails before forward values can be compared, so the diagnosis reports the execution failure.
+\paragraph{Iteration and Cost.}
+Later submissions account for 16 of LaDiM's 45 accepted repairs: acceptance increases from 29 after one submission to 41 after two and 45 within four. The second submission contributes most of this gain. Direct rises from 24 to 31 to 35, while SWE-agent rises from 28 to 29 and remains there. LaDiM uses 39.98 million tokens across the 50 tasks, or 888.5K per accepted repair. SWE-agent uses 1,468.2K per accepted repair and Direct uses 356.0K. LaDiM therefore combines higher acceptance with lower cost than SWE-agent, while Direct offers lower cost with ten fewer accepted repairs. Natural10 uses 13.21 million tokens across all ten inputs, including diagnosis of healthy programs and unsuccessful attempts.
 
-Allowing the translated model to retain its own state exposes a different consequence of the same dependencies. Incorrect updates accumulate and change later forward computations in Figure~\ref{fig:gradient-drift}. Across four model families and three seeds for each of two fault types (24 runs), gradient or parameter update checks detect the fault immediately, while the mean loss difference crosses its threshold only after further training. Forward agreement can therefore persist while incorrect gradients or updates already affect learning.
+\paragraph{Failure Analysis.}
+The five remaining Fixed50 failures comprise two forward-value faults and three gradient or parameter-update faults. Their benchmark definitions cover mask fill values (CNN), rotary-position pairing (MLP), trainable-gradient mapping (MLP and Transformer), and candidate trainability and updates (MLP). LaDiM thus accepts all 20 execution faults, 12/14 forward-value faults, and 13/16 gradient or parameter-update faults. Both baselines also fail on these five instances. This concentration identifies numerical operator semantics and the correspondence between trainable parameters and gradients as remaining repair targets. Natural10 retains one unresolved fault among its five initially faulty programs. All complete failed runs remain in the acceptance denominators and cost totals.
 
-\Needspace{12\baselineskip}
-\subsection{Ablation Study}
+\paragraph{Training Signals and Detection Latency.}
+The diagnostic replay checks numerical behavior independently of LLM repair. Correct translations pass the recorded checks over 50 steps and three seeds across four models; the maximum loss difference is $3.815\times10^{-6}$. In 36 synchronized fault trajectories, each target model starts each checked step from the source state, and the intended signal detects every injected fault. Execution failures leave later numerical measurements unavailable. Forward faults can affect subsequent gradients and updates; gradient faults can preserve loss agreement; update faults can affect the update comparison alone. The historical 48/50 result measures agreement between a deterministic first-failing-stage rule and injected-stage labels, with two execution failures caused by mixed-precision overflow. It is a stage-agreement measurement.
+
+When the target retains its own state, incorrect gradients or updates change later forward computations. Figure~\ref{fig:gradient-drift} covers 12 runs per fault type. The direct training signal detects every fault at step 1, while the mean loss difference crosses its threshold at steps 31 and 18. Only 3/12 and 4/12 individual loss trajectories, respectively, cross their thresholds within the observation window. The mean curve's crossing thus describes aggregate drift, while the per-run counts describe detection coverage.
+
+\subsubsection{Generalization Across Frameworks}
+\label{sec:generalization}
+
+The JAX study evaluates the original v4 procedure on six frozen MLP and CNN faults with edits confined to the candidate program. Original v4 and Direct both accept 6/6 within their first submission under three-seed training verification. Both allow up to four submission checkpoints in this rerun. Original v4 uses 674,009 tokens in total, compared with 353,311 for Direct, and 302.7 versus 137.2 seconds per accepted repair. The result supports reuse of the diagnosis and repair procedure with TorchAX/JAX; Direct has lower cost on these six instances. Native Ivy and \texttt{torch2jax} each accept 0/6 when given the already faulty candidates, with healthy-input gates passing. This converter comparison measures removal of faults already present in the input.
+
+\subsection{Ablation Studies}
 \label{sec:ablations}
 
-We examine how signal coverage and diagnostic feedback affect repair. The signal study uses 12 tasks spanning the three fault stages and four model families. The feedback ablation uses the 50 MindSpore instances with the faulty programs, repair LLM, permitted edits, and four-attempt budget fixed. Execution only supplies runtime feedback; pass/fail only compresses all checks into one decision; stage label only identifies the first failing stage; and flat feedback supplies all measurements without stage selection or targeted repair guidance. Table~\ref{tab:feedback-ablation} compares their repair acceptance and cost with the full method.
+\paragraph{Repair Components.}
+Table~\ref{tab:feedback-ablation} compares complete component conditions against original v4. Each condition changes the named component of that reference. Slim v4 is the condition without editing-format assistance and is selected as the main method after this comparison. The other ablations retain the original format assistance.
 
 \begin{table}[!htb]
-\caption{Effect of diagnostic feedback on repair acceptance and cost across 50 MindSpore instances.}
+\caption{Component conditions relative to original v4. Natural10 reports total acceptance and actual repairs among its five initially faulty programs. All conditions retain all five healthy programs.}
 \label{tab:feedback-ablation}
 \centering
 \small
 \setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.1}
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}
 \toprule
-\textbf{Variant} & \thead{Accepted\\repairs} & \thead{First-attempt\\acceptance} & \thead{Tokens per\\accepted repair} & \thead{Seconds per\\accepted repair} \\
+\textbf{Configuration} & \thead{Fixed50\\accepted} & \thead{Natural10\\accepted} & \thead{Natural10\\actual repairs} \\
 \midrule
-\input{figures/TABLE_feedback_rows.tex}
+Original v4 reference & 41/50 & 9/10 & 4/5 \\
+Continuous role and conversation & 44/50 & 8/10 & 3/5 \\
+Without prior repair conversation & 37/50 & 5/10 & 0/5 \\
+Without progress prompts & 46/50 & 7/10 & 2/5 \\
+Without editing-format assistance (slim v4) & 45/50 & 9/10 & 4/5 \\
+\bottomrule
 \end{tabular*}
-\par\vspace{4pt}
-\begin{minipage}{\linewidth}
-\footnotesize All variants use \texttt{deepseek-v4-flash} at temperature 0 and paired-threshold acceptance within four attempts. Costs include unsuccessful attempts. $^\ast$LaDiM reports the third of three independent runs; all three results appear in Appendix~\ref{sec:feedback-evidence}. -- denotes an unmeasured result. The last three variants each disable the named component while retaining the remaining procedure.
-\end{minipage}
 \end{table}
 
-Complementary signals make faults at successive training stages visible to repair. Adding forward comparisons to execution feedback raises acceptance from 4/12 to 8/12; adding gradient and parameter update feedback raises it to 12/12. Each setting repairs the four faults at each visible stage, and every accepted repair finishes in the first round (Table~\ref{tab:signal-coverage}).
+Retaining prior repair conversation supports acceptance in both task sets: removing it reduces Fixed50 acceptance from 41 to 37 and actual Natural10 repairs from four to zero. This condition retains the initial diagnosis, current files, and latest observations, with a cumulative budget. The continuous-role condition changes role separation, message attribution, and provider reasoning retention together. Its effect and that of progress prompts vary across the two sets. Removing format assistance preserves four Natural10 repairs while reducing total tokens there from 15.55 to 13.21 million; Fixed50 acceptance increases to 45, with tokens increasing from 38.03 to 39.98 million. Each condition represents one complete set of model trajectories.
 
-Combining measurements with stage selection and targeted guidance improves both repair acceptance and efficiency. LaDiM accepts 48/50 repairs, compared with 34/50 under flat feedback, while reducing tokens per accepted repair from 12.7K to 6.8K and elapsed time from 357.2 to 100.2 seconds. Its first-attempt acceptance also rises from 64\% to 72\%. The stage-label condition reaches the same acceptance as flat feedback at a higher token cost. LaDiM gives the repair agent both the measurements behind the selected stage and guidance on the implicated computation.
-
-Framework documentation has a different role (Appendix~\ref{sec:framework-documentation}). The \texttt{torch4ms} usage guides enable initial translations to complete training in all 15 runs, compared with none without them. During repair, the guides eliminate out-of-scope operator edits but leave operator acceptance unchanged, reduce acceptance for translated-program faults, and leave automatic differentiation and optimizer faults unresolved. Their benefit in supplying interface conventions during translation does not carry over consistently to repair.
+\paragraph{Training-Signal Coverage.}
+We use the original v4 procedure on four actual models: a CNN, image MLP, Transformer classifier, and small causal language model. Each has one execution, forward-value, gradient, and parameter-update fault, giving 16 instances per feedback condition. Every final candidate is scored using all checks on three seeds. Execution feedback accepts 4/16 under that full evaluation; adding forward values accepts 8/16, adding gradients accepts 12/16, and adding parameter updates accepts 16/16. The corresponding numbers of initial candidates that pass the visible checks and trigger no repair are 12, eight, four, and zero. All four controllers eventually report 16/16 passing their visible checks. The study therefore measures how default signals trigger, guide, and stop repair. Increasing coverage prevents faulty programs from satisfying an incomplete stopping rule. The audited conditions use 690 LLM calls, with complete usage records and 120 final backend checks for 40 accepted patches.
 
 \section{Conclusion}
 
-We introduced LaDiM, a multi-agent repair system that uses the order of training computations to diagnose migration failures. The first failing stage connects verification evidence to a computation that requires correction, including faults that remain hidden in forward observations. LaDiM turns this diagnosis into code edits through specialized translation, verification, and repair agents coordinated by an orchestrator. Experiments on MindSpore and JAX show improved repair acceptance and lower token cost with the same diagnosis and repair procedure across target frameworks.
+We introduced LaDiM, a multi-agent repair system that uses the order of training computations to investigate migration failures. Its diagnostic observations expose faults that remain hidden in forward values, and an independent repair role uses the accumulated evidence to edit permitted code. The selected slim v4 configuration accepts 45/50 injected MindSpore faults and repairs four of five faulty natural translations. Component studies show the value of retaining repair history, while training-signal studies show how incomplete checks can stop repair prematurely. The original v4 procedure also repairs all six JAX instances, supporting reuse across target frameworks.
 
 % Required by ICLR 2027; left blank at the author's request.
 \subsection*{AI use statement}
@@ -237,6 +247,26 @@ This work was supported by CAAI Huawei MindSpore Open Fund, and developed on Ope
 
 \clearpage
 \appendix
+\section{Historical Guided Repair Example}
+The following case records the earlier guided procedure and its historical baselines. These patches are preserved separately from the autonomous slim v4 comparison in Section~\ref{sec:main-results}.
+
+A grouped-query attention repair illustrates the remaining numerical error after execution is restored. The instance has four query heads and two key/value heads. Direct LLM and SWE-agent move key/value expansion before attention-score computation, but their first patches use \texttt{tile}, producing $[k_0,k_1,k_0,k_1]$ instead of $[k_0,k_0,k_1,k_1]$. The following excerpts show the expansion in their patches and LaDiM's accepted repair.
+
+\begin{minipage}{\linewidth}
+\small\textsc{Direct LLM / SWE-agent: first repair}
+\begin{lstlisting}[style=repaircode,backgroundcolor=\color{red!7}]
+key = mops.tile(key, (1, key_repeats, 1, 1))
+value = mops.tile(value, (1, value_repeats, 1, 1))
+\end{lstlisting}
+\small\textsc{LaDiM: second repair}
+\begin{lstlisting}[style=repaircode,backgroundcolor=\color{cyan!8}]
+key = mops.repeat_elements(key, rep=key_repeats, axis=-3)
+value = mops.repeat_elements(value, rep=value_repeats, axis=-3)
+\end{lstlisting}
+\end{minipage}
+
+LaDiM initially makes the same tiling edit. Verification finds that the output shape and data type agree while the maximum absolute output difference remains 1.028591. Its second repair repeats each head consecutively, reducing the difference to $9.95\times10^{-7}$ and passing the $10^{-4}$ tolerance. Direct LLM and SWE-agent have no accepted repair within four attempts. The compared patches edit the same attention operator file.
+
 \section{Framework Documentation Studies}
 \label{sec:framework-documentation}
 
@@ -289,7 +319,7 @@ On  & 15 & 100.0\% & 100.0\% & 100.0\% & 100.0\% \\
 \section{Repair Results by Fault, Location, and Model}
 \label{sec:repair-breakdown}
 
-Table~\ref{tab:repair-breakdown} gives the breakdown underlying the main MindSpore results. Table~\ref{tab:original-feedback} records the execution-only and all-signals conditions from the same run. These results use fault-specific acceptance at temperature 0.1. Figure~\ref{fig:repair-comparison} uses this experiment for every curve.
+Table~\ref{tab:repair-breakdown} preserves the earlier guided MindSpore experiment. Table~\ref{tab:original-feedback} records its execution-only and all-signals conditions. These historical results use fault-specific acceptance at temperature 0.1 and are separate from the autonomous slim v4 results in Section~\ref{sec:main-results}.
 
 \begin{table}[!htb]
 \caption{Acceptance by fault stage, repair location, and model in the original 50-instance MindSpore experiment.}
@@ -326,7 +356,7 @@ Language model & 10/12 & 11/12 & 12/12 & \textbf{12/12} \\
 \end{table}
 
 \begin{table}[!htb]
-\caption{Reduced feedback in the original 50-instance MindSpore experiment used by Figure~\ref{fig:repair-comparison}.}
+\caption{Reduced feedback in the historical guided 50-instance MindSpore experiment.}
 \label{tab:original-feedback}
 \centering
 \small

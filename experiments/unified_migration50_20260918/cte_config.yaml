@@ -1,0 +1,44 @@
+numExecutionWorkers: 1
+numInferenceWorkers: 1
+useComputeEfficientMode: true
+serverAddress: 127.0.0.1
+serverPort: 50183
+earlyStop: true
+verifyIntermediateTranslations: false
+expansionIntermediaryNodes: 1
+applyRegexInferenceOnly: true
+useTranscoderTestFormat: false
+useInferenceCache: false
+useResponseCache: false
+useExecutionCache: false
+cacheDatabasePath: ./data/unified50_cte
+maxGeneratedTokens: 131072
+temperature: 0.1
+top-p: 0.95
+top-k: 10
+inferenceSeed: -1
+regexTemplates:
+  temperature: '(?s)\x60\x60\x60(?:(?:python|py|Python))?(.+)\x60\x60\x60'
+inferenceApiBaseUrls:
+  - __AUTOFIX_LLM_BASE_URL__
+inferenceApiToken: __AUTOFIX_LLM_API_KEY__
+executionContainers:
+  Python: unified50/cte-python:20260918
+promptTemplates:
+  prompt_codenet_mindspore: |
+    @@ Instruction
+    Translate the complete {input_lang} source below into one complete,
+    trainable native MindSpore Python file. Use mindspore.nn.Cell, native
+    MindSpore tensor operations, native automatic differentiation, and a native
+    MindSpore optimizer. Do not import or use PyTorch, MSAdapter, ms_adapter, or
+    torch4ms in the target code. Preserve the model architecture, tensor shapes,
+    loss reduction, optimizer type and learning rate, and training semantics.
+    Preserve all public module interfaces and parameter names in the supplied
+    source and task contract. Return exactly one Python code block and no prose.
+
+    Source code and public task contract:
+    ```
+    {input_code}
+    ```
+
+    @@ Response

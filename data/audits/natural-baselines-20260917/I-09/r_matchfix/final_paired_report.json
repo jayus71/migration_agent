@@ -1,0 +1,143 @@
+{
+  "config": {
+    "kind": "paired_code_report",
+    "source_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-natural-baselines-20260917/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_baselines_20260917/I-09/r_matchfix/workspace/source.py",
+    "converted_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-natural-baselines-20260917/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_baselines_20260917/I-09/r_matchfix/workspace/candidate.py",
+    "source_entry": "build_model",
+    "converted_entry": "build_model",
+    "source_train_entry": "train_one_step",
+    "converted_train_entry": "train_one_step",
+    "mode": "train",
+    "batch_mode": "classification",
+    "input_shape": [
+      2,
+      3,
+      8,
+      8
+    ],
+    "use_torch4ms_env": true,
+    "sync_initial_state": true
+  },
+  "results": {
+    "torch": {
+      "mode": "torch",
+      "status": "ok",
+      "losses": [
+        1.5050275325775146
+      ],
+      "grad_norms": [
+        1.4701093435287476
+      ],
+      "error": "",
+      "backend_execution": {
+        "required": false
+      }
+    },
+    "torch4ms": {
+      "mode": "torch4ms",
+      "status": "ok",
+      "losses": [
+        1.5050270557403564
+      ],
+      "grad_norms": [
+        1.0514774322509766
+      ],
+      "error": "",
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 8,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "comparison": {
+    "last_step_abs_loss_diff": 4.76837158203125e-07,
+    "last_step_abs_grad_norm_diff": 0.418631911277771,
+    "param_update_rel_l2": 0.9252656699732557,
+    "parameter_update_diagnostics": {
+      "parameters": [
+        {
+          "name": "value.weight",
+          "reference_update_norm": 0.009623337537050247,
+          "candidate_update_norm": 0.0,
+          "update_diff_norm": 0.009623337537050247,
+          "update_rel_l2": 0.9999999998960859
+        },
+        {
+          "name": "value.bias",
+          "reference_update_norm": 0.0018520227167755365,
+          "candidate_update_norm": 0.0,
+          "update_diff_norm": 0.0018520227167755365,
+          "update_rel_l2": 0.9999999994600498
+        },
+        {
+          "name": "gate.weight",
+          "reference_update_norm": 0.0032077785581350327,
+          "candidate_update_norm": 0.0,
+          "update_diff_norm": 0.0032077785581350327,
+          "update_rel_l2": 0.9999999996882578
+        },
+        {
+          "name": "gate.bias",
+          "reference_update_norm": 0.0018520178273320198,
+          "candidate_update_norm": 0.0,
+          "update_diff_norm": 0.0018520178273320198,
+          "update_rel_l2": 0.9999999994600484
+        },
+        {
+          "name": "norm.weight",
+          "reference_update_norm": 0.0018519953591749072,
+          "candidate_update_norm": 0.0,
+          "update_diff_norm": 0.0018519953591749072,
+          "update_rel_l2": 0.9999999994600418
+        },
+        {
+          "name": "norm.bias",
+          "reference_update_norm": 0.0018520256271585822,
+          "candidate_update_norm": 0.0,
+          "update_diff_norm": 0.0018520256271585822,
+          "update_rel_l2": 0.9999999994600507
+        },
+        {
+          "name": "head.weight",
+          "reference_update_norm": 0.0041411989368498325,
+          "candidate_update_norm": 0.0041411989368498325,
+          "update_diff_norm": 0.0,
+          "update_rel_l2": 0.0
+        },
+        {
+          "name": "head.bias",
+          "reference_update_norm": 0.001565240789204836,
+          "candidate_update_norm": 0.001565240789204836,
+          "update_diff_norm": 0.0,
+          "update_rel_l2": 0.0
+        }
+      ]
+    }
+  },
+  "layer_outputs": {
+    "torch": {
+      "value": 0.012097720988094807,
+      "gate": -0.08255089074373245,
+      "norm": -2.2617834272153914e-09,
+      "head": 0.1014225035905838
+    },
+    "torch4ms": {
+      "value": 0.012097716331481934,
+      "gate": -0.08255089074373245,
+      "norm": -3.12573833483043e-09,
+      "head": 0.1014225035905838
+    }
+  }
+}

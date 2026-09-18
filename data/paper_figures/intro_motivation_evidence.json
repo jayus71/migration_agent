@@ -1,0 +1,86 @@
+{
+  "instance": "I-09",
+  "source_report": "experiment-results-local-20260906/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-09/r_hier/reports/I-09__r_hier_iter1_paired_report.json",
+  "source_report_sha256": "ed237b2588174722eb7b96984cd46118bcdb47f9cebd2160a1185e60b0c73d07",
+  "source_framework": "PyTorch",
+  "target_framework": "MindSpore via torch4ms",
+  "observation": "Initial synchronized training step, before repair",
+  "source_loss": 1.5050275325775146,
+  "target_loss": 1.5050270557403564,
+  "loss_absolute_difference": 4.76837158203125e-07,
+  "gradient_norm_absolute_difference": 0.418631911277771,
+  "parameter_update_relative_l2_difference": 0.9252656699732557,
+  "zero_target_update_parameters": [
+    "value.weight",
+    "value.bias",
+    "gate.weight",
+    "gate.bias",
+    "norm.weight",
+    "norm.bias"
+  ],
+  "matching_update_parameters": [
+    "head.weight",
+    "head.bias"
+  ],
+  "parameter_update_diagnostics": [
+    {
+      "name": "value.weight",
+      "reference_update_norm": 0.009623337537050247,
+      "candidate_update_norm": 0.0,
+      "update_diff_norm": 0.009623337537050247,
+      "update_rel_l2": 0.9999999998960859
+    },
+    {
+      "name": "value.bias",
+      "reference_update_norm": 0.0018520227167755365,
+      "candidate_update_norm": 0.0,
+      "update_diff_norm": 0.0018520227167755365,
+      "update_rel_l2": 0.9999999994600498
+    },
+    {
+      "name": "gate.weight",
+      "reference_update_norm": 0.0032077785581350327,
+      "candidate_update_norm": 0.0,
+      "update_diff_norm": 0.0032077785581350327,
+      "update_rel_l2": 0.9999999996882578
+    },
+    {
+      "name": "gate.bias",
+      "reference_update_norm": 0.0018520178273320198,
+      "candidate_update_norm": 0.0,
+      "update_diff_norm": 0.0018520178273320198,
+      "update_rel_l2": 0.9999999994600484
+    },
+    {
+      "name": "norm.weight",
+      "reference_update_norm": 0.0018519953591749072,
+      "candidate_update_norm": 0.0,
+      "update_diff_norm": 0.0018519953591749072,
+      "update_rel_l2": 0.9999999994600418
+    },
+    {
+      "name": "norm.bias",
+      "reference_update_norm": 0.0018520256271585822,
+      "candidate_update_norm": 0.0,
+      "update_diff_norm": 0.0018520256271585822,
+      "update_rel_l2": 0.9999999994600507
+    },
+    {
+      "name": "head.weight",
+      "reference_update_norm": 0.0041411989368498325,
+      "candidate_update_norm": 0.0041411989368498325,
+      "update_diff_norm": 0.0,
+      "update_rel_l2": 0.0
+    },
+    {
+      "name": "head.bias",
+      "reference_update_norm": 0.001565240789204836,
+      "candidate_update_norm": 0.001565240789204836,
+      "update_diff_norm": 0.0,
+      "update_rel_l2": 0.0
+    }
+  ],
+  "code_review": "docs/natural-translation-cause-review-20260916.md",
+  "mechanism_evidence": "Static review of archived operator registration and fallback code",
+  "repair_outcome": "STOP_NO_PROGRESS"
+}

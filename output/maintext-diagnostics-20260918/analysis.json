@@ -1,0 +1,198 @@
+{
+  "studies": {
+    "experiment_c": {
+      "counts": {
+        "teacher-forced/none": {
+          "runs": 12,
+          "all_step_pass": 12,
+          "detected": 0,
+          "intended_signal_detected": null
+        },
+        "free-running/none": {
+          "runs": 12,
+          "all_step_pass": 12,
+          "detected": 0,
+          "intended_signal_detected": null
+        },
+        "teacher-forced/grad_wrong": {
+          "runs": 12,
+          "all_step_pass": 0,
+          "detected": 12,
+          "intended_signal_detected": 12
+        },
+        "free-running/grad_wrong": {
+          "runs": 12,
+          "all_step_pass": 0,
+          "detected": 12,
+          "intended_signal_detected": 12
+        },
+        "teacher-forced/param_wrong": {
+          "runs": 12,
+          "all_step_pass": 0,
+          "detected": 12,
+          "intended_signal_detected": 12
+        },
+        "free-running/param_wrong": {
+          "runs": 12,
+          "all_step_pass": 0,
+          "detected": 12,
+          "intended_signal_detected": 12
+        }
+      },
+      "self_checks": {
+        "row_count": {
+          "ok": true,
+          "expected": 3600,
+          "observed": 3600
+        },
+        "complete_grid": {
+          "ok": true,
+          "expected_combinations": 72,
+          "observed_combinations": 72,
+          "malformed_groups": {}
+        },
+        "no_nan_or_infinity": {
+          "ok": true,
+          "violations": []
+        },
+        "none_reproduces_section66": {
+          "ok": true,
+          "max_loss_abs_diff": 3.814697265625e-06,
+          "max_param_update_rel_l2": 4.852178220524941e-06
+        },
+        "grad_wrong_teacher_forced": {
+          "ok": true,
+          "violations": 0
+        },
+        "param_wrong_teacher_forced": {
+          "ok": true,
+          "violations": 0
+        }
+      }
+    },
+    "diagnostic_three_classes": {
+      "counts": {
+        "teacher-forced/execution": {
+          "runs": 12,
+          "all_step_pass": 0,
+          "detected": 12,
+          "intended_signal_detected": 12
+        },
+        "teacher-forced/numeric": {
+          "runs": 12,
+          "all_step_pass": 0,
+          "detected": 12,
+          "intended_signal_detected": 12
+        },
+        "teacher-forced/training": {
+          "runs": 12,
+          "all_step_pass": 0,
+          "detected": 12,
+          "intended_signal_detected": 12
+        }
+      },
+      "self_checks": {
+        "row_count": {
+          "ok": true,
+          "expected": 1800,
+          "observed": 1800
+        },
+        "complete_grid": {
+          "ok": true,
+          "expected_combinations": 36,
+          "observed_combinations": 36,
+          "malformed_groups": {}
+        },
+        "no_nan_or_infinity": {
+          "ok": true,
+          "violations": []
+        },
+        "training_teacher_forced": {
+          "ok": true,
+          "violations": 0
+        },
+        "numeric_exceeds_loss_threshold": {
+          "ok": true,
+          "violations": 0
+        },
+        "execution_breaks_at_configured_step": {
+          "ok": true,
+          "fault_step": 20,
+          "violations": 0
+        }
+      }
+    }
+  },
+  "backend": {
+    "recorded_runs": 108,
+    "target_forward_steps": 5028,
+    "observed_backward_steps": 4428,
+    "unexpected_missing_backward": []
+  },
+  "figure1": {
+    "grad_wrong": {
+      "runs": 12,
+      "signal_first_steps": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "loss_first_steps": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        10,
+        11,
+        10
+      ],
+      "mean_loss_first_step": 31
+    },
+    "param_wrong": {
+      "runs": 12,
+      "signal_first_steps": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "loss_first_steps": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        20,
+        6,
+        7,
+        7
+      ],
+      "mean_loss_first_step": 18
+    }
+  }
+}

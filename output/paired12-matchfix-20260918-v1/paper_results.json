@@ -1,0 +1,569 @@
+{
+  "complete": true,
+  "protocol_version": "public-native-workload-paired12-20260918",
+  "conditions": 24,
+  "unique_responses": 674,
+  "new_model_calls": 0,
+  "audit_scope": "Offline reconciliation of existing runs; no candidate or baseline edits.",
+  "all_initial_inputs_equal": true,
+  "unknown_usage_calls": 0,
+  "methods": {
+    "autonomous_layered": {
+      "accepted": 12,
+      "planned": 12,
+      "accepted_at": {
+        "1": 7,
+        "2": 12,
+        "4": 12
+      },
+      "calls": 225,
+      "prompt_tokens": 6343051,
+      "completion_tokens": 299552,
+      "total_tokens": 6642603,
+      "seconds": 1974.0875987340696,
+      "tokens_per_accepted": 553550.25,
+      "failed_tasks": []
+    },
+    "matchfix_full_orchestration": {
+      "accepted": 11,
+      "planned": 12,
+      "accepted_at": {
+        "1": 11,
+        "2": 11,
+        "4": 11
+      },
+      "calls": 449,
+      "prompt_tokens": 14143812,
+      "completion_tokens": 362021,
+      "total_tokens": 14505833,
+      "seconds": 2813.5618399649975,
+      "tokens_per_accepted": 1318712.0909090908,
+      "failed_tasks": [
+        "task_011"
+      ]
+    }
+  },
+  "overlap": {
+    "both": 11,
+    "ours_only": 1,
+    "baseline_only": 0,
+    "neither": 0
+  },
+  "input_hashes": {
+    "manifest.json": "c67233f4dac777da3a229a522d1a69958266cbae1372655853e7da241811e05a",
+    "implementation.json": "0dbd7cf5240b8d18c66f7a873a95396473a28343836cec2b653a3d005d52699a",
+    "complete.json": "0c0e075b42d2480b2673efca286033e9ff2bbb58ac1c46549aee78f8c0529913",
+    "summary.json": "611dbb83ba738e62180fbc1bc0650ae2a65c72897daf956556f161de2e2cda3f"
+  },
+  "rows": [
+    {
+      "task": "task_011",
+      "method": "autonomous_layered",
+      "accepted": true,
+      "accepted_at": 2,
+      "submissions": 2,
+      "calls": 22,
+      "prompt_tokens": 1579497,
+      "completion_tokens": 80497,
+      "total_tokens": 1659994,
+      "seconds": 435.4692344790092,
+      "source_sha256": "e588d48fc3429177d8145b2eaf809c2b584215372a04e83f216bd2029e27f959",
+      "initial_candidate_sha256": "ac4667c6fc19fbdd88f246686a91bd85e8513b2d8378a2c893f0fdc7c66b8d63",
+      "initial_inputs_equal": true,
+      "upstream_commit": null,
+      "upstream_role_records": 0,
+      "attempt_statuses": [
+        "investigation_only",
+        "invalid_final"
+      ],
+      "result_sha256": "71d6af7be157831992e5b826ad5b2546daff54118e62631a514f72058ac3c458"
+    },
+    {
+      "task": "task_011",
+      "method": "matchfix_full_orchestration",
+      "accepted": false,
+      "accepted_at": null,
+      "submissions": 1,
+      "calls": 40,
+      "prompt_tokens": 2222147,
+      "completion_tokens": 39354,
+      "total_tokens": 2261501,
+      "seconds": 289.294923709007,
+      "source_sha256": "e588d48fc3429177d8145b2eaf809c2b584215372a04e83f216bd2029e27f959",
+      "initial_candidate_sha256": "ac4667c6fc19fbdd88f246686a91bd85e8513b2d8378a2c893f0fdc7c66b8d63",
+      "initial_inputs_equal": true,
+      "upstream_commit": "66a52a5626f5e8b480abbcd4b0e7a287fb3d85a7",
+      "upstream_role_records": 6,
+      "attempt_statuses": [
+        "call_budget_exhausted"
+      ],
+      "result_sha256": "e974c53fffa3d36f1b6644f317154094caac000b28bc246e2a4016d6e997bf78"
+    },
+    {
+      "task": "task_012",
+      "method": "autonomous_layered",
+      "accepted": true,
+      "accepted_at": 2,
+      "submissions": 2,
+      "calls": 23,
+      "prompt_tokens": 902107,
+      "completion_tokens": 25882,
+      "total_tokens": 927989,
+      "seconds": 183.36840636999113,
+      "source_sha256": "e588d48fc3429177d8145b2eaf809c2b584215372a04e83f216bd2029e27f959",
+      "initial_candidate_sha256": "ac4667c6fc19fbdd88f246686a91bd85e8513b2d8378a2c893f0fdc7c66b8d63",
+      "initial_inputs_equal": true,
+      "upstream_commit": null,
+      "upstream_role_records": 0,
+      "attempt_statuses": [
+        "investigation_only",
+        "invalid_final"
+      ],
+      "result_sha256": "b54a38d0e06f07ab4f81903fed5a4c134dccbb470c21c98296fe0835561f2a2a"
+    },
+    {
+      "task": "task_012",
+      "method": "matchfix_full_orchestration",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 40,
+      "prompt_tokens": 1585399,
+      "completion_tokens": 36810,
+      "total_tokens": 1622209,
+      "seconds": 282.27827469899785,
+      "source_sha256": "e588d48fc3429177d8145b2eaf809c2b584215372a04e83f216bd2029e27f959",
+      "initial_candidate_sha256": "ac4667c6fc19fbdd88f246686a91bd85e8513b2d8378a2c893f0fdc7c66b8d63",
+      "initial_inputs_equal": true,
+      "upstream_commit": "66a52a5626f5e8b480abbcd4b0e7a287fb3d85a7",
+      "upstream_role_records": 6,
+      "attempt_statuses": [
+        "call_budget_exhausted"
+      ],
+      "result_sha256": "a1ff1289ac2e035e9d16feb99a18d053140c0b6f88a4c1d46483969494ee6197"
+    },
+    {
+      "task": "task_013",
+      "method": "autonomous_layered",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 15,
+      "prompt_tokens": 320368,
+      "completion_tokens": 14641,
+      "total_tokens": 335009,
+      "seconds": 115.22078453196445,
+      "source_sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+      "initial_candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "initial_inputs_equal": true,
+      "upstream_commit": null,
+      "upstream_role_records": 0,
+      "attempt_statuses": [
+        "invalid_final"
+      ],
+      "result_sha256": "2c79675b0bf9d184bce2c2bd2a0779f7841dc44eff30a3a2e34658a0158baa29"
+    },
+    {
+      "task": "task_013",
+      "method": "matchfix_full_orchestration",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 37,
+      "prompt_tokens": 666968,
+      "completion_tokens": 23995,
+      "total_tokens": 690963,
+      "seconds": 223.71140697499504,
+      "source_sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+      "initial_candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "initial_inputs_equal": true,
+      "upstream_commit": "66a52a5626f5e8b480abbcd4b0e7a287fb3d85a7",
+      "upstream_role_records": 6,
+      "attempt_statuses": [
+        "completed"
+      ],
+      "result_sha256": "88e22182af5e0622576f8a8633dfdf6a982428772511edcc3d035fe05c463e4c"
+    },
+    {
+      "task": "task_014",
+      "method": "autonomous_layered",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 16,
+      "prompt_tokens": 246428,
+      "completion_tokens": 10754,
+      "total_tokens": 257182,
+      "seconds": 96.06598774401937,
+      "source_sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+      "initial_candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "initial_inputs_equal": true,
+      "upstream_commit": null,
+      "upstream_role_records": 0,
+      "attempt_statuses": [
+        "completed"
+      ],
+      "result_sha256": "46d0fab9406ee44af1fb15d06e27e3e03f1d9dd2f1a900abf5d4db919454e9cd"
+    },
+    {
+      "task": "task_014",
+      "method": "matchfix_full_orchestration",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 30,
+      "prompt_tokens": 541485,
+      "completion_tokens": 27534,
+      "total_tokens": 569019,
+      "seconds": 195.59452732797945,
+      "source_sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+      "initial_candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "initial_inputs_equal": true,
+      "upstream_commit": "66a52a5626f5e8b480abbcd4b0e7a287fb3d85a7",
+      "upstream_role_records": 6,
+      "attempt_statuses": [
+        "completed"
+      ],
+      "result_sha256": "38476768e21ee9d35b6201fe1d49f78c74b455dd8ecb4033791f9e87a3c1fa3c"
+    },
+    {
+      "task": "task_015",
+      "method": "autonomous_layered",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 16,
+      "prompt_tokens": 393334,
+      "completion_tokens": 15843,
+      "total_tokens": 409177,
+      "seconds": 118.36793934804155,
+      "source_sha256": "77ff06aa7d0253608d909257392de990279719be343e9c21b94fd1b5034ecf43",
+      "initial_candidate_sha256": "d801c2cc50e300ec48c02a865f8d0c1147fc98e6dcac38917d00a502fafd9185",
+      "initial_inputs_equal": true,
+      "upstream_commit": null,
+      "upstream_role_records": 0,
+      "attempt_statuses": [
+        "completed"
+      ],
+      "result_sha256": "bd93ca4ebaa77a3a099a50b9512ec11dc5b770b3702de335ea527bf76154a7d7"
+    },
+    {
+      "task": "task_015",
+      "method": "matchfix_full_orchestration",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 40,
+      "prompt_tokens": 1039201,
+      "completion_tokens": 23722,
+      "total_tokens": 1062923,
+      "seconds": 212.1265838110121,
+      "source_sha256": "77ff06aa7d0253608d909257392de990279719be343e9c21b94fd1b5034ecf43",
+      "initial_candidate_sha256": "d801c2cc50e300ec48c02a865f8d0c1147fc98e6dcac38917d00a502fafd9185",
+      "initial_inputs_equal": true,
+      "upstream_commit": "66a52a5626f5e8b480abbcd4b0e7a287fb3d85a7",
+      "upstream_role_records": 6,
+      "attempt_statuses": [
+        "call_budget_exhausted"
+      ],
+      "result_sha256": "d2a99de7e1f6a2331ff7a1e611fd48f7120d9fb4d619ce545cf87293e8c3e2c3"
+    },
+    {
+      "task": "task_016",
+      "method": "autonomous_layered",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 16,
+      "prompt_tokens": 376379,
+      "completion_tokens": 30554,
+      "total_tokens": 406933,
+      "seconds": 173.8435865479987,
+      "source_sha256": "77ff06aa7d0253608d909257392de990279719be343e9c21b94fd1b5034ecf43",
+      "initial_candidate_sha256": "d801c2cc50e300ec48c02a865f8d0c1147fc98e6dcac38917d00a502fafd9185",
+      "initial_inputs_equal": true,
+      "upstream_commit": null,
+      "upstream_role_records": 0,
+      "attempt_statuses": [
+        "completed"
+      ],
+      "result_sha256": "4c97471cc8c6082ac59d7c6fc00707fb484fbd91b98026c3efaa21573f58ad4a"
+    },
+    {
+      "task": "task_016",
+      "method": "matchfix_full_orchestration",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 40,
+      "prompt_tokens": 1415848,
+      "completion_tokens": 24502,
+      "total_tokens": 1440350,
+      "seconds": 205.22436579695204,
+      "source_sha256": "77ff06aa7d0253608d909257392de990279719be343e9c21b94fd1b5034ecf43",
+      "initial_candidate_sha256": "d801c2cc50e300ec48c02a865f8d0c1147fc98e6dcac38917d00a502fafd9185",
+      "initial_inputs_equal": true,
+      "upstream_commit": "66a52a5626f5e8b480abbcd4b0e7a287fb3d85a7",
+      "upstream_role_records": 6,
+      "attempt_statuses": [
+        "call_budget_exhausted"
+      ],
+      "result_sha256": "8fa0407228d16273090f9e72da1c63b80ab920549bd380179398b4ab82e2ee56"
+    },
+    {
+      "task": "task_025",
+      "method": "autonomous_layered",
+      "accepted": true,
+      "accepted_at": 2,
+      "submissions": 2,
+      "calls": 24,
+      "prompt_tokens": 714908,
+      "completion_tokens": 35586,
+      "total_tokens": 750494,
+      "seconds": 214.7282674559974,
+      "source_sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+      "initial_candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "initial_inputs_equal": true,
+      "upstream_commit": null,
+      "upstream_role_records": 0,
+      "attempt_statuses": [
+        "investigation_only",
+        "completed"
+      ],
+      "result_sha256": "7d4db85d367816fdc03bea8a2bf43a376a8dd128bcf08fd3ef5a86c429618277"
+    },
+    {
+      "task": "task_025",
+      "method": "matchfix_full_orchestration",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 40,
+      "prompt_tokens": 1540422,
+      "completion_tokens": 31830,
+      "total_tokens": 1572252,
+      "seconds": 265.7942312239902,
+      "source_sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+      "initial_candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "initial_inputs_equal": true,
+      "upstream_commit": "66a52a5626f5e8b480abbcd4b0e7a287fb3d85a7",
+      "upstream_role_records": 6,
+      "attempt_statuses": [
+        "call_budget_exhausted"
+      ],
+      "result_sha256": "7d6c905088ce2d1f401b088a4e5d75c72f6bfe85f2fa812ccc813dbdc5790fe1"
+    },
+    {
+      "task": "task_026",
+      "method": "autonomous_layered",
+      "accepted": true,
+      "accepted_at": 2,
+      "submissions": 2,
+      "calls": 24,
+      "prompt_tokens": 500161,
+      "completion_tokens": 32853,
+      "total_tokens": 533014,
+      "seconds": 219.77248600998428,
+      "source_sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+      "initial_candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "initial_inputs_equal": true,
+      "upstream_commit": null,
+      "upstream_role_records": 0,
+      "attempt_statuses": [
+        "investigation_only",
+        "completed"
+      ],
+      "result_sha256": "a0d124357d23b1833721abe28166e6d376f3e244ceba4e274c846a140b75a8b3"
+    },
+    {
+      "task": "task_026",
+      "method": "matchfix_full_orchestration",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 40,
+      "prompt_tokens": 1484185,
+      "completion_tokens": 32873,
+      "total_tokens": 1517058,
+      "seconds": 237.99757398403017,
+      "source_sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+      "initial_candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "initial_inputs_equal": true,
+      "upstream_commit": "66a52a5626f5e8b480abbcd4b0e7a287fb3d85a7",
+      "upstream_role_records": 6,
+      "attempt_statuses": [
+        "call_budget_exhausted"
+      ],
+      "result_sha256": "81b5d98f52d5d74f116e2b9770c0123eed697d02da34c2fcd40a13dcc69c659c"
+    },
+    {
+      "task": "task_029",
+      "method": "autonomous_layered",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 13,
+      "prompt_tokens": 128661,
+      "completion_tokens": 7550,
+      "total_tokens": 136211,
+      "seconds": 75.21837644802872,
+      "source_sha256": "77ff06aa7d0253608d909257392de990279719be343e9c21b94fd1b5034ecf43",
+      "initial_candidate_sha256": "d801c2cc50e300ec48c02a865f8d0c1147fc98e6dcac38917d00a502fafd9185",
+      "initial_inputs_equal": true,
+      "upstream_commit": null,
+      "upstream_role_records": 0,
+      "attempt_statuses": [
+        "invalid_final"
+      ],
+      "result_sha256": "863ff4990ab70871e1fcd8faa8352454142d11b2386937e1e6b763c41493e3b6"
+    },
+    {
+      "task": "task_029",
+      "method": "matchfix_full_orchestration",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 29,
+      "prompt_tokens": 514794,
+      "completion_tokens": 13172,
+      "total_tokens": 527966,
+      "seconds": 150.83398625801783,
+      "source_sha256": "77ff06aa7d0253608d909257392de990279719be343e9c21b94fd1b5034ecf43",
+      "initial_candidate_sha256": "d801c2cc50e300ec48c02a865f8d0c1147fc98e6dcac38917d00a502fafd9185",
+      "initial_inputs_equal": true,
+      "upstream_commit": "66a52a5626f5e8b480abbcd4b0e7a287fb3d85a7",
+      "upstream_role_records": 6,
+      "attempt_statuses": [
+        "completed"
+      ],
+      "result_sha256": "94ffb90e5f2811b6b71b0aacd55fb5bcc250d99a91a9c97c3025b1b2bc95e11e"
+    },
+    {
+      "task": "task_030",
+      "method": "autonomous_layered",
+      "accepted": true,
+      "accepted_at": 2,
+      "submissions": 2,
+      "calls": 24,
+      "prompt_tokens": 474430,
+      "completion_tokens": 12164,
+      "total_tokens": 486594,
+      "seconds": 113.56749810499605,
+      "source_sha256": "77ff06aa7d0253608d909257392de990279719be343e9c21b94fd1b5034ecf43",
+      "initial_candidate_sha256": "d801c2cc50e300ec48c02a865f8d0c1147fc98e6dcac38917d00a502fafd9185",
+      "initial_inputs_equal": true,
+      "upstream_commit": null,
+      "upstream_role_records": 0,
+      "attempt_statuses": [
+        "investigation_only",
+        "completed"
+      ],
+      "result_sha256": "91c9c233cfd68cd2e7756235dd46160eb7e9524e4ced9ffeee117ed3185bbca2"
+    },
+    {
+      "task": "task_030",
+      "method": "matchfix_full_orchestration",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 40,
+      "prompt_tokens": 1047969,
+      "completion_tokens": 27477,
+      "total_tokens": 1075446,
+      "seconds": 219.39371762500377,
+      "source_sha256": "77ff06aa7d0253608d909257392de990279719be343e9c21b94fd1b5034ecf43",
+      "initial_candidate_sha256": "d801c2cc50e300ec48c02a865f8d0c1147fc98e6dcac38917d00a502fafd9185",
+      "initial_inputs_equal": true,
+      "upstream_commit": "66a52a5626f5e8b480abbcd4b0e7a287fb3d85a7",
+      "upstream_role_records": 6,
+      "attempt_statuses": [
+        "upstream_role_error"
+      ],
+      "result_sha256": "ae624ead60b54a3b265abf006bf53220fca97719cdf91928f189c77b976705a7"
+    },
+    {
+      "task": "task_033",
+      "method": "autonomous_layered",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 16,
+      "prompt_tokens": 263043,
+      "completion_tokens": 15403,
+      "total_tokens": 278446,
+      "seconds": 109.71452772698831,
+      "source_sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+      "initial_candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "initial_inputs_equal": true,
+      "upstream_commit": null,
+      "upstream_role_records": 0,
+      "attempt_statuses": [
+        "completed"
+      ],
+      "result_sha256": "f3f82e09b2c962f8c2aa2159ffa9515d02f376ae231200dc47d47a07c9bab544"
+    },
+    {
+      "task": "task_033",
+      "method": "matchfix_full_orchestration",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 39,
+      "prompt_tokens": 1380910,
+      "completion_tokens": 44845,
+      "total_tokens": 1425755,
+      "seconds": 300.41260793601396,
+      "source_sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+      "initial_candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "initial_inputs_equal": true,
+      "upstream_commit": "66a52a5626f5e8b480abbcd4b0e7a287fb3d85a7",
+      "upstream_role_records": 6,
+      "attempt_statuses": [
+        "completed"
+      ],
+      "result_sha256": "534f3269e46c90ebb8b1f32132663a6cdb238dd2031d5965f8ec9a2aabea8fe6"
+    },
+    {
+      "task": "task_034",
+      "method": "autonomous_layered",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 16,
+      "prompt_tokens": 443735,
+      "completion_tokens": 17825,
+      "total_tokens": 461560,
+      "seconds": 118.75050396705046,
+      "source_sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+      "initial_candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "initial_inputs_equal": true,
+      "upstream_commit": null,
+      "upstream_role_records": 0,
+      "attempt_statuses": [
+        "completed"
+      ],
+      "result_sha256": "4baf01ad436c850da6c92758566c3d323ca63320d82496a85d2f02b2e5c3dd95"
+    },
+    {
+      "task": "task_034",
+      "method": "matchfix_full_orchestration",
+      "accepted": true,
+      "accepted_at": 1,
+      "submissions": 1,
+      "calls": 34,
+      "prompt_tokens": 704484,
+      "completion_tokens": 35907,
+      "total_tokens": 740391,
+      "seconds": 230.8996406189981,
+      "source_sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+      "initial_candidate_sha256": "f3f0e47f0ef1622f6a4c2e05c8513128ddb6775e60fddcebf684496c02a5e435",
+      "initial_inputs_equal": true,
+      "upstream_commit": "66a52a5626f5e8b480abbcd4b0e7a287fb3d85a7",
+      "upstream_role_records": 6,
+      "attempt_statuses": [
+        "completed"
+      ],
+      "result_sha256": "efeb021956b74c39f1f20d6817527603199e8745dc9fc3e3d57d540fcd14e7f8"
+    }
+  ]
+}

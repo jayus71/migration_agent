@@ -1,0 +1,11 @@
+--- initial/candidate.py
++++ final/candidate.py
+@@ -19,7 +19,7 @@
+     def forward(self, inputs):
+         hidden = F.relu(self.conv(inputs))
+         hidden = hidden.reshape(hidden.shape[0], -1)
+-        logits = self.fc(hidden, hidden)
++        logits = self.fc(hidden)
+         return logits
+ 
+ 

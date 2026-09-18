@@ -1,0 +1,48 @@
+[
+  {
+    "study": "experiment_c",
+    "passed": true,
+    "argv": [
+      "--per-step-divergence",
+      "--models",
+      "cnn,mlp,transformer,tiny_causal_lm",
+      "--steps",
+      "50",
+      "--seeds",
+      "3",
+      "--data-dir",
+      "/media/main/whj/projects/torch4ms/ascend-torch4ms/experiments/paper_section_65_66/data",
+      "--grad-wrong-scale",
+      "1.5",
+      "--couplings",
+      "teacher-forced,free-running",
+      "--faults",
+      "none,grad_wrong,param_wrong",
+      "--output-dir",
+      "/media/main/whj/projects/torch4ms/maintext-diagnostics-20260918/experiment_c"
+    ]
+  },
+  {
+    "study": "diagnostic_three_classes",
+    "passed": true,
+    "argv": [
+      "--per-step-divergence",
+      "--models",
+      "cnn,mlp,transformer,tiny_causal_lm",
+      "--steps",
+      "50",
+      "--seeds",
+      "3",
+      "--data-dir",
+      "/media/main/whj/projects/torch4ms/ascend-torch4ms/experiments/paper_section_65_66/data",
+      "--grad-wrong-scale",
+      "1.5",
+      "--couplings",
+      "teacher-forced",
+      "--faults",
+      "execution,numeric,training",
+      "--output-dir",
+      "/media/main/whj/projects/torch4ms/maintext-diagnostics-20260918/diagnostic_three_classes"
+    ]
+  }
+]

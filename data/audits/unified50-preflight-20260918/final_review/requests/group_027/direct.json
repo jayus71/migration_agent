@@ -1,0 +1,19 @@
+{
+  "model": "deepseek-v4-flash",
+  "temperature": 0,
+  "thinking": {
+    "type": "enabled"
+  },
+  "reasoning_effort": "high",
+  "max_tokens": 131072,
+  "messages": [
+    {
+      "role": "system",
+      "content": "Translate the complete Python module from PyTorch to native MindSpore. Preserve its public interfaces and behavior, including differentiation and training. Use the supplied source and public task contract. Return only the complete Python module. Keep model parameter names and shapes so the common evaluator can supply identical initial values. The candidate must execute its tensor computations with MindSpore on CPU."
+    },
+    {
+      "role": "user",
+      "content": "{\"source_reference\": \"source.py\", \"target_framework\": \"MindSpore\", \"public_interfaces\": [\"_batch\", \"_optimizer\", \"apply_external_trainable_grads\", \"build_model\", \"train_step\"], \"semantics\": \"Train every parameter of the two-layer model using mean squared error and SGD with learning rate 0.2. train_step performs backward and parameter update, then clears gradients. External gradients bind by parameter name and apply only to trainable parameters.\", \"model_variant\": \"causal_lm\", \"editable\": [\"candidate.py\", \"torch4ms/**/*.py\"], \"tests\": [\"public\"], \"seed\": 101, \"evaluation\": {\"final_seeds\": [101, 202, 303], \"initial_state\": \"explicit_parameter_value_alignment\", \"forward_atol\": 0.0001, \"forward_rtol\": 0.0001, \"gradient_atol\": 0.0001, \"gradient_rtol\": 0.001, \"update_atol\": 1e-05, \"update_rtol\": 0.001, \"bf16_atol\": 0.01, \"backend_execution_required\": true}}\n\nsource.py:\nfrom __future__ import annotations\n\nMODEL_VARIANT = 'causal_lm'\nBATCH_SEED = 6521\nimport torch\nimport torch.nn as nn\nimport torch.optim as optim\n\n\nclass TinyNet(nn.Module):\n    def __init__(self):\n        super().__init__()\n        self.fc1 = nn.Conv2d(3, 4, 1) if MODEL_VARIANT == 'cnn' else nn.Linear(3, 4)\n        self.fc2 = nn.Conv2d(4, 2, 1) if MODEL_VARIANT == 'cnn' else nn.Linear(4, 2)\n\n    def forward(self, x):\n        return self.fc2(torch.relu(self.fc1(x)))\n\n\ndef build_model():\n    return TinyNet()\n\n\ndef _batch():\n    generator = torch.Generator().manual_seed(BATCH_SEED)\n    if MODEL_VARIANT == 'cnn':\n        shapes = (5, 3, 4, 4), (5, 2, 4, 4)\n    elif MODEL_VARIANT in ('transformer', 'causal_lm'):\n        length = 6 if MODEL_VARIANT == 'transformer' else 8\n        shapes = (5, length, 3), (5, length, 2)\n    else:\n        shapes = (5, 3), (5, 2)\n    return tuple(torch.randn(shape, generator=generator) for shape in shapes)\n\n\ndef _optimizer(model):\n    return optim.SGD([p for p in model.parameters() if p.requires_grad], lr=0.2)\n\n\ndef train_step(model, x, y):\n    optimizer = _optimizer(model)\n    optimizer.zero_grad()\n    loss = torch.nn.functional.mse_loss(model(x), y)\n    loss.backward()\n    optimizer.step()\n    optimizer.zero_grad()\n    return float(loss.detach().item())\n\n\ndef apply_external_trainable_grads(model, external_grads):\n    for name, parameter in model.named_parameters():\n        parameter.grad = None\n        if parameter.requires_grad and name in external_grads:\n            parameter.grad = external_grads[name].clone()\n"
+    }
+  ]
+}

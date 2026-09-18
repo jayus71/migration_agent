@@ -1,0 +1,34 @@
+{
+  "source_reference": "source.py",
+  "target_framework": "MindSpore",
+  "public_interfaces": [
+    "gradient_workload",
+    "parameter_workload"
+  ],
+  "semantics": "parameter_workload returns ordered (name, parameter) pairs for trainable parameters. gradient_workload assigns the supplied gradient to the parameter at the corresponding trainable index. environment is an opaque interoperability argument and unused in native PyTorch.",
+  "model_variant": "transformer",
+  "editable": [
+    "candidate.py",
+    "torch4ms/**/*.py"
+  ],
+  "tests": [
+    "public"
+  ],
+  "seed": 101,
+  "evaluation": {
+    "final_seeds": [
+      101,
+      202,
+      303
+    ],
+    "initial_state": "explicit_parameter_value_alignment",
+    "forward_atol": 0.0001,
+    "forward_rtol": 0.0001,
+    "gradient_atol": 0.0001,
+    "gradient_rtol": 0.001,
+    "update_atol": 1e-05,
+    "update_rtol": 0.001,
+    "bf16_atol": 0.01,
+    "backend_execution_required": true
+  }
+}

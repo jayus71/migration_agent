@@ -1,0 +1,182 @@
+{
+  "schema_version": "autonomous-process-analysis-notes-v1",
+  "purpose": "Read-only process analysis, with completed-task intersection for version comparisons; evaluation artifact only.",
+  "script": "scripts/analyze_autonomous_process.py",
+  "script_sha256": "ea2d23f07e3a7a35f40eafa94104ac96cfcd8d6668533e359abaa5b296a52d9c",
+  "usage": {
+    "local": "python3 scripts/analyze_autonomous_process.py --run fixed50 formal_v3 /path/formal_v3 --run fixed50 progress_v4 /path/progress_v4 --output /outside/input/roots/process.json",
+    "stdout": "Pass --output - to execute the script through SSH stdin without deploying a file.",
+    "validation_selection": "--task task_001 --task task_002; both suites, both versions, all three ours methods when present"
+  },
+  "output_contract": {
+    "conditions": "Per-condition metrics, stage status, verified changed-file hashes, exact-read recurrence sources, feedback follow-through and source SHA256 ledger.",
+    "summaries": "Completed conditions and running/other incomplete conditions are separate descriptive summaries.",
+    "paired_comparisons": "Only common eligible completed task IDs; all unmatched or incomplete tasks are listed. No aggregate contrast of different completion subsets.",
+    "definitions": "The generated JSON embeds metric definitions and interpretation limits. No final acceptance or diagnosis is used to infer process actions."
+  },
+  "verification": {
+    "behavioral_tests": "python3 -m unittest discover -s tests -p test_autonomous_process_analysis.py -v",
+    "behavioral_tests_passed": 7,
+    "real_report": "data/audits/autonomous-process-validation-20260917.json",
+    "real_report_sha256": "b674ced7fb7143f43d0a2a9d8ce6c8693236a4b27adfc34460afbd64b7b5a5ab",
+    "real_conditions": 20,
+    "real_conditions_with_read_issues": 0,
+    "independent_check": "Separate remote read counted request filenames and tool events, then checked byte-change records and event hashes; these counts were asserted against analyzer output.",
+    "verified_examples": [
+      {
+        "suite": "fixed50",
+        "version": "formal_v3",
+        "task": "task_001",
+        "method": "autonomous_layered",
+        "independent_request_file_count": 14,
+        "verified_metrics": {
+          "llm_calls_started": 14,
+          "read_requests": 5,
+          "search_requests": 5,
+          "list_requests": 2,
+          "run_test_requests": 4,
+          "edit_requests": 2,
+          "successful_production_edit_operations": 1,
+          "successful_scratch_edit_operations": 1
+        },
+        "verified_source": {
+          "path": "evidence/agent/event_00042_tool.json",
+          "sha256": "1e5a8f70e69fb398c4a090172979ee2b9384704391d154c666e5c9a81f6dd9e4",
+          "purpose": "public_event"
+        }
+      },
+      {
+        "suite": "fixed50",
+        "version": "progress_v4",
+        "task": "task_002",
+        "method": "autonomous_layered",
+        "independent_request_file_count": 23,
+        "verified_metrics": {
+          "llm_calls_started": 23,
+          "read_requests": 8,
+          "search_requests": 10,
+          "list_requests": 2,
+          "run_test_requests": 8,
+          "edit_requests": 7,
+          "successful_production_edit_operations": 1,
+          "successful_scratch_edit_operations": 3
+        },
+        "verified_source": {
+          "path": "evidence/agent/event_00085_tool.json",
+          "sha256": "5bc5f599b2b74d50ef80b345576ae91902efcd1954faf696507c5a37f3414879",
+          "purpose": "public_event"
+        }
+      },
+      {
+        "suite": "natural10",
+        "version": "formal_v3",
+        "task": "task_002",
+        "method": "autonomous_layered",
+        "independent_request_file_count": 40,
+        "verified_metrics": {
+          "llm_calls_started": 40,
+          "read_requests": 30,
+          "search_requests": 15,
+          "list_requests": 1,
+          "run_test_requests": 5,
+          "edit_requests": 5,
+          "successful_production_edit_operations": 3,
+          "successful_scratch_edit_operations": 1
+        },
+        "verified_source": {
+          "path": "evidence/agent/event_00096_tool.json",
+          "sha256": "aac1ea224c56ceb94105e4c3bfc704c279e0fb3266aede79df9493f10bfa75fc",
+          "purpose": "public_event"
+        }
+      },
+      {
+        "suite": "natural10",
+        "version": "progress_v4",
+        "task": "task_002",
+        "method": "autonomous_layered",
+        "independent_request_file_count": 32,
+        "verified_metrics": {
+          "llm_calls_started": 32,
+          "read_requests": 29,
+          "search_requests": 12,
+          "list_requests": 1,
+          "run_test_requests": 8,
+          "edit_requests": 6,
+          "successful_production_edit_operations": 2,
+          "successful_scratch_edit_operations": 5
+        },
+        "verified_source": {
+          "path": "evidence/agent/event_00094_tool.json",
+          "sha256": "d66fe37fce92aa61d6df14c0c1a943996692f496cc2ee0c39376b2e9780fb3a4",
+          "purpose": "public_event"
+        }
+      }
+    ]
+  },
+  "interpretation": [
+    "This small fixed-ID sample validates counting and provenance, not method effectiveness.",
+    "A feedback event followed by an action is an observed association; the script does not infer causality or diagnosis correctness.",
+    "A mixed successful edit changes production and scratch files in one operation and therefore contributes once to each edit category.",
+    "No running experiment, implementation, manifest or raw evidence was modified."
+  ],
+  "repair_stage_budget_assessment": {
+    "recommendation": "Worth one predeclared, complete 60-task development ablation against progress_v4 autonomous_layered_native, changing only repair_calls_per_stage from 8 to 32. Do not launch as part of this analysis.",
+    "retain": {
+      "diagnosis_calls_per_stage": 8,
+      "max_calls": 40,
+      "max_output_tokens": 120000,
+      "max_repair_attempts": 4,
+      "workflow_policy": "progress_loop",
+      "memory_policy": "native",
+      "model": "same DeepSeek configuration",
+      "inputs_and_acceptance": "same frozen inputs and suite-specific acceptance"
+    },
+    "observed_mechanism": "A production edit in the seventh action-capable repair round can be followed by a tool-disabled summary rather than a test. The next repair stage then resumes editing/testing. Existing repair history already persists across stages; the proposed change removes some forced summaries and external-submission boundaries, not a history reset.",
+    "recorded_examples": [
+      {
+        "suite": "fixed50",
+        "version": "formal_v3",
+        "task": "task_001",
+        "method": "autonomous_layered_native",
+        "sequence": "call15 production edit; call16 tools-disabled summary and unvalidated_repair; call17 edit; call18 test",
+        "summary_request": "call_0016_request.json",
+        "sha256": "aee8a78a3c12f6f03b6a4bc83577c5bf31e252d3f2b3ad1974954ca964aac776"
+      },
+      {
+        "suite": "natural10",
+        "version": "formal_v3",
+        "task": "task_002",
+        "method": "autonomous_layered",
+        "sequence": "call23 production edit; call24 tools-disabled summary and unvalidated_repair; call25 edit; call26 test",
+        "summary_request": "call_0024_request.json",
+        "sha256": "a5e880111a531ec06232ad192ec3067227b384f8dcc1a746afee1efc6747c3f5"
+      },
+      {
+        "suite": "fixed50",
+        "version": "progress_v4",
+        "task": "task_004",
+        "method": "autonomous_layered_native",
+        "sequence": "call23 production edit; call24 tools-disabled summary and unvalidated_repair; call25 edit; call26 test",
+        "summary_request": "call_0024_request.json",
+        "sha256": "81dd3d1d23c1671feb08678e46fc5b2cd60ae1a9228380fd81e81b78de3eb1e6"
+      },
+      {
+        "suite": "natural10",
+        "version": "progress_v4",
+        "task": "task_002",
+        "method": "autonomous_layered_native",
+        "sequence": "call31 production edit; call32 tools-disabled summary and unvalidated_repair",
+        "summary_request": "call_0032_request.json",
+        "sha256": "087dd707bfaac577a8136c597d525ba24d5286c394dc9b9c999d5888f064abf9"
+      }
+    ],
+    "budget_implications": [
+      "With eight diagnosis calls and four full eight-call repair stages, up to four repair calls are reserved for summaries. A single full 32-call repair stage reserves one, permitting up to three additional action-capable model rounds within the same 40-call total.",
+      "Four external submissions remain a maximum, not four guaranteed 32-call episodes. If the first repair stage consumes all 32 remaining calls, later repairs have no model budget; early voluntary submission can leave budget for retries.",
+      "The current controller may record a zero-call budget-exhausted stage and perform its external evaluation after a previous stage consumed the remaining calls without returning a budget status. Preserve the recorded attempts and report zero-call stages separately; they are not extra model repair opportunities.",
+      "Because progress_loop emits at most one inspection checkpoint per stage, a long stage also has fewer possible reminders than four short stages. Record actual checkpoint counts and inspection streaks; do not silently introduce another policy change.",
+      "First-attempt acceptance has a different model-call allocation under this configuration. Primary comparison should use final acceptance under the common global budget, total calls/tokens/time, and calls before first accepted submission. Report submission-count curves with the stage allowance explicitly attached."
+    ],
+    "limits": "Recorded boundaries establish lost action slots and premature submission opportunities, not a counterfactual success rate. Keep all original tasks and outcomes; these tasks informed development and are not held-out evidence. No code or experiment was changed for this assessment."
+  }
+}

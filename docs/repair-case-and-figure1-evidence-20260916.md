@@ -48,7 +48,7 @@ Experiment I 的冻结任务清单明确 `no_fault_injection=true`。I-08 和 I-
 
 I-09 的 PyTorch loss 为 1.5050275326，候选为 1.5050270557。参考模型的 value、gate、norm 参数都有更新，候选的这六个参数张量更新范数全部为 0；head.weight 和 head.bias 的更新则与参考完全相同。I-08 的第一层 encoder 权重参考更新范数约 0.012248，候选仅约 0.000018869，其他几层的更新正常。
 
-这支持“LLM 生成的迁移程序可正常执行、已测前向值接近，而训练更新错误”的现象。层输出记录是标量均值，不是完整张量逐元素等价证明。自然故障的最终根因尚未在人工归因记录中确认，可能涉及生成代码与适配层的交互；不能把它直接归因为 LLM 写错某一行。LaDiM 在 I-08/I-09 都以 STOP_NO_PROGRESS 结束，这两例提供现象与检测证据，不提供 LaDiM 修复成功证据；Direct 在 I-09 最终获接受。
+这支持“LLM 生成的迁移程序可正常执行、已测前向值接近，而训练更新错误”的现象。层输出记录是标量均值。后续[归档代码审查](natural-translation-cause-review-20260916.md)定位到 Tanh / GroupNorm 高层映射缺失、经 NumPy 回退时中断求导关系的路径。LaDiM 在 I-08/I-09 都以 STOP_NO_PROGRESS 结束，这两例提供现象与检测证据，未修复成功。Direct 在 I-09 原被验收器接受；2026-09-17 的[运行时审计](backend-authenticity-audit-20260917.md)确认其已退回普通 PyTorch，按迁移失败纠正。I-07 Direct 存在同类误判，Experiment I 的 Direct 接受数由 7/10 纠正为 5/10。
 
 来源：
 

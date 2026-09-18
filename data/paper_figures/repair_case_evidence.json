@@ -1,0 +1,349 @@
+{
+  "description": "Read-only extraction from original Fixed50 reports; no rerun",
+  "gqa_repair": {
+    "instance": "NU-07-B",
+    "query_heads": 4,
+    "key_value_heads": 2,
+    "tolerance": 0.0001,
+    "probe_source": "ascend-torch4ms/autofix/faults/core_qwen.py::_probe_only",
+    "allowed_file": "torch4ms/ops/mtorch.py",
+    "tiled_head_order": [
+      0,
+      1,
+      0,
+      1
+    ],
+    "required_head_order": [
+      0,
+      0,
+      1,
+      1
+    ],
+    "head_order_basis": "Analytical expansion of tile versus repetition of each head",
+    "methods": {
+      "r_direct": {
+        "source": {
+          "path": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_direct/raw/NU-07-B__tiny_causal_lm__numerical__NU-07__r_direct.json",
+          "sha256": "9ee5a614f9489ec5ea1a3149861f3d9a1d6280ee90c6bdb0579f3c9f552b98f9"
+        },
+        "accepted": false,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "rolled_back",
+            "probe": {
+              "case": "NU-07",
+              "model_variant": "causal_lm",
+              "ok": false,
+              "finite": true,
+              "max_abs_diff": 1.0285910367965698,
+              "expected_shape": [
+                1,
+                4,
+                8,
+                5
+              ],
+              "actual_shape": [
+                1,
+                4,
+                8,
+                5
+              ],
+              "expected_dtype": "torch.float32",
+              "actual_dtype": "torch.float32"
+            },
+            "repair_evidence": {
+              "edited_files": [
+                "torch4ms/ops/mtorch.py"
+              ],
+              "head_repetition_lines": [
+                "            key = mops.tile(key, (1, key_repeats, 1, 1))",
+                "            value = mops.tile(value, (1, value_repeats, 1, 1))"
+              ]
+            }
+          },
+          {
+            "attempt": 2,
+            "status": "rolled_back",
+            "probe": null,
+            "repair_evidence": {
+              "edited_files": [
+                "torch4ms/ops/mtorch.py"
+              ],
+              "head_repetition_lines": []
+            }
+          },
+          {
+            "attempt": 3,
+            "status": "rolled_back",
+            "probe": {
+              "case": "NU-07",
+              "model_variant": "causal_lm",
+              "ok": false,
+              "finite": true,
+              "max_abs_diff": 1.0285910367965698,
+              "expected_shape": [
+                1,
+                4,
+                8,
+                5
+              ],
+              "actual_shape": [
+                1,
+                4,
+                8,
+                5
+              ],
+              "expected_dtype": "torch.float32",
+              "actual_dtype": "torch.float32"
+            },
+            "repair_evidence": {
+              "edited_files": [
+                "torch4ms/ops/mtorch.py"
+              ],
+              "head_repetition_lines": [
+                "            key = mops.tile(key, (1, key_repeats, 1, 1))",
+                "            value = mops.tile(value, (1, value_repeats, 1, 1))"
+              ]
+            }
+          },
+          {
+            "attempt": 4,
+            "status": "rolled_back",
+            "probe": null,
+            "repair_evidence": {
+              "edited_files": [],
+              "head_repetition_lines": []
+            }
+          }
+        ]
+      },
+      "r_swe": {
+        "source": {
+          "path": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_swe/raw/NU-07-B__tiny_causal_lm__numerical__NU-07__r_swe.json",
+          "sha256": "eca9d1207e4bc4331f36fa9f00f1ec433f20c6a787d75e5763d3def44819c1ed"
+        },
+        "accepted": false,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "rolled_back",
+            "probe": {
+              "case": "NU-07",
+              "model_variant": "causal_lm",
+              "ok": false,
+              "finite": true,
+              "max_abs_diff": 1.0285910367965698,
+              "expected_shape": [
+                1,
+                4,
+                8,
+                5
+              ],
+              "actual_shape": [
+                1,
+                4,
+                8,
+                5
+              ],
+              "expected_dtype": "torch.float32",
+              "actual_dtype": "torch.float32"
+            },
+            "repair_evidence": {
+              "edited_files": [
+                "torch4ms/ops/mtorch.py"
+              ],
+              "head_repetition_lines": [
+                "+            key = mops.tile(key, (1, key_repeats, 1, 1))",
+                "+            value = mops.tile(value, (1, value_repeats, 1, 1))",
+                "-            key = mops.tile(key, (1, key_repeats, 1, 1))",
+                "-            value = mops.tile(value, (1, value_repeats, 1, 1))"
+              ]
+            }
+          },
+          {
+            "attempt": 2,
+            "status": "rolled_back",
+            "probe": null,
+            "repair_evidence": {
+              "edited_files": [],
+              "head_repetition_lines": []
+            }
+          },
+          {
+            "attempt": 3,
+            "status": "rolled_back",
+            "probe": {
+              "case": "NU-07",
+              "model_variant": "causal_lm",
+              "ok": false,
+              "finite": true,
+              "max_abs_diff": 1.0285910367965698,
+              "expected_shape": [
+                1,
+                4,
+                8,
+                5
+              ],
+              "actual_shape": [
+                1,
+                4,
+                8,
+                5
+              ],
+              "expected_dtype": "torch.float32",
+              "actual_dtype": "torch.float32"
+            },
+            "repair_evidence": {
+              "edited_files": [
+                "torch4ms/ops/mtorch.py",
+                "torch4ms/ops/mtorch.py.orig"
+              ],
+              "head_repetition_lines": [
+                "+            key = mops.tile(key, (1, key_repeats, 1, 1))",
+                "+            value = mops.tile(value, (1, value_repeats, 1, 1))",
+                "-            key = mops.tile(key, (1, key_repeats, 1, 1))",
+                "-            value = mops.tile(value, (1, value_repeats, 1, 1))",
+                "+            key = mops.tile(key, (1, key_repeats, 1, 1))",
+                "+            value = mops.tile(value, (1, value_repeats, 1, 1))"
+              ]
+            }
+          },
+          {
+            "attempt": 4,
+            "status": "rolled_back",
+            "probe": null,
+            "repair_evidence": {
+              "edited_files": [],
+              "head_repetition_lines": []
+            }
+          }
+        ]
+      },
+      "r_matchfix": {
+        "source": {
+          "path": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_matchfix/raw/NU-07-B__tiny_causal_lm__numerical__NU-07__r_matchfix.json",
+          "sha256": "1fc98d05326dd3b754804d7cf11403ab4b4204a19cab2942be602353e5120ed6"
+        },
+        "accepted": true,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "verified_restored",
+            "probe": {
+              "case": "NU-07",
+              "model_variant": "causal_lm",
+              "ok": true,
+              "finite": true,
+              "max_abs_diff": 9.94652509689331e-07,
+              "expected_shape": [
+                1,
+                4,
+                8,
+                5
+              ],
+              "actual_shape": [
+                1,
+                4,
+                8,
+                5
+              ],
+              "expected_dtype": "torch.float32",
+              "actual_dtype": "torch.float32"
+            },
+            "repair_evidence": {
+              "edited_files": [
+                "torch4ms/ops/mtorch.py"
+              ],
+              "head_repetition_lines": [
+                "            key = mops.reshape(key, (key.shape[0], key.shape[-3], 1, key.shape[-2], key.shape[-1]))",
+                "            key = mops.tile(key, (1, 1, repeats, 1, 1))",
+                "            key = mops.reshape(key, (key.shape[0], key.shape[-3] * repeats, key.shape[-2], key.shape[-1]))",
+                "            value = mops.reshape(value, (value.shape[0], value.shape[-3], 1, value.shape[-2], value.shape[-1]))",
+                "            value = mops.tile(value, (1, 1, repeats, 1, 1))",
+                "            value = mops.reshape(value, (value.shape[0], value.shape[-3] * repeats, value.shape[-2], value.shape[-1]))"
+              ]
+            }
+          }
+        ]
+      },
+      "r_hier": {
+        "source": {
+          "path": "ascend-torch4ms/experiments/baselines/full_hier_fixed50/r_hier/raw/NU-07-B.json",
+          "sha256": "7eb171d12847d1d88c43f7dafc91ec69d49e3134737b813ea1f592308195c48a"
+        },
+        "accepted": true,
+        "attempts": [
+          {
+            "attempt": 1,
+            "status": "rolled_back",
+            "probe": {
+              "case": "NU-07",
+              "model_variant": "causal_lm",
+              "ok": false,
+              "finite": true,
+              "max_abs_diff": 1.0285910367965698,
+              "expected_shape": [
+                1,
+                4,
+                8,
+                5
+              ],
+              "actual_shape": [
+                1,
+                4,
+                8,
+                5
+              ],
+              "expected_dtype": "torch.float32",
+              "actual_dtype": "torch.float32"
+            },
+            "repair_evidence": {
+              "edited_files": [
+                "torch4ms/ops/mtorch.py"
+              ],
+              "head_repetition_lines": [
+                "            key = mops.tile(key, (1, key_repeats, 1, 1))",
+                "            value = mops.tile(value, (1, value_repeats, 1, 1))"
+              ]
+            }
+          },
+          {
+            "attempt": 2,
+            "status": "verified_restored",
+            "probe": {
+              "case": "NU-07",
+              "model_variant": "causal_lm",
+              "ok": true,
+              "finite": true,
+              "max_abs_diff": 9.94652509689331e-07,
+              "expected_shape": [
+                1,
+                4,
+                8,
+                5
+              ],
+              "actual_shape": [
+                1,
+                4,
+                8,
+                5
+              ],
+              "expected_dtype": "torch.float32",
+              "actual_dtype": "torch.float32"
+            },
+            "repair_evidence": {
+              "edited_files": [
+                "torch4ms/ops/mtorch.py"
+              ],
+              "head_repetition_lines": [
+                "            key = mops.repeat_elements(key, rep=key_repeats, axis=-3)",
+                "            value = mops.repeat_elements(value, rep=value_repeats, axis=-3)"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

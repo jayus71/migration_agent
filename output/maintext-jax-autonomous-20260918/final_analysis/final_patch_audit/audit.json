@@ -1,0 +1,1248 @@
+{
+  "run": "/media/main/whj/projects/torch4ms/experiments/maintext_jax_autonomous_20260918/formal_v5",
+  "manifest_sha256": "c02524ceefa24abacf65fb281a27e46ef2cbc855c335b90e8fdbff79367193c6",
+  "scope": "Recorded evidence and final code only; no new candidate execution or model calls",
+  "conditions": 12,
+  "accepted": 12,
+  "accepted_backend_measurements": 36,
+  "healthy_ast_matches": 12,
+  "issues": [],
+  "records": [
+    {
+      "task": "task_001",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "accepted": true,
+      "issues": [],
+      "initial_candidate_sha256": "66ebded38bebb927b1b7dff5123b8d8611fab612d1397118b2dcb6d33831d899",
+      "final_candidate_sha256": "6235493e68751b83bca70da11f49b17b08f4ced04768e74011592b037338cb46",
+      "matches_original_healthy_ast": true,
+      "patch": "task_001_autonomous_layered.patch",
+      "accepted_measurements": [
+        {
+          "seed": 6701,
+          "path": "conditions/task_001/autonomous_layered/evidence/measurement_0007",
+          "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 1.5104204775795438e-08,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 0.0,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6702,
+          "path": "conditions/task_001/autonomous_layered/evidence/measurement_0008",
+          "raw_target_sha256": "0b8109f5eea38a1e21ee83d281a7c616d331f3fb81ef6e6c342e40372d002c9b",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 7.620714503886461e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 2.3758231276242634e-08,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6703,
+          "path": "conditions/task_001/autonomous_layered/evidence/measurement_0009",
+          "raw_target_sha256": "bcfbe0faece2c5cd2b30f5b5ddf2f75812e334a9f567dd90ef2f55374d2ec100",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 9.667944222968572e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 1.1934221092617947e-06,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "task": "task_001",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "accepted": true,
+      "issues": [],
+      "initial_candidate_sha256": "66ebded38bebb927b1b7dff5123b8d8611fab612d1397118b2dcb6d33831d899",
+      "final_candidate_sha256": "6235493e68751b83bca70da11f49b17b08f4ced04768e74011592b037338cb46",
+      "matches_original_healthy_ast": true,
+      "patch": "task_001_direct_shared_tools.patch",
+      "accepted_measurements": [
+        {
+          "seed": 6701,
+          "path": "conditions/task_001/direct_shared_tools/evidence/measurement_0006",
+          "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 1.5104204775795438e-08,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 0.0,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6702,
+          "path": "conditions/task_001/direct_shared_tools/evidence/measurement_0007",
+          "raw_target_sha256": "0b8109f5eea38a1e21ee83d281a7c616d331f3fb81ef6e6c342e40372d002c9b",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 7.620714503886461e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 2.3758231276242634e-08,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6703,
+          "path": "conditions/task_001/direct_shared_tools/evidence/measurement_0008",
+          "raw_target_sha256": "bcfbe0faece2c5cd2b30f5b5ddf2f75812e334a9f567dd90ef2f55374d2ec100",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 9.667944222968572e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 1.1934221092617947e-06,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "task": "task_002",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "accepted": true,
+      "issues": [],
+      "initial_candidate_sha256": "0bf204fa63c28251744ce41e7099b875f9ad64f317f7ef9f3ae25cfa7c9094f9",
+      "final_candidate_sha256": "6235493e68751b83bca70da11f49b17b08f4ced04768e74011592b037338cb46",
+      "matches_original_healthy_ast": true,
+      "patch": "task_002_autonomous_layered.patch",
+      "accepted_measurements": [
+        {
+          "seed": 6701,
+          "path": "conditions/task_002/autonomous_layered/evidence/measurement_0007",
+          "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 1.5104204775795438e-08,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 0.0,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6702,
+          "path": "conditions/task_002/autonomous_layered/evidence/measurement_0008",
+          "raw_target_sha256": "0b8109f5eea38a1e21ee83d281a7c616d331f3fb81ef6e6c342e40372d002c9b",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 7.620714503886461e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 2.3758231276242634e-08,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6703,
+          "path": "conditions/task_002/autonomous_layered/evidence/measurement_0009",
+          "raw_target_sha256": "bcfbe0faece2c5cd2b30f5b5ddf2f75812e334a9f567dd90ef2f55374d2ec100",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 9.667944222968572e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 1.1934221092617947e-06,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "task": "task_002",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "accepted": true,
+      "issues": [],
+      "initial_candidate_sha256": "0bf204fa63c28251744ce41e7099b875f9ad64f317f7ef9f3ae25cfa7c9094f9",
+      "final_candidate_sha256": "6235493e68751b83bca70da11f49b17b08f4ced04768e74011592b037338cb46",
+      "matches_original_healthy_ast": true,
+      "patch": "task_002_direct_shared_tools.patch",
+      "accepted_measurements": [
+        {
+          "seed": 6701,
+          "path": "conditions/task_002/direct_shared_tools/evidence/measurement_0006",
+          "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 1.5104204775795438e-08,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 0.0,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6702,
+          "path": "conditions/task_002/direct_shared_tools/evidence/measurement_0007",
+          "raw_target_sha256": "0b8109f5eea38a1e21ee83d281a7c616d331f3fb81ef6e6c342e40372d002c9b",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 7.620714503886461e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 2.3758231276242634e-08,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6703,
+          "path": "conditions/task_002/direct_shared_tools/evidence/measurement_0008",
+          "raw_target_sha256": "bcfbe0faece2c5cd2b30f5b5ddf2f75812e334a9f567dd90ef2f55374d2ec100",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 9.667944222968572e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 1.1934221092617947e-06,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "task": "task_003",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "accepted": true,
+      "issues": [],
+      "initial_candidate_sha256": "13d7cd57d617008fedbdfe505653f88e87df4208a7f5284c0d91f88414575db0",
+      "final_candidate_sha256": "6235493e68751b83bca70da11f49b17b08f4ced04768e74011592b037338cb46",
+      "matches_original_healthy_ast": true,
+      "patch": "task_003_autonomous_layered.patch",
+      "accepted_measurements": [
+        {
+          "seed": 6701,
+          "path": "conditions/task_003/autonomous_layered/evidence/measurement_0007",
+          "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 1.5104204775795438e-08,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 0.0,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6702,
+          "path": "conditions/task_003/autonomous_layered/evidence/measurement_0008",
+          "raw_target_sha256": "0b8109f5eea38a1e21ee83d281a7c616d331f3fb81ef6e6c342e40372d002c9b",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 7.620714503886461e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 2.3758231276242634e-08,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6703,
+          "path": "conditions/task_003/autonomous_layered/evidence/measurement_0009",
+          "raw_target_sha256": "bcfbe0faece2c5cd2b30f5b5ddf2f75812e334a9f567dd90ef2f55374d2ec100",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 9.667944222968572e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 1.1934221092617947e-06,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "task": "task_003",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "accepted": true,
+      "issues": [],
+      "initial_candidate_sha256": "13d7cd57d617008fedbdfe505653f88e87df4208a7f5284c0d91f88414575db0",
+      "final_candidate_sha256": "6235493e68751b83bca70da11f49b17b08f4ced04768e74011592b037338cb46",
+      "matches_original_healthy_ast": true,
+      "patch": "task_003_direct_shared_tools.patch",
+      "accepted_measurements": [
+        {
+          "seed": 6701,
+          "path": "conditions/task_003/direct_shared_tools/evidence/measurement_0006",
+          "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 1.5104204775795438e-08,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 0.0,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6702,
+          "path": "conditions/task_003/direct_shared_tools/evidence/measurement_0007",
+          "raw_target_sha256": "0b8109f5eea38a1e21ee83d281a7c616d331f3fb81ef6e6c342e40372d002c9b",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 7.620714503886461e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 2.3758231276242634e-08,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6703,
+          "path": "conditions/task_003/direct_shared_tools/evidence/measurement_0008",
+          "raw_target_sha256": "bcfbe0faece2c5cd2b30f5b5ddf2f75812e334a9f567dd90ef2f55374d2ec100",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 9.667944222968572e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 1.1934221092617947e-06,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "task": "task_004",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "accepted": true,
+      "issues": [],
+      "initial_candidate_sha256": "6fa0db6ad4faca237e6ba64d3c46b453e01efd942824c5de08fb8f3ad1549b40",
+      "final_candidate_sha256": "6bbedca88afce6706ea9b9533f6da555cec320bd4fa9a72018fa7c68150dcf5a",
+      "matches_original_healthy_ast": true,
+      "patch": "task_004_autonomous_layered.patch",
+      "accepted_measurements": [
+        {
+          "seed": 6701,
+          "path": "conditions/task_004/autonomous_layered/evidence/measurement_0008",
+          "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 1.1920928955078125e-07,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 8.436639165054771e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 7.931366029190282e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6702,
+          "path": "conditions/task_004/autonomous_layered/evidence/measurement_0009",
+          "raw_target_sha256": "0d433549930111bfb81d51789f2a681178637e0d9c1761ed4a59ee5a15a08f99",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 1.3216831185047795e-08,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 1.908991826496827e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6703,
+          "path": "conditions/task_004/autonomous_layered/evidence/measurement_0010",
+          "raw_target_sha256": "683fb9d13d348239fb0ac16dd23bb1664e43c084ddb66a42e9f803ba30e05e37",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 1.1920928955078125e-07,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 7.446920857745454e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 5.390918699252827e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "task": "task_004",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "accepted": true,
+      "issues": [],
+      "initial_candidate_sha256": "6fa0db6ad4faca237e6ba64d3c46b453e01efd942824c5de08fb8f3ad1549b40",
+      "final_candidate_sha256": "6bbedca88afce6706ea9b9533f6da555cec320bd4fa9a72018fa7c68150dcf5a",
+      "matches_original_healthy_ast": true,
+      "patch": "task_004_direct_shared_tools.patch",
+      "accepted_measurements": [
+        {
+          "seed": 6701,
+          "path": "conditions/task_004/direct_shared_tools/evidence/measurement_0006",
+          "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 1.1920928955078125e-07,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 8.436639165054771e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 7.931366029190282e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6702,
+          "path": "conditions/task_004/direct_shared_tools/evidence/measurement_0007",
+          "raw_target_sha256": "0d433549930111bfb81d51789f2a681178637e0d9c1761ed4a59ee5a15a08f99",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 1.3216831185047795e-08,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 1.908991826496827e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6703,
+          "path": "conditions/task_004/direct_shared_tools/evidence/measurement_0008",
+          "raw_target_sha256": "683fb9d13d348239fb0ac16dd23bb1664e43c084ddb66a42e9f803ba30e05e37",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 1.1920928955078125e-07,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 7.446920857745454e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 5.390918699252827e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "task": "task_005",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "accepted": true,
+      "issues": [],
+      "initial_candidate_sha256": "8b3af611064d1c4fac8e0e45f8dcd93f63b8bd74d3fabf69177e0110e11e3b86",
+      "final_candidate_sha256": "6bbedca88afce6706ea9b9533f6da555cec320bd4fa9a72018fa7c68150dcf5a",
+      "matches_original_healthy_ast": true,
+      "patch": "task_005_autonomous_layered.patch",
+      "accepted_measurements": [
+        {
+          "seed": 6701,
+          "path": "conditions/task_005/autonomous_layered/evidence/measurement_0006",
+          "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 1.1920928955078125e-07,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 8.436639165054771e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 7.931366029190282e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6702,
+          "path": "conditions/task_005/autonomous_layered/evidence/measurement_0007",
+          "raw_target_sha256": "0d433549930111bfb81d51789f2a681178637e0d9c1761ed4a59ee5a15a08f99",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 1.3216831185047795e-08,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 1.908991826496827e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6703,
+          "path": "conditions/task_005/autonomous_layered/evidence/measurement_0008",
+          "raw_target_sha256": "683fb9d13d348239fb0ac16dd23bb1664e43c084ddb66a42e9f803ba30e05e37",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 1.1920928955078125e-07,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 7.446920857745454e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 5.390918699252827e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "task": "task_005",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "accepted": true,
+      "issues": [],
+      "initial_candidate_sha256": "8b3af611064d1c4fac8e0e45f8dcd93f63b8bd74d3fabf69177e0110e11e3b86",
+      "final_candidate_sha256": "6bbedca88afce6706ea9b9533f6da555cec320bd4fa9a72018fa7c68150dcf5a",
+      "matches_original_healthy_ast": true,
+      "patch": "task_005_direct_shared_tools.patch",
+      "accepted_measurements": [
+        {
+          "seed": 6701,
+          "path": "conditions/task_005/direct_shared_tools/evidence/measurement_0007",
+          "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 1.1920928955078125e-07,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 8.436639165054771e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 7.931366029190282e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6702,
+          "path": "conditions/task_005/direct_shared_tools/evidence/measurement_0008",
+          "raw_target_sha256": "0d433549930111bfb81d51789f2a681178637e0d9c1761ed4a59ee5a15a08f99",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 1.3216831185047795e-08,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 1.908991826496827e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6703,
+          "path": "conditions/task_005/direct_shared_tools/evidence/measurement_0009",
+          "raw_target_sha256": "683fb9d13d348239fb0ac16dd23bb1664e43c084ddb66a42e9f803ba30e05e37",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 1.1920928955078125e-07,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 7.446920857745454e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 5.390918699252827e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "task": "task_006",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "accepted": true,
+      "issues": [],
+      "initial_candidate_sha256": "9b4255d9a58253752faa233a30e47826c34235ffb37cf30f94fdcdb4315a40f6",
+      "final_candidate_sha256": "6bbedca88afce6706ea9b9533f6da555cec320bd4fa9a72018fa7c68150dcf5a",
+      "matches_original_healthy_ast": true,
+      "patch": "task_006_autonomous_layered.patch",
+      "accepted_measurements": [
+        {
+          "seed": 6701,
+          "path": "conditions/task_006/autonomous_layered/evidence/measurement_0008",
+          "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 1.1920928955078125e-07,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 8.436639165054771e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 7.931366029190282e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6702,
+          "path": "conditions/task_006/autonomous_layered/evidence/measurement_0009",
+          "raw_target_sha256": "0d433549930111bfb81d51789f2a681178637e0d9c1761ed4a59ee5a15a08f99",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 1.3216831185047795e-08,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 1.908991826496827e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6703,
+          "path": "conditions/task_006/autonomous_layered/evidence/measurement_0010",
+          "raw_target_sha256": "683fb9d13d348239fb0ac16dd23bb1664e43c084ddb66a42e9f803ba30e05e37",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 1.1920928955078125e-07,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 7.446920857745454e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 5.390918699252827e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "task": "task_006",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "accepted": true,
+      "issues": [],
+      "initial_candidate_sha256": "9b4255d9a58253752faa233a30e47826c34235ffb37cf30f94fdcdb4315a40f6",
+      "final_candidate_sha256": "6bbedca88afce6706ea9b9533f6da555cec320bd4fa9a72018fa7c68150dcf5a",
+      "matches_original_healthy_ast": true,
+      "patch": "task_006_direct_shared_tools.patch",
+      "accepted_measurements": [
+        {
+          "seed": 6701,
+          "path": "conditions/task_006/direct_shared_tools/evidence/measurement_0006",
+          "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 1.1920928955078125e-07,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 8.436639165054771e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 7.931366029190282e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6702,
+          "path": "conditions/task_006/direct_shared_tools/evidence/measurement_0007",
+          "raw_target_sha256": "0d433549930111bfb81d51789f2a681178637e0d9c1761ed4a59ee5a15a08f99",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 0.0,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 1.3216831185047795e-08,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 1.908991826496827e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        },
+        {
+          "seed": 6703,
+          "path": "conditions/task_006/direct_shared_tools/evidence/measurement_0008",
+          "raw_target_sha256": "683fb9d13d348239fb0ac16dd23bb1664e43c084ddb66a42e9f803ba30e05e37",
+          "backend_evidence": {
+            "requested_backend": "torchax",
+            "torchax_enabled": true,
+            "underlying_array_type": "ArrayImpl",
+            "underlying_array_module": "jaxlib._jax",
+            "is_jax_array": true,
+            "training_api": "JittableModule+jax_value_and_grad+optax.sgd"
+          },
+          "measurements": {
+            "loss_abs": {
+              "value": 1.1920928955078125e-07,
+              "threshold": 0.02,
+              "status": "observed"
+            },
+            "grad_norm_abs": {
+              "value": 7.446920857745454e-09,
+              "threshold": 0.05,
+              "status": "observed"
+            },
+            "param_update_rel_l2": {
+              "value": 5.390918699252827e-07,
+              "threshold": 0.03,
+              "status": "observed"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

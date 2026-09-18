@@ -1,0 +1,78 @@
+{
+  "conditions_verified": 12,
+  "raw_calls_verified": 133,
+  "raw_ledger_mismatches": 0,
+  "unknown_usage_calls": 0,
+  "actual_models": [
+    "deepseek-flash"
+  ],
+  "accepted_final_seed_checks": 36,
+  "accepted_final_exact_initial_matches": 36,
+  "all_accepted_repair_measurements": 50,
+  "all_accepted_repair_initial_states_exact": true,
+  "accepted_control_measurements_without_initial_vector": [
+    {
+      "task": "task_001",
+      "method": "ivy_clean_gate",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/ivy_clean_gate/evidence/measurement_0001",
+      "raw_target_sha256": "c5754fca056fcda9377c79f23121d2171dbb21d0eb40427fa053dfa7b3a1282e",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "torch2jax_clean_gate",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/torch2jax_clean_gate/evidence/measurement_0001",
+      "raw_target_sha256": "b460f89a8a8f3736d40307dd3614d4b37dbb48d265d29231d286da0f191fbb26",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "ivy_clean_gate",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/ivy_clean_gate/evidence/measurement_0001",
+      "raw_target_sha256": "4c5cddf607227ec51540b4518a313d5e43d95c4044e3e2eb634df9f6cc57c8c2",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "torch2jax_clean_gate",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/torch2jax_clean_gate/evidence/measurement_0001",
+      "raw_target_sha256": "4f9a66b1b9d0a927754a5c0f4a028095ac55b9f2db1007a927f97a03668ae9f5",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    }
+  ],
+  "stage_status_counts": {
+    "invalid_final": 5,
+    "completed": 7
+  },
+  "maximum_final_differences": {
+    "loss_abs": 1.1920928955078125e-07,
+    "grad_norm_abs": 1.5104204775795438e-08,
+    "param_update_rel_l2": 1.1934221092617947e-06
+  },
+  "healthy_target_ast_matches": 12,
+  "frozen_file_mismatches": 0
+}

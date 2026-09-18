@@ -1,0 +1,2043 @@
+{
+  "source_run": "/media/main/whj/projects/torch4ms/experiments/maintext_jax_autonomous_20260918/formal_v5",
+  "manifest_sha256": "c02524ceefa24abacf65fb281a27e46ef2cbc855c335b90e8fdbff79367193c6",
+  "scope": "Every recorded target measurement, including preflight, clean controls and intermediate patches.",
+  "interpretation": "Offline state comparison only; no candidate execution or acceptance changes. Missing vectors are unavailable, never matches.",
+  "measurements": 118,
+  "initial_state_statuses": {
+    "unavailable": 30,
+    "observed": 88
+  },
+  "accepted_measurements": 60,
+  "accepted_exact_initial_matches": 56,
+  "accepted_without_exact_initial_match": [
+    {
+      "task": "task_001",
+      "method": "ivy_clean_gate",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/ivy_clean_gate/evidence/measurement_0001",
+      "raw_target_sha256": "c5754fca056fcda9377c79f23121d2171dbb21d0eb40427fa053dfa7b3a1282e",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "torch2jax_clean_gate",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/torch2jax_clean_gate/evidence/measurement_0001",
+      "raw_target_sha256": "b460f89a8a8f3736d40307dd3614d4b37dbb48d265d29231d286da0f191fbb26",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "ivy_clean_gate",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/ivy_clean_gate/evidence/measurement_0001",
+      "raw_target_sha256": "4c5cddf607227ec51540b4518a313d5e43d95c4044e3e2eb634df9f6cc57c8c2",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "torch2jax_clean_gate",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/torch2jax_clean_gate/evidence/measurement_0001",
+      "raw_target_sha256": "4f9a66b1b9d0a927754a5c0f4a028095ac55b9f2db1007a927f97a03668ae9f5",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    }
+  ],
+  "records": [
+    {
+      "task": "task_001",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_001/autonomous_layered/evidence/measurement_0001",
+      "raw_target_sha256": "f5a16d957950a690422cde314a214c88aebdc80c909e798ee5c7a9f432ec7640",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_001/autonomous_layered/evidence/measurement_0002",
+      "raw_target_sha256": "f5a16d957950a690422cde314a214c88aebdc80c909e798ee5c7a9f432ec7640",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_001/autonomous_layered/evidence/measurement_0004",
+      "raw_target_sha256": "f5a16d957950a690422cde314a214c88aebdc80c909e798ee5c7a9f432ec7640",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/autonomous_layered/evidence/measurement_0006",
+      "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/autonomous_layered/evidence/measurement_0007",
+      "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "autonomous_layered",
+      "seed": 6702,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/autonomous_layered/evidence/measurement_0008",
+      "raw_target_sha256": "0b8109f5eea38a1e21ee83d281a7c616d331f3fb81ef6e6c342e40372d002c9b",
+      "reference_sha256": "a551ebc7eb851bc1c27aa2bc0ff080d83b2d65b39931501709b002b210893331",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "autonomous_layered",
+      "seed": 6703,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/autonomous_layered/evidence/measurement_0009",
+      "raw_target_sha256": "bcfbe0faece2c5cd2b30f5b5ddf2f75812e334a9f567dd90ef2f55374d2ec100",
+      "reference_sha256": "1e6664e23641ed1f8f693f524273ba2c08c48bd1f2aa2f379a5b1fb86a800395",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_001/direct_shared_tools/evidence/measurement_0001",
+      "raw_target_sha256": "1c190d00c16cc1de478dc00094367b41c2e404624e038eadfa64369e514f459c",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_001/direct_shared_tools/evidence/measurement_0002",
+      "raw_target_sha256": "1c190d00c16cc1de478dc00094367b41c2e404624e038eadfa64369e514f459c",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_001/direct_shared_tools/evidence/measurement_0004",
+      "raw_target_sha256": "1c190d00c16cc1de478dc00094367b41c2e404624e038eadfa64369e514f459c",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/direct_shared_tools/evidence/measurement_0005",
+      "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/direct_shared_tools/evidence/measurement_0006",
+      "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "direct_shared_tools",
+      "seed": 6702,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/direct_shared_tools/evidence/measurement_0007",
+      "raw_target_sha256": "0b8109f5eea38a1e21ee83d281a7c616d331f3fb81ef6e6c342e40372d002c9b",
+      "reference_sha256": "a551ebc7eb851bc1c27aa2bc0ff080d83b2d65b39931501709b002b210893331",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "direct_shared_tools",
+      "seed": 6703,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/direct_shared_tools/evidence/measurement_0008",
+      "raw_target_sha256": "bcfbe0faece2c5cd2b30f5b5ddf2f75812e334a9f567dd90ef2f55374d2ec100",
+      "reference_sha256": "1e6664e23641ed1f8f693f524273ba2c08c48bd1f2aa2f379a5b1fb86a800395",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "healthy_control",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/healthy_control/evidence/measurement_0001",
+      "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "healthy_control",
+      "seed": 6702,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/healthy_control/evidence/measurement_0002",
+      "raw_target_sha256": "0b8109f5eea38a1e21ee83d281a7c616d331f3fb81ef6e6c342e40372d002c9b",
+      "reference_sha256": "a551ebc7eb851bc1c27aa2bc0ff080d83b2d65b39931501709b002b210893331",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "healthy_control",
+      "seed": 6703,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/healthy_control/evidence/measurement_0003",
+      "raw_target_sha256": "bcfbe0faece2c5cd2b30f5b5ddf2f75812e334a9f567dd90ef2f55374d2ec100",
+      "reference_sha256": "1e6664e23641ed1f8f693f524273ba2c08c48bd1f2aa2f379a5b1fb86a800395",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "ivy",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_001/ivy/evidence/measurement_0001",
+      "raw_target_sha256": "3114191801e66e2cb9a821ee3795161539a2d04efa0b280aa05e1cd5e03ae1ef",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "ivy_clean_gate",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/ivy_clean_gate/evidence/measurement_0001",
+      "raw_target_sha256": "c5754fca056fcda9377c79f23121d2171dbb21d0eb40427fa053dfa7b3a1282e",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "preflight",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_001/preflight/evidence/measurement_0001",
+      "raw_target_sha256": "f231a9680a502e69a57185fafb8971a33c872917b7b71e9949b7e33f4d2acc87",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "torch2jax",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_001/torch2jax/evidence/measurement_0001",
+      "raw_target_sha256": "089268a236d80915cd827b9a417c5244e0a86ca7da01620a1d0525dea641d715",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_001",
+      "method": "torch2jax_clean_gate",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_001/torch2jax_clean_gate/evidence/measurement_0001",
+      "raw_target_sha256": "b460f89a8a8f3736d40307dd3614d4b37dbb48d265d29231d286da0f191fbb26",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/autonomous_layered/evidence/measurement_0001",
+      "raw_target_sha256": "91adb90fedfe3d4ebeb30c9341be2e5d0dc08121c84f001926a6e129b5adff1c",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/autonomous_layered/evidence/measurement_0002",
+      "raw_target_sha256": "91adb90fedfe3d4ebeb30c9341be2e5d0dc08121c84f001926a6e129b5adff1c",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/autonomous_layered/evidence/measurement_0004",
+      "raw_target_sha256": "91adb90fedfe3d4ebeb30c9341be2e5d0dc08121c84f001926a6e129b5adff1c",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/autonomous_layered/evidence/measurement_0005",
+      "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/autonomous_layered/evidence/measurement_0006",
+      "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/autonomous_layered/evidence/measurement_0007",
+      "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "autonomous_layered",
+      "seed": 6702,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/autonomous_layered/evidence/measurement_0008",
+      "raw_target_sha256": "0b8109f5eea38a1e21ee83d281a7c616d331f3fb81ef6e6c342e40372d002c9b",
+      "reference_sha256": "a551ebc7eb851bc1c27aa2bc0ff080d83b2d65b39931501709b002b210893331",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "autonomous_layered",
+      "seed": 6703,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/autonomous_layered/evidence/measurement_0009",
+      "raw_target_sha256": "bcfbe0faece2c5cd2b30f5b5ddf2f75812e334a9f567dd90ef2f55374d2ec100",
+      "reference_sha256": "1e6664e23641ed1f8f693f524273ba2c08c48bd1f2aa2f379a5b1fb86a800395",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/direct_shared_tools/evidence/measurement_0001",
+      "raw_target_sha256": "91adb90fedfe3d4ebeb30c9341be2e5d0dc08121c84f001926a6e129b5adff1c",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/direct_shared_tools/evidence/measurement_0002",
+      "raw_target_sha256": "91adb90fedfe3d4ebeb30c9341be2e5d0dc08121c84f001926a6e129b5adff1c",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/direct_shared_tools/evidence/measurement_0003",
+      "raw_target_sha256": "91adb90fedfe3d4ebeb30c9341be2e5d0dc08121c84f001926a6e129b5adff1c",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/direct_shared_tools/evidence/measurement_0005",
+      "raw_target_sha256": "91adb90fedfe3d4ebeb30c9341be2e5d0dc08121c84f001926a6e129b5adff1c",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/direct_shared_tools/evidence/measurement_0006",
+      "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "direct_shared_tools",
+      "seed": 6702,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/direct_shared_tools/evidence/measurement_0007",
+      "raw_target_sha256": "0b8109f5eea38a1e21ee83d281a7c616d331f3fb81ef6e6c342e40372d002c9b",
+      "reference_sha256": "a551ebc7eb851bc1c27aa2bc0ff080d83b2d65b39931501709b002b210893331",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "direct_shared_tools",
+      "seed": 6703,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/direct_shared_tools/evidence/measurement_0008",
+      "raw_target_sha256": "bcfbe0faece2c5cd2b30f5b5ddf2f75812e334a9f567dd90ef2f55374d2ec100",
+      "reference_sha256": "1e6664e23641ed1f8f693f524273ba2c08c48bd1f2aa2f379a5b1fb86a800395",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "ivy",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/ivy/evidence/measurement_0001",
+      "raw_target_sha256": "92db9340134c7524e97cf7102984d924ece23361d1fc3cf5abc861677b5baff0",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "preflight",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/preflight/evidence/measurement_0001",
+      "raw_target_sha256": "91adb90fedfe3d4ebeb30c9341be2e5d0dc08121c84f001926a6e129b5adff1c",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_002",
+      "method": "torch2jax",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_002/torch2jax/evidence/measurement_0001",
+      "raw_target_sha256": "3162c3d0936321178417051381c47d8909a8a06143f23e11b733058d68f91e02",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/autonomous_layered/evidence/measurement_0001",
+      "raw_target_sha256": "0984b580ea61214eb4ad003fd41032dc25354f7094e0e2185bf6385e4fa20e39",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/autonomous_layered/evidence/measurement_0004",
+      "raw_target_sha256": "0984b580ea61214eb4ad003fd41032dc25354f7094e0e2185bf6385e4fa20e39",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/autonomous_layered/evidence/measurement_0005",
+      "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/autonomous_layered/evidence/measurement_0006",
+      "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/autonomous_layered/evidence/measurement_0007",
+      "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "autonomous_layered",
+      "seed": 6702,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/autonomous_layered/evidence/measurement_0008",
+      "raw_target_sha256": "0b8109f5eea38a1e21ee83d281a7c616d331f3fb81ef6e6c342e40372d002c9b",
+      "reference_sha256": "a551ebc7eb851bc1c27aa2bc0ff080d83b2d65b39931501709b002b210893331",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "autonomous_layered",
+      "seed": 6703,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/autonomous_layered/evidence/measurement_0009",
+      "raw_target_sha256": "bcfbe0faece2c5cd2b30f5b5ddf2f75812e334a9f567dd90ef2f55374d2ec100",
+      "reference_sha256": "1e6664e23641ed1f8f693f524273ba2c08c48bd1f2aa2f379a5b1fb86a800395",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/direct_shared_tools/evidence/measurement_0001",
+      "raw_target_sha256": "0984b580ea61214eb4ad003fd41032dc25354f7094e0e2185bf6385e4fa20e39",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/direct_shared_tools/evidence/measurement_0002",
+      "raw_target_sha256": "0984b580ea61214eb4ad003fd41032dc25354f7094e0e2185bf6385e4fa20e39",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/direct_shared_tools/evidence/measurement_0003",
+      "raw_target_sha256": "0984b580ea61214eb4ad003fd41032dc25354f7094e0e2185bf6385e4fa20e39",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/direct_shared_tools/evidence/measurement_0005",
+      "raw_target_sha256": "0984b580ea61214eb4ad003fd41032dc25354f7094e0e2185bf6385e4fa20e39",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/direct_shared_tools/evidence/measurement_0006",
+      "raw_target_sha256": "dedbaa7b4badf5d8bce02b1440cef7e7e7a67a60242b71a144b1b2d19fc6d501",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "direct_shared_tools",
+      "seed": 6702,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/direct_shared_tools/evidence/measurement_0007",
+      "raw_target_sha256": "0b8109f5eea38a1e21ee83d281a7c616d331f3fb81ef6e6c342e40372d002c9b",
+      "reference_sha256": "a551ebc7eb851bc1c27aa2bc0ff080d83b2d65b39931501709b002b210893331",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "direct_shared_tools",
+      "seed": 6703,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/direct_shared_tools/evidence/measurement_0008",
+      "raw_target_sha256": "bcfbe0faece2c5cd2b30f5b5ddf2f75812e334a9f567dd90ef2f55374d2ec100",
+      "reference_sha256": "1e6664e23641ed1f8f693f524273ba2c08c48bd1f2aa2f379a5b1fb86a800395",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "ivy",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/ivy/evidence/measurement_0001",
+      "raw_target_sha256": "80b97163c6a83a0b79b3f03e7e86ce3272a1b033c6012b470fa8aeb0ba3597db",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "preflight",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/preflight/evidence/measurement_0001",
+      "raw_target_sha256": "0984b580ea61214eb4ad003fd41032dc25354f7094e0e2185bf6385e4fa20e39",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 160,
+        "target_length": 160,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_003",
+      "method": "torch2jax",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_003/torch2jax/evidence/measurement_0001",
+      "raw_target_sha256": "7d2eae8d135da2bab1a81f76bbbe5eac6cdc61ec0a59b0f9c252893e15b88fe1",
+      "reference_sha256": "6a555eff3bb90f01fb386f185a477b889162df45e651538914275d7a7d7d0489",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_004/autonomous_layered/evidence/measurement_0001",
+      "raw_target_sha256": "cbe8dffb67b6fd534a55dda1f68b773d51705eb758ce10a78ff9768cb2eb62db",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_004/autonomous_layered/evidence/measurement_0004",
+      "raw_target_sha256": "cbe8dffb67b6fd534a55dda1f68b773d51705eb758ce10a78ff9768cb2eb62db",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_004/autonomous_layered/evidence/measurement_0005",
+      "raw_target_sha256": "cbe8dffb67b6fd534a55dda1f68b773d51705eb758ce10a78ff9768cb2eb62db",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/autonomous_layered/evidence/measurement_0006",
+      "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/autonomous_layered/evidence/measurement_0007",
+      "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/autonomous_layered/evidence/measurement_0008",
+      "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "autonomous_layered",
+      "seed": 6702,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/autonomous_layered/evidence/measurement_0009",
+      "raw_target_sha256": "0d433549930111bfb81d51789f2a681178637e0d9c1761ed4a59ee5a15a08f99",
+      "reference_sha256": "63283d441c32e581fb9ff1bb80f675813352e077fcae576cfa15503bebd6c987",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "autonomous_layered",
+      "seed": 6703,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/autonomous_layered/evidence/measurement_0010",
+      "raw_target_sha256": "683fb9d13d348239fb0ac16dd23bb1664e43c084ddb66a42e9f803ba30e05e37",
+      "reference_sha256": "83254bc1cbfbc1a4c9ef496b2c2dce4f18e9ed9b8d634a7ff95c0212d98ef967",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_004/direct_shared_tools/evidence/measurement_0001",
+      "raw_target_sha256": "86bb65d35a519e6cb7944386bf76f7840c2bf115c852d711d7f1d664ad2277fd",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_004/direct_shared_tools/evidence/measurement_0002",
+      "raw_target_sha256": "86bb65d35a519e6cb7944386bf76f7840c2bf115c852d711d7f1d664ad2277fd",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_004/direct_shared_tools/evidence/measurement_0004",
+      "raw_target_sha256": "86bb65d35a519e6cb7944386bf76f7840c2bf115c852d711d7f1d664ad2277fd",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/direct_shared_tools/evidence/measurement_0005",
+      "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/direct_shared_tools/evidence/measurement_0006",
+      "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "direct_shared_tools",
+      "seed": 6702,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/direct_shared_tools/evidence/measurement_0007",
+      "raw_target_sha256": "0d433549930111bfb81d51789f2a681178637e0d9c1761ed4a59ee5a15a08f99",
+      "reference_sha256": "63283d441c32e581fb9ff1bb80f675813352e077fcae576cfa15503bebd6c987",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "direct_shared_tools",
+      "seed": 6703,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/direct_shared_tools/evidence/measurement_0008",
+      "raw_target_sha256": "683fb9d13d348239fb0ac16dd23bb1664e43c084ddb66a42e9f803ba30e05e37",
+      "reference_sha256": "83254bc1cbfbc1a4c9ef496b2c2dce4f18e9ed9b8d634a7ff95c0212d98ef967",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "healthy_control",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/healthy_control/evidence/measurement_0001",
+      "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "healthy_control",
+      "seed": 6702,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/healthy_control/evidence/measurement_0002",
+      "raw_target_sha256": "0d433549930111bfb81d51789f2a681178637e0d9c1761ed4a59ee5a15a08f99",
+      "reference_sha256": "63283d441c32e581fb9ff1bb80f675813352e077fcae576cfa15503bebd6c987",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "healthy_control",
+      "seed": 6703,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/healthy_control/evidence/measurement_0003",
+      "raw_target_sha256": "683fb9d13d348239fb0ac16dd23bb1664e43c084ddb66a42e9f803ba30e05e37",
+      "reference_sha256": "83254bc1cbfbc1a4c9ef496b2c2dce4f18e9ed9b8d634a7ff95c0212d98ef967",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "ivy",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_004/ivy/evidence/measurement_0001",
+      "raw_target_sha256": "bad607c0fad973056db17d3ac82dc5081b5af2e16b5f9c6c5aa980d22342ef93",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "ivy_clean_gate",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/ivy_clean_gate/evidence/measurement_0001",
+      "raw_target_sha256": "4c5cddf607227ec51540b4518a313d5e43d95c4044e3e2eb634df9f6cc57c8c2",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "preflight",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_004/preflight/evidence/measurement_0001",
+      "raw_target_sha256": "29aca0b3361fe484e59b2be9528752d89ed18ac911caceb62b9fca70892dac0c",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "torch2jax",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "failed",
+      "measurement": "conditions/task_004/torch2jax/evidence/measurement_0001",
+      "raw_target_sha256": "6f655bc6029b8df12738db0899316c25cc1138d5e4e06a14b2683e8e07783f11",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_004",
+      "method": "torch2jax_clean_gate",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_004/torch2jax_clean_gate/evidence/measurement_0001",
+      "raw_target_sha256": "4f9a66b1b9d0a927754a5c0f4a028095ac55b9f2db1007a927f97a03668ae9f5",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/autonomous_layered/evidence/measurement_0001",
+      "raw_target_sha256": "255b87b41819898c25867b58e3e53330b380a936da5f35a70dc1cfc1822168d1",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/autonomous_layered/evidence/measurement_0002",
+      "raw_target_sha256": "255b87b41819898c25867b58e3e53330b380a936da5f35a70dc1cfc1822168d1",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/autonomous_layered/evidence/measurement_0004",
+      "raw_target_sha256": "255b87b41819898c25867b58e3e53330b380a936da5f35a70dc1cfc1822168d1",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/autonomous_layered/evidence/measurement_0005",
+      "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/autonomous_layered/evidence/measurement_0006",
+      "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "autonomous_layered",
+      "seed": 6702,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/autonomous_layered/evidence/measurement_0007",
+      "raw_target_sha256": "0d433549930111bfb81d51789f2a681178637e0d9c1761ed4a59ee5a15a08f99",
+      "reference_sha256": "63283d441c32e581fb9ff1bb80f675813352e077fcae576cfa15503bebd6c987",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "autonomous_layered",
+      "seed": 6703,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/autonomous_layered/evidence/measurement_0008",
+      "raw_target_sha256": "683fb9d13d348239fb0ac16dd23bb1664e43c084ddb66a42e9f803ba30e05e37",
+      "reference_sha256": "83254bc1cbfbc1a4c9ef496b2c2dce4f18e9ed9b8d634a7ff95c0212d98ef967",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/direct_shared_tools/evidence/measurement_0001",
+      "raw_target_sha256": "255b87b41819898c25867b58e3e53330b380a936da5f35a70dc1cfc1822168d1",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/direct_shared_tools/evidence/measurement_0002",
+      "raw_target_sha256": "255b87b41819898c25867b58e3e53330b380a936da5f35a70dc1cfc1822168d1",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/direct_shared_tools/evidence/measurement_0003",
+      "raw_target_sha256": "255b87b41819898c25867b58e3e53330b380a936da5f35a70dc1cfc1822168d1",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/direct_shared_tools/evidence/measurement_0005",
+      "raw_target_sha256": "255b87b41819898c25867b58e3e53330b380a936da5f35a70dc1cfc1822168d1",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/direct_shared_tools/evidence/measurement_0006",
+      "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/direct_shared_tools/evidence/measurement_0007",
+      "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "direct_shared_tools",
+      "seed": 6702,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/direct_shared_tools/evidence/measurement_0008",
+      "raw_target_sha256": "0d433549930111bfb81d51789f2a681178637e0d9c1761ed4a59ee5a15a08f99",
+      "reference_sha256": "63283d441c32e581fb9ff1bb80f675813352e077fcae576cfa15503bebd6c987",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "direct_shared_tools",
+      "seed": 6703,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/direct_shared_tools/evidence/measurement_0009",
+      "raw_target_sha256": "683fb9d13d348239fb0ac16dd23bb1664e43c084ddb66a42e9f803ba30e05e37",
+      "reference_sha256": "83254bc1cbfbc1a4c9ef496b2c2dce4f18e9ed9b8d634a7ff95c0212d98ef967",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "ivy",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/ivy/evidence/measurement_0001",
+      "raw_target_sha256": "d052297dd6fc6195373ff203392b15674034e92de1af3f05473d8b37764627d8",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "preflight",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/preflight/evidence/measurement_0001",
+      "raw_target_sha256": "255b87b41819898c25867b58e3e53330b380a936da5f35a70dc1cfc1822168d1",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_005",
+      "method": "torch2jax",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_005/torch2jax/evidence/measurement_0001",
+      "raw_target_sha256": "5321f425c51257ec8c1719f9958673a02a219d0aceaa48ce983b0a032be24f22",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/autonomous_layered/evidence/measurement_0001",
+      "raw_target_sha256": "73fdc7af5b66f6f140ec8d27c0c8d13bae77bc1ed34805287d539e75abae536b",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/autonomous_layered/evidence/measurement_0002",
+      "raw_target_sha256": "73fdc7af5b66f6f140ec8d27c0c8d13bae77bc1ed34805287d539e75abae536b",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/autonomous_layered/evidence/measurement_0003",
+      "raw_target_sha256": "73fdc7af5b66f6f140ec8d27c0c8d13bae77bc1ed34805287d539e75abae536b",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/autonomous_layered/evidence/measurement_0005",
+      "raw_target_sha256": "73fdc7af5b66f6f140ec8d27c0c8d13bae77bc1ed34805287d539e75abae536b",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/autonomous_layered/evidence/measurement_0006",
+      "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/autonomous_layered/evidence/measurement_0007",
+      "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "autonomous_layered",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/autonomous_layered/evidence/measurement_0008",
+      "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "autonomous_layered",
+      "seed": 6702,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/autonomous_layered/evidence/measurement_0009",
+      "raw_target_sha256": "0d433549930111bfb81d51789f2a681178637e0d9c1761ed4a59ee5a15a08f99",
+      "reference_sha256": "63283d441c32e581fb9ff1bb80f675813352e077fcae576cfa15503bebd6c987",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "autonomous_layered",
+      "seed": 6703,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/autonomous_layered/evidence/measurement_0010",
+      "raw_target_sha256": "683fb9d13d348239fb0ac16dd23bb1664e43c084ddb66a42e9f803ba30e05e37",
+      "reference_sha256": "83254bc1cbfbc1a4c9ef496b2c2dce4f18e9ed9b8d634a7ff95c0212d98ef967",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/direct_shared_tools/evidence/measurement_0001",
+      "raw_target_sha256": "73fdc7af5b66f6f140ec8d27c0c8d13bae77bc1ed34805287d539e75abae536b",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/direct_shared_tools/evidence/measurement_0002",
+      "raw_target_sha256": "73fdc7af5b66f6f140ec8d27c0c8d13bae77bc1ed34805287d539e75abae536b",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/direct_shared_tools/evidence/measurement_0003",
+      "raw_target_sha256": "73fdc7af5b66f6f140ec8d27c0c8d13bae77bc1ed34805287d539e75abae536b",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/direct_shared_tools/evidence/measurement_0004",
+      "raw_target_sha256": "73fdc7af5b66f6f140ec8d27c0c8d13bae77bc1ed34805287d539e75abae536b",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/direct_shared_tools/evidence/measurement_0005",
+      "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "direct_shared_tools",
+      "seed": 6701,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/direct_shared_tools/evidence/measurement_0006",
+      "raw_target_sha256": "be2ec562b002c6740f6719ae301fabbd02ef2ffce3e41124a7fd08f96986c2d0",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "direct_shared_tools",
+      "seed": 6702,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/direct_shared_tools/evidence/measurement_0007",
+      "raw_target_sha256": "0d433549930111bfb81d51789f2a681178637e0d9c1761ed4a59ee5a15a08f99",
+      "reference_sha256": "63283d441c32e581fb9ff1bb80f675813352e077fcae576cfa15503bebd6c987",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "direct_shared_tools",
+      "seed": 6703,
+      "accepted": true,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/direct_shared_tools/evidence/measurement_0008",
+      "raw_target_sha256": "683fb9d13d348239fb0ac16dd23bb1664e43c084ddb66a42e9f803ba30e05e37",
+      "reference_sha256": "83254bc1cbfbc1a4c9ef496b2c2dce4f18e9ed9b8d634a7ff95c0212d98ef967",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "ivy",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/ivy/evidence/measurement_0001",
+      "raw_target_sha256": "0f64f27eccbad6a941aaaaa7701ef70d88aeb1949d4741e1390dcc6010de7888",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "preflight",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/preflight/evidence/measurement_0001",
+      "raw_target_sha256": "73fdc7af5b66f6f140ec8d27c0c8d13bae77bc1ed34805287d539e75abae536b",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "observed",
+        "reference_length": 226,
+        "target_length": 226,
+        "exact_match": true,
+        "max_abs_difference": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    {
+      "task": "task_006",
+      "method": "torch2jax",
+      "seed": 6701,
+      "accepted": false,
+      "target_execution_status": "ok",
+      "measurement": "conditions/task_006/torch2jax/evidence/measurement_0001",
+      "raw_target_sha256": "607fd2badc9b591d2ee519178f2cc23faaf708c5c7d57f2c732a1353f36264e7",
+      "reference_sha256": "cb5d5146fdfc545c9707191dfc4985603f77075cd4367e33dc1d7ad6231c5bb8",
+      "initial_state": {
+        "status": "unavailable"
+      }
+    }
+  ]
+}

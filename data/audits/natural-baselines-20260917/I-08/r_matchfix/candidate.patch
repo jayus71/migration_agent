@@ -1,0 +1,19 @@
+--- candidate_initial.py
++++ candidate_final.py
+@@ -31,6 +31,15 @@
+         optimizer.zero_grad()
+         loss_wrapper = extract_and_wrap_loss_fn(model, nn.CrossEntropyLoss(), x, y)
+         loss = loss_wrapper.output
+-        loss.backward(module=model)
++        # NOTE: the wrapped loss already carries the functional forward (all 8 params)
++        # and the exact parameter list it was built from. Propagate that context
++        # explicitly instead of relying on attribute lookup inside _ms_backward --
++        # otherwise the GradOperation used for backward is out of sync with the
++        # forward that produced the loss and encoder.0.{weight,bias} get a zero grad.
++        loss.backward(
++            module=model,
++            inputs=loss_wrapper.inputs,
++            forward_fn=loss_wrapper.forward_fn,
++        )
+         optimizer.step()
+         return float(loss.detach().item())

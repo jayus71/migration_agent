@@ -8,7 +8,7 @@ import tempfile
 from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "figures/架构图0914.svg"
+SOURCE = ROOT / "figures/slim_v4_overview.svg"
 OUTPUT = ROOT / "figures/hierarchical_feedback_architecture"
 
 

@@ -1,0 +1,19 @@
+{
+  "model": "deepseek-v4-flash",
+  "temperature": 0,
+  "thinking": {
+    "type": "enabled"
+  },
+  "reasoning_effort": "high",
+  "max_tokens": 131072,
+  "messages": [
+    {
+      "role": "system",
+      "content": "Translate the complete Python module from PyTorch to native MindSpore. Preserve its public interfaces and behavior, including differentiation and training. Use the supplied source and public task contract. Return only the complete Python module. Keep model parameter names and shapes so the common evaluator can supply identical initial values. The candidate must execute its tensor computations with MindSpore on CPU."
+    },
+    {
+      "role": "user",
+      "content": "{\"source_reference\": \"source.py\", \"target_framework\": \"MindSpore\", \"public_interfaces\": [\"gradient_workload\", \"parameter_workload\"], \"semantics\": \"parameter_workload returns ordered (name, parameter) pairs for trainable parameters. gradient_workload assigns the supplied gradient to the parameter at the corresponding trainable index. environment is an opaque interoperability argument and unused in native PyTorch.\", \"model_variant\": \"transformer\", \"editable\": [\"candidate.py\", \"torch4ms/**/*.py\"], \"tests\": [\"public\"], \"seed\": 101, \"evaluation\": {\"final_seeds\": [101, 202, 303], \"initial_state\": \"explicit_parameter_value_alignment\", \"forward_atol\": 0.0001, \"forward_rtol\": 0.0001, \"gradient_atol\": 0.0001, \"gradient_rtol\": 0.001, \"update_atol\": 1e-05, \"update_rtol\": 0.001, \"bf16_atol\": 0.01, \"backend_execution_required\": true}}\n\nsource.py:\nfrom __future__ import annotations\n\nMODEL_VARIANT = 'transformer'\nimport torch\n\n\ndef parameter_workload(model):\n    return [(name, parameter) for name, parameter in model.named_parameters() if parameter.requires_grad]\n\n\ndef gradient_workload(parameter, gradient, environment, model, index):\n    named = parameter_workload(model)\n    if index < 0 or index >= len(named):\n        raise IndexError('Trainable parameter index is out of range')\n    _, destination = named[index]\n    if destination is not parameter:\n        raise ValueError('Parameter and trainable index disagree')\n    if gradient.shape != destination.shape:\n        raise ValueError('Gradient shape does not match parameter')\n    destination.grad = gradient.detach().to(device=destination.device, dtype=destination.dtype).clone()\n"
+    }
+  ]
+}

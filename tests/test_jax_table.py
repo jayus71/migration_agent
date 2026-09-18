@@ -66,16 +66,21 @@ class JaxTableTests(unittest.TestCase):
     def test_manuscript_keeps_experiment_pools_separate(self):
         manuscript = (ROOT / "conference_101719.tex").read_text()
         main_table = manuscript.split(r"\label{tab:main-results}", 1)[1].split(r"\end{table}", 1)[0]
-        self.assertIn("TABLE_main_rows", main_table)
+        self.assertIn("TABLE_slim_main_rows", main_table)
+        self.assertNotIn("TABLE_main_rows", main_table)
+        self.assertNotIn("TABLE_jax_rows", main_table)
         generated = (ROOT / "figures/TABLE_main_rows.tex").read_text()
         self.assertIn(table.build_rows().rstrip(), generated)
         self.assertNotIn("MSAdapter", main_table)
-        self.assertIn("(a) MindSpore: 50 instances, up to four attempts", main_table)
+        self.assertIn("Fixed50", main_table)
+        self.assertIn("Natural10", main_table)
         self.assertIn("(b) JAX: six instances", generated)
-        self.assertIn("up to three repair rounds", main_table)
-        self.assertIn(r"Direct LLM, Ivy, and \texttt{torch2jax} run once", main_table)
-        self.assertIn("training verification on three seeds", main_table)
         self.assertIn("all accepted repairs finish in the first round", generated)
+        jax_section = manuscript.split(r"\label{sec:generalization}", 1)[1].split(
+            r"\subsection{", 1)[0]
+        self.assertIn("six frozen MLP and CNN faults", jax_section)
+        self.assertIn("three-seed training verification", jax_section)
+        self.assertIn("up to four submission checkpoints", jax_section)
         self.assertNotIn("TABLE_mindspore_translation_rows", manuscript)
         self.assertNotIn("15 task--seed conditions", main_table)
         self.assertNotIn("Grad./upd.", manuscript)

@@ -1,0 +1,41 @@
+{
+  "automation_id": "automation",
+  "interval_minutes": 10,
+  "checked_at": "2026-09-18T12:22:02.122411+00:00",
+  "last_reported_finished": 56,
+  "last_reported_milestone": 50,
+  "next_completion_milestone": 100,
+  "reported_completed_phases": [],
+  "reported_issues": ["cross__task_001__test_repair:ModuleNotFoundError:autofix.backends", "cross__task_003__test_repair:output_truncated:dispatcher_blocked_native_terminal_failure"],
+  "finished": 85,
+  "running": 4,
+  "needs_inspection": 0,
+  "pending": 302,
+  "scheduler_pid": 192058,
+  "scheduler_alive": true,
+  "all_four_workers_alive": true,
+  "recorded_response_files": 1502,
+  "status_file_age_seconds": 1.8,
+  "response_errors": 0,
+  "global_api_pause": false,
+  "blocked_methods": [],
+  "phases_finished": {"main": 32, "cross_language": 27, "plugin": 10, "ablation": 16},
+  "latest_check_summary": "Eleven additional conditions completed since the last check: 85 finished, four live workers, 302 pending. Scheduler and response files continue advancing; the longest inspected active condition is about 669 seconds, and latest activity is within 123 seconds. Worker replacement during inspection confirmed automatic refill. No blocked methods, pending inspections, provider errors or completed groups. Next milestone remains 100; no notification.",
+  "terminal_failure_restart": {
+    "state": "restarted",
+    "restarted_at": "2026-09-18T11:30:25.936531+00:00",
+    "started_at": "2026-09-18T11:21:48.015603+00:00",
+    "job": "cross__task_003__test_repair",
+    "result_sha256": "0307f17a83d2795f8ccc993eb6a7a9295a02f2310db9efdf41d7131f6304ef13",
+    "rerun": false,
+    "verified": "Original dispatch receipt archived, completed failure result hash unchanged, no rerun, ordinary repair queue resumed."
+  },
+  "resolved_issues": ["cross__task_001__test_repair:ModuleNotFoundError:autofix.backends", "cross__task_003__test_repair:output_truncated:dispatcher_blocked_native_terminal_failure"],
+  "recovery": {
+    "state": "restarted",
+    "restarted_at": "2026-09-18T10:51:32.889038+00:00",
+    "job": "cross__task_001__test_repair",
+    "prior_model_calls": 0,
+    "verified": "Failure records archived; scheduler restarted with four workers. Ordinary repair tasks 001 and 002 have each received a real model response and advanced to repair 2. No duplicate dispatcher or replacement generation was started."
+  }
+}

@@ -1,0 +1,403 @@
+{
+  "formal_execution_authorized": false,
+  "real_model_calls": 0,
+  "status": "review_candidate",
+  "implementation_commit": "694f6920ac89de66492d556e00dacb42fcd47154",
+  "task_count": 50,
+  "unique_source_count": 24,
+  "unique_source_contract_groups": 29,
+  "methods": {
+    "ladim": {
+      "label": "LaDiM",
+      "mode": "shared_initial_then_repair",
+      "adapter": "autonomous_layered",
+      "runtime": "mindspore",
+      "memory_policy": "evidence",
+      "workflow_policy": "progress_loop"
+    },
+    "direct": {
+      "label": "Direct LLM",
+      "mode": "shared_initial_only",
+      "runtime": "mindspore"
+    },
+    "swe": {
+      "label": "SWE-agent",
+      "mode": "shared_initial_then_repair",
+      "adapter": "swe_native_isolated",
+      "runtime": "mindspore",
+      "memory_policy": "native",
+      "workflow_policy": "standard"
+    },
+    "matchfix": {
+      "label": "MatchFixAgent",
+      "mode": "shared_initial_then_repair",
+      "adapter": "matchfix_full_orchestration",
+      "runtime": "mindspore",
+      "memory_policy": "native",
+      "workflow_policy": "standard"
+    },
+    "msadapter": {
+      "label": "MSAdapter",
+      "mode": "native_import_conversion",
+      "runtime": "msadapter"
+    },
+    "cte": {
+      "label": "CodeTransEngine (direct translation)",
+      "mode": "native_direct_translation",
+      "runtime": "mindspore",
+      "full_intertrans_search": false
+    }
+  },
+  "repair_budget": {
+    "model": "deepseek-v4-flash",
+    "temperature": 0,
+    "thinking_mode": "enabled",
+    "reasoning_effort": "high",
+    "max_calls": 40,
+    "max_output_tokens": 120000,
+    "max_seconds": 1800,
+    "max_repair_attempts": 4,
+    "per_call_output_tokens": 16384,
+    "diagnosis_calls_per_stage": 8,
+    "repair_calls_per_stage": 8
+  },
+  "generation_configuration": {
+    "model": "deepseek-v4-flash",
+    "temperature": 0,
+    "thinking": {
+      "type": "enabled"
+    },
+    "reasoning_effort": "high",
+    "max_tokens": 131072
+  },
+  "source_manifest_sha256": "b674ae689f3addef7b5f79e868fc621325218d359607337e169a49d0fbc5e073",
+  "candidate_initialization": "One Direct native MindSpore module per source-and-contract group",
+  "translation_reuse": [
+    {
+      "group": "group_001",
+      "tasks": [
+        "task_001",
+        "task_003",
+        "task_005",
+        "task_017"
+      ],
+      "source_sha256": "98a34d754a5d60ad226000c134df4bda73b1f65bb1ed8c0972d869629da9bb27",
+      "contract_sha256": "4450410d414ef683a385d01553ccfe3eaffc5b991339c505fdda97e6e3292764",
+      "request_sha256": "93f900fa8e1a9648a5caa35f0b140ed3b7699a8853cfbb64effab7c647c51517"
+    },
+    {
+      "group": "group_002",
+      "tasks": [
+        "task_002",
+        "task_007",
+        "task_009",
+        "task_019"
+      ],
+      "source_sha256": "0108b95094cc62e0ca2358c7bd581146e508f8e879be71b348c9bbb2d9cb91cc",
+      "contract_sha256": "439c947e207fbfaf5e122866274c30a7042bb39c37cc3d12f60d2b81f7aa773f",
+      "request_sha256": "9ffff00765510f77aabdb6ed8354d768f37468e4e2d88940cea7f0d32ddbbf70"
+    },
+    {
+      "group": "group_003",
+      "tasks": [
+        "task_004",
+        "task_008",
+        "task_020"
+      ],
+      "source_sha256": "a4ba85507a9c8cf76191118186261c0542cc2b8a9778b81beef1f4abef0bac88",
+      "contract_sha256": "7db8927ecaf0d505e12c857514b8324e22b9c76a1a6e619194e4139e8c7ab7f2",
+      "request_sha256": "d0a7331c70fdb0d9e1cfd8f7a42aa9098f27dc66b8c399e7f9d18f8e9623ef23"
+    },
+    {
+      "group": "group_004",
+      "tasks": [
+        "task_006",
+        "task_010",
+        "task_018"
+      ],
+      "source_sha256": "0b9513975ba15bff966f4b643b8d4b0c8a6b45631f6fbecd784843193a22b53f",
+      "contract_sha256": "5d6d380b37a355c86f344444f9b26e3ab63de1d463ba63f65d76f35d766eb8da",
+      "request_sha256": "bfeec0edc8fa308722371539451a35b35327dc8c5d6643fe57cae4dbad323562"
+    },
+    {
+      "group": "group_005",
+      "tasks": [
+        "task_011"
+      ],
+      "source_sha256": "e588d48fc3429177d8145b2eaf809c2b584215372a04e83f216bd2029e27f959",
+      "contract_sha256": "8d0075cdf9c0e471c794870bd0b2ac67d1db38877195fc6b1fb28e56c9fd4da0",
+      "request_sha256": "cae9032a463b4231e3aeaaa41a71ae8598a17d54ea3ca420555f2e0fbe99efcd"
+    },
+    {
+      "group": "group_006",
+      "tasks": [
+        "task_012"
+      ],
+      "source_sha256": "e588d48fc3429177d8145b2eaf809c2b584215372a04e83f216bd2029e27f959",
+      "contract_sha256": "2e9839ee5d0a962a518c14949267f69de386314ac25786cd29a9409c37ec8287",
+      "request_sha256": "7cdc6a5f3f800010111aa8eafd1a4ae1e9223ba4ed509eeb58ff6b15edea06b4"
+    },
+    {
+      "group": "group_007",
+      "tasks": [
+        "task_013",
+        "task_025"
+      ],
+      "source_sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+      "contract_sha256": "7a5f22c8b57df5fd1a1ba17eae33263058fcf0ecc933c48773599673875bb926",
+      "request_sha256": "21be277c83a66bcab7f19cdaac3d6e1728004ae812337fcced8f0b23fb9d6972"
+    },
+    {
+      "group": "group_008",
+      "tasks": [
+        "task_014",
+        "task_026",
+        "task_033"
+      ],
+      "source_sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+      "contract_sha256": "c476cf838b7ef3c735f0d719350785ccafd215917eb56b1ee4df0cf2ef5b67c9",
+      "request_sha256": "69a1ac2024b575d654585ae69cb1d05d2a531eb1f8b14f87c0b3c983a2858b58"
+    },
+    {
+      "group": "group_009",
+      "tasks": [
+        "task_015",
+        "task_029"
+      ],
+      "source_sha256": "77ff06aa7d0253608d909257392de990279719be343e9c21b94fd1b5034ecf43",
+      "contract_sha256": "a8b21318b4e0b874bccdfa940374a8cfea2bc64b6f53e3d0ab17be1fde62e69d",
+      "request_sha256": "6065d5d80b9b9ff0b55cc2f3c176117239de15cc4bf319656c5808bfeb9a1e93"
+    },
+    {
+      "group": "group_010",
+      "tasks": [
+        "task_016"
+      ],
+      "source_sha256": "77ff06aa7d0253608d909257392de990279719be343e9c21b94fd1b5034ecf43",
+      "contract_sha256": "8d0075cdf9c0e471c794870bd0b2ac67d1db38877195fc6b1fb28e56c9fd4da0",
+      "request_sha256": "e82ab767b13c5c9f78dd240ef188fa062b260b2a5ddd8d1ef996a304530c8baf"
+    },
+    {
+      "group": "group_011",
+      "tasks": [
+        "task_021",
+        "task_031"
+      ],
+      "source_sha256": "9b7d1383dc1b9bbc2b163862363d928126e64f22ff8d099495544f6fb820aeb1",
+      "contract_sha256": "dae2f581b7387a3c28c9f3f9cb730bcec1285b4427cc285a374719d18fb2f6f5",
+      "request_sha256": "037482c4f283b0522eb2630b724cea85ee760486965fe60a97992aaa931c3b2a"
+    },
+    {
+      "group": "group_012",
+      "tasks": [
+        "task_022"
+      ],
+      "source_sha256": "a1c71d51c8d62ffb0b46b6975619f5634369fa2e5d745f39bf6b8f79fd00aab7",
+      "contract_sha256": "6b45fc47cbb53306a9695fd9881e7c8ae9ed324d54cefd3b6545aa9c02f34aa1",
+      "request_sha256": "472bee55303bb448c0e27d18b8303146ccc1bf7d34343d4e204a36cdc2698922"
+    },
+    {
+      "group": "group_013",
+      "tasks": [
+        "task_023"
+      ],
+      "source_sha256": "08193ec30ca57856f12dcc495a0bd0072fa338a5ca4678c332adbf47d7f6ccba",
+      "contract_sha256": "41e0b9ee95ba4da504f5f03ecf6f3e70920ecd19e1eba6d88ac444ca91a8322b",
+      "request_sha256": "0716dee18abf8a88faa59e544c75ebfa6ac0e70ebbed842c979c1386be3b34bc"
+    },
+    {
+      "group": "group_014",
+      "tasks": [
+        "task_024"
+      ],
+      "source_sha256": "595c646bb9d55423363366a56f5474958f67098761005a3ba7f9f1e9c6b14ecd",
+      "contract_sha256": "434cabf5f3569d1b8c79080b9bac58233e1fa4130aa35cc7cd9ffe73da8e6860",
+      "request_sha256": "4b400219815fd957db644195f2659ef4e3097218da221bf9b9fe5552a56334dd"
+    },
+    {
+      "group": "group_015",
+      "tasks": [
+        "task_027"
+      ],
+      "source_sha256": "5ef17c5f3c11f83843305d7aa36fd2eeac3d1373d2e11f15a36a28181d81a034",
+      "contract_sha256": "0ca26487ba0bf2bc54f4c2aa3890b05c3e50e2af3059ba0091901573675abe1d",
+      "request_sha256": "7a6ed3f456ebe8ac1518282186f391cd085926392c248bfdd92b5bd7edd3b177"
+    },
+    {
+      "group": "group_016",
+      "tasks": [
+        "task_028",
+        "task_032"
+      ],
+      "source_sha256": "4d8ac433646f7de7f3ca61dff64a8cba758878ae8bf84fd92381f9ef1a6742f1",
+      "contract_sha256": "6ec8bddb48b5e1fd44b45122dbc549db665869089839f9c074e56d0abda7e8e5",
+      "request_sha256": "c9dd8f34e7b0c3d3523807dfa30e6f312ecf3f5480b2b32ac3aa563f60c4421f"
+    },
+    {
+      "group": "group_017",
+      "tasks": [
+        "task_030"
+      ],
+      "source_sha256": "77ff06aa7d0253608d909257392de990279719be343e9c21b94fd1b5034ecf43",
+      "contract_sha256": "2e9839ee5d0a962a518c14949267f69de386314ac25786cd29a9409c37ec8287",
+      "request_sha256": "cf3b0a89e9e3421628a29529e545c8e2391d4322b01aab792d8c5c92b8350560"
+    },
+    {
+      "group": "group_018",
+      "tasks": [
+        "task_034"
+      ],
+      "source_sha256": "359c98606fe16106e05f09c0694937f71ad49c910a0dc5cc3af389d86f68c5f5",
+      "contract_sha256": "393935078095a37fc36238849b82fdde59713677343789592231090efa358b4a",
+      "request_sha256": "12a442c4138c7f7ee366912bcbfae3d143e1fea0ee081414f3e751094aabd714"
+    },
+    {
+      "group": "group_019",
+      "tasks": [
+        "task_035"
+      ],
+      "source_sha256": "6195b32113113dae45b7a57219759c0bd2cc1294894f104cf1dc589f0e396a27",
+      "contract_sha256": "65b61c0a36dbcf842ff3945f54341f7698deb4eb7c12b5f4cc692ed4635d0367",
+      "request_sha256": "974edb19e6ff0dea56b2e45197b600fd0330f8e5998881943e20cb7d7fda4ac8"
+    },
+    {
+      "group": "group_020",
+      "tasks": [
+        "task_036",
+        "task_042"
+      ],
+      "source_sha256": "ef59efd72bd978fa99063611ddc5cbc2cd6c4dce02ef2918d2d8fff0597c097b",
+      "contract_sha256": "bcfbbe4c1799c449bdf83973d329ed0a70ab59d819a17e908547979abb7e6b96",
+      "request_sha256": "15a112be5947c3b0e3aab1b6449e816f00032a9cc1eacb1500e4b8e2e6243e07"
+    },
+    {
+      "group": "group_021",
+      "tasks": [
+        "task_037",
+        "task_039",
+        "task_049"
+      ],
+      "source_sha256": "30ad1889786b9131a4e7a30db62f8e4e90d8d04d2765cf75d7e8bb8be4ae8a85",
+      "contract_sha256": "111d00ca9ccf3d9d9b51f881f5a20cabd500573048f4e0ca5bcc7d67f7d3a874",
+      "request_sha256": "851391984fa2303a1e3937a3e098158dffd3b0c2f20f31e470731418147fdb31"
+    },
+    {
+      "group": "group_022",
+      "tasks": [
+        "task_038",
+        "task_045",
+        "task_050"
+      ],
+      "source_sha256": "d8e11cec7e01928a907eb82c117b96cdb9468d5ea09e92f051c89b24daf63e38",
+      "contract_sha256": "47b9f764ff15b91b4c61460e9d6d83c03e88391d014d2ff532563f754f13daca",
+      "request_sha256": "f17f0154eec48c3d1c52d3808fee8b26c88344eed7329ffd2cfd33ef152133dd"
+    },
+    {
+      "group": "group_023",
+      "tasks": [
+        "task_040"
+      ],
+      "source_sha256": "2521bb95aa9e0bea509795c6b0669ee22dfb6f7c3a9e7ddad43375dc9389633f",
+      "contract_sha256": "6cf783bcdae0cd565b42cefea4d391412e034f2ae671630157b1ad603ecae73c",
+      "request_sha256": "4f6d38e73171fc887b6928cb66d9cc479014b146563bfef65f76ff1587dbd558"
+    },
+    {
+      "group": "group_024",
+      "tasks": [
+        "task_041"
+      ],
+      "source_sha256": "b2d20a00f08d5b93d3cc2c159af4920d6a9bf554816bc63a8693ed210e6eafee",
+      "contract_sha256": "abcf1666886f6fa0b850d74ac940b2346ccc7acf9637e40b8b5107f40a4a1581",
+      "request_sha256": "ac06a16f099de617f48dcf2d5e30914396d15c63f0c64fb62dc627c84b6640f6"
+    },
+    {
+      "group": "group_025",
+      "tasks": [
+        "task_043"
+      ],
+      "source_sha256": "9cdac6bbd1bb2a46a5ebf457bad904287e0ef122e8f06e52a62146e462d46436",
+      "contract_sha256": "c02720c1ec62ef63f7f8d33d088eb7ddcfb066b786f761e85e66bd43abf76317",
+      "request_sha256": "8b0e4d8f863318b63178a4f407b4b91a76debefa1e9dbd3d58a9edb238a5e8be"
+    },
+    {
+      "group": "group_026",
+      "tasks": [
+        "task_044"
+      ],
+      "source_sha256": "98e887e21a5ae17e1123585866f9566bbe45dc0caf0d241d1dd8470fea0918f9",
+      "contract_sha256": "301bcc56959b37fdfa8cd3d80feb3c757995e4cef1b2bf8bdd38e1dabe828b3e",
+      "request_sha256": "c3c05168821dc62dcfad1957330812280af1ea22d90d5729f4d4c002ba9a293a"
+    },
+    {
+      "group": "group_027",
+      "tasks": [
+        "task_046"
+      ],
+      "source_sha256": "2174c70335ab7c40fbf3174d984af4722eadf3859e19f6874aae4de356a7ed3f",
+      "contract_sha256": "c84a91b3de35dc89a40677f7201b160300e4878342ccd1659a908358c8783de9",
+      "request_sha256": "44dad4d874abeb7dde93facfd2fc151792c88e5d1fd09de8e98627a83a9e0852"
+    },
+    {
+      "group": "group_028",
+      "tasks": [
+        "task_047"
+      ],
+      "source_sha256": "08a20bc9baba35c36452c6834eca3f4bb02d72b2f102834449f90196b249bcb6",
+      "contract_sha256": "2144ed414f3953468f8455494fb893108c89a3b7ab044b01bc9fa7cdee5810ca",
+      "request_sha256": "4eae84ac33fc7723beaf72fda62cb27864d32a67165e4c75481238ff8418f423"
+    },
+    {
+      "group": "group_029",
+      "tasks": [
+        "task_048"
+      ],
+      "source_sha256": "816e52fdd6f6b2059b053c53ce4f4694fa3d6964a64c61be4f8e9701ff049767",
+      "contract_sha256": "3374c94755aeccd10c7878d1622a8ee8c1cada34562ff3e5f60bef2e653cf334",
+      "request_sha256": "731d82bd78dd7264df31e73b7d8a218e7694f5519a63366954076ef22de80766"
+    }
+  ],
+  "table_cells": 300,
+  "unique_method_conditions": 174,
+  "proposed_episode_reuse": "Reuse only identical source, contract, initial candidate, method configuration and acceptance fingerprints. Preserve all 50 task IDs and report 29 distinct input groups.",
+  "cost": {
+    "actual_ledger": "Every actual call, including failures and interrupted attempts, exactly once.",
+    "method_end_to_end": "Charge shared initial translation once to each applicable method/group; shared physical calls retain a common call ID.",
+    "alias_rows": "Do not count repeated table aliases as additional physical calls.",
+    "missing_usage": "null; do not substitute zero or mix estimates with provider usage."
+  },
+  "public_visibility": [
+    "source.py",
+    "task.json",
+    "candidate.py",
+    "public evaluation observations",
+    "scratch tests and unmodified public runtime library"
+  ],
+  "private": [
+    "source traces",
+    "reference calibration targets",
+    "fault labels and injected locations",
+    "legacy candidate history",
+    "other method trajectories",
+    "provider credentials"
+  ],
+  "acceptance": {
+    "seeds": [
+      101,
+      202,
+      303
+    ],
+    "training_steps": 2,
+    "all_required_measurements": true,
+    "same_initial_values": true,
+    "dtype_and_shape": "exact",
+    "backend_required": true,
+    "missing_after_execution_failure": null
+  },
+  "review_decisions": [
+    "New source semantics and four native adapter interface mappings",
+    "29 input groups under the 50 preserved task identifiers",
+    "Common native MindSpore initial translation and method integration",
+    "CodeTransEngine direct-translation configuration label",
+    "Generation and repair budgets; identical-condition reuse"
+  ]
+}

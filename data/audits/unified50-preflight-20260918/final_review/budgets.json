@@ -1,0 +1,23 @@
+{
+  "all_values_are_upper_bounds_not_estimated_spending": true,
+  "main": {
+    "unique_method_conditions": 174,
+    "generation_calls": 58,
+    "repair_episodes": 87,
+    "maximum_calls": 3712,
+    "maximum_output_tokens": 40848704
+  },
+  "plugin_optional": {
+    "new_episodes": 58,
+    "maximum_calls": 2320,
+    "maximum_output_tokens": 6960000
+  },
+  "final_component_controls_optional": {
+    "new_episodes": 87,
+    "maximum_calls": 3480,
+    "maximum_output_tokens": 10440000
+  },
+  "input_tokens": "Measured from provider usage; not estimated from output-token caps.",
+  "cte_native_retries": "One edge per task; upstream retains up to six transport retries (seven provider attempts). The generation_calls field is nominal; maximum_calls and output caps include all seven.",
+  "authorization": "No group has execution approval."
+}

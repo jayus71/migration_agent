@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-17",
+  "scope": "Exploratory follow-up on frozen natural I-08/I-09; not Fixed50 and not a repair ranking",
+  "base_commit": "8c5c635b0c5c718fab052b885966be8980eea6ad",
+  "model": "deepseek-v4-flash",
+  "temperature": 0.1,
+  "max_checkpoints": 4,
+  "visible_feedback": "complete source/candidate/private adapter, ordinary one-step execution and loss; no hidden mismatch or gradient diagnosis",
+  "hidden_thresholds": {
+    "loss_abs": 0.02,
+    "gradient_norm_abs": 0.05,
+    "parameter_update_relative_l2": 0.03
+  },
+  "results": [
+    {
+      "task_id": "I-08",
+      "method": "r_swe",
+      "display_method": "SWE-agent 1.1.0",
+      "first_checkpoint_detected_training_mismatch": true,
+      "first_checkpoint_strict_success": false,
+      "checkpoints": 4,
+      "stop_reasons": [
+        "exit_cost",
+        "exit_cost",
+        "submitted (exit_cost)",
+        "submitted (exit_cost)"
+      ],
+      "final_strict_success": false,
+      "actual_backend": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 8,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "immutable_inputs_changed": [],
+      "production_changes": [],
+      "structured_code_application": {
+        "applied": false,
+        "reason": "SWE uses workspace patch"
+      },
+      "verdict_is_equivalent": null,
+      "initial_metrics": {
+        "last_step_abs_loss_diff": 1.430511474609375e-06,
+        "last_step_abs_grad_norm_diff": 0.04596114158630371,
+        "param_update_rel_l2": 0.7711267081348738
+      },
+      "final_metrics": {
+        "last_step_abs_loss_diff": 1.430511474609375e-06,
+        "last_step_abs_grad_norm_diff": 0.04596114158630371,
+        "param_update_rel_l2": 0.7711267081348738
+      },
+      "first_checkpoint_usage": {
+        "prompt_tokens": 311322,
+        "completion_tokens": 3124,
+        "total_tokens": 314446,
+        "api_cost_usd": 0
+      },
+      "total_usage": {
+        "prompt_tokens": 1128697,
+        "completion_tokens": 10926,
+        "total_tokens": 1139623
+      },
+      "evidence": {
+        "first_detection": "data/audits/natural-baselines-20260917/I-08/r_swe/first_detection_evidence.json",
+        "first_detection_test": "data/audits/natural-baselines-20260917/I-08/r_swe/first_detection_test.py",
+        "raw_trajectory": "tmp/natural-baselines-20260917/results/I-08/r_swe/evidence/checkpoint_1/baseline_result.json",
+        "raw_trajectory_sha256": "d08b572b17167e4bc4c39af2471bc12678bcaaa7515689bb6aae4cd21b024d71",
+        "final_report": "data/audits/natural-baselines-20260917/I-08/r_swe/final_paired_report.json",
+        "final_candidate": "data/audits/natural-baselines-20260917/I-08/r_swe/candidate_final.py",
+        "candidate_patch": "data/audits/natural-baselines-20260917/I-08/r_swe/candidate.patch"
+      },
+      "agent_wall_time_seconds": 280.356694,
+      "api_calls": 52,
+      "backend_validation_status": "verified_target_backward_for_evaluated_model"
+    },
+    {
+      "task_id": "I-08",
+      "method": "r_matchfix",
+      "display_method": "MatchFixAgent + DeepSeek tool execution adapter",
+      "first_checkpoint_detected_training_mismatch": true,
+      "first_checkpoint_strict_success": false,
+      "checkpoints": 1,
+      "stop_reasons": [
+        "test/repair role exhausted its 12-call budget and returned non-equivalence; upstream verdict followed"
+      ],
+      "final_strict_success": false,
+      "actual_backend": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 8,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "immutable_inputs_changed": [],
+      "production_changes": [
+        "candidate.py"
+      ],
+      "structured_code_application": {
+        "applied": true,
+        "mode": "whole_module",
+        "changed": true
+      },
+      "verdict_is_equivalent": "no",
+      "initial_metrics": {
+        "last_step_abs_loss_diff": 1.430511474609375e-06,
+        "last_step_abs_grad_norm_diff": 0.04596114158630371,
+        "param_update_rel_l2": 0.7711267081348738
+      },
+      "final_metrics": {
+        "last_step_abs_loss_diff": 1.430511474609375e-06,
+        "last_step_abs_grad_norm_diff": 0.04596114158630371,
+        "param_update_rel_l2": 0.7711267081348738
+      },
+      "first_checkpoint_usage": {
+        "prompt_tokens": 314534,
+        "completion_tokens": 35026,
+        "total_tokens": 349560
+      },
+      "total_usage": {
+        "prompt_tokens": 314534,
+        "completion_tokens": 35026,
+        "total_tokens": 349560
+      },
+      "evidence": {
+        "first_detection": "data/audits/natural-baselines-20260917/I-08/r_matchfix/first_detection_evidence.json",
+        "first_detection_test": "data/audits/natural-baselines-20260917/I-08/r_matchfix/first_detection_test.py",
+        "raw_trajectory": "tmp/natural-baselines-20260917/results/I-08/r_matchfix/evidence/checkpoint_1/test_gen_repair_agent_trajectory.json",
+        "raw_trajectory_sha256": "b0bb9df3c2d62481f56a1d112a5e34757086948e2b7875bbfacc1190a2200483",
+        "final_report": "data/audits/natural-baselines-20260917/I-08/r_matchfix/final_paired_report.json",
+        "final_candidate": "data/audits/natural-baselines-20260917/I-08/r_matchfix/candidate_final.py",
+        "candidate_patch": "data/audits/natural-baselines-20260917/I-08/r_matchfix/candidate.patch"
+      },
+      "agent_wall_time_seconds": 268.73087410000153,
+      "api_calls": 29,
+      "backend_validation_status": "verified_target_backward_for_evaluated_model"
+    },
+    {
+      "task_id": "I-09",
+      "method": "r_swe",
+      "display_method": "SWE-agent 1.1.0",
+      "first_checkpoint_detected_training_mismatch": true,
+      "first_checkpoint_strict_success": false,
+      "checkpoints": 4,
+      "stop_reasons": [
+        "submitted (exit_cost)",
+        "submitted (exit_cost)",
+        "submitted (exit_cost)",
+        "submitted (exit_cost)"
+      ],
+      "final_strict_success": false,
+      "actual_backend": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 8,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "immutable_inputs_changed": [],
+      "production_changes": [],
+      "structured_code_application": {
+        "applied": false,
+        "reason": "SWE uses workspace patch"
+      },
+      "verdict_is_equivalent": null,
+      "initial_metrics": {
+        "last_step_abs_loss_diff": 4.76837158203125e-07,
+        "last_step_abs_grad_norm_diff": 0.418631911277771,
+        "param_update_rel_l2": 0.9252656699732557
+      },
+      "final_metrics": {
+        "last_step_abs_loss_diff": 4.76837158203125e-07,
+        "last_step_abs_grad_norm_diff": 0.418631911277771,
+        "param_update_rel_l2": 0.9252656699732557
+      },
+      "first_checkpoint_usage": {
+        "prompt_tokens": 652801,
+        "completion_tokens": 3701,
+        "total_tokens": 656502,
+        "api_cost_usd": 0
+      },
+      "total_usage": {
+        "prompt_tokens": 1528348,
+        "completion_tokens": 9991,
+        "total_tokens": 1538339
+      },
+      "evidence": {
+        "first_detection": "data/audits/natural-baselines-20260917/I-09/r_swe/first_detection_evidence.json",
+        "first_detection_test": "data/audits/natural-baselines-20260917/I-09/r_swe/first_detection_test.py",
+        "raw_trajectory": "tmp/natural-baselines-20260917/results/I-09/r_swe/evidence/checkpoint_1/baseline_result.json",
+        "raw_trajectory_sha256": "8fc1f070a21876f8ed44b108fb4465888045948b8f246de3f202ab7444304e57",
+        "final_report": "data/audits/natural-baselines-20260917/I-09/r_swe/final_paired_report.json",
+        "final_candidate": "data/audits/natural-baselines-20260917/I-09/r_swe/candidate_final.py",
+        "candidate_patch": "data/audits/natural-baselines-20260917/I-09/r_swe/candidate.patch"
+      },
+      "agent_wall_time_seconds": 265.014315,
+      "api_calls": 52,
+      "backend_validation_status": "verified_target_backward_for_evaluated_model"
+    },
+    {
+      "task_id": "I-09",
+      "method": "r_matchfix",
+      "display_method": "MatchFixAgent + DeepSeek tool execution adapter",
+      "first_checkpoint_detected_training_mismatch": true,
+      "first_checkpoint_strict_success": false,
+      "checkpoints": 1,
+      "stop_reasons": [
+        "test/repair role exhausted its 12-call budget and returned non-equivalence; upstream verdict followed"
+      ],
+      "final_strict_success": false,
+      "actual_backend": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 8,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "immutable_inputs_changed": [],
+      "production_changes": [
+        "candidate.py"
+      ],
+      "structured_code_application": {
+        "applied": true,
+        "mode": "whole_module",
+        "changed": true
+      },
+      "verdict_is_equivalent": "error",
+      "initial_metrics": {
+        "last_step_abs_loss_diff": 4.76837158203125e-07,
+        "last_step_abs_grad_norm_diff": 0.418631911277771,
+        "param_update_rel_l2": 0.9252656699732557
+      },
+      "final_metrics": {
+        "last_step_abs_loss_diff": 4.76837158203125e-07,
+        "last_step_abs_grad_norm_diff": 0.418631911277771,
+        "param_update_rel_l2": 0.9252656699732557
+      },
+      "first_checkpoint_usage": {
+        "prompt_tokens": 508495,
+        "completion_tokens": 45752,
+        "total_tokens": 554247
+      },
+      "total_usage": {
+        "prompt_tokens": 508495,
+        "completion_tokens": 45752,
+        "total_tokens": 554247
+      },
+      "evidence": {
+        "first_detection": "data/audits/natural-baselines-20260917/I-09/r_matchfix/first_detection_evidence.json",
+        "first_detection_test": "data/audits/natural-baselines-20260917/I-09/r_matchfix/first_detection_test.py",
+        "raw_trajectory": "tmp/natural-baselines-20260917/results/I-09/r_matchfix/evidence/checkpoint_1/test_gen_repair_agent_trajectory.json",
+        "raw_trajectory_sha256": "fa703040e759fdf1db5b710d9c10e6f6f8358ec8445fdd899d36453386c7832b",
+        "final_report": "data/audits/natural-baselines-20260917/I-09/r_matchfix/final_paired_report.json",
+        "final_candidate": "data/audits/natural-baselines-20260917/I-09/r_matchfix/candidate_final.py",
+        "candidate_patch": "data/audits/natural-baselines-20260917/I-09/r_matchfix/candidate.patch"
+      },
+      "agent_wall_time_seconds": 171.55268521502148,
+      "api_calls": 29,
+      "backend_validation_status": "verified_target_backward_for_evaluated_model"
+    }
+  ],
+  "limitations": [
+    "SWE checkpoint continuation preserves only the preceding checkpoint trailing 24000 characters, losing some earlier findings; repair outcomes are exploratory rather than method rankings.",
+    "MatchFix uses a DeepSeek shell-tool adapter, preserving upstream role prompts, six analyzers, parsers and verdict; this is not the historical single-chat wrapper or upstream Codex/Claude Code backend.",
+    "Initial MatchFix infrastructure failures from missing Graphviz PATH are preserved remotely and excluded from method outcomes; partial semantic API calls in those startups are not included in successful-run token totals.",
+    "MatchFix I-09 final verdict JSON failed parsing. Its test/repair response was valid; the proposed patch was applied and independently failed numeric acceptance."
+  ],
+  "archive": {
+    "local_path": "tmp/natural-baselines-20260917/natural_baselines_evidence.tar.gz",
+    "sha256": "4a338eeab2b1cf7c78678aa2806374d4c784204144b5a93859e6ba0c55cf4ee7",
+    "remote_root": "/media/main/whj/projects/torch4ms/ascend-torch4ms-natural-baselines-20260917/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_baselines_20260917"
+  }
+}

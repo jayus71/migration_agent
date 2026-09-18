@@ -1,0 +1,2754 @@
+{
+  "original_summary_sha256": "1059a6b95bfa2231eea065221648ee9dc8c06e12c5c3b2af4e1a791c60d784e6",
+  "results": [
+    {
+      "task_id": "I-01",
+      "method": "r_hier",
+      "stage": "final",
+      "original_strict_success": true,
+      "initial_failure_layer": "none",
+      "candidate_sha256": "4d7f98ac5b112ced4fd3889b8ace2846f62ca5f4e6a177daf613a2739dff0648",
+      "source_sha256": "7850d0208edfc031e19e6e7f273d9a8f432d461b3edc919fa6169d806950d0b5",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-01/r_hier/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.0008):\n    base_optimizer = torch.optim.Adam(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    env = torch4ms.default_env()\n    with env:\n        criterion = nn.CrossEntropyLoss()\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        loss_value = float(loss.detach().item())\n    return loss_value",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 10,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 2.86102294921875e-06,
+        "last_step_abs_grad_norm_diff": 4.76837158203125e-07,
+        "param_update_rel_l2": 4.11931908488451e-07,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "stem.weight",
+              "reference_update_norm": 0.011757480911910534,
+              "candidate_update_norm": 0.011757480911910534,
+              "update_diff_norm": 4.564014943753136e-09,
+              "update_rel_l2": 3.8817966004448533e-07
+            },
+            {
+              "name": "stem.bias",
+              "reference_update_norm": 0.0022627385333180428,
+              "candidate_update_norm": 0.0022627385333180428,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "block.path.0.weight",
+              "reference_update_norm": 0.01919984444975853,
+              "candidate_update_norm": 0.01919984631240368,
+              "update_diff_norm": 8.865544742775455e-09,
+              "update_rel_l2": 4.6175086290478796e-07
+            },
+            {
+              "name": "block.path.1.weight",
+              "reference_update_norm": 0.0022627587895840406,
+              "candidate_update_norm": 0.0022627587895840406,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "block.path.1.bias",
+              "reference_update_norm": 0.0022626924328505993,
+              "candidate_update_norm": 0.0022626924328505993,
+              "update_diff_norm": 2.1779313075231954e-10,
+              "update_rel_l2": 9.625397048846098e-08
+            },
+            {
+              "name": "block.path.3.weight",
+              "reference_update_norm": 0.019199810922145844,
+              "candidate_update_norm": 0.019199809059500694,
+              "update_diff_norm": 7.698169213199435e-09,
+              "update_rel_l2": 4.0095026164654067e-07
+            },
+            {
+              "name": "block.path.4.weight",
+              "reference_update_norm": 0.002262779977172613,
+              "candidate_update_norm": 0.002262779977172613,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "block.path.4.bias",
+              "reference_update_norm": 0.002262741094455123,
+              "candidate_update_norm": 0.002262741094455123,
+              "update_diff_norm": 1.7462298274040222e-10,
+              "update_rel_l2": 7.717320514094385e-08
+            },
+            {
+              "name": "fc.weight",
+              "reference_update_norm": 0.005542585160583258,
+              "candidate_update_norm": 0.005542585160583258,
+              "update_diff_norm": 5.820766091346741e-11,
+              "update_rel_l2": 1.0501897438927253e-08
+            },
+            {
+              "name": "fc.bias",
+              "reference_update_norm": 0.001959588611498475,
+              "candidate_update_norm": 0.001959588611498475,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-01/r_hier/final/report.json",
+      "corrected_strict_success": true
+    },
+    {
+      "task_id": "I-01",
+      "method": "r_direct",
+      "stage": "initial",
+      "original_strict_success": true,
+      "initial_failure_layer": "none",
+      "candidate_sha256": "4d7f98ac5b112ced4fd3889b8ace2846f62ca5f4e6a177daf613a2739dff0648",
+      "source_sha256": "7850d0208edfc031e19e6e7f273d9a8f432d461b3edc919fa6169d806950d0b5",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-01/r_direct/candidate_initial.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.0008):\n    base_optimizer = torch.optim.Adam(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    env = torch4ms.default_env()\n    with env:\n        criterion = nn.CrossEntropyLoss()\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        loss_value = float(loss.detach().item())\n    return loss_value",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 10,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 2.86102294921875e-06,
+        "last_step_abs_grad_norm_diff": 4.76837158203125e-07,
+        "param_update_rel_l2": 4.11931908488451e-07,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "stem.weight",
+              "reference_update_norm": 0.011757480911910534,
+              "candidate_update_norm": 0.011757480911910534,
+              "update_diff_norm": 4.564014943753136e-09,
+              "update_rel_l2": 3.8817966004448533e-07
+            },
+            {
+              "name": "stem.bias",
+              "reference_update_norm": 0.0022627385333180428,
+              "candidate_update_norm": 0.0022627385333180428,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "block.path.0.weight",
+              "reference_update_norm": 0.01919984444975853,
+              "candidate_update_norm": 0.01919984631240368,
+              "update_diff_norm": 8.865544742775455e-09,
+              "update_rel_l2": 4.6175086290478796e-07
+            },
+            {
+              "name": "block.path.1.weight",
+              "reference_update_norm": 0.0022627587895840406,
+              "candidate_update_norm": 0.0022627587895840406,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "block.path.1.bias",
+              "reference_update_norm": 0.0022626924328505993,
+              "candidate_update_norm": 0.0022626924328505993,
+              "update_diff_norm": 2.1779313075231954e-10,
+              "update_rel_l2": 9.625397048846098e-08
+            },
+            {
+              "name": "block.path.3.weight",
+              "reference_update_norm": 0.019199810922145844,
+              "candidate_update_norm": 0.019199809059500694,
+              "update_diff_norm": 7.698169213199435e-09,
+              "update_rel_l2": 4.0095026164654067e-07
+            },
+            {
+              "name": "block.path.4.weight",
+              "reference_update_norm": 0.002262779977172613,
+              "candidate_update_norm": 0.002262779977172613,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "block.path.4.bias",
+              "reference_update_norm": 0.002262741094455123,
+              "candidate_update_norm": 0.002262741094455123,
+              "update_diff_norm": 1.7462298274040222e-10,
+              "update_rel_l2": 7.717320514094385e-08
+            },
+            {
+              "name": "fc.weight",
+              "reference_update_norm": 0.005542585160583258,
+              "candidate_update_norm": 0.005542585160583258,
+              "update_diff_norm": 5.820766091346741e-11,
+              "update_rel_l2": 1.0501897438927253e-08
+            },
+            {
+              "name": "fc.bias",
+              "reference_update_norm": 0.001959588611498475,
+              "candidate_update_norm": 0.001959588611498475,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-01/r_direct/initial/report.json"
+    },
+    {
+      "task_id": "I-01",
+      "method": "r_direct",
+      "stage": "final",
+      "original_strict_success": true,
+      "initial_failure_layer": "none",
+      "candidate_sha256": "4d7f98ac5b112ced4fd3889b8ace2846f62ca5f4e6a177daf613a2739dff0648",
+      "source_sha256": "7850d0208edfc031e19e6e7f273d9a8f432d461b3edc919fa6169d806950d0b5",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-01/r_direct/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.0008):\n    base_optimizer = torch.optim.Adam(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    env = torch4ms.default_env()\n    with env:\n        criterion = nn.CrossEntropyLoss()\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        loss_value = float(loss.detach().item())\n    return loss_value",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 10,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 2.86102294921875e-06,
+        "last_step_abs_grad_norm_diff": 4.76837158203125e-07,
+        "param_update_rel_l2": 4.11931908488451e-07,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "stem.weight",
+              "reference_update_norm": 0.011757480911910534,
+              "candidate_update_norm": 0.011757480911910534,
+              "update_diff_norm": 4.564014943753136e-09,
+              "update_rel_l2": 3.8817966004448533e-07
+            },
+            {
+              "name": "stem.bias",
+              "reference_update_norm": 0.0022627385333180428,
+              "candidate_update_norm": 0.0022627385333180428,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "block.path.0.weight",
+              "reference_update_norm": 0.01919984444975853,
+              "candidate_update_norm": 0.01919984631240368,
+              "update_diff_norm": 8.865544742775455e-09,
+              "update_rel_l2": 4.6175086290478796e-07
+            },
+            {
+              "name": "block.path.1.weight",
+              "reference_update_norm": 0.0022627587895840406,
+              "candidate_update_norm": 0.0022627587895840406,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "block.path.1.bias",
+              "reference_update_norm": 0.0022626924328505993,
+              "candidate_update_norm": 0.0022626924328505993,
+              "update_diff_norm": 2.1779313075231954e-10,
+              "update_rel_l2": 9.625397048846098e-08
+            },
+            {
+              "name": "block.path.3.weight",
+              "reference_update_norm": 0.019199810922145844,
+              "candidate_update_norm": 0.019199809059500694,
+              "update_diff_norm": 7.698169213199435e-09,
+              "update_rel_l2": 4.0095026164654067e-07
+            },
+            {
+              "name": "block.path.4.weight",
+              "reference_update_norm": 0.002262779977172613,
+              "candidate_update_norm": 0.002262779977172613,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "block.path.4.bias",
+              "reference_update_norm": 0.002262741094455123,
+              "candidate_update_norm": 0.002262741094455123,
+              "update_diff_norm": 1.7462298274040222e-10,
+              "update_rel_l2": 7.717320514094385e-08
+            },
+            {
+              "name": "fc.weight",
+              "reference_update_norm": 0.005542585160583258,
+              "candidate_update_norm": 0.005542585160583258,
+              "update_diff_norm": 5.820766091346741e-11,
+              "update_rel_l2": 1.0501897438927253e-08
+            },
+            {
+              "name": "fc.bias",
+              "reference_update_norm": 0.001959588611498475,
+              "candidate_update_norm": 0.001959588611498475,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-01/r_direct/final/report.json",
+      "corrected_strict_success": true
+    },
+    {
+      "task_id": "I-02",
+      "method": "r_hier",
+      "stage": "final",
+      "original_strict_success": false,
+      "initial_failure_layer": "execution",
+      "candidate_sha256": "a127cae6c5201d2a35c80f8f8d0db62ae23ead7287bfe249d2745afd8f65c081",
+      "source_sha256": "10aeea6cd5cc6520f26b5f4a483b3402cb1553931c2e59548c5b7e79df45fd50",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-02/r_hier/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    optimizer = Torch4msOptimizer(torch.optim.Adam(model.parameters(), lr=lr), model)\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, nn.CrossEntropyLoss(), x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        loss_value = float(loss.detach().item())\n    return loss_value",
+      "returncode": 0,
+      "execution_status": "failed",
+      "backend_observed": false,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": []
+      },
+      "error": "OperatorNotFound('Operator with name lstm has no lowering and cannot fallback to PyTorch native implementation')",
+      "comparison": {
+        "last_step_abs_loss_diff": null,
+        "last_step_abs_grad_norm_diff": null,
+        "param_update_rel_l2": 0.9999999999637486,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "encoder.weight_ih_l0",
+              "reference_update_norm": 0.014966451562941074,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.014966451562941074,
+              "update_rel_l2": 0.9999999999331839
+            },
+            {
+              "name": "encoder.weight_hh_l0",
+              "reference_update_norm": 0.013999165035784245,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.013999165035784245,
+              "update_rel_l2": 0.9999999999285671
+            },
+            {
+              "name": "encoder.bias_ih_l0",
+              "reference_update_norm": 0.005291464738547802,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.005291464738547802,
+              "update_rel_l2": 0.9999999998110163
+            },
+            {
+              "name": "encoder.bias_hh_l0",
+              "reference_update_norm": 0.005291462875902653,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.005291462875902653,
+              "update_rel_l2": 0.9999999998110163
+            },
+            {
+              "name": "encoder.weight_ih_l0_reverse",
+              "reference_update_norm": 0.012960236519575119,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.012960236519575119,
+              "update_rel_l2": 0.9999999999228408
+            },
+            {
+              "name": "encoder.weight_hh_l0_reverse",
+              "reference_update_norm": 0.0,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "encoder.bias_ih_l0_reverse",
+              "reference_update_norm": 0.004582527559250593,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.004582527559250593,
+              "update_rel_l2": 0.9999999997817797
+            },
+            {
+              "name": "encoder.bias_hh_l0_reverse",
+              "reference_update_norm": 0.004582516849040985,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.004582516849040985,
+              "update_rel_l2": 0.9999999997817792
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.008366579189896584,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.008366579189896584,
+              "update_rel_l2": 0.9999999998804768
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.0022360708098858595,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0022360708098858595,
+              "update_rel_l2": 0.999999999552787
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-02/r_hier/final/report.json",
+      "corrected_strict_success": false
+    },
+    {
+      "task_id": "I-02",
+      "method": "r_direct",
+      "stage": "initial",
+      "original_strict_success": false,
+      "initial_failure_layer": "execution",
+      "candidate_sha256": "a127cae6c5201d2a35c80f8f8d0db62ae23ead7287bfe249d2745afd8f65c081",
+      "source_sha256": "10aeea6cd5cc6520f26b5f4a483b3402cb1553931c2e59548c5b7e79df45fd50",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-02/r_direct/candidate_initial.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    optimizer = Torch4msOptimizer(torch.optim.Adam(model.parameters(), lr=lr), model)\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, nn.CrossEntropyLoss(), x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        loss_value = float(loss.detach().item())\n    return loss_value",
+      "returncode": 0,
+      "execution_status": "failed",
+      "backend_observed": false,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": []
+      },
+      "error": "OperatorNotFound('Operator with name lstm has no lowering and cannot fallback to PyTorch native implementation')",
+      "comparison": {
+        "last_step_abs_loss_diff": null,
+        "last_step_abs_grad_norm_diff": null,
+        "param_update_rel_l2": 0.9999999999637486,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "encoder.weight_ih_l0",
+              "reference_update_norm": 0.014966451562941074,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.014966451562941074,
+              "update_rel_l2": 0.9999999999331839
+            },
+            {
+              "name": "encoder.weight_hh_l0",
+              "reference_update_norm": 0.013999165035784245,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.013999165035784245,
+              "update_rel_l2": 0.9999999999285671
+            },
+            {
+              "name": "encoder.bias_ih_l0",
+              "reference_update_norm": 0.005291464738547802,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.005291464738547802,
+              "update_rel_l2": 0.9999999998110163
+            },
+            {
+              "name": "encoder.bias_hh_l0",
+              "reference_update_norm": 0.005291462875902653,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.005291462875902653,
+              "update_rel_l2": 0.9999999998110163
+            },
+            {
+              "name": "encoder.weight_ih_l0_reverse",
+              "reference_update_norm": 0.012960236519575119,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.012960236519575119,
+              "update_rel_l2": 0.9999999999228408
+            },
+            {
+              "name": "encoder.weight_hh_l0_reverse",
+              "reference_update_norm": 0.0,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "encoder.bias_ih_l0_reverse",
+              "reference_update_norm": 0.004582527559250593,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.004582527559250593,
+              "update_rel_l2": 0.9999999997817797
+            },
+            {
+              "name": "encoder.bias_hh_l0_reverse",
+              "reference_update_norm": 0.004582516849040985,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.004582516849040985,
+              "update_rel_l2": 0.9999999997817792
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.008366579189896584,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.008366579189896584,
+              "update_rel_l2": 0.9999999998804768
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.0022360708098858595,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0022360708098858595,
+              "update_rel_l2": 0.999999999552787
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-02/r_direct/initial/report.json"
+    },
+    {
+      "task_id": "I-02",
+      "method": "r_direct",
+      "stage": "final",
+      "original_strict_success": false,
+      "initial_failure_layer": "execution",
+      "candidate_sha256": "0ceafdc82fed1564d0bec2be65f3ebc3d40985ccc4008b116da837bd919d0964",
+      "source_sha256": "10aeea6cd5cc6520f26b5f4a483b3402cb1553931c2e59548c5b7e79df45fd50",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-02/r_direct/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    optimizer = Torch4msOptimizer(torch.optim.Adam(model.parameters(), lr=lr), model)\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss = nn.CrossEntropyLoss()(model(x), y)\n        loss.backward()\n        optimizer.step()\n        loss_value = float(loss.detach().item())\n    return loss_value",
+      "returncode": 0,
+      "execution_status": "failed",
+      "backend_observed": false,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": []
+      },
+      "error": "OperatorNotFound('Operator with name lstm has no lowering and cannot fallback to PyTorch native implementation')",
+      "comparison": {
+        "last_step_abs_loss_diff": null,
+        "last_step_abs_grad_norm_diff": null,
+        "param_update_rel_l2": 0.9999999999637486,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "encoder.weight_ih_l0",
+              "reference_update_norm": 0.014966451562941074,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.014966451562941074,
+              "update_rel_l2": 0.9999999999331839
+            },
+            {
+              "name": "encoder.weight_hh_l0",
+              "reference_update_norm": 0.013999165035784245,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.013999165035784245,
+              "update_rel_l2": 0.9999999999285671
+            },
+            {
+              "name": "encoder.bias_ih_l0",
+              "reference_update_norm": 0.005291464738547802,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.005291464738547802,
+              "update_rel_l2": 0.9999999998110163
+            },
+            {
+              "name": "encoder.bias_hh_l0",
+              "reference_update_norm": 0.005291462875902653,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.005291462875902653,
+              "update_rel_l2": 0.9999999998110163
+            },
+            {
+              "name": "encoder.weight_ih_l0_reverse",
+              "reference_update_norm": 0.012960236519575119,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.012960236519575119,
+              "update_rel_l2": 0.9999999999228408
+            },
+            {
+              "name": "encoder.weight_hh_l0_reverse",
+              "reference_update_norm": 0.0,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "encoder.bias_ih_l0_reverse",
+              "reference_update_norm": 0.004582527559250593,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.004582527559250593,
+              "update_rel_l2": 0.9999999997817797
+            },
+            {
+              "name": "encoder.bias_hh_l0_reverse",
+              "reference_update_norm": 0.004582516849040985,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.004582516849040985,
+              "update_rel_l2": 0.9999999997817792
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.008366579189896584,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.008366579189896584,
+              "update_rel_l2": 0.9999999998804768
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.0022360708098858595,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0022360708098858595,
+              "update_rel_l2": 0.999999999552787
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-02/r_direct/final/report.json",
+      "corrected_strict_success": false
+    },
+    {
+      "task_id": "I-03",
+      "method": "r_hier",
+      "stage": "final",
+      "original_strict_success": false,
+      "initial_failure_layer": "execution",
+      "candidate_sha256": "eb78a637ea88bba847f6fe7a94cbf6d547982665d4bcf807a437a0b43ee9402a",
+      "source_sha256": "9830228f32e16d4feb314917f228005b0a9a7c22d3acb5aab0b960fdaa957820",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-03/r_hier/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.0008):\n    criterion = nn.CrossEntropyLoss()\n    base_opt = torch.optim.AdamW(model.parameters(), lr=lr)\n    opt = Torch4msOptimizer(base_opt, model)\n    env = torch4ms.default_env()\n    with env:\n        opt.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        opt.step()\n        return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "failed",
+      "backend_observed": false,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": []
+      },
+      "error": "OperatorNotFound('Operator with name gru has no lowering and cannot fallback to PyTorch native implementation')",
+      "comparison": {
+        "last_step_abs_loss_diff": null,
+        "last_step_abs_grad_norm_diff": null,
+        "param_update_rel_l2": 0.9999999999445363,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "gru.weight_ih_l0",
+              "reference_update_norm": 0.01017974317073822,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.01017974317073822,
+              "update_rel_l2": 0.9999999999017657
+            },
+            {
+              "name": "gru.weight_hh_l0",
+              "reference_update_norm": 0.012470267713069916,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.012470267713069916,
+              "update_rel_l2": 0.9999999999198093
+            },
+            {
+              "name": "gru.bias_ih_l0",
+              "reference_update_norm": 0.004157199524343014,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.004157199524343014,
+              "update_rel_l2": 0.9999999997594533
+            },
+            {
+              "name": "gru.bias_hh_l0",
+              "reference_update_norm": 0.00415795249864459,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.00415795249864459,
+              "update_rel_l2": 0.9999999997594969
+            },
+            {
+              "name": "score.weight",
+              "reference_update_norm": 0.002400218043476343,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.002400218043476343,
+              "update_rel_l2": 0.9999999995833712
+            },
+            {
+              "name": "score.bias",
+              "reference_update_norm": 4.6581029891967773e-05,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 4.6581029891967773e-05,
+              "update_rel_l2": 0.9999999785320337
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.004800759721547365,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.004800759721547365,
+              "update_rel_l2": 0.9999999997916995
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.0015988332452252507,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0015988332452252507,
+              "update_rel_l2": 0.9999999993745439
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-03/r_hier/final/report.json",
+      "corrected_strict_success": false
+    },
+    {
+      "task_id": "I-03",
+      "method": "r_direct",
+      "stage": "initial",
+      "original_strict_success": false,
+      "initial_failure_layer": "execution",
+      "candidate_sha256": "eb78a637ea88bba847f6fe7a94cbf6d547982665d4bcf807a437a0b43ee9402a",
+      "source_sha256": "9830228f32e16d4feb314917f228005b0a9a7c22d3acb5aab0b960fdaa957820",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-03/r_direct/candidate_initial.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.0008):\n    criterion = nn.CrossEntropyLoss()\n    base_opt = torch.optim.AdamW(model.parameters(), lr=lr)\n    opt = Torch4msOptimizer(base_opt, model)\n    env = torch4ms.default_env()\n    with env:\n        opt.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        opt.step()\n        return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "failed",
+      "backend_observed": false,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": []
+      },
+      "error": "OperatorNotFound('Operator with name gru has no lowering and cannot fallback to PyTorch native implementation')",
+      "comparison": {
+        "last_step_abs_loss_diff": null,
+        "last_step_abs_grad_norm_diff": null,
+        "param_update_rel_l2": 0.9999999999445363,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "gru.weight_ih_l0",
+              "reference_update_norm": 0.01017974317073822,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.01017974317073822,
+              "update_rel_l2": 0.9999999999017657
+            },
+            {
+              "name": "gru.weight_hh_l0",
+              "reference_update_norm": 0.012470267713069916,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.012470267713069916,
+              "update_rel_l2": 0.9999999999198093
+            },
+            {
+              "name": "gru.bias_ih_l0",
+              "reference_update_norm": 0.004157199524343014,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.004157199524343014,
+              "update_rel_l2": 0.9999999997594533
+            },
+            {
+              "name": "gru.bias_hh_l0",
+              "reference_update_norm": 0.00415795249864459,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.00415795249864459,
+              "update_rel_l2": 0.9999999997594969
+            },
+            {
+              "name": "score.weight",
+              "reference_update_norm": 0.002400218043476343,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.002400218043476343,
+              "update_rel_l2": 0.9999999995833712
+            },
+            {
+              "name": "score.bias",
+              "reference_update_norm": 4.6581029891967773e-05,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 4.6581029891967773e-05,
+              "update_rel_l2": 0.9999999785320337
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.004800759721547365,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.004800759721547365,
+              "update_rel_l2": 0.9999999997916995
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.0015988332452252507,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0015988332452252507,
+              "update_rel_l2": 0.9999999993745439
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-03/r_direct/initial/report.json"
+    },
+    {
+      "task_id": "I-03",
+      "method": "r_direct",
+      "stage": "final",
+      "original_strict_success": false,
+      "initial_failure_layer": "execution",
+      "candidate_sha256": "e91aa494ddaf4fab7b6445de99bf00e18eafb4a13ac330d86f4e90f0193e04c8",
+      "source_sha256": "9830228f32e16d4feb314917f228005b0a9a7c22d3acb5aab0b960fdaa957820",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-03/r_direct/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.0008):\n    criterion = nn.CrossEntropyLoss()\n    base_opt = torch.optim.AdamW(model.parameters(), lr=lr)\n    opt = Torch4msOptimizer(base_opt, model)\n    env = torch4ms.default_env()\n    with env:\n        opt.zero_grad()\n        loss = criterion(model(x), y)\n        loss.backward()\n        opt.step()\n        return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "failed",
+      "backend_observed": false,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": false,
+            "events": []
+          }
+        ]
+      },
+      "error": "TargetBackendNotObserved('target_backend_not_observed: no MindSpore gradient computation for the evaluated model and returned training loss; ordinary PyTorch training does not satisfy the migration contract')",
+      "comparison": {
+        "last_step_abs_loss_diff": null,
+        "last_step_abs_grad_norm_diff": null,
+        "param_update_rel_l2": 0.9999999999445363,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "gru.weight_ih_l0",
+              "reference_update_norm": 0.01017974317073822,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.01017974317073822,
+              "update_rel_l2": 0.9999999999017657
+            },
+            {
+              "name": "gru.weight_hh_l0",
+              "reference_update_norm": 0.012470267713069916,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.012470267713069916,
+              "update_rel_l2": 0.9999999999198093
+            },
+            {
+              "name": "gru.bias_ih_l0",
+              "reference_update_norm": 0.004157199524343014,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.004157199524343014,
+              "update_rel_l2": 0.9999999997594533
+            },
+            {
+              "name": "gru.bias_hh_l0",
+              "reference_update_norm": 0.00415795249864459,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.00415795249864459,
+              "update_rel_l2": 0.9999999997594969
+            },
+            {
+              "name": "score.weight",
+              "reference_update_norm": 0.002400218043476343,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.002400218043476343,
+              "update_rel_l2": 0.9999999995833712
+            },
+            {
+              "name": "score.bias",
+              "reference_update_norm": 4.6581029891967773e-05,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 4.6581029891967773e-05,
+              "update_rel_l2": 0.9999999785320337
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.004800759721547365,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.004800759721547365,
+              "update_rel_l2": 0.9999999997916995
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.0015988332452252507,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0015988332452252507,
+              "update_rel_l2": 0.9999999993745439
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-03/r_direct/final/report.json",
+      "corrected_strict_success": false
+    },
+    {
+      "task_id": "I-04",
+      "method": "r_hier",
+      "stage": "final",
+      "original_strict_success": true,
+      "initial_failure_layer": "none",
+      "candidate_sha256": "e8bcb7c6d3f8d887d1a9a4c57838ce28c28cf785107d61da126b766fce717246",
+      "source_sha256": "451990bd9f4d3d6bd405288a0c136b678c7d9abfdb3fb2183fe07095651958a1",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-04/r_hier/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    criterion = nn.CrossEntropyLoss()\n    base_optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        loss_value = float(loss.detach().item())\n        return loss_value",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 6,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 2.6226043701171875e-06,
+        "last_step_abs_grad_norm_diff": 1.1920928955078125e-07,
+        "param_update_rel_l2": 7.196780415853455e-06,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "features.0.weight",
+              "reference_update_norm": 7.341963646467775e-05,
+              "candidate_update_norm": 7.341963646467775e-05,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "features.0.bias",
+              "reference_update_norm": 1.7189551726914942e-05,
+              "candidate_update_norm": 1.7189551726914942e-05,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "features.2.weight",
+              "reference_update_norm": 9.138980385614559e-05,
+              "candidate_update_norm": 9.138992027146742e-05,
+              "update_diff_norm": 3.7257450458128005e-09,
+              "update_rel_l2": 4.0767622293070905e-05
+            },
+            {
+              "name": "features.2.bias",
+              "reference_update_norm": 8.04545998107642e-05,
+              "candidate_update_norm": 8.04545998107642e-05,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 6.119081808719784e-05,
+              "candidate_update_norm": 6.119081808719784e-05,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.0004937144694849849,
+              "candidate_update_norm": 0.0004937144694849849,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-04/r_hier/final/report.json",
+      "corrected_strict_success": true
+    },
+    {
+      "task_id": "I-04",
+      "method": "r_direct",
+      "stage": "initial",
+      "original_strict_success": true,
+      "initial_failure_layer": "none",
+      "candidate_sha256": "e8bcb7c6d3f8d887d1a9a4c57838ce28c28cf785107d61da126b766fce717246",
+      "source_sha256": "451990bd9f4d3d6bd405288a0c136b678c7d9abfdb3fb2183fe07095651958a1",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-04/r_direct/candidate_initial.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    criterion = nn.CrossEntropyLoss()\n    base_optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        loss_value = float(loss.detach().item())\n        return loss_value",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 6,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 2.6226043701171875e-06,
+        "last_step_abs_grad_norm_diff": 1.1920928955078125e-07,
+        "param_update_rel_l2": 7.196780415853455e-06,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "features.0.weight",
+              "reference_update_norm": 7.341963646467775e-05,
+              "candidate_update_norm": 7.341963646467775e-05,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "features.0.bias",
+              "reference_update_norm": 1.7189551726914942e-05,
+              "candidate_update_norm": 1.7189551726914942e-05,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "features.2.weight",
+              "reference_update_norm": 9.138980385614559e-05,
+              "candidate_update_norm": 9.138992027146742e-05,
+              "update_diff_norm": 3.7257450458128005e-09,
+              "update_rel_l2": 4.0767622293070905e-05
+            },
+            {
+              "name": "features.2.bias",
+              "reference_update_norm": 8.04545998107642e-05,
+              "candidate_update_norm": 8.04545998107642e-05,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 6.119081808719784e-05,
+              "candidate_update_norm": 6.119081808719784e-05,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.0004937144694849849,
+              "candidate_update_norm": 0.0004937144694849849,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-04/r_direct/initial/report.json"
+    },
+    {
+      "task_id": "I-04",
+      "method": "r_direct",
+      "stage": "final",
+      "original_strict_success": true,
+      "initial_failure_layer": "none",
+      "candidate_sha256": "e8bcb7c6d3f8d887d1a9a4c57838ce28c28cf785107d61da126b766fce717246",
+      "source_sha256": "451990bd9f4d3d6bd405288a0c136b678c7d9abfdb3fb2183fe07095651958a1",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-04/r_direct/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    criterion = nn.CrossEntropyLoss()\n    base_optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=0.9)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        loss_value = float(loss.detach().item())\n        return loss_value",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 6,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 2.6226043701171875e-06,
+        "last_step_abs_grad_norm_diff": 1.1920928955078125e-07,
+        "param_update_rel_l2": 7.196780415853455e-06,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "features.0.weight",
+              "reference_update_norm": 7.341963646467775e-05,
+              "candidate_update_norm": 7.341963646467775e-05,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "features.0.bias",
+              "reference_update_norm": 1.7189551726914942e-05,
+              "candidate_update_norm": 1.7189551726914942e-05,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "features.2.weight",
+              "reference_update_norm": 9.138980385614559e-05,
+              "candidate_update_norm": 9.138992027146742e-05,
+              "update_diff_norm": 3.7257450458128005e-09,
+              "update_rel_l2": 4.0767622293070905e-05
+            },
+            {
+              "name": "features.2.bias",
+              "reference_update_norm": 8.04545998107642e-05,
+              "candidate_update_norm": 8.04545998107642e-05,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 6.119081808719784e-05,
+              "candidate_update_norm": 6.119081808719784e-05,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.0004937144694849849,
+              "candidate_update_norm": 0.0004937144694849849,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-04/r_direct/final/report.json",
+      "corrected_strict_success": true
+    },
+    {
+      "task_id": "I-05",
+      "method": "r_hier",
+      "stage": "final",
+      "original_strict_success": true,
+      "initial_failure_layer": "none",
+      "candidate_sha256": "c099c04944014055c26e8271399a7399222e1ca34a3a04a1460f24bdc37715fd",
+      "source_sha256": "5ab491654dfa7dd3dd7d5f4799ecc8ca464092b4d0b547087b5128f1ed84feaf",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-05/r_hier/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    optimizer = Torch4msOptimizer(torch.optim.Adam(model.parameters(), lr=lr), model)\n    criterion = nn.CrossEntropyLoss()\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 8,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 9.5367431640625e-07,
+        "last_step_abs_grad_norm_diff": 0.0,
+        "param_update_rel_l2": 0.0,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "phi.0.weight",
+              "reference_update_norm": 0.008774751797318459,
+              "candidate_update_norm": 0.008774751797318459,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "phi.0.bias",
+              "reference_update_norm": 0.0033166136126965284,
+              "candidate_update_norm": 0.0033166136126965284,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "phi.2.weight",
+              "reference_update_norm": 0.010999957099556923,
+              "candidate_update_norm": 0.010999957099556923,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "phi.2.bias",
+              "reference_update_norm": 0.0033166203647851944,
+              "candidate_update_norm": 0.0033166203647851944,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "rho.0.weight",
+              "reference_update_norm": 0.00663322489708662,
+              "candidate_update_norm": 0.00663322489708662,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "rho.0.bias",
+              "reference_update_norm": 0.0020000003278255463,
+              "candidate_update_norm": 0.0020000003278255463,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "rho.2.weight",
+              "reference_update_norm": 0.003999989479780197,
+              "candidate_update_norm": 0.003999989479780197,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "rho.2.bias",
+              "reference_update_norm": 0.001999996602535248,
+              "candidate_update_norm": 0.001999996602535248,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-05/r_hier/final/report.json",
+      "corrected_strict_success": true
+    },
+    {
+      "task_id": "I-05",
+      "method": "r_direct",
+      "stage": "initial",
+      "original_strict_success": true,
+      "initial_failure_layer": "none",
+      "candidate_sha256": "c099c04944014055c26e8271399a7399222e1ca34a3a04a1460f24bdc37715fd",
+      "source_sha256": "5ab491654dfa7dd3dd7d5f4799ecc8ca464092b4d0b547087b5128f1ed84feaf",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-05/r_direct/candidate_initial.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    optimizer = Torch4msOptimizer(torch.optim.Adam(model.parameters(), lr=lr), model)\n    criterion = nn.CrossEntropyLoss()\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 8,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 9.5367431640625e-07,
+        "last_step_abs_grad_norm_diff": 0.0,
+        "param_update_rel_l2": 0.0,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "phi.0.weight",
+              "reference_update_norm": 0.008774751797318459,
+              "candidate_update_norm": 0.008774751797318459,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "phi.0.bias",
+              "reference_update_norm": 0.0033166136126965284,
+              "candidate_update_norm": 0.0033166136126965284,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "phi.2.weight",
+              "reference_update_norm": 0.010999957099556923,
+              "candidate_update_norm": 0.010999957099556923,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "phi.2.bias",
+              "reference_update_norm": 0.0033166203647851944,
+              "candidate_update_norm": 0.0033166203647851944,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "rho.0.weight",
+              "reference_update_norm": 0.00663322489708662,
+              "candidate_update_norm": 0.00663322489708662,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "rho.0.bias",
+              "reference_update_norm": 0.0020000003278255463,
+              "candidate_update_norm": 0.0020000003278255463,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "rho.2.weight",
+              "reference_update_norm": 0.003999989479780197,
+              "candidate_update_norm": 0.003999989479780197,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "rho.2.bias",
+              "reference_update_norm": 0.001999996602535248,
+              "candidate_update_norm": 0.001999996602535248,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-05/r_direct/initial/report.json"
+    },
+    {
+      "task_id": "I-05",
+      "method": "r_direct",
+      "stage": "final",
+      "original_strict_success": true,
+      "initial_failure_layer": "none",
+      "candidate_sha256": "c099c04944014055c26e8271399a7399222e1ca34a3a04a1460f24bdc37715fd",
+      "source_sha256": "5ab491654dfa7dd3dd7d5f4799ecc8ca464092b4d0b547087b5128f1ed84feaf",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-05/r_direct/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    optimizer = Torch4msOptimizer(torch.optim.Adam(model.parameters(), lr=lr), model)\n    criterion = nn.CrossEntropyLoss()\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 8,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 9.5367431640625e-07,
+        "last_step_abs_grad_norm_diff": 0.0,
+        "param_update_rel_l2": 0.0,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "phi.0.weight",
+              "reference_update_norm": 0.008774751797318459,
+              "candidate_update_norm": 0.008774751797318459,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "phi.0.bias",
+              "reference_update_norm": 0.0033166136126965284,
+              "candidate_update_norm": 0.0033166136126965284,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "phi.2.weight",
+              "reference_update_norm": 0.010999957099556923,
+              "candidate_update_norm": 0.010999957099556923,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "phi.2.bias",
+              "reference_update_norm": 0.0033166203647851944,
+              "candidate_update_norm": 0.0033166203647851944,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "rho.0.weight",
+              "reference_update_norm": 0.00663322489708662,
+              "candidate_update_norm": 0.00663322489708662,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "rho.0.bias",
+              "reference_update_norm": 0.0020000003278255463,
+              "candidate_update_norm": 0.0020000003278255463,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "rho.2.weight",
+              "reference_update_norm": 0.003999989479780197,
+              "candidate_update_norm": 0.003999989479780197,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "rho.2.bias",
+              "reference_update_norm": 0.001999996602535248,
+              "candidate_update_norm": 0.001999996602535248,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-05/r_direct/final/report.json",
+      "corrected_strict_success": true
+    },
+    {
+      "task_id": "I-06",
+      "method": "r_hier",
+      "stage": "final",
+      "original_strict_success": true,
+      "initial_failure_layer": "none",
+      "candidate_sha256": "b5032796d91ed95d7da0d6463cbca6490f8c4b72edd9fca65a30f3bb8f6574d3",
+      "source_sha256": "e30fde1b551218b28549ffd8ad0d7abc8a8cdd28e358dff47759f7e942111761",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-06/r_hier/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.002):\n    base_optimizer = torch.optim.Adam(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    criterion = nn.CrossEntropyLoss()\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        loss_value = float(loss.detach().item())\n    return loss_value",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 6,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 2.384185791015625e-06,
+        "last_step_abs_grad_norm_diff": 4.76837158203125e-07,
+        "param_update_rel_l2": 4.197771621848082e-06,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "proj.weight",
+              "reference_update_norm": 0.021633239462971687,
+              "candidate_update_norm": 0.021633239462971687,
+              "update_diff_norm": 4.656612873077393e-10,
+              "update_rel_l2": 2.1525268468610925e-08
+            },
+            {
+              "name": "proj.bias",
+              "reference_update_norm": 0.005999999586492777,
+              "candidate_update_norm": 0.005999999586492777,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "gate.weight",
+              "reference_update_norm": 0.025995535776019096,
+              "candidate_update_norm": 0.025995546951889992,
+              "update_diff_norm": 1.6618579934402078e-07,
+              "update_rel_l2": 6.392859172802065e-06
+            },
+            {
+              "name": "gate.bias",
+              "reference_update_norm": 0.007211029063910246,
+              "candidate_update_norm": 0.007211028132587671,
+              "update_diff_norm": 1.862645149230957e-09,
+              "update_rel_l2": 2.583050397473527e-07
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.01766352169215679,
+              "candidate_update_norm": 0.01766352169215679,
+              "update_diff_norm": 2.146592459340013e-09,
+              "update_rel_l2": 1.2152686744068977e-07
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.004898987244814634,
+              "candidate_update_norm": 0.004898987244814634,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-06/r_hier/final/report.json",
+      "corrected_strict_success": true
+    },
+    {
+      "task_id": "I-06",
+      "method": "r_direct",
+      "stage": "initial",
+      "original_strict_success": true,
+      "initial_failure_layer": "none",
+      "candidate_sha256": "b5032796d91ed95d7da0d6463cbca6490f8c4b72edd9fca65a30f3bb8f6574d3",
+      "source_sha256": "e30fde1b551218b28549ffd8ad0d7abc8a8cdd28e358dff47759f7e942111761",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-06/r_direct/candidate_initial.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.002):\n    base_optimizer = torch.optim.Adam(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    criterion = nn.CrossEntropyLoss()\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        loss_value = float(loss.detach().item())\n    return loss_value",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 6,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 2.384185791015625e-06,
+        "last_step_abs_grad_norm_diff": 4.76837158203125e-07,
+        "param_update_rel_l2": 4.197771621848082e-06,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "proj.weight",
+              "reference_update_norm": 0.021633239462971687,
+              "candidate_update_norm": 0.021633239462971687,
+              "update_diff_norm": 4.656612873077393e-10,
+              "update_rel_l2": 2.1525268468610925e-08
+            },
+            {
+              "name": "proj.bias",
+              "reference_update_norm": 0.005999999586492777,
+              "candidate_update_norm": 0.005999999586492777,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "gate.weight",
+              "reference_update_norm": 0.025995535776019096,
+              "candidate_update_norm": 0.025995546951889992,
+              "update_diff_norm": 1.6618579934402078e-07,
+              "update_rel_l2": 6.392859172802065e-06
+            },
+            {
+              "name": "gate.bias",
+              "reference_update_norm": 0.007211029063910246,
+              "candidate_update_norm": 0.007211028132587671,
+              "update_diff_norm": 1.862645149230957e-09,
+              "update_rel_l2": 2.583050397473527e-07
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.01766352169215679,
+              "candidate_update_norm": 0.01766352169215679,
+              "update_diff_norm": 2.146592459340013e-09,
+              "update_rel_l2": 1.2152686744068977e-07
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.004898987244814634,
+              "candidate_update_norm": 0.004898987244814634,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-06/r_direct/initial/report.json"
+    },
+    {
+      "task_id": "I-06",
+      "method": "r_direct",
+      "stage": "final",
+      "original_strict_success": true,
+      "initial_failure_layer": "none",
+      "candidate_sha256": "b5032796d91ed95d7da0d6463cbca6490f8c4b72edd9fca65a30f3bb8f6574d3",
+      "source_sha256": "e30fde1b551218b28549ffd8ad0d7abc8a8cdd28e358dff47759f7e942111761",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-06/r_direct/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.002):\n    base_optimizer = torch.optim.Adam(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    criterion = nn.CrossEntropyLoss()\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        loss_value = float(loss.detach().item())\n    return loss_value",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 6,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 2.384185791015625e-06,
+        "last_step_abs_grad_norm_diff": 4.76837158203125e-07,
+        "param_update_rel_l2": 4.197771621848082e-06,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "proj.weight",
+              "reference_update_norm": 0.021633239462971687,
+              "candidate_update_norm": 0.021633239462971687,
+              "update_diff_norm": 4.656612873077393e-10,
+              "update_rel_l2": 2.1525268468610925e-08
+            },
+            {
+              "name": "proj.bias",
+              "reference_update_norm": 0.005999999586492777,
+              "candidate_update_norm": 0.005999999586492777,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "gate.weight",
+              "reference_update_norm": 0.025995535776019096,
+              "candidate_update_norm": 0.025995546951889992,
+              "update_diff_norm": 1.6618579934402078e-07,
+              "update_rel_l2": 6.392859172802065e-06
+            },
+            {
+              "name": "gate.bias",
+              "reference_update_norm": 0.007211029063910246,
+              "candidate_update_norm": 0.007211028132587671,
+              "update_diff_norm": 1.862645149230957e-09,
+              "update_rel_l2": 2.583050397473527e-07
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.01766352169215679,
+              "candidate_update_norm": 0.01766352169215679,
+              "update_diff_norm": 2.146592459340013e-09,
+              "update_rel_l2": 1.2152686744068977e-07
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.004898987244814634,
+              "candidate_update_norm": 0.004898987244814634,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-06/r_direct/final/report.json",
+      "corrected_strict_success": true
+    },
+    {
+      "task_id": "I-07",
+      "method": "r_hier",
+      "stage": "final",
+      "original_strict_success": false,
+      "initial_failure_layer": "execution",
+      "candidate_sha256": "74d4946eb68a5cf3590432319eb71c787d29474ff3368327eac5d3e5cde73c66",
+      "source_sha256": "f0e6cc224dc0010d4816eb3fb93087bd0b85b83d57b70fe17f9ecb998486e3ec",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-07/r_hier/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    criterion = nn.CrossEntropyLoss()\n    base_optimizer = torch.optim.RMSprop(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss_value = float(loss.detach().item())\n        loss.backward(module=model)\n        optimizer.step()\n        return loss_value",
+      "returncode": 0,
+      "execution_status": "failed",
+      "backend_observed": false,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": []
+      },
+      "error": "RecursionError('maximum recursion depth exceeded while calling a Python object')",
+      "comparison": {
+        "last_step_abs_loss_diff": null,
+        "last_step_abs_grad_norm_diff": null,
+        "param_update_rel_l2": 0.9999999999920189,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "left.weight",
+              "reference_update_norm": 0.06927903741598129,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.06927903741598129,
+              "update_rel_l2": 0.9999999999855655
+            },
+            {
+              "name": "left.bias",
+              "reference_update_norm": 0.028283603489398956,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.028283603489398956,
+              "update_rel_l2": 0.9999999999646438
+            },
+            {
+              "name": "right.weight",
+              "reference_update_norm": 0.06928067654371262,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.06928067654371262,
+              "update_rel_l2": 0.9999999999855659
+            },
+            {
+              "name": "right.bias",
+              "reference_update_norm": 0.02828342653810978,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.02828342653810978,
+              "update_rel_l2": 0.9999999999646436
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.0632450208067894,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0632450208067894,
+              "update_rel_l2": 0.9999999999841884
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.02236066199839115,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.02236066199839115,
+              "update_rel_l2": 0.9999999999552787
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-07/r_hier/final/report.json",
+      "corrected_strict_success": false
+    },
+    {
+      "task_id": "I-07",
+      "method": "r_direct",
+      "stage": "initial",
+      "original_strict_success": true,
+      "initial_failure_layer": "execution",
+      "candidate_sha256": "74d4946eb68a5cf3590432319eb71c787d29474ff3368327eac5d3e5cde73c66",
+      "source_sha256": "f0e6cc224dc0010d4816eb3fb93087bd0b85b83d57b70fe17f9ecb998486e3ec",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-07/r_direct/candidate_initial.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    criterion = nn.CrossEntropyLoss()\n    base_optimizer = torch.optim.RMSprop(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss_value = float(loss.detach().item())\n        loss.backward(module=model)\n        optimizer.step()\n        return loss_value",
+      "returncode": 0,
+      "execution_status": "failed",
+      "backend_observed": false,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": []
+      },
+      "error": "RecursionError('maximum recursion depth exceeded while calling a Python object')",
+      "comparison": {
+        "last_step_abs_loss_diff": null,
+        "last_step_abs_grad_norm_diff": null,
+        "param_update_rel_l2": 0.9999999999920189,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "left.weight",
+              "reference_update_norm": 0.06927903741598129,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.06927903741598129,
+              "update_rel_l2": 0.9999999999855655
+            },
+            {
+              "name": "left.bias",
+              "reference_update_norm": 0.028283603489398956,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.028283603489398956,
+              "update_rel_l2": 0.9999999999646438
+            },
+            {
+              "name": "right.weight",
+              "reference_update_norm": 0.06928067654371262,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.06928067654371262,
+              "update_rel_l2": 0.9999999999855659
+            },
+            {
+              "name": "right.bias",
+              "reference_update_norm": 0.02828342653810978,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.02828342653810978,
+              "update_rel_l2": 0.9999999999646436
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.0632450208067894,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0632450208067894,
+              "update_rel_l2": 0.9999999999841884
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.02236066199839115,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.02236066199839115,
+              "update_rel_l2": 0.9999999999552787
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-07/r_direct/initial/report.json"
+    },
+    {
+      "task_id": "I-07",
+      "method": "r_direct",
+      "stage": "final",
+      "original_strict_success": true,
+      "initial_failure_layer": "execution",
+      "candidate_sha256": "8eb1478986cff2236a8f1a797202f0a13a125ddacb503b624d4817304648ae11",
+      "source_sha256": "f0e6cc224dc0010d4816eb3fb93087bd0b85b83d57b70fe17f9ecb998486e3ec",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-07/r_direct/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    optimizer = torch.optim.RMSprop(model.parameters(), lr=lr)\n    optimizer.zero_grad()\n    loss = nn.CrossEntropyLoss()(model(x), y)\n    loss.backward()\n    optimizer.step()\n    return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "failed",
+      "backend_observed": false,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": false,
+            "events": []
+          }
+        ]
+      },
+      "error": "TargetBackendNotObserved('target_backend_not_observed: no MindSpore gradient computation for the evaluated model and returned training loss; ordinary PyTorch training does not satisfy the migration contract')",
+      "comparison": {
+        "last_step_abs_loss_diff": null,
+        "last_step_abs_grad_norm_diff": null,
+        "param_update_rel_l2": 0.0,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "left.weight",
+              "reference_update_norm": 0.06927903741598129,
+              "candidate_update_norm": 0.06927903741598129,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "left.bias",
+              "reference_update_norm": 0.028283603489398956,
+              "candidate_update_norm": 0.028283603489398956,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "right.weight",
+              "reference_update_norm": 0.06928067654371262,
+              "candidate_update_norm": 0.06928067654371262,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "right.bias",
+              "reference_update_norm": 0.02828342653810978,
+              "candidate_update_norm": 0.02828342653810978,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.0632450208067894,
+              "candidate_update_norm": 0.0632450208067894,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.02236066199839115,
+              "candidate_update_norm": 0.02236066199839115,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-07/r_direct/final/report.json",
+      "corrected_strict_success": false
+    },
+    {
+      "task_id": "I-08",
+      "method": "r_hier",
+      "stage": "final",
+      "original_strict_success": false,
+      "initial_failure_layer": "gradient_update",
+      "candidate_sha256": "59df8647dfdaee2a8d4bfd78394ebcc941b5d6bf1f06c66afc94b8e45b1e59ec",
+      "source_sha256": "9147733310cb4f26db4f475824fccc37e7db96bbaef62faf35e1787e2728ab9e",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-08/r_hier/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    env = torch4ms.default_env()\n    base_optimizer = torch.optim.AdamW(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, nn.CrossEntropyLoss(), x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 8,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 1.430511474609375e-06,
+        "last_step_abs_grad_norm_diff": 0.04596114158630371,
+        "param_update_rel_l2": 0.7711267081348738,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "encoder.0.weight",
+              "reference_update_norm": 0.012248214334249496,
+              "candidate_update_norm": 1.8868575352826156e-05,
+              "update_diff_norm": 0.012246575206518173,
+              "update_rel_l2": 0.9998661740653406
+            },
+            {
+              "name": "encoder.0.bias",
+              "reference_update_norm": 0.00316177518106997,
+              "candidate_update_norm": 4.47518232249422e-06,
+              "update_diff_norm": 0.0031622787937521935,
+              "update_rel_l2": 1.0001592813066151
+            },
+            {
+              "name": "encoder.2.weight",
+              "reference_update_norm": 0.006325588095933199,
+              "candidate_update_norm": 0.006325588095933199,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "encoder.2.bias",
+              "reference_update_norm": 0.0019984247628599405,
+              "candidate_update_norm": 0.0019984247628599405,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.weight",
+              "reference_update_norm": 0.004003297071903944,
+              "candidate_update_norm": 0.004003297071903944,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.bias",
+              "reference_update_norm": 0.001996835693717003,
+              "candidate_update_norm": 0.001996835693717003,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.006325353402644396,
+              "candidate_update_norm": 0.006325353402644396,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.0022337904665619135,
+              "candidate_update_norm": 0.0022337904665619135,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-08/r_hier/final/report.json",
+      "corrected_strict_success": false
+    },
+    {
+      "task_id": "I-08",
+      "method": "r_direct",
+      "stage": "initial",
+      "original_strict_success": false,
+      "initial_failure_layer": "gradient_update",
+      "candidate_sha256": "59df8647dfdaee2a8d4bfd78394ebcc941b5d6bf1f06c66afc94b8e45b1e59ec",
+      "source_sha256": "9147733310cb4f26db4f475824fccc37e7db96bbaef62faf35e1787e2728ab9e",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-08/r_direct/candidate_initial.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    env = torch4ms.default_env()\n    base_optimizer = torch.optim.AdamW(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, nn.CrossEntropyLoss(), x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 8,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 1.430511474609375e-06,
+        "last_step_abs_grad_norm_diff": 0.04596114158630371,
+        "param_update_rel_l2": 0.7711267081348738,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "encoder.0.weight",
+              "reference_update_norm": 0.012248214334249496,
+              "candidate_update_norm": 1.8868575352826156e-05,
+              "update_diff_norm": 0.012246575206518173,
+              "update_rel_l2": 0.9998661740653406
+            },
+            {
+              "name": "encoder.0.bias",
+              "reference_update_norm": 0.00316177518106997,
+              "candidate_update_norm": 4.47518232249422e-06,
+              "update_diff_norm": 0.0031622787937521935,
+              "update_rel_l2": 1.0001592813066151
+            },
+            {
+              "name": "encoder.2.weight",
+              "reference_update_norm": 0.006325588095933199,
+              "candidate_update_norm": 0.006325588095933199,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "encoder.2.bias",
+              "reference_update_norm": 0.0019984247628599405,
+              "candidate_update_norm": 0.0019984247628599405,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.weight",
+              "reference_update_norm": 0.004003297071903944,
+              "candidate_update_norm": 0.004003297071903944,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.bias",
+              "reference_update_norm": 0.001996835693717003,
+              "candidate_update_norm": 0.001996835693717003,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.006325353402644396,
+              "candidate_update_norm": 0.006325353402644396,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.0022337904665619135,
+              "candidate_update_norm": 0.0022337904665619135,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-08/r_direct/initial/report.json"
+    },
+    {
+      "task_id": "I-08",
+      "method": "r_direct",
+      "stage": "final",
+      "original_strict_success": false,
+      "initial_failure_layer": "gradient_update",
+      "candidate_sha256": "3ab4ef84a78e4bf7c30659d83003705c2096b795b9f5b42f414107633a058694",
+      "source_sha256": "9147733310cb4f26db4f475824fccc37e7db96bbaef62faf35e1787e2728ab9e",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-08/r_direct/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    env = torch4ms.default_env()\n    base_optimizer = torch.optim.AdamW(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    with env:\n        optimizer.zero_grad()\n        loss = nn.CrossEntropyLoss()(model(x), y)\n        loss.backward()\n        optimizer.step()\n        return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "failed",
+      "backend_observed": false,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": false,
+            "events": []
+          }
+        ]
+      },
+      "error": "TargetBackendNotObserved('target_backend_not_observed: no MindSpore gradient computation for the evaluated model and returned training loss; ordinary PyTorch training does not satisfy the migration contract')",
+      "comparison": {
+        "last_step_abs_loss_diff": null,
+        "last_step_abs_grad_norm_diff": null,
+        "param_update_rel_l2": 0.9999999999390331,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "encoder.0.weight",
+              "reference_update_norm": 0.012248214334249496,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.012248214334249496,
+              "update_rel_l2": 0.9999999999183554
+            },
+            {
+              "name": "encoder.0.bias",
+              "reference_update_norm": 0.00316177518106997,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.00316177518106997,
+              "update_rel_l2": 0.999999999683722
+            },
+            {
+              "name": "encoder.2.weight",
+              "reference_update_norm": 0.006325588095933199,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.006325588095933199,
+              "update_rel_l2": 0.9999999998419119
+            },
+            {
+              "name": "encoder.2.bias",
+              "reference_update_norm": 0.0019984247628599405,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0019984247628599405,
+              "update_rel_l2": 0.9999999994996058
+            },
+            {
+              "name": "decoder.weight",
+              "reference_update_norm": 0.004003297071903944,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.004003297071903944,
+              "update_rel_l2": 0.9999999997502058
+            },
+            {
+              "name": "decoder.bias",
+              "reference_update_norm": 0.001996835693717003,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.001996835693717003,
+              "update_rel_l2": 0.9999999994992077
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.006325353402644396,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.006325353402644396,
+              "update_rel_l2": 0.999999999841906
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.0022337904665619135,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0022337904665619135,
+              "update_rel_l2": 0.9999999995523304
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-08/r_direct/final/report.json",
+      "corrected_strict_success": false
+    },
+    {
+      "task_id": "I-09",
+      "method": "r_hier",
+      "stage": "final",
+      "original_strict_success": false,
+      "initial_failure_layer": "gradient_update",
+      "candidate_sha256": "aba21d3a7863db2c4fbec7f1fe8f8b000a6ef88232af3ffa9d8e4a552b3eb690",
+      "source_sha256": "5cabaff96ae4151bf65caeee8eeb092e8ad4964b956eebdd7e283271d02dc9cb",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-09/r_hier/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.0007):\n    criterion = nn.CrossEntropyLoss()\n    base_optimizer = torch.optim.Adam(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 8,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 4.76837158203125e-07,
+        "last_step_abs_grad_norm_diff": 0.418631911277771,
+        "param_update_rel_l2": 0.9252656699732557,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "value.weight",
+              "reference_update_norm": 0.009623337537050247,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.009623337537050247,
+              "update_rel_l2": 0.9999999998960859
+            },
+            {
+              "name": "value.bias",
+              "reference_update_norm": 0.0018520227167755365,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0018520227167755365,
+              "update_rel_l2": 0.9999999994600498
+            },
+            {
+              "name": "gate.weight",
+              "reference_update_norm": 0.0032077785581350327,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0032077785581350327,
+              "update_rel_l2": 0.9999999996882578
+            },
+            {
+              "name": "gate.bias",
+              "reference_update_norm": 0.0018520178273320198,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0018520178273320198,
+              "update_rel_l2": 0.9999999994600484
+            },
+            {
+              "name": "norm.weight",
+              "reference_update_norm": 0.0018519953591749072,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0018519953591749072,
+              "update_rel_l2": 0.9999999994600418
+            },
+            {
+              "name": "norm.bias",
+              "reference_update_norm": 0.0018520256271585822,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0018520256271585822,
+              "update_rel_l2": 0.9999999994600507
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.0041411989368498325,
+              "candidate_update_norm": 0.0041411989368498325,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.001565240789204836,
+              "candidate_update_norm": 0.001565240789204836,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-09/r_hier/final/report.json",
+      "corrected_strict_success": false
+    },
+    {
+      "task_id": "I-09",
+      "method": "r_direct",
+      "stage": "initial",
+      "original_strict_success": true,
+      "initial_failure_layer": "gradient_update",
+      "candidate_sha256": "aba21d3a7863db2c4fbec7f1fe8f8b000a6ef88232af3ffa9d8e4a552b3eb690",
+      "source_sha256": "5cabaff96ae4151bf65caeee8eeb092e8ad4964b956eebdd7e283271d02dc9cb",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-09/r_direct/candidate_initial.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.0007):\n    criterion = nn.CrossEntropyLoss()\n    base_optimizer = torch.optim.Adam(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    env = torch4ms.default_env()\n    with env:\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 8,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 4.76837158203125e-07,
+        "last_step_abs_grad_norm_diff": 0.418631911277771,
+        "param_update_rel_l2": 0.9252656699732557,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "value.weight",
+              "reference_update_norm": 0.009623337537050247,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.009623337537050247,
+              "update_rel_l2": 0.9999999998960859
+            },
+            {
+              "name": "value.bias",
+              "reference_update_norm": 0.0018520227167755365,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0018520227167755365,
+              "update_rel_l2": 0.9999999994600498
+            },
+            {
+              "name": "gate.weight",
+              "reference_update_norm": 0.0032077785581350327,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0032077785581350327,
+              "update_rel_l2": 0.9999999996882578
+            },
+            {
+              "name": "gate.bias",
+              "reference_update_norm": 0.0018520178273320198,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0018520178273320198,
+              "update_rel_l2": 0.9999999994600484
+            },
+            {
+              "name": "norm.weight",
+              "reference_update_norm": 0.0018519953591749072,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0018519953591749072,
+              "update_rel_l2": 0.9999999994600418
+            },
+            {
+              "name": "norm.bias",
+              "reference_update_norm": 0.0018520256271585822,
+              "candidate_update_norm": 0.0,
+              "update_diff_norm": 0.0018520256271585822,
+              "update_rel_l2": 0.9999999994600507
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.0041411989368498325,
+              "candidate_update_norm": 0.0041411989368498325,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.001565240789204836,
+              "candidate_update_norm": 0.001565240789204836,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-09/r_direct/initial/report.json"
+    },
+    {
+      "task_id": "I-09",
+      "method": "r_direct",
+      "stage": "final",
+      "original_strict_success": true,
+      "initial_failure_layer": "gradient_update",
+      "candidate_sha256": "e4f610cbe78fa9333bd450f127217a8cb71cc847f9d9ba2c18455c00526101df",
+      "source_sha256": "5cabaff96ae4151bf65caeee8eeb092e8ad4964b956eebdd7e283271d02dc9cb",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-09/r_direct/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.0007):\n    optimizer = torch.optim.Adam(model.parameters(), lr=lr)\n    optimizer.zero_grad()\n    loss = nn.CrossEntropyLoss()(model(x), y)\n    loss.backward()\n    optimizer.step()\n    return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "failed",
+      "backend_observed": false,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": false,
+            "events": []
+          }
+        ]
+      },
+      "error": "TargetBackendNotObserved('target_backend_not_observed: no MindSpore gradient computation for the evaluated model and returned training loss; ordinary PyTorch training does not satisfy the migration contract')",
+      "comparison": {
+        "last_step_abs_loss_diff": null,
+        "last_step_abs_grad_norm_diff": null,
+        "param_update_rel_l2": 0.0,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "value.weight",
+              "reference_update_norm": 0.009623337537050247,
+              "candidate_update_norm": 0.009623337537050247,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "value.bias",
+              "reference_update_norm": 0.0018520227167755365,
+              "candidate_update_norm": 0.0018520227167755365,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "gate.weight",
+              "reference_update_norm": 0.0032077785581350327,
+              "candidate_update_norm": 0.0032077785581350327,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "gate.bias",
+              "reference_update_norm": 0.0018520178273320198,
+              "candidate_update_norm": 0.0018520178273320198,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "norm.weight",
+              "reference_update_norm": 0.0018519953591749072,
+              "candidate_update_norm": 0.0018519953591749072,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "norm.bias",
+              "reference_update_norm": 0.0018520256271585822,
+              "candidate_update_norm": 0.0018520256271585822,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.0041411989368498325,
+              "candidate_update_norm": 0.0041411989368498325,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.001565240789204836,
+              "candidate_update_norm": 0.001565240789204836,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-09/r_direct/final/report.json",
+      "corrected_strict_success": false
+    },
+    {
+      "task_id": "I-10",
+      "method": "r_hier",
+      "stage": "final",
+      "original_strict_success": true,
+      "initial_failure_layer": "none",
+      "candidate_sha256": "c8cedb606102a081090766a0bd99db78130fd52796403d4daadb990c776723e8",
+      "source_sha256": "26725ca4206643dc618da9f72a0c5cb2b4b8ce4c6c389f19ed48f5bba3264f72",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-10/r_hier/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    criterion = nn.CrossEntropyLoss()\n    base_optimizer = torch.optim.SGD(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    with torch4ms.default_env():\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 6,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 2.2649765014648438e-06,
+        "last_step_abs_grad_norm_diff": 0.0,
+        "param_update_rel_l2": 5.831797620330357e-06,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "branch1.weight",
+              "reference_update_norm": 0.00010389427188783884,
+              "candidate_update_norm": 0.00010389427188783884,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "branch1.bias",
+              "reference_update_norm": 0.00019309690105728805,
+              "candidate_update_norm": 0.00019309690105728805,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "branch3.weight",
+              "reference_update_norm": 0.0001684112212387845,
+              "candidate_update_norm": 0.0001684112212387845,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "branch3.bias",
+              "reference_update_norm": 0.00016455889272037894,
+              "candidate_update_norm": 0.00016455889272037894,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.0008272264385595918,
+              "candidate_update_norm": 0.0008272266713902354,
+              "update_diff_norm": 7.46511830129748e-09,
+              "update_rel_l2": 9.024274303021365e-06
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.000922364997677505,
+              "candidate_update_norm": 0.000922364997677505,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-10/r_hier/final/report.json",
+      "corrected_strict_success": true
+    },
+    {
+      "task_id": "I-10",
+      "method": "r_direct",
+      "stage": "initial",
+      "original_strict_success": true,
+      "initial_failure_layer": "none",
+      "candidate_sha256": "c8cedb606102a081090766a0bd99db78130fd52796403d4daadb990c776723e8",
+      "source_sha256": "26725ca4206643dc618da9f72a0c5cb2b4b8ce4c6c389f19ed48f5bba3264f72",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-10/r_direct/candidate_initial.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    criterion = nn.CrossEntropyLoss()\n    base_optimizer = torch.optim.SGD(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    with torch4ms.default_env():\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 6,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 2.2649765014648438e-06,
+        "last_step_abs_grad_norm_diff": 0.0,
+        "param_update_rel_l2": 5.831797620330357e-06,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "branch1.weight",
+              "reference_update_norm": 0.00010389427188783884,
+              "candidate_update_norm": 0.00010389427188783884,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "branch1.bias",
+              "reference_update_norm": 0.00019309690105728805,
+              "candidate_update_norm": 0.00019309690105728805,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "branch3.weight",
+              "reference_update_norm": 0.0001684112212387845,
+              "candidate_update_norm": 0.0001684112212387845,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "branch3.bias",
+              "reference_update_norm": 0.00016455889272037894,
+              "candidate_update_norm": 0.00016455889272037894,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.0008272264385595918,
+              "candidate_update_norm": 0.0008272266713902354,
+              "update_diff_norm": 7.46511830129748e-09,
+              "update_rel_l2": 9.024274303021365e-06
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.000922364997677505,
+              "candidate_update_norm": 0.000922364997677505,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-10/r_direct/initial/report.json"
+    },
+    {
+      "task_id": "I-10",
+      "method": "r_direct",
+      "stage": "final",
+      "original_strict_success": true,
+      "initial_failure_layer": "none",
+      "candidate_sha256": "c8cedb606102a081090766a0bd99db78130fd52796403d4daadb990c776723e8",
+      "source_sha256": "26725ca4206643dc618da9f72a0c5cb2b4b8ce4c6c389f19ed48f5bba3264f72",
+      "candidate": "/media/main/whj/projects/torch4ms/ascend-torch4ms-exp-i-core-8c5c635/experiments/experiment_request_20260820/09_experiment_I_real_translation/runs_real_core_v3/tasks/I-10/r_direct/candidate_final.py",
+      "training_entry": "def train_one_step(model, x, y, lr=0.001):\n    criterion = nn.CrossEntropyLoss()\n    base_optimizer = torch.optim.SGD(model.parameters(), lr=lr)\n    optimizer = Torch4msOptimizer(base_optimizer, model)\n    with torch4ms.default_env():\n        optimizer.zero_grad()\n        loss_wrapper = extract_and_wrap_loss_fn(model, criterion, x, y)\n        loss = loss_wrapper.output\n        loss.backward(module=model)\n        optimizer.step()\n        return float(loss.detach().item())",
+      "returncode": 0,
+      "execution_status": "ok",
+      "backend_observed": true,
+      "backend_execution": {
+        "required": true,
+        "backend": "torch4ms/MindSpore",
+        "steps": [
+          {
+            "step": 1,
+            "observed": true,
+            "events": [
+              {
+                "gradient_tensors": 6,
+                "autograd": "backward"
+              }
+            ]
+          }
+        ]
+      },
+      "error": "",
+      "comparison": {
+        "last_step_abs_loss_diff": 2.2649765014648438e-06,
+        "last_step_abs_grad_norm_diff": 0.0,
+        "param_update_rel_l2": 5.831797620330357e-06,
+        "parameter_update_diagnostics": {
+          "parameters": [
+            {
+              "name": "branch1.weight",
+              "reference_update_norm": 0.00010389427188783884,
+              "candidate_update_norm": 0.00010389427188783884,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "branch1.bias",
+              "reference_update_norm": 0.00019309690105728805,
+              "candidate_update_norm": 0.00019309690105728805,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "branch3.weight",
+              "reference_update_norm": 0.0001684112212387845,
+              "candidate_update_norm": 0.0001684112212387845,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "branch3.bias",
+              "reference_update_norm": 0.00016455889272037894,
+              "candidate_update_norm": 0.00016455889272037894,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "reference_update_norm": 0.0008272264385595918,
+              "candidate_update_norm": 0.0008272266713902354,
+              "update_diff_norm": 7.46511830129748e-09,
+              "update_rel_l2": 9.024274303021365e-06
+            },
+            {
+              "name": "head.bias",
+              "reference_update_norm": 0.000922364997677505,
+              "candidate_update_norm": 0.000922364997677505,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ]
+        }
+      },
+      "report": "/media/main/whj/projects/torch4ms/ascend-torch4ms-backend-authenticity-20260917/experiments/backend_authenticity_audit_20260917/I-10/r_direct/final/report.json",
+      "corrected_strict_success": true
+    }
+  ]
+}

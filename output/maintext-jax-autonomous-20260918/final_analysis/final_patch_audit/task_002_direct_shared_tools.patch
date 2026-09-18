@@ -1,0 +1,11 @@
+--- initial/candidate.py
++++ final/candidate.py
+@@ -19,7 +19,7 @@
+     def forward(self, inputs):
+         hidden = F.relu(self.fc1(inputs))
+         logits = self.fc2(hidden)
+-        return logits * 1.75
++        return logits
+ 
+ 
+ def build_model():

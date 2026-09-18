@@ -1,0 +1,342 @@
+{
+  "source_language": "java",
+  "target_language": "python",
+  "source_framework": "Java/DJL",
+  "target_framework": "Python/PyTorch",
+  "seed": 101,
+  "source_reference": "source.py contains the complete original Java source or all notebook cells as UTF-8 reference text.",
+  "interface": "# Common translated-program interface, N18 v1\n\nTranslate the entire supplied training source into one complete Python/PyTorch\nprogram, retaining preprocessing, training, evaluation and saving functions.\nKeep expensive main-program execution under the main guard. In addition, expose\n`build_training(context)` which returns an object implementing the interface\nbelow by calling the SAME translated model, loss and optimizer implementations.\nDo not replace them with a separate test model. Use CPU float32 for the paired run.\n\nThe pairing harness supplies explicit original initial parameters and two real\npreprocessed training batches, to remove random initialization and data ordering\ndifferences. It does not supply a model, loss, backward or optimizer implementation.\nThis test covers continuous training after preprocessing; it does not by itself\ncertify preprocessing, full-epoch evaluation or checkpoint equivalence.\n\n- `parameters()` returns a list of trainable tensors in `context.parameters`\n  order, with the exact listed shapes. Preserve shared parameter aliases.\n- `buffers()` returns nontrainable tensors in `context.buffers` order, including\n  frozen weights if listed. Omit PyTorch-only counters absent from this manifest.\n- `zero_grad()` performs the source program's gradient reset (or accumulation).\n- `forward(inputs, labels)` accepts lists of PyTorch tensors and returns a list\n  of tensors in the original source output order. Maintain/detach recurrent state\n  as the source does. The same object is reused for both consecutive steps.\n- `loss(outputs, labels)` returns the source loss tensor, preserving reduction\n  and shape. Its shape appears in `context.loss_shape`.\n- `backward(loss)` executes the source backward operation and any clipping.\n- `step()` executes the translated source optimizer exactly once.\n- `optimizer_state()` returns one dictionary per entry in `parameters()`, in\n  the same order. Each contains integer `updates`. For Adam also return the\n  first and second moment tensors under `means` and `variances`, respectively.\n\nThe harness copies initial values after building the object. Optimizer state must\nstart empty/zero and refer to these same tensor objects. Output and parameter\nshapes and source engine are public interface metadata, not expected answers.\nInfer training semantics and optimizer hyperparameters from the supplied source\nand its upstream framework. Preserve observed source behavior even if unusual.\n\nDeepAR only: recurrent Dropout is explicitly zero on BOTH sides, a user-approved\ndeterministic training configuration replacing the original default 0.1.\nShared frozen assets listed in `context.assets` may be loaded at those paths.\n\nDo not read any oracle, reference trace, calibration implementation, hidden\nseed data or expected output. Do not import experiment `source_*` helpers or\n`calibrate_training_pairs`. Do not fabricate outputs or verification reports.\nOnly the translated candidate file is editable during repair.\n",
+  "public_context": {
+    "task_id": "djl_train_timeseries",
+    "engine": "MXNet",
+    "parameters": [
+      {
+        "name": "01param_proj_01_distr_total_count_weight",
+        "shape": [
+          1,
+          40
+        ]
+      },
+      {
+        "name": "01param_proj_01_distr_total_count_bias",
+        "shape": [
+          1
+        ]
+      },
+      {
+        "name": "01param_proj_02_distr_logits_weight",
+        "shape": [
+          1,
+          40
+        ]
+      },
+      {
+        "name": "01param_proj_02_distr_logits_bias",
+        "shape": [
+          1
+        ]
+      },
+      {
+        "name": "02feature_embedder_01cat_0_embedding_embedding",
+        "shape": [
+          3,
+          2
+        ]
+      },
+      {
+        "name": "02feature_embedder_02cat_1_embedding_embedding",
+        "shape": [
+          10,
+          5
+        ]
+      },
+      {
+        "name": "02feature_embedder_03cat_2_embedding_embedding",
+        "shape": [
+          3,
+          2
+        ]
+      },
+      {
+        "name": "02feature_embedder_04cat_3_embedding_embedding",
+        "shape": [
+          7,
+          4
+        ]
+      },
+      {
+        "name": "02feature_embedder_05cat_4_embedding_embedding",
+        "shape": [
+          3049,
+          50
+        ]
+      },
+      {
+        "name": "04rnn_lstm_l_0_i2h_WEIGHT",
+        "shape": [
+          160,
+          86
+        ]
+      },
+      {
+        "name": "04rnn_lstm_l_0_h2h_WEIGHT",
+        "shape": [
+          160,
+          40
+        ]
+      },
+      {
+        "name": "04rnn_lstm_l_0_i2h_BIAS",
+        "shape": [
+          160
+        ]
+      },
+      {
+        "name": "04rnn_lstm_l_0_h2h_BIAS",
+        "shape": [
+          160
+        ]
+      },
+      {
+        "name": "04rnn_lstm_l_1_i2h_WEIGHT",
+        "shape": [
+          160,
+          40
+        ]
+      },
+      {
+        "name": "04rnn_lstm_l_1_h2h_WEIGHT",
+        "shape": [
+          160,
+          40
+        ]
+      },
+      {
+        "name": "04rnn_lstm_l_1_i2h_BIAS",
+        "shape": [
+          160
+        ]
+      },
+      {
+        "name": "04rnn_lstm_l_1_h2h_BIAS",
+        "shape": [
+          160
+        ]
+      }
+    ],
+    "buffers": [],
+    "input_shapes": [
+      [
+        32,
+        5
+      ],
+      [
+        32,
+        1
+      ],
+      [
+        32,
+        165,
+        3
+      ],
+      [
+        32,
+        165
+      ],
+      [
+        32,
+        165
+      ],
+      [
+        32,
+        165
+      ],
+      [
+        32,
+        4,
+        3
+      ],
+      [
+        32,
+        4
+      ],
+      [
+        32,
+        4
+      ]
+    ],
+    "label_shapes": [
+      [
+        32,
+        11
+      ]
+    ],
+    "output_shapes": [
+      [
+        32,
+        11
+      ],
+      [
+        32,
+        1
+      ],
+      [
+        32,
+        11
+      ],
+      [
+        32,
+        11
+      ]
+    ],
+    "loss_shape": [],
+    "assets": {},
+    "source_order": [
+      {
+        "name": "01param_proj_01_distr_total_count_weight",
+        "shape": [
+          1,
+          40
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "01param_proj_01_distr_total_count_bias",
+        "shape": [
+          1
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "01param_proj_02_distr_logits_weight",
+        "shape": [
+          1,
+          40
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "01param_proj_02_distr_logits_bias",
+        "shape": [
+          1
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "02feature_embedder_01cat_0_embedding_embedding",
+        "shape": [
+          3,
+          2
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "02feature_embedder_02cat_1_embedding_embedding",
+        "shape": [
+          10,
+          5
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "02feature_embedder_03cat_2_embedding_embedding",
+        "shape": [
+          3,
+          2
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "02feature_embedder_04cat_3_embedding_embedding",
+        "shape": [
+          7,
+          4
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "02feature_embedder_05cat_4_embedding_embedding",
+        "shape": [
+          3049,
+          50
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "04rnn_lstm_l_0_i2h_WEIGHT",
+        "shape": [
+          160,
+          86
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "04rnn_lstm_l_0_h2h_WEIGHT",
+        "shape": [
+          160,
+          40
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "04rnn_lstm_l_0_i2h_BIAS",
+        "shape": [
+          160
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "04rnn_lstm_l_0_h2h_BIAS",
+        "shape": [
+          160
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "04rnn_lstm_l_1_i2h_WEIGHT",
+        "shape": [
+          160,
+          40
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "04rnn_lstm_l_1_h2h_WEIGHT",
+        "shape": [
+          160,
+          40
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "04rnn_lstm_l_1_i2h_BIAS",
+        "shape": [
+          160
+        ],
+        "requires_gradient": true
+      },
+      {
+        "name": "04rnn_lstm_l_1_h2h_BIAS",
+        "shape": [
+          160
+        ],
+        "requires_gradient": true
+      }
+    ],
+    "recurrent_dropout": 0.0
+  },
+  "evaluation": {
+    "final_seeds": [
+      101,
+      202,
+      303
+    ],
+    "scope": "Two consecutive post-preprocessing training steps: outputs, loss, gradients, parameter updates and observed optimizer states."
+  },
+  "editable": [
+    "candidate.py"
+  ],
+  "tests": [
+    "public"
+  ]
+}
