@@ -78,8 +78,9 @@ paired-threshold verification, localization accuracy, and detection latency
 distinct. Missing measurements after execution failure are `n/a`, never zero
 or a passing check. Do not alter numbers, denominators, or attempt budgets.
 
-Each figure should support a distinct claim. Use the existing cost and cumulative
-acceptance comparison at the measured budgets of 1, 2, and 4 attempts. Update
+Each figure should support a distinct claim. Figure 3 compares total token use
+and matched per-input token costs for LaDiM and MatchFixAgent. Keep acceptance
+at the measured budgets of 1, 2, and 4 attempts in the experimental prose. Update
 generation scripts, labels, captions, and included assets together. Check figures
 at their actual manuscript size for readable text, overlap, and clipping.
 

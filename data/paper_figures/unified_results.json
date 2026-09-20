@@ -1,0 +1,466 @@
+{
+  "main": {
+    "direct": {
+      "method": "direct",
+      "accepted": 29,
+      "denominator": 50,
+      "accepted_groups": 20,
+      "groups": 29,
+      "missing": 0,
+      "tokens": 429109,
+      "calls": 29,
+      "at_budget": {
+        "1": 29,
+        "2": 29,
+        "4": 29
+      },
+      "faults_repaired": null,
+      "healthy_retained": null
+    },
+    "cte": {
+      "method": "cte",
+      "accepted": 31,
+      "denominator": 50,
+      "accepted_groups": 19,
+      "groups": 29,
+      "missing": 0,
+      "tokens": 279536,
+      "calls": 29,
+      "at_budget": {
+        "1": 31,
+        "2": 31,
+        "4": 31
+      },
+      "faults_repaired": null,
+      "healthy_retained": null
+    },
+    "msadapter": {
+      "method": "msadapter",
+      "accepted": 15,
+      "denominator": 50,
+      "accepted_groups": 7,
+      "groups": 29,
+      "missing": 0,
+      "tokens": 0,
+      "calls": 0,
+      "at_budget": {
+        "1": 15,
+        "2": 15,
+        "4": 15
+      },
+      "faults_repaired": null,
+      "healthy_retained": null
+    },
+    "ladim": {
+      "method": "ladim",
+      "accepted": 50,
+      "denominator": 50,
+      "accepted_groups": 29,
+      "groups": 29,
+      "missing": 0,
+      "tokens": 5159134,
+      "calls": 326,
+      "at_budget": {
+        "1": 46,
+        "2": 50,
+        "4": 50
+      },
+      "faults_repaired": 21,
+      "healthy_retained": 29
+    },
+    "swe": {
+      "method": "swe",
+      "accepted": 44,
+      "denominator": 50,
+      "accepted_groups": 25,
+      "groups": 29,
+      "missing": 1,
+      "tokens": 20831495,
+      "calls": 1097,
+      "at_budget": {
+        "1": 44,
+        "2": 44,
+        "4": 44
+      },
+      "faults_repaired": 17,
+      "healthy_retained": 27
+    },
+    "matchfix": {
+      "method": "matchfix",
+      "accepted": 50,
+      "denominator": 50,
+      "accepted_groups": 29,
+      "groups": 29,
+      "missing": 0,
+      "tokens": 12097425,
+      "calls": 619,
+      "at_budget": {
+        "1": 50,
+        "2": 50,
+        "4": 50
+      },
+      "faults_repaired": 21,
+      "healthy_retained": 29
+    }
+  },
+  "variants": {
+    "continuous_role/ladim": {
+      "method": "ladim",
+      "accepted": 49,
+      "denominator": 50,
+      "accepted_groups": 28,
+      "groups": 29,
+      "missing": 0,
+      "tokens": 5603194,
+      "calls": 317,
+      "at_budget": {
+        "1": 46,
+        "2": 49,
+        "4": 49
+      },
+      "faults_repaired": 20,
+      "healthy_retained": 29
+    },
+    "matchfix_investigation/matchfix": {
+      "method": "matchfix",
+      "accepted": 50,
+      "denominator": 50,
+      "accepted_groups": 29,
+      "groups": 29,
+      "missing": 0,
+      "tokens": 19480375,
+      "calls": 742,
+      "at_budget": {
+        "1": 50,
+        "2": 50,
+        "4": 50
+      },
+      "faults_repaired": 21,
+      "healthy_retained": 29
+    },
+    "swe_investigation/swe": {
+      "method": "swe",
+      "accepted": 43,
+      "denominator": 50,
+      "accepted_groups": 24,
+      "groups": 29,
+      "missing": 0,
+      "tokens": 36547007,
+      "calls": 1137,
+      "at_budget": {
+        "1": 43,
+        "2": 43,
+        "4": 43
+      },
+      "faults_repaired": 18,
+      "healthy_retained": 25
+    },
+    "without_progress_prompt/ladim": {
+      "method": "ladim",
+      "accepted": 50,
+      "denominator": 50,
+      "accepted_groups": 29,
+      "groups": 29,
+      "missing": 0,
+      "tokens": 4562389,
+      "calls": 321,
+      "at_budget": {
+        "1": 47,
+        "2": 50,
+        "4": 50
+      },
+      "faults_repaired": 21,
+      "healthy_retained": 29
+    },
+    "without_repair_history/ladim": {
+      "method": "ladim",
+      "accepted": 50,
+      "denominator": 50,
+      "accepted_groups": 29,
+      "groups": 29,
+      "missing": 0,
+      "tokens": 4566058,
+      "calls": 320,
+      "at_budget": {
+        "1": 47,
+        "2": 50,
+        "4": 50
+      },
+      "faults_repaired": 21,
+      "healthy_retained": 29
+    }
+  },
+  "cross_language": [
+    {
+      "method": "LaDiM",
+      "accepted": 9,
+      "denominator": 18,
+      "tokens": 21479058,
+      "key": "ladim",
+      "calls": 345
+    },
+    {
+      "method": "SWE-agent",
+      "accepted": 8,
+      "denominator": 18,
+      "tokens": 24320695,
+      "key": "swe",
+      "calls": 682
+    },
+    {
+      "method": "MatchFixAgent",
+      "accepted": 8,
+      "denominator": 18,
+      "tokens": 28354720,
+      "key": "matchfix",
+      "calls": 524
+    },
+    {
+      "method": "\u666e\u901a\u6d4b\u8bd5\u4fee\u590d",
+      "accepted": 7,
+      "denominator": 18,
+      "tokens": 4475292,
+      "key": "test_repair",
+      "calls": 71
+    },
+    {
+      "method": "Direct LLM\uff08\u590d\u7528\uff09",
+      "accepted": 1,
+      "denominator": 18,
+      "tokens": 693790,
+      "key": "direct",
+      "calls": 18
+    },
+    {
+      "method": "InterTrans\uff08\u590d\u7528\uff09",
+      "accepted": 1,
+      "denominator": 18,
+      "tokens": 2286034,
+      "key": "intertrans",
+      "calls": 89
+    }
+  ],
+  "training_signals": [
+    {
+      "variant": "execution",
+      "accepted": 4,
+      "planned": 16,
+      "controller_accepted": 16,
+      "initially_accepted_by_visible_checks": 12,
+      "calls": 145,
+      "tokens": 2088915,
+      "unknown_usage_calls": 0
+    },
+    {
+      "variant": "execution_forward",
+      "accepted": 8,
+      "planned": 16,
+      "controller_accepted": 16,
+      "initially_accepted_by_visible_checks": 8,
+      "calls": 168,
+      "tokens": 2603211,
+      "unknown_usage_calls": 0
+    },
+    {
+      "variant": "execution_forward_gradient",
+      "accepted": 12,
+      "planned": 16,
+      "controller_accepted": 16,
+      "initially_accepted_by_visible_checks": 4,
+      "calls": 184,
+      "tokens": 3302873,
+      "unknown_usage_calls": 0
+    },
+    {
+      "variant": "all_observations",
+      "accepted": 16,
+      "planned": 16,
+      "controller_accepted": 16,
+      "initially_accepted_by_visible_checks": 0,
+      "calls": 193,
+      "tokens": 3418960,
+      "unknown_usage_calls": 0
+    }
+  ],
+  "paired_costs": [
+    {
+      "group": "group_001",
+      "initially_accepted": false,
+      "ladim_tokens": 303940,
+      "matchfix_tokens": 173863
+    },
+    {
+      "group": "group_002",
+      "initially_accepted": true,
+      "ladim_tokens": 108564,
+      "matchfix_tokens": 120556
+    },
+    {
+      "group": "group_003",
+      "initially_accepted": false,
+      "ladim_tokens": 225190,
+      "matchfix_tokens": 318601
+    },
+    {
+      "group": "group_004",
+      "initially_accepted": false,
+      "ladim_tokens": 292288,
+      "matchfix_tokens": 405850
+    },
+    {
+      "group": "group_005",
+      "initially_accepted": true,
+      "ladim_tokens": 39218,
+      "matchfix_tokens": 47254
+    },
+    {
+      "group": "group_006",
+      "initially_accepted": true,
+      "ladim_tokens": 52811,
+      "matchfix_tokens": 40120
+    },
+    {
+      "group": "group_007",
+      "initially_accepted": true,
+      "ladim_tokens": 113355,
+      "matchfix_tokens": 945247
+    },
+    {
+      "group": "group_008",
+      "initially_accepted": false,
+      "ladim_tokens": 362555,
+      "matchfix_tokens": 1474187
+    },
+    {
+      "group": "group_009",
+      "initially_accepted": false,
+      "ladim_tokens": 154880,
+      "matchfix_tokens": 656485
+    },
+    {
+      "group": "group_010",
+      "initially_accepted": true,
+      "ladim_tokens": 142899,
+      "matchfix_tokens": 239383
+    },
+    {
+      "group": "group_011",
+      "initially_accepted": true,
+      "ladim_tokens": 89352,
+      "matchfix_tokens": 152009
+    },
+    {
+      "group": "group_012",
+      "initially_accepted": true,
+      "ladim_tokens": 60346,
+      "matchfix_tokens": 162612
+    },
+    {
+      "group": "group_013",
+      "initially_accepted": true,
+      "ladim_tokens": 68989,
+      "matchfix_tokens": 71663
+    },
+    {
+      "group": "group_014",
+      "initially_accepted": true,
+      "ladim_tokens": 45119,
+      "matchfix_tokens": 80405
+    },
+    {
+      "group": "group_015",
+      "initially_accepted": true,
+      "ladim_tokens": 77663,
+      "matchfix_tokens": 255091
+    },
+    {
+      "group": "group_016",
+      "initially_accepted": true,
+      "ladim_tokens": 105161,
+      "matchfix_tokens": 181771
+    },
+    {
+      "group": "group_017",
+      "initially_accepted": false,
+      "ladim_tokens": 447930,
+      "matchfix_tokens": 604971
+    },
+    {
+      "group": "group_018",
+      "initially_accepted": true,
+      "ladim_tokens": 84048,
+      "matchfix_tokens": 220938
+    },
+    {
+      "group": "group_019",
+      "initially_accepted": true,
+      "ladim_tokens": 105973,
+      "matchfix_tokens": 165751
+    },
+    {
+      "group": "group_020",
+      "initially_accepted": true,
+      "ladim_tokens": 126840,
+      "matchfix_tokens": 1368438
+    },
+    {
+      "group": "group_021",
+      "initially_accepted": false,
+      "ladim_tokens": 728480,
+      "matchfix_tokens": 1227922
+    },
+    {
+      "group": "group_022",
+      "initially_accepted": true,
+      "ladim_tokens": 104498,
+      "matchfix_tokens": 485398
+    },
+    {
+      "group": "group_023",
+      "initially_accepted": false,
+      "ladim_tokens": 410797,
+      "matchfix_tokens": 1164853
+    },
+    {
+      "group": "group_024",
+      "initially_accepted": true,
+      "ladim_tokens": 106975,
+      "matchfix_tokens": 357165
+    },
+    {
+      "group": "group_025",
+      "initially_accepted": true,
+      "ladim_tokens": 69653,
+      "matchfix_tokens": 117056
+    },
+    {
+      "group": "group_026",
+      "initially_accepted": true,
+      "ladim_tokens": 63961,
+      "matchfix_tokens": 95750
+    },
+    {
+      "group": "group_027",
+      "initially_accepted": false,
+      "ladim_tokens": 579561,
+      "matchfix_tokens": 691003
+    },
+    {
+      "group": "group_028",
+      "initially_accepted": true,
+      "ladim_tokens": 42421,
+      "matchfix_tokens": 84100
+    },
+    {
+      "group": "group_029",
+      "initially_accepted": true,
+      "ladim_tokens": 45667,
+      "matchfix_tokens": 188983
+    }
+  ],
+  "provenance": {
+    "data/audits/unified50-preflight-20260918/formal_launch/results_audit_final.json": "69e64ebf2f95a60a932b99b2074b2edb241bd4e853d8b40f2f6fac274cb67026",
+    "data/audits/unified50-preflight-20260918/formal_launch/final_summary.json": "f6539d99b26a106e469b608e9ccbd84771c4c192976b758de96f97a210d6bd47",
+    "data/paper_figures/autonomous_training_signals.csv": "8d4634ecf83f2ae02494d3e69e67a7a89ba43bd6140ebed1149762107edc0fa6"
+  }
+}

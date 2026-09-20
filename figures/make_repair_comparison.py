@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Original Fixed50 results: cost and cumulative acceptance by attempt budget."""
+"""Current migration comparison, with the historical plot retained as a helper."""
 from make_cost_quality import draw_cost_quality
 from make_repair_by_budget import draw_repair_by_budget
 from paper_plot_style import panel_label, plt, save_figure
-from make_slim_results import build_figure as build_slim_figure
+from make_unified_results import build_figure as build_unified_figure, export_tables, load_data
 
 
 def build_historical_figure():
@@ -26,10 +26,11 @@ def build_historical_figure():
 
 
 def build_figure():
-    return build_slim_figure()
+    return build_unified_figure()
 
 
 def main():
+    export_tables(load_data())
     save_figure(build_figure(), "repair_comparison")
 
 

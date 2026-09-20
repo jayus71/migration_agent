@@ -1,0 +1,43 @@
+\section{Additional Experimental Protocols}
+\label{sec:supplementary-protocols}
+
+The main MindSpore experiment restricts production edits to the candidate program. Sources and public contracts remain fixed, and scratch tests provide a separate space for investigation. Identical source-and-contract pairs use the same initial translation for LaDiM, SWE-agent, and MatchFixAgent. Each accepted candidate passes all applicable checks at seeds 101, 202, and 303. The 29 distinct pairs underlie the 50 identifiers reported in the main table; they also define the unit of physical execution and model-use accounting.
+
+The cross-language collection contains ten DJL application programs and eight textbook examples. LaDiM accepts one application program and all eight examples; SWE-agent and MatchFixAgent each accept one application program and seven examples. Test-guided repair accepts seven examples. The saved initial translations and their model usage are shared by the four repair conditions. InterTrans uses its direct Java-to-Python path and an intermediate JavaScript path, with its native search and extraction procedures. Its total of 2,286,034 tokens comprises 1,711,730 tokens in the completed search and 574,304 tokens in incomplete generation calls. The final verifier compares source and candidate outputs, losses, gradients, parameter updates, and observed optimizer state over two training steps.
+
+The training-signal and JAX studies use the same investigation and evidence-handoff procedure with editing examples and format-correction feedback in the tool prompts. The signal experiment uses four actual model classes and four controlled modifications: an invalid optimizer keyword, a constant loss offset, gradient scaling, and a changed learning rate. Each setting retains the initial investigation, current workspace, and cumulative call budget. Its visible checks determine whether repair starts and when it stops; final acceptance uses execution, forward values, gradients, and updates on all three seeds. The MindSpore measurements use the \texttt{torch4ms} forward and backward bridge, followed by optimizer updates on its parameters.
+
+The JAX study contains six candidate-program faults in MLP and CNN workloads. Both LaDiM and direct repair allow four external submissions and pass all six tasks at the first submission. LaDiM uses 674,009 tokens and direct repair uses 353,311. Native Ivy and \texttt{torch2jax} are additionally tested on these faulty candidates, yielding 0/6 accepted repairs; their healthy-input checks pass. This study evaluates repair of supplied target candidates through the JAX runtime.
+
+The detection study uses four models, three seeds, and 50 training steps. Its gradient scaling and partial update suppression conditions are evaluated with per-step source-state synchronization and with each execution retaining its own state. The loss, gradient-norm, and relative update thresholds are 0.02, 0.05, and 0.03. Figure~\ref{fig:gradient-drift} uses the latter trajectories and reports the mean and range over 12 runs for each fault. The threshold crossings at steps 31 and 18 refer to the mean loss-difference curves. Direct gradient or update measurements detect all 12 faults in their respective panels at step~1.
+
+\section{Evidence Handoff and Agent Integration}
+\label{sec:component-study}
+
+The component study shares the main collection, initial translations, acceptance checks, and cumulative budgets. Continuing the original conversation retains its message roles and reasoning history when the agent begins editing. The independent handoff supplies the verifier's evidence to a separate repair conversation. Removing prior repair conversation restarts each subsequent repair attempt from the initial investigation and latest observation, while retaining the current files and cumulative budget. Removing progress reminders preserves the call and submission limits.
+
+\begin{table}[!htb]
+\caption{Complete component and host-integration comparison on the common MindSpore collection. Token totals include initial translation and all subsequent calls.}
+\label{tab:components}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\input{figures/TABLE_unified_components.tex}
+\par\vspace{3pt}
+\begin{minipage}{\linewidth}
+\footnotesize $\dagger$ Includes the task with unavailable final acceptance identified in Table~\ref{tab:main-results}. Each condition uses the source-and-contract reuse described in Section~\ref{sec:setup}.
+\end{minipage}
+\end{table}
+
+LaDiM accepts all 50 identifiers, while the continuous conversation accepts 49. Removing prior repair conversation or progress reminders preserves full acceptance and uses fewer tokens. Twenty distinct initial translations are already accepted, and only two of the nine faulty pairs require a second repair submission under the complete method. The observed outcomes therefore involve few opportunities for prior repair conversation to influence a later attempt.
+
+The host-integration conditions prepend the same read-only investigation to SWE-agent or MatchFixAgent. Investigation calls share the host's total call, token, and time limits; the native host retains its own history and repair policy. MatchFixAgent with investigation retains 50/50 at a higher token total. SWE-agent with investigation accepts 43/50, compared with 44/50 and one interrupted task for its native condition. At the distinct-pair level, the added investigation increases SWE-agent's repair count from seven to eight among nine faulty initials; it also leaves four previously accepted pairs failing at the end. Table~\ref{tab:components} records both the repair and preservation consequences in final acceptance.
+
+\section{Additional Repair Collections}
+\label{sec:additional-repair}
+
+We also evaluate supplied faulty target programs under their respective repair contracts. A controlled MindSpore collection contains 50 injected faults with task-specific acceptance checks. LaDiM accepts 45/50 within four submissions, compared with 29/50 for SWE-agent and 35/50 for a direct repair agent using shared tools. LaDiM's cumulative accepted counts are 29, 41, and 45 at one, two, and four submissions. Total token use is 39,982,844, 42,579,064, and 12,459,013 for LaDiM, SWE-agent, and direct repair, respectively. The source-and-target inputs required by MatchFixAgent are supplied in the paired collection below.
+
+Ten existing natural translations provide a further repair collection with five faulty and five initially accepted programs. LaDiM repairs four of the five faults and preserves all five accepted programs. The shared-tool direct repair control, SWE-agent, and MatchFixAgent preserve the initially accepted programs and repair none of the five faults. LaDiM uses 13,206,863 tokens across the ten tasks. Acceptance compares source and target training observations under matched inputs and initialization with three-seed confirmation.
+
+In a separate collection of twelve source-and-target repair tasks, LaDiM accepts 12/12 and MatchFixAgent accepts 11/12. They use 6,642,603 and 14,505,833 tokens, respectively. Both receive the complete source, candidate, public contract, and target library. These repair collections retain their declared editable code scopes and acceptance checks, with each denominator attached to its own task definition. Their agent and tool-backend configurations are recorded alongside the frozen sources and result files.

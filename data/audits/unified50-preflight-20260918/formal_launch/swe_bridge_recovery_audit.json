@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-09-18T16:53:36.443565+00:00",
+  "scope": "host process-control bridge only; applied in dispatcher worker before native execution",
+  "frozen_files_modified": false,
+  "baseline_code_modified": false,
+  "prompts_parser_retry_budgets_modified": false,
+  "interrupted_result_sha256": "dc01ceda726dfefd12c30875ab840daa5789b6af0ba8bcb7d2db595821b0e4d5",
+  "interrupted_rerun": false,
+  "never_started_jobs": [
+    "main__group_013__swe",
+    "main__group_014__swe",
+    "main__group_015__swe",
+    "main__group_016__swe",
+    "main__group_017__swe",
+    "main__group_018__swe",
+    "main__group_019__swe",
+    "main__group_020__swe",
+    "main__group_021__swe",
+    "main__group_022__swe",
+    "main__group_023__swe",
+    "main__group_024__swe",
+    "main__group_025__swe",
+    "main__group_026__swe",
+    "main__group_027__swe",
+    "main__group_028__swe",
+    "main__group_029__swe",
+    "swe_investigation__group_013__swe",
+    "swe_investigation__group_014__swe",
+    "swe_investigation__group_015__swe",
+    "swe_investigation__group_016__swe",
+    "swe_investigation__group_017__swe",
+    "swe_investigation__group_018__swe",
+    "swe_investigation__group_019__swe",
+    "swe_investigation__group_020__swe",
+    "swe_investigation__group_021__swe",
+    "swe_investigation__group_022__swe",
+    "swe_investigation__group_023__swe",
+    "swe_investigation__group_024__swe",
+    "swe_investigation__group_025__swe",
+    "swe_investigation__group_026__swe",
+    "swe_investigation__group_027__swe",
+    "swe_investigation__group_028__swe",
+    "swe_investigation__group_029__swe"
+  ],
+  "bridge_patch_sha256": "aecf5a5fce2907d6c0b803af92a0509c290afc9202b9c49f9c7be095376d312f",
+  "tests": {
+    "tests": 6,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "real_model_calls": 0
+  },
+  "regression": {
+    "schedule": "50ms after actual signal delivery to ensure child re-stop occurs before observer check",
+    "results": [
+      {
+        "version": "before",
+        "error": "Native process did not acknowledge continuation",
+        "stale_closed_descriptors": 1,
+        "owned_descriptors_after": 1
+      },
+      {
+        "version": "proposed",
+        "error": null,
+        "stale_closed_descriptors": 0,
+        "owned_descriptors_after": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "status": "infrastructure_error",
+  "accepted": true,
+  "initially_accepted": true,
+  "error": "RuntimeError: Native process did not acknowledge continuation",
+  "cleanup_error": "OSError: [Errno 9] pidfd_send_signal",
+  "traceback": "Traceback (most recent call last):\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-unified50-preflight-20260918/autofix/autonomous/experiment.py\", line 186, in run_condition\n    stage = adapter.repair(current[\"observation\"], attempt=attempt) if adapter else agent.repair(current[\"observation\"], attempt=attempt)\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-unified50-preflight-20260918/autofix/autonomous/swe_upstream.py\", line 544, in repair\n    result = self._serve()\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-unified50-preflight-20260918/autofix/autonomous/swe_upstream.py\", line 511, in _serve\n    self.resume()\n  File \"/media/main/whj/projects/torch4ms/ascend-torch4ms-unified50-preflight-20260918/autofix/autonomous/swe_upstream.py\", line 383, in resume\n    raise RuntimeError('Native process did not acknowledge continuation')\nRuntimeError: Native process did not acknowledge continuation\n",
+  "budget": {
+    "calls": 28,
+    "usage": {
+      "prompt_tokens": 418238,
+      "completion_tokens": 10573,
+      "total_tokens": 428811,
+      "budget_output_tokens": 10573,
+      "unknown_usage_calls": 0,
+      "unknown_prompt_usage_calls": 0,
+      "unknown_completion_usage_calls": 0,
+      "reasoning_tokens": 5537,
+      "truncated_calls": 0,
+      "input_budget": "recorded without a cumulative input-token limit",
+      "requested_model": "deepseek-v4-flash",
+      "actual_models": [
+        "deepseek-flash"
+      ],
+      "elapsed_seconds": 414.0896720630117
+    }
+  },
+  "wall_time_sec": 414.08363492100034,
+  "result_sha256": "dc01ceda726dfefd12c30875ab840daa5789b6af0ba8bcb7d2db595821b0e4d5",
+  "job": "main__group_012__swe",
+  "measurements": [
+    {
+      "directory": "experiments/unified_migration50_20260918/final_review/conditions/task_022/swe_native_isolated/evidence/measurement_0001",
+      "accepted": true,
+      "execution": "completed"
+    },
+    {
+      "directory": "experiments/unified_migration50_20260918/final_review/conditions/task_022/swe_native_isolated/evidence/measurement_0002",
+      "accepted": true,
+      "execution": "completed"
+    },
+    {
+      "directory": "experiments/unified_migration50_20260918/final_review/conditions/task_022/swe_native_isolated/evidence/measurement_0003",
+      "accepted": true,
+      "execution": "completed"
+    },
+    {
+      "directory": "experiments/unified_migration50_20260918/final_review/conditions/task_022/swe_native_isolated/evidence/measurement_0004",
+      "accepted": true,
+      "execution": "completed"
+    },
+    {
+      "directory": "experiments/unified_migration50_20260918/final_review/conditions/task_022/swe_native_isolated/evidence/measurement_0005",
+      "accepted": true,
+      "execution": "completed"
+    },
+    {
+      "directory": "experiments/unified_migration50_20260918/final_review/conditions/task_022/swe_native_isolated/evidence/measurement_0006",
+      "accepted": true,
+      "execution": "completed"
+    },
+    {
+      "directory": "experiments/unified_migration50_20260918/final_review/conditions/task_022/swe_native_isolated/evidence/measurement_0007",
+      "accepted": false,
+      "execution": "completed"
+    }
+  ]
+}

@@ -81,43 +81,42 @@ for the template source, build instructions, and current page count.
 
 ```bash
 .venv/bin/python figures/make_gradient_drift.py
-.venv/bin/python scripts/build_maintext_results_bundle.py --recovery output/maintext-ablations-20260918/recovery_final.json
-.venv/bin/python figures/make_repair_comparison.py
-.venv/bin/python figures/make_slim_v4_overview.py
+.venv/bin/python figures/make_unified_results.py
 .venv/bin/python figures/update_overview_labels.py
-.venv/bin/python -m unittest discover -s tests
+.venv/bin/python -m unittest discover -s tests -p 'test_paper_figure*.py'
+.venv/bin/python -m unittest discover -s tests -p 'test_unified_paper_results.py'
 latexmk -pdf -interaction=nonstopmode -halt-on-error conference_101719.tex
 ```
 
-LaTeX requires `latexmk`, `texlive-latex-extra`, and `texlive-fonts-recommended`
-(Debian/Ubuntu package names). The overview exporter also requires Inkscape.
-Figure scripts require NumPy,
-pandas, and Matplotlib and export vector PDFs plus 300-dpi PNGs. The manuscript
-uses the autonomous slim-v4 results: 45/50 fault-specific acceptance on Fixed50
-and four repairs among five faulty Natural10 translations. Five initially healthy
-translations remain accepted. The component, 16-instance training-signal, JAX,
-and diagnostic studies retain their respective protocols and scoring definitions.
-See [figure inputs and provenance](data/paper_figures/README.md) for source CSVs,
-checksums, scoring definitions, and links to the archived diagnostic data.
+LaTeX requires `latexmk`, `texlive-latex-extra`, and `texlive-fonts-recommended`.
+Figure export uses NumPy, pandas, Matplotlib, and Inkscape. The manuscript's main
+MindSpore comparison reports 50 task identifiers: LaDiM and MatchFixAgent both
+accept 50/50, with 57.4% fewer end-to-end tokens for LaDiM. The 50 identifiers
+correspond to 29 distinct source-and-contract pairs. Identical conditions were
+executed once; token totals count actual calls. The total and per-input token
+comparison uses this same collection. The second main-table panel compares
+all six methods on 18 Java/DJL-to-Python/PyTorch tasks.
 
-The abstract states cross-framework effectiveness on MindSpore and JAX. The three
-manuscript figures show gradient drift, the repair architecture, and cost with
-cumulative repair acceptance at the recorded 1-, 2-, and 4-attempt budgets.
-The experiment section contains Main Experiments, Analysis Experiments, and
-Ablation Studies. Analyses cover task overlap, retry recovery, cost, unresolved
-faults, signal detection latency, and generalization across frameworks. The
-component reference and the completed JAX and training-signal studies use
-original v4; their identity is preserved after selecting slim v4. Historical
-guided experiments remain separately labeled in the appendix. Current evidence
-and implementation provenance are indexed in
-`docs/maintext-results-20260918.md` and `docs/frozen-method-v4-20260918.md`.
-Generated figure assets are tracked;
-the compiled manuscript `conference_101719.pdf` remains local and is ignored by
-Git. `figures/make_slim_v4_overview.py` generates the current diagram as editable
-PowerPoint shapes and connectors in `hierarchical_feedback_architecture.pptx`
-and as `slim_v4_overview.svg` from one layout. `update_overview_labels.py` exports
-the matching vector PDF and PNG through Inkscape. The earlier overview SVG is
-preserved as a historical asset.
+The experimental section is organized into Experimental Setup, Main Experiments,
+Analysis Experiments, and Ablation Studies, in `sections/experiments.tex`.
+Two main tables report migration outcomes and the 16-task training-signal
+ablation. Analyses explain repair versus preservation, per-task cost, retries,
+detection latency, and transfer across languages and target frameworks. The
+complete component matrix and additional repair protocols are in
+`sections/supplementary_experiments.tex`. Answer-guided historical experiments
+remain in the repository archives.
+
+The three figures show training-signal detection, the investigation and repair
+procedure, and total model use with per-input LaDiM/MatchFixAgent token costs.
+The measured acceptance at one, two, and four submissions remains in the text.
+The overview is a simple placeholder for the author's replacement. Its editable
+PowerPoint and SVG share the same labels and layout; `update_overview_labels.py`
+exports the SVG as a vector PDF and PNG. The compiled manuscript PDF remains
+local and ignored by Git.
+
+See [figure inputs and provenance](data/paper_figures/README.md),
+[revision record](docs/paper-revision-20260920.md), and
+[evidence and claims](docs/paper-evidence-and-claims-plan-20260920.md).
 
 ## Re-running experiments
 

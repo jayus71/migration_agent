@@ -1,0 +1,269 @@
+{
+  "checked_at": "2026-09-18T18:13:43.241651+00:00",
+  "completed_at": "2026-09-18T18:06:01.461317+00:00",
+  "checks": {
+    "unique_conditions": 391,
+    "normal_terminal_results": 390,
+    "integration_interruptions": 1,
+    "accepted": 300,
+    "not_accepted": 90,
+    "pending": 0,
+    "running": 0,
+    "result_hashes_present": true,
+    "request_files_missing_responses": 0,
+    "provider_usage_matches_status": true,
+    "main_unique_groups": 29,
+    "main_alias_ids": 50,
+    "main_alias_uniqueness_passed_for_all_methods": true,
+    "interrupted_original_hash_verified": true,
+    "interrupted_job": "main__group_012__swe"
+  },
+  "main": [
+    {
+      "method": "LaDiM",
+      "key": "ladim",
+      "denominator": 29,
+      "accepted": 29,
+      "not_accepted": 0,
+      "interrupted": 0,
+      "accepted_aliases": 50,
+      "interrupted_aliases": 0,
+      "end_to_end_tokens": 5159134,
+      "end_to_end_calls": 326
+    },
+    {
+      "method": "MatchFixAgent",
+      "key": "matchfix",
+      "denominator": 29,
+      "accepted": 29,
+      "not_accepted": 0,
+      "interrupted": 0,
+      "accepted_aliases": 50,
+      "interrupted_aliases": 0,
+      "end_to_end_tokens": 12097425,
+      "end_to_end_calls": 619
+    },
+    {
+      "method": "SWE-agent",
+      "key": "swe",
+      "denominator": 29,
+      "accepted": 25,
+      "not_accepted": 3,
+      "interrupted": 1,
+      "accepted_aliases": 44,
+      "interrupted_aliases": 1,
+      "end_to_end_tokens": 20831495,
+      "end_to_end_calls": 1097
+    },
+    {
+      "method": "Direct LLM",
+      "key": "direct",
+      "denominator": 29,
+      "accepted": 20,
+      "not_accepted": 9,
+      "interrupted": 0,
+      "accepted_aliases": 29,
+      "interrupted_aliases": 0,
+      "end_to_end_tokens": 429109,
+      "end_to_end_calls": 29
+    },
+    {
+      "method": "CodeTransEngine（直接转换配置）",
+      "key": "cte",
+      "denominator": 29,
+      "accepted": 19,
+      "not_accepted": 10,
+      "interrupted": 0,
+      "accepted_aliases": 31,
+      "interrupted_aliases": 0,
+      "end_to_end_tokens": 279536,
+      "end_to_end_calls": 29
+    },
+    {
+      "method": "MSAdapter",
+      "key": "msadapter",
+      "denominator": 29,
+      "accepted": 7,
+      "not_accepted": 22,
+      "interrupted": 0,
+      "accepted_aliases": 15,
+      "interrupted_aliases": 0,
+      "end_to_end_tokens": 0,
+      "end_to_end_calls": 0
+    }
+  ],
+  "cross_language": [
+    {
+      "method": "LaDiM",
+      "accepted": 9,
+      "denominator": 18,
+      "tokens": 21479058
+    },
+    {
+      "method": "SWE-agent",
+      "accepted": 8,
+      "denominator": 18,
+      "tokens": 24320695
+    },
+    {
+      "method": "MatchFixAgent",
+      "accepted": 8,
+      "denominator": 18,
+      "tokens": 28354720
+    },
+    {
+      "method": "普通测试修复",
+      "accepted": 7,
+      "denominator": 18,
+      "tokens": 4475292
+    },
+    {
+      "method": "Direct LLM（复用）",
+      "accepted": 1,
+      "denominator": 18,
+      "tokens": 693790
+    },
+    {
+      "method": "InterTrans（复用）",
+      "accepted": 1,
+      "denominator": 18,
+      "tokens": 2286034
+    }
+  ],
+  "analysis": [
+    {
+      "variant": "LaDiM 完整方法",
+      "accepted": 29,
+      "denominator": 29,
+      "tokens": 5159134
+    },
+    {
+      "variant": "延续原会话进行修复",
+      "accepted": 28,
+      "denominator": 29,
+      "tokens": 5603194
+    },
+    {
+      "variant": "移除跨轮修复历史",
+      "accepted": 29,
+      "denominator": 29,
+      "tokens": 4566058
+    },
+    {
+      "variant": "移除进展提示",
+      "accepted": 29,
+      "denominator": 29,
+      "tokens": 4562389
+    },
+    {
+      "variant": "MatchFixAgent 加入诊断模块",
+      "accepted": 29,
+      "denominator": 29,
+      "tokens": 19480375
+    },
+    {
+      "variant": "SWE-agent 加入诊断模块",
+      "accepted": 24,
+      "denominator": 29,
+      "tokens": 36547007
+    }
+  ],
+  "main_ladim_token_reduction_vs_matchfix": 0.5735345331754484,
+  "formal_physical_observed_usage": {
+    "observed_calls": 6255,
+    "usage": {
+      "prompt_tokens": 170129570,
+      "completion_tokens": 11847885,
+      "total_tokens": 181977455,
+      "prompt_cache_hit_tokens": 148014934,
+      "prompt_cache_miss_tokens": 22114636
+    },
+    "missing_usage_fields": {},
+    "usd_cost": null
+  },
+  "historical_direct_observed_tokens": 693790,
+  "historical_intertrans_summary": {
+    "expected": 18,
+    "completed": 18,
+    "accepted": 1,
+    "current_usage": {
+      "calls": 53,
+      "prompt_tokens": 400439,
+      "completion_tokens": 1311291,
+      "total_tokens": 1711730,
+      "reasoning_tokens": 1203793,
+      "prompt_cache_hit_tokens": 272638,
+      "prompt_cache_miss_tokens": 127801,
+      "missing_fields": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0,
+        "reasoning_tokens": 0,
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 0
+      },
+      "known_subtotals": {
+        "prompt_tokens": 400439,
+        "completion_tokens": 1311291,
+        "total_tokens": 1711730,
+        "reasoning_tokens": 1203793,
+        "prompt_cache_hit_tokens": 272638,
+        "prompt_cache_miss_tokens": 127801
+      }
+    },
+    "historical_incomplete_usage": {
+      "calls": 36,
+      "prompt_tokens": 279392,
+      "completion_tokens": 294912,
+      "total_tokens": 574304,
+      "reasoning_tokens": 294912,
+      "prompt_cache_hit_tokens": 17408,
+      "prompt_cache_miss_tokens": 261984,
+      "missing_fields": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0,
+        "reasoning_tokens": 0,
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 0
+      },
+      "known_subtotals": {
+        "prompt_tokens": 279392,
+        "completion_tokens": 294912,
+        "total_tokens": 574304,
+        "reasoning_tokens": 294912,
+        "prompt_cache_hit_tokens": 17408,
+        "prompt_cache_miss_tokens": 261984
+      }
+    },
+    "cumulative_usage": {
+      "calls": 89,
+      "prompt_tokens": 679831,
+      "completion_tokens": 1606203,
+      "total_tokens": 2286034,
+      "reasoning_tokens": 1498705,
+      "prompt_cache_hit_tokens": 290046,
+      "prompt_cache_miss_tokens": 389785,
+      "missing_fields": {
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0,
+        "reasoning_tokens": 0,
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 0
+      },
+      "known_subtotals": {
+        "prompt_tokens": 679831,
+        "completion_tokens": 1606203,
+        "total_tokens": 2286034,
+        "reasoning_tokens": 1498705,
+        "prompt_cache_hit_tokens": 290046,
+        "prompt_cache_miss_tokens": 389785
+      }
+    },
+    "usd_cost": null,
+    "usd_cost_note": "Token usage is exact; no verified provider billing rate or invoice is archived."
+  },
+  "combined_observed_tokens_with_reused_history": 184957279,
+  "usd_cost": null
+}

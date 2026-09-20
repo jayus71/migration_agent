@@ -1,0 +1,21 @@
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}
+\toprule
+\textbf{Method} & \textbf{Accepted} & \thead{Total tokens\\(millions)} & \thead{Model\\calls} \\
+\midrule
+\multicolumn{4}{l}{\textit{(a) PyTorch to MindSpore}} \\
+Direct LLM & 29/50 & 0.429 & 29 \\
+CodeTransEngine (direct)~\citep{macedo2025codetransengine} & 31/50 & 0.280 & 29 \\
+MSAdapter~\citep{openi2025msadapter} & 15/50 & 0.000 & 0 \\
+SWE-agent~\citep{yang2024sweagent} & 44/50 & 20.831 & 1,097 \\
+MatchFixAgent~\citep{ibrahimzada2025matchfixagent} & 50/50 & 12.097 & 619 \\
+\textbf{LaDiM (ours)} & \textbf{50/50} & 5.159 & 326 \\
+\midrule
+\multicolumn{4}{l}{\textit{(b) Java/DJL to Python/PyTorch}} \\
+Direct LLM & 1/18 & 0.694 & 18 \\
+InterTrans~\citep{macedo2024intertrans} & 1/18 & 2.286 & 89 \\
+Test-guided repair & 7/18 & 4.475 & 71 \\
+SWE-agent~\citep{yang2024sweagent} & 8/18 & 24.321 & 682 \\
+MatchFixAgent~\citep{ibrahimzada2025matchfixagent} & 8/18 & 28.355 & 524 \\
+\textbf{LaDiM (ours)} & 9/18 & 21.479 & 345 \\
+\bottomrule
+\end{tabular*}

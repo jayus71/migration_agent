@@ -1,0 +1,6 @@
+已接管并完成真实 SSH 检查：2026-09-18 14:54:23 UTC，200/391 finished，4 worker 均存活，scheduler PID 192058，status 年龄 1.28 秒。主 71、跨语言 69、插拔 24、消融 36。监控记录已更新。子 agent 没有已验证的独立 thread ID；无法声称 heartbeat 可直接指向该 canonical 名。
+发现新故障 main__group_012__swe：28 次模型调用后，接入层进程恢复失败（Native process did not acknowledge continuation），cleanup 另有 pidfd EBADF。调度器暂停 swe 后续条件，其他方法继续四并行。我正继续核对接入实现和原始证据；未重跑、未修改方法或结果。原 result accepted=true 来自 initially_accepted=true，不能直接解读为本次修复成功。
+追加核查：measurement_0001–0006 accepted=true；第 28 调用把候选 relu 改为 sigmoid 后，measurement_0007 accepted=false。随后发生进程恢复错误，result 的 accepted=true 仍为旧 initial 状态。汇总必须将原始字段与终态有效性分开，保留 28 调用费用，不能把该字段直接当最终验收。
+离线集成探针使用已有 NativeSWEIntegrationTests 的 synthetic fixture、脚本模型与相同 public-test 管道，initialize=ready、repair=submitted，未调用真实模型。当前单次探针未复现续行故障；没有据此改动冻结接入代码。
+进一步用同一 synthetic fixture 连续执行 29 次相同 public-test 管道：repair=submitted，29 次公共测试正常，仍未复现。未修改代码。现有 SWE 中断已消费模型调用且 native worker 已退出，不能无损恢复其进程状态；若需继续此条件必须另行决定如何保留中断条件与追加调用，当前不会自行重采样。
+15:12 UTC 更新：244 finished，4 active，1 needs_inspection，142 pending；跨语言72已全部完成。SWE仍被自动封锁。故障说明见 docs/unified50-swe-continuation-incident-20260918.md。原始结果 SHA-256 dc01ceda726dfefd12c30875ab840daa5789b6af0ba8bcb7d2db595821b0e4d5。

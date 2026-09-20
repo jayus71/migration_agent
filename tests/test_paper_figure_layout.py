@@ -12,6 +12,7 @@ try:
     from make_gradient_drift import build_figure as build_gradient_figure
     from make_repair_comparison import build_figure
     from make_repair_by_budget import draw_repair_by_budget
+    from make_unified_results import load_data
     from paper_data import GRADIENT_STEPS, METHOD_LABELS, THRESHOLDS, budget_acceptance
     from paper_plot_style import plt
 finally:
@@ -103,22 +104,29 @@ class PaperFigureLayoutTests(unittest.TestCase):
         fig.tight_layout(pad=0.4)
         self.assert_labels_do_not_overlap(fig, ax)
 
-    def test_composite_budget_labels_and_data(self):
+    def test_composite_paired_cost_labels_and_data(self):
         fig = build_figure()
         ax = fig.axes[1]
         self.assert_labels_do_not_overlap(fig, ax)
-        labels = ['SWE-agent', 'Direct', 'LaDiM (slim v4)']
-        counts = [[28, 29, 29], [24, 31, 35], [29, 41, 45]]
-        self.assertEqual(len(ax.lines), len(labels))
-        for line, label, accepted in zip(ax.lines, labels, counts):
-            self.assertEqual(line.get_label(), label)
-            self.assertEqual(list(line.get_xdata()), [1, 2, 4])
-            self.assertEqual(list(line.get_ydata()), [n * 2 for n in accepted])
+        pairs = load_data()['paired_costs']
+        self.assertEqual((ax.get_xscale(), ax.get_yscale()), ('log', 'log'))
+        self.assertEqual(len(ax.collections), 2)
+        for collection, initially_accepted, label in zip(
+                ax.collections, [True, False], ['Initially accepted', 'Initially faulty']):
+            points = [p for p in pairs if p['initially_accepted'] == initially_accepted]
+            self.assertEqual(collection.get_label(), label)
+            np.testing.assert_allclose(collection.get_offsets(),
+                [[p['matchfix_tokens'] / 1000, p['ladim_tokens'] / 1000] for p in points])
+        self.assertEqual(sum(len(c.get_offsets()) for c in ax.collections), 29)
+        self.assertEqual(len(ax.lines), 1)
+        np.testing.assert_allclose(ax.lines[0].get_xdata(), ax.lines[0].get_ydata())
         fig.canvas.draw()
         renderer = fig.canvas.get_renderer()
         legend_box = ax.get_legend().get_window_extent(renderer)
         for label in ax.texts:
             self.assertFalse(label.get_window_extent(renderer).overlaps(legend_box))
+            for x, y in label.get_window_extent(renderer).get_points():
+                self.assertTrue(fig.bbox.contains(x, y))
 
     def test_standalone_budget_labels(self):
         fig, ax = plt.subplots(figsize=(3.6, 2.8))

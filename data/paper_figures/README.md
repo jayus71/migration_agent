@@ -1,24 +1,70 @@
 # Inputs for manuscript figures and tables
 
-## Current autonomous comparison (2026-09-18)
+## Current unified migration comparison (2026-09-20)
 
-The main manuscript now selects slim v4 (`without_edit_format_feedback`).
-`scripts/build_maintext_results_bundle.py` exports the audited selected runs to
-`output/maintext-results-20260918/slim_main.csv` and paired baseline overlap to
-`slim_baseline_overlap.csv`. Its `evidence_index.json` records source hashes.
-Run the exporter with `--recovery output/maintext-ablations-20260918/recovery_final.json`,
-then run `figures/make_slim_results.py` (also invoked by
-`figures/make_repair_comparison.py`) to regenerate the main table and figure.
-The cumulative Fixed50 counts are 29, 41, and 45 at one, two, and four submissions.
-Natural10 includes five initially healthy programs and four actual repairs.
-JAX and training-signal evidence still uses original v4. New MatchFixAgent and
-InterTrans results remain pending and are excluded from the new main comparison.
+`figures/make_unified_results.py` reads the completed audit and summary under
+`data/audits/unified50-preflight-20260918/formal_launch/`. It generates
+`TABLE_unified_comparison.tex`, `TABLE_unified_components.tex`,
+`TABLE_training_signals.tex`, `repair_comparison.pdf`/`.png`, and
+`data/paper_figures/unified_results.json`. `make_repair_comparison.py` calls the
+same exporter. The JSON records SHA-256 hashes of its inputs.
 
-`figures/make_slim_v4_overview.py` defines the current method diagram and creates
-both the editable PowerPoint and SVG. `figures/update_overview_labels.py` exports
-its vector PDF and PNG. The diagram shows autonomous investigation, evidence
-handoff, retained repair history and external acceptance, without deterministic
-category routing or score-based rollback.
+Main-table labels include citations for the external methods. CodeTransEngine
+uses its own system-paper citation, InterTrans its ICSE paper, and MSAdapter
+the official version 0.6.0 project. Direct LLM and test-guided repair retain
+their descriptive labels, and LaDiM is marked as ours. The main table has no
+special SWE-agent marker; its acceptance and cost accounting are unchanged.
+
+The main panel uses all 50 task identifiers for every method. They map to 29
+distinct source-and-contract pairs from 24 source files. A condition with
+identical source, contract, initial candidate, method, and inputs was executed
+once and mapped to its aliases. LaDiM and MatchFixAgent accept 50/50, SWE-agent
+44/50, Direct LLM 29/50, CodeTransEngine direct 31/50, and MSAdapter 15/50.
+Costs sum actual calls, including initial translation and unsuccessful attempts;
+aliases never multiply tokens. The one interrupted SWE-agent final outcome
+stays unavailable and remains in the denominator. Acceptance at a budget scores
+the last candidate checkpoint, including any regression after an earlier pass.
+LaDiM's counts at one, two, and four submissions are 46, 50, and 50.
+
+Figure 3(b) compares end-to-end LaDiM and MatchFixAgent tokens on all 29 distinct
+pairs. Each point sums its unique `end_to_end_call_keys` from the audited
+`provider_calls` ledger, and symbols use the shared Direct translation's
+initial acceptance. The JSON export stores these points in `paired_costs`.
+Both methods ultimately accept every pair. LaDiM uses fewer tokens on 27/29:
+19/20 initially accepted pairs and 8/9 initially faulty pairs. Point totals
+reconcile with the method totals. This plot replaces the largely flat budget
+curves at the user's request; the measured budget results remain in the prose.
+
+The second panel uses 18 cross-language tasks and includes LaDiM, SWE-agent,
+MatchFixAgent, whole-file test-guided repair, Direct LLM, and native InterTrans
+search. InterTrans's cost includes its incomplete generation calls. All component
+and host-integration rows use the common 50 identifiers and appear in the
+supplementary component table.
+
+`autonomous_training_signals.csv` copies the verified values from
+`output/maintext-results-20260918/training_signals.csv`. It reports four actual
+model classes and 16 instances per feedback setting, with final full-check
+acceptance 4, 8, 12, and 16. The original summary and provider audit hashes are
+in `output/maintext-results-20260918/evidence_index.json`; interpretation and
+independent validation are in
+`docs/maintext-training-signal-independent-review-20260918.md`.
+
+The current method uses the frozen slim-v4 implementation. Signal and JAX studies
+use the earlier editing examples and format-correction feedback; this scientific
+difference is described in the supplementary protocol, with internal version
+identities retained only in provenance. Detection data and the Figure 1 exporter
+are unchanged by this revision.
+
+The method overview is a simple placeholder for the author's replacement.
+`make_slim_v4_overview.py` records the shared PowerPoint/SVG layout and labels;
+`update_overview_labels.py` exports the vector PDF and PNG. The current label edit
+preserves native editable objects and identifies the native MindSpore/PyTorch
+and TorchAX/JAX execution paths.
+
+The sections below document historical assets and generators. Their descriptions
+of main tables, figures, or appendices refer to earlier manuscripts. The current
+submission inputs are the unified files above and the documented signal and
+diagnostic studies; historical guided outcomes are kept as archived evidence.
 
 ## Historical guided snapshots
 
