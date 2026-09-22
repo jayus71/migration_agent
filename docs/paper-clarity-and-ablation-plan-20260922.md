@@ -2,6 +2,8 @@
 
 本轮以 `10e3710` 为检查点。先验证自动结构映射模块，并给出可审阅的修改方案；本文件尚未应用到论文正文、图表或方法图。
 
+方案初稿已保存为 `37220f1`。本轮只更新方案与独立实验文件，论文正文继续保留在原版本。
+
 当前主要问题是：实验设置承载了过多评估器细节，结果段夹杂修复日志，部分分组出现时没有定义，仓库组件的独立作用也没有被现有累计消融区分。下一版围绕“迁移是否成功、成功需要多少成本、哪些设计带来改进”组织实验论证。
 
 ## 1. 优先验证自动结构映射
@@ -22,6 +24,8 @@
 需同时核对初始提示、工具输出和上下文重建，确保移除的信息没有从其他入口自动返回。普通工具仍能读取相同源代码，因此两组比较的是结构整理的作用。
 
 首轮用于取得完整配对证据。建议随后预先固定追加两轮，在两个仓库都完成相同重复，报告三轮的配对结果及波动。重复 LLM 运行与评价程序使用的随机种子是两件事，不能用三个评价种子代替三次独立运行。追加重复和更大的组件矩阵列为后续实验方案，当前先执行上述四次运行。
+
+时间序列首轮已完成：两条件都通过完整验收，均在第二次外部提交后接受。完整方法使用 30 次调用和 2,126,900 总 token；移除自动映射后使用 42 次调用和 2,651,248 总 token。本轮减少 12 次调用及 19.8% 总 token。推荐仓库仍在执行。完整费用核查、映射使用轨迹和两仓库最终结果将保存在 `docs/repository-map-ablation-20260922.md`。
 
 论文中的强调方式由结果决定：接受结果相近且成本稳定下降时，突出减少定位和上下文开销；跨入口或训练检查稳定改善时，突出跨文件协调效果。映射与依赖规划的组合价值需要另设“保留映射、关闭依赖规划”的对照来区分。现阶段先保留仓库协调方法的位置，等待结果确定它在贡献和方法图中的权重。
 
@@ -57,6 +61,12 @@ Orchestrator 的主句采用：
 
 上述规则继续用于实验和数据统计。正文用一句附录引用承接完整复现信息。
 
+Evaluation protocol 的拟替换核心段落如下，比较方法与共同预算另保留一小段：
+
+> We compare methods on common source programs, evaluation inputs, and corresponding initial parameters. Repair methods also receive the same initial translations. Acceptance requires agreement in execution, forward values, gradients, and parameter updates, together with the task's optimizer and interface checks. Repository evaluation also covers shared entry points and the original tests. Candidates that pass the initial evaluation are checked on additional seeds. The appendix gives the numerical tolerances, training schedules, and detailed checks.
+
+此处的附录编号在应用方案时由 LaTeX 引用生成。训练步数、每类检查数量和停止规则不再挤在这段定义中。
+
 ## 4. 主结果围绕优势展开
 
 MindSpore 段落按“完整接受 → 成本优势 → 优势来源”组织：50/50 接受，较 MatchFixAgent 少用 57.4% token；46/50 在首次提交后通过，第二次达到 50/50；调用减少到 326 次，输入 token 的减少占总节省的 93.0%。解释效率优势同时出现在需要修复和初始检查已通过的程序中。图 3 为这种分解提供证据。
@@ -69,7 +79,11 @@ MindSpore 段落按“完整接受 → 成本优势 → 优势来源”组织：
 
 将 `Repairing Natural Translation Faults` 改为更直接的 `Repairing Translation Errors`，并与 setup 中十个保存的初始翻译对应。
 
-本段的主张是：LaDiM 修复了五个失败翻译中的四个，同时保留五个已通过检查的程序；三个对照方法保留原已通过的程序，但未修复这五个失败翻译。这个结果说明新增成功来自错误修复，也直接体现独立调查的实际价值。
+本段的主张是：LaDiM 修复了五个失败翻译中的四个，同时保留五个已通过检查的程序；三个对照方法保留原已通过的程序，但未修复这五个失败翻译。新增成功全部来自错误修复，可以直接支撑整个诊断与修复流程的有效性。独立调查这一组件的贡献由对应消融解释。
+
+拟替换段落先用下面两句表达实质结果，再根据修复记录选取一个能解释训练语义的例子：
+
+> LaDiM raises acceptance from five to nine of the ten saved translations by repairing four programs that fail the initial checks and preserving the five that already pass. Direct repair, SWE-agent, and MatchFixAgent retain the initial five successes but recover none of the failed programs.
 
 将 LSTM 的运算注册、张量索引递归、dispatch cycle、三次提交日志全部移到附录。正文如保留案例，只用一句说明“修复涉及支持库中的运算实现与调用关系”，并连接到训练行为恢复这一结果。删除段末重复总结修复流程的句子。
 
@@ -83,6 +97,16 @@ JAX 的当前正式修复比较运行了 LaDiM 与直接修复，两者都是 6/
 
 用户随后要求扩大 JAX 实例并研究提升方法表现。当前六例的最终补丁全部只改一行，分别修正多余函数参数、输出缩放或梯度截断，且只涉及 MLP/CNN 和单步 SGD。新研究应增加真实迁移中的模型结构、连续训练状态和优化器语义，并用开发实例改进方法。正式比较前固定未用于调试的任务、方法版本与预算，再让 LaDiM、直接修复、MatchFixAgent 和 SWE-agent 接收同一初始候选。旧六例及其成本保留为原有实验，不把新旧协议混成同一表。
 
+JAX 子代理负责独立目录 `experiments/jax_expansion_20260922/`，先推进两个受控开发任务：残差 MLP 的连续 momentum SGD 更新，以及 attention 的连续 Adam 更新。每例运行三个训练步和三个评价种子，比较完整的逐参数梯度、更新与参数状态，同时检查前向值、损失和对应初态。启动前必须验证健康实现在两框架间通过、目标故障确实被检出。
+
+开发研究先运行 LaDiM 与共享工具的直接修复，共四个条件，每个条件最多 40 次模型调用、四次提交，单 worker 执行。它用于发现诊断、证据交接或修复流程中的具体改进点，所有版本和结果留档。初始注意力健康检查暴露的近零梯度数值问题已在离线阶段处理；第二版十二个健康/故障检查全部通过，四个开发条件已经启动。
+
+正式扩展的来源池已经冻结为 PyTorch 官方示例的八个原始文件、九个模型训练任务：MNIST CNN、超分辨 CNN、VAE、DCGAN Generator、RNN 语言模型、Transformer 语言模型、时间序列 LSTM、Actor-Critic 与 REINFORCE Policy。固定上游版本为 `acc295dc7b90714f1bf47f06004fc19a7fe235c4`，来源和逐文件哈希保存在 `experiments/jax_expansion_20260922/formal_source_pool/manifest.json`。该池在开发 API 结果出现前选定，当前继续构建可运行的多步训练契约。
+
+通过一次共同翻译得到每例的原生 JAX/Optax 初始候选，固定任务和候选后运行四种修复方法。任务测量给定模型的连续训练，不声称迁移源文件中的数据下载、环境交互和整个应用。Dropout 模式、VAE 采样及 BatchNorm 缓冲状态在所有方法共用的任务要求中预先声明。正式任务不使用上述两个开发程序，也不依据已经观察到的方法输赢选择实例。MatchFixAgent 与 SWE-agent 的原生算法、提示和工具流程保持一致，新增工作集中在共同的 JAX 执行和验收接入。最终报告接受率、达到接受所用的提交次数、调用及完整 token 成本，并用多步训练中的失败类型解释差异。
+
+验收脚本的独立审阅还要求核对参数形状、从更新前快照计算参数变化，并验证梯度确实由 JAX 对当前计算求导。开发运行保留已冻结判定，最终候选另做这三项离线复验；正式验收内置相应检查。
+
 JAX 主文表的安排待新增结果确定：若形成有解释力的接受或成本优势，则正文展示新的共同协议比较；旧六例及转换器结果进入附录。当前稿的完整成本证据继续保留。
 
 ## 7. 增强智能体消融的解释力
@@ -93,7 +117,7 @@ JAX 主文表的安排待新增结果确定：若形成有解释力的接受或�
 
 从已有记录提取每次提交时的通过情况与累计 token，呈现修复进展和达到相同完成程度所需的成本。这样既看最终接受，也能看相同最终分数背后的修复效率。跨文件的入口通过情况、共享实现修改后的复查可辅助解释作用。以独立仓库运行作为比较单位，不把同一次运行中的 69 项检查当作 69 个独立实验。
 
-现有自然翻译的修复历史与独立交接消融也可辅助说明智能体机制，但要与仓库实验分开，保留各自任务和实现设置。不通过挑选仓库、缩小分母或事后改变预算制造优势。
+现有自然翻译的修复历史与独立交接消融也可辅助说明智能体机制，分别保留各自任务和实现设置。正式矩阵预先固定仓库、分母和预算，并汇总所有运行。
 
 ## 8. 行文和方法图
 
