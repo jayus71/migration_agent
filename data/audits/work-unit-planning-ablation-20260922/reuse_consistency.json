@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "checks": {
+    "timeseries:individual_reference_config_equal": true,
+    "timeseries:reference_result_bytes_equal": true,
+    "twotower:individual_reference_config_equal": true,
+    "twotower:reference_result_bytes_equal": true,
+    "only_ablated_condition_declared": true
+  },
+  "new_model_calls": 0,
+  "resource_placement": "New single worker uses CPUs 4 and 5; previous full references used original unrestricted CPU affinity. Algorithm, model request configuration, all time/call/token budgets and acceptance remain identical."
+}

@@ -11,10 +11,10 @@ CONDITIONS = ('full', 'no_work_unit_planning')
 def summarize(root):
     original_conditions, original_labels = common.CONDITIONS, common.LABELS
     try:
-        common.CONDITIONS, common.LABELS = CONDITIONS, ('Full (reused)', 'Without work-unit planning')
+        common.CONDITIONS, common.LABELS = CONDITIONS, ('Full (reused)', 'Without Repair Dependency Graph Planning')
         result = common.summarize(root)
         result['all_conditions_terminal'] = len(result['rows']) == 4 and all(r['status'] not in ('not_run', 'running') for r in result['rows'])
-        result['definition'] = 'Two new work-unit-planning ablations and two byte-preserved full references from the prior map ablation. Fixed inputs, budgets, backend and complete acceptance; no new full-method calls.'
+        result['definition'] = 'Two new Repair Dependency Graph Planning ablations and two byte-preserved full references from the prior Repository Structural Analysis ablation. Fixed inputs, budgets, backend and complete acceptance; no new full-method calls.'
         for row in result['rows']:
             row['reused_full_reference'] = row['condition'] == 'full'
         new = [r for r in result['rows'] if r['condition'] != 'full']
@@ -41,7 +41,7 @@ def hashes(root):
             if p.is_file() and not any(x.startswith('.') or x == '__pycache__' for x in p.relative_to(root).parts)}
 
 
-def audit(snapshot):
+def audit(snapshot, reference_snapshot=None):
     root = snapshot / 'experiments/work_unit_planning_ablation_20260922/results'
     freeze = read(root / 'freeze.json')
     declared_protocol = read(root / 'protocol.json')
@@ -64,6 +64,12 @@ def audit(snapshot):
         checks[f'{repo}:task_unchanged'] = digest(root / repo / 'task.json') == freeze['tasks'][repo]
         for name, expected in freeze['inputs'][repo].items():
             checks[f'{repo}:input_unchanged:{name}'] = hashes(root / repo / name) == expected
+        if reference_snapshot is not None:
+            reference = reference_snapshot / 'experiments/repository_map_ablation_20260922/results'
+            reused_files = hashes(root / repo / 'conditions/full')
+            reused_files.pop('reuse_origin.json')
+            checks[f'{repo}:reused_full_evidence_byte_preserved'] = reused_files == hashes(reference / repo / 'conditions/full')
+            checks[f'{repo}:translation_generation_and_usage_byte_preserved'] = digest(root / repo / 'translation/result.json') == digest(reference / repo / 'translation/result.json')
     for row in summary['rows']:
         repo, condition = row['repository'], row['condition']
         prefix = f'{repo}:{condition}:'
@@ -130,6 +136,7 @@ def audit(snapshot):
         checks[prefix + 'fixed_check_denominator'] = c['expected'] == (69 if repo == 'timeseries' else 145)
         checks[prefix + 'accepted_checks_complete'] = not row['accepted'] or c['passed'] == c['expected']
     return {'passed': all(checks.values()), 'checks': checks,
+            'original_reference_archive_checked': reference_snapshot is not None,
             'run_count': len(summary['rows']), 'physical_ledger': summary['physical_ledger'],
             'result_sha256': summary['result_sha256']}
 
@@ -137,9 +144,11 @@ def audit(snapshot):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('snapshot', type=Path)
+    parser.add_argument('--reference-snapshot', type=Path,
+                        help='Original map-ablation archive for complete reused evidence and generation-state checks')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
-    result = audit(args.snapshot)
+    result = audit(args.snapshot, args.reference_snapshot)
     args.output.write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps({'passed': result['passed'], 'checks': len(result['checks']),
                       'failed': [k for k, v in result['checks'].items() if not v]}))

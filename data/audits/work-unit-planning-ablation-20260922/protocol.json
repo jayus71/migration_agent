@@ -1,0 +1,37 @@
+{
+  "repositories": [
+    "timeseries",
+    "twotower"
+  ],
+  "conditions": [
+    "no_work_unit_planning"
+  ],
+  "replicate": 1,
+  "jobs": 2,
+  "reused_conditions": [
+    "full"
+  ],
+  "max_parallel_jobs": 1,
+  "repair_budget": {
+    "model": "deepseek-v4-flash",
+    "max_calls": 80,
+    "max_output_tokens": 480000,
+    "max_seconds": 3600,
+    "per_call_output_tokens": 32768
+  },
+  "external_submissions": 4,
+  "full_reference": "/media/main/whj/projects/torch4ms/ascend-torch4ms-map-ablation-20260922/experiments/repository_map_ablation_20260922/results",
+  "full_reuse": "User requested reuse of the unchanged complete-method runs from the map ablation; no new full-method API calls. Reused outcomes and usage are separately labelled and excluded from newly incurred costs.",
+  "contrast": "Remove explicit work-unit planning and its dependent execution rules: plan/focus/checkpoint tools, dependency-ready gating, unit-scoped edit guard, checkpoint invalidation propagation and unit-boundary context rebuilds.",
+  "retained": "Same automatic file/import/symbol/notebook inventory, ordinary read/search/edit/tests, notebook edit transactions and syntax guards, immutable sources, versioned evidence, capacity-triggered context rebuilds, verifier and independent handoff, initial translation and generation state, acceptance and budgets. Working-set reads retain matching file hashes with identical character cap across the whole workspace when no unit is active.",
+  "prompt_change": {
+    "before": "\nThis is a repository migration. Use repository_map to inspect public interfaces, imports and notebook structure. Propose semantic work units using plan_units, preserving shared model and training interfaces. Infer unit membership and dependencies from the supplied code and actual observations; no fault classes or repair locations are supplied. Focus one ready unit before edits. Use notebook to read cells and edit with a cell index to change plain cell code, avoiding full notebook regeneration. Checkpoint completed work with declared local tests. Upstream changes invalidate dependent checkpoints. Local completion is provisional; final acceptance requires the unchanged complete-repository verifier, including actual execution of all declared entrypoints. The lifetime budget covers investigation, edits and validation for all units. Use existing execution evidence to decide when a unit is sufficiently understood, and reserve calls for dependent units and integration tests. Keep edits incremental and preserve implemented behavior across every entry point.\n",
+    "after": "\nThis is a repository migration. Use repository_map to inspect public interfaces, imports and notebook structure. Inspect cross-file interfaces from the supplied code and actual observations; no fault classes or repair locations are supplied. Explicit work-unit planning, focus constraints and unit checkpoints are disabled. Edit any legitimate target/ path directly using the ordinary transaction and syntax checks; source/ and task.json remain immutable. Use notebook to read cells and edit with a cell index to change plain cell code, avoiding full notebook regeneration. Use run_test for measured validation. Final acceptance requires the unchanged complete-repository verifier, including actual execution of all declared entrypoints. The lifetime budget covers investigation, edits and validation for the whole repository. Use existing execution evidence to decide what needs further investigation, and reserve calls for integration tests. Keep edits incremental and preserve implemented behavior across every entry point.\n"
+  },
+  "schedule": "Same cumulative runner: diagnosis 6 calls/64000 output; first repair <=16 calls; remaining allowance divided over remaining submissions. No budget reset.",
+  "outcomes": "Primary: complete repository acceptance on both fixed tasks. Descriptive: checks passed at every submission (69/145 fixed), calls and tokens, final failures, map/planning/checkpoint/edit/test trajectories. Checks are not independent samples.",
+  "cost": "All calls and failures counted; reused historical common translation added once for end-to-end attribution, no new translation calls.",
+  "future_repetitions": "No additional repeats dispatched. Report every run and any future authorized repeats without best-of selection; complete-method references are reused as explicitly requested.",
+  "sampling": "Same backend configuration; no seed or temperature added. Evaluation seeds unchanged. First replication is exploratory and does not establish a stable causal effect.",
+  "created": 1790066225.2644815
+}

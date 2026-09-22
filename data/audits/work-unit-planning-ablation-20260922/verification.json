@@ -1,0 +1,26 @@
+{
+  "mechanism_tests": {
+    "passed": true,
+    "count": 20,
+    "location": "Frozen remote runtime; unittest discover -s experiments/work_unit_planning_ablation_20260922 -p test_adapter.py -v"
+  },
+  "accounting_test": {
+    "passed": true,
+    "count": 1,
+    "command": "python3 -m unittest discover -s scripts -p test_work_unit_planning_accounting.py -v"
+  },
+  "offline_checks": {
+    "passed": true,
+    "count": 56
+  },
+  "reuse_preflight_checks": {
+    "passed": true,
+    "count": 5
+  },
+  "final_audit": {
+    "passed": true,
+    "count": 146
+  },
+  "runtime_versions_match_reference": true,
+  "new_model_calls_for_validation": 0
+}
