@@ -265,6 +265,8 @@ def export_tables(data):
         signal_rows.append(f"{signal_labels[row['variant']]} & {missed} & {row['tokens']/1e6:.3f} & {count}" + r' \\')
     signals = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}',
                r'\toprule',
+               r'\multicolumn{4}{l}{\textit{(a) Training signals: 16 faulty candidates}} \\',
+               r'\midrule',
                r'\textbf{Available feedback} & \thead{Initially undetected\\faults} & \thead{Total tokens\\(millions)} & \thead{Final\\accepted} \\',
                r'\midrule', *signal_rows, r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_training_signals.tex').write_text('\n'.join(signals) + '\n')
@@ -385,7 +387,8 @@ def export_figure():
     fig = build_figure()
     with plt.rc_context({'svg.fonttype': 'none'}):
         for suffix in ('pdf', 'png', 'svg'):
-            fig.savefig(ROOT / f'figures/repair_comparison.{suffix}', dpi=300)
+            fig.savefig(ROOT / f'figures/repair_comparison.{suffix}', dpi=300,
+                        bbox_inches='tight', pad_inches=.02)
     plt.close(fig)
 
 

@@ -3,7 +3,13 @@
 Read `README.md`, `data/paper_figures/README.md`, and the relevant experiment
 provenance before editing the paper or its figures. The manuscript is
 `conference_101719.tex`. Make paper changes on the branch requested by the user.
-Preserve existing work. Commit, push, open a PR, or merge only as requested.
+Preserve existing work. Before each new round of edits, inspect `git status`
+and the current diff, then commit the existing task changes as a checkpoint.
+When the relevant working tree is clean, the current commit is the checkpoint;
+do not create empty commits. Check Git status after each substantial batch and
+before delivery, and commit the completed, verified task changes. Keep unrelated
+user files intact and out of task commits. Push, open a PR, or merge only as
+requested.
 
 ## Writing
 

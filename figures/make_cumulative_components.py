@@ -30,6 +30,8 @@ def main():
         "% SHA256: " + hashlib.sha256(payload).hexdigest(),
         r"\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{6.0cm}rrr@{}}",
         r"\toprule",
+        r"\multicolumn{4}{l}{\textit{(b) Agent components: time series repository}} \\",
+        r"\midrule",
         r"\textbf{Components} & \thead{Behavior\\checks passed} & \thead{Investigation\\and repair calls} & \thead{Total tokens\\(millions)} \\",
         r"\midrule",
     ]
