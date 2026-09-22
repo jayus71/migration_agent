@@ -4,6 +4,15 @@
 \subsection{Task Construction and Accounting}
 \label{sec:task-construction}
 
+\begin{table}[!htb]
+\caption{Program collections for migration and repair, with their candidate construction, model coverage, and task counts.}
+\label{tab:collections}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\input{figures/TABLE_task_collections.tex}
+\end{table}
+
 The main MindSpore collection contains 50 task identifiers. Twelve entries reuse existing native source programs, and the remaining entries use programs authored from public interfaces and declared semantics. The identifiers correspond to 29 distinct combinations of source program and evaluation settings drawn from 24 source files. Conditions with identical source, evaluation settings, initial candidate, method, and inputs are executed once and associated with the corresponding identifiers. Acceptance in the main table uses all 50 identifiers, while token totals count actual calls. LaDiM, SWE-agent, and MatchFixAgent share the same initial translation for each distinct input. Production edits are restricted to the candidate program, with separate temporary tests available for investigation. Sources and task specifications remain fixed.
 
 The comparison across languages contains ten DJL application programs and eight textbook examples, averaging 221.2 nonblank source lines. LaDiM accepts one application and all eight examples. SWE-agent and MatchFixAgent each accept the same application and seven examples, while test-guided repair accepts seven examples. All repair methods preserve the initially accepted application. The saved initial translations and their generation costs are shared by the repair conditions. InterTrans uses its direct Java-to-Python path and an intermediate JavaScript path, with native search and extraction procedures. Its 2,286,034 tokens include 574,304 from incomplete generation calls and 1,711,730 from the completed search. The final evaluation compares outputs, losses, gradients, parameter updates, and observable optimizer state over two consecutive training steps.
@@ -13,7 +22,7 @@ The common MindSpore initial translations cost 429,109 tokens. This amount is in
 All failed tasks remain in each study's declared denominator, and all failed calls remain in its cost totals. Acceptance at a submission budget scores the current candidate, including any regression after an earlier pass. An edit counts one successfully applied editing operation and can replace several code blocks across files in the declared scope. Investigation and repair share cumulative call, output, and time budgets across submissions.
 
 
-Source lengths count nonblank physical lines, including comments. Program means count each distinct source once. The 50 MindSpore identifiers use 24 source files, the signal study uses four, and the JAX study uses two. Repository lengths include all source Python files and notebook code cells, including original tests and excluding the external evaluation harness.
+Source lengths count nonblank physical lines, including comments. The 50 MindSpore identifiers use 24 source files, the signal study uses four, and the JAX study uses two. Repository lengths include all source Python files and notebook code cells, including original tests and excluding the external evaluation harness.
 
 \begin{table}[!htb]
 \caption{Complete input and output token costs for individual migrations. Costs include initial translation and every subsequent call. Acceptance uses the declared task denominator for each collection.}
@@ -144,11 +153,11 @@ The time series protocol compares the core model for three consecutive Adam step
 
 The recommendation protocol covers six model paths that execute in the source framework with three sequential Adam updates. Source exceptions and empty returns are checked against the corresponding source behavior. Both the numerical worker and training command invoke the candidate's optimizer factory with learning rate 0.001. The source Adam settings use decay coefficients 0.9 and 0.999 and epsilon $10^{-8}$. Representation absolute tolerance is $10^{-4}$. Loss absolute/relative tolerances are $0.002/10^{-4}$, gradient tolerances are $10^{-4}/0.005$, and relative parameter update tolerance is 0.03. The evaluation includes all ten original tests and one epoch of the training command on 16 synthetic examples.
 
-Table~\ref{tab:repository-checks} reports the declared checks on the public seed. The 114 numerical comparisons comprise 108 checks over six paths, three steps, and six training signals, plus six inference retrieval checks. Twenty-four execution, step count, and native differentiation checks and seven source behavior checks bring the behavior-check total to 145. SWE-agent and MatchFixAgent each lack one retrieval measurement after reward model inference fails. That entry remains n/a in both the 114 and 145 denominators. MatchFixAgent passes 0/10 original tests: an unmigrated PyTorch import in its history-encoder test prevents collection under the native MindSpore requirement. No method reaches the two confirmation seeds on this repository.
+Table~\ref{tab:repository-checks} reports the declared checks on the public seed. The 114 numerical comparisons comprise 108 checks over six paths, three steps, and six training signals, plus six inference retrieval checks. Twenty-four execution, step count, and native differentiation checks and seven source behavior checks bring the behavior check total to 145. SWE-agent and MatchFixAgent each lack one retrieval measurement after reward model inference fails. That entry remains n/a in both the 114 and 145 denominators. MatchFixAgent passes 0/10 original tests: an unmigrated PyTorch import in its history-encoder test prevents collection under the native MindSpore requirement. No method reaches the two confirmation seeds on this repository.
 
 LaDiM passes all 18 loss and 18 gradient checks and 15/18 parameter update checks in the main recommendation comparison. Later item embeddings diverge in all six model paths at steps two and three. These failures remain alongside the successful reward model inference, retrieval, training command, and ten original tests.
 
-\begin{table}[!htb]
+\begin{table}[!t]
 \caption{Recommendation repository checks passed on the public seed. The numerical checks are a subset of behavior checks, and the six training signal rows break down the training checks. One unmeasured retrieval check remains in each baseline's denominator.}
 \label{tab:repository-checks}
 \centering

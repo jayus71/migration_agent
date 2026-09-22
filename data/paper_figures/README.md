@@ -16,7 +16,7 @@ same exporter. The JSON records SHA-256 hashes of its inputs.
 Method citations appear once per baseline in the experimental setup. The main
 program panels appear side by side and show calls, total tokens, and acceptance;
 the appendix retains their complete input/output token breakdowns. Repository
-panels share method rows with grouped task columns for passed checks, entry points
+panels share method rows with grouped task columns for behavior checks passed, entry points
 or original tests, repair calls, and total tokens. The appendix cost table also
 retains gradients and parameter updates for both repositories. The time series signal counts come from
 `repository_training_check_details.json`, which records the source archive and
@@ -91,11 +91,11 @@ including comments, and notebook code cells. Means deduplicate identical source
 hashes; counts and repository total lines do not. Repository totals include the
 original tests and exclude external evaluation harnesses. The twelve-task source
 and target study has short wrappers around attention, embedding, and activation
-operators; its 4.3-line mean describes those wrappers. The main-text table contains the MindSpore migration, natural translation,
+operators; its 4.3-line mean describes those wrappers. The collection table in Appendix A.1 contains the MindSpore migration, natural translation,
 training-signal, and JAX collections. The separate source-and-target repair
 statistics stay in provenance and the corresponding study stays in the appendix.
 Detection trajectories and the separate injected-fault collection are not rows
-in the main task table. The table presents candidate construction, model or operation
+in the collection table. The table presents candidate construction, model or operation
 coverage, and task counts. Source-length measurements remain in the statistics
 JSON: the short programs exercise selected computations and do not include the
 framework or supporting library implementation.
@@ -126,6 +126,15 @@ paths and SHA-256 hashes. The main context pair
 uses 6,047,074 versus 1,936,579 tokens; the independent structural analysis pair
 uses 2,651,248 versus 2,126,900. These references remain separate. Planning shares
 the independent structural analysis study's complete references.
+
+The September 22 feedback revision retains every numerical cell and moves the
+collection table to the appendix without adding mean source lengths. It defines
+behavior checks passed, entry points, and original tests in the existing evaluation
+protocol. The main signal caption explicitly makes each added signal cumulative.
+Table emphasis now includes the 35 time series repair calls, 4/5 repaired and 9/10
+accepted saved translations, 16/16 full-signal acceptance, and the independent
+68.0% and 19.8% repository token reductions. These are presentation changes to
+completed evidence, with no additional experiment runs.
 
 The main program component panel selects the first three entries from the complete
 saved-translation component results: independent evidence handoff, continuous

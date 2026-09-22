@@ -41,7 +41,7 @@ def table_start():
             r"\toprule",
             r"& \multicolumn{3}{c}{\textbf{Time series}} & \multicolumn{3}{c}{\textbf{Recommendation}} \\",
             r"\cmidrule(lr){2-4}\cmidrule(l){5-7}",
-            r"\textbf{Condition} & \thead{Checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} & \thead{Checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} \\",
+            r"\textbf{Condition} & \thead{Behavior\\checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} & \thead{Behavior\\checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} \\",
             r"\midrule"]
 
 
@@ -78,7 +78,8 @@ def main():
             ("Repository Structural Analysis", structure["timeseries", "no_automatic_map"], structure["timeseries", "full"])]:
         reduction = 100 * (1 - with_component["end_to_end_tokens"] / without["end_to_end_tokens"])
         lines.append(f"{label} & {without['calls']} & {without['end_to_end_tokens']:,} & "
-                     f"{with_component['calls']} & {with_component['end_to_end_tokens']:,} & {reduction:.1f}\\%" + r" \\")
+                     f"{with_component['calls']} & {with_component['end_to_end_tokens']:,} & "
+                     + r"\textbf{" + f"{reduction:.1f}" + r"\%}" + r" \\")
     lines += [r"\bottomrule", r"\end{tabular*}"]
     write_table("TABLE_repository_components.tex", lines, [SOURCE, STRUCTURE])
 
