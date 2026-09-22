@@ -1,0 +1,1206 @@
+{
+  "rows": [
+    {
+      "repository": "timeseries",
+      "condition": "repository_context",
+      "status": "completed",
+      "accepted": true,
+      "calls": 22,
+      "usage": {
+        "prompt_tokens": 1699639,
+        "completion_tokens": 73279,
+        "total_tokens": 1772918,
+        "budget_output_tokens": 73279,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 53315,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 393.7391453719465
+      },
+      "end_to_end_tokens": 1936579,
+      "stop_reason": null,
+      "error": null,
+      "pid": 2111624,
+      "started": 1790008773.784873,
+      "finished": 1790009167.5227048,
+      "result_sha256": "e1ccf92c301e34d01f8de3614a25b03e7ab9a63ac6c42d9d50a6a4f32cca2845",
+      "observed_requests": 22,
+      "observed_responses": 22,
+      "measured_response_tokens": 1772918,
+      "response_usage_missing": 0,
+      "tool_counts": {
+        "list": 3,
+        "read": 24,
+        "notebook": 1,
+        "edit": 5,
+        "run_test": 8,
+        "repository_map": 1,
+        "plan_units": 2,
+        "focus_unit": 3,
+        "checkpoint_unit": 1
+      },
+      "tool_counts_by_stage": {
+        "diagnose:0": {
+          "list": 1,
+          "read": 20,
+          "notebook": 1,
+          "edit": 1,
+          "run_test": 1
+        },
+        "repair:1": {
+          "repository_map": 1,
+          "list": 2,
+          "read": 4,
+          "edit": 4,
+          "plan_units": 2,
+          "focus_unit": 3,
+          "run_test": 7,
+          "checkpoint_unit": 1
+        }
+      },
+      "trajectory": [
+        {
+          "event": "event_00049_tool.json",
+          "call": 7,
+          "stage": "repair:1",
+          "name": "repository_map",
+          "arguments": {},
+          "returned_keys": [
+            "active",
+            "completion_rule",
+            "files",
+            "index_basis",
+            "unassigned_target_code_files",
+            "units"
+          ],
+          "mapped_files": 26
+        },
+        {
+          "event": "event_00063_tool.json",
+          "call": 10,
+          "stage": "repair:1",
+          "name": "plan_units",
+          "arguments": {
+            "units": [
+              {
+                "id": "core-model",
+                "paths": [
+                  "target/project.py",
+                  "target/parameter_map.json"
+                ],
+                "depends_on": [],
+                "goal": "Make the native MindSpore LSTMModel callable (construct dispatch), preserve source architecture/parameter names and make numeric training (make_optimizer/train_batch/learning_rate_for_epoch) match source semantics.",
+                "tests": [
+                  "paired",
+                  "public"
+                ]
+              },
+              {
+                "id": "snippets",
+                "paths": [
+                  "target/step_by_step_code_blocks/define_lstm_model.py",
+                  "target/step_by_step_code_blocks/pytorch_dataloader.py",
+                  "target/step_by_step_code_blocks/model_training.py",
+                  "target/step_by_step_code_blocks/model_eval.py",
+                  "target/step_by_step_code_blocks/model_eval_zoomed_in.py",
+                  "target/step_by_step_code_blocks/predict_future_prices.py"
+                ],
+                "depends_on": [
+                  "core-model"
+                ],
+                "goal": "Preserve the instructional snippet chain as mindspore code that executes sequentially: define DataLoader before use, provide make_optimizer/learning_rate_for_epoch/train_batch so the snippet training loop runs on native MindSpore.",
+                "tests": [
+                  "entrypoints"
+                ]
+              },
+              {
+                "id": "notebook",
+                "paths": [
+                  "target/demo-predicting-stock-prices.ipynb"
+                ],
+                "depends_on": [
+                  "core-model"
+                ],
+                "goal": "Convert every notebook code cell from PyTorch to native MindSpore while preserving the instructional progression, and complete training + 3 evaluation plots + next-day forecast on the fixed data fixture.",
+                "tests": [
+                  "coverage",
+                  "entrypoints"
+                ]
+              },
+              {
+                "id": "docs",
+                "paths": [
+                  "target/README.md",
+                  "target/requirements.txt"
+                ],
+                "depends_on": [],
+                "goal": "Document the native MindSpore framework and its installation so the documentation check passes (requirements already list mindspore and exclude torch).",
+                "tests": [
+                  "coverage"
+                ]
+              },
+              {
+                "id": "integration",
+                "paths": [
+                  "target/project.py"
+                ],
+                "depends_on": [
+                  "core-model",
+                  "snippets",
+                  "notebook",
+                  "docs"
+                ],
+                "goal": "Full-repository integration: workflow and public checks pass with real MindSpore execution.",
+                "tests": [
+                  "workflow",
+                  "public"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "event": "event_00066_tool.json",
+          "call": 11,
+          "stage": "repair:1",
+          "name": "focus_unit",
+          "arguments": {
+            "id": "core-model"
+          }
+        },
+        {
+          "event": "event_00076_tool.json",
+          "call": 14,
+          "stage": "repair:1",
+          "name": "plan_units",
+          "arguments": {
+            "units": [
+              {
+                "depends_on": [],
+                "goal": "Convert the whole repository to native MindSpore while preserving source behavior: callable nn.Cell (construct), matching parameter names, snippets chain that runs standalone, notebook converted off PyTorch, README documenting native MindSpore installation.",
+                "id": "native-migration",
+                "paths": [
+                  "target/project.py",
+                  "target/parameter_map.json",
+                  "target/demo-predicting-stock-prices.ipynb",
+                  "target/step_by_step_code_blocks/define_lstm_model.py",
+                  "target/step_by_step_code_blocks/pytorch_dataloader.py",
+                  "target/step_by_step_code_blocks/model_training.py",
+                  "target/step_by_step_code_blocks/model_eval.py",
+                  "target/step_by_step_code_blocks/model_eval_zoomed_in.py",
+                  "target/step_by_step_code_blocks/predict_future_prices.py",
+                  "target/README.md",
+                  "target/requirements.txt"
+                ],
+                "tests": [
+                  "paired",
+                  "coverage",
+                  "entrypoints"
+                ]
+              },
+              {
+                "depends_on": [
+                  "native-migration"
+                ],
+                "goal": "Full-repository integration: 100-epoch workflow and public acceptance run entirely on native MindSpore.",
+                "id": "integration",
+                "paths": [
+                  "target/project.py"
+                ],
+                "tests": [
+                  "workflow",
+                  "public"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "event": "event_00080_tool.json",
+          "call": 15,
+          "stage": "repair:1",
+          "name": "focus_unit",
+          "arguments": {
+            "id": "native-migration"
+          }
+        },
+        {
+          "event": "event_00098_tool.json",
+          "call": 20,
+          "stage": "repair:1",
+          "name": "checkpoint_unit",
+          "arguments": {}
+        },
+        {
+          "event": "event_00101_tool.json",
+          "call": 21,
+          "stage": "repair:1",
+          "name": "focus_unit",
+          "arguments": {
+            "id": "integration"
+          }
+        }
+      ],
+      "progress": [
+        {
+          "submission": 0,
+          "calls": 0,
+          "repair_tokens": 0,
+          "accepted": false,
+          "checks": {
+            "passed": null,
+            "expected": 69,
+            "failed": [],
+            "not_measured": [
+              "public:preprocessing_normalized",
+              "public:preprocessing_windows",
+              "public:preprocessing_unseen",
+              "public:preprocessing_labels",
+              "public:preprocessing_inverse",
+              "public:step_1_prediction_max_abs",
+              "public:step_1_loss_abs",
+              "public:step_1_gradient_vector_l2",
+              "public:step_1_parameter_update_relative_l2",
+              "public:step_1_native_autodiff",
+              "public:step_2_prediction_max_abs",
+              "public:step_2_loss_abs",
+              "public:step_2_gradient_vector_l2",
+              "public:step_2_parameter_update_relative_l2",
+              "public:step_2_native_autodiff",
+              "public:step_3_prediction_max_abs",
+              "public:step_3_loss_abs",
+              "public:step_3_gradient_vector_l2",
+              "public:step_3_parameter_update_relative_l2",
+              "public:step_3_native_autodiff",
+              "public:three_steps",
+              "public:learning_rate_boundaries",
+              "public:parameter_count",
+              "confirmation_1:preprocessing_normalized",
+              "confirmation_1:preprocessing_windows",
+              "confirmation_1:preprocessing_unseen",
+              "confirmation_1:preprocessing_labels",
+              "confirmation_1:preprocessing_inverse",
+              "confirmation_1:step_1_prediction_max_abs",
+              "confirmation_1:step_1_loss_abs",
+              "confirmation_1:step_1_gradient_vector_l2",
+              "confirmation_1:step_1_parameter_update_relative_l2",
+              "confirmation_1:step_1_native_autodiff",
+              "confirmation_1:step_2_prediction_max_abs",
+              "confirmation_1:step_2_loss_abs",
+              "confirmation_1:step_2_gradient_vector_l2",
+              "confirmation_1:step_2_parameter_update_relative_l2",
+              "confirmation_1:step_2_native_autodiff",
+              "confirmation_1:step_3_prediction_max_abs",
+              "confirmation_1:step_3_loss_abs",
+              "confirmation_1:step_3_gradient_vector_l2",
+              "confirmation_1:step_3_parameter_update_relative_l2",
+              "confirmation_1:step_3_native_autodiff",
+              "confirmation_1:three_steps",
+              "confirmation_1:learning_rate_boundaries",
+              "confirmation_1:parameter_count",
+              "confirmation_2:preprocessing_normalized",
+              "confirmation_2:preprocessing_windows",
+              "confirmation_2:preprocessing_unseen",
+              "confirmation_2:preprocessing_labels",
+              "confirmation_2:preprocessing_inverse",
+              "confirmation_2:step_1_prediction_max_abs",
+              "confirmation_2:step_1_loss_abs",
+              "confirmation_2:step_1_gradient_vector_l2",
+              "confirmation_2:step_1_parameter_update_relative_l2",
+              "confirmation_2:step_1_native_autodiff",
+              "confirmation_2:step_2_prediction_max_abs",
+              "confirmation_2:step_2_loss_abs",
+              "confirmation_2:step_2_gradient_vector_l2",
+              "confirmation_2:step_2_parameter_update_relative_l2",
+              "confirmation_2:step_2_native_autodiff",
+              "confirmation_2:step_3_prediction_max_abs",
+              "confirmation_2:step_3_loss_abs",
+              "confirmation_2:step_3_gradient_vector_l2",
+              "confirmation_2:step_3_parameter_update_relative_l2",
+              "confirmation_2:step_3_native_autodiff",
+              "confirmation_2:three_steps",
+              "confirmation_2:learning_rate_boundaries",
+              "confirmation_2:parameter_count"
+            ],
+            "passed_fraction": null,
+            "measured": 0
+          }
+        },
+        {
+          "submission": 1,
+          "calls": 22,
+          "repair_tokens": 1772918,
+          "accepted": true,
+          "checks": {
+            "passed": 69,
+            "expected": 69,
+            "failed": [],
+            "not_measured": [],
+            "passed_fraction": 1.0,
+            "measured": 69
+          }
+        }
+      ],
+      "final_checks": {
+        "passed": 69,
+        "expected": 69,
+        "failed": [],
+        "not_measured": [],
+        "passed_fraction": 1.0,
+        "measured": 69
+      }
+    },
+    {
+      "repository": "twotower",
+      "condition": "repository_context",
+      "status": "completed",
+      "accepted": false,
+      "calls": 80,
+      "usage": {
+        "prompt_tokens": 9381298,
+        "completion_tokens": 441774,
+        "total_tokens": 9823072,
+        "budget_output_tokens": 441774,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 378132,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 2689.871301922016
+      },
+      "end_to_end_tokens": 10191440,
+      "stop_reason": "call_budget_exhausted",
+      "error": null,
+      "pid": 2118494,
+      "started": 1790008994.8151708,
+      "finished": 1790011684.684992,
+      "result_sha256": "acbebd5beecdbf9c7356c438fdf2015897b8166a3361ad7406ead9c9b475cd47",
+      "observed_requests": 80,
+      "observed_responses": 80,
+      "measured_response_tokens": 9823072,
+      "response_usage_missing": 0,
+      "tool_counts": {
+        "list": 8,
+        "read": 67,
+        "repository_map": 6,
+        "repository_evidence": 5,
+        "plan_units": 3,
+        "focus_unit": 5,
+        "edit": 20,
+        "run_test": 22,
+        "search": 4
+      },
+      "tool_counts_by_stage": {
+        "diagnose:0": {
+          "list": 1,
+          "read": 12,
+          "repository_map": 1,
+          "repository_evidence": 2
+        },
+        "repair:1": {
+          "read": 14,
+          "repository_map": 2,
+          "list": 3,
+          "plan_units": 2,
+          "focus_unit": 2,
+          "edit": 3,
+          "run_test": 4,
+          "search": 4
+        },
+        "repair:2": {
+          "read": 16,
+          "edit": 8,
+          "run_test": 8,
+          "focus_unit": 1,
+          "repository_map": 1
+        },
+        "repair:3": {
+          "read": 17,
+          "plan_units": 1,
+          "focus_unit": 2,
+          "edit": 4,
+          "run_test": 5,
+          "repository_map": 1,
+          "list": 1
+        },
+        "repair:4": {
+          "edit": 5,
+          "run_test": 5,
+          "repository_map": 1,
+          "list": 3,
+          "read": 8,
+          "repository_evidence": 3
+        }
+      },
+      "trajectory": [
+        {
+          "event": "event_00010_tool.json",
+          "call": 2,
+          "stage": "diagnose:0",
+          "name": "repository_map",
+          "arguments": {},
+          "returned_keys": [
+            "active",
+            "completion_rule",
+            "files",
+            "index_basis",
+            "unassigned_target_code_files",
+            "units"
+          ],
+          "mapped_files": 48
+        },
+        {
+          "event": "event_00041_tool.json",
+          "call": 7,
+          "stage": "repair:1",
+          "name": "repository_map",
+          "arguments": {},
+          "returned_keys": [
+            "active",
+            "completion_rule",
+            "files",
+            "index_basis",
+            "unassigned_target_code_files",
+            "units"
+          ],
+          "mapped_files": 48
+        },
+        {
+          "event": "event_00055_tool.json",
+          "call": 10,
+          "stage": "repair:1",
+          "name": "plan_units",
+          "arguments": {
+            "units": [
+              {
+                "id": "u1_train_cli",
+                "paths": [
+                  "target/train/train.py"
+                ],
+                "depends_on": [],
+                "goal": "Migrate the training CLI to native MindSpore: replace torch/torch.optim/torch.utils.data with numpy data handling + ms tensors, add make_optimizer(model, learning_rate=0.001) returning nn.Adam with source defaults, make train_one_epoch run exactly one ms.value_and_grad per batch using the optimizer returned by make_optimizer and a device string, preserving source loss/averaging and CLI args.",
+                "tests": [
+                  "workflow",
+                  "base"
+                ]
+              },
+              {
+                "id": "u2_user_history_test",
+                "paths": [
+                  "target/tests/test_user_history_enc.py"
+                ],
+                "depends_on": [],
+                "goal": "Port the original UserHistoryEncoder test from torch to unittest+numpy+mindspore, preserving test names (test_forward/test_values/test_values_pos), assertions and expected values, and supplying the source-derived seed-42 initial parameters from task.json public_test_initializations so the exact-value expectations hold.",
+                "tests": [
+                  "tests"
+                ]
+              },
+              {
+                "id": "u3_docs_packaging",
+                "paths": [
+                  "target/README.md",
+                  "target/requirements.txt"
+                ],
+                "depends_on": [],
+                "goal": "Rewrite README framework/installation text for native MindSpore while preserving descriptions and limitations, and add requirements.txt listing mindspore/numpy/pytest/setuptools without any source framework.",
+                "tests": [
+                  "coverage"
+                ]
+              },
+              {
+                "id": "u4_parameter_map",
+                "paths": [
+                  "target/parameter_map.json"
+                ],
+                "depends_on": [],
+                "goal": "Provide the contract-required parameter_map.json with shared source->target name mapping covering every source named parameter once with matching shapes, and per-case entries for base,history,position,user,debias,reward,ranker,distillation; verify target parameters_and_names() bijection per case.",
+                "tests": [
+                  "coverage"
+                ]
+              },
+              {
+                "id": "u5_numeric_parity",
+                "paths": [
+                  "target/src/baseline_mips_module.py",
+                  "target/src/two_tower_base_retrieval.py",
+                  "target/src/user_history_encoder.py",
+                  "target/src/two_tower_with_user_history_encoder.py",
+                  "target/src/two_tower_with_position_debiased_weights.py",
+                  "target/src/two_tower_with_user_debiased_weights.py",
+                  "target/src/two_tower_with_debiasing.py",
+                  "target/src/two_tower_base_plus_main_ranker_reward_model.py",
+                  "target/src/two_tower_plus_light_ranker.py",
+                  "target/src/two_tower_plus_light_ranker_plus_main_ranker_kd.py"
+                ],
+                "depends_on": [
+                  "u1_train_cli",
+                  "u2_user_history_test",
+                  "u4_parameter_map"
+                ],
+                "goal": "Measure numeric parity of migrated src models against the source-derived initial parameters (embeddings, loss, gradients, three Adam updates) and only edit a src module if a measured mismatch is traced to it.",
+                "tests": [
+                  "paired",
+                  "base",
+                  "public"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "event": "event_00060_tool.json",
+          "call": 11,
+          "stage": "repair:1",
+          "name": "focus_unit",
+          "arguments": {
+            "id": "u1_train_cli"
+          }
+        },
+        {
+          "event": "event_00095_tool.json",
+          "call": 20,
+          "stage": "repair:1",
+          "name": "plan_units",
+          "arguments": {
+            "units": [
+              {
+                "depends_on": [],
+                "goal": "Migrate the training CLI to native MindSpore: replace torch/torch.optim/torch.utils.data with numpy data handling + ms tensors, add make_optimizer(model, learning_rate=0.001) returning nn.Adam with source defaults, make train_one_epoch run exactly one ms.value_and_grad per batch using the optimizer returned by make_optimizer and a device string, preserving source loss/averaging and CLI args.",
+                "id": "u1_train_cli",
+                "paths": [
+                  "target/train/train.py"
+                ],
+                "tests": [
+                  "workflow",
+                  "base"
+                ]
+              },
+              {
+                "depends_on": [],
+                "goal": "Fix the measured target defect that TwoTowerWithDebiasing called nn.Embedding with source-framework keyword names, port the torch-based UserHistoryEncoder test to unittest+numpy+mindspore with source-derived seed-42 initial parameters, add contract documentation/requirements, and supply the required parameter_map.json with the source->target parameter bijection (embeddings are named embedding_table in MindSpore).",
+                "id": "u6_residual_migration",
+                "paths": [
+                  "target/src/two_tower_with_debiasing.py",
+                  "target/tests/test_user_history_enc.py",
+                  "target/README.md",
+                  "target/requirements.txt",
+                  "target/parameter_map.json"
+                ],
+                "tests": [
+                  "tests",
+                  "coverage",
+                  "paired"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "event": "event_00096_tool.json",
+          "call": 20,
+          "stage": "repair:1",
+          "name": "focus_unit",
+          "arguments": {
+            "id": "u6_residual_migration"
+          }
+        },
+        {
+          "event": "event_00100_tool.json",
+          "call": 21,
+          "stage": "repair:1",
+          "name": "repository_map",
+          "arguments": {},
+          "returned_keys": [
+            "active",
+            "completion_rule",
+            "files",
+            "index_basis",
+            "unassigned_target_code_files",
+            "units"
+          ],
+          "mapped_files": 48
+        },
+        {
+          "event": "event_00178_tool.json",
+          "call": 40,
+          "stage": "repair:2",
+          "name": "focus_unit",
+          "arguments": {
+            "id": "u1_train_cli"
+          }
+        },
+        {
+          "event": "event_00182_tool.json",
+          "call": 41,
+          "stage": "repair:2",
+          "name": "repository_map",
+          "arguments": {},
+          "returned_keys": [
+            "active",
+            "completion_rule",
+            "files",
+            "index_basis",
+            "unassigned_target_code_files",
+            "units"
+          ],
+          "mapped_files": 48
+        },
+        {
+          "event": "event_00196_tool.json",
+          "call": 44,
+          "stage": "repair:3",
+          "name": "plan_units",
+          "arguments": {
+            "units": [
+              {
+                "id": "u1_train_cli",
+                "paths": [
+                  "target/train/train.py"
+                ],
+                "depends_on": [],
+                "goal": "Migrate the training CLI to native MindSpore and make make_optimizer(model, learning_rate=0.001) return a native optimizer whose parameter update reproduces the source Adam semantics exactly (m/v bias correction, eps added after sqrt(v/(1-beta2^t)), beta1=0.9, beta2=0.999, eps=1e-8), because native nn.Adam divides eps by sqrt(bias_correction2) and therefore diverges on small gradients; keep train_one_epoch's single ms.value_and_grad per batch, device string handling, loss averaging and CLI arguments unchanged.",
+                "tests": [
+                  "workflow",
+                  "base",
+                  "paired"
+                ]
+              },
+              {
+                "id": "u7_reward_inference",
+                "paths": [
+                  "target/src/two_tower_base_plus_main_ranker_reward_model.py"
+                ],
+                "depends_on": [],
+                "goal": "Restore the source method dispatch of TwoTowerWithMainRankerReward: the reward-specific loss code must override train_forward (as in the source) rather than construct, so native framework inference (model(...) -> construct) uses the inherited retrieval construct exactly like the source forward, while train_forward keeps the source loss behavior; preserve the unused local proxy-ranker limitation.",
+                "tests": [
+                  "paired"
+                ]
+              },
+              {
+                "id": "u6_residual_migration",
+                "paths": [
+                  "target/src/two_tower_with_debiasing.py",
+                  "target/tests/test_user_history_enc.py",
+                  "target/README.md",
+                  "target/requirements.txt",
+                  "target/parameter_map.json"
+                ],
+                "depends_on": [],
+                "goal": "Keep the already-verified residual migration items (torch-free UserHistoryEncoder test with seed-42 source initial state, native nn.Embedding constructor in TwoTowerWithDebiasing, MindSpore README/requirements, parameter_map bijection) passing; no further edits planned unless a measurement regresses.",
+                "tests": [
+                  "tests",
+                  "coverage",
+                  "paired"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "event": "event_00197_tool.json",
+          "call": 44,
+          "stage": "repair:3",
+          "name": "focus_unit",
+          "arguments": {
+            "id": "u1_train_cli"
+          }
+        },
+        {
+          "event": "event_00230_tool.json",
+          "call": 53,
+          "stage": "repair:3",
+          "name": "focus_unit",
+          "arguments": {
+            "id": "u7_reward_inference"
+          }
+        },
+        {
+          "event": "event_00234_tool.json",
+          "call": 54,
+          "stage": "repair:3",
+          "name": "repository_map",
+          "arguments": {},
+          "returned_keys": [
+            "active",
+            "completion_rule",
+            "files",
+            "index_basis",
+            "unassigned_target_code_files",
+            "units"
+          ],
+          "mapped_files": 48
+        },
+        {
+          "event": "event_00282_tool.json",
+          "call": 67,
+          "stage": "repair:4",
+          "name": "repository_map",
+          "arguments": {},
+          "returned_keys": [
+            "active",
+            "completion_rule",
+            "files",
+            "index_basis",
+            "unassigned_target_code_files",
+            "units"
+          ],
+          "mapped_files": 48
+        }
+      ],
+      "progress": [
+        {
+          "submission": 0,
+          "calls": 0,
+          "repair_tokens": 0,
+          "accepted": false,
+          "checks": {
+            "passed": null,
+            "expected": 145,
+            "failed": [],
+            "not_measured": [
+              "base_step1_user_embedding",
+              "base_step1_item_embedding",
+              "base_step1_loss",
+              "base_step1_epoch_loss",
+              "base_step1_gradient",
+              "base_step1_update",
+              "base_step2_user_embedding",
+              "base_step2_item_embedding",
+              "base_step2_loss",
+              "base_step2_epoch_loss",
+              "base_step2_gradient",
+              "base_step2_update",
+              "base_step3_user_embedding",
+              "base_step3_item_embedding",
+              "base_step3_loss",
+              "base_step3_epoch_loss",
+              "base_step3_gradient",
+              "base_step3_update",
+              "history_step1_user_embedding",
+              "history_step1_item_embedding",
+              "history_step1_loss",
+              "history_step1_epoch_loss",
+              "history_step1_gradient",
+              "history_step1_update",
+              "history_step2_user_embedding",
+              "history_step2_item_embedding",
+              "history_step2_loss",
+              "history_step2_epoch_loss",
+              "history_step2_gradient",
+              "history_step2_update",
+              "history_step3_user_embedding",
+              "history_step3_item_embedding",
+              "history_step3_loss",
+              "history_step3_epoch_loss",
+              "history_step3_gradient",
+              "history_step3_update",
+              "position_step1_user_embedding",
+              "position_step1_item_embedding",
+              "position_step1_loss",
+              "position_step1_epoch_loss",
+              "position_step1_gradient",
+              "position_step1_update",
+              "position_step2_user_embedding",
+              "position_step2_item_embedding",
+              "position_step2_loss",
+              "position_step2_epoch_loss",
+              "position_step2_gradient",
+              "position_step2_update",
+              "position_step3_user_embedding",
+              "position_step3_item_embedding",
+              "position_step3_loss",
+              "position_step3_epoch_loss",
+              "position_step3_gradient",
+              "position_step3_update",
+              "user_step1_user_embedding",
+              "user_step1_item_embedding",
+              "user_step1_loss",
+              "user_step1_epoch_loss",
+              "user_step1_gradient",
+              "user_step1_update",
+              "user_step2_user_embedding",
+              "user_step2_item_embedding",
+              "user_step2_loss",
+              "user_step2_epoch_loss",
+              "user_step2_gradient",
+              "user_step2_update",
+              "user_step3_user_embedding",
+              "user_step3_item_embedding",
+              "user_step3_loss",
+              "user_step3_epoch_loss",
+              "user_step3_gradient",
+              "user_step3_update",
+              "debias_step1_user_embedding",
+              "debias_step1_item_embedding",
+              "debias_step1_loss",
+              "debias_step1_epoch_loss",
+              "debias_step1_gradient",
+              "debias_step1_update",
+              "debias_step2_user_embedding",
+              "debias_step2_item_embedding",
+              "debias_step2_loss",
+              "debias_step2_epoch_loss",
+              "debias_step2_gradient",
+              "debias_step2_update",
+              "debias_step3_user_embedding",
+              "debias_step3_item_embedding",
+              "debias_step3_loss",
+              "debias_step3_epoch_loss",
+              "debias_step3_gradient",
+              "debias_step3_update",
+              "reward_step1_user_embedding",
+              "reward_step1_item_embedding",
+              "reward_step1_loss",
+              "reward_step1_epoch_loss",
+              "reward_step1_gradient",
+              "reward_step1_update",
+              "reward_step2_user_embedding",
+              "reward_step2_item_embedding",
+              "reward_step2_loss",
+              "reward_step2_epoch_loss",
+              "reward_step2_gradient",
+              "reward_step2_update",
+              "reward_step3_user_embedding",
+              "reward_step3_item_embedding",
+              "reward_step3_loss",
+              "reward_step3_epoch_loss",
+              "reward_step3_gradient",
+              "reward_step3_update",
+              "base_retrieval",
+              "history_retrieval",
+              "position_retrieval",
+              "user_retrieval",
+              "debias_retrieval",
+              "reward_retrieval",
+              "base_inference_status",
+              "base_training_status",
+              "base_three_steps",
+              "base_native_autodiff",
+              "history_inference_status",
+              "history_training_status",
+              "history_three_steps",
+              "history_native_autodiff",
+              "position_inference_status",
+              "position_training_status",
+              "position_three_steps",
+              "position_native_autodiff",
+              "user_inference_status",
+              "user_training_status",
+              "user_three_steps",
+              "user_native_autodiff",
+              "debias_inference_status",
+              "debias_training_status",
+              "debias_three_steps",
+              "debias_native_autodiff",
+              "reward_inference_status",
+              "reward_training_status",
+              "reward_three_steps",
+              "reward_native_autodiff",
+              "ranker_inference_status",
+              "ranker_inference_exception",
+              "ranker_training_status",
+              "ranker_training_exception",
+              "distillation_inference_status",
+              "distillation_inference_exception",
+              "distillation_training_status"
+            ],
+            "passed_fraction": null,
+            "measured": 0
+          }
+        },
+        {
+          "submission": 1,
+          "calls": 22,
+          "repair_tokens": 1567834,
+          "accepted": false,
+          "checks": {
+            "passed": null,
+            "expected": 145,
+            "failed": [],
+            "not_measured": [
+              "base_step1_user_embedding",
+              "base_step1_item_embedding",
+              "base_step1_loss",
+              "base_step1_epoch_loss",
+              "base_step1_gradient",
+              "base_step1_update",
+              "base_step2_user_embedding",
+              "base_step2_item_embedding",
+              "base_step2_loss",
+              "base_step2_epoch_loss",
+              "base_step2_gradient",
+              "base_step2_update",
+              "base_step3_user_embedding",
+              "base_step3_item_embedding",
+              "base_step3_loss",
+              "base_step3_epoch_loss",
+              "base_step3_gradient",
+              "base_step3_update",
+              "history_step1_user_embedding",
+              "history_step1_item_embedding",
+              "history_step1_loss",
+              "history_step1_epoch_loss",
+              "history_step1_gradient",
+              "history_step1_update",
+              "history_step2_user_embedding",
+              "history_step2_item_embedding",
+              "history_step2_loss",
+              "history_step2_epoch_loss",
+              "history_step2_gradient",
+              "history_step2_update",
+              "history_step3_user_embedding",
+              "history_step3_item_embedding",
+              "history_step3_loss",
+              "history_step3_epoch_loss",
+              "history_step3_gradient",
+              "history_step3_update",
+              "position_step1_user_embedding",
+              "position_step1_item_embedding",
+              "position_step1_loss",
+              "position_step1_epoch_loss",
+              "position_step1_gradient",
+              "position_step1_update",
+              "position_step2_user_embedding",
+              "position_step2_item_embedding",
+              "position_step2_loss",
+              "position_step2_epoch_loss",
+              "position_step2_gradient",
+              "position_step2_update",
+              "position_step3_user_embedding",
+              "position_step3_item_embedding",
+              "position_step3_loss",
+              "position_step3_epoch_loss",
+              "position_step3_gradient",
+              "position_step3_update",
+              "user_step1_user_embedding",
+              "user_step1_item_embedding",
+              "user_step1_loss",
+              "user_step1_epoch_loss",
+              "user_step1_gradient",
+              "user_step1_update",
+              "user_step2_user_embedding",
+              "user_step2_item_embedding",
+              "user_step2_loss",
+              "user_step2_epoch_loss",
+              "user_step2_gradient",
+              "user_step2_update",
+              "user_step3_user_embedding",
+              "user_step3_item_embedding",
+              "user_step3_loss",
+              "user_step3_epoch_loss",
+              "user_step3_gradient",
+              "user_step3_update",
+              "debias_step1_user_embedding",
+              "debias_step1_item_embedding",
+              "debias_step1_loss",
+              "debias_step1_epoch_loss",
+              "debias_step1_gradient",
+              "debias_step1_update",
+              "debias_step2_user_embedding",
+              "debias_step2_item_embedding",
+              "debias_step2_loss",
+              "debias_step2_epoch_loss",
+              "debias_step2_gradient",
+              "debias_step2_update",
+              "debias_step3_user_embedding",
+              "debias_step3_item_embedding",
+              "debias_step3_loss",
+              "debias_step3_epoch_loss",
+              "debias_step3_gradient",
+              "debias_step3_update",
+              "reward_step1_user_embedding",
+              "reward_step1_item_embedding",
+              "reward_step1_loss",
+              "reward_step1_epoch_loss",
+              "reward_step1_gradient",
+              "reward_step1_update",
+              "reward_step2_user_embedding",
+              "reward_step2_item_embedding",
+              "reward_step2_loss",
+              "reward_step2_epoch_loss",
+              "reward_step2_gradient",
+              "reward_step2_update",
+              "reward_step3_user_embedding",
+              "reward_step3_item_embedding",
+              "reward_step3_loss",
+              "reward_step3_epoch_loss",
+              "reward_step3_gradient",
+              "reward_step3_update",
+              "base_retrieval",
+              "history_retrieval",
+              "position_retrieval",
+              "user_retrieval",
+              "debias_retrieval",
+              "reward_retrieval",
+              "base_inference_status",
+              "base_training_status",
+              "base_three_steps",
+              "base_native_autodiff",
+              "history_inference_status",
+              "history_training_status",
+              "history_three_steps",
+              "history_native_autodiff",
+              "position_inference_status",
+              "position_training_status",
+              "position_three_steps",
+              "position_native_autodiff",
+              "user_inference_status",
+              "user_training_status",
+              "user_three_steps",
+              "user_native_autodiff",
+              "debias_inference_status",
+              "debias_training_status",
+              "debias_three_steps",
+              "debias_native_autodiff",
+              "reward_inference_status",
+              "reward_training_status",
+              "reward_three_steps",
+              "reward_native_autodiff",
+              "ranker_inference_status",
+              "ranker_inference_exception",
+              "ranker_training_status",
+              "ranker_training_exception",
+              "distillation_inference_status",
+              "distillation_inference_exception",
+              "distillation_training_status"
+            ],
+            "passed_fraction": null,
+            "measured": 0
+          }
+        },
+        {
+          "submission": 2,
+          "calls": 42,
+          "repair_tokens": 4256494,
+          "accepted": false,
+          "checks": {
+            "passed": 122,
+            "expected": 145,
+            "failed": [
+              "base_step2_item_embedding",
+              "base_step3_item_embedding",
+              "history_step1_update",
+              "history_step2_item_embedding",
+              "history_step3_item_embedding",
+              "position_step1_update",
+              "position_step2_user_embedding",
+              "position_step2_item_embedding",
+              "position_step2_update",
+              "position_step3_user_embedding",
+              "position_step3_item_embedding",
+              "position_step3_update",
+              "user_step1_update",
+              "user_step2_item_embedding",
+              "user_step3_item_embedding",
+              "debias_step1_update",
+              "debias_step2_item_embedding",
+              "debias_step3_item_embedding",
+              "debias_step3_gradient",
+              "reward_step2_item_embedding",
+              "reward_step3_item_embedding",
+              "reward_inference_status"
+            ],
+            "not_measured": [
+              "reward_retrieval"
+            ],
+            "passed_fraction": 0.8413793103448276,
+            "measured": 144
+          }
+        },
+        {
+          "submission": 3,
+          "calls": 61,
+          "repair_tokens": 6972650,
+          "accepted": false,
+          "checks": {
+            "passed": 131,
+            "expected": 145,
+            "failed": [
+              "base_step2_item_embedding",
+              "base_step3_item_embedding",
+              "history_step1_update",
+              "history_step2_item_embedding",
+              "history_step3_item_embedding",
+              "position_step2_item_embedding",
+              "position_step2_update",
+              "position_step3_item_embedding",
+              "user_step2_item_embedding",
+              "user_step3_item_embedding",
+              "debias_step2_item_embedding",
+              "debias_step3_item_embedding",
+              "reward_step2_item_embedding",
+              "reward_step3_item_embedding"
+            ],
+            "not_measured": [],
+            "passed_fraction": 0.903448275862069,
+            "measured": 145
+          }
+        },
+        {
+          "submission": 4,
+          "calls": 80,
+          "repair_tokens": 9823072,
+          "accepted": false,
+          "checks": {
+            "passed": 131,
+            "expected": 145,
+            "failed": [
+              "base_step2_item_embedding",
+              "base_step3_item_embedding",
+              "history_step1_update",
+              "history_step2_item_embedding",
+              "history_step3_item_embedding",
+              "position_step2_item_embedding",
+              "position_step2_update",
+              "position_step3_item_embedding",
+              "user_step2_item_embedding",
+              "user_step3_item_embedding",
+              "debias_step2_item_embedding",
+              "debias_step3_item_embedding",
+              "reward_step2_item_embedding",
+              "reward_step3_item_embedding"
+            ],
+            "not_measured": [],
+            "passed_fraction": 0.903448275862069,
+            "measured": 145
+          }
+        }
+      ],
+      "final_checks": {
+        "passed": 131,
+        "expected": 145,
+        "failed": [
+          "base_step2_item_embedding",
+          "base_step3_item_embedding",
+          "history_step1_update",
+          "history_step2_item_embedding",
+          "history_step3_item_embedding",
+          "position_step2_item_embedding",
+          "position_step2_update",
+          "position_step3_item_embedding",
+          "user_step2_item_embedding",
+          "user_step3_item_embedding",
+          "debias_step2_item_embedding",
+          "debias_step3_item_embedding",
+          "reward_step2_item_embedding",
+          "reward_step3_item_embedding"
+        ],
+        "not_measured": [],
+        "passed_fraction": 0.903448275862069,
+        "measured": 145
+      }
+    }
+  ],
+  "definition": "Fixed repositories, complete external acceptance. Check counts are descriptive and retain missing measurements; tool counts are actual execution events, not repeated tool messages in API prompts."
+}

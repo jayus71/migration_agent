@@ -1,0 +1,33 @@
+{
+  "repositories": [
+    "timeseries",
+    "twotower"
+  ],
+  "conditions": [
+    "full",
+    "no_automatic_map"
+  ],
+  "replicate": 1,
+  "jobs": 4,
+  "max_parallel_jobs": 2,
+  "repair_budget": {
+    "model": "deepseek-v4-flash",
+    "max_calls": 80,
+    "max_output_tokens": 480000,
+    "max_seconds": 3600,
+    "per_call_output_tokens": 32768
+  },
+  "external_submissions": 4,
+  "contrast": "Only automatic structure inventory removed: files, imports, symbols, notebook cell metadata and automatic unassigned-file list. Agent-generated work-unit graph remains.",
+  "retained": "Same public read/search/notebook tools, plan/focus/checkpoint, notebook edits, versioned evidence, context rebuilding, verifier, independent handoff, initial translation and generation-state handoff, all acceptance tests and all budgets.",
+  "prompt_change": {
+    "before": "Use repository_map to inspect public interfaces, imports and notebook structure.",
+    "after": "Use read, search and notebook to inspect public interfaces, imports and notebook structure. repository_map returns only your current work-unit graph; automatic structure extraction is disabled."
+  },
+  "schedule": "Same cumulative runner: diagnosis 6 calls/64000 output; first repair <=16 calls; remaining allowance divided over remaining submissions. No budget reset.",
+  "outcomes": "Primary: complete repository acceptance on both fixed tasks. Descriptive: checks passed at every submission (69/145 fixed), calls and tokens, final failures, map/planning/checkpoint/edit/test trajectories. Checks are not independent samples.",
+  "cost": "All calls and failures counted; reused historical common translation added once for end-to-end attribution, no new translation calls.",
+  "future_repetitions": "Prespecified recommendation, not dispatched: replicas 2 and 3, each both conditions on both repositories (8 additional jobs), identical budgets and no outcome-dependent selection. Report every run; no best-of selection.",
+  "sampling": "Same backend configuration; no seed or temperature added. Evaluation seeds unchanged. First replication is exploratory and does not establish a stable causal effect.",
+  "created": 1790060764.1428437
+}

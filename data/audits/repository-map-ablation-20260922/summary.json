@@ -1,0 +1,823 @@
+{
+  "rows": [
+    {
+      "repository": "timeseries",
+      "condition": "full",
+      "label": "Full",
+      "status": "completed",
+      "replicate": 1,
+      "accepted": true,
+      "calls": 30,
+      "usage": {
+        "prompt_tokens": 1870862,
+        "completion_tokens": 92377,
+        "total_tokens": 1963239,
+        "budget_output_tokens": 92377,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 72869,
+        "truncated_calls": 1,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 522.427960988949
+      },
+      "end_to_end_tokens": 2126900,
+      "translation_usage": {
+        "total_tokens": 163661
+      },
+      "source_unchanged": true,
+      "task_unchanged": true,
+      "stop_reason": null,
+      "error": null,
+      "repair_tokens": 1963239,
+      "translation_calls": 3,
+      "end_to_end_calls": 33,
+      "submissions": 2,
+      "stage_statuses": [
+        "completed",
+        "invalid_final"
+      ],
+      "termination": "accepted",
+      "diagnosis_status": "completed",
+      "recorded_request_count": 30,
+      "recorded_response_count": 30,
+      "response_usage_total": 1963239,
+      "response_prompt_and_completion_total": 1963239,
+      "api_errors": [],
+      "recorded_metadata_count": 30,
+      "diagnosis_calls": 6,
+      "repair_stage_calls": 24,
+      "role_handoffs": 1,
+      "repository_context_rebuilds": [
+        {
+          "reason": "generation_boundary",
+          "generation": 1,
+          "messages_sent": 3,
+          "prepared_chars": 13462,
+          "calls_used": 0,
+          "output_tokens_used": 0
+        },
+        {
+          "reason": "independent_role_handoff",
+          "generation": 2,
+          "messages_sent": 4,
+          "prepared_chars": 162266,
+          "calls_used": 6,
+          "output_tokens_used": 9775
+        },
+        {
+          "reason": "unit_boundary",
+          "generation": 3,
+          "messages_sent": 3,
+          "prepared_chars": 67026,
+          "calls_used": 14,
+          "output_tokens_used": 54958
+        },
+        {
+          "reason": "unit_boundary",
+          "generation": 4,
+          "messages_sent": 3,
+          "prepared_chars": 187738,
+          "calls_used": 23,
+          "output_tokens_used": 72915
+        }
+      ],
+      "context_budget_events": 0,
+      "elapsed_seconds": 522.4266543388367,
+      "documentation_accepted": true,
+      "workflow_accepted": true,
+      "coverage_accepted": null,
+      "entrypoints_accepted": true,
+      "numeric_execution": "ok",
+      "unknown_usage_calls": 0,
+      "protocol_checks": {
+        "passed": 69,
+        "expected": 69,
+        "failed": [],
+        "not_measured": [],
+        "passed_fraction": 1.0,
+        "measured": 69
+      },
+      "public_checks": {
+        "passed": 23,
+        "expected": 23,
+        "failed": [],
+        "not_measured": [],
+        "passed_fraction": 1.0,
+        "measured": 23
+      },
+      "confirmations": 2
+    },
+    {
+      "repository": "twotower",
+      "condition": "full",
+      "label": "Full",
+      "status": "completed",
+      "replicate": 1,
+      "accepted": false,
+      "calls": 80,
+      "usage": {
+        "prompt_tokens": 9240965,
+        "completion_tokens": 352170,
+        "total_tokens": 9593135,
+        "budget_output_tokens": 352170,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 281113,
+        "truncated_calls": 1,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 1707.462451439933
+      },
+      "end_to_end_tokens": 9961503,
+      "translation_usage": {
+        "prompt_tokens": 128368,
+        "completion_tokens": 240000,
+        "total_tokens": 368368,
+        "budget_output_tokens": 240000,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 211904,
+        "truncated_calls": 3,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 1264.855403942056
+      },
+      "source_unchanged": true,
+      "task_unchanged": true,
+      "stop_reason": "call_budget_exhausted",
+      "error": null,
+      "repair_tokens": 9593135,
+      "translation_calls": 20,
+      "end_to_end_calls": 100,
+      "submissions": 4,
+      "stage_statuses": [
+        "completed",
+        "completed",
+        "invalid_final",
+        "investigation_only"
+      ],
+      "termination": "call_budget_exhausted",
+      "diagnosis_status": "completed",
+      "recorded_request_count": 80,
+      "recorded_response_count": 80,
+      "response_usage_total": 9593135,
+      "response_prompt_and_completion_total": 9593135,
+      "api_errors": [],
+      "recorded_metadata_count": 80,
+      "diagnosis_calls": 6,
+      "repair_stage_calls": 74,
+      "role_handoffs": 1,
+      "repository_context_rebuilds": [
+        {
+          "reason": "generation_boundary",
+          "generation": 1,
+          "messages_sent": 3,
+          "prepared_chars": 13272,
+          "calls_used": 0,
+          "output_tokens_used": 0
+        },
+        {
+          "reason": "independent_role_handoff",
+          "generation": 2,
+          "messages_sent": 4,
+          "prepared_chars": 97983,
+          "calls_used": 6,
+          "output_tokens_used": 4452
+        },
+        {
+          "reason": "context_capacity",
+          "generation": 3,
+          "messages_sent": 3,
+          "prepared_chars": 168516,
+          "calls_used": 30,
+          "output_tokens_used": 103718
+        },
+        {
+          "reason": "context_capacity",
+          "generation": 4,
+          "messages_sent": 3,
+          "prepared_chars": 201825,
+          "calls_used": 52,
+          "output_tokens_used": 203932
+        },
+        {
+          "reason": "context_capacity",
+          "generation": 5,
+          "messages_sent": 3,
+          "prepared_chars": 229637,
+          "calls_used": 71,
+          "output_tokens_used": 320802
+        }
+      ],
+      "context_budget_events": 0,
+      "elapsed_seconds": 1707.4607934951782,
+      "documentation_accepted": true,
+      "workflow_accepted": true,
+      "coverage_accepted": true,
+      "entrypoints_accepted": null,
+      "numeric_execution": "ok",
+      "unknown_usage_calls": 0,
+      "protocol_checks": {
+        "passed": 131,
+        "expected": 145,
+        "failed": [
+          "base_step2_item_embedding",
+          "base_step3_item_embedding",
+          "history_step1_update",
+          "history_step2_item_embedding",
+          "history_step3_item_embedding",
+          "position_step2_item_embedding",
+          "position_step2_update",
+          "position_step3_item_embedding",
+          "user_step2_item_embedding",
+          "user_step3_item_embedding",
+          "debias_step2_item_embedding",
+          "debias_step3_item_embedding",
+          "reward_step2_item_embedding",
+          "reward_step3_item_embedding"
+        ],
+        "not_measured": [],
+        "passed_fraction": 0.903448275862069,
+        "measured": 145
+      },
+      "numerical_checks": {
+        "passed": 100,
+        "expected": 114,
+        "failed": [
+          "base_step2_item_embedding",
+          "base_step3_item_embedding",
+          "history_step1_update",
+          "history_step2_item_embedding",
+          "history_step3_item_embedding",
+          "position_step2_item_embedding",
+          "position_step2_update",
+          "position_step3_item_embedding",
+          "user_step2_item_embedding",
+          "user_step3_item_embedding",
+          "debias_step2_item_embedding",
+          "debias_step3_item_embedding",
+          "reward_step2_item_embedding",
+          "reward_step3_item_embedding"
+        ],
+        "not_measured": [],
+        "passed_fraction": 0.8771929824561403,
+        "measured": 114
+      },
+      "training_signals": {
+        "user_embedding": {
+          "passed": 18,
+          "expected": 18,
+          "failed": [],
+          "not_measured": [],
+          "passed_fraction": 1.0,
+          "measured": 18
+        },
+        "item_embedding": {
+          "passed": 6,
+          "expected": 18,
+          "failed": [
+            "base_step2_item_embedding",
+            "base_step3_item_embedding",
+            "history_step2_item_embedding",
+            "history_step3_item_embedding",
+            "position_step2_item_embedding",
+            "position_step3_item_embedding",
+            "user_step2_item_embedding",
+            "user_step3_item_embedding",
+            "debias_step2_item_embedding",
+            "debias_step3_item_embedding",
+            "reward_step2_item_embedding",
+            "reward_step3_item_embedding"
+          ],
+          "not_measured": [],
+          "passed_fraction": 0.3333333333333333,
+          "measured": 18
+        },
+        "loss": {
+          "passed": 18,
+          "expected": 18,
+          "failed": [],
+          "not_measured": [],
+          "passed_fraction": 1.0,
+          "measured": 18
+        },
+        "epoch_loss": {
+          "passed": 18,
+          "expected": 18,
+          "failed": [],
+          "not_measured": [],
+          "passed_fraction": 1.0,
+          "measured": 18
+        },
+        "gradient": {
+          "passed": 18,
+          "expected": 18,
+          "failed": [],
+          "not_measured": [],
+          "passed_fraction": 1.0,
+          "measured": 18
+        },
+        "update": {
+          "passed": 16,
+          "expected": 18,
+          "failed": [
+            "history_step1_update",
+            "position_step2_update"
+          ],
+          "not_measured": [],
+          "passed_fraction": 0.8888888888888888,
+          "measured": 18
+        }
+      },
+      "original_tests": {
+        "expected": 10,
+        "passed": 10,
+        "observed_outcomes": [
+          {
+            "nodeid": "tests/test_baseline_mips_module.py::TestBaselineMIPSModule::test_output_shapes",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_baseline_mips_module.py::TestBaselineMIPSModule::test_output_values",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_two_tower_base_retrieval.py::TestTwoTowerBaseRetrieval::test_forward_pass",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_two_tower_base_retrieval.py::TestTwoTowerBaseRetrieval::test_train_forward",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_two_tower_user_hist.py::TestTwoTowerWithUserHistoryEncoder::test_forward_pass",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_two_tower_user_hist_position_debias.py::TestTwoTowerWithPositionDebiasedWeights::test_forward_pass",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_two_tower_user_hist_position_debias.py::TestTwoTowerWithPositionDebiasedWeights::test_train_forward",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_user_history_enc.py::TestUserHistoryEncoder::test_forward",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_user_history_enc.py::TestUserHistoryEncoder::test_values",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_user_history_enc.py::TestUserHistoryEncoder::test_values_pos",
+            "outcome": "passed"
+          }
+        ],
+        "exit_code": 0
+      }
+    },
+    {
+      "repository": "timeseries",
+      "condition": "no_automatic_map",
+      "label": "Without automatic map",
+      "status": "completed",
+      "replicate": 1,
+      "accepted": true,
+      "calls": 42,
+      "usage": {
+        "prompt_tokens": 2372774,
+        "completion_tokens": 114813,
+        "total_tokens": 2487587,
+        "budget_output_tokens": 114813,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 82970,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 700.9026827650378
+      },
+      "end_to_end_tokens": 2651248,
+      "translation_usage": {
+        "total_tokens": 163661
+      },
+      "source_unchanged": true,
+      "task_unchanged": true,
+      "stop_reason": null,
+      "error": null,
+      "repair_tokens": 2487587,
+      "translation_calls": 3,
+      "end_to_end_calls": 45,
+      "submissions": 2,
+      "stage_statuses": [
+        "completed",
+        "completed"
+      ],
+      "termination": "accepted",
+      "diagnosis_status": "completed",
+      "recorded_request_count": 42,
+      "recorded_response_count": 42,
+      "response_usage_total": 2487587,
+      "response_prompt_and_completion_total": 2487587,
+      "api_errors": [],
+      "recorded_metadata_count": 42,
+      "diagnosis_calls": 6,
+      "repair_stage_calls": 36,
+      "role_handoffs": 1,
+      "repository_context_rebuilds": [
+        {
+          "reason": "generation_boundary",
+          "generation": 1,
+          "messages_sent": 3,
+          "prepared_chars": 13575,
+          "calls_used": 0,
+          "output_tokens_used": 0
+        },
+        {
+          "reason": "independent_role_handoff",
+          "generation": 2,
+          "messages_sent": 4,
+          "prepared_chars": 117626,
+          "calls_used": 6,
+          "output_tokens_used": 6644
+        },
+        {
+          "reason": "unit_boundary",
+          "generation": 3,
+          "messages_sent": 3,
+          "prepared_chars": 109181,
+          "calls_used": 23,
+          "output_tokens_used": 51411
+        },
+        {
+          "reason": "unit_boundary",
+          "generation": 4,
+          "messages_sent": 3,
+          "prepared_chars": 127348,
+          "calls_used": 31,
+          "output_tokens_used": 68039
+        },
+        {
+          "reason": "unit_boundary",
+          "generation": 5,
+          "messages_sent": 3,
+          "prepared_chars": 95147,
+          "calls_used": 40,
+          "output_tokens_used": 109155
+        }
+      ],
+      "context_budget_events": 0,
+      "elapsed_seconds": 700.9013543128967,
+      "documentation_accepted": true,
+      "workflow_accepted": true,
+      "coverage_accepted": null,
+      "entrypoints_accepted": true,
+      "numeric_execution": "ok",
+      "unknown_usage_calls": 0,
+      "protocol_checks": {
+        "passed": 69,
+        "expected": 69,
+        "failed": [],
+        "not_measured": [],
+        "passed_fraction": 1.0,
+        "measured": 69
+      },
+      "public_checks": {
+        "passed": 23,
+        "expected": 23,
+        "failed": [],
+        "not_measured": [],
+        "passed_fraction": 1.0,
+        "measured": 23
+      },
+      "confirmations": 2
+    },
+    {
+      "repository": "twotower",
+      "condition": "no_automatic_map",
+      "label": "Without automatic map",
+      "status": "completed",
+      "replicate": 1,
+      "accepted": false,
+      "calls": 80,
+      "usage": {
+        "prompt_tokens": 6567308,
+        "completion_tokens": 236542,
+        "total_tokens": 6803850,
+        "budget_output_tokens": 236542,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 198263,
+        "truncated_calls": 1,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 1183.4664720150176
+      },
+      "end_to_end_tokens": 7172218,
+      "translation_usage": {
+        "prompt_tokens": 128368,
+        "completion_tokens": 240000,
+        "total_tokens": 368368,
+        "budget_output_tokens": 240000,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 211904,
+        "truncated_calls": 3,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 1264.855403942056
+      },
+      "source_unchanged": true,
+      "task_unchanged": true,
+      "stop_reason": "call_budget_exhausted",
+      "error": null,
+      "repair_tokens": 6803850,
+      "translation_calls": 20,
+      "end_to_end_calls": 100,
+      "submissions": 4,
+      "stage_statuses": [
+        "completed",
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "termination": "call_budget_exhausted",
+      "diagnosis_status": "completed",
+      "recorded_request_count": 80,
+      "recorded_response_count": 80,
+      "response_usage_total": 6803850,
+      "response_prompt_and_completion_total": 6803850,
+      "api_errors": [],
+      "recorded_metadata_count": 80,
+      "diagnosis_calls": 6,
+      "repair_stage_calls": 74,
+      "role_handoffs": 1,
+      "repository_context_rebuilds": [
+        {
+          "reason": "generation_boundary",
+          "generation": 1,
+          "messages_sent": 3,
+          "prepared_chars": 13422,
+          "calls_used": 0,
+          "output_tokens_used": 0
+        },
+        {
+          "reason": "independent_role_handoff",
+          "generation": 2,
+          "messages_sent": 4,
+          "prepared_chars": 116667,
+          "calls_used": 6,
+          "output_tokens_used": 6020
+        },
+        {
+          "reason": "unit_boundary",
+          "generation": 3,
+          "messages_sent": 3,
+          "prepared_chars": 120501,
+          "calls_used": 19,
+          "output_tokens_used": 35667
+        },
+        {
+          "reason": "unit_boundary",
+          "generation": 4,
+          "messages_sent": 3,
+          "prepared_chars": 132778,
+          "calls_used": 34,
+          "output_tokens_used": 85611
+        },
+        {
+          "reason": "unit_boundary",
+          "generation": 5,
+          "messages_sent": 3,
+          "prepared_chars": 158649,
+          "calls_used": 43,
+          "output_tokens_used": 106938
+        },
+        {
+          "reason": "unit_boundary",
+          "generation": 6,
+          "messages_sent": 4,
+          "prepared_chars": 178505,
+          "calls_used": 60,
+          "output_tokens_used": 192860
+        }
+      ],
+      "context_budget_events": 0,
+      "elapsed_seconds": 1183.4651255607605,
+      "documentation_accepted": true,
+      "workflow_accepted": true,
+      "coverage_accepted": true,
+      "entrypoints_accepted": null,
+      "numeric_execution": "ok",
+      "unknown_usage_calls": 0,
+      "protocol_checks": {
+        "passed": 131,
+        "expected": 145,
+        "failed": [
+          "base_step2_item_embedding",
+          "base_step3_item_embedding",
+          "history_step1_update",
+          "history_step2_item_embedding",
+          "history_step3_item_embedding",
+          "position_step2_item_embedding",
+          "position_step2_update",
+          "position_step3_item_embedding",
+          "user_step2_item_embedding",
+          "user_step3_item_embedding",
+          "debias_step2_item_embedding",
+          "debias_step3_item_embedding",
+          "reward_step2_item_embedding",
+          "reward_step3_item_embedding"
+        ],
+        "not_measured": [],
+        "passed_fraction": 0.903448275862069,
+        "measured": 145
+      },
+      "numerical_checks": {
+        "passed": 100,
+        "expected": 114,
+        "failed": [
+          "base_step2_item_embedding",
+          "base_step3_item_embedding",
+          "history_step1_update",
+          "history_step2_item_embedding",
+          "history_step3_item_embedding",
+          "position_step2_item_embedding",
+          "position_step2_update",
+          "position_step3_item_embedding",
+          "user_step2_item_embedding",
+          "user_step3_item_embedding",
+          "debias_step2_item_embedding",
+          "debias_step3_item_embedding",
+          "reward_step2_item_embedding",
+          "reward_step3_item_embedding"
+        ],
+        "not_measured": [],
+        "passed_fraction": 0.8771929824561403,
+        "measured": 114
+      },
+      "training_signals": {
+        "user_embedding": {
+          "passed": 18,
+          "expected": 18,
+          "failed": [],
+          "not_measured": [],
+          "passed_fraction": 1.0,
+          "measured": 18
+        },
+        "item_embedding": {
+          "passed": 6,
+          "expected": 18,
+          "failed": [
+            "base_step2_item_embedding",
+            "base_step3_item_embedding",
+            "history_step2_item_embedding",
+            "history_step3_item_embedding",
+            "position_step2_item_embedding",
+            "position_step3_item_embedding",
+            "user_step2_item_embedding",
+            "user_step3_item_embedding",
+            "debias_step2_item_embedding",
+            "debias_step3_item_embedding",
+            "reward_step2_item_embedding",
+            "reward_step3_item_embedding"
+          ],
+          "not_measured": [],
+          "passed_fraction": 0.3333333333333333,
+          "measured": 18
+        },
+        "loss": {
+          "passed": 18,
+          "expected": 18,
+          "failed": [],
+          "not_measured": [],
+          "passed_fraction": 1.0,
+          "measured": 18
+        },
+        "epoch_loss": {
+          "passed": 18,
+          "expected": 18,
+          "failed": [],
+          "not_measured": [],
+          "passed_fraction": 1.0,
+          "measured": 18
+        },
+        "gradient": {
+          "passed": 18,
+          "expected": 18,
+          "failed": [],
+          "not_measured": [],
+          "passed_fraction": 1.0,
+          "measured": 18
+        },
+        "update": {
+          "passed": 16,
+          "expected": 18,
+          "failed": [
+            "history_step1_update",
+            "position_step2_update"
+          ],
+          "not_measured": [],
+          "passed_fraction": 0.8888888888888888,
+          "measured": 18
+        }
+      },
+      "original_tests": {
+        "expected": 10,
+        "passed": 10,
+        "observed_outcomes": [
+          {
+            "nodeid": "tests/test_baseline_mips_module.py::TestBaselineMIPSModule::test_output_shapes",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_baseline_mips_module.py::TestBaselineMIPSModule::test_output_values",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_two_tower_base_retrieval.py::TestTwoTowerBaseRetrieval::test_forward_pass",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_two_tower_base_retrieval.py::TestTwoTowerBaseRetrieval::test_train_forward",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_two_tower_user_hist.py::TestTwoTowerWithUserHistoryEncoder::test_forward_pass",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_two_tower_user_hist_position_debias.py::TestTwoTowerWithPositionDebiasedWeights::test_forward_pass",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_two_tower_user_hist_position_debias.py::TestTwoTowerWithPositionDebiasedWeights::test_train_forward",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_user_history_enc.py::TestUserHistoryEncoder::test_forward",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_user_history_enc.py::TestUserHistoryEncoder::test_values",
+            "outcome": "passed"
+          },
+          {
+            "nodeid": "tests/test_user_history_enc.py::TestUserHistoryEncoder::test_values_pos",
+            "outcome": "passed"
+          }
+        ],
+        "exit_code": 0
+      }
+    }
+  ],
+  "all_conditions_terminal": true,
+  "physical_ledger": {
+    "new_model_calls": 232,
+    "new_measured_tokens": 20847811,
+    "new_completion_tokens": 795902,
+    "unknown_usage_calls": 0,
+    "new_translation_calls": 0,
+    "historical_translation_tokens_per_condition": {
+      "timeseries": 163661,
+      "twotower": 368368
+    },
+    "historical_translation_calls_per_condition": {
+      "timeseries": 3,
+      "twotower": 20
+    }
+  },
+  "result_sha256": {
+    "timeseries/conditions/full/result.json": "9d192113fc6cef64c846b6ca05c3fc45885f587729043388e40d3aaa1cce805b",
+    "twotower/conditions/full/result.json": "1e30b0827027d2a2218baa74418d9c2f495262ae4a4c35c4bc99ad61fce0c023",
+    "timeseries/conditions/no_automatic_map/result.json": "6969e5660c48ee76a892c8ab166a6ce4ccac4e86da345dda90b66818df62329d",
+    "twotower/conditions/no_automatic_map/result.json": "b3d4e7c92f09008fd49562cb4d7b817707b13a39c0faf66b27853ae0041d082e"
+  },
+  "definition": "Four new paired runs, two fixed repositories and automatic map on/off. All other repository coordination components retained."
+}
