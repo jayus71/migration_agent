@@ -23,11 +23,13 @@
 | S5 | 当前任务此前的明确决定：两个仓库模块正式名称；四项组件按历史十份初译/时间序列分组；JAX 主文采用原六例；强化有证据的主张；全文统一风格；保留图 3 三根总量横柱；横向表格；审核只回用户；批准过的三类局部调整。 |
 | S6 | 当前任务最新要求：建立动态、持久清单，阅读过程中维护，每次论文修改后检查；**本轮立即合并并检查**；前后冲突以时间最新的意见为主。 |
 | S7 | 随后的最新摘要要求：立即删掉 saved initial translations 的四/五及对照零修复句；只写 state-of-the-art 方法，不写具体基线名；摘要简洁，去掉自造分类和数字罗列；以原摘要局部修复，勿推翻重写。此项明确授权本轮直接修改摘要。 |
+| S8 | 随后的用词意见：不要使用连字符，查其他论文中 state of the art 的写法；已查 R2D2 摘要中的名词短语用法。 |
+| S9 | 最后一句的最新决定：保留 Evaluation across framework migration, language migration, and repository tasks 前半句，重新斟酌后半句。 |
 | H | 历史方案和审查记录：[9 月 21 日方案](paper-revision-plan-20260921.md)、[重建方案](paper-rebuild-plan-20260922.md)、[风格审查](paper-style-review-20260922.md)、[最近方案](paper-clarity-and-ablation-plan-20260922.md)、[执行记录](paper-clarity-execution-20260922.md)。这些文档用于追踪处理经过，不能替代用户原要求。 |
 
-**本次核验版本：`04a66f8`，分支 `codex/iclr-2027-template`，日期 2026-09-22。** 下列每一行均已对照当前来源检查；位置行号对应该版本。核验覆盖摘要至结论、方法与实验源码、附录相关条目、全部主表、图形脚本/来源说明，以及上一轮同版本 PDF 的版面审查记录。版面判断沿用该 PDF 的检查结果，本轮未重新编译或渲染。用户自行修改的方法图资产不作为本轮验收对象。
+**基础核验版本：`04a66f8`，分支 `codex/iclr-2027-template`，日期 2026-09-22。** 下列每一行均已对照当前来源检查；位置行号对应该版本。随后在检查点 `3f73497` 上只修改摘要，并完成全部 80 项的回退复核，详见末尾记录。核验覆盖摘要至结论、方法与实验源码、附录相关条目、全部主表、图形脚本/来源说明，以及上一轮同版本 PDF 的版面审查记录。版面判断沿用该 PDF 的检查结果，本轮未重新编译或渲染。用户自行修改的方法图资产不作为本轮验收对象。
 
-基础检查共登记 **75 项**；新摘要意见加入 A10–A12，目前共 **78 项**。位置简称对应[主文](../conference_101719.tex)、[方法](../sections/methods.tex)、[实验](../sections/experiments.tex)与[附录](../sections/supplementary_experiments.tex)。图表数据和生成关系见[来源说明](../data/paper_figures/README.md)，源代码长度取自[已有统计](../data/paper_figures/collection_statistics.json)。
+基础检查共登记 **75 项**；新摘要意见加入 A10–A12，随后用词与结尾意见加入 A13/A14，目前共 **80 项**。位置简称对应[主文](../conference_101719.tex)、[方法](../sections/methods.tex)、[实验](../sections/experiments.tex)与[附录](../sections/supplementary_experiments.tex)。图表数据和生成关系见[来源说明](../data/paper_figures/README.md)，源代码长度取自[已有统计](../data/paper_figures/collection_statistics.json)。
 
 ## 过程和全文要求
 
@@ -51,18 +53,20 @@
 
 | ID | 用户要求与来源 | 当前状态 | 本次检查结果 | 持续验收或处理建议 |
 |---|---|---|---|---|
-| A01 | 语义偏差问题后补到方法的逻辑，如 To address this；S1 | 未落实 | `conference_101719.tex:45` 从错误梯度/更新直接跳到 We propose。 | 用 `To address this problem, we propose ...` 明确承接，避免另加重复目标句。 |
+| A01 | 语义偏差问题后补到方法的逻辑，如 To address this；S1 | 已落实 | 本轮摘要使用 `To address this problem, we propose LaDiM...`。 | 保留直接的问题→方法连接，避免另加重复目标句。 |
 | A02 | 删除摘要中的 and its loss initially agrees with the source；S1 | 已落实 | 摘要无该片段。 | 后续从旧稿恢复内容时继续检查。 |
 | A03 | 摘要介绍 agent 组成，Orchestrator schedules their work and returns...；S1/S2 | 已落实 | Verifier、Repair、Orchestrator 及指定调度职责已出现，Translator 在方法定义。 | 保留职责与信息传递；摘要可从初译承接调查，但不为列齐名称堆叠角色句。 |
-| A04 | 仓库上下文机制有名称，先讲解决什么问题；S1/S2 | 部分落实 | 摘要写 repository context management 如何协调/保留证据，未点明共享代码影响其他入口、跨文件证据丢失的问题；引言 `:64` 已解释。 | 沿用 repository context management 总称，摘要先用其作用承接仓库困难；正式子模块名不变。 |
+| A04 | 仓库上下文机制有名称，先讲解决什么问题；S1/S2 | 已落实 | 摘要沿用 repository context management，说明保留相关证据是为了协调依赖文件间的修复；引言解释共享代码和跨文件问题。 | 保留目的与作用，组成细节留方法，正式子模块名不变。 |
 | A05 | 合并结果与跨框架结论；曾确认两至三个主要结果，最新要求删自然故障结果、精简摘要；S1→S5→S7 | 后续调整 | S7 覆盖此前两至三个结果的摘要安排。 | 摘要只保留 MindSpore 的主要成本比较及跨框架/语言结论，不再加入四/五等结果。 |
 | A06 | 明确方法、基线、指标、集合与条件；最新摘要不写具体基线名；S5→S7 | 后续调整 | 摘要中的具体 baseline 名称按 S7 删除；正文和表中继续完整定义比较对象。 | 摘要写 state-of-the-art acceptance、50 项与 57.4% 总 token 节省；精确 baseline 对应在主实验保留。 |
 | A07 | 保留跨框架/语言有效性结论与 Generalization Across Frameworks 标题；S1/S5 | 已落实 | 摘要末句、引言和 JAX 分析标题仍在。 | 不将已证实适用性改写为 may/potential。 |
 | A08 | 创新点叫得出名字、贡献有对应机制与证据；S1/S2/S5 | 部分落实 | 贡献已对应训练诊断、证据交接/历史、仓库管理；`Layered Diagnosis` 主要显在题目/算法，方法正文名称关联可加强。 | 方法首次明确名称及其动作，再自然沿用；不再添加 LD/IEH/DCM 等缩写。 |
 | A09 | 早期要求 MOST 式结论且不重复精确数字；后来确认加强结论中的定量证据；S3→S5 | 后续调整 | `conference_101719.tex:91` 按较新的已确认方案包含 50/50、57.4%、4/5。不能仅依据旧要求判作回退。 | 按最新方案保留必要结果；仍可兼容 MOST 的机制推进，避免逐项重念所有实验。拟稿见综合方案。 |
-| A10 | 删除摘要 saved initial translations 的四/五、各对照零修复句；S7 | 待执行 | 当前摘要仍含该句；已列入本轮直接修改范围。 | 摘要和方案候选中均删除；实验正文的真实结果保留。 |
-| A11 | 摘要只说 state-of-the-art 方法，不加具体基线名；S7 | 待执行 | 当前摘要写 MatchFixAgent 并另列 Direct repair、SWE-agent。 | 摘要去掉全部 baseline 名称；57.4% 实际比较和正文对应保持。 |
-| A12 | 以原摘要为基础局部修复，简洁，不堆自造分类和数字；S7 | 待执行 | 已从固定基线取回原摘要；本轮前摘要为 159 词（按空白切分）。 | 保留问题→方法→主要结果→跨框架/语言结论顺序，去掉分类式末句和额外组件罗列。 |
+| A10 | 删除摘要 saved initial translations 的四/五、各对照零修复句；S7 | 已落实 | 摘要及方案摘要均已删除该句。 | 实验正文的真实结果保留；后续摘要不得重新带回。 |
+| A11 | 摘要只说 state of the art，不加具体基线名；S7/S8 | 已落实 | 摘要已无 MatchFixAgent、SWE-agent、Direct repair，采用 matches the state of the art in acceptance。 | 57.4% 与实际 baseline 的对应仍在主实验保留。 |
+| A12 | 以原摘要为基础局部修复，简洁，不堆新分类和数字；S7，结尾按 S9 | 已落实 | 本轮以固定基线原摘要为底稿，保留原论证顺序；摘要由 159 减至 140 词，只留一组主要比较。结尾前半句按 S9 保留。 | 不再加入自然故障数字、完整组件列表或基线名单；局部修改继续以该底稿推进。 |
+| A13 | 摘要不用连字符，参考其他论文的 SOTA 写法；S8 | 已落实 | 摘要采用名词短语 `the state of the art`；multiple agents 也改成自然介词结构，源码无连字符。R2D2 摘要可核对同类用法。 | 使用 matches the state of the art，避免把无连字符词组直接堆在 methods 前。 |
+| A14 | 保留 Evaluation across framework migration, language migration, and repository tasks，改后半句；S9 | 已落实 | 前半句保留；后半句改为 demonstrates LaDiM's effectiveness in preserving training behavior across frameworks and programming languages。 | 直接说明训练行为保持的效果，并保留跨框架/语言结论。 |
 
 ## 方法与算法
 
@@ -146,8 +150,8 @@
 
 具体候选文字和改法见[综合修改方案](manuscript-feedback-plan.md)。本轮已完成意见合并和逐项核验；随后收到 S7，单独执行摘要局部修复，其余论文建议仍待用户审阅方案。
 
-1. 修复明确遗漏或回退：A01、M07–M10、E02、E05、R03、F07。
-2. 补足论证和读图关系：A03/A04、A08、M14、E01/E04、R08、B01/B04。
+1. 摘要 A01/A04、A10–A14 已执行；其余明确遗漏或回退待方案确认：M07–M10、E02、E05、R03、F07。
+2. 补足论证和读图关系：A08、M14、E01/E04、R08、B01/B04；已落实的摘要职责 A03 继续保留。
 3. 保留后续已定安排：JAX 六例、四组件分任务、横排、图 3 三横柱、引言环绕图。
 4. 内容稳定后落实此前批准的留白、换行和粗体调整 F08。
 
@@ -163,6 +167,16 @@
 - 本轮修改范围：本清单、综合方案、项目规则和文档入口。论文正文、正式图表、实验数据和固定比较基线没有修改。
 - 本轮核验方式：全文与表格源文件对照、指定句子检索、历史版本和来源统计核对、文档链接与 Git 差异检查。没有重新执行实验，也没有把历史 25 项测试或历史 PDF 编译记为本轮检查。
 - 文档检查确认 75 个 ID 唯一、本轮文档本地链接有效；98 个论文/图表文件的编辑前后哈希一致。差异空白检查按本轮六个文件执行；用户现有 SVG 的两处空白提示保持原样。
+
+### 2026-09-22：追加意见并执行摘要局部修复
+
+- 新增 A10–A14，记录删自然故障结果、删除 baseline 名称、不用连字符、原稿局部修复、保留末句前半部分等最新决定。旧摘要方案按最新意见更新，没有删除历史来源。
+- 编辑前检查点为 `3f73497`。论文源码仅 abstract 环境改变；通过替换摘要后的全文相等检查，确认其余正文保持原样。96 个其余源文件/图表资产哈希未变化，固定基线未改。
+- 摘要从 159 词减至 140 词（按空白切分），只保留 50 项 MindSpore 与 57.4% 的主要比较。用户指定删除的句子及三个 baseline 名称均不在摘要，摘要源码没有连字符。
+- 末句严格保留 S9 指定的前半句，后半句明确为训练行为保持的有效性。S8 的措辞参考 [R2D2 原文摘要](https://openreview.net/references/pdf?id=Hy7PKCFCQ)中的 `matches the state of the art`，未向论文新增该参考文献。
+- 重新对照全部 80 项：涉及摘要的 A01/A04、A10–A14 已落实；A05/A06 的当前决定更新；其余项目的源文本和证据未变，沿用各自的已落实或待处理状态，未将未解决项目标为完成。
+- `latexmk` 编译成功，仍为 23 页，无 overfull 或未定义引用；已渲染并检查第 1、2 页，摘要和引言环绕图无重叠/裁切。此前记录的其他版式待办仍保留。
+- `scripts/update_manuscript_diff.py` 已执行并更新比较页，比较页 PDF 与主 PDF 一致。没有运行或扩展实验，也没有为摘要改动重跑无关图表测试。
 
 ### 后续每轮复核记录格式
 
