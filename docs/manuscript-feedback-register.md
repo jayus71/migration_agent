@@ -25,11 +25,12 @@
 | S7 | 随后的最新摘要要求：立即删掉 saved initial translations 的四/五及对照零修复句；只写 state-of-the-art 方法，不写具体基线名；摘要简洁，去掉自造分类和数字罗列；以原摘要局部修复，勿推翻重写。此项明确授权本轮直接修改摘要。 |
 | S8 | 随后的用词意见：不要使用连字符，查其他论文中 state of the art 的写法；已查 R2D2 摘要中的名词短语用法。 |
 | S9 | 最后一句的最新决定：保留 Evaluation across framework migration, language migration, and repository tasks 前半句，重新斟酌后半句。 |
+| S10 | 最新末句批注：前半句已经说明 framework/language 的范围，后半句不要再次说 across frameworks and programming languages。 |
 | H | 历史方案和审查记录：[9 月 21 日方案](paper-revision-plan-20260921.md)、[重建方案](paper-rebuild-plan-20260922.md)、[风格审查](paper-style-review-20260922.md)、[最近方案](paper-clarity-and-ablation-plan-20260922.md)、[执行记录](paper-clarity-execution-20260922.md)。这些文档用于追踪处理经过，不能替代用户原要求。 |
 
-**基础核验版本：`04a66f8`，分支 `codex/iclr-2027-template`，日期 2026-09-22。** 下列每一行均已对照当前来源检查；位置行号对应该版本。随后在检查点 `3f73497` 上只修改摘要，并完成全部 80 项的回退复核，详见末尾记录。核验覆盖摘要至结论、方法与实验源码、附录相关条目、全部主表、图形脚本/来源说明，以及上一轮同版本 PDF 的版面审查记录。版面判断沿用该 PDF 的检查结果，本轮未重新编译或渲染。用户自行修改的方法图资产不作为本轮验收对象。
+**基础核验版本：`04a66f8`，分支 `codex/iclr-2027-template`，日期 2026-09-22。** 下列每一行均已对照当前来源检查；位置行号对应该版本。随后在检查点 `3f73497` 上只修改摘要，并完成全部 81 项的回退复核，详见末尾记录。核验覆盖摘要至结论、方法与实验源码、附录相关条目、全部主表、图形脚本/来源说明，以及上一轮同版本 PDF 的版面审查记录。版面判断沿用该 PDF 的检查结果，本轮未重新编译或渲染。用户自行修改的方法图资产不作为本轮验收对象。
 
-基础检查共登记 **75 项**；新摘要意见加入 A10–A12，随后用词与结尾意见加入 A13/A14，目前共 **80 项**。位置简称对应[主文](../conference_101719.tex)、[方法](../sections/methods.tex)、[实验](../sections/experiments.tex)与[附录](../sections/supplementary_experiments.tex)。图表数据和生成关系见[来源说明](../data/paper_figures/README.md)，源代码长度取自[已有统计](../data/paper_figures/collection_statistics.json)。
+基础检查共登记 **75 项**；新摘要意见加入 A10–A12，随后用词与结尾意见加入 A13/A14，末句去重意见加入 A15，目前共 **81 项**。位置简称对应[主文](../conference_101719.tex)、[方法](../sections/methods.tex)、[实验](../sections/experiments.tex)与[附录](../sections/supplementary_experiments.tex)。图表数据和生成关系见[来源说明](../data/paper_figures/README.md)，源代码长度取自[已有统计](../data/paper_figures/collection_statistics.json)。
 
 ## 过程和全文要求
 
@@ -58,15 +59,16 @@
 | A03 | 摘要介绍 agent 组成，Orchestrator schedules their work and returns...；S1/S2 | 已落实 | Verifier、Repair、Orchestrator 及指定调度职责已出现，Translator 在方法定义。 | 保留职责与信息传递；摘要可从初译承接调查，但不为列齐名称堆叠角色句。 |
 | A04 | 仓库上下文机制有名称，先讲解决什么问题；S1/S2 | 已落实 | 摘要沿用 repository context management，说明保留相关证据是为了协调依赖文件间的修复；引言解释共享代码和跨文件问题。 | 保留目的与作用，组成细节留方法，正式子模块名不变。 |
 | A05 | 合并结果与跨框架结论；曾确认两至三个主要结果，最新要求删自然故障结果、精简摘要；S1→S5→S7 | 后续调整 | S7 覆盖此前两至三个结果的摘要安排。 | 摘要只保留 MindSpore 的主要成本比较及跨框架/语言结论，不再加入四/五等结果。 |
-| A06 | 明确方法、基线、指标、集合与条件；最新摘要不写具体基线名；S5→S7 | 后续调整 | 摘要中的具体 baseline 名称按 S7 删除；正文和表中继续完整定义比较对象。 | 摘要写 state-of-the-art acceptance、50 项与 57.4% 总 token 节省；精确 baseline 对应在主实验保留。 |
+| A06 | 明确方法、基线、指标、集合与条件；最新摘要不写具体基线名；S5→S7 | 后续调整 | 摘要中的具体 baseline 名称按 S7 删除；正文和表中继续完整定义比较对象。 | 摘要写 matches the state of the art in acceptance、50 项与 57.4% 总 token 节省；精确 baseline 对应在主实验保留。 |
 | A07 | 保留跨框架/语言有效性结论与 Generalization Across Frameworks 标题；S1/S5 | 已落实 | 摘要末句、引言和 JAX 分析标题仍在。 | 不将已证实适用性改写为 may/potential。 |
 | A08 | 创新点叫得出名字、贡献有对应机制与证据；S1/S2/S5 | 部分落实 | 贡献已对应训练诊断、证据交接/历史、仓库管理；`Layered Diagnosis` 主要显在题目/算法，方法正文名称关联可加强。 | 方法首次明确名称及其动作，再自然沿用；不再添加 LD/IEH/DCM 等缩写。 |
 | A09 | 早期要求 MOST 式结论且不重复精确数字；后来确认加强结论中的定量证据；S3→S5 | 后续调整 | `conference_101719.tex:91` 按较新的已确认方案包含 50/50、57.4%、4/5。不能仅依据旧要求判作回退。 | 按最新方案保留必要结果；仍可兼容 MOST 的机制推进，避免逐项重念所有实验。拟稿见综合方案。 |
 | A10 | 删除摘要 saved initial translations 的四/五、各对照零修复句；S7 | 已落实 | 摘要及方案摘要均已删除该句。 | 实验正文的真实结果保留；后续摘要不得重新带回。 |
 | A11 | 摘要只说 state of the art，不加具体基线名；S7/S8 | 已落实 | 摘要已无 MatchFixAgent、SWE-agent、Direct repair，采用 matches the state of the art in acceptance。 | 57.4% 与实际 baseline 的对应仍在主实验保留。 |
-| A12 | 以原摘要为基础局部修复，简洁，不堆新分类和数字；S7，结尾按 S9 | 已落实 | 本轮以固定基线原摘要为底稿，保留原论证顺序；摘要由 159 减至 140 词，只留一组主要比较。结尾前半句按 S9 保留。 | 不再加入自然故障数字、完整组件列表或基线名单；局部修改继续以该底稿推进。 |
+| A12 | 以原摘要为基础局部修复，简洁，不堆新分类和数字；S7，结尾按 S9 | 已落实 | 本轮以固定基线原摘要为底稿，保留原论证顺序；摘要由 159 减至 135 词，只留一组主要比较。结尾前半句按 S9 保留。 | 不再加入自然故障数字、完整组件列表或基线名单；局部修改继续以该底稿推进。 |
 | A13 | 摘要不用连字符，参考其他论文的 SOTA 写法；S8 | 已落实 | 摘要采用名词短语 `the state of the art`；multiple agents 也改成自然介词结构，源码无连字符。R2D2 摘要可核对同类用法。 | 使用 matches the state of the art，避免把无连字符词组直接堆在 methods 前。 |
-| A14 | 保留 Evaluation across framework migration, language migration, and repository tasks，改后半句；S9 | 已落实 | 前半句保留；后半句改为 demonstrates LaDiM's effectiveness in preserving training behavior across frameworks and programming languages。 | 直接说明训练行为保持的效果，并保留跨框架/语言结论。 |
+| A14 | 保留 Evaluation across framework migration, language migration, and repository tasks，改后半句；S9 | 已落实 | 前半句保留；后半句按 S10 进一步精简为 demonstrates LaDiM's effectiveness in preserving training behavior。 | 直接说明训练行为保持的效果；跨框架/语言范围由前半句表达。 |
+| A15 | 结尾不要连续两次重复框架/语言范围；S10 | 已落实 | 删除 across frameworks and programming languages，前半句 Evaluation across... 保留，后半句只说明 preserving training behavior 的效果。 | 不通过堆叠适用范围强化主张；范围说一次，后半句推进到研究结果。 |
 
 ## 方法与算法
 
@@ -177,6 +179,13 @@
 - 重新对照全部 80 项：涉及摘要的 A01/A04、A10–A14 已落实；A05/A06 的当前决定更新；其余项目的源文本和证据未变，沿用各自的已落实或待处理状态，未将未解决项目标为完成。
 - `latexmk` 编译成功，仍为 23 页，无 overfull 或未定义引用；已渲染并检查第 1、2 页，摘要和引言环绕图无重叠/裁切。此前记录的其他版式待办仍保留。
 - `scripts/update_manuscript_diff.py` 已执行并更新比较页，比较页 PDF 与主 PDF 一致。没有运行或扩展实验，也没有为摘要改动重跑无关图表测试。
+
+### 2026-09-22：按最新批注删除末句范围重复
+
+- 编辑前检查点为 `c338ccb`，新增 A15。前半句保留 framework migration、language migration 和 repository tasks，后半句删除重复的 across frameworks and programming languages。
+- 当前摘要 135 词，仍保留训练行为保持的效果、原有跨框架/语言范围及唯一主要数值比较。方案候选已同步，A14 的最新采用文字随批注更新。
+- 全部 81 项再次对照：本次只改变 A14/A15 的末句实现，其他条目与上一检查版本一致；此前明确待处理的项目继续保持待处理。
+- 最终文本重新编译成功，已检查更新后的第一页；无 overfull/未定义引用。逐词比较已刷新，主 PDF 和比较页 current.pdf 内容一致。
 
 ### 后续每轮复核记录格式
 
