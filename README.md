@@ -54,6 +54,13 @@ python3 scripts/fetch_experiment_data.py --archive /path/to/experiment-data-2026
 
 ## Writing style reference
 
+The [persistent manuscript feedback register](docs/manuscript-feedback-register.md)
+records user feedback, later decisions, current implementation evidence, and
+revision checks. Update it while reading and revising, and check all active items
+after every manuscript change. Conflicts follow the user's latest explicit
+instruction or approved plan. The [current reconciliation plan](docs/manuscript-feedback-plan.md)
+contains proposed fixes awaiting review.
+
 The [Zhekai Du writing DNA](literature/zhekai-du/Academic-Writing-DNA.md) describes
 writing patterns in six English first-author papers, including LoCA and its TPAMI
 extension. It covers paragraph structure, language, argumentation, and figures.

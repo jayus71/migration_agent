@@ -17,6 +17,21 @@ run `scripts/update_manuscript_diff.py` and include the updated comparison with
 the delivery. The LaTeX build also refreshes it through `.latexmkrc`. Keep this
 baseline fixed unless the user explicitly selects another version.
 
+Maintain `docs/manuscript-feedback-register.md` as the persistent manuscript
+feedback register. Update it while reading the paper, receiving feedback,
+resolving decisions, and editing. Before every revision, read all active items
+and identify the applicable IDs and agreed changes. After every revision,
+check every active item again, including already satisfied items, for regressions
+across prose, algorithms, figures, tables, and appendices. Record current evidence,
+the reviewed version, and unresolved items; do not delete completed feedback or
+carry an unchecked item forward as newly verified. When opinions conflict, use
+the user's latest explicit instruction or explicitly approved plan, preserving
+the earlier instruction and its replacement in the register. Date precedence by
+the original instruction or latest confirmation, not by a later re-paste of old
+feedback. Unapproved agent suggestions do not supersede user requirements.
+Keep proposed fixes separate from approved changes when the user asks to review
+a plan first. Every manuscript delivery must update the register's review log.
+
 ## Writing
 
 Use clear paragraphs with one main point each. State the point early, use
@@ -96,7 +111,8 @@ at the measured budgets of 1, 2, and 4 attempts in the experimental prose. Updat
 generation scripts, labels, captions, and included assets together. Check figures
 at their actual manuscript size for readable text, overlap, and clipping.
 
-In Figure 1, panel (a) contains loss and gradient differences; panel (b) contains
+In the training-signal detection figure (`fig:gradient-drift`, currently Figure 4),
+panel (a) contains loss and gradient differences; panel (b) contains
 loss and update differences. Put panel names inside the plot. Use arrows for
 step-1 detection and the mean loss difference crossing at steps 31 and 18.
 Label the detection threshold and use `Loss difference`. The caption must
