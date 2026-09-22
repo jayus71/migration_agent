@@ -249,7 +249,7 @@ def main():
     elif args.command=='translate':translate(args.run)
     elif args.command=='initial-check':initial_check(args.run,args.python)
     else:
-        raise RuntimeError('Formal repair dispatcher deliberately not enabled until parent review of fixed inputs and gates')
+        raise RuntimeError('Use formal_dispatch.py prepare and launch for the persistent repair suite')
 
 
 if __name__=='__main__':main()

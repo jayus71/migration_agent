@@ -48,6 +48,26 @@ v2 于本轮启动，PID `3373399`；日志为 `development_v2/development.log`�
 
 `check_formal_sources.py` 实际执行 9×3 种子、每种子三步源训练，记录参数形状、buffers、loss、缺失梯度和耗时。这只是源程序可运行检查；正式目标的健康数值 gate、共享初始自然翻译、完整输入冻结、最终验收阈值和四方法原生接入 smoke 仍须完成后才能启动正式比较。不能把源 gate 称为 JAX 迁移成功。
 
-正式计划为 9×4=36 条件，LaDiM、Direct、原生 MatchFixAgent full orchestration、原生 SWE-agent 共用同一初始自然翻译、输入、种子、初态、合同与验收。每条件40调用/4提交，不改变原生算法、提示或重试。共享翻译建议每任务1次、最多16,384输出 token，其完整实际成本对四方法端到端账本各计一次。修复硬上限1,440调用、4,320,000输出 token；额外9次初始翻译最多147,456输出 token。正式启动前交由主代理审核可运行清单、健康 gate 和冻结方法版本。
+最初的9任务来源池与27项源检查保留为第一版准备记录。用户随后要求新实验彻底替换旧六例，并增加较复杂、初始有问题的程序；正式准备范围因此在任何自然初译前扩展为12个来源任务。新增 GAT（4头、concat、邻接mask）、公开 GPT-nano（3层、3头、48维）、ResNet(BasicBlock,[1,1,1,1],5类)。新来源清单为 `formal_source_pool/manifest_12_tasks.json`，旧 `manifest.json` 保持不变。GAT沿用 examples revision；minGPT 固定为 `37baab71b9abea1b76ab957409a1cc2fbfba8a26`；torchvision固定为 `7b0e250acf82aac5a2389f54c6855da17bfeace9`。合同逐任务记录实际仓库和commit。
 
-现有最新接入已提供 MatchFixAgent/SWE-agent 原生实现；其框架名称读取 `task.json.target_framework`，正式合同须明确 `native JAX/Optax`，并将共同 `inputs/` 纳入隔离容器可读集。接入修复仅涉及传递公共输入和 evaluator，不能修改上游算法。现有 SWE 打包清单尚未包含 `inputs/`，需要在新独立快照上补该项并做无API smoke；开发 LaDiM/Direct 不受影响。
+12任务×3种子的36项源检查全部通过，见 `formal_source_checks_v2/results.json`。ResNet有4,908,357参数，CPU float64三步约0.44秒/种子；原始完整参考数组量约393MB/种子，采用NPZ压缩保留，不向模型发送数组正文。源检查与目标迁移验收分别记录。
+
+正式候选实现 `forward(parameters, buffers, batch, task)`，迁移前向、可微路径和显式buffer状态。可信外部worker独立执行 `jax.value_and_grad` 和合同指定的Optax优化器，连续三步，与PyTorch同名参数和buffers作逐元素比较。它不测试候选自行实现或修复优化器。浮点精度统一float64；tensor名称、shape、dtype必须一致，初态精确相同，其余量使用预先固定的 `atol=1e-7, rtol=1e-5`。完整outputs、gradients、updates、parameters、buffers保存为NPZ，完整统计留证据，模型反馈报告通过计数和所有失败量。`public`、`paired`是同一个首种子检查的别名，公共合同明确这一点，最终三种子验收保持完整。
+
+独立健康后端控制使用小型线性MSE源/目标，覆盖SGD momentum和Adam各三种子、连续三步，6/6通过。该gate校验可信worker的独立JAX求导、优化器语义、shape/dtype和NPZ比较，不计入自然模型迁移成功率。
+
+四方法原生接入smoke均完成且实际API为零。LaDiM/Direct调用真实诊断/验收生命周期后初态通过，完整修复路径由四条真实开发运行覆盖。MatchFix full orchestration进入原生路径并执行4次假provider调用；SWE启动upstream worker、进入原生episode并执行3次假provider调用。假传输的MatchFix `call_budget_exhausted` 与SWE `exit_format`按原记录保留，未冒充真实模型性能。SWE匿名Git实际追踪三份inputs NPZ；按相同Landlock/seccomp和公共写路径运行探针，输入可读、写入PermissionError。接入只补公共inputs的regular-file验证和匿名Git追踪，保持inputs只读，不修改baseline算法、提示或重试。
+
+## 开发最终结果与自然实验执行
+
+四个开发条件均首提交通过。LaDiM共23调用、339,929输入token、12,695输出token，合计352,624；Direct共20调用、259,776输入token、18,663输出token，合计278,439。LaDiM总token多74,185（26.64%），本开发集没有显示方法优势。额外独立求导/shape审计12/12通过。逐响应usage和原账本完全核对；摘要为 `output/jax-expansion-20260922/development_v2/development_summary.json`。
+
+额外成本主要来自修复阶段：LaDiM修复11调用/241,370 tokens，Direct修复4调用/88,573；LaDiM诊断12调用/111,254 tokens，Direct诊断16调用/189,866。两方法每例均只有一次生产代码编辑。LaDiM编辑后重复调用同义的public/paired，attention还追加scratch复查，角色交接后重复读源/候选，长反馈继续随历史传入。后续可研究检查去重和紧凑证据，但本正式比较保持方法算法冻结，仅对四方法统一使用NPZ与紧凑共同反馈。
+
+开发完整归档已下载并核对SHA-256：`development_complete_20260922.tar.gz`，3,255,326 bytes，`5afe534afdf6bd28941faba06736be1324f9e94e34ae6bb31370a6be3768bd36`。包括v1失败gate、v2真实运行、后验审计、9/12任务源检查。原始证据不覆盖。
+
+正式来源流量固定为12次共同初译，每次最多16,384输出token。取得非空真实候选后，其语法、导入、执行、数值或状态错误均由统一初始验收判定，所有失败进入修复集合。API无返回、空输出或不可取得候选单列生成失败，保留费用，不制造占位代码，不加入修复分母。初译已通过程序单独报告。四方法的修复分母为实际初始失败数，绝不按修复胜负筛选。
+
+`natural12_v1`是首次准备快照，未调用API。`natural12_v2`在首次调用前澄清语法失败仍入组，保留v1全部记录。v2共同初译/初始验收已持久启动，PID `3437085`，日志为远端 `natural12_v2/translation_and_initial_check.log`。manifest SHA-256为 `86cd79ff7037a5435b6d5abfe74a87b95730b6859888f8dffdbcfd95a8509f0c`，pretranslation hashes SHA-256为 `556d8ce77d7b800fca71cbee1b78519669c2dbb1e4760b6ff0f8cea3ffb75588`。
+
+用户已明确授权实验子代理独立完成初译、筛选、四方法执行、监测与审计，无需再等主代理批准启动。`formal_dispatch.py prepare`将筛选结果、条件网格、方法hash、预算和CPU组写入可审阅launch manifest；随后`launch`持久运行，最多2个API worker，各有独立workspace和两个CPU核。每条件40调用、4提交、120,000输出token和1,800秒不变；不自动重试失败条件。共享初译实际费用在每方法的对应任务端到端账本计一次，生成失败/初译通过的来源流量及费用另记。全部最终记录完成后据实更新接受数，不沿用旧六例数字。

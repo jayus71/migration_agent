@@ -11,6 +11,8 @@ class ShapeAndVectorTests(unittest.TestCase):
         self.assertFalse(compare_arrays([1.,0.],[0.,1.])['accepted'])
     def test_missing_key_rejected(self):
         self.assertFalse(compare_named_arrays({'w':np.ones(2)}, {})['accepted'])
+    def test_wrong_dtype_rejected(self):
+        self.assertFalse(compare_arrays(np.ones(2,dtype=np.float64),np.ones(2,dtype=np.float32))['accepted'])
     def test_near_zero_roundoff_accepted(self):
         self.assertTrue(compare_arrays([1e-18],[-2e-18])['accepted'])
     def test_nan_rejected(self):

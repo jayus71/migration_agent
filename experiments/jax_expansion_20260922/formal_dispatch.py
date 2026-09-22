@@ -13,11 +13,11 @@ import shlex
 import subprocess
 import sys
 import time
-from formal_runner import METHODS,check_hashes,dump,runtime,sha
-
 BASE=Path(__file__).resolve().parent
 RUN=BASE/'natural12_v2'
 PYTHON='/media/main/whj/miniconda3/envs/torchax311/bin/python'
+sys.path.insert(0,str(RUN))
+from formal_runner import METHODS,check_hashes,dump,runtime,sha
 
 
 def prepare_launch(workers):
@@ -85,7 +85,23 @@ def summary():
              'accepted_at_submissions':{str(a['attempt']):a['accepted'] for a in result.get('attempts',[])},
              'end_to_end_total_tokens':shared.get('total_tokens',0)+repair.get('total_tokens',0) if shared and repair and not repair.get('unknown_usage_calls',0) else None}
         rows.append(row)
+    generation_rows=[json.loads(p.read_text()) for p in (RUN/'translations').glob('*/result.json')]
+    generation_known=all(r.get('usage') and all(k in r['usage'] for k in ('prompt_tokens','completion_tokens','total_tokens')) for r in generation_rows)
+    generation_usage={k:sum(r.get('usage',{}).get(k,0) for r in generation_rows) for k in ('prompt_tokens','completion_tokens','total_tokens')}
+    totals={}
+    for method in METHODS:
+        method_rows=[r for r in rows if r['method']==method]
+        repair_tokens=sum(r.get('repair_usage',{}).get('total_tokens',0) for r in method_rows)
+        costs_known=all(r.get('repair_usage') and not r['repair_usage'].get('unknown_usage_calls',0) for r in method_rows)
+        accepted=sum(r.get('accepted') is True for r in method_rows)
+        totals[method]={'repair_accepted':accepted,'repair_denominator':len(plan['selection']['repair_tasks']),
+                        'repair_total_tokens':repair_tokens if costs_known else None,
+                        'selected_task_end_to_end_tokens':sum(r['end_to_end_total_tokens'] for r in method_rows) if all(r.get('end_to_end_total_tokens') is not None for r in method_rows) else None,
+                        'shared_translation_then_repair_accepted':len(plan['selection']['initial_passes'])+accepted,
+                        'source_pool_denominator':12,
+                        'shared_translation_then_repair_total_tokens':generation_usage['total_tokens']+repair_tokens if costs_known and generation_known else None}
     dump(RUN/'formal_summary.json',{'source_pool_tasks':12,'selection':plan['selection'],'conditions':rows,
+       'source_pool_translation_usage':generation_usage,'source_pool_translation_usage_complete':generation_known,'method_totals':totals,
        'cost_accounting':'Each selected task includes its one actual shared initial translation in each method end-to-end total; all attempted repair calls retained. Generation failures and initial passes remain in the separate full source-pool ledger.'})
 
 
