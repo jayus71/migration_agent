@@ -68,6 +68,10 @@ v2 于本轮启动，PID `3373399`；日志为 `development_v2/development.log`�
 
 正式来源流量固定为12次共同初译，每次最多16,384输出token。取得非空真实候选后，其语法、导入、执行、数值或状态错误均由统一初始验收判定，所有失败进入修复集合。API无返回、空输出或不可取得候选单列生成失败，保留费用，不制造占位代码，不加入修复分母。初译已通过程序单独报告。四方法的修复分母为实际初始失败数，绝不按修复胜负筛选。
 
-`natural12_v1`是首次准备快照，未调用API。`natural12_v2`在首次调用前澄清语法失败仍入组，保留v1全部记录。v2共同初译/初始验收已持久启动，PID `3437085`，日志为远端 `natural12_v2/translation_and_initial_check.log`。manifest SHA-256为 `86cd79ff7037a5435b6d5abfe74a87b95730b6859888f8dffdbcfd95a8509f0c`，pretranslation hashes SHA-256为 `556d8ce77d7b800fca71cbee1b78519669c2dbb1e4760b6ff0f8cea3ffb75588`。
+`natural12_v1`是首次准备快照，未调用API。`natural12_v2`在首次调用前澄清语法失败仍入组，保留v1全部记录。v2共同初译/初始验收已经完成，原PID为 `3437085`，日志为远端 `natural12_v2/translation_and_initial_check.log`。manifest SHA-256为 `86cd79ff7037a5435b6d5abfe74a87b95730b6859888f8dffdbcfd95a8509f0c`，pretranslation hashes SHA-256为 `556d8ce77d7b800fca71cbee1b78519669c2dbb1e4760b6ff0f8cea3ffb75588`。
 
 用户已明确授权实验子代理独立完成初译、筛选、四方法执行、监测与审计，无需再等主代理批准启动。`formal_dispatch.py prepare`将筛选结果、条件网格、方法hash、预算和CPU组写入可审阅launch manifest；随后`launch`持久运行，最多2个API worker，各有独立workspace和两个CPU核。每条件40调用、4提交、120,000输出token和1,800秒不变；不自动重试失败条件。共享初译实际费用在每方法的对应任务端到端账本计一次，生成失败/初译通过的来源流量及费用另记。全部最终记录完成后据实更新接受数，不沿用旧六例数字。
+
+12次初译均取得API响应，实际返回模型名为 `deepseek-flash`，请求模型名为 `deepseek-v4-flash`。其中10次生成非空候选，8个通过三种子初始验收，2个失败进入全部四方法的条件修复比较。通过者为CNN分类、超分辨、VAE、循环语言模型、Actor-Critic、REINFORCE、GAT和GPT-nano。时间序列候选把二维输入按三维索引，触发IndexError；ResNet候选返回了非空但截断的代码，首行SyntaxError，按既定规则保留在修复集合。GAN生成器和Transformer语言模型两次响应均耗尽16,384输出token额度且没有正文，记为生成失败，其费用留在12来源账本中。没有为这两项制造候选或补发初译。
+
+选择文件SHA-256为 `dd4864873d813c9ebca58e4154c298fb40ab4e80a42980c7daa61df1ce2ea8e0`，翻译后输入hash清单SHA-256为 `df1f2708a4e271d9a7975dc3bb1e208eb2b757c1efbc5670dc9b75a52bb4968a`。2任务×4方法的正式launch manifest SHA-256为 `f78fe078c66e9cd9375c5bbfbca4660b383168c440ce978824a706eb59dcad64`，冻结dispatcher SHA-256为 `f820d3b54ba91e93eeb9a6f3f4d2117b9045c63d0ebec2fcf6edb9cf9f74dd76`。正式调度PID为 `3473891`，两组CPU为 `[0,1]`、`[2,3]`。结束后由 `finalize_formal.py`（PID `3502833`，CPU `[0,1,2,3]`）一次性执行最终复验、原始usage核对和证据清单归档；不触发新的API调用。
