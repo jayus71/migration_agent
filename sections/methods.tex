@@ -1,18 +1,18 @@
 \section{Methods}
 \label{sec:method}
 
-LaDiM uses dependencies between training computations to guide the investigation of a translated program. Starting from the Translator's candidate, the Verifier Agent examines the observed discrepancies and tests the code that could explain them. Its findings and supporting observations pass to a separate Repair Agent, which uses this evidence to select and evaluate changes. The Orchestrator returns measurements after each submission, allowing repair to follow the errors revealed as execution progresses. Figure~\ref{fig:architecture} shows this process.
+LaDiM uses dependencies between training computations to guide diagnosis and repair. The Translator first produces a candidate in the requested framework. The Verifier Agent investigates discrepancies between source and target executions and passes its findings and supporting observations to a separate Repair Agent. The Repair Agent tests these hypotheses and revises the candidate. The Orchestrator schedules their work and returns verification results after each submission to guide further repair. Figure~\ref{fig:architecture} shows this process.
 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{figures/hierarchical_feedback_architecture.pdf}
-\caption{LaDiM's migration workflow. The Translator generates a candidate for the Verifier Agent to investigate through code and training observations. The Repair Agent receives the evidence and revises the candidate. The Orchestrator checks submitted changes and returns measurements for subsequent attempts. Execution adapters obtain observations from the target framework.}
+\caption{LaDiM's migration workflow. The Translator generates a candidate, the Verifier Agent investigates code and training observations, and the Repair Agent receives the evidence and revises the candidate. The Orchestrator schedules their work, checks submissions, and returns measurements. Execution adapters obtain observations from MindSpore and JAX.}
 \label{fig:architecture}
 \end{figure}
 
 \subsection{Preliminary}
 
-A migration task $\mathcal T=(P,L_s,F_s,L_t,F_t,W)$ specifies a source program $P$, its language and framework $(L_s,F_s)$, the requested target environment $(L_t,F_t)$, and an editable file scope $W$. Migration produces a target program $\hat P$ that preserves the source's training behavior. An edit is one successfully applied editing operation, which can replace several code blocks across files in $W$. A submission follows a repair stage containing code inspection, tests, and edits.
+A migration task $\mathcal T=(P,L_s,F_s,L_t,F_t,W)$ specifies a source program $P$, its language and framework $(L_s,F_s)$, the requested target environment $(L_t,F_t)$, and an editable file scope $W$. Migration produces a target program $\hat P$ that preserves the source's training behavior. The scope can include the translated program, its supporting library, or a repository.
 
 At training step $t$, source and target executions produce corresponding observations $(e_t,v_t,g_t,\theta_{t+1}-\theta_t)$ and $(\hat e_t,\hat v_t,\hat g_t,\hat\theta_{t+1}-\hat\theta_t)$. Here $e_t$ records the execution outcome, including success or an exception, $v_t$ contains selected forward values and losses, $g_t$ contains gradients, and $\theta_t$ denotes the parameters before the update. After aligning corresponding tensors and parameters, we define
 \begin{align}
@@ -23,12 +23,14 @@ d_{\mathrm{update},t}&=(\theta_{t+1}-\theta_t)-(\hat\theta_{t+1}-\hat\theta_t).
 \end{align}
 For a numerical comparison $d=x-\hat x$, $d\simeq0$ denotes agreement within its tolerance, such as $|d_j|\leq\alpha+\beta|x_j|$ for absolute tolerance $\alpha$ and relative tolerance $\beta$, or a specified norm bound. These discrepancies follow the training computation. Forward values determine the loss, differentiation produces the gradients, and the optimizer uses those gradients and its state to update parameters. The updated parameters then affect subsequent forward computations.
 
-The LLM $M$ performs translation, investigation, and repair under the role instructions $A_T$, $A_V$, and $A_R$, respectively. The Orchestrator $\mathcal O$ evaluates candidates and manages the shared investigation and repair budget $B$. In the algorithms, $S$ holds the current candidate and observations, $q$ is its verification status, $H$ is a conversation, and $C$ manages retained evidence, preserving the conversation for individual programs and coordinating context for repositories. Each $\textsc{Query}(M,A,H,b,B)$ invokes $M$ with role instructions $A$ and conversation $H$, charging its usage to the stage allowance $b$ and shared budget $B$. The initial $\textsc{Translate}(M,A_T,\mathcal T)$ call uses the same LLM to generate a candidate. Tools return observations and update $S$ when an edit succeeds.
+The LLM $M$ performs translation, investigation, and repair under role instructions $A_T$, $A_V$, and $A_R$. The Orchestrator $\mathcal O$ evaluates candidates and manages their shared investigation and repair budget $B$. In the algorithms, $S$ holds the candidate and observations, $q$ is its verification status, $H$ is a conversation, and $C$ manages retained evidence. A submission sends the candidate for external verification after a repair stage that can contain several LLM calls, tests, and edits. Each $\textsc{Query}(M,A,H,b,B)$ invokes $M$ with instructions $A$ and conversation $H$, charging its usage to the stage allowance $b$ and shared budget $B$.
 
-\subsection{Verifier Agent: Layered Diagnosis}
+\subsection{Verifier Agent}
 \label{sec:hierarchy}
 
-The Verifier Agent investigates the execution, forward, gradient, and update observations under $A_V$, which asks it to support hypotheses with code locations and distinguishing tests. Dependencies between these computations help narrow the causes. An \textbf{execution discrepancy} ($d_{\mathrm{execution},t}=1$) points to the exception and implicated calls. A \textbf{forward discrepancy} ($d_{\mathrm{forward},t}\not\simeq0$) motivates tracing the operators that produce different values. When forward values agree, a \textbf{gradient discrepancy} ($d_{\mathrm{gradient},t}\not\simeq0$) directs attention to parameter registration and differentiation. When forward values and gradients agree, an \textbf{update discrepancy} ($d_{\mathrm{update},t}\not\simeq0$) points to the optimizer's rule and state. The first affected step helps distinguish these causes because updates influence later forward values. The LLM selects code inspections and tests from this evidence. Algorithm~\ref{alg:diagnose} records the investigation and defines the shared model-call and tool-execution step. During diagnosis, production files are read-only and scratch tests remain editable.
+The Verifier Agent uses discrepancies to narrow the code and computations it investigates. An execution discrepancy ($d_{\mathrm{execution},t}=1$) identifies an exception and the calls that led to it. A forward discrepancy ($d_{\mathrm{forward},t}\not\simeq0$) directs the investigation toward operators that produce different values. When forward values agree, a gradient discrepancy ($d_{\mathrm{gradient},t}\not\simeq0$) points to parameter registration or the differentiation path. When both forward values and gradients agree, an update discrepancy ($d_{\mathrm{update},t}\not\simeq0$) directs attention to the optimizer's rule and state. The first affected step provides further evidence because a changed update can alter later forward computations.
+
+Under $A_V$, the LLM selects code inspections and distinguishing tests, then records the observations supporting its hypotheses. Production files remain read-only during this investigation, while scratch tests can be created and modified. Independent evidence handoff transfers these findings to a new repair conversation so that the Repair Agent can assess the diagnosis against its supporting code and measurements. Algorithm~\ref{alg:diagnose} gives the layered investigation and defines the shared \textsc{AgentStep} for querying the LLM, executing tools, and recording observations.
 
 \begin{algorithm}[!htb]
 \caption{Layered Diagnosis}
@@ -54,11 +56,12 @@ The Verifier Agent investigates the execution, forward, gradient, and update obs
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Repair Agent: Evidence Handoff}
+\subsection{Repair Agent}
+\label{sec:repair-agent}
 
-The Repair Agent starts a separate conversation with the Verifier Agent's code observations, test results, and diagnosis, attributed to the Verifier Agent. It can reassess these findings, run further tests, and edit files in $W$. For individual programs, the Orchestrator refreshes the measurements after diagnosis and confirms candidates that pass the public checks. Unresolved discrepancies enter the repair loop in Algorithm~\ref{alg:repair} with the diagnosis evidence $E$, current observations $S.m$, and verification status $q$.
+The Repair Agent receives the Verifier Agent's code observations, test results, and hypotheses through independent evidence handoff. It reassesses this evidence, runs further tests, and edits files in $W$, including supporting library code when the task permits it. The agent tests its changes before submission. The Orchestrator then verifies the candidate and returns the remaining discrepancies, which guide further investigation and repair.
 
-The repair loop reuses \textsc{AgentStep} and its ordered tool results $R$. The stage flags $F$ record whether a production edit succeeded and whether a test ran after the latest edit. A final response ends the stage when both conditions hold; otherwise, the agent receives the pending action and continues within its allowance. After each submission, the Orchestrator measures the candidate and returns the unresolved differences. The candidate and repair conversation persist across attempts under the shared budget.
+Repair history preserves earlier edits, observations, and hypotheses across attempts. The continuing conversation includes failed tests and verification feedback, allowing the agent to relate a changed result to the preceding modification and revise explanations that did not resolve the fault. The current candidate also persists, so later attempts build on applied changes. Algorithm~\ref{alg:repair} reuses \textsc{AgentStep} from Algorithm~\ref{alg:diagnose}.
 
 \begin{algorithm}[!htb]
 \caption{\textsc{Repair}$(\mathcal T,S,E,q,M,B,C)$}
@@ -83,16 +86,18 @@ The repair loop reuses \textsc{AgentStep} and its ordered tool results $R$. The 
 \subsection{Repository Coordination}
 \label{sec:repository-method}
 
-A change to a shared implementation can affect several callers in a repository. LaDiM provides a map of files, imports, symbols, and notebook cells from which the agent proposes work units with file scopes, interface goals, and dependencies. It selects a unit whose prerequisites have current checkpoints, then investigates the related interfaces. Checkpoints record syntax validation and selected local tests. Code changes invalidate checkpoints for affected units and their dependents, prompting checks of the callers that may have changed behavior. The Orchestrator evaluates the complete repository, including its entry points and training computations, to determine acceptance.
+A change to a shared implementation can affect several callers in a repository. Repository context management carries the plan, code context, and evidence needed to investigate these relationships across files. It combines Repository Structural Analysis, Repair Dependency Graph Planning, notebook tools with edit validation, an archive of evidence associated with code versions, and context reconstruction.
 
-Repository context management carries relevant evidence as investigation moves across files. LaDiM archives observations and conversations and provides a tool for retrieving detailed records. At the role handoff, an actual switch between work units, or a context capacity boundary, it rebuilds the conversation around the current plan, hypotheses, measurements, and relevant code already inspected. Earlier measurements retain their association with the candidate on which they were obtained. Algorithm~\ref{alg:repository} starts with complete repository verification and returns an accepted candidate immediately. Otherwise, the initial measurements support diagnosis, and the resulting evidence starts the repair loop. Its context operations serve Algorithms~\ref{alg:diagnose} and~\ref{alg:repair}.
+Repository Structural Analysis exposes files, imports, function and class definitions, and notebook cells for the agent to inspect through a tool call. The agent uses Repair Dependency Graph Planning to group related files into work units, specify their repair goals, and organize their prerequisites as a directed acyclic graph. It selects a unit whose prerequisites have current checkpoints, then edits the files assigned to that unit. Local syntax checks and selected tests establish each unit's current status. When an edit changes a shared implementation, LaDiM invalidates the checks for affected units and their dependents, prompting the agent to check the relevant callers again. The Orchestrator evaluates the complete repository, including its entry points and training computations, to determine acceptance.
+
+Notebook tools expose cell source and apply edits with transaction and syntax validation. The evidence archive retains code observations, measurements, hypotheses, and conversations with their code versions, and supports retrieval of relevant records. At independent evidence handoff, an actual switch between work units, or a context capacity boundary, LaDiM rebuilds the conversation around the current plan, findings, and measurements, retaining relevant code already read whose file hashes still match. These operations extend the program repair history to investigations that span multiple files and conversations. Algorithm~\ref{alg:repository} combines repository verification with the diagnosis and repair procedures.
 
 \begin{algorithm}[!htb]
 \caption{Repository migration and context operations}
 \label{alg:repository}
 \begin{algorithmic}[1]
 \Function{RepositoryMigrate}{$\mathcal T,M,B$}
-  \State $S.\hat P\gets\Call{Translate}{M,A_T,\mathcal T}$; $C\gets\Call{RepositoryContext}{\operatorname{Map}(\mathcal T)}$
+  \State $S.\hat P\gets\Call{Translate}{M,A_T,\mathcal T}$; $C\gets\Call{RepositoryContext}{\mathcal T}$
   \State $(S.m,q)\gets\mathcal O.\Call{Verify}{S.\hat P}$
   \If{$q=\mathrm{accepted}$} \State \Return $(S.\hat P,q)$ \EndIf
   \State $E\gets\Call{LayeredDiagnosis}{\mathcal T,S,M,B,C}$

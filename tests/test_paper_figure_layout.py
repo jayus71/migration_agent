@@ -67,10 +67,10 @@ class PaperFigureLayoutTests(unittest.TestCase):
                 np.testing.assert_allclose(lines[label].get_ydata(),
                                            (means[column] / THRESHOLDS[column]).clip(lower=1e-7))
             labels = {label.get_text(): label for label in ax.texts}
-            first = labels["Detected at step 1"]
+            first = labels["LaDiM detects at step 1"]
             self.assertEqual(first.xy[0], 1)
             self.assertAlmostEqual(first.xy[1], means.loc[1, metric] / THRESHOLDS[metric])
-            loss = labels[f"Loss-based detection\nat step {loss_step} (mean)"]
+            loss = labels[f"Loss check detects\nat step {loss_step}"]
             self.assertEqual(loss.xy[0], loss_step)
             self.assertAlmostEqual(loss.xy[1], means.loc[loss_step, "loss_abs_diff"]
                                    / THRESHOLDS["loss_abs_diff"])
@@ -119,7 +119,7 @@ class PaperFigureLayoutTests(unittest.TestCase):
         self.assertEqual(sum(expected), 6938291)
         self.assertEqual(len(b.patches), 29)
         np.testing.assert_allclose([p.get_height() for p in b.patches], np.array(expected) / 1000)
-        for index, method in enumerate(('ladim', 'matchfix', 'swe')):
+        for index, method in enumerate(('ladim', 'matchfix')):
             self.assertAlmostEqual(sum(p.get_width() for p in a.patches[index*3:index*3+3]),
                                    data['main'][method]['tokens'] / 1e6)
         fig.canvas.draw()

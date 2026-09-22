@@ -1,8 +1,13 @@
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}
 \toprule
-\textbf{Method} & \textbf{Model calls} & \textbf{Repair tokens} & \textbf{Accepted} \\
+\textbf{Method} & \textbf{LLM calls} & \textbf{LLM tokens} & \textbf{Accepted} \\
 \midrule
-Direct repair (shared tools) & 57 & 353,311 & 6/6 \\
+\multicolumn{4}{l}{\textit{LLM repair of supplied candidates}} \\
 LaDiM & 76 & 674,009 & 6/6 \\
+Direct repair & 57 & 353,311 & 6/6 \\
+\midrule
+\multicolumn{4}{l}{\textit{Single native conversion of supplied candidates}} \\
+Ivy & 0 & 0 & 0/6 \\
+\texttt{torch2jax} & 0 & 0 & 0/6 \\
 \bottomrule
 \end{tabular*}

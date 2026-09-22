@@ -191,7 +191,7 @@ def load_data():
 
 
 def export_tables(data):
-    header = r'\textbf{Method} & \thead{Model\\calls} & \thead{Input tokens\\(millions)} & \thead{Output tokens\\(millions)} & \thead{Total tokens\\(millions)} & \textbf{Accepted} \\'
+    header = r'\textbf{Method} & \thead{LLM\\calls} & \thead{Input tokens\\(millions)} & \thead{Output tokens\\(millions)} & \thead{Total tokens\\(millions)} & \textbf{Accepted} \\'
     comparison = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}', r'\toprule', header]
     citations = {'cte': 'macedo2025codetransengine', 'msadapter': 'openi2025msadapter',
                  'swe': 'yang2024sweagent', 'matchfix': 'ibrahimzada2025matchfixagent',
@@ -238,7 +238,7 @@ def export_tables(data):
         comparison += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_unified_comparison.tex').write_text('\n'.join(comparison) + '\n')
     labels = [('main/ladim', 'LaDiM'), ('continuous_role/ladim', 'Continuous investigation and repair conversation'),
-              ('without_repair_history/ladim', 'Without prior repair conversation'),
+              ('without_repair_history/ladim', 'Without repair history'),
               ('without_progress_prompt/ladim', 'Without progress reminders'),
               ('main/matchfix', 'MatchFixAgent'), ('matchfix_investigation/matchfix', 'MatchFixAgent with independent investigation'),
               ('main/swe', 'SWE-agent'), ('swe_investigation/swe', 'SWE-agent with independent investigation')]
@@ -271,7 +271,7 @@ def export_tables(data):
                r'\midrule', *signal_rows, r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_training_signals.tex').write_text('\n'.join(signals) + '\n')
     natural = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}', r'\toprule',
-        r'\textbf{Method} & \thead{Initially incorrect\\programs repaired} & \thead{Initially correct\\programs preserved} & \thead{Repair tokens\\(millions)} & \thead{Final\\accepted} \\', r'\midrule']
+        r'\textbf{Method} & \thead{Failed programs\\repaired} & \thead{Passing programs\\preserved} & \thead{Repair tokens\\(millions)} & \thead{Final\\accepted} \\', r'\midrule']
     for row in data['natural_repairs']:
         label = 'Direct repair' if row['method'] == 'direct' else LABELS[row['method']]
         natural.append(f"{label} & {row['repaired']}/5 & {row['retained']}/5 & {row['tokens']/1e6:.3f} & {row['accepted']}/10" + r' \\')
@@ -280,19 +280,31 @@ def export_tables(data):
     jax_path = ROOT / 'output/maintext-jax-autonomous-20260918/final_analysis/summary.json'
     jax_data = json.loads(jax_path.read_text())['summaries']
     jax = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}', r'\toprule',
-           r'\textbf{Method} & \textbf{Model calls} & \textbf{Repair tokens} & \textbf{Accepted} \\', r'\midrule']
-    for key, label in [('direct_shared_tools', 'Direct repair (shared tools)'), ('autonomous_layered', 'LaDiM')]:
-        row = next(r for r in jax_data if r['method'] == key)
-        assert row['complete'] and row['unknown_usage_calls'] == 0
-        jax.append(f"{label} & {row['calls']} & {row['known_total_tokens']:,} & {row['accepted']}/{row['planned']}" + r' \\')
+           r'\textbf{Method} & \textbf{LLM calls} & \textbf{LLM tokens} & \textbf{Accepted} \\']
+    for group, methods in [
+            ('LLM repair of supplied candidates', [('autonomous_layered', 'LaDiM'), ('direct_shared_tools', 'Direct repair')]),
+            ('Single native conversion of supplied candidates', [('ivy', 'Ivy'), ('torch2jax', r'\texttt{torch2jax}')])]:
+        jax += [r'\midrule', r'\multicolumn{4}{l}{\textit{' + group + r'}} \\']
+        for key, label in methods:
+            row = next(r for r in jax_data if r['method'] == key)
+            assert row['completed'] == row['recorded'] == row['planned'] == 6
+            assert row.get('unknown_usage_calls', 0) == 0
+            jax.append(f"{label} & {row['calls']} & {row['known_total_tokens']:,} & {row['accepted']}/{row['planned']}" + r' \\')
     jax += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_jax_repairs.tex').write_text('\n'.join(jax) + '\n')
-    components = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}', r'\toprule',
-        r'\textbf{Condition} & \thead{Initially incorrect\\programs repaired} & \thead{Initially correct\\programs preserved} & \thead{Repair tokens\\(millions)} & \thead{Final\\accepted} \\', r'\midrule']
+    components = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{4.6cm}rrrr@{}}', r'\toprule',
+        r'\textbf{Condition} & \thead{Failed programs\\repaired} & \thead{Passing programs\\preserved} & \thead{Repair tokens\\(millions)} & \thead{Final\\accepted} \\', r'\midrule']
     for row in data['natural_components']:
         components.append(f"{row['label']} & {row['repaired']}/5 & {row['retained']}/5 & {row['tokens']/1e6:.3f} & {row['accepted']}/10" + r' \\')
     components += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_natural_components.tex').write_text('\n'.join(components) + '\n')
+    program = [r'\textit{(b) Repair history and independent evidence handoff on saved initial translations}\par\smallskip',
+        r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{4.3cm}rrrr@{}}', r'\toprule',
+        r'\textbf{Condition} & \thead{Failed programs\\repaired} & \thead{Passing programs\\preserved} & \thead{Final\\accepted} & \thead{Repair\\tokens} \\', r'\midrule']
+    for row in data['natural_components'][:3]:
+        program.append(f"{row['label']} & {row['repaired']}/5 & {row['retained']}/5 & {row['accepted']}/10 & {row['tokens']:,}" + r' \\')
+    program += [r'\bottomrule', r'\end{tabular*}']
+    (ROOT / 'figures/TABLE_program_components.tex').write_text('\n'.join(program) + '\n')
     costs = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}', r'\toprule',
         r'\textbf{Method} & \thead{Repair\\calls} & \textbf{Submissions} & \thead{Repair input\\tokens} & \thead{Repair output\\tokens} & \thead{Total\\tokens} \\']
     for repo, label in [('timeseries', 'Time series'), ('twotower', 'Recommendation')]:
@@ -336,7 +348,7 @@ def build_figure():
                               gridspec_kw={'width_ratios': [1, 1.25]})
     stage_keys = ['translation', 'initially_accepted', 'initially_faulty']
     stage_colors = ['#E2E6E9', '#7BB2C9', BLUE]
-    for y, method in enumerate(('ladim', 'matchfix', 'swe')):
+    for y, method in enumerate(('ladim', 'matchfix')):
         left = 0
         for key, color in zip(stage_keys, stage_colors):
             value = data['cost_stages'][method][key] / 1e6
@@ -344,12 +356,12 @@ def build_figure():
                    edgecolor='white', linewidth=.4)
             left += value
         a.text(left + .35, y, f'{left:.2f}', va='center', fontsize=8)
-    a.set(yticks=range(3), yticklabels=['LaDiM', 'MatchFixAgent', 'SWE-agent'],
-          xlim=(0, 24), ylim=(2.55, -1.85), xlabel='Total tokens (millions)')
-    a.set_xticks([0, 10, 20])
+    a.set(yticks=range(2), yticklabels=['LaDiM', 'MatchFixAgent'],
+          xlim=(0, 14), ylim=(1.65, -1.85), xlabel='Total tokens (millions)')
+    a.set_xticks([0, 5, 10])
     a.set_title('(a) Total tokens', loc='left', fontsize=9, pad=8)
     a.legend(handles=[Patch(facecolor=color, label=label) for color, label in zip(
-             stage_colors, ['Initial translation', 'Initially correct inputs', 'Initially incorrect inputs'])],
+             stage_colors, ['Initial translation', 'Passes initial checks', 'Needs repair'])],
              loc='upper left', frameon=False, fontsize=8, handlelength=1.05,
              handletextpad=.4, labelspacing=.3, borderaxespad=.25)
     a.grid(axis='x', color='#E9ECEF', linewidth=.45)
@@ -364,7 +376,7 @@ def build_figure():
     b.axvline(19.5, color=GRAY, linestyle=(0, (2, 3)), linewidth=.55)
     b.set(xlim=(-1, 29), ylim=(-200, 1650), ylabel='Tokens saved by LaDiM\n(thousands)',
           yticks=[0, 250, 500, 750, 1000, 1250], xticks=[9.5, 24],
-          xticklabels=['Initially correct', 'Initially incorrect'],
+          xticklabels=['Passes initial checks', 'Needs repair'],
           xlabel='Migration inputs')
     b.legend(handles=[Patch(facecolor='#009E73', label='Lower token use by LaDiM'),
                       Patch(facecolor=ORANGE, label='Higher token use by LaDiM')],

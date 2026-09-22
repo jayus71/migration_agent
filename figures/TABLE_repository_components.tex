@@ -1,0 +1,18 @@
+% Source: output/cumulative-component-ablation-20260922/summary.json
+% SHA256: 3e7f0b2f2c36fd431694888e7e02d372932dc40dd92dfd6785b6e783ba87cf43
+% Source: data/audits/repository-map-ablation-20260922/summary.json
+% SHA256: b72e59f794fa70aebf6cd6df742c28c893023e435399cf9c9ef24a3968b8663b
+\textit{(c) Repository context management and Repository Structural Analysis on the time series repository}\par\smallskip
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{6.8cm}rrr@{}}
+\toprule
+\textbf{Condition} & \thead{Behavior\\checks passed} & \thead{Investigation\\and repair calls} & \thead{End-to-end\\tokens} \\
+\midrule
+\multicolumn{4}{l}{\textit{Repository context management}} \\
+Without repository context & 69/69 & 26 & 6,047,074 \\
+With repository context & 69/69 & 22 & 1,936,579 \\
+\midrule
+\multicolumn{4}{l}{\textit{Repository Structural Analysis}} \\
+Without Repository Structural Analysis & 69/69 & 42 & 2,651,248 \\
+With Repository Structural Analysis & 69/69 & 30 & 2,126,900 \\
+\bottomrule
+\end{tabular*}
