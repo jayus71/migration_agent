@@ -4,17 +4,21 @@
 
 `figures/make_unified_results.py` reads the completed audit and summary under
 `data/audits/unified50-preflight-20260918/formal_launch/`. It generates
+`TABLE_main_comparison.tex`, `TABLE_program_costs.tex`,
 `TABLE_unified_comparison.tex`, `TABLE_unified_components.tex`,
-`TABLE_training_signals.tex`, `TABLE_natural_repairs.tex`,
-`TABLE_natural_components.tex`, `TABLE_program_components.tex`, `TABLE_repository_costs.tex`,
+`TABLE_training_signals.tex`, `TABLE_training_signals_compact.tex`, `TABLE_natural_repairs.tex`,
+`TABLE_natural_components.tex`, `TABLE_program_components.tex`,
+`TABLE_program_components_compact.tex`, `TABLE_repository_costs.tex`,
 `TABLE_repository_checks.tex`, `TABLE_jax_repairs.tex`, `repair_comparison.pdf`/`.png`/`.svg`, and
 `data/paper_figures/unified_results.json`. `make_repair_comparison.py` calls the
 same exporter. The JSON records SHA-256 hashes of its inputs.
 
-Method citations appear once per baseline in the main table. Program panels
-show calls, input/output/total tokens, and acceptance in the final column; repository panels show
-passed check counts, gradients, parameter updates, entry points or original
-tests, repair calls, and total tokens. The time series signal counts come from
+Method citations appear once per baseline in the experimental setup. The main
+program panels appear side by side and show calls, total tokens, and acceptance;
+the appendix retains their complete input/output token breakdowns. Repository
+panels share method rows with grouped task columns for passed checks, entry points
+or original tests, repair calls, and total tokens. The appendix cost table also
+retains gradients and parameter updates for both repositories. The time series signal counts come from
 `repository_training_check_details.json`, which records the source archive and
 member hashes and all three seeds' numerical check booleans. Original test
 counts report confirmed passes out of the ten declared tests. MatchFixAgent
@@ -99,7 +103,8 @@ framework or supporting library implementation.
 `TABLE_jax_repairs.tex` reads the frozen
 `output/maintext-jax-autonomous-20260918/final_analysis/summary.json`:
 LaDiM uses 76 calls and 674,009 tokens; direct repair uses 57 calls and 353,311.
-Both accept 6/6 on their first submission. The table separately groups Ivy and
+Both accept 6/6 on their first submission. Methods form columns, grouped as LLM
+repair or native conversion, with acceptance and costs as rows. The table groups Ivy and
 `samuela/torch2jax` as single native conversions of the supplied faulty candidates.
 Each accepts 0/6, with zero LLM calls and tokens; each converter's healthy MLP/CNN
 controls pass. TorchAX is the repair evaluation backend, not a conversion-control
@@ -114,7 +119,10 @@ the structural analysis and planning summaries under `data/audits/`, and
 two-repository cumulative table, `TABLE_repository_components.tex` for the two
 separate time series pairs, `TABLE_repository_independent.tex` for the structural
 analysis and planning ablations, and `TABLE_native_jax.tex` for the separate native
-JAX study. Each table records input paths and SHA-256 hashes. The main context pair
+JAX study. Both appendix repository tables use shared condition rows and grouped
+columns for time series and recommendation. The main repository component table
+places each independent without/with pair on one row. Each table records input
+paths and SHA-256 hashes. The main context pair
 uses 6,047,074 versus 1,936,579 tokens; the independent structural analysis pair
 uses 2,651,248 versus 2,126,900. These references remain separate. Planning shares
 the independent structural analysis study's complete references.

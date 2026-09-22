@@ -1,19 +1,14 @@
 % Source: output/cumulative-component-ablation-20260922/summary.json
 % SHA256: 3e7f0b2f2c36fd431694888e7e02d372932dc40dd92dfd6785b6e783ba87cf43
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{6.8cm}rrr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{5.4cm}rrrrrr@{}}
 \toprule
-\textbf{Condition} & \thead{Behavior\\checks passed} & \thead{Investigation\\and repair calls} & \thead{End-to-end\\tokens} \\
+& \multicolumn{3}{c}{\textbf{Time series}} & \multicolumn{3}{c}{\textbf{Recommendation}} \\
+\cmidrule(lr){2-4}\cmidrule(l){5-7}
+\textbf{Condition} & \thead{Checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} & \thead{Checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} \\
 \midrule
-\multicolumn{4}{l}{\textit{Time series repository}} \\
-Repair Agent & 69/69 & 26 & 6,128,331 \\
-\quad + Verifier investigation & 69/69 & 18 & 3,896,158 \\
-\quad + Independent evidence handoff & 69/69 & 26 & 6,047,074 \\
-\quad + Repository context management & 69/69 & 22 & 1,936,579 \\
-\midrule
-\multicolumn{4}{l}{\textit{Recommendation repository}} \\
-Repair Agent & 131/145 & 62 & 8,335,687 \\
-\quad + Verifier investigation & 131/145 & 59 & 8,912,546 \\
-\quad + Independent evidence handoff & 131/145 & 68 & 9,556,058 \\
-\quad + Repository context management & 131/145 & 80 & 10,191,440 \\
+Repair Agent & 69/69 & 26 & 6,128,331 & 131/145 & 62 & 8,335,687 \\
+\quad + Verifier investigation & 69/69 & 18 & 3,896,158 & 131/145 & 59 & 8,912,546 \\
+\quad + Independent evidence handoff & 69/69 & 26 & 6,047,074 & 131/145 & 68 & 9,556,058 \\
+\quad + Repository context management & 69/69 & 22 & 1,936,579 & 131/145 & 80 & 10,191,440 \\
 \bottomrule
 \end{tabular*}

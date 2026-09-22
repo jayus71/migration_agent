@@ -15,6 +15,15 @@ All failed tasks remain in each study's declared denominator, and all failed cal
 
 Source lengths count nonblank physical lines, including comments. Program means count each distinct source once. The 50 MindSpore identifiers use 24 source files, the signal study uses four, and the JAX study uses two. Repository lengths include all source Python files and notebook code cells, including original tests and excluding the external evaluation harness.
 
+\begin{table}[!htb]
+\caption{Complete input and output token costs for individual migrations. Costs include initial translation and every subsequent call. Acceptance uses the declared task denominator for each collection.}
+\label{tab:program-costs}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\input{figures/TABLE_program_costs.tex}
+\end{table}
+
 \subsection{Numerical Comparisons and Migration Settings}
 \label{sec:migration-settings}
 
@@ -123,11 +132,11 @@ The LSTM repair in Section~\ref{sec:fault-characterization} follows two errors t
 All methods receive byte-identical source repositories, common initial translations, task requirements, and acceptance procedures. The time series translation has three generation calls totaling 163,661 tokens. The recommendation translation uses 20 calls totaling 368,368 tokens. Generation proceeds from the public import structure and includes failed or truncated attempts. Each method's reported total contains one complete copy of this generation cost together with every repair call. Table~\ref{tab:repository-costs} separates input and output usage in repair.
 
 \begin{table}[!htb]
-\caption{Complete costs for the repository comparison. Total tokens include repair input and output plus common initial translation.}
+\caption{Training checks and complete costs for repository migration. Gradient and parameter update checks cover three training steps on all evaluated seeds. Total tokens include repair input and output plus common initial translation.}
 \label{tab:repository-costs}
 \centering
 \small
-\setlength{\tabcolsep}{3pt}
+\setlength{\tabcolsep}{2pt}
 \input{figures/TABLE_repository_costs.tex}
 \end{table}
 

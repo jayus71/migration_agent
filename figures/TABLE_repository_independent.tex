@@ -2,18 +2,14 @@
 % SHA256: b72e59f794fa70aebf6cd6df742c28c893023e435399cf9c9ef24a3968b8663b
 % Source: data/audits/work-unit-planning-ablation-20260922/summary.json
 % SHA256: 91f3ddbff3148c4119102edca99ae31801140ef430098f08d2a3fa0eb50a9d12
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{6.8cm}rrr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{5.4cm}rrrrrr@{}}
 \toprule
-\textbf{Condition} & \thead{Behavior\\checks passed} & \thead{Investigation\\and repair calls} & \thead{End-to-end\\tokens} \\
+& \multicolumn{3}{c}{\textbf{Time series}} & \multicolumn{3}{c}{\textbf{Recommendation}} \\
+\cmidrule(lr){2-4}\cmidrule(l){5-7}
+\textbf{Condition} & \thead{Checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} & \thead{Checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} \\
 \midrule
-\multicolumn{4}{l}{\textit{Time series repository}} \\
-Complete method & 69/69 & 30 & 2,126,900 \\
-Without Repository Structural Analysis & 69/69 & 42 & 2,651,248 \\
-Without Repair Dependency Graph Planning & 69/69 & 21 & 1,803,551 \\
-\midrule
-\multicolumn{4}{l}{\textit{Recommendation repository}} \\
-Complete method & 131/145 & 80 & 9,961,503 \\
-Without Repository Structural Analysis & 131/145 & 80 & 7,172,218 \\
-Without Repair Dependency Graph Planning & 130/145 & 69 & 9,213,723 \\
+Complete method & 69/69 & 30 & 2,126,900 & 131/145 & 80 & 9,961,503 \\
+Without Repository Structural Analysis & 69/69 & 42 & 2,651,248 & 131/145 & 80 & 7,172,218 \\
+Without Repair Dependency Graph Planning & 69/69 & 21 & 1,803,551 & 130/145 & 69 & 9,213,723 \\
 \bottomrule
 \end{tabular*}

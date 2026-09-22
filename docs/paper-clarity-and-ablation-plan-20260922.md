@@ -1,6 +1,6 @@
 # 论文内容与行文修改方案
 
-JAX 正式比较与修复依赖图规划消融均已完成，费用、最终验收和原始证据已通过审计。本方案结合完整结果，明确全文的贡献、结果表达与证据范围。方案已落实到全文、图表和附录，执行与验证见 [修改记录](paper-clarity-execution-20260922.md)；方法图由用户负责，篇幅压缩暂不处理。
+JAX 正式比较与修复依赖图规划消融均已完成，费用、最终验收和原始证据已通过审计。本方案结合完整结果，明确全文的贡献、结果表达与证据范围。方案已落实到全文、图表和附录，执行与验证见 [修改记录](paper-clarity-execution-20260922.md)。随后按用户要求横向组织表格，保留正文和完整证据；方法图由用户负责，进一步压缩到投稿页数限制留待后续。
 
 全文改写采用用户确认的方向：在现有证据支持下坚定陈述方法解决的问题和取得的结果，突出比较对象、指标、评价条件及量化差异，并充分表达已覆盖的任务和模型范围。摘要、引言、方法动机、实验分析、图表标题与结论共同落实这一方向。
 
@@ -270,7 +270,9 @@ Ivy 与 torch2jax 的两个 0/6 都包含以下三种结果，每种对应 MLP�
 
 每段先给主要判断，再提供支持该判断的机制、比较或例子。结果段围绕接受、效率和行为覆盖分别展开；表格承担完整数值，正文选最有解释力的数字。已有积极结果直接陈述，实质条件在最相关的位置说明一次。
 
-图表标题和讨论写明任务、方法与指标。图 3 可用“Total and per-input token costs for LaDiM and MatchFixAgent on MindSpore migration”，图注给出两方法均 50/50 及 57.4% 总 token 节省。消融表总题采用“Effects of training signals and repair components on acceptance and token use”，三个面板分别用“Training signals”“Repair history and independent evidence handoff on saved initial translations”“Repository context management and Repository Structural Analysis on the time-series repository”。图 4 的标题区分训练信号检测与损失曲线过阈。JAX 表题点明“Repair and native conversion controls on six faulty JAX candidates”，表内分开 LLM 修复与原生转换。
+图表标题和讨论写明任务、方法与指标。图 3 左侧保留 LaDiM、MatchFixAgent 和 SWE-agent 三项总量，右侧展示 LaDiM 与 MatchFixAgent 的逐输入成本差；图注明确后两种方法均为 50/50，以及 LaDiM 相对 MatchFixAgent 的 57.4% 总 token 节省。消融表总题采用“Effects of training signals and repair components”，三个面板分别呈现训练信号、保存初译上的修复历史与独立证据交接，以及时间序列上的两组仓库组件比较。图 4 的标题区分训练信号检测与损失曲线过阈。JAX 表题点明“Repair and native conversion controls on six faulty JAX candidates”，方法列按 LLM 修复与原生转换分组。
+
+横向表格布局参照 LoCA 与 AutoIF 的相邻面板和任务分组列。主比较的两个程序集合并排，两个仓库共享方法行；输入/输出费用和梯度/参数更新检查完整保留在附录。消融的训练信号与程序组件面板并排，仓库组件以一行呈现 Without/With 配对。附录累计与独立仓库消融也采用共享条件行和两仓库列组。使用可读的 9 点表格文字，不压缩整个表格或改变正文模板尺寸。
 
 结果句直接指出比较，例如“uses 57.4% fewer tokens than MatchFixAgent”，删除 may help 或 shows potential 一类弱化已测差异的说法。讲跨条件一致性时列出实际共同呈现该规律的研究；成本统一注明端到端或仅修复，接受按各研究的完整协议表述。摘要与结论选择覆盖最强的证据，结果段保留完整的成功、失败和相反趋势。
 

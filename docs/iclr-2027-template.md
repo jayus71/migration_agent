@@ -28,12 +28,17 @@ Build commands are maintained in [README.md](../README.md#figures-and-pdf).
 The entry point includes `sections/experiments.tex` and
 `sections/supplementary_experiments.tex`. The consolidated comparison table has
 MindSpore, cross-language, time series repository, and recommendation repository
-panels. Its program panels include input/output token breakdowns; repository
-panels show counts of passed checks, training signals, and entry points or tests.
+panels. Its program panels are adjacent; repository panels use shared method rows
+and grouped task columns. Complete input/output token breakdowns and repository
+gradient and parameter update checks appear in the appendix.
 Further main tables cover saved initial translation repair, six JAX repair and
 native conversion controls, and a three-panel ablation table. The ablation panels
 contain training signals, repair history and independent evidence handoff on saved
 translations, and two separate repository context and structural analysis pairs.
+The first two panels sit side by side; each repository component occupies one
+row with separate without/with columns. The JAX table groups method columns by
+LLM repair or native conversion. Appendix repository ablations use shared condition
+rows and separate columns for both repositories. These tables use 9-point text.
 Figure 3 shows stacked total tokens for LaDiM, MatchFixAgent, and SWE-agent beside
 29 signed per-input token savings bars for the LaDiM/MatchFixAgent pair, sorted
 within the two initial-check groups.
@@ -50,10 +55,11 @@ component matrices for the common collection and natural faults, repository
 checks and costs, context reconstruction details, complete repository component
 results, and the separate native JAX study with consecutive training steps.
 
-The compiled PDF has 22 pages. The main text ends on page 11, where references
-begin; the appendix starts on page 14. The official style, margins, body font,
-and line spacing are unchanged. The user deferred compression to the nine-page
-main-text limit for this content revision.
+The compiled PDF has 23 pages. The main text ends on page 10, references begin on
+page 11, and the appendix starts on page 14. The official style, margins, body font,
+and line spacing are unchanged. The user authorized horizontal table organization
+after the content revision, preserving the prose and evidence. Further compression
+to the nine-page main-text limit remains deferred.
 The AI use statement remains blank for the authors to complete.
 
 The [revision record](paper-clarity-execution-20260922.md) lists evidence sources and the

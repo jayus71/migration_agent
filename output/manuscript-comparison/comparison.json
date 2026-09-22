@@ -27,13 +27,13 @@
     }
   },
   "current": {
-    "base_commit": "04ea2cf",
-    "pdf_sha256": "84f9558ddcb2b4580bd8fb132112f491aafc6ac7984e7611be9078e2da71a5b2"
+    "base_commit": "95936db",
+    "pdf_sha256": "bc9973ab36b0531dd1896d9ff0d51f5197f2364fb7856c80d54ff44205a8d073"
   },
-  "updated": "2026-09-22T19:46:37+08:00",
-  "version": "d2463e2b11e47eb8230ef2cf1554f4152bb604417709ea467ac46ded36feff0d",
-  "reading_words_added": 5867,
-  "reading_words_removed": 3207,
+  "updated": "2026-09-22T20:03:02+08:00",
+  "version": "981f3405571fd82f202f9da2ecb14534f80f965d5a8887cc7ab397450c37eb85",
+  "reading_words_added": 6079,
+  "reading_words_removed": 3344,
   "sections": {
     "Title": {
       "reading": [
@@ -15138,38 +15138,27 @@
             "compare",
             "LaDiM",
             "with",
-            "SWE-agent"
+            "SWE-agent",
+            "[yang2024sweagent]",
+            "and",
+            "MatchFixAgent",
+            "[ibrahimzada2025matchfixagent]"
           ],
           "after": [
             "We",
             "compare",
             "LaDiM",
             "with",
-            "SWE-agent"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "[yang2024sweagent]"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "SWE-agent",
+            "[yang2024sweagent]",
             "and",
-            "MatchFixAgent"
-          ],
-          "after": [
-            "and",
-            "MatchFixAgent"
+            "MatchFixAgent",
+            "[ibrahimzada2025matchfixagent]"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "[ibrahimzada2025matchfixagent]",
             "from",
             "the",
             "same"
@@ -15232,35 +15221,68 @@
           "before": [
             "CodeTransEngine's",
             "direct",
-            "translation"
+            "translation",
+            "configuration",
+            "[macedo2025codetransengine]"
           ],
           "after": [
             "CodeTransEngine's",
             "direct",
-            "translation"
+            "translation",
+            "configuration",
+            "[macedo2025codetransengine]"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "configuration",
-            "[macedo2025codetransengine]",
-            "and",
+            "and"
+          ],
+          "after": [
+            ","
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "MSAdapter",
-            "[openi2025msadapter]",
+            "[openi2025msadapter]"
+          ],
+          "after": [
+            "MSAdapter",
+            "[openi2025msadapter]"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             ".",
             "The",
             "comparison",
             "across",
             "languages",
-            "includes",
+            "includes"
+          ],
+          "after": [
+            ","
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "InterTrans",
             "[macedo2024intertrans]"
           ],
           "after": [
-            "configuration,",
-            "MSAdapter,",
-            "InterTrans,"
+            "InterTrans",
+            "[macedo2024intertrans]"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            ","
           ]
         },
         {
@@ -16031,184 +16053,172 @@
           "kind": "equal",
           "before": [
             "calls",
-            "&",
-            "Input",
-            "tokens",
-            "(millions)",
-            "&",
-            "Output",
-            "tokens",
-            "(millions)",
-            "&",
-            "Total",
-            "tokens",
-            "(millions)"
+            "&"
           ],
           "after": [
             "calls",
-            "&",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "Input",
-            "tokens",
+            "tokens"
+          ],
+          "after": [
+            "Tokens"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "(millions)",
-            "&",
+            "&"
+          ],
+          "after": [
+            "(millions)",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "Output",
             "tokens",
             "(millions)",
             "&",
             "Total",
             "tokens",
-            "(millions)"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
+            "(millions)",
+            "(a)",
+            "PyTorch",
+            "to",
+            "MindSpore"
+          ],
           "after": [
-            "&",
             "Accepted"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "(a)",
-            "PyTorch",
-            "to",
-            "MindSpore",
             "Direct",
-            "LLM"
+            "LLM",
+            "&"
           ],
           "after": [
-            "(a)",
-            "PyTorch",
-            "to",
-            "MindSpore",
             "Direct",
-            "LLM"
+            "LLM",
+            "&"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "29",
+            "&",
+            "0.429",
+            "&"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "29/50"
+          ],
+          "after": [
+            "29/50"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "CodeTransEngine"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&",
+            "29",
+            "&"
+          ],
+          "after": [
+            "&",
+            "29",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "0.018",
+            "&",
+            "0.411",
+            "&",
+            "0.429",
+            "CodeTransEngine",
+            "(direct)"
+          ],
+          "after": [
+            "0.280"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&",
+            "31/50"
+          ],
+          "after": [
+            "&",
+            "31/50"
           ]
         },
         {
           "kind": "delete",
           "before": [
             "&",
-            "29/50"
+            "29",
+            "&",
+            "0.022",
+            "&",
+            "0.257",
+            "&",
+            "0.280"
           ],
           "after": []
         },
         {
           "kind": "equal",
           "before": [
-            "&",
-            "29",
-            "&",
-            "0.018",
-            "&",
-            "0.411",
-            "&",
-            "0.429"
+            "MSAdapter",
+            "&"
           ],
           "after": [
-            "&",
-            "29",
-            "&",
-            "0.018",
-            "&",
-            "0.411",
-            "&",
-            "0.429"
+            "MSAdapter",
+            "&"
           ]
         },
         {
           "kind": "insert",
           "before": [],
           "after": [
-            "&",
-            "29/50"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "CodeTransEngine"
-          ],
-          "after": [
-            "CodeTransEngine"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "(direct)",
-            "&",
-            "31/50"
-          ],
-          "after": [
-            "[macedo2025codetransengine]"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "&",
-            "29",
-            "&",
-            "0.022",
-            "&",
-            "0.257",
-            "&",
-            "0.280"
-          ],
-          "after": [
-            "&",
-            "29",
-            "&",
-            "0.022",
-            "&",
-            "0.257",
-            "&",
-            "0.280"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
-            "31/50"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "MSAdapter"
-          ],
-          "after": [
-            "MSAdapter"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "[openi2025msadapter]",
-            "&",
             "-",
             "&",
             "-",
-            "&",
-            "-",
-            "&",
-            "-"
+            "&"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "&",
             "15/50"
           ],
           "after": [
-            "&",
             "15/50"
           ]
         },
@@ -16236,43 +16246,52 @@
           ]
         },
         {
-          "kind": "replace",
+          "kind": "delete",
           "before": [
             "&",
             "44/50"
           ],
-          "after": [
-            "[yang2024sweagent]"
-          ]
+          "after": []
         },
         {
           "kind": "equal",
           "before": [
             "&",
             "1,097",
+            "&"
+          ],
+          "after": [
             "&",
-            "19.845",
-            "&",
+            "1,097",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "19.845"
+          ],
+          "after": [
+            "20.831"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "0.987",
             "&",
             "20.831"
           ],
           "after": [
-            "&",
-            "1,097",
-            "&",
-            "19.845",
-            "&",
-            "0.987",
-            "&",
-            "20.831"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
             "44/50"
           ]
         },
@@ -16283,58 +16302,6 @@
           ],
           "after": [
             "MatchFixAgent"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "&",
-            "50/50"
-          ],
-          "after": [
-            "[ibrahimzada2025matchfixagent]"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "&",
-            "619",
-            "&",
-            "10.750",
-            "&",
-            "1.347",
-            "&",
-            "12.097"
-          ],
-          "after": [
-            "&",
-            "619",
-            "&",
-            "10.750",
-            "&",
-            "1.347",
-            "&",
-            "12.097"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
-            "50/50"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "LaDiM",
-            "(ours)"
-          ],
-          "after": [
-            "LaDiM",
-            "(ours)"
           ]
         },
         {
@@ -16349,80 +16316,180 @@
           "kind": "equal",
           "before": [
             "&",
-            "326",
-            "&",
-            "4.298",
-            "&",
-            "0.861",
-            "&",
-            "5.159"
+            "619",
+            "&"
           ],
           "after": [
             "&",
-            "326",
-            "&",
-            "4.298",
-            "&",
-            "0.861",
-            "&",
-            "5.159"
+            "619",
+            "&"
           ]
         },
         {
-          "kind": "insert",
-          "before": [],
+          "kind": "replace",
+          "before": [
+            "10.750"
+          ],
           "after": [
+            "12.097"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "1.347",
             "&",
+            "12.097"
+          ],
+          "after": [
             "50/50"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "(b)",
-            "Java/DJL",
-            "to",
-            "Python/PyTorch",
-            "Direct",
-            "LLM"
+            "LaDiM",
+            "(ours)",
+            "&"
           ],
           "after": [
-            "(b)",
-            "Java/DJL",
-            "to",
-            "Python/PyTorch",
-            "Direct",
-            "LLM"
+            "LaDiM",
+            "(ours)",
+            "&"
           ]
         },
         {
           "kind": "delete",
           "before": [
-            "&",
-            "1/18"
+            "50/50",
+            "&"
           ],
           "after": []
         },
         {
           "kind": "equal",
           "before": [
+            "326",
+            "&"
+          ],
+          "after": [
+            "326",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "4.298"
+          ],
+          "after": [
+            "5.159"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "0.861"
+          ],
+          "after": [
+            "50/50",
+            "Method"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "5.159",
+            "(b)",
+            "Java/DJL",
+            "to",
+            "Python/PyTorch"
+          ],
+          "after": [
+            "LLM",
+            "calls",
             "&",
+            "Tokens",
+            "(millions)",
+            "&",
+            "Accepted"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "Direct",
+            "LLM",
+            "&"
+          ],
+          "after": [
+            "Direct",
+            "LLM",
+            "&"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "1/18",
+            "&"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
             "18",
-            "&",
+            "&"
+          ],
+          "after": [
+            "18",
+            "&"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
             "0.142",
             "&",
             "0.552",
-            "&",
+            "&"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
             "0.694"
           ],
           "after": [
-            "&",
-            "18",
-            "&",
-            "0.142",
-            "&",
-            "0.552",
-            "&",
             "0.694"
           ]
         },
@@ -16448,8 +16515,7 @@
           "kind": "insert",
           "before": [],
           "after": [
-            "InterTrans",
-            "[macedo2024intertrans]"
+            "InterTrans"
           ]
         },
         {
@@ -16457,29 +16523,40 @@
           "before": [
             "&",
             "89",
+            "&"
+          ],
+          "after": [
             "&",
-            "0.680",
-            "&",
+            "89",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "0.680"
+          ],
+          "after": [
+            "2.286"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "1.606",
             "&",
             "2.286"
           ],
           "after": [
-            "&",
-            "89",
-            "&",
-            "0.680",
-            "&",
-            "1.606",
-            "&",
-            "2.286"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
             "1/18"
           ]
         },
@@ -16487,49 +16564,60 @@
           "kind": "equal",
           "before": [
             "Test-guided",
-            "repair"
+            "repair",
+            "&"
           ],
           "after": [
             "Test-guided",
-            "repair"
+            "repair",
+            "&"
           ]
         },
         {
           "kind": "delete",
           "before": [
-            "&",
-            "7/18"
+            "7/18",
+            "&"
           ],
           "after": []
         },
         {
           "kind": "equal",
           "before": [
-            "&",
             "71",
-            "&",
-            "1.594",
-            "&",
+            "&"
+          ],
+          "after": [
+            "71",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "1.594"
+          ],
+          "after": [
+            "4.475"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "2.881",
             "&",
             "4.475"
           ],
           "after": [
-            "&",
-            "71",
-            "&",
-            "1.594",
-            "&",
-            "2.881",
-            "&",
-            "4.475"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
             "7/18"
           ]
         },
@@ -16555,21 +16643,30 @@
           "before": [
             "&",
             "682",
-            "&",
-            "23.063",
-            "&",
-            "1.258",
-            "&",
-            "24.321"
+            "&"
           ],
           "after": [
             "&",
             "682",
-            "&",
+            "&"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
             "23.063",
             "&",
             "1.258",
-            "&",
+            "&"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "24.321"
+          ],
+          "after": [
             "24.321"
           ]
         },
@@ -16603,29 +16700,40 @@
           "before": [
             "&",
             "524",
+            "&"
+          ],
+          "after": [
             "&",
-            "26.335",
-            "&",
+            "524",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "26.335"
+          ],
+          "after": [
+            "28.355"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "2.020",
             "&",
             "28.355"
           ],
           "after": [
-            "&",
-            "524",
-            "&",
-            "26.335",
-            "&",
-            "2.020",
-            "&",
-            "28.355"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
             "8/18"
           ]
         },
@@ -16633,51 +16741,48 @@
           "kind": "equal",
           "before": [
             "LaDiM",
-            "(ours)"
+            "(ours)",
+            "&"
           ],
           "after": [
             "LaDiM",
-            "(ours)"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "&",
-            "9/18"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "&",
-            "345",
-            "&",
-            "19.470",
-            "&",
-            "2.009",
-            "&",
-            "21.479"
-          ],
-          "after": [
-            "&",
-            "345",
-            "&",
-            "19.470",
-            "&",
-            "2.009",
-            "&",
-            "21.479"
+            "(ours)",
+            "&"
           ]
         },
         {
           "kind": "insert",
           "before": [],
           "after": [
+            "345",
             "&",
-            "9/18"
+            "21.479",
+            "&"
           ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "9/18",
+            "&"
+          ],
+          "after": [
+            "9/18",
+            "&"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "345",
+            "&",
+            "19.470",
+            "&",
+            "2.009",
+            "&",
+            "21.479"
+          ],
+          "after": []
         },
         {
           "kind": "equal",
@@ -16685,15 +16790,33 @@
             "(c)",
             "Time",
             "series",
+            "repository"
+          ],
+          "after": [
+            "(c)",
+            "Time",
+            "series",
+            "repository"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "&",
+            "(d)",
+            "Recommendation",
             "repository",
+            "(lr)2-5(l)6-9"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "Method",
             "&"
           ],
           "after": [
-            "(c)",
-            "Time",
-            "series",
-            "repository",
             "Method",
             "&"
           ]
@@ -16701,25 +16824,16 @@
         {
           "kind": "replace",
           "before": [
-            "Paired"
+            "Paired",
+            "checks",
+            "&",
+            "Gradients",
+            "&",
+            "Parameter",
+            "updates"
           ],
           "after": [
-            "Behavior"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "checks"
-          ],
-          "after": [
-            "checks"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
+            "Checks",
             "passed"
           ]
         },
@@ -16727,22 +16841,61 @@
           "kind": "equal",
           "before": [
             "&",
-            "Gradients",
+            "Entry",
+            "points",
             "&",
-            "Parameter",
-            "updates",
+            "Repair",
+            "calls",
+            "&"
+          ],
+          "after": [
             "&",
             "Entry",
             "points",
             "&",
             "Repair",
             "calls",
-            "&",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "Total",
-            "tokens",
-            "(millions)",
-            "SWE-agent",
-            "&",
+            "tokens"
+          ],
+          "after": [
+            "Tokens"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "(millions)"
+          ],
+          "after": [
+            "(millions)"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "SWE-agent"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "69/69",
             "&",
             "9/9",
@@ -16785,93 +16938,17 @@
             "Recommendation",
             "repository",
             "Method",
-            "&"
-          ],
-          "after": [
+            "&",
+            "Paired",
+            "checks",
             "&",
             "Gradients",
             "&",
             "Parameter",
-            "updates",
-            "&",
-            "Entry",
-            "points",
-            "&",
-            "Repair",
-            "calls",
-            "&",
-            "Total",
-            "tokens",
-            "(millions)",
-            "SWE-agent",
-            "&",
-            "69/69",
-            "&",
-            "9/9",
-            "&",
-            "9/9",
-            "&",
-            "3/3",
-            "&",
-            "80",
-            "&",
-            "8.200",
-            "MatchFixAgent",
-            "&",
-            "69/69",
-            "&",
-            "9/9",
-            "&",
-            "9/9",
-            "&",
-            "3/3",
-            "&",
-            "69",
-            "&",
-            "13.598",
-            "LaDiM",
-            "(ours)",
-            "&",
-            "69/69",
-            "&",
-            "9/9",
-            "&",
-            "9/9",
-            "&",
-            "3/3",
-            "&",
-            "35",
-            "&",
-            "2.614",
-            "(d)",
-            "Recommendation",
-            "repository",
-            "Method",
-            "&"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "Paired"
+            "updates"
           ],
           "after": [
-            "Behavior"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "checks"
-          ],
-          "after": [
-            "checks"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
+            "Checks",
             "passed"
           ]
         },
@@ -16879,84 +16956,134 @@
           "kind": "equal",
           "before": [
             "&",
-            "Gradients",
-            "&",
-            "Parameter",
-            "updates",
-            "&",
             "Original",
             "tests",
             "&",
             "Repair",
             "calls",
-            "&",
-            "Total",
-            "tokens",
-            "(millions)",
-            "SWE-agent",
-            "&",
-            "104/145",
-            "&",
-            "17/18",
-            "&",
-            "12/18",
-            "&",
-            "10/10",
-            "&",
-            "80",
-            "&",
-            "8.317",
-            "MatchFixAgent",
-            "&",
-            "129/145",
-            "&",
-            "18/18",
-            "&",
-            "16/18",
             "&"
           ],
           "after": [
             "&",
-            "Gradients",
-            "&",
-            "Parameter",
-            "updates",
-            "&",
             "Original",
             "tests",
             "&",
             "Repair",
             "calls",
-            "&",
-            "Total",
-            "tokens",
-            "(millions)",
-            "SWE-agent",
-            "&",
-            "104/145",
-            "&",
-            "17/18",
-            "&",
-            "12/18",
-            "&",
-            "10/10",
-            "&",
-            "80",
-            "&",
-            "8.317",
-            "MatchFixAgent",
-            "&",
-            "129/145",
-            "&",
-            "18/18",
-            "&",
-            "16/18",
             "&"
           ]
         },
         {
           "kind": "replace",
           "before": [
+            "Total",
+            "tokens"
+          ],
+          "after": [
+            "Tokens"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "(millions)",
+            "SWE-agent",
+            "&"
+          ],
+          "after": [
+            "(millions)",
+            "SWE-agent",
+            "&"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "69/69",
+            "&",
+            "3/3",
+            "&",
+            "80",
+            "&",
+            "8.200",
+            "&"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "104/145"
+          ],
+          "after": [
+            "104/145"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "&",
+            "17/18",
+            "&",
+            "12/18"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&",
+            "10/10",
+            "&",
+            "80",
+            "&",
+            "8.317",
+            "MatchFixAgent",
+            "&"
+          ],
+          "after": [
+            "&",
+            "10/10",
+            "&",
+            "80",
+            "&",
+            "8.317",
+            "MatchFixAgent",
+            "&"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "69/69",
+            "&",
+            "3/3",
+            "&",
+            "69",
+            "&",
+            "13.598",
+            "&"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "129/145",
+            "&"
+          ],
+          "after": [
+            "129/145",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "18/18",
+            "&",
+            "16/18",
+            "&",
             "n/a"
           ],
           "after": [
@@ -16972,12 +17099,54 @@
             "8.679",
             "LaDiM",
             "(ours)",
+            "&"
+          ],
+          "after": [
             "&",
-            "130/145",
+            "80",
+            "&",
+            "8.679",
+            "LaDiM",
+            "(ours)",
+            "&"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "69/69",
+            "&",
+            "3/3",
+            "&",
+            "35",
+            "&",
+            "2.614",
+            "&"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "130/145"
+          ],
+          "after": [
+            "130/145"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
             "&",
             "18/18",
             "&",
-            "15/18",
+            "15/18"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
             "&",
             "10/10",
             "&",
@@ -16987,18 +17156,6 @@
             "Migration"
           ],
           "after": [
-            "&",
-            "80",
-            "&",
-            "8.679",
-            "LaDiM",
-            "(ours)",
-            "&",
-            "130/145",
-            "&",
-            "18/18",
-            "&",
-            "15/18",
             "&",
             "10/10",
             "&",
@@ -17607,14 +17764,30 @@
         {
           "kind": "replace",
           "before": [
-            "group,",
-            "and",
-            "positive"
+            "group,"
           ],
           "after": [
             "group.",
-            "Both",
-            "methods",
+            "LaDiM"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "positive"
+          ],
+          "after": [
+            "MatchFixAgent",
+            "both",
             "accept",
             "50/50",
             "tasks;",
@@ -20453,55 +20626,53 @@
             "fault",
             "is",
             "removed.",
-            "Method",
             "&",
-            "LLM",
-            "calls",
-            "&",
-            "LLM",
-            "tokens",
-            "&",
-            "Accepted",
             "LLM",
             "repair",
-            "of",
-            "supplied",
-            "candidates",
-            "LaDiM",
             "&",
-            "76",
-            "&",
-            "674,009",
-            "&",
-            "6/6",
-            "Direct",
-            "repair",
-            "&",
-            "57",
-            "&",
-            "353,311",
-            "&",
-            "6/6",
             "Single",
             "native",
             "conversion",
-            "of",
-            "supplied",
-            "candidates",
+            "(lr)2-3(l)4-5",
+            "Metric",
+            "&",
+            "LaDiM",
+            "&",
+            "Direct",
+            "repair",
+            "&",
             "Ivy",
             "&",
-            "0",
+            "torch2jax",
+            "Accepted",
             "&",
-            "0",
+            "6/6",
+            "&",
+            "6/6",
             "&",
             "0/6",
-            "torch2jax",
+            "&",
+            "0/6",
+            "LLM",
+            "calls",
+            "&",
+            "76",
+            "&",
+            "57",
             "&",
             "0",
             "&",
             "0",
+            "LLM",
+            "tokens",
             "&",
-            "0/6"
+            "674,009",
+            "&",
+            "353,311",
+            "&",
+            "0",
+            "&",
+            "0"
           ]
         },
         {
@@ -20721,14 +20892,14 @@
             "Every"
           ],
           "after": [
-            "Table",
-            "[tab:signal-ablation]",
-            "a",
-            "reports",
-            "initially",
-            "undetected",
-            "faults",
-            "and"
+            "Each",
+            "added",
+            "signal",
+            "exposes",
+            "another",
+            "fault",
+            "class,",
+            "increasing"
           ]
         },
         {
@@ -20764,29 +20935,33 @@
           ]
         },
         {
-          "kind": "replace",
-          "before": [
-            "checks",
-            "on",
-            "three",
-            "seeds.",
-            "Effect"
-          ],
+          "kind": "insert",
+          "before": [],
           "after": [
-            "verification.",
-            "Each",
-            "added",
-            "signal",
-            "exposes",
-            "another",
-            "fault",
-            "class,",
-            "increasing",
-            "acceptance",
+            "verification",
             "from",
             "4/16",
             "to",
-            "16/16.",
+            "16/16",
+            "(Table",
+            "[tab:signal-ablation]",
+            "a).",
+            "Initially",
+            "undetected",
+            "faults",
+            "decrease",
+            "from",
+            "12",
+            "to",
+            "8",
+            "to",
+            "4",
+            "to",
+            "0",
+            "across",
+            "the",
+            "four",
+            "settings.",
             "Forward",
             "values",
             "reveal",
@@ -20801,63 +20976,80 @@
             "reveal",
             "optimizer",
             "faults.",
-            "Effects"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "Effects",
             "of",
-            "training"
-          ],
-          "after": [
-            "of",
-            "training"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "signal",
-            "coverage"
-          ],
-          "after": [
+            "training",
             "signals",
             "and",
             "repair",
-            "components"
+            "components.",
+            "(a)",
+            "Cumulative",
+            "signals",
+            "on",
+            "16",
+            "faulty",
+            "candidates;",
+            "final",
+            "acceptance",
+            "uses",
+            "complete",
+            "verification.",
+            "(b)",
+            "Ten",
+            "saved",
+            "translations:",
+            "parentheses",
+            "count",
+            "failed",
+            "programs",
+            "repaired,",
+            "and",
+            "all",
+            "conditions",
+            "retain",
+            "5/5",
+            "initially",
+            "passing",
+            "programs.",
+            "(c)",
+            "Independent",
+            "pairs",
+            "on",
+            "time",
+            "series;",
+            "every",
+            "condition",
+            "passes",
+            "69/69"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "on"
+            "checks",
+            "on",
+            "three",
+            "seeds."
           ],
           "after": [
-            "on"
+            "checks",
+            "on",
+            "three",
+            "seeds."
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "detection"
-          ],
-          "after": [
-            "acceptance"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "and"
-          ],
-          "after": [
-            "and"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "Effect",
+            "of",
+            "training",
+            "signal",
+            "coverage",
+            "on",
+            "detection",
+            "and",
             "repair.",
             "Accepted",
             "candidates",
@@ -20870,297 +21062,192 @@
             "the",
             "initial",
             "available",
-            "checks"
+            "checks",
+            "trigger",
+            "no",
+            "repair.",
+            "Available",
+            "feedback"
           ],
           "after": [
-            "token",
-            "use.",
-            "(a)",
-            "Cumulative",
-            "signals",
-            "on",
-            "16",
-            "faulty",
-            "candidates;",
-            "initially",
-            "undetected",
-            "faults"
+            "Feedback"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "trigger",
-            "no"
-          ],
-          "after": [
-            "trigger",
-            "no"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "repair."
-          ],
-          "after": [
-            "repair,",
-            "and",
-            "final",
-            "acceptance",
-            "uses",
-            "complete",
-            "verification.",
-            "(b)",
-            "Program",
-            "repair",
-            "on",
-            "ten",
-            "saved",
-            "initial",
-            "translations.",
-            "(c)",
-            "Two",
-            "separate",
-            "paired",
-            "comparisons",
-            "on",
-            "the",
-            "time",
-            "series",
-            "repository.",
-            "(a)",
-            "Training",
-            "signals:",
-            "16",
-            "faulty",
-            "candidates"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "Available",
-            "feedback",
-            "&"
-          ],
-          "after": [
-            "Available",
-            "feedback",
-            "&"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "Accepted",
             "&",
+            "Accepted",
+            "&"
+          ],
+          "after": [
+            "&",
+            "Accepted",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "Faults",
             "passing",
             "initial",
-            "checks"
+            "checks",
+            "&",
+            "Total"
           ],
           "after": [
-            "Initially",
-            "undetected",
-            "faults"
+            "Repair"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "&",
-            "Total",
-            "tokens",
-            "(millions)"
+            "tokens"
           ],
           "after": [
-            "&",
-            "Total",
-            "tokens",
-            "(millions)"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
-            "Final",
-            "accepted"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "Execution",
-            "and",
-            "basic",
-            "checks",
-            "&"
-          ],
-          "after": [
-            "Execution",
-            "and",
-            "basic",
-            "checks",
-            "&"
+            "tokens"
           ]
         },
         {
           "kind": "delete",
           "before": [
+            "(millions)"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "Execution",
+            "and",
+            "basic",
+            "checks",
+            "&",
             "4/16",
             "&"
           ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "12",
-            "&",
-            "2.089"
-          ],
           "after": [
-            "12",
+            "Execution",
+            "and",
+            "basic",
+            "checks",
             "&",
-            "2.089"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
-            "4/16"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "+",
-            "Forward",
-            "values",
+            "4/16",
             "&"
-          ],
-          "after": [
-            "+",
-            "Forward",
-            "values",
-            "&"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "8/16",
-            "&"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "8",
-            "&",
-            "2.603"
-          ],
-          "after": [
-            "8",
-            "&",
-            "2.603"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
-            "8/16"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "+",
-            "Gradients"
-          ],
-          "after": [
-            "+",
-            "Gradients"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "&",
-            "12/16"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "&",
-            "4",
-            "&",
-            "3.303"
-          ],
-          "after": [
-            "&",
-            "4",
-            "&",
-            "3.303"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
-            "12/16"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "+",
-            "Parameter",
-            "updates",
-            "&"
-          ],
-          "after": [
-            "+",
-            "Parameter",
-            "updates",
-            "&"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "16/16",
-            "&"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "0",
-            "&",
-            "3.419"
-          ],
-          "after": [
-            "0",
-            "&",
-            "3.419"
           ]
         },
         {
           "kind": "replace",
           "before": [
+            "12",
+            "&",
+            "2.089"
+          ],
+          "after": [
+            "2,088,915"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "+",
+            "Forward",
+            "values",
+            "&",
+            "8/16",
+            "&"
+          ],
+          "after": [
+            "+",
+            "Forward",
+            "values",
+            "&",
+            "8/16",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "8",
+            "&",
+            "2.603"
+          ],
+          "after": [
+            "2,603,211"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "+",
+            "Gradients",
+            "&",
+            "12/16",
+            "&"
+          ],
+          "after": [
+            "+",
+            "Gradients",
+            "&",
+            "12/16",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "4",
+            "&",
+            "3.303"
+          ],
+          "after": [
+            "3,302,873"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "+",
+            "Parameter",
+            "updates",
+            "&",
+            "16/16",
+            "&"
+          ],
+          "after": [
+            "+",
+            "Parameter",
+            "updates",
+            "&",
+            "16/16",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "0"
+          ],
+          "after": [
+            "3,418,960",
+            "Condition"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "3.419",
             "Adding",
             "each",
             "signal",
@@ -21169,31 +21256,8 @@
             "class"
           ],
           "after": [
-            "&",
-            "16/16",
-            "(b)",
-            "Repair",
-            "history",
-            "and",
-            "independent",
-            "evidence",
-            "handoff",
-            "on",
-            "saved",
-            "initial",
-            "translations",
-            "Condition",
-            "&",
-            "Failed",
-            "programs",
-            "repaired",
-            "&",
-            "Passing",
-            "programs",
-            "preserved",
-            "&",
-            "Final",
-            "accepted",
+            "Accepted",
+            "(repaired)",
             "&",
             "Repair",
             "tokens",
@@ -21201,104 +21265,77 @@
             "evidence",
             "handoff",
             "&",
-            "4/5",
-            "&",
-            "5/5",
-            "&",
             "9/10",
+            "(4/5)",
             "&",
             "15,547,813",
             "Continuous",
             "conversation",
             "&",
-            "3/5",
-            "&",
-            "5/5",
-            "&",
             "8/10",
+            "(3/5)",
             "&",
             "14,516,463",
             "Without",
             "repair",
             "history",
             "&",
-            "0/5",
-            "&",
-            "5/5",
-            "&",
             "5/10",
+            "(0/5)",
             "&",
             "10,851,537",
             "(c)",
             "Repository",
-            "context",
-            "management",
-            "and",
-            "Repository",
-            "Structural",
-            "Analysis",
+            "components",
             "on",
-            "the",
             "time",
             "series",
-            "repository",
-            "Condition",
             "&",
-            "Behavior",
-            "checks",
-            "passed",
+            "Without",
+            "component",
             "&",
-            "Investigation",
-            "and",
-            "repair",
-            "calls",
+            "With",
+            "component",
             "&",
-            "End-to-end",
-            "tokens",
+            "(lr)2-3(lr)4-5",
+            "Component",
+            "&",
+            "Calls",
+            "&",
+            "Tokens",
+            "&",
+            "Calls",
+            "&",
+            "Tokens",
+            "&",
+            "Token",
+            "reduction",
             "Repository",
             "context",
             "management",
-            "Without",
-            "repository",
-            "context",
-            "&",
-            "69/69",
             "&",
             "26",
             "&",
             "6,047,074",
-            "With",
-            "repository",
-            "context",
-            "&",
-            "69/69",
             "&",
             "22",
             "&",
             "1,936,579",
-            "Repository",
-            "Structural",
-            "Analysis",
-            "Without",
-            "Repository",
-            "Structural",
-            "Analysis",
             "&",
-            "69/69",
+            "68.0%",
+            "Repository",
+            "Structural",
+            "Analysis",
             "&",
             "42",
             "&",
             "2,651,248",
-            "With",
-            "Repository",
-            "Structural",
-            "Analysis",
-            "&",
-            "69/69",
             "&",
             "30",
             "&",
             "2,126,900",
+            "&",
+            "19.8%",
             "Repair",
             "history",
             "and",
@@ -22520,43 +22557,29 @@
             "We",
             "compare",
             "LaDiM",
-            "with"
+            "with",
+            "SWE-agent~\\citep{yang2024sweagent}",
+            "and",
+            "MatchFixAgent~\\citep{ibrahimzada2025matchfixagent}"
           ],
           "after": [
             "We",
             "compare",
             "LaDiM",
-            "with"
+            "with",
+            "SWE-agent~\\citep{yang2024sweagent}",
+            "and",
+            "MatchFixAgent~\\citep{ibrahimzada2025matchfixagent}"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "SWE-agent~\\citep{yang2024sweagent}"
-          ],
-          "after": [
-            "SWE-agent"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "and"
-          ],
-          "after": [
-            "and"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "MatchFixAgent~\\citep{ibrahimzada2025matchfixagent}",
             "from",
             "the",
             "same"
           ],
           "after": [
-            "MatchFixAgent",
             "using",
             "a",
             "common",
@@ -22636,9 +22659,9 @@
             "InterTrans~\\citep{macedo2024intertrans}"
           ],
           "after": [
-            "configuration,",
-            "MSAdapter,",
-            "InterTrans,"
+            "configuration~\\citep{macedo2025codetransengine},",
+            "MSAdapter~\\citep{openi2025msadapter},",
+            "InterTrans~\\citep{macedo2024intertrans},"
           ]
         },
         {
@@ -23436,158 +23459,174 @@
         {
           "kind": "replace",
           "before": [
-            "\\setlength{\\tabcolsep}{5pt}"
+            "\\setlength{\\tabcolsep}{5pt}",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrr@{}}"
           ],
           "after": [
-            "\\setlength{\\tabcolsep}{3pt}"
+            "\\setlength{\\tabcolsep}{3pt}",
+            "\\begin{minipage}[t]{0.485\\linewidth}",
+            "\\vspace{0pt}",
+            "\\raggedright\\textit{(a)",
+            "PyTorch",
+            "to",
+            "MindSpore}\\par\\smallskip",
+            "\\setlength{\\tabcolsep}{2pt}",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{2.3cm}rrr@{}}"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrr@{}}",
             "\\toprule",
             "\\textbf{Method}",
             "&"
           ],
           "after": [
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrr@{}}",
             "\\toprule",
             "\\textbf{Method}",
             "&"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "\\textbf{Accepted}",
-            "&",
-            "\\thead{Model\\\\calls}"
-          ],
-          "after": [
-            "\\thead{LLM\\\\calls}"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "&",
-            "\\thead{Input",
-            "tokens\\\\(millions)}",
-            "&",
-            "\\thead{Output",
-            "tokens\\\\(millions)}",
-            "&",
-            "\\thead{Total",
-            "tokens\\\\(millions)}"
-          ],
-          "after": [
-            "&",
-            "\\thead{Input",
-            "tokens\\\\(millions)}",
-            "&",
-            "\\thead{Output",
-            "tokens\\\\(millions)}",
-            "&",
-            "\\thead{Total",
-            "tokens\\\\(millions)}"
           ]
         },
         {
           "kind": "insert",
           "before": [],
           "after": [
+            "\\thead{LLM\\\\calls}",
             "&",
-            "\\textbf{Accepted}"
+            "\\thead{Tokens\\\\(millions)}",
+            "&"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "\\\\",
-            "\\midrule",
-            "\\multicolumn{6}{l}{\\textit{(a)",
-            "PyTorch",
-            "to",
-            "MindSpore}}",
-            "\\\\",
-            "Direct",
-            "LLM",
-            "&"
+            "\\textbf{Accepted}"
           ],
           "after": [
-            "\\\\",
-            "\\midrule",
-            "\\multicolumn{6}{l}{\\textit{(a)",
-            "PyTorch",
-            "to",
-            "MindSpore}}",
-            "\\\\",
-            "Direct",
-            "LLM",
-            "&"
+            "\\textbf{Accepted}"
           ]
         },
         {
           "kind": "delete",
           "before": [
-            "29/50",
-            "&"
+            "&",
+            "\\thead{Model\\\\calls}",
+            "&",
+            "\\thead{Input",
+            "tokens\\\\(millions)}",
+            "&",
+            "\\thead{Output",
+            "tokens\\\\(millions)}",
+            "&",
+            "\\thead{Total",
+            "tokens\\\\(millions)}"
           ],
           "after": []
         },
         {
           "kind": "equal",
           "before": [
-            "29",
-            "&",
-            "0.018",
-            "&",
-            "0.411",
-            "&",
-            "0.429"
+            "\\\\",
+            "\\midrule"
           ],
           "after": [
-            "29",
-            "&",
-            "0.018",
-            "&",
-            "0.411",
-            "&",
-            "0.429"
+            "\\\\",
+            "\\midrule"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "\\multicolumn{6}{l}{\\textit{(a)",
+            "PyTorch",
+            "to",
+            "MindSpore}}",
+            "\\\\"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "Direct",
+            "LLM",
+            "&"
+          ],
+          "after": [
+            "Direct",
+            "LLM",
+            "&"
           ]
         },
         {
           "kind": "insert",
           "before": [],
           "after": [
+            "29",
             "&",
+            "0.429",
+            "&"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "29/50"
+          ],
+          "after": [
             "29/50"
           ]
         },
         {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "\\\\",
+            "CodeTransEngine"
+          ]
+        },
+        {
           "kind": "equal",
           "before": [
-            "\\\\"
+            "&",
+            "29",
+            "&"
           ],
           "after": [
-            "\\\\"
+            "&",
+            "29",
+            "&"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "CodeTransEngine",
-            "(direct)",
+            "0.018",
             "&",
-            "31/50"
+            "0.411",
+            "&",
+            "0.429",
+            "\\\\",
+            "CodeTransEngine",
+            "(direct)"
           ],
           "after": [
-            "CodeTransEngine~\\citep{macedo2025codetransengine}"
+            "0.280"
           ]
         },
         {
           "kind": "equal",
+          "before": [
+            "&",
+            "31/50"
+          ],
+          "after": [
+            "&",
+            "31/50"
+          ]
+        },
+        {
+          "kind": "delete",
           "before": [
             "&",
             "29",
@@ -23598,59 +23637,37 @@
             "&",
             "0.280"
           ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "\\\\",
+            "MSAdapter",
+            "&"
+          ],
           "after": [
-            "&",
-            "29",
-            "&",
-            "0.022",
-            "&",
-            "0.257",
-            "&",
-            "0.280"
+            "\\\\",
+            "MSAdapter",
+            "&"
           ]
         },
         {
           "kind": "insert",
           "before": [],
           "after": [
+            "--",
             "&",
-            "31/50"
+            "--",
+            "&"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "\\\\"
-          ],
-          "after": [
-            "\\\\"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "MSAdapter"
-          ],
-          "after": [
-            "MSAdapter~\\citep{openi2025msadapter}",
-            "&",
-            "--",
-            "&",
-            "--",
-            "&",
-            "--",
-            "&",
-            "--"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "&",
             "15/50"
           ],
           "after": [
-            "&",
             "15/50"
           ]
         },
@@ -23671,154 +23688,122 @@
         {
           "kind": "equal",
           "before": [
-            "\\\\"
-          ],
-          "after": [
-            "\\\\"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "\\\\",
             "SWE-agent",
-            "&",
-            "44/50"
-          ],
-          "after": [
-            "SWE-agent~\\citep{yang2024sweagent}"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "&",
-            "1,097",
-            "&",
-            "19.845",
-            "&",
-            "0.987",
-            "&",
-            "20.831"
-          ],
-          "after": [
-            "&",
-            "1,097",
-            "&",
-            "19.845",
-            "&",
-            "0.987",
-            "&",
-            "20.831"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
-            "44/50"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "\\\\"
-          ],
-          "after": [
-            "\\\\"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "MatchFixAgent",
-            "&",
-            "50/50"
-          ],
-          "after": [
-            "MatchFixAgent~\\citep{ibrahimzada2025matchfixagent}"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "&",
-            "619",
-            "&",
-            "10.750",
-            "&",
-            "1.347",
-            "&",
-            "12.097"
-          ],
-          "after": [
-            "&",
-            "619",
-            "&",
-            "10.750",
-            "&",
-            "1.347",
-            "&",
-            "12.097"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
-            "\\textbf{50/50}"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "\\\\",
-            "\\textbf{LaDiM",
-            "(ours)}"
+            "&"
           ],
           "after": [
             "\\\\",
-            "\\textbf{LaDiM",
-            "(ours)}"
+            "SWE-agent",
+            "&"
           ]
         },
         {
           "kind": "delete",
           "before": [
-            "&",
-            "50/50"
+            "44/50",
+            "&"
           ],
           "after": []
         },
         {
           "kind": "equal",
           "before": [
-            "&",
-            "326",
-            "&",
-            "4.298",
-            "&",
-            "0.861",
-            "&",
-            "5.159"
+            "1,097",
+            "&"
           ],
           "after": [
-            "&",
-            "326",
-            "&",
-            "4.298",
-            "&",
-            "0.861",
-            "&",
-            "5.159"
+            "1,097",
+            "&"
           ]
         },
         {
-          "kind": "insert",
-          "before": [],
+          "kind": "replace",
+          "before": [
+            "19.845"
+          ],
           "after": [
+            "20.831"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "0.987",
             "&",
+            "20.831"
+          ],
+          "after": [
+            "44/50"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "\\\\",
+            "MatchFixAgent",
+            "&"
+          ],
+          "after": [
+            "\\\\",
+            "MatchFixAgent",
+            "&"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "50/50",
+            "&"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "619",
+            "&"
+          ],
+          "after": [
+            "619",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "10.750"
+          ],
+          "after": [
+            "12.097"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "1.347",
+            "&",
+            "12.097"
+          ],
+          "after": [
             "\\textbf{50/50}"
           ]
         },
@@ -23826,24 +23811,130 @@
           "kind": "equal",
           "before": [
             "\\\\",
-            "\\midrule",
+            "\\textbf{LaDiM",
+            "(ours)}",
+            "&"
+          ],
+          "after": [
+            "\\\\",
+            "\\textbf{LaDiM",
+            "(ours)}",
+            "&"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "50/50",
+            "&"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "326",
+            "&"
+          ],
+          "after": [
+            "326",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "4.298"
+          ],
+          "after": [
+            "5.159"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "0.861"
+          ],
+          "after": [
+            "\\textbf{50/50}",
+            "\\\\",
+            "\\bottomrule",
+            "\\end{tabular*}",
+            "\\end{minipage}",
+            "\\hfill",
+            "\\begin{minipage}[t]{0.485\\linewidth}",
+            "\\vspace{0pt}",
+            "\\raggedright\\textit{(b)",
+            "Java/DJL",
+            "to",
+            "Python/PyTorch}\\par\\smallskip",
+            "\\setlength{\\tabcolsep}{2pt}",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{2.3cm}rrr@{}}",
+            "\\toprule",
+            "\\textbf{Method}"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "5.159"
+          ],
+          "after": [
+            "\\thead{LLM\\\\calls}",
+            "&",
+            "\\thead{Tokens\\\\(millions)}",
+            "&",
+            "\\textbf{Accepted}"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "\\\\",
+            "\\midrule"
+          ],
+          "after": [
+            "\\\\",
+            "\\midrule"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
             "\\multicolumn{6}{l}{\\textit{(b)",
             "Java/DJL",
             "to",
             "Python/PyTorch}}",
-            "\\\\",
+            "\\\\"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
             "Direct",
             "LLM",
             "&"
           ],
           "after": [
-            "\\\\",
-            "\\midrule",
-            "\\multicolumn{6}{l}{\\textit{(b)",
-            "Java/DJL",
-            "to",
-            "Python/PyTorch}}",
-            "\\\\",
             "Direct",
             "LLM",
             "&"
@@ -23861,78 +23952,100 @@
           "kind": "equal",
           "before": [
             "18",
-            "&",
-            "0.142",
-            "&",
-            "0.552",
-            "&",
-            "0.694"
+            "&"
           ],
           "after": [
             "18",
-            "&",
-            "0.142",
-            "&",
-            "0.552",
-            "&",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "0.142"
+          ],
+          "after": [
             "0.694"
           ]
         },
         {
-          "kind": "delete",
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "0.552",
+            "&",
+            "0.694"
+          ],
+          "after": [
+            "1/18"
+          ]
+        },
+        {
+          "kind": "equal",
           "before": [
             "\\\\",
-            "InterTrans"
+            "InterTrans",
+            "&"
+          ],
+          "after": [
+            "\\\\",
+            "InterTrans",
+            "&"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "1/18",
+            "&"
           ],
           "after": []
         },
         {
           "kind": "equal",
           "before": [
-            "&",
-            "1/18"
+            "89",
+            "&"
           ],
           "after": [
-            "&",
-            "1/18"
+            "89",
+            "&"
           ]
         },
         {
-          "kind": "insert",
-          "before": [],
+          "kind": "replace",
+          "before": [
+            "0.680"
+          ],
           "after": [
-            "\\\\",
-            "InterTrans~\\citep{macedo2024intertrans}"
+            "2.286"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "&",
-            "89",
-            "&",
-            "0.680",
-            "&",
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "1.606",
             "&",
             "2.286"
           ],
           "after": [
-            "&",
-            "89",
-            "&",
-            "0.680",
-            "&",
-            "1.606",
-            "&",
-            "2.286"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
             "1/18"
           ]
         },
@@ -23941,50 +24054,61 @@
           "before": [
             "\\\\",
             "Test-guided",
-            "repair"
+            "repair",
+            "&"
           ],
           "after": [
             "\\\\",
             "Test-guided",
-            "repair"
+            "repair",
+            "&"
           ]
         },
         {
           "kind": "delete",
           "before": [
-            "&",
-            "7/18"
+            "7/18",
+            "&"
           ],
           "after": []
         },
         {
           "kind": "equal",
           "before": [
-            "&",
             "71",
-            "&",
-            "1.594",
-            "&",
+            "&"
+          ],
+          "after": [
+            "71",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "1.594"
+          ],
+          "after": [
+            "4.475"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "2.881",
             "&",
             "4.475"
           ],
           "after": [
-            "&",
-            "71",
-            "&",
-            "1.594",
-            "&",
-            "2.881",
-            "&",
-            "4.475"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
             "7/18"
           ]
         },
@@ -23992,49 +24116,60 @@
           "kind": "equal",
           "before": [
             "\\\\",
-            "SWE-agent"
+            "SWE-agent",
+            "&"
           ],
           "after": [
             "\\\\",
-            "SWE-agent"
+            "SWE-agent",
+            "&"
           ]
         },
         {
           "kind": "delete",
           "before": [
-            "&",
-            "8/18"
+            "8/18",
+            "&"
           ],
           "after": []
         },
         {
           "kind": "equal",
           "before": [
-            "&",
             "682",
-            "&",
-            "23.063",
-            "&",
+            "&"
+          ],
+          "after": [
+            "682",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "23.063"
+          ],
+          "after": [
+            "24.321"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "1.258",
             "&",
             "24.321"
           ],
           "after": [
-            "&",
-            "682",
-            "&",
-            "23.063",
-            "&",
-            "1.258",
-            "&",
-            "24.321"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
             "8/18"
           ]
         },
@@ -24042,49 +24177,60 @@
           "kind": "equal",
           "before": [
             "\\\\",
-            "MatchFixAgent"
+            "MatchFixAgent",
+            "&"
           ],
           "after": [
             "\\\\",
-            "MatchFixAgent"
+            "MatchFixAgent",
+            "&"
           ]
         },
         {
           "kind": "delete",
           "before": [
-            "&",
-            "8/18"
+            "8/18",
+            "&"
           ],
           "after": []
         },
         {
           "kind": "equal",
           "before": [
-            "&",
             "524",
-            "&",
-            "26.335",
-            "&",
+            "&"
+          ],
+          "after": [
+            "524",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "26.335"
+          ],
+          "after": [
+            "28.355"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "2.020",
             "&",
             "28.355"
           ],
           "after": [
-            "&",
-            "524",
-            "&",
-            "26.335",
-            "&",
-            "2.020",
-            "&",
-            "28.355"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
             "8/18"
           ]
         },
@@ -24093,50 +24239,61 @@
           "before": [
             "\\\\",
             "\\textbf{LaDiM",
-            "(ours)}"
+            "(ours)}",
+            "&"
           ],
           "after": [
             "\\\\",
             "\\textbf{LaDiM",
-            "(ours)}"
+            "(ours)}",
+            "&"
           ]
         },
         {
           "kind": "delete",
           "before": [
-            "&",
-            "9/18"
+            "9/18",
+            "&"
           ],
           "after": []
         },
         {
           "kind": "equal",
           "before": [
-            "&",
             "345",
-            "&",
-            "19.470",
-            "&",
+            "&"
+          ],
+          "after": [
+            "345",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "19.470"
+          ],
+          "after": [
+            "21.479"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "2.009",
             "&",
             "21.479"
           ],
           "after": [
-            "&",
-            "345",
-            "&",
-            "19.470",
-            "&",
-            "2.009",
-            "&",
-            "21.479"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
             "\\textbf{9/18}"
           ]
         },
@@ -24145,32 +24302,93 @@
           "before": [
             "\\\\",
             "\\bottomrule",
-            "\\end{tabular*}",
-            "\\par\\vspace{5pt}",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrrr@{}}",
-            "\\toprule",
-            "\\multicolumn{7}{l}{\\textit{(c)",
-            "Time",
-            "series",
-            "repository}}",
-            "\\\\",
-            "\\midrule",
-            "\\textbf{Method}",
-            "&"
+            "\\end{tabular*}"
           ],
           "after": [
             "\\\\",
             "\\bottomrule",
-            "\\end{tabular*}",
+            "\\end{tabular*}"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "\\par\\vspace{5pt}",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrrr@{}}",
-            "\\toprule",
-            "\\multicolumn{7}{l}{\\textit{(c)",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrrr@{}}"
+          ],
+          "after": [
+            "\\end{minipage}",
+            "\\par\\medskip",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrrrrr@{}}"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "\\toprule"
+          ],
+          "after": [
+            "\\toprule"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "\\multicolumn{7}{l}{\\textit{(c)"
+          ],
+          "after": [
+            "&",
+            "\\multicolumn{4}{c}{\\textit{(c)"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "Time",
             "series",
-            "repository}}",
-            "\\\\",
-            "\\midrule",
+            "repository}}"
+          ],
+          "after": [
+            "Time",
+            "series",
+            "repository}}"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "&",
+            "\\multicolumn{4}{c}{\\textit{(d)",
+            "Recommendation",
+            "repository}}"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "\\\\"
+          ],
+          "after": [
+            "\\\\"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "\\midrule"
+          ],
+          "after": [
+            "\\cmidrule(lr){2-5}\\cmidrule(l){6-9}"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "\\textbf{Method}",
+            "&"
+          ],
+          "after": [
             "\\textbf{Method}",
             "&"
           ]
@@ -24178,42 +24396,100 @@
         {
           "kind": "replace",
           "before": [
-            "\\thead{Paired\\\\checks}"
+            "\\thead{Paired\\\\checks}",
+            "&",
+            "\\textbf{Gradients}",
+            "&",
+            "\\thead{Parameter\\\\updates}"
           ],
           "after": [
-            "\\thead{Behavior",
-            "checks\\\\passed}"
+            "\\thead{Checks\\\\passed}"
           ]
         },
         {
           "kind": "equal",
           "before": [
             "&",
-            "\\textbf{Gradients}",
+            "\\thead{Entry\\\\points}",
             "&",
-            "\\thead{Parameter\\\\updates}",
+            "\\thead{Repair\\\\calls}",
+            "&"
+          ],
+          "after": [
             "&",
             "\\thead{Entry\\\\points}",
             "&",
             "\\thead{Repair\\\\calls}",
-            "&",
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "\\thead{Total",
-            "tokens\\\\(millions)}",
+            "tokens\\\\(millions)}"
+          ],
+          "after": [
+            "\\thead{Tokens\\\\(millions)}",
+            "&",
+            "\\thead{Checks\\\\passed}",
+            "&",
+            "\\thead{Original\\\\tests}",
+            "&",
+            "\\thead{Repair\\\\calls}",
+            "&",
+            "\\thead{Tokens\\\\(millions)}"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "\\\\",
             "\\midrule",
             "SWE-agent",
             "&",
             "69/69",
+            "&"
+          ],
+          "after": [
+            "\\\\",
+            "\\midrule",
+            "SWE-agent",
             "&",
+            "69/69",
+            "&"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
             "9/9",
             "&",
             "9/9",
-            "&",
+            "&"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
             "3/3",
             "&",
             "80",
             "&",
-            "8.200",
+            "8.200"
+          ],
+          "after": [
+            "3/3",
+            "&",
+            "80",
+            "&",
+            "8.200"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
             "\\\\",
             "MatchFixAgent",
             "&",
@@ -24239,15 +24515,30 @@
             "9/9",
             "&",
             "3/3",
-            "&"
-          ],
-          "after": [
+            "&",
+            "35",
+            "&",
+            "2.614",
+            "\\\\",
+            "\\bottomrule",
+            "\\end{tabular*}",
+            "\\par\\vspace{5pt}",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrrr@{}}",
+            "\\toprule",
+            "\\multicolumn{7}{l}{\\textit{(d)",
+            "Recommendation",
+            "repository}}",
+            "\\\\",
+            "\\midrule",
+            "\\textbf{Method}",
+            "&",
+            "\\thead{Paired\\\\checks}",
             "&",
             "\\textbf{Gradients}",
             "&",
             "\\thead{Parameter\\\\updates}",
             "&",
-            "\\thead{Entry\\\\points}",
+            "\\thead{Original\\\\tests}",
             "&",
             "\\thead{Repair\\\\calls}",
             "&",
@@ -24255,183 +24546,88 @@
             "tokens\\\\(millions)}",
             "\\\\",
             "\\midrule",
-            "SWE-agent",
+            "SWE-agent"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
             "&",
-            "69/69",
+            "104/145"
+          ],
+          "after": [
             "&",
-            "9/9",
+            "104/145"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
             "&",
-            "9/9",
+            "17/18",
             "&",
-            "3/3",
+            "12/18"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&",
+            "10/10",
             "&",
             "80",
             "&",
-            "8.200",
+            "8.317",
             "\\\\",
             "MatchFixAgent",
+            "&"
+          ],
+          "after": [
             "&",
+            "10/10",
+            "&",
+            "80",
+            "&",
+            "8.317",
+            "\\\\",
+            "MatchFixAgent",
+            "&"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
             "69/69",
-            "&",
-            "9/9",
-            "&",
-            "9/9",
             "&",
             "3/3",
             "&",
             "69",
             "&",
             "13.598",
-            "\\\\",
-            "\\textbf{LaDiM",
-            "(ours)}",
-            "&",
-            "69/69",
-            "&",
-            "9/9",
-            "&",
-            "9/9",
-            "&",
-            "3/3",
             "&"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "35"
-          ],
-          "after": [
-            "\\textbf{35}"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "&",
-            "2.614",
-            "\\\\",
-            "\\bottomrule",
-            "\\end{tabular*}",
-            "\\par\\vspace{5pt}",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrrr@{}}",
-            "\\toprule",
-            "\\multicolumn{7}{l}{\\textit{(d)",
-            "Recommendation",
-            "repository}}",
-            "\\\\",
-            "\\midrule",
-            "\\textbf{Method}",
+            "129/145",
             "&"
           ],
           "after": [
-            "&",
-            "2.614",
-            "\\\\",
-            "\\bottomrule",
-            "\\end{tabular*}",
-            "\\par\\vspace{5pt}",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrrr@{}}",
-            "\\toprule",
-            "\\multicolumn{7}{l}{\\textit{(d)",
-            "Recommendation",
-            "repository}}",
-            "\\\\",
-            "\\midrule",
-            "\\textbf{Method}",
+            "129/145",
             "&"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "\\thead{Paired\\\\checks}"
-          ],
-          "after": [
-            "\\thead{Behavior",
-            "checks\\\\passed}"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "&",
-            "\\textbf{Gradients}",
-            "&",
-            "\\thead{Parameter\\\\updates}",
-            "&",
-            "\\thead{Original\\\\tests}",
-            "&",
-            "\\thead{Repair\\\\calls}",
-            "&",
-            "\\thead{Total",
-            "tokens\\\\(millions)}",
-            "\\\\",
-            "\\midrule",
-            "SWE-agent",
-            "&",
-            "104/145",
-            "&",
-            "17/18",
-            "&",
-            "12/18",
-            "&",
-            "10/10",
-            "&",
-            "80",
-            "&",
-            "8.317",
-            "\\\\",
-            "MatchFixAgent",
-            "&",
-            "129/145",
-            "&",
             "18/18",
             "&",
             "16/18",
-            "&"
-          ],
-          "after": [
             "&",
-            "\\textbf{Gradients}",
-            "&",
-            "\\thead{Parameter\\\\updates}",
-            "&",
-            "\\thead{Original\\\\tests}",
-            "&",
-            "\\thead{Repair\\\\calls}",
-            "&",
-            "\\thead{Total",
-            "tokens\\\\(millions)}",
-            "\\\\",
-            "\\midrule",
-            "SWE-agent",
-            "&",
-            "104/145",
-            "&",
-            "17/18",
-            "&",
-            "12/18",
-            "&",
-            "10/10",
-            "&",
-            "80",
-            "&",
-            "8.317",
-            "\\\\",
-            "MatchFixAgent",
-            "&",
-            "129/145",
-            "&",
-            "18/18",
-            "&",
-            "16/18",
-            "&"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
             "n/a"
           ],
           "after": [
@@ -24467,16 +24663,52 @@
             "130/145"
           ],
           "after": [
+            "69/69"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "18/18"
+          ],
+          "after": [
+            "3/3"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "15/18"
+          ],
+          "after": [
+            "35",
+            "&",
+            "2.614",
+            "&",
             "\\textbf{130/145}"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "&",
-            "18/18",
-            "&",
-            "15/18",
             "&",
             "10/10",
             "&",
@@ -24488,10 +24720,6 @@
             "\\end{tabular*}"
           ],
           "after": [
-            "&",
-            "18/18",
-            "&",
-            "15/18",
             "&",
             "10/10",
             "&",
@@ -24524,6 +24752,20 @@
             "prevents",
             "test",
             "collection.",
+            "Complete",
+            "token",
+            "costs",
+            "and",
+            "repository",
+            "gradient",
+            "and",
+            "parameter",
+            "update",
+            "checks",
+            "appear",
+            "in",
+            "Tables~\\ref{tab:program-costs}",
+            "and~\\ref{tab:repository-costs}.",
             "\\end{minipage}"
           ]
         },
@@ -25166,14 +25408,30 @@
         {
           "kind": "replace",
           "before": [
-            "group,",
-            "and",
-            "positive"
+            "group,"
           ],
           "after": [
             "group.",
-            "Both",
-            "methods",
+            "LaDiM"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "positive"
+          ],
+          "after": [
+            "MatchFixAgent",
+            "both",
             "accept",
             "50/50",
             "tasks;",
@@ -28061,65 +28319,60 @@
             "\\label{tab:jax}",
             "\\centering",
             "\\small",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrr@{}}",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrr@{}}",
             "\\toprule",
-            "\\textbf{Method}",
             "&",
-            "\\textbf{LLM",
-            "calls}",
+            "\\multicolumn{2}{c}{\\textbf{LLM",
+            "repair}}",
             "&",
-            "\\textbf{LLM",
-            "tokens}",
+            "\\multicolumn{2}{c}{\\textbf{Single",
+            "native",
+            "conversion}}",
+            "\\\\",
+            "\\cmidrule(lr){2-3}\\cmidrule(l){4-5}",
+            "\\textbf{Metric}",
             "&",
-            "\\textbf{Accepted}",
+            "\\textbf{LaDiM}",
+            "&",
+            "\\textbf{Direct",
+            "repair}",
+            "&",
+            "\\textbf{Ivy}",
+            "&",
+            "\\textbf{\\texttt{torch2jax}}",
             "\\\\",
             "\\midrule",
-            "\\multicolumn{4}{l}{\\textit{LLM",
-            "repair",
-            "of",
-            "supplied",
-            "candidates}}",
+            "Accepted",
+            "&",
+            "6/6",
+            "&",
+            "6/6",
+            "&",
+            "0/6",
+            "&",
+            "0/6",
             "\\\\",
-            "LaDiM",
+            "LLM",
+            "calls",
             "&",
             "76",
             "&",
-            "674,009",
-            "&",
-            "6/6",
-            "\\\\",
-            "Direct",
-            "repair",
-            "&",
             "57",
+            "&",
+            "0",
+            "&",
+            "0",
+            "\\\\",
+            "LLM",
+            "tokens",
+            "&",
+            "674,009",
             "&",
             "353,311",
             "&",
-            "6/6",
-            "\\\\",
-            "\\midrule",
-            "\\multicolumn{4}{l}{\\textit{Single",
-            "native",
-            "conversion",
-            "of",
-            "supplied",
-            "candidates}}",
-            "\\\\",
-            "Ivy",
-            "&",
             "0",
             "&",
             "0",
-            "&",
-            "0/6",
-            "\\\\",
-            "\\texttt{torch2jax}",
-            "&",
-            "0",
-            "&",
-            "0",
-            "&",
-            "0/6",
             "\\\\",
             "\\bottomrule",
             "\\end{tabular*}",
@@ -28345,12 +28598,14 @@
             "Every"
           ],
           "after": [
-            "Table~\\ref{tab:signal-ablation}a",
-            "reports",
-            "initially",
-            "undetected",
-            "faults",
-            "and"
+            "Each",
+            "added",
+            "signal",
+            "exposes",
+            "another",
+            "fault",
+            "class,",
+            "increasing"
           ]
         },
         {
@@ -28386,28 +28641,31 @@
           ]
         },
         {
-          "kind": "replace",
-          "before": [
-            "checks",
-            "on",
-            "three",
-            "seeds."
-          ],
+          "kind": "insert",
+          "before": [],
           "after": [
-            "verification.",
-            "Each",
-            "added",
-            "signal",
-            "exposes",
-            "another",
-            "fault",
-            "class,",
-            "increasing",
-            "acceptance",
+            "verification",
             "from",
             "4/16",
             "to",
-            "16/16.",
+            "16/16",
+            "(Table~\\ref{tab:signal-ablation}a).",
+            "Initially",
+            "undetected",
+            "faults",
+            "decrease",
+            "from",
+            "12",
+            "to",
+            "8",
+            "to",
+            "4",
+            "to",
+            "0",
+            "across",
+            "the",
+            "four",
+            "settings.",
             "Forward",
             "values",
             "reveal",
@@ -28421,81 +28679,82 @@
             "updates",
             "reveal",
             "optimizer",
-            "faults."
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "\\begin{table}[!htb]"
-          ],
-          "after": [
-            "\\begin{table}[!htb]"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "\\caption{Effect"
-          ],
-          "after": [
-            "\\caption{Effects"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "faults.",
+            "\\begin{table}[!htb]",
+            "\\caption{Effects",
             "of",
-            "training"
-          ],
-          "after": [
-            "of",
-            "training"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "signal",
-            "coverage"
-          ],
-          "after": [
+            "training",
             "signals",
             "and",
             "repair",
-            "components"
+            "components.",
+            "(a)",
+            "Cumulative",
+            "signals",
+            "on",
+            "16",
+            "faulty",
+            "candidates;",
+            "final",
+            "acceptance",
+            "uses",
+            "complete",
+            "verification.",
+            "(b)",
+            "Ten",
+            "saved",
+            "translations:",
+            "parentheses",
+            "count",
+            "failed",
+            "programs",
+            "repaired,",
+            "and",
+            "all",
+            "conditions",
+            "retain",
+            "5/5",
+            "initially",
+            "passing",
+            "programs.",
+            "(c)",
+            "Independent",
+            "pairs",
+            "on",
+            "time",
+            "series;",
+            "every",
+            "condition",
+            "passes",
+            "69/69"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "on"
+            "checks",
+            "on",
+            "three"
           ],
           "after": [
-            "on"
+            "checks",
+            "on",
+            "three"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "detection"
-          ],
-          "after": [
-            "acceptance"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "and"
-          ],
-          "after": [
-            "and"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "seeds.",
+            "\\begin{table}[!htb]",
+            "\\caption{Effect",
+            "of",
+            "training",
+            "signal",
+            "coverage",
+            "on",
+            "detection",
+            "and",
             "repair.",
             "Accepted",
             "candidates",
@@ -28508,65 +28767,13 @@
             "the",
             "initial",
             "available",
-            "checks"
-          ],
-          "after": [
-            "token",
-            "use.",
-            "(a)",
-            "Cumulative",
-            "signals",
-            "on",
-            "16",
-            "faulty",
-            "candidates;",
-            "initially",
-            "undetected",
-            "faults"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "checks",
             "trigger",
-            "no"
-          ],
-          "after": [
-            "trigger",
-            "no"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "no",
             "repair.}"
           ],
           "after": [
-            "repair,",
-            "and",
-            "final",
-            "acceptance",
-            "uses",
-            "complete",
-            "verification.",
-            "(b)",
-            "Program",
-            "repair",
-            "on",
-            "ten",
-            "saved",
-            "initial",
-            "translations.",
-            "(c)",
-            "Two",
-            "separate",
-            "paired",
-            "comparisons",
-            "on",
-            "the",
-            "time",
-            "series",
-            "repository.}"
+            "seeds.}"
           ]
         },
         {
@@ -28599,83 +28806,63 @@
         {
           "kind": "replace",
           "before": [
-            "\\setlength{\\tabcolsep}{4pt}"
+            "\\setlength{\\tabcolsep}{4pt}",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrr@{}}"
           ],
           "after": [
-            "\\setlength{\\tabcolsep}{3pt}"
+            "\\setlength{\\tabcolsep}{2pt}",
+            "\\begin{minipage}[t]{0.485\\linewidth}",
+            "\\vspace{0pt}",
+            "\\raggedright\\textit{(a)",
+            "Training",
+            "signals}\\par\\smallskip",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{2.7cm}rr@{}}"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrr@{}}",
             "\\toprule"
           ],
           "after": [
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrr@{}}",
             "\\toprule"
           ]
         },
         {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "\\multicolumn{4}{l}{\\textit{(a)",
-            "Training",
-            "signals:",
-            "16",
-            "faulty",
-            "candidates}}",
-            "\\\\",
-            "\\midrule"
-          ]
-        },
-        {
-          "kind": "equal",
+          "kind": "replace",
           "before": [
             "\\textbf{Available",
-            "feedback}",
+            "feedback}"
+          ],
+          "after": [
+            "\\textbf{Feedback}"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&",
+            "\\textbf{Accepted}",
             "&"
           ],
           "after": [
-            "\\textbf{Available",
-            "feedback}",
+            "&",
+            "\\textbf{Accepted}",
             "&"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "\\textbf{Accepted}",
-            "&",
             "\\thead{Faults",
             "passing\\\\initial",
-            "checks}"
-          ],
-          "after": [
-            "\\thead{Initially",
-            "undetected\\\\faults}"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "checks}",
             "&",
             "\\thead{Total",
             "tokens\\\\(millions)}"
           ],
           "after": [
-            "&",
-            "\\thead{Total",
-            "tokens\\\\(millions)}"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
-            "\\thead{Final\\\\accepted}"
+            "\\thead{Repair\\\\tokens}"
           ]
         },
         {
@@ -28687,45 +28874,31 @@
             "and",
             "basic",
             "checks",
-            "&"
-          ],
-          "after": [
-            "\\\\",
-            "\\midrule",
-            "Execution",
-            "and",
-            "basic",
-            "checks",
-            "&"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
+            "&",
             "4/16",
             "&"
           ],
-          "after": []
+          "after": [
+            "\\\\",
+            "\\midrule",
+            "Execution",
+            "and",
+            "basic",
+            "checks",
+            "&",
+            "4/16",
+            "&"
+          ]
         },
         {
-          "kind": "equal",
+          "kind": "replace",
           "before": [
             "12",
             "&",
             "2.089"
           ],
           "after": [
-            "12",
-            "&",
-            "2.089"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
-            "4/16"
+            "2,088,915"
           ]
         },
         {
@@ -28736,44 +28909,30 @@
             "+",
             "Forward",
             "values",
-            "&"
-          ],
-          "after": [
-            "\\\\",
-            "\\quad",
-            "+",
-            "Forward",
-            "values",
-            "&"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
+            "&",
             "8/16",
             "&"
           ],
-          "after": []
+          "after": [
+            "\\\\",
+            "\\quad",
+            "+",
+            "Forward",
+            "values",
+            "&",
+            "8/16",
+            "&"
+          ]
         },
         {
-          "kind": "equal",
+          "kind": "replace",
           "before": [
             "8",
             "&",
             "2.603"
           ],
           "after": [
-            "8",
-            "&",
-            "2.603"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
-            "8/16"
+            "2,603,211"
           ]
         },
         {
@@ -28783,43 +28942,29 @@
             "\\quad",
             "+",
             "Gradients",
-            "&"
-          ],
-          "after": [
-            "\\\\",
-            "\\quad",
-            "+",
-            "Gradients",
-            "&"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
+            "&",
             "12/16",
             "&"
           ],
-          "after": []
+          "after": [
+            "\\\\",
+            "\\quad",
+            "+",
+            "Gradients",
+            "&",
+            "12/16",
+            "&"
+          ]
         },
         {
-          "kind": "equal",
+          "kind": "replace",
           "before": [
             "4",
             "&",
             "3.303"
           ],
           "after": [
-            "4",
-            "&",
-            "3.303"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
-            "12/16"
+            "3,302,873"
           ]
         },
         {
@@ -28842,32 +28987,32 @@
           ]
         },
         {
-          "kind": "delete",
+          "kind": "replace",
           "before": [
-            "\\textbf{16/16}",
-            "&"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "\\textbf{0}",
-            "&",
-            "3.419"
-          ],
-          "after": [
-            "\\textbf{0}",
-            "&",
-            "3.419"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "&",
             "\\textbf{16/16}"
+          ],
+          "after": [
+            "16/16"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "\\textbf{0}",
+            "&",
+            "3.419"
+          ],
+          "after": [
+            "3,418,960"
           ]
         },
         {
@@ -28887,29 +29032,21 @@
           "kind": "insert",
           "before": [],
           "after": [
-            "\\par\\vspace{5pt}",
-            "\\textit{(b)",
+            "\\end{minipage}\\hfill",
+            "\\begin{minipage}[t]{0.485\\linewidth}",
+            "\\vspace{0pt}",
+            "\\raggedright\\textit{(b)",
             "Repair",
             "history",
             "and",
             "independent",
             "evidence",
-            "handoff",
-            "on",
-            "saved",
-            "initial",
-            "translations}\\par\\smallskip",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{4.3cm}rrrr@{}}",
+            "handoff}\\par\\smallskip",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{2.7cm}rr@{}}",
             "\\toprule",
             "\\textbf{Condition}",
             "&",
-            "\\thead{Failed",
-            "programs\\\\repaired}",
-            "&",
-            "\\thead{Passing",
-            "programs\\\\preserved}",
-            "&",
-            "\\thead{Final\\\\accepted}",
+            "\\thead{Accepted\\\\(repaired)}",
             "&",
             "\\thead{Repair\\\\tokens}",
             "\\\\",
@@ -28918,22 +29055,16 @@
             "evidence",
             "handoff",
             "&",
-            "4/5",
-            "&",
-            "5/5",
-            "&",
             "9/10",
+            "(4/5)",
             "&",
             "15,547,813",
             "\\\\",
             "Continuous",
             "conversation",
             "&",
-            "3/5",
-            "&",
-            "5/5",
-            "&",
             "8/10",
+            "(3/5)",
             "&",
             "14,516,463",
             "\\\\",
@@ -28941,94 +29072,72 @@
             "repair",
             "history",
             "&",
-            "0/5",
-            "&",
-            "5/5",
-            "&",
             "5/10",
+            "(0/5)",
             "&",
             "10,851,537",
             "\\\\",
             "\\bottomrule",
             "\\end{tabular*}",
-            "\\par\\vspace{5pt}",
-            "\\textit{(c)",
+            "\\end{minipage}",
+            "\\par\\medskip",
+            "\\raggedright\\textit{(c)",
+            "Repository",
+            "components",
+            "on",
+            "time",
+            "series}\\par\\smallskip",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{4.8cm}rrrrr@{}}",
+            "\\toprule",
+            "&",
+            "\\multicolumn{2}{c}{\\textbf{Without",
+            "component}}",
+            "&",
+            "\\multicolumn{2}{c}{\\textbf{With",
+            "component}}",
+            "&",
+            "\\\\",
+            "\\cmidrule(lr){2-3}\\cmidrule(lr){4-5}",
+            "\\textbf{Component}",
+            "&",
+            "\\textbf{Calls}",
+            "&",
+            "\\textbf{Tokens}",
+            "&",
+            "\\textbf{Calls}",
+            "&",
+            "\\textbf{Tokens}",
+            "&",
+            "\\thead{Token\\\\reduction}",
+            "\\\\",
+            "\\midrule",
             "Repository",
             "context",
             "management",
-            "and",
-            "Repository",
-            "Structural",
-            "Analysis",
-            "on",
-            "the",
-            "time",
-            "series",
-            "repository}\\par\\smallskip",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{6.8cm}rrr@{}}",
-            "\\toprule",
-            "\\textbf{Condition}",
-            "&",
-            "\\thead{Behavior\\\\checks",
-            "passed}",
-            "&",
-            "\\thead{Investigation\\\\and",
-            "repair",
-            "calls}",
-            "&",
-            "\\thead{End-to-end\\\\tokens}",
-            "\\\\",
-            "\\midrule",
-            "\\multicolumn{4}{l}{\\textit{Repository",
-            "context",
-            "management}}",
-            "\\\\",
-            "Without",
-            "repository",
-            "context",
-            "&",
-            "69/69",
             "&",
             "26",
             "&",
             "6,047,074",
-            "\\\\",
-            "With",
-            "repository",
-            "context",
-            "&",
-            "69/69",
             "&",
             "22",
             "&",
             "1,936,579",
+            "&",
+            "68.0\\%",
             "\\\\",
-            "\\midrule",
-            "\\multicolumn{4}{l}{\\textit{Repository",
-            "Structural",
-            "Analysis}}",
-            "\\\\",
-            "Without",
             "Repository",
             "Structural",
             "Analysis",
-            "&",
-            "69/69",
             "&",
             "42",
             "&",
             "2,651,248",
-            "\\\\",
-            "With",
-            "Repository",
-            "Structural",
-            "Analysis",
-            "&",
-            "69/69",
             "&",
             "30",
             "&",
             "2,126,900",
+            "&",
+            "19.8\\%",
             "\\\\",
             "\\bottomrule",
             "\\end{tabular*}",
@@ -29037,12 +29146,11 @@
             "\\footnotesize",
             "Panels",
             "(a,b)",
-            "report",
+            "include",
             "investigation",
-            "and",
+            "in",
             "repair",
-            "tokens.",
-            "Panel",
+            "tokens;",
             "(b)",
             "includes",
             "editing",
@@ -29050,41 +29158,31 @@
             "and",
             "format-correction",
             "feedback.",
-            "Panel",
-            "(c)",
-            "reports",
+            "In",
+            "(c),",
+            "calls",
+            "cover",
             "investigation",
             "and",
-            "repair",
-            "calls",
+            "repair,",
             "and",
-            "end-to-end",
-            "tokens,",
-            "including",
-            "the",
-            "shared",
+            "tokens",
+            "also",
+            "include",
             "initial",
             "translation.",
             "Each",
             "condition",
             "runs",
-            "once;",
-            "69",
-            "checks",
-            "cover",
-            "one",
-            "repository",
-            "on",
-            "three",
-            "seeds.",
-            "Each",
-            "paired",
-            "comparison",
-            "retains",
-            "its",
-            "own",
+            "once,",
+            "with",
+            "a",
+            "separate",
             "complete",
-            "reference.",
+            "reference",
+            "for",
+            "each",
+            "pair.",
             "\\end{minipage}"
           ]
         },
@@ -36504,7 +36602,201 @@
             "the",
             "external",
             "evaluation",
-            "harness."
+            "harness.",
+            "Complete",
+            "input",
+            "and",
+            "output",
+            "token",
+            "costs",
+            "for",
+            "individual",
+            "migrations.",
+            "Costs",
+            "include",
+            "initial",
+            "translation",
+            "and",
+            "every",
+            "subsequent",
+            "call.",
+            "Acceptance",
+            "uses",
+            "the",
+            "declared",
+            "task",
+            "denominator",
+            "for",
+            "each",
+            "collection.",
+            "Method",
+            "&",
+            "LLM",
+            "calls",
+            "&",
+            "Input",
+            "tokens",
+            "(millions)",
+            "&",
+            "Output",
+            "tokens",
+            "(millions)",
+            "&",
+            "Total",
+            "tokens",
+            "(millions)",
+            "&",
+            "Accepted",
+            "(a)",
+            "PyTorch",
+            "to",
+            "MindSpore",
+            "Direct",
+            "LLM",
+            "&",
+            "29",
+            "&",
+            "0.018",
+            "&",
+            "0.411",
+            "&",
+            "0.429",
+            "&",
+            "29/50",
+            "CodeTransEngine",
+            "[macedo2025codetransengine]",
+            "&",
+            "29",
+            "&",
+            "0.022",
+            "&",
+            "0.257",
+            "&",
+            "0.280",
+            "&",
+            "31/50",
+            "MSAdapter",
+            "[openi2025msadapter]",
+            "&",
+            "-",
+            "&",
+            "-",
+            "&",
+            "-",
+            "&",
+            "-",
+            "&",
+            "15/50",
+            "SWE-agent",
+            "[yang2024sweagent]",
+            "&",
+            "1,097",
+            "&",
+            "19.845",
+            "&",
+            "0.987",
+            "&",
+            "20.831",
+            "&",
+            "44/50",
+            "MatchFixAgent",
+            "[ibrahimzada2025matchfixagent]",
+            "&",
+            "619",
+            "&",
+            "10.750",
+            "&",
+            "1.347",
+            "&",
+            "12.097",
+            "&",
+            "50/50",
+            "LaDiM",
+            "(ours)",
+            "&",
+            "326",
+            "&",
+            "4.298",
+            "&",
+            "0.861",
+            "&",
+            "5.159",
+            "&",
+            "50/50",
+            "(b)",
+            "Java/DJL",
+            "to",
+            "Python/PyTorch",
+            "Direct",
+            "LLM",
+            "&",
+            "18",
+            "&",
+            "0.142",
+            "&",
+            "0.552",
+            "&",
+            "0.694",
+            "&",
+            "1/18",
+            "InterTrans",
+            "[macedo2024intertrans]",
+            "&",
+            "89",
+            "&",
+            "0.680",
+            "&",
+            "1.606",
+            "&",
+            "2.286",
+            "&",
+            "1/18",
+            "Test-guided",
+            "repair",
+            "&",
+            "71",
+            "&",
+            "1.594",
+            "&",
+            "2.881",
+            "&",
+            "4.475",
+            "&",
+            "7/18",
+            "SWE-agent",
+            "&",
+            "682",
+            "&",
+            "23.063",
+            "&",
+            "1.258",
+            "&",
+            "24.321",
+            "&",
+            "8/18",
+            "MatchFixAgent",
+            "&",
+            "524",
+            "&",
+            "26.335",
+            "&",
+            "2.020",
+            "&",
+            "28.355",
+            "&",
+            "8/18",
+            "LaDiM",
+            "(ours)",
+            "&",
+            "345",
+            "&",
+            "19.470",
+            "&",
+            "2.009",
+            "&",
+            "21.479",
+            "&",
+            "9/18"
           ]
         },
         {
@@ -39664,7 +39956,219 @@
             "the",
             "external",
             "evaluation",
-            "harness."
+            "harness.",
+            "\\begin{table}[!htb]",
+            "\\caption{Complete",
+            "input",
+            "and",
+            "output",
+            "token",
+            "costs",
+            "for",
+            "individual",
+            "migrations.",
+            "Costs",
+            "include",
+            "initial",
+            "translation",
+            "and",
+            "every",
+            "subsequent",
+            "call.",
+            "Acceptance",
+            "uses",
+            "the",
+            "declared",
+            "task",
+            "denominator",
+            "for",
+            "each",
+            "collection.}",
+            "\\label{tab:program-costs}",
+            "\\centering",
+            "\\small",
+            "\\setlength{\\tabcolsep}{3pt}",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrr@{}}",
+            "\\toprule",
+            "\\textbf{Method}",
+            "&",
+            "\\thead{LLM\\\\calls}",
+            "&",
+            "\\thead{Input",
+            "tokens\\\\(millions)}",
+            "&",
+            "\\thead{Output",
+            "tokens\\\\(millions)}",
+            "&",
+            "\\thead{Total",
+            "tokens\\\\(millions)}",
+            "&",
+            "\\textbf{Accepted}",
+            "\\\\",
+            "\\midrule",
+            "\\multicolumn{6}{l}{\\textit{(a)",
+            "PyTorch",
+            "to",
+            "MindSpore}}",
+            "\\\\",
+            "Direct",
+            "LLM",
+            "&",
+            "29",
+            "&",
+            "0.018",
+            "&",
+            "0.411",
+            "&",
+            "0.429",
+            "&",
+            "29/50",
+            "\\\\",
+            "CodeTransEngine~\\citep{macedo2025codetransengine}",
+            "&",
+            "29",
+            "&",
+            "0.022",
+            "&",
+            "0.257",
+            "&",
+            "0.280",
+            "&",
+            "31/50",
+            "\\\\",
+            "MSAdapter~\\citep{openi2025msadapter}",
+            "&",
+            "--",
+            "&",
+            "--",
+            "&",
+            "--",
+            "&",
+            "--",
+            "&",
+            "15/50",
+            "\\\\",
+            "SWE-agent~\\citep{yang2024sweagent}",
+            "&",
+            "1,097",
+            "&",
+            "19.845",
+            "&",
+            "0.987",
+            "&",
+            "20.831",
+            "&",
+            "44/50",
+            "\\\\",
+            "MatchFixAgent~\\citep{ibrahimzada2025matchfixagent}",
+            "&",
+            "619",
+            "&",
+            "10.750",
+            "&",
+            "1.347",
+            "&",
+            "12.097",
+            "&",
+            "\\textbf{50/50}",
+            "\\\\",
+            "\\textbf{LaDiM",
+            "(ours)}",
+            "&",
+            "326",
+            "&",
+            "4.298",
+            "&",
+            "0.861",
+            "&",
+            "5.159",
+            "&",
+            "\\textbf{50/50}",
+            "\\\\",
+            "\\midrule",
+            "\\multicolumn{6}{l}{\\textit{(b)",
+            "Java/DJL",
+            "to",
+            "Python/PyTorch}}",
+            "\\\\",
+            "Direct",
+            "LLM",
+            "&",
+            "18",
+            "&",
+            "0.142",
+            "&",
+            "0.552",
+            "&",
+            "0.694",
+            "&",
+            "1/18",
+            "\\\\",
+            "InterTrans~\\citep{macedo2024intertrans}",
+            "&",
+            "89",
+            "&",
+            "0.680",
+            "&",
+            "1.606",
+            "&",
+            "2.286",
+            "&",
+            "1/18",
+            "\\\\",
+            "Test-guided",
+            "repair",
+            "&",
+            "71",
+            "&",
+            "1.594",
+            "&",
+            "2.881",
+            "&",
+            "4.475",
+            "&",
+            "7/18",
+            "\\\\",
+            "SWE-agent",
+            "&",
+            "682",
+            "&",
+            "23.063",
+            "&",
+            "1.258",
+            "&",
+            "24.321",
+            "&",
+            "8/18",
+            "\\\\",
+            "MatchFixAgent",
+            "&",
+            "524",
+            "&",
+            "26.335",
+            "&",
+            "2.020",
+            "&",
+            "28.355",
+            "&",
+            "8/18",
+            "\\\\",
+            "\\textbf{LaDiM",
+            "(ours)}",
+            "&",
+            "345",
+            "&",
+            "19.470",
+            "&",
+            "2.009",
+            "&",
+            "21.479",
+            "&",
+            "\\textbf{9/18}",
+            "\\\\",
+            "\\bottomrule",
+            "\\end{tabular*}",
+            "\\end{table}"
           ]
         },
         {
@@ -47093,13 +47597,153 @@
             "output",
             "usage",
             "in",
-            "repair.",
-            "Complete",
-            "costs",
-            "for",
+            "repair."
+          ],
+          "after": [
+            "Repository",
+            "Protocols",
+            "and",
+            "Detailed",
+            "Results",
+            "All",
+            "methods",
+            "receive",
+            "byte-identical",
+            "source",
+            "repositories,",
+            "common",
+            "initial",
+            "translations,",
+            "task",
+            "requirements,",
+            "and",
+            "acceptance",
+            "procedures.",
+            "The",
+            "time",
+            "series",
+            "translation",
+            "has",
+            "three",
+            "generation",
+            "calls",
+            "totaling",
+            "163,661",
+            "tokens.",
+            "The",
+            "recommendation",
+            "translation",
+            "uses",
+            "20",
+            "calls",
+            "totaling",
+            "368,368",
+            "tokens.",
+            "Generation",
+            "proceeds",
+            "from",
             "the",
-            "repository",
-            "comparison.",
+            "public",
+            "import",
+            "structure",
+            "and",
+            "includes",
+            "failed",
+            "or",
+            "truncated",
+            "attempts.",
+            "Each",
+            "method's",
+            "reported",
+            "total",
+            "contains",
+            "one",
+            "complete",
+            "copy",
+            "of",
+            "this",
+            "generation",
+            "cost",
+            "together",
+            "with",
+            "every",
+            "repair",
+            "call.",
+            "Table",
+            "[tab:repository-costs]",
+            "separates",
+            "input",
+            "and",
+            "output",
+            "usage",
+            "in",
+            "repair."
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "Complete"
+          ],
+          "after": [
+            "Training",
+            "checks",
+            "and",
+            "complete"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "costs",
+            "for"
+          ],
+          "after": [
+            "costs",
+            "for"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "the"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "repository"
+          ],
+          "after": [
+            "repository"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "comparison."
+          ],
+          "after": [
+            "migration.",
+            "Gradient",
+            "and",
+            "parameter",
+            "update",
+            "checks",
+            "cover",
+            "three",
+            "training",
+            "steps",
+            "on",
+            "all",
+            "evaluated",
+            "seeds."
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "Total",
             "tokens",
             "include",
@@ -47111,7 +47755,37 @@
             "common",
             "initial",
             "translation.",
-            "Method",
+            "Method"
+          ],
+          "after": [
+            "Total",
+            "tokens",
+            "include",
+            "repair",
+            "input",
+            "and",
+            "output",
+            "plus",
+            "common",
+            "initial",
+            "translation.",
+            "Method"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "&",
+            "Gradients",
+            "&",
+            "Parameter",
+            "updates"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "&",
             "Repair",
             "calls",
@@ -47131,7 +47805,44 @@
             "Time",
             "series",
             "LaDiM",
+            "&"
+          ],
+          "after": [
             "&",
+            "Repair",
+            "calls",
+            "&",
+            "Submissions",
+            "&",
+            "Repair",
+            "input",
+            "tokens",
+            "&",
+            "Repair",
+            "output",
+            "tokens",
+            "&",
+            "Total",
+            "tokens",
+            "Time",
+            "series",
+            "LaDiM",
+            "&"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "9/9",
+            "&",
+            "9/9",
+            "&"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "35",
             "&",
             "2",
@@ -47142,7 +47853,35 @@
             "&",
             "2,614,230",
             "SWE-agent",
+            "&"
+          ],
+          "after": [
+            "35",
             "&",
+            "2",
+            "&",
+            "2,345,473",
+            "&",
+            "105,096",
+            "&",
+            "2,614,230",
+            "SWE-agent",
+            "&"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "9/9",
+            "&",
+            "9/9",
+            "&"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "80",
             "&",
             "1",
@@ -47152,7 +47891,34 @@
             "51,367",
             "&",
             "8,199,825",
-            "MatchFixAgent",
+            "MatchFixAgent"
+          ],
+          "after": [
+            "80",
+            "&",
+            "1",
+            "&",
+            "7,984,797",
+            "&",
+            "51,367",
+            "&",
+            "8,199,825",
+            "MatchFixAgent"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "&",
+            "9/9",
+            "&",
+            "9/9"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "&",
             "69",
             "&",
@@ -47165,7 +47931,37 @@
             "13,597,778",
             "Recommendation",
             "LaDiM",
+            "&"
+          ],
+          "after": [
             "&",
+            "69",
+            "&",
+            "2",
+            "&",
+            "13,306,003",
+            "&",
+            "128,114",
+            "&",
+            "13,597,778",
+            "Recommendation",
+            "LaDiM",
+            "&"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "18/18",
+            "&",
+            "15/18",
+            "&"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "80",
             "&",
             "4",
@@ -47176,7 +47972,35 @@
             "&",
             "8,811,246",
             "SWE-agent",
+            "&"
+          ],
+          "after": [
+            "80",
             "&",
+            "4",
+            "&",
+            "8,147,846",
+            "&",
+            "295,032",
+            "&",
+            "8,811,246",
+            "SWE-agent",
+            "&"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "17/18",
+            "&",
+            "12/18",
+            "&"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "80",
             "&",
             "1",
@@ -47186,7 +48010,34 @@
             "58,248",
             "&",
             "8,316,552",
-            "MatchFixAgent",
+            "MatchFixAgent"
+          ],
+          "after": [
+            "80",
+            "&",
+            "1",
+            "&",
+            "7,889,936",
+            "&",
+            "58,248",
+            "&",
+            "8,316,552",
+            "MatchFixAgent"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "&",
+            "18/18",
+            "&",
+            "16/18"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "&",
             "80",
             "&",
@@ -47312,177 +48163,6 @@
             "23"
           ],
           "after": [
-            "Repository",
-            "Protocols",
-            "and",
-            "Detailed",
-            "Results",
-            "All",
-            "methods",
-            "receive",
-            "byte-identical",
-            "source",
-            "repositories,",
-            "common",
-            "initial",
-            "translations,",
-            "task",
-            "requirements,",
-            "and",
-            "acceptance",
-            "procedures.",
-            "The",
-            "time",
-            "series",
-            "translation",
-            "has",
-            "three",
-            "generation",
-            "calls",
-            "totaling",
-            "163,661",
-            "tokens.",
-            "The",
-            "recommendation",
-            "translation",
-            "uses",
-            "20",
-            "calls",
-            "totaling",
-            "368,368",
-            "tokens.",
-            "Generation",
-            "proceeds",
-            "from",
-            "the",
-            "public",
-            "import",
-            "structure",
-            "and",
-            "includes",
-            "failed",
-            "or",
-            "truncated",
-            "attempts.",
-            "Each",
-            "method's",
-            "reported",
-            "total",
-            "contains",
-            "one",
-            "complete",
-            "copy",
-            "of",
-            "this",
-            "generation",
-            "cost",
-            "together",
-            "with",
-            "every",
-            "repair",
-            "call.",
-            "Table",
-            "[tab:repository-costs]",
-            "separates",
-            "input",
-            "and",
-            "output",
-            "usage",
-            "in",
-            "repair.",
-            "Complete",
-            "costs",
-            "for",
-            "the",
-            "repository",
-            "comparison.",
-            "Total",
-            "tokens",
-            "include",
-            "repair",
-            "input",
-            "and",
-            "output",
-            "plus",
-            "common",
-            "initial",
-            "translation.",
-            "Method",
-            "&",
-            "Repair",
-            "calls",
-            "&",
-            "Submissions",
-            "&",
-            "Repair",
-            "input",
-            "tokens",
-            "&",
-            "Repair",
-            "output",
-            "tokens",
-            "&",
-            "Total",
-            "tokens",
-            "Time",
-            "series",
-            "LaDiM",
-            "&",
-            "35",
-            "&",
-            "2",
-            "&",
-            "2,345,473",
-            "&",
-            "105,096",
-            "&",
-            "2,614,230",
-            "SWE-agent",
-            "&",
-            "80",
-            "&",
-            "1",
-            "&",
-            "7,984,797",
-            "&",
-            "51,367",
-            "&",
-            "8,199,825",
-            "MatchFixAgent",
-            "&",
-            "69",
-            "&",
-            "2",
-            "&",
-            "13,306,003",
-            "&",
-            "128,114",
-            "&",
-            "13,597,778",
-            "Recommendation",
-            "LaDiM",
-            "&",
-            "80",
-            "&",
-            "4",
-            "&",
-            "8,147,846",
-            "&",
-            "295,032",
-            "&",
-            "8,811,246",
-            "SWE-agent",
-            "&",
-            "80",
-            "&",
-            "1",
-            "&",
-            "7,889,936",
-            "&",
-            "58,248",
-            "&",
-            "8,316,552",
-            "MatchFixAgent",
             "&",
             "80",
             "&",
@@ -48739,13 +49419,154 @@
             "usage",
             "in",
             "repair.",
-            "\\begin{table}[!htb]",
-            "\\caption{Complete",
-            "costs",
-            "for",
+            "\\begin{table}[!htb]"
+          ],
+          "after": [
+            "\\section{Repository",
+            "Protocols",
+            "and",
+            "Detailed",
+            "Results}",
+            "\\label{sec:repository-results}",
+            "All",
+            "methods",
+            "receive",
+            "byte-identical",
+            "source",
+            "repositories,",
+            "common",
+            "initial",
+            "translations,",
+            "task",
+            "requirements,",
+            "and",
+            "acceptance",
+            "procedures.",
+            "The",
+            "time",
+            "series",
+            "translation",
+            "has",
+            "three",
+            "generation",
+            "calls",
+            "totaling",
+            "163,661",
+            "tokens.",
+            "The",
+            "recommendation",
+            "translation",
+            "uses",
+            "20",
+            "calls",
+            "totaling",
+            "368,368",
+            "tokens.",
+            "Generation",
+            "proceeds",
+            "from",
             "the",
-            "repository",
-            "comparison.",
+            "public",
+            "import",
+            "structure",
+            "and",
+            "includes",
+            "failed",
+            "or",
+            "truncated",
+            "attempts.",
+            "Each",
+            "method's",
+            "reported",
+            "total",
+            "contains",
+            "one",
+            "complete",
+            "copy",
+            "of",
+            "this",
+            "generation",
+            "cost",
+            "together",
+            "with",
+            "every",
+            "repair",
+            "call.",
+            "Table~\\ref{tab:repository-costs}",
+            "separates",
+            "input",
+            "and",
+            "output",
+            "usage",
+            "in",
+            "repair.",
+            "\\begin{table}[!htb]"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "\\caption{Complete"
+          ],
+          "after": [
+            "\\caption{Training",
+            "checks",
+            "and",
+            "complete"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "costs",
+            "for"
+          ],
+          "after": [
+            "costs",
+            "for"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "the"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "repository"
+          ],
+          "after": [
+            "repository"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "comparison."
+          ],
+          "after": [
+            "migration.",
+            "Gradient",
+            "and",
+            "parameter",
+            "update",
+            "checks",
+            "cover",
+            "three",
+            "training",
+            "steps",
+            "on",
+            "all",
+            "evaluated",
+            "seeds."
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "Total",
             "tokens",
             "include",
@@ -48759,11 +49580,60 @@
             "translation.}",
             "\\label{tab:repository-costs}",
             "\\centering",
-            "\\small",
+            "\\small"
+          ],
+          "after": [
+            "Total",
+            "tokens",
+            "include",
+            "repair",
+            "input",
+            "and",
+            "output",
+            "plus",
+            "common",
+            "initial",
+            "translation.}",
+            "\\label{tab:repository-costs}",
+            "\\centering",
+            "\\small"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "\\setlength{\\tabcolsep}{3pt}",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrr@{}}",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrr@{}}"
+          ],
+          "after": [
+            "\\setlength{\\tabcolsep}{2pt}",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrrrr@{}}"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "\\toprule",
-            "\\textbf{Method}",
+            "\\textbf{Method}"
+          ],
+          "after": [
+            "\\toprule",
+            "\\textbf{Method}"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "&",
+            "\\textbf{Gradients}",
+            "&",
+            "\\thead{Parameter\\\\updates}"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "&",
             "\\thead{Repair\\\\calls}",
             "&",
@@ -48777,11 +49647,60 @@
             "&",
             "\\thead{Total\\\\tokens}",
             "\\\\",
-            "\\midrule",
-            "\\multicolumn{6}{l}{\\textit{Time",
+            "\\midrule"
+          ],
+          "after": [
+            "&",
+            "\\thead{Repair\\\\calls}",
+            "&",
+            "\\textbf{Submissions}",
+            "&",
+            "\\thead{Repair",
+            "input\\\\tokens}",
+            "&",
+            "\\thead{Repair",
+            "output\\\\tokens}",
+            "&",
+            "\\thead{Total\\\\tokens}",
+            "\\\\",
+            "\\midrule"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "\\multicolumn{6}{l}{\\textit{Time"
+          ],
+          "after": [
+            "\\multicolumn{8}{l}{\\textit{Time"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "series}}",
             "\\\\",
-            "LaDiM",
+            "LaDiM"
+          ],
+          "after": [
+            "series}}",
+            "\\\\",
+            "LaDiM"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "&",
+            "9/9",
+            "&",
+            "9/9"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "&",
             "35",
             "&",
@@ -48794,7 +49713,37 @@
             "2,614,230",
             "\\\\",
             "SWE-agent",
+            "&"
+          ],
+          "after": [
             "&",
+            "35",
+            "&",
+            "2",
+            "&",
+            "2,345,473",
+            "&",
+            "105,096",
+            "&",
+            "2,614,230",
+            "\\\\",
+            "SWE-agent",
+            "&"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "9/9",
+            "&",
+            "9/9",
+            "&"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "80",
             "&",
             "1",
@@ -48806,7 +49755,36 @@
             "8,199,825",
             "\\\\",
             "MatchFixAgent",
+            "&"
+          ],
+          "after": [
+            "80",
             "&",
+            "1",
+            "&",
+            "7,984,797",
+            "&",
+            "51,367",
+            "&",
+            "8,199,825",
+            "\\\\",
+            "MatchFixAgent",
+            "&"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "9/9",
+            "&",
+            "9/9",
+            "&"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "69",
             "&",
             "2",
@@ -48817,10 +49795,55 @@
             "&",
             "13,597,778",
             "\\\\",
-            "\\midrule",
-            "\\multicolumn{6}{l}{\\textit{Recommendation}}",
+            "\\midrule"
+          ],
+          "after": [
+            "69",
+            "&",
+            "2",
+            "&",
+            "13,306,003",
+            "&",
+            "128,114",
+            "&",
+            "13,597,778",
             "\\\\",
-            "LaDiM",
+            "\\midrule"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "\\multicolumn{6}{l}{\\textit{Recommendation}}"
+          ],
+          "after": [
+            "\\multicolumn{8}{l}{\\textit{Recommendation}}"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "\\\\",
+            "LaDiM"
+          ],
+          "after": [
+            "\\\\",
+            "LaDiM"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "&",
+            "18/18",
+            "&",
+            "15/18"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "&",
             "80",
             "&",
@@ -48833,7 +49856,37 @@
             "8,811,246",
             "\\\\",
             "SWE-agent",
+            "&"
+          ],
+          "after": [
             "&",
+            "80",
+            "&",
+            "4",
+            "&",
+            "8,147,846",
+            "&",
+            "295,032",
+            "&",
+            "8,811,246",
+            "\\\\",
+            "SWE-agent",
+            "&"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "17/18",
+            "&",
+            "12/18",
+            "&"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "80",
             "&",
             "1",
@@ -48844,7 +49897,35 @@
             "&",
             "8,316,552",
             "\\\\",
-            "MatchFixAgent",
+            "MatchFixAgent"
+          ],
+          "after": [
+            "80",
+            "&",
+            "1",
+            "&",
+            "7,889,936",
+            "&",
+            "58,248",
+            "&",
+            "8,316,552",
+            "\\\\",
+            "MatchFixAgent"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "&",
+            "18/18",
+            "&",
+            "16/18"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "&",
             "80",
             "&",
@@ -48972,190 +50053,6 @@
             "23"
           ],
           "after": [
-            "\\section{Repository",
-            "Protocols",
-            "and",
-            "Detailed",
-            "Results}",
-            "\\label{sec:repository-results}",
-            "All",
-            "methods",
-            "receive",
-            "byte-identical",
-            "source",
-            "repositories,",
-            "common",
-            "initial",
-            "translations,",
-            "task",
-            "requirements,",
-            "and",
-            "acceptance",
-            "procedures.",
-            "The",
-            "time",
-            "series",
-            "translation",
-            "has",
-            "three",
-            "generation",
-            "calls",
-            "totaling",
-            "163,661",
-            "tokens.",
-            "The",
-            "recommendation",
-            "translation",
-            "uses",
-            "20",
-            "calls",
-            "totaling",
-            "368,368",
-            "tokens.",
-            "Generation",
-            "proceeds",
-            "from",
-            "the",
-            "public",
-            "import",
-            "structure",
-            "and",
-            "includes",
-            "failed",
-            "or",
-            "truncated",
-            "attempts.",
-            "Each",
-            "method's",
-            "reported",
-            "total",
-            "contains",
-            "one",
-            "complete",
-            "copy",
-            "of",
-            "this",
-            "generation",
-            "cost",
-            "together",
-            "with",
-            "every",
-            "repair",
-            "call.",
-            "Table~\\ref{tab:repository-costs}",
-            "separates",
-            "input",
-            "and",
-            "output",
-            "usage",
-            "in",
-            "repair.",
-            "\\begin{table}[!htb]",
-            "\\caption{Complete",
-            "costs",
-            "for",
-            "the",
-            "repository",
-            "comparison.",
-            "Total",
-            "tokens",
-            "include",
-            "repair",
-            "input",
-            "and",
-            "output",
-            "plus",
-            "common",
-            "initial",
-            "translation.}",
-            "\\label{tab:repository-costs}",
-            "\\centering",
-            "\\small",
-            "\\setlength{\\tabcolsep}{3pt}",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrr@{}}",
-            "\\toprule",
-            "\\textbf{Method}",
-            "&",
-            "\\thead{Repair\\\\calls}",
-            "&",
-            "\\textbf{Submissions}",
-            "&",
-            "\\thead{Repair",
-            "input\\\\tokens}",
-            "&",
-            "\\thead{Repair",
-            "output\\\\tokens}",
-            "&",
-            "\\thead{Total\\\\tokens}",
-            "\\\\",
-            "\\midrule",
-            "\\multicolumn{6}{l}{\\textit{Time",
-            "series}}",
-            "\\\\",
-            "LaDiM",
-            "&",
-            "35",
-            "&",
-            "2",
-            "&",
-            "2,345,473",
-            "&",
-            "105,096",
-            "&",
-            "2,614,230",
-            "\\\\",
-            "SWE-agent",
-            "&",
-            "80",
-            "&",
-            "1",
-            "&",
-            "7,984,797",
-            "&",
-            "51,367",
-            "&",
-            "8,199,825",
-            "\\\\",
-            "MatchFixAgent",
-            "&",
-            "69",
-            "&",
-            "2",
-            "&",
-            "13,306,003",
-            "&",
-            "128,114",
-            "&",
-            "13,597,778",
-            "\\\\",
-            "\\midrule",
-            "\\multicolumn{6}{l}{\\textit{Recommendation}}",
-            "\\\\",
-            "LaDiM",
-            "&",
-            "80",
-            "&",
-            "4",
-            "&",
-            "8,147,846",
-            "&",
-            "295,032",
-            "&",
-            "8,811,246",
-            "\\\\",
-            "SWE-agent",
-            "&",
-            "80",
-            "&",
-            "1",
-            "&",
-            "7,889,936",
-            "&",
-            "58,248",
-            "&",
-            "8,316,552",
-            "\\\\",
-            "MatchFixAgent",
             "&",
             "80",
             "&",
@@ -51627,22 +52524,29 @@
             "within",
             "its",
             "repository.",
+            "&",
+            "Time",
+            "series",
+            "&",
+            "Recommendation",
+            "(lr)2-4(l)5-7",
             "Condition",
             "&",
-            "Behavior",
-            "checks",
+            "Checks",
             "passed",
             "&",
-            "Investigation",
-            "and",
-            "repair",
-            "calls",
+            "Calls",
             "&",
             "End-to-end",
             "tokens",
-            "Time",
-            "series",
-            "repository",
+            "&",
+            "Checks",
+            "passed",
+            "&",
+            "Calls",
+            "&",
+            "End-to-end",
+            "tokens",
             "Repair",
             "Agent",
             "&",
@@ -51651,39 +52555,6 @@
             "26",
             "&",
             "6,128,331",
-            "+",
-            "Verifier",
-            "investigation",
-            "&",
-            "69/69",
-            "&",
-            "18",
-            "&",
-            "3,896,158",
-            "+",
-            "Independent",
-            "evidence",
-            "handoff",
-            "&",
-            "69/69",
-            "&",
-            "26",
-            "&",
-            "6,047,074",
-            "+",
-            "Repository",
-            "context",
-            "management",
-            "&",
-            "69/69",
-            "&",
-            "22",
-            "&",
-            "1,936,579",
-            "Recommendation",
-            "repository",
-            "Repair",
-            "Agent",
             "&",
             "131/145",
             "&",
@@ -51693,6 +52564,12 @@
             "+",
             "Verifier",
             "investigation",
+            "&",
+            "69/69",
+            "&",
+            "18",
+            "&",
+            "3,896,158",
             "&",
             "131/145",
             "&",
@@ -51704,6 +52581,12 @@
             "evidence",
             "handoff",
             "&",
+            "69/69",
+            "&",
+            "26",
+            "&",
+            "6,047,074",
+            "&",
             "131/145",
             "&",
             "68",
@@ -51713,6 +52596,12 @@
             "Repository",
             "context",
             "management",
+            "&",
+            "69/69",
+            "&",
+            "22",
+            "&",
+            "1,936,579",
             "&",
             "131/145",
             "&",
@@ -52005,22 +52894,29 @@
             "include",
             "initial",
             "translation.",
+            "&",
+            "Time",
+            "series",
+            "&",
+            "Recommendation",
+            "(lr)2-4(l)5-7",
             "Condition",
             "&",
-            "Behavior",
-            "checks",
+            "Checks",
             "passed",
             "&",
-            "Investigation",
-            "and",
-            "repair",
-            "calls",
+            "Calls",
             "&",
             "End-to-end",
             "tokens",
-            "Time",
-            "series",
-            "repository",
+            "&",
+            "Checks",
+            "passed",
+            "&",
+            "Calls",
+            "&",
+            "End-to-end",
+            "tokens",
             "Complete",
             "method",
             "&",
@@ -52029,31 +52925,6 @@
             "30",
             "&",
             "2,126,900",
-            "Without",
-            "Repository",
-            "Structural",
-            "Analysis",
-            "&",
-            "69/69",
-            "&",
-            "42",
-            "&",
-            "2,651,248",
-            "Without",
-            "Repair",
-            "Dependency",
-            "Graph",
-            "Planning",
-            "&",
-            "69/69",
-            "&",
-            "21",
-            "&",
-            "1,803,551",
-            "Recommendation",
-            "repository",
-            "Complete",
-            "method",
             "&",
             "131/145",
             "&",
@@ -52065,6 +52936,12 @@
             "Structural",
             "Analysis",
             "&",
+            "69/69",
+            "&",
+            "42",
+            "&",
+            "2,651,248",
+            "&",
             "131/145",
             "&",
             "80",
@@ -52075,6 +52952,12 @@
             "Dependency",
             "Graph",
             "Planning",
+            "&",
+            "69/69",
+            "&",
+            "21",
+            "&",
+            "1,803,551",
             "&",
             "130/145",
             "&",
@@ -52614,24 +53497,30 @@
             "\\centering",
             "\\small",
             "\\setlength{\\tabcolsep}{3pt}",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{6.8cm}rrr@{}}",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{5.4cm}rrrrrr@{}}",
             "\\toprule",
+            "&",
+            "\\multicolumn{3}{c}{\\textbf{Time",
+            "series}}",
+            "&",
+            "\\multicolumn{3}{c}{\\textbf{Recommendation}}",
+            "\\\\",
+            "\\cmidrule(lr){2-4}\\cmidrule(l){5-7}",
             "\\textbf{Condition}",
             "&",
-            "\\thead{Behavior\\\\checks",
-            "passed}",
+            "\\thead{Checks\\\\passed}",
             "&",
-            "\\thead{Investigation\\\\and",
-            "repair",
-            "calls}",
+            "\\textbf{Calls}",
+            "&",
+            "\\thead{End-to-end\\\\tokens}",
+            "&",
+            "\\thead{Checks\\\\passed}",
+            "&",
+            "\\textbf{Calls}",
             "&",
             "\\thead{End-to-end\\\\tokens}",
             "\\\\",
             "\\midrule",
-            "\\multicolumn{4}{l}{\\textit{Time",
-            "series",
-            "repository}}",
-            "\\\\",
             "Repair",
             "Agent",
             "&",
@@ -52640,48 +53529,6 @@
             "26",
             "&",
             "6,128,331",
-            "\\\\",
-            "\\quad",
-            "+",
-            "Verifier",
-            "investigation",
-            "&",
-            "69/69",
-            "&",
-            "18",
-            "&",
-            "3,896,158",
-            "\\\\",
-            "\\quad",
-            "+",
-            "Independent",
-            "evidence",
-            "handoff",
-            "&",
-            "69/69",
-            "&",
-            "26",
-            "&",
-            "6,047,074",
-            "\\\\",
-            "\\quad",
-            "+",
-            "Repository",
-            "context",
-            "management",
-            "&",
-            "69/69",
-            "&",
-            "22",
-            "&",
-            "1,936,579",
-            "\\\\",
-            "\\midrule",
-            "\\multicolumn{4}{l}{\\textit{Recommendation",
-            "repository}}",
-            "\\\\",
-            "Repair",
-            "Agent",
             "&",
             "131/145",
             "&",
@@ -52693,6 +53540,12 @@
             "+",
             "Verifier",
             "investigation",
+            "&",
+            "69/69",
+            "&",
+            "18",
+            "&",
+            "3,896,158",
             "&",
             "131/145",
             "&",
@@ -52706,6 +53559,12 @@
             "evidence",
             "handoff",
             "&",
+            "69/69",
+            "&",
+            "26",
+            "&",
+            "6,047,074",
+            "&",
             "131/145",
             "&",
             "68",
@@ -52717,6 +53576,12 @@
             "Repository",
             "context",
             "management",
+            "&",
+            "69/69",
+            "&",
+            "22",
+            "&",
+            "1,936,579",
             "&",
             "131/145",
             "&",
@@ -53018,24 +53883,30 @@
             "\\centering",
             "\\small",
             "\\setlength{\\tabcolsep}{3pt}",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{6.8cm}rrr@{}}",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{5.4cm}rrrrrr@{}}",
             "\\toprule",
+            "&",
+            "\\multicolumn{3}{c}{\\textbf{Time",
+            "series}}",
+            "&",
+            "\\multicolumn{3}{c}{\\textbf{Recommendation}}",
+            "\\\\",
+            "\\cmidrule(lr){2-4}\\cmidrule(l){5-7}",
             "\\textbf{Condition}",
             "&",
-            "\\thead{Behavior\\\\checks",
-            "passed}",
+            "\\thead{Checks\\\\passed}",
             "&",
-            "\\thead{Investigation\\\\and",
-            "repair",
-            "calls}",
+            "\\textbf{Calls}",
+            "&",
+            "\\thead{End-to-end\\\\tokens}",
+            "&",
+            "\\thead{Checks\\\\passed}",
+            "&",
+            "\\textbf{Calls}",
             "&",
             "\\thead{End-to-end\\\\tokens}",
             "\\\\",
             "\\midrule",
-            "\\multicolumn{4}{l}{\\textit{Time",
-            "series",
-            "repository}}",
-            "\\\\",
             "Complete",
             "method",
             "&",
@@ -53044,36 +53915,6 @@
             "30",
             "&",
             "2,126,900",
-            "\\\\",
-            "Without",
-            "Repository",
-            "Structural",
-            "Analysis",
-            "&",
-            "69/69",
-            "&",
-            "42",
-            "&",
-            "2,651,248",
-            "\\\\",
-            "Without",
-            "Repair",
-            "Dependency",
-            "Graph",
-            "Planning",
-            "&",
-            "69/69",
-            "&",
-            "21",
-            "&",
-            "1,803,551",
-            "\\\\",
-            "\\midrule",
-            "\\multicolumn{4}{l}{\\textit{Recommendation",
-            "repository}}",
-            "\\\\",
-            "Complete",
-            "method",
             "&",
             "131/145",
             "&",
@@ -53086,6 +53927,12 @@
             "Structural",
             "Analysis",
             "&",
+            "69/69",
+            "&",
+            "42",
+            "&",
+            "2,651,248",
+            "&",
             "131/145",
             "&",
             "80",
@@ -53097,6 +53944,12 @@
             "Dependency",
             "Graph",
             "Planning",
+            "&",
+            "69/69",
+            "&",
+            "21",
+            "&",
+            "1,803,551",
             "&",
             "130/145",
             "&",

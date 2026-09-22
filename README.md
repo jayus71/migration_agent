@@ -115,13 +115,16 @@ executed once; token totals count actual calls. The total and per-input token
 comparison uses this same collection. The second main-table panel compares
 all six methods on 18 Java/DJL-to-Python/PyTorch tasks.
 
-The experimental section is organized into Experimental Setup, Main Experiments,
+The experimental section is organized into Experimental Setup, Main Results,
 Analysis Experiments, and Ablation Studies, in `sections/experiments.tex`.
 Main tables report source collections, migration outcomes, natural fault repairs,
 JAX repairs and native conversion controls, and three panels of training signals,
 program repair components, and repository components.
-The consolidated migration table covers framework and language migration and
-both repository tasks.
+The consolidated migration table places framework and language migration side
+by side and groups both repository tasks under shared method rows. The signal
+and saved-translation ablations are also adjacent, with repository components
+shown as horizontal without/with pairs. Complete input/output costs and repository
+gradient and parameter update checks remain in the appendix.
 Analyses explain repair and preservation, per-task cost, retries, detection
 latency, and repair in another target framework. The
 complete component matrices, independent repository ablations, the separate native
@@ -136,9 +139,10 @@ within initially accepted and initially faulty groups.
 The measured acceptance at one, two, and four submissions remains in the text.
 The author maintains the method overview separately; its editable PowerPoint,
 SVG, and exported PDF/PNG are excluded from this content revision. The current
-compiled manuscript has 22 pages, with the main text ending on page 11. This
-revision preserves the approved content without reducing it to the submission
-page limit. The compiled manuscript PDF remains local and ignored by Git.
+compiled manuscript has 23 pages, with the main text ending on page 10. The
+horizontal table revision preserves the approved prose and evidence at readable
+table sizes; further reduction to the submission page limit is deferred. The
+compiled manuscript PDF remains local and ignored by Git.
 
 See [figure inputs and provenance](data/paper_figures/README.md),
 [revision record](docs/paper-revision-20260920.md), and

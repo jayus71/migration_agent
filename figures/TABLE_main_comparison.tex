@@ -1,0 +1,47 @@
+\begin{minipage}[t]{0.485\linewidth}
+\vspace{0pt}
+\raggedright\textit{(a) PyTorch to MindSpore}\par\smallskip
+\setlength{\tabcolsep}{2pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.3cm}rrr@{}}
+\toprule
+\textbf{Method} & \thead{LLM\\calls} & \thead{Tokens\\(millions)} & \textbf{Accepted} \\
+\midrule
+Direct LLM & 29 & 0.429 & 29/50 \\
+CodeTransEngine & 29 & 0.280 & 31/50 \\
+MSAdapter & -- & -- & 15/50 \\
+SWE-agent & 1,097 & 20.831 & 44/50 \\
+MatchFixAgent & 619 & 12.097 & \textbf{50/50} \\
+\textbf{LaDiM (ours)} & 326 & 5.159 & \textbf{50/50} \\
+\bottomrule
+\end{tabular*}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.485\linewidth}
+\vspace{0pt}
+\raggedright\textit{(b) Java/DJL to Python/PyTorch}\par\smallskip
+\setlength{\tabcolsep}{2pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.3cm}rrr@{}}
+\toprule
+\textbf{Method} & \thead{LLM\\calls} & \thead{Tokens\\(millions)} & \textbf{Accepted} \\
+\midrule
+Direct LLM & 18 & 0.694 & 1/18 \\
+InterTrans & 89 & 2.286 & 1/18 \\
+Test-guided repair & 71 & 4.475 & 7/18 \\
+SWE-agent & 682 & 24.321 & 8/18 \\
+MatchFixAgent & 524 & 28.355 & 8/18 \\
+\textbf{LaDiM (ours)} & 345 & 21.479 & \textbf{9/18} \\
+\bottomrule
+\end{tabular*}
+\end{minipage}
+\par\medskip
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrrrr@{}}
+\toprule
+& \multicolumn{4}{c}{\textit{(c) Time series repository}} & \multicolumn{4}{c}{\textit{(d) Recommendation repository}} \\
+\cmidrule(lr){2-5}\cmidrule(l){6-9}
+\textbf{Method} & \thead{Checks\\passed} & \thead{Entry\\points} & \thead{Repair\\calls} & \thead{Tokens\\(millions)} & \thead{Checks\\passed} & \thead{Original\\tests} & \thead{Repair\\calls} & \thead{Tokens\\(millions)} \\
+\midrule
+SWE-agent & 69/69 & 3/3 & 80 & 8.200 & 104/145 & 10/10 & 80 & 8.317 \\
+MatchFixAgent & 69/69 & 3/3 & 69 & 13.598 & 129/145 & 0/10 & 80 & 8.679 \\
+\textbf{LaDiM (ours)} & 69/69 & 3/3 & 35 & 2.614 & \textbf{130/145} & 10/10 & 80 & 8.811 \\
+\bottomrule
+\end{tabular*}

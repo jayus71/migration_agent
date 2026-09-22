@@ -121,12 +121,19 @@ class UnifiedPaperResultsTests(unittest.TestCase):
                 self.assertEqual(tests['status'], 'collection_failed')
                 self.assertEqual(tests['exit_code'], 2)
                 self.assertEqual(tests['observed_outcomes'], [])
-        table = (ROOT / 'figures/TABLE_unified_comparison.tex').read_text()
+        table = (ROOT / 'figures/TABLE_main_comparison.tex').read_text()
         self.assertNotIn('Passed', table)
         self.assertNotIn('Failed', table)
+        setup = (ROOT / 'sections/experiments.tex').read_text().split(r'\subsection{Main Results}')[0]
         for key in ('macedo2025codetransengine', 'openi2025msadapter',
                     'yang2024sweagent', 'ibrahimzada2025matchfixagent', 'macedo2024intertrans'):
-            self.assertEqual(table.count(r'\citep{' + key + '}'), 1)
+            self.assertEqual(setup.count(r'\citep{' + key + '}'), 1)
+        self.assertNotIn(r'\citep', table)
+        costs = (ROOT / 'figures/TABLE_repository_costs.tex').read_text()
+        self.assertEqual(costs.count('9/9 & 9/9'), 3)
+        for expected in ('LaDiM & 18/18 & 15/18', 'SWE-agent & 17/18 & 12/18',
+                         'MatchFixAgent & 18/18 & 16/18'):
+            self.assertIn(expected, costs)
 
     def test_generated_export_matches_its_frozen_inputs(self):
         saved = json.loads((ROOT / 'data/paper_figures/unified_results.json').read_text())

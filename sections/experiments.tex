@@ -16,7 +16,7 @@ The main comparison contains 50 migration tasks from PyTorch to MindSpore, cover
 \end{table}
 
 \textbf{Compared methods.}
-We compare LaDiM with SWE-agent and MatchFixAgent using a common DeepSeek backend and each baseline's native algorithms, prompts, tools, parsers, and retry policies. The main table also includes Direct LLM initial translation, CodeTransEngine's direct translation configuration, MSAdapter, InterTrans, and a repair loop that rewrites the complete candidate from test feedback. Direct repair in the analysis studies is a separate control that receives the saved candidate and uses LaDiM's inspection, testing, and editing tools with its existing repair procedure. Each table lists the methods evaluated in that study.
+We compare LaDiM with SWE-agent~\citep{yang2024sweagent} and MatchFixAgent~\citep{ibrahimzada2025matchfixagent} using a common DeepSeek backend and each baseline's native algorithms, prompts, tools, parsers, and retry policies. The main table also includes Direct LLM initial translation, CodeTransEngine's direct translation configuration~\citep{macedo2025codetransengine}, MSAdapter~\citep{openi2025msadapter}, InterTrans~\citep{macedo2024intertrans}, and a repair loop that rewrites the complete candidate from test feedback. Direct repair in the analysis studies is a separate control that receives the saved candidate and uses LaDiM's inspection, testing, and editing tools with its existing repair procedure. Each table lists the methods evaluated in that study.
 
 For JAX, Ivy converts code between frameworks through \texttt{ivy.transpile}~\citep{ivy2026transpiler}, while \texttt{torch2jax} maps PyTorch operations and tensors to JAX through \texttt{t2j}~\citep{torch2jax2026}. We apply each converter once to the supplied faulty candidates and measure whether the existing faults are removed, without LLM repair. TorchAX, a PyTorch frontend for JAX~\citep{google2025torchax}, is the execution backend for LaDiM and Direct repair, with JAX differentiation and Optax parameter updates.
 
@@ -32,10 +32,10 @@ Methods use common source programs, evaluation inputs, and corresponding initial
 \centering
 \small
 \setlength{\tabcolsep}{3pt}
-\input{figures/TABLE_unified_comparison.tex}
+\input{figures/TABLE_main_comparison.tex}
 \par\smallskip
 \begin{minipage}{\linewidth}
-\footnotesize MatchFixAgent passes 0/10 original recommendation tests because an unmigrated PyTorch import prevents test collection.
+\footnotesize MatchFixAgent passes 0/10 original recommendation tests because an unmigrated PyTorch import prevents test collection. Complete token costs and repository gradient and parameter update checks appear in Tables~\ref{tab:program-costs} and~\ref{tab:repository-costs}.
 \end{minipage}
 \end{table}
 
@@ -45,7 +45,7 @@ LaDiM completes all 50 MindSpore migrations with 57.4\% fewer tokens than MatchF
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figures/repair_comparison.pdf}
-\caption{Token costs on MindSpore migration. (a) LaDiM, MatchFixAgent, and SWE-agent totals include initial translation and subsequent calls grouped by the initial checks. (b) Each bar shows MatchFixAgent tokens minus LaDiM tokens for one distinct source and evaluation input, sorted within each group. Both methods accept 50/50 tasks; LaDiM uses 57.4\% fewer tokens. Positive values indicate lower LaDiM cost.}
+\caption{Token costs on MindSpore migration. (a) LaDiM, MatchFixAgent, and SWE-agent totals include initial translation and subsequent calls grouped by the initial checks. (b) Each bar shows MatchFixAgent tokens minus LaDiM tokens for one distinct source and evaluation input, sorted within each group. LaDiM and MatchFixAgent both accept 50/50 tasks; LaDiM uses 57.4\% fewer tokens. Positive values indicate lower LaDiM cost.}
 \label{fig:repair-comparison}
 \end{figure}
 
@@ -98,23 +98,30 @@ LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults
 \label{sec:ablations}
 
 \textbf{Training signals.}
-We compare cumulative feedback on 16 fixed candidates, with one execution, forward, gradient, and update fault in each CNN, image MLP, Transformer classifier, and small causal language model. Sources, candidates, tools, and budgets are fixed. Available feedback determines whether repair begins and stops. Table~\ref{tab:signal-ablation}a reports initially undetected faults and final acceptance under complete verification. Each added signal exposes another fault class, increasing acceptance from 4/16 to 16/16. Forward values reveal changed computations, gradients reveal differentiation faults, and updates reveal optimizer faults.
+We compare cumulative feedback on 16 fixed candidates, with one execution, forward, gradient, and update fault in each CNN, image MLP, Transformer classifier, and small causal language model. Sources, candidates, tools, and budgets are fixed. Available feedback determines whether repair begins and stops. Each added signal exposes another fault class, increasing final acceptance under complete verification from 4/16 to 16/16 (Table~\ref{tab:signal-ablation}a). Initially undetected faults decrease from 12 to 8 to 4 to 0 across the four settings. Forward values reveal changed computations, gradients reveal differentiation faults, and updates reveal optimizer faults.
 
 \begin{table}[!htb]
-\caption{Effects of training signals and repair components on acceptance and token use. (a) Cumulative signals on 16 faulty candidates; initially undetected faults trigger no repair, and final acceptance uses complete verification. (b) Program repair on ten saved initial translations. (c) Two separate paired comparisons on the time series repository.}
+\caption{Effects of training signals and repair components. (a) Cumulative signals on 16 faulty candidates; final acceptance uses complete verification. (b) Ten saved translations: parentheses count failed programs repaired, and all conditions retain 5/5 initially passing programs. (c) Independent pairs on time series; every condition passes 69/69 checks on three seeds.}
 \label{tab:signal-ablation}
 \label{tab:cumulative-components}
 \centering
 \small
-\setlength{\tabcolsep}{3pt}
-\input{figures/TABLE_training_signals.tex}
-\par\vspace{5pt}
-\input{figures/TABLE_program_components.tex}
-\par\vspace{5pt}
+\setlength{\tabcolsep}{2pt}
+\begin{minipage}[t]{0.485\linewidth}
+\vspace{0pt}
+\raggedright\textit{(a) Training signals}\par\smallskip
+\input{figures/TABLE_training_signals_compact.tex}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.485\linewidth}
+\vspace{0pt}
+\raggedright\textit{(b) Repair history and independent evidence handoff}\par\smallskip
+\input{figures/TABLE_program_components_compact.tex}
+\end{minipage}
+\par\medskip
 \input{figures/TABLE_repository_components.tex}
 \par\smallskip
 \begin{minipage}{\linewidth}
-\footnotesize Panels (a,b) report investigation and repair tokens. Panel (b) includes editing examples and format-correction feedback. Panel (c) reports investigation and repair calls and end-to-end tokens, including the shared initial translation. Each condition runs once; 69 checks cover one repository on three seeds. Each paired comparison retains its own complete reference.
+\footnotesize Panels (a,b) include investigation in repair tokens; (b) includes editing examples and format-correction feedback. In (c), calls cover investigation and repair, and tokens also include initial translation. Each condition runs once, with a separate complete reference for each pair.
 \end{minipage}
 \end{table}
 

@@ -242,7 +242,7 @@ JAX repair & Supplied faulty candidates & MLP and CNN & 6 \\
 \end{table}
 
 \textbf{Compared methods.}
-We compare LaDiM with SWE-agent and MatchFixAgent using a common DeepSeek backend and each baseline's native algorithms, prompts, tools, parsers, and retry policies. The main table also includes Direct LLM initial translation, CodeTransEngine's direct translation configuration, MSAdapter, InterTrans, and a repair loop that rewrites the complete candidate from test feedback. Direct repair in the analysis studies is a separate control that receives the saved candidate and uses LaDiM's inspection, testing, and editing tools with its existing repair procedure. Each table lists the methods evaluated in that study.
+We compare LaDiM with SWE-agent~\citep{yang2024sweagent} and MatchFixAgent~\citep{ibrahimzada2025matchfixagent} using a common DeepSeek backend and each baseline's native algorithms, prompts, tools, parsers, and retry policies. The main table also includes Direct LLM initial translation, CodeTransEngine's direct translation configuration~\citep{macedo2025codetransengine}, MSAdapter~\citep{openi2025msadapter}, InterTrans~\citep{macedo2024intertrans}, and a repair loop that rewrites the complete candidate from test feedback. Direct repair in the analysis studies is a separate control that receives the saved candidate and uses LaDiM's inspection, testing, and editing tools with its existing repair procedure. Each table lists the methods evaluated in that study.
 
 For JAX, Ivy converts code between frameworks through \texttt{ivy.transpile}~\citep{ivy2026transpiler}, while \texttt{torch2jax} maps PyTorch operations and tensors to JAX through \texttt{t2j}~\citep{torch2jax2026}. We apply each converter once to the supplied faulty candidates and measure whether the existing faults are removed, without LLM repair. TorchAX, a PyTorch frontend for JAX~\citep{google2025torchax}, is the execution backend for LaDiM and Direct repair, with JAX differentiation and Optax parameter updates.
 
@@ -259,56 +259,58 @@ Methods use common source programs, evaluation inputs, and corresponding initial
 \small
 \setlength{\tabcolsep}{3pt}
 
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}
+\begin{minipage}[t]{0.485\linewidth}
+\vspace{0pt}
+\raggedright\textit{(a) PyTorch to MindSpore}\par\smallskip
+\setlength{\tabcolsep}{2pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.3cm}rrr@{}}
 \toprule
-\textbf{Method} & \thead{LLM\\calls} & \thead{Input tokens\\(millions)} & \thead{Output tokens\\(millions)} & \thead{Total tokens\\(millions)} & \textbf{Accepted} \\
+\textbf{Method} & \thead{LLM\\calls} & \thead{Tokens\\(millions)} & \textbf{Accepted} \\
 \midrule
-\multicolumn{6}{l}{\textit{(a) PyTorch to MindSpore}} \\
-Direct LLM & 29 & 0.018 & 0.411 & 0.429 & 29/50 \\
-CodeTransEngine~\citep{macedo2025codetransengine} & 29 & 0.022 & 0.257 & 0.280 & 31/50 \\
-MSAdapter~\citep{openi2025msadapter} & -- & -- & -- & -- & 15/50 \\
-SWE-agent~\citep{yang2024sweagent} & 1,097 & 19.845 & 0.987 & 20.831 & 44/50 \\
-MatchFixAgent~\citep{ibrahimzada2025matchfixagent} & 619 & 10.750 & 1.347 & 12.097 & \textbf{50/50} \\
-\textbf{LaDiM (ours)} & 326 & 4.298 & 0.861 & 5.159 & \textbf{50/50} \\
-\midrule
-\multicolumn{6}{l}{\textit{(b) Java/DJL to Python/PyTorch}} \\
-Direct LLM & 18 & 0.142 & 0.552 & 0.694 & 1/18 \\
-InterTrans~\citep{macedo2024intertrans} & 89 & 0.680 & 1.606 & 2.286 & 1/18 \\
-Test-guided repair & 71 & 1.594 & 2.881 & 4.475 & 7/18 \\
-SWE-agent & 682 & 23.063 & 1.258 & 24.321 & 8/18 \\
-MatchFixAgent & 524 & 26.335 & 2.020 & 28.355 & 8/18 \\
-\textbf{LaDiM (ours)} & 345 & 19.470 & 2.009 & 21.479 & \textbf{9/18} \\
+Direct LLM & 29 & 0.429 & 29/50 \\
+CodeTransEngine & 29 & 0.280 & 31/50 \\
+MSAdapter & -- & -- & 15/50 \\
+SWE-agent & 1,097 & 20.831 & 44/50 \\
+MatchFixAgent & 619 & 12.097 & \textbf{50/50} \\
+\textbf{LaDiM (ours)} & 326 & 5.159 & \textbf{50/50} \\
 \bottomrule
 \end{tabular*}
-\par\vspace{5pt}
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrr@{}}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.485\linewidth}
+\vspace{0pt}
+\raggedright\textit{(b) Java/DJL to Python/PyTorch}\par\smallskip
+\setlength{\tabcolsep}{2pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.3cm}rrr@{}}
 \toprule
-\multicolumn{7}{l}{\textit{(c) Time series repository}} \\
+\textbf{Method} & \thead{LLM\\calls} & \thead{Tokens\\(millions)} & \textbf{Accepted} \\
 \midrule
-\textbf{Method} & \thead{Behavior checks\\passed} & \textbf{Gradients} & \thead{Parameter\\updates} & \thead{Entry\\points} & \thead{Repair\\calls} & \thead{Total tokens\\(millions)} \\
-\midrule
-SWE-agent & 69/69 & 9/9 & 9/9 & 3/3 & 80 & 8.200 \\
-MatchFixAgent & 69/69 & 9/9 & 9/9 & 3/3 & 69 & 13.598 \\
-\textbf{LaDiM (ours)} & 69/69 & 9/9 & 9/9 & 3/3 & \textbf{35} & 2.614 \\
+Direct LLM & 18 & 0.694 & 1/18 \\
+InterTrans & 89 & 2.286 & 1/18 \\
+Test-guided repair & 71 & 4.475 & 7/18 \\
+SWE-agent & 682 & 24.321 & 8/18 \\
+MatchFixAgent & 524 & 28.355 & 8/18 \\
+\textbf{LaDiM (ours)} & 345 & 21.479 & \textbf{9/18} \\
 \bottomrule
 \end{tabular*}
-\par\vspace{5pt}
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrr@{}}
+\end{minipage}
+\par\medskip
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrrrr@{}}
 \toprule
-\multicolumn{7}{l}{\textit{(d) Recommendation repository}} \\
+& \multicolumn{4}{c}{\textit{(c) Time series repository}} & \multicolumn{4}{c}{\textit{(d) Recommendation repository}} \\
+\cmidrule(lr){2-5}\cmidrule(l){6-9}
+\textbf{Method} & \thead{Checks\\passed} & \thead{Entry\\points} & \thead{Repair\\calls} & \thead{Tokens\\(millions)} & \thead{Checks\\passed} & \thead{Original\\tests} & \thead{Repair\\calls} & \thead{Tokens\\(millions)} \\
 \midrule
-\textbf{Method} & \thead{Behavior checks\\passed} & \textbf{Gradients} & \thead{Parameter\\updates} & \thead{Original\\tests} & \thead{Repair\\calls} & \thead{Total tokens\\(millions)} \\
-\midrule
-SWE-agent & 104/145 & 17/18 & 12/18 & 10/10 & 80 & 8.317 \\
-MatchFixAgent & 129/145 & 18/18 & 16/18 & 0/10 & 80 & 8.679 \\
-\textbf{LaDiM (ours)} & \textbf{130/145} & 18/18 & 15/18 & 10/10 & 80 & 8.811 \\
+SWE-agent & 69/69 & 3/3 & 80 & 8.200 & 104/145 & 10/10 & 80 & 8.317 \\
+MatchFixAgent & 69/69 & 3/3 & 69 & 13.598 & 129/145 & 0/10 & 80 & 8.679 \\
+\textbf{LaDiM (ours)} & 69/69 & 3/3 & 35 & 2.614 & \textbf{130/145} & 10/10 & 80 & 8.811 \\
 \bottomrule
 \end{tabular*}
 
 
 \par\smallskip
 \begin{minipage}{\linewidth}
-\footnotesize MatchFixAgent passes 0/10 original recommendation tests because an unmigrated PyTorch import prevents test collection.
+\footnotesize MatchFixAgent passes 0/10 original recommendation tests because an unmigrated PyTorch import prevents test collection. Complete token costs and repository gradient and parameter update checks appear in Tables~\ref{tab:program-costs} and~\ref{tab:repository-costs}.
 \end{minipage}
 \end{table}
 
@@ -318,7 +320,7 @@ LaDiM completes all 50 MindSpore migrations with 57.4\% fewer tokens than MatchF
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figures/repair_comparison.pdf}
-\caption{Token costs on MindSpore migration. (a) LaDiM, MatchFixAgent, and SWE-agent totals include initial translation and subsequent calls grouped by the initial checks. (b) Each bar shows MatchFixAgent tokens minus LaDiM tokens for one distinct source and evaluation input, sorted within each group. Both methods accept 50/50 tasks; LaDiM uses 57.4\% fewer tokens. Positive values indicate lower LaDiM cost.}
+\caption{Token costs on MindSpore migration. (a) LaDiM, MatchFixAgent, and SWE-agent totals include initial translation and subsequent calls grouped by the initial checks. (b) Each bar shows MatchFixAgent tokens minus LaDiM tokens for one distinct source and evaluation input, sorted within each group. LaDiM and MatchFixAgent both accept 50/50 tasks; LaDiM uses 57.4\% fewer tokens. Positive values indicate lower LaDiM cost.}
 \label{fig:repair-comparison}
 \end{figure}
 
@@ -377,17 +379,15 @@ LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults
 \centering
 \small
 
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}
 \toprule
-\textbf{Method} & \textbf{LLM calls} & \textbf{LLM tokens} & \textbf{Accepted} \\
+& \multicolumn{2}{c}{\textbf{LLM repair}} & \multicolumn{2}{c}{\textbf{Single native conversion}} \\
+\cmidrule(lr){2-3}\cmidrule(l){4-5}
+\textbf{Metric} & \textbf{LaDiM} & \textbf{Direct repair} & \textbf{Ivy} & \textbf{\texttt{torch2jax}} \\
 \midrule
-\multicolumn{4}{l}{\textit{LLM repair of supplied candidates}} \\
-LaDiM & 76 & 674,009 & 6/6 \\
-Direct repair & 57 & 353,311 & 6/6 \\
-\midrule
-\multicolumn{4}{l}{\textit{Single native conversion of supplied candidates}} \\
-Ivy & 0 & 0 & 0/6 \\
-\texttt{torch2jax} & 0 & 0 & 0/6 \\
+Accepted & 6/6 & 6/6 & 0/6 & 0/6 \\
+LLM calls & 76 & 57 & 0 & 0 \\
+LLM tokens & 674,009 & 353,311 & 0 & 0 \\
 \bottomrule
 \end{tabular*}
 
@@ -398,69 +398,70 @@ Ivy & 0 & 0 & 0/6 \\
 \label{sec:ablations}
 
 \textbf{Training signals.}
-We compare cumulative feedback on 16 fixed candidates, with one execution, forward, gradient, and update fault in each CNN, image MLP, Transformer classifier, and small causal language model. Sources, candidates, tools, and budgets are fixed. Available feedback determines whether repair begins and stops. Table~\ref{tab:signal-ablation}a reports initially undetected faults and final acceptance under complete verification. Each added signal exposes another fault class, increasing acceptance from 4/16 to 16/16. Forward values reveal changed computations, gradients reveal differentiation faults, and updates reveal optimizer faults.
+We compare cumulative feedback on 16 fixed candidates, with one execution, forward, gradient, and update fault in each CNN, image MLP, Transformer classifier, and small causal language model. Sources, candidates, tools, and budgets are fixed. Available feedback determines whether repair begins and stops. Each added signal exposes another fault class, increasing final acceptance under complete verification from 4/16 to 16/16 (Table~\ref{tab:signal-ablation}a). Initially undetected faults decrease from 12 to 8 to 4 to 0 across the four settings. Forward values reveal changed computations, gradients reveal differentiation faults, and updates reveal optimizer faults.
 
 \begin{table}[!htb]
-\caption{Effects of training signals and repair components on acceptance and token use. (a) Cumulative signals on 16 faulty candidates; initially undetected faults trigger no repair, and final acceptance uses complete verification. (b) Program repair on ten saved initial translations. (c) Two separate paired comparisons on the time series repository.}
+\caption{Effects of training signals and repair components. (a) Cumulative signals on 16 faulty candidates; final acceptance uses complete verification. (b) Ten saved translations: parentheses count failed programs repaired, and all conditions retain 5/5 initially passing programs. (c) Independent pairs on time series; every condition passes 69/69 checks on three seeds.}
 \label{tab:signal-ablation}
 \label{tab:cumulative-components}
 \centering
 \small
-\setlength{\tabcolsep}{3pt}
+\setlength{\tabcolsep}{2pt}
+\begin{minipage}[t]{0.485\linewidth}
+\vspace{0pt}
+\raggedright\textit{(a) Training signals}\par\smallskip
 
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.7cm}rr@{}}
 \toprule
-\multicolumn{4}{l}{\textit{(a) Training signals: 16 faulty candidates}} \\
+\textbf{Feedback} & \textbf{Accepted} & \thead{Repair\\tokens} \\
 \midrule
-\textbf{Available feedback} & \thead{Initially undetected\\faults} & \thead{Total tokens\\(millions)} & \thead{Final\\accepted} \\
-\midrule
-Execution and basic checks & 12 & 2.089 & 4/16 \\
-\quad + Forward values & 8 & 2.603 & 8/16 \\
-\quad + Gradients & 4 & 3.303 & 12/16 \\
-\quad + Parameter updates & \textbf{0} & 3.419 & \textbf{16/16} \\
+Execution and basic checks & 4/16 & 2,088,915 \\
+\quad + Forward values & 8/16 & 2,603,211 \\
+\quad + Gradients & 12/16 & 3,302,873 \\
+\quad + Parameter updates & 16/16 & 3,418,960 \\
 \bottomrule
 \end{tabular*}
 
 
-\par\vspace{5pt}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.485\linewidth}
+\vspace{0pt}
+\raggedright\textit{(b) Repair history and independent evidence handoff}\par\smallskip
 
-\textit{(b) Repair history and independent evidence handoff on saved initial translations}\par\smallskip
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{4.3cm}rrrr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.7cm}rr@{}}
 \toprule
-\textbf{Condition} & \thead{Failed programs\\repaired} & \thead{Passing programs\\preserved} & \thead{Final\\accepted} & \thead{Repair\\tokens} \\
+\textbf{Condition} & \thead{Accepted\\(repaired)} & \thead{Repair\\tokens} \\
 \midrule
-Independent evidence handoff & 4/5 & 5/5 & 9/10 & 15,547,813 \\
-Continuous conversation & 3/5 & 5/5 & 8/10 & 14,516,463 \\
-Without repair history & 0/5 & 5/5 & 5/10 & 10,851,537 \\
+Independent evidence handoff & 9/10 (4/5) & 15,547,813 \\
+Continuous conversation & 8/10 (3/5) & 14,516,463 \\
+Without repair history & 5/10 (0/5) & 10,851,537 \\
 \bottomrule
 \end{tabular*}
 
 
-\par\vspace{5pt}
+\end{minipage}
+\par\medskip
 
 
 
 
 
-\textit{(c) Repository context management and Repository Structural Analysis on the time series repository}\par\smallskip
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{6.8cm}rrr@{}}
+\raggedright\textit{(c) Repository components on time series}\par\smallskip
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{4.8cm}rrrrr@{}}
 \toprule
-\textbf{Condition} & \thead{Behavior\\checks passed} & \thead{Investigation\\and repair calls} & \thead{End-to-end\\tokens} \\
+& \multicolumn{2}{c}{\textbf{Without component}} & \multicolumn{2}{c}{\textbf{With component}} & \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+\textbf{Component} & \textbf{Calls} & \textbf{Tokens} & \textbf{Calls} & \textbf{Tokens} & \thead{Token\\reduction} \\
 \midrule
-\multicolumn{4}{l}{\textit{Repository context management}} \\
-Without repository context & 69/69 & 26 & 6,047,074 \\
-With repository context & 69/69 & 22 & 1,936,579 \\
-\midrule
-\multicolumn{4}{l}{\textit{Repository Structural Analysis}} \\
-Without Repository Structural Analysis & 69/69 & 42 & 2,651,248 \\
-With Repository Structural Analysis & 69/69 & 30 & 2,126,900 \\
+Repository context management & 26 & 6,047,074 & 22 & 1,936,579 & 68.0\% \\
+Repository Structural Analysis & 42 & 2,651,248 & 30 & 2,126,900 & 19.8\% \\
 \bottomrule
 \end{tabular*}
 
 
 \par\smallskip
 \begin{minipage}{\linewidth}
-\footnotesize Panels (a,b) report investigation and repair tokens. Panel (b) includes editing examples and format-correction feedback. Panel (c) reports investigation and repair calls and end-to-end tokens, including the shared initial translation. Each condition runs once; 69 checks cover one repository on three seeds. Each paired comparison retains its own complete reference.
+\footnotesize Panels (a,b) include investigation in repair tokens; (b) includes editing examples and format-correction feedback. In (c), calls cover investigation and repair, and tokens also include initial translation. Each condition runs once, with a separate complete reference for each pair.
 \end{minipage}
 \end{table}
 
@@ -824,6 +825,38 @@ All failed tasks remain in each study's declared denominator, and all failed cal
 
 Source lengths count nonblank physical lines, including comments. Program means count each distinct source once. The 50 MindSpore identifiers use 24 source files, the signal study uses four, and the JAX study uses two. Repository lengths include all source Python files and notebook code cells, including original tests and excluding the external evaluation harness.
 
+\begin{table}[!htb]
+\caption{Complete input and output token costs for individual migrations. Costs include initial translation and every subsequent call. Acceptance uses the declared task denominator for each collection.}
+\label{tab:program-costs}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}
+\toprule
+\textbf{Method} & \thead{LLM\\calls} & \thead{Input tokens\\(millions)} & \thead{Output tokens\\(millions)} & \thead{Total tokens\\(millions)} & \textbf{Accepted} \\
+\midrule
+\multicolumn{6}{l}{\textit{(a) PyTorch to MindSpore}} \\
+Direct LLM & 29 & 0.018 & 0.411 & 0.429 & 29/50 \\
+CodeTransEngine~\citep{macedo2025codetransengine} & 29 & 0.022 & 0.257 & 0.280 & 31/50 \\
+MSAdapter~\citep{openi2025msadapter} & -- & -- & -- & -- & 15/50 \\
+SWE-agent~\citep{yang2024sweagent} & 1,097 & 19.845 & 0.987 & 20.831 & 44/50 \\
+MatchFixAgent~\citep{ibrahimzada2025matchfixagent} & 619 & 10.750 & 1.347 & 12.097 & \textbf{50/50} \\
+\textbf{LaDiM (ours)} & 326 & 4.298 & 0.861 & 5.159 & \textbf{50/50} \\
+\midrule
+\multicolumn{6}{l}{\textit{(b) Java/DJL to Python/PyTorch}} \\
+Direct LLM & 18 & 0.142 & 0.552 & 0.694 & 1/18 \\
+InterTrans~\citep{macedo2024intertrans} & 89 & 0.680 & 1.606 & 2.286 & 1/18 \\
+Test-guided repair & 71 & 1.594 & 2.881 & 4.475 & 7/18 \\
+SWE-agent & 682 & 23.063 & 1.258 & 24.321 & 8/18 \\
+MatchFixAgent & 524 & 26.335 & 2.020 & 28.355 & 8/18 \\
+\textbf{LaDiM (ours)} & 345 & 19.470 & 2.009 & 21.479 & \textbf{9/18} \\
+\bottomrule
+\end{tabular*}
+
+
+\end{table}
+
 \subsection{Numerical Comparisons and Migration Settings}
 \label{sec:migration-settings}
 
@@ -961,25 +994,25 @@ The LSTM repair in Section~\ref{sec:fault-characterization} follows two errors t
 All methods receive byte-identical source repositories, common initial translations, task requirements, and acceptance procedures. The time series translation has three generation calls totaling 163,661 tokens. The recommendation translation uses 20 calls totaling 368,368 tokens. Generation proceeds from the public import structure and includes failed or truncated attempts. Each method's reported total contains one complete copy of this generation cost together with every repair call. Table~\ref{tab:repository-costs} separates input and output usage in repair.
 
 \begin{table}[!htb]
-\caption{Complete costs for the repository comparison. Total tokens include repair input and output plus common initial translation.}
+\caption{Training checks and complete costs for repository migration. Gradient and parameter update checks cover three training steps on all evaluated seeds. Total tokens include repair input and output plus common initial translation.}
 \label{tab:repository-costs}
 \centering
 \small
-\setlength{\tabcolsep}{3pt}
+\setlength{\tabcolsep}{2pt}
 
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrrr@{}}
 \toprule
-\textbf{Method} & \thead{Repair\\calls} & \textbf{Submissions} & \thead{Repair input\\tokens} & \thead{Repair output\\tokens} & \thead{Total\\tokens} \\
+\textbf{Method} & \textbf{Gradients} & \thead{Parameter\\updates} & \thead{Repair\\calls} & \textbf{Submissions} & \thead{Repair input\\tokens} & \thead{Repair output\\tokens} & \thead{Total\\tokens} \\
 \midrule
-\multicolumn{6}{l}{\textit{Time series}} \\
-LaDiM & 35 & 2 & 2,345,473 & 105,096 & 2,614,230 \\
-SWE-agent & 80 & 1 & 7,984,797 & 51,367 & 8,199,825 \\
-MatchFixAgent & 69 & 2 & 13,306,003 & 128,114 & 13,597,778 \\
+\multicolumn{8}{l}{\textit{Time series}} \\
+LaDiM & 9/9 & 9/9 & 35 & 2 & 2,345,473 & 105,096 & 2,614,230 \\
+SWE-agent & 9/9 & 9/9 & 80 & 1 & 7,984,797 & 51,367 & 8,199,825 \\
+MatchFixAgent & 9/9 & 9/9 & 69 & 2 & 13,306,003 & 128,114 & 13,597,778 \\
 \midrule
-\multicolumn{6}{l}{\textit{Recommendation}} \\
-LaDiM & 80 & 4 & 8,147,846 & 295,032 & 8,811,246 \\
-SWE-agent & 80 & 1 & 7,889,936 & 58,248 & 8,316,552 \\
-MatchFixAgent & 80 & 1 & 8,215,327 & 95,385 & 8,679,080 \\
+\multicolumn{8}{l}{\textit{Recommendation}} \\
+LaDiM & 18/18 & 15/18 & 80 & 4 & 8,147,846 & 295,032 & 8,811,246 \\
+SWE-agent & 17/18 & 12/18 & 80 & 1 & 7,889,936 & 58,248 & 8,316,552 \\
+MatchFixAgent & 18/18 & 16/18 & 80 & 1 & 8,215,327 & 95,385 & 8,679,080 \\
 \bottomrule
 \end{tabular*}
 
@@ -1052,21 +1085,16 @@ We add Verifier investigation, independent evidence handoff, and repository cont
 
 
 
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{6.8cm}rrr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{5.4cm}rrrrrr@{}}
 \toprule
-\textbf{Condition} & \thead{Behavior\\checks passed} & \thead{Investigation\\and repair calls} & \thead{End-to-end\\tokens} \\
+& \multicolumn{3}{c}{\textbf{Time series}} & \multicolumn{3}{c}{\textbf{Recommendation}} \\
+\cmidrule(lr){2-4}\cmidrule(l){5-7}
+\textbf{Condition} & \thead{Checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} & \thead{Checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} \\
 \midrule
-\multicolumn{4}{l}{\textit{Time series repository}} \\
-Repair Agent & 69/69 & 26 & 6,128,331 \\
-\quad + Verifier investigation & 69/69 & 18 & 3,896,158 \\
-\quad + Independent evidence handoff & 69/69 & 26 & 6,047,074 \\
-\quad + Repository context management & 69/69 & 22 & 1,936,579 \\
-\midrule
-\multicolumn{4}{l}{\textit{Recommendation repository}} \\
-Repair Agent & 131/145 & 62 & 8,335,687 \\
-\quad + Verifier investigation & 131/145 & 59 & 8,912,546 \\
-\quad + Independent evidence handoff & 131/145 & 68 & 9,556,058 \\
-\quad + Repository context management & 131/145 & 80 & 10,191,440 \\
+Repair Agent & 69/69 & 26 & 6,128,331 & 131/145 & 62 & 8,335,687 \\
+\quad + Verifier investigation & 69/69 & 18 & 3,896,158 & 131/145 & 59 & 8,912,546 \\
+\quad + Independent evidence handoff & 69/69 & 26 & 6,047,074 & 131/145 & 68 & 9,556,058 \\
+\quad + Repository context management & 69/69 & 22 & 1,936,579 & 131/145 & 80 & 10,191,440 \\
 \bottomrule
 \end{tabular*}
 
@@ -1092,19 +1120,15 @@ The independent structural analysis comparison retains Repair Dependency Graph P
 
 
 
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{6.8cm}rrr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{5.4cm}rrrrrr@{}}
 \toprule
-\textbf{Condition} & \thead{Behavior\\checks passed} & \thead{Investigation\\and repair calls} & \thead{End-to-end\\tokens} \\
+& \multicolumn{3}{c}{\textbf{Time series}} & \multicolumn{3}{c}{\textbf{Recommendation}} \\
+\cmidrule(lr){2-4}\cmidrule(l){5-7}
+\textbf{Condition} & \thead{Checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} & \thead{Checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} \\
 \midrule
-\multicolumn{4}{l}{\textit{Time series repository}} \\
-Complete method & 69/69 & 30 & 2,126,900 \\
-Without Repository Structural Analysis & 69/69 & 42 & 2,651,248 \\
-Without Repair Dependency Graph Planning & 69/69 & 21 & 1,803,551 \\
-\midrule
-\multicolumn{4}{l}{\textit{Recommendation repository}} \\
-Complete method & 131/145 & 80 & 9,961,503 \\
-Without Repository Structural Analysis & 131/145 & 80 & 7,172,218 \\
-Without Repair Dependency Graph Planning & 130/145 & 69 & 9,213,723 \\
+Complete method & 69/69 & 30 & 2,126,900 & 131/145 & 80 & 9,961,503 \\
+Without Repository Structural Analysis & 69/69 & 42 & 2,651,248 & 131/145 & 80 & 7,172,218 \\
+Without Repair Dependency Graph Planning & 69/69 & 21 & 1,803,551 & 130/145 & 69 & 9,213,723 \\
 \bottomrule
 \end{tabular*}
 

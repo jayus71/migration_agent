@@ -218,6 +218,7 @@ def export_tables(data):
                      f"{row['calls']:,} & {row['input_tokens']/1e6:.3f} & {row['output_tokens']/1e6:.3f} & {row['tokens']/1e6:.3f}")
             comparison.append(f"{label} & {usage} & {accepted}" + r' \\')
     comparison += [r'\bottomrule', r'\end{tabular*}']
+    (ROOT / 'figures/TABLE_program_costs.tex').write_text('\n'.join(comparison) + '\n')
     for repository_name, panel in [('timeseries', '(c) Time series repository'),
                                     ('twotower', '(d) Recommendation repository')]:
         entry_label = r'\thead{Entry\\points}' if repository_name == 'timeseries' else r'\thead{Original\\tests}'
@@ -280,17 +281,18 @@ def export_tables(data):
     natural += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_natural_repairs.tex').write_text('\n'.join(natural) + '\n')
     jax_data = json.loads(JAX_SUMMARY.read_text())['summaries']
-    jax = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}', r'\toprule',
-           r'\textbf{Method} & \textbf{LLM calls} & \textbf{LLM tokens} & \textbf{Accepted} \\']
-    for group, methods in [
-            ('LLM repair of supplied candidates', [('autonomous_layered', 'LaDiM'), ('direct_shared_tools', 'Direct repair')]),
-            ('Single native conversion of supplied candidates', [('ivy', 'Ivy'), ('torch2jax', r'\texttt{torch2jax}')])]:
-        jax += [r'\midrule', r'\multicolumn{4}{l}{\textit{' + group + r'}} \\']
-        for key, label in methods:
-            row = next(r for r in jax_data if r['method'] == key)
-            assert row['completed'] == row['recorded'] == row['planned'] == 6
-            assert row.get('unknown_usage_calls', 0) == 0
-            jax.append(f"{label} & {row['calls']} & {row['known_total_tokens']:,} & {row['accepted']}/{row['planned']}" + r' \\')
+    jax_rows = [next(r for r in jax_data if r['method'] == key)
+                for key in ('autonomous_layered', 'direct_shared_tools', 'ivy', 'torch2jax')]
+    for row in jax_rows:
+        assert row['completed'] == row['recorded'] == row['planned'] == 6
+        assert row.get('unknown_usage_calls', 0) == 0
+    jax = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}', r'\toprule',
+           r'& \multicolumn{2}{c}{\textbf{LLM repair}} & \multicolumn{2}{c}{\textbf{Single native conversion}} \\',
+           r'\cmidrule(lr){2-3}\cmidrule(l){4-5}',
+           r'\textbf{Metric} & \textbf{LaDiM} & \textbf{Direct repair} & \textbf{Ivy} & \textbf{\texttt{torch2jax}} \\', r'\midrule']
+    jax.append('Accepted & ' + ' & '.join(f"{r['accepted']}/{r['planned']}" for r in jax_rows) + r' \\')
+    jax.append('LLM calls & ' + ' & '.join(str(r['calls']) for r in jax_rows) + r' \\')
+    jax.append('LLM tokens & ' + ' & '.join(f"{r['known_total_tokens']:,}" for r in jax_rows) + r' \\')
     jax += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_jax_repairs.tex').write_text('\n'.join(jax) + '\n')
     components = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{4.6cm}rrrr@{}}', r'\toprule',
@@ -306,12 +308,15 @@ def export_tables(data):
         program.append(f"{row['label']} & {row['repaired']}/5 & {row['retained']}/5 & {row['accepted']}/10 & {row['tokens']:,}" + r' \\')
     program += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_program_components.tex').write_text('\n'.join(program) + '\n')
-    costs = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}', r'\toprule',
-        r'\textbf{Method} & \thead{Repair\\calls} & \textbf{Submissions} & \thead{Repair input\\tokens} & \thead{Repair output\\tokens} & \thead{Total\\tokens} \\']
+    costs = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrrr@{}}', r'\toprule',
+        r'\textbf{Method} & \textbf{Gradients} & \thead{Parameter\\updates} & \thead{Repair\\calls} & \textbf{Submissions} & \thead{Repair input\\tokens} & \thead{Repair output\\tokens} & \thead{Total\\tokens} \\']
     for repo, label in [('timeseries', 'Time series'), ('twotower', 'Recommendation')]:
-        costs += [r'\midrule', r'\multicolumn{6}{l}{\textit{' + label + r'}} \\']
+        costs += [r'\midrule', r'\multicolumn{8}{l}{\textit{' + label + r'}} \\']
         for row in (r for r in data['repository'] if r['repository'] == repo):
-            costs.append(f"{LABELS[row['method']]} & {row['repair_calls']} & {row['submissions']} & {row['repair_prompt_tokens']:,} & {row['repair_completion_tokens']:,} & {row['tokens']:,}" + r' \\')
+            signals = row['main_table_signals']
+            ratios = [f"{signals[k]['passed']}/{signals[k]['expected']}" for k in ('gradient', 'update')]
+            costs.append(f"{LABELS[row['method']]} & " + ' & '.join(ratios) +
+                         f" & {row['repair_calls']} & {row['submissions']} & {row['repair_prompt_tokens']:,} & {row['repair_completion_tokens']:,} & {row['tokens']:,}" + r' \\')
     costs += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_repository_costs.tex').write_text('\n'.join(costs) + '\n')
     details = {r['method']: r['details'] for r in data['repository'] if r['repository'] == 'twotower'}
@@ -340,6 +345,62 @@ def export_tables(data):
     (ROOT / 'figures/TABLE_repository_checks.tex').write_text('\n'.join(check_table) + '\n')
     target = ROOT / 'data/paper_figures/unified_results.json'
     target.write_text(json.dumps(data, indent=2) + '\n')
+
+
+def export_compact_tables(data):
+    """Use task columns and adjacent panels while retaining the full cost tables."""
+    compact = []
+    for index, (source, order, denominator, title) in enumerate([
+            ('main', ORDER, 50, '(a) PyTorch to MindSpore'),
+            ('cross_language', ['direct', 'intertrans', 'test_repair', 'swe', 'matchfix', 'ladim'], 18,
+             '(b) Java/DJL to Python/PyTorch')]):
+        if index:
+            compact.append(r'\hfill')
+        compact += [r'\begin{minipage}[t]{0.485\linewidth}', r'\vspace{0pt}',
+                    r'\raggedright\textit{' + title + r'}\par\smallskip',
+                    r'\setlength{\tabcolsep}{2pt}',
+                    r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.3cm}rrr@{}}',
+                    r'\toprule', r'\textbf{Method} & \thead{LLM\\calls} & \thead{Tokens\\(millions)} & \textbf{Accepted} \\', r'\midrule']
+        for method in order:
+            row = data['main'][method] if source == 'main' else next(r for r in data[source] if r['key'] == method)
+            accepted = f"{row['accepted']}/{denominator}"
+            if row['accepted'] == (50 if source == 'main' else 9):
+                accepted = r'\textbf{' + accepted + '}'
+            usage = '-- & --' if method == 'msadapter' else f"{row['calls']:,} & {row['tokens']/1e6:.3f}"
+            compact.append(f"{TABLE_LABELS[method]} & {usage} & {accepted}" + r' \\')
+        compact += [r'\bottomrule', r'\end{tabular*}', r'\end{minipage}']
+    compact += [r'\par\medskip', r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrrrr@{}}', r'\toprule',
+                r'& \multicolumn{4}{c}{\textit{(c) Time series repository}} & \multicolumn{4}{c}{\textit{(d) Recommendation repository}} \\',
+                r'\cmidrule(lr){2-5}\cmidrule(l){6-9}',
+                r'\textbf{Method} & \thead{Checks\\passed} & \thead{Entry\\points} & \thead{Repair\\calls} & \thead{Tokens\\(millions)} & \thead{Checks\\passed} & \thead{Original\\tests} & \thead{Repair\\calls} & \thead{Tokens\\(millions)} \\', r'\midrule']
+    for method in ('swe', 'matchfix', 'ladim'):
+        cells = [TABLE_LABELS[method]]
+        for repository in ('timeseries', 'twotower'):
+            row = next(r for r in data['repository'] if r['repository'] == repository and r['method'] == method)
+            checked = row['paired_checks']
+            entry = row['main_table_signals']['entry_points']
+            count = f"{checked['passed']}/{checked['expected']}"
+            if method == 'ladim' and repository == 'twotower':
+                count = r'\textbf{' + count + '}'
+            cells += [count, f"{entry['passed']}/{entry['expected']}", str(row['repair_calls']), f"{row['tokens']/1e6:.3f}"]
+        compact.append(' & '.join(cells) + r' \\')
+    compact += [r'\bottomrule', r'\end{tabular*}']
+    (ROOT / 'figures/TABLE_main_comparison.tex').write_text('\n'.join(compact) + '\n')
+
+    signal_labels = ['Execution and basic checks', r'\quad + Forward values', r'\quad + Gradients', r'\quad + Parameter updates']
+    signals = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.7cm}rr@{}}',
+               r'\toprule', r'\textbf{Feedback} & \textbf{Accepted} & \thead{Repair\\tokens} \\', r'\midrule']
+    for label, row in zip(signal_labels, data['training_signals']):
+        signals.append(f"{label} & {row['accepted']}/{row['planned']} & {row['tokens']:,}" + r' \\')
+    signals += [r'\bottomrule', r'\end{tabular*}']
+    (ROOT / 'figures/TABLE_training_signals_compact.tex').write_text('\n'.join(signals) + '\n')
+
+    program = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.7cm}rr@{}}',
+               r'\toprule', r'\textbf{Condition} & \thead{Accepted\\(repaired)} & \thead{Repair\\tokens} \\', r'\midrule']
+    for row in data['natural_components'][:3]:
+        program.append(f"{row['label']} & {row['accepted']}/10 ({row['repaired']}/5) & {row['tokens']:,}" + r' \\')
+    program += [r'\bottomrule', r'\end{tabular*}']
+    (ROOT / 'figures/TABLE_program_components_compact.tex').write_text('\n'.join(program) + '\n')
 
 
 def build_figure():
@@ -410,6 +471,7 @@ def export_figure():
 def main():
     data = load_data()
     export_tables(data)
+    export_compact_tables(data)
     export_figure()
     print(json.dumps({'main': data['main'], 'variants': data['variants']}, indent=2))
 

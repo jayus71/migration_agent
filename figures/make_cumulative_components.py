@@ -36,16 +36,21 @@ def write_table(name, lines, sources):
     (ROOT / "figures" / name).write_text("\n".join(provenance + lines) + "\n")
 
 
-def table_start(width="6.8cm"):
-    return [r"\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{" + width + r"}rrr@{}}",
+def table_start():
+    return [r"\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{5.4cm}rrrrrr@{}}",
             r"\toprule",
-            r"\textbf{Condition} & \thead{Behavior\\checks passed} & \thead{Investigation\\and repair calls} & \thead{End-to-end\\tokens} \\"]
+            r"& \multicolumn{3}{c}{\textbf{Time series}} & \multicolumn{3}{c}{\textbf{Recommendation}} \\",
+            r"\cmidrule(lr){2-4}\cmidrule(l){5-7}",
+            r"\textbf{Condition} & \thead{Checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} & \thead{Checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} \\",
+            r"\midrule"]
 
 
-def row_text(label, row):
-    checks = row["protocol_checks"]
-    return (f"{label} & {checks['passed']}/{checks['expected']} & {row['calls']} & "
-            f"{row['end_to_end_tokens']:,}" + r" \\")
+def row_text(label, rows):
+    cells = [label]
+    for row in rows:
+        checks = row["protocol_checks"]
+        cells += [f"{checks['passed']}/{checks['expected']}", str(row["calls"]), f"{row['end_to_end_tokens']:,}"]
+    return " & ".join(cells) + r" \\"
 
 
 def main():
@@ -58,33 +63,31 @@ def main():
             assert structure[repository, "full"][field] == planning[repository, "full"][field]
 
     lines = table_start()
-    for repository, title in (("timeseries", "Time series repository"), ("twotower", "Recommendation repository")):
-        lines += [r"\midrule", r"\multicolumn{4}{l}{\textit{" + title + r"}} \\"]
-        lines += [row_text(label, cumulative[repository, condition]) for condition, label in CONDITIONS]
+    for condition, label in CONDITIONS:
+        lines.append(row_text(label, [cumulative[repository, condition] for repository in ("timeseries", "twotower")]))
     lines += [r"\bottomrule", r"\end{tabular*}"]
     write_table("TABLE_cumulative_components.tex", lines, [SOURCE])
 
-    lines = [r"\textit{(c) Repository context management and Repository Structural Analysis on the time series repository}\par\smallskip"] + table_start()
-    for title, pairs in [
-            ("Repository context management", [
-                ("Without repository context", cumulative["timeseries", "handoff"]),
-                ("With repository context", cumulative["timeseries", "repository_context"])]),
-            ("Repository Structural Analysis", [
-                ("Without Repository Structural Analysis", structure["timeseries", "no_automatic_map"]),
-                ("With Repository Structural Analysis", structure["timeseries", "full"])])]:
-        lines += [r"\midrule", r"\multicolumn{4}{l}{\textit{" + title + r"}} \\"]
-        lines += [row_text(label, row) for label, row in pairs]
+    lines = [r"\raggedright\textit{(c) Repository components on time series}\par\smallskip",
+             r"\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{4.8cm}rrrrr@{}}", r"\toprule",
+             r"& \multicolumn{2}{c}{\textbf{Without component}} & \multicolumn{2}{c}{\textbf{With component}} & \\",
+             r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}",
+             r"\textbf{Component} & \textbf{Calls} & \textbf{Tokens} & \textbf{Calls} & \textbf{Tokens} & \thead{Token\\reduction} \\", r"\midrule"]
+    for label, without, with_component in [
+            ("Repository context management", cumulative["timeseries", "handoff"], cumulative["timeseries", "repository_context"]),
+            ("Repository Structural Analysis", structure["timeseries", "no_automatic_map"], structure["timeseries", "full"])]:
+        reduction = 100 * (1 - with_component["end_to_end_tokens"] / without["end_to_end_tokens"])
+        lines.append(f"{label} & {without['calls']} & {without['end_to_end_tokens']:,} & "
+                     f"{with_component['calls']} & {with_component['end_to_end_tokens']:,} & {reduction:.1f}\\%" + r" \\")
     lines += [r"\bottomrule", r"\end{tabular*}"]
     write_table("TABLE_repository_components.tex", lines, [SOURCE, STRUCTURE])
 
     lines = table_start()
-    for repository, title in (("timeseries", "Time series repository"), ("twotower", "Recommendation repository")):
-        lines += [r"\midrule", r"\multicolumn{4}{l}{\textit{" + title + r"}} \\"]
-        for label, row in [
-                ("Complete method", structure[repository, "full"]),
-                ("Without Repository Structural Analysis", structure[repository, "no_automatic_map"]),
-                ("Without Repair Dependency Graph Planning", planning[repository, "no_work_unit_planning"])]:
-            lines.append(row_text(label, row))
+    for label, data, condition in [
+            ("Complete method", structure, "full"),
+            ("Without Repository Structural Analysis", structure, "no_automatic_map"),
+            ("Without Repair Dependency Graph Planning", planning, "no_work_unit_planning")]:
+        lines.append(row_text(label, [data[repository, condition] for repository in ("timeseries", "twotower")]))
     lines += [r"\bottomrule", r"\end{tabular*}"]
     write_table("TABLE_repository_independent.tex", lines, [STRUCTURE, PLANNING])
 
