@@ -1,0 +1,116 @@
+{
+  "status": "source pool frozen; runnable contracts pending",
+  "repository": "https://github.com/pytorch/examples",
+  "revision": "acc295dc7b90714f1bf47f06004fc19a7fe235c4",
+  "selection": "Eight public source files, nine named program tasks in four families, selected before development API results. No outcome filtering.",
+  "target": "Native JAX/Optax candidates must be generated from these sources and the public contract; no injected faults or hidden healthy target.",
+  "sources": [
+    {
+      "path": "mnist/main.py",
+      "url": "https://raw.githubusercontent.com/pytorch/examples/acc295dc7b90714f1bf47f06004fc19a7fe235c4/mnist/main.py",
+      "sha256": "30a3359d1911d2d859dd090ce20be7ed132a33f508dc389f40366010b3e9ecc8",
+      "tasks": [
+        [
+          "cnn_classifier",
+          "Net",
+          "convolutional"
+        ]
+      ]
+    },
+    {
+      "path": "super_resolution/model.py",
+      "url": "https://raw.githubusercontent.com/pytorch/examples/acc295dc7b90714f1bf47f06004fc19a7fe235c4/super_resolution/model.py",
+      "sha256": "02edbd87555c4a99136572cc03e27a3b73ecef09127fb00c8ac2e3ac1f6c289c",
+      "tasks": [
+        [
+          "super_resolution",
+          "Net",
+          "convolutional"
+        ]
+      ]
+    },
+    {
+      "path": "vae/main.py",
+      "url": "https://raw.githubusercontent.com/pytorch/examples/acc295dc7b90714f1bf47f06004fc19a7fe235c4/vae/main.py",
+      "sha256": "366116e8252ac68ef1f180cce0b3c017f5a957595d863c8d4904210a80cdab6d",
+      "tasks": [
+        [
+          "variational_autoencoder",
+          "VAE",
+          "generative"
+        ]
+      ]
+    },
+    {
+      "path": "dcgan/main.py",
+      "url": "https://raw.githubusercontent.com/pytorch/examples/acc295dc7b90714f1bf47f06004fc19a7fe235c4/dcgan/main.py",
+      "sha256": "4f6aef3527822a32bcca366e336e941a67d04081f66f568cc24a0a642b5f9555",
+      "tasks": [
+        [
+          "gan_generator",
+          "Generator",
+          "generative"
+        ]
+      ]
+    },
+    {
+      "path": "word_language_model/model.py",
+      "url": "https://raw.githubusercontent.com/pytorch/examples/acc295dc7b90714f1bf47f06004fc19a7fe235c4/word_language_model/model.py",
+      "sha256": "e4451a33e9b16953004bc639d736d14f42a2b21f2939ccabe4cff10d3c40b74c",
+      "tasks": [
+        [
+          "recurrent_language_model",
+          "RNNModel",
+          "sequence"
+        ],
+        [
+          "transformer_language_model",
+          "TransformerModel",
+          "sequence"
+        ]
+      ]
+    },
+    {
+      "path": "time_sequence_prediction/train.py",
+      "url": "https://raw.githubusercontent.com/pytorch/examples/acc295dc7b90714f1bf47f06004fc19a7fe235c4/time_sequence_prediction/train.py",
+      "sha256": "3a5d6603cecf7bbf76f96a515dc6c9377849adeefe783edaf6f661bd02e80330",
+      "tasks": [
+        [
+          "time_sequence",
+          "Sequence",
+          "sequence"
+        ]
+      ]
+    },
+    {
+      "path": "reinforcement_learning/actor_critic.py",
+      "url": "https://raw.githubusercontent.com/pytorch/examples/acc295dc7b90714f1bf47f06004fc19a7fe235c4/reinforcement_learning/actor_critic.py",
+      "sha256": "8575b51aec93f5d069be84cf6017f470851dbcb630409f0e29a7981f38014863",
+      "tasks": [
+        [
+          "actor_critic",
+          "Policy",
+          "policy"
+        ]
+      ]
+    },
+    {
+      "path": "reinforcement_learning/reinforce.py",
+      "url": "https://raw.githubusercontent.com/pytorch/examples/acc295dc7b90714f1bf47f06004fc19a7fe235c4/reinforcement_learning/reinforce.py",
+      "sha256": "41db0a9af332bfb6018b9223c39cf7827f93a7c93aa92bfa0848b82442ca3e31",
+      "tasks": [
+        [
+          "reinforce",
+          "Policy",
+          "policy"
+        ]
+      ]
+    },
+    {
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/pytorch/examples/acc295dc7b90714f1bf47f06004fc19a7fe235c4/LICENSE",
+      "sha256": "7e5dc9b5cf276166c4a0678d33e53b14e3d7ef47eee9356ab786c4ba45414efd",
+      "tasks": []
+    }
+  ]
+}
