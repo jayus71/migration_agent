@@ -1,148 +1,159 @@
-# 论文清晰度与仓库模块消融修改方案
+# 论文内容与行文修改方案
 
-本轮以 `10e3710` 为检查点。先验证自动结构映射模块，并给出可审阅的修改方案；本文件尚未应用到论文正文、图表或方法图。
+本轮交付修改方案，论文正文尚未应用。方法图由用户负责，篇幅压缩暂不处理。实验子代理独立负责新增比较及证据整理；本方案说明这些证据在论文中回答什么问题、如何组织。
 
-方案初稿已保存为 `37220f1`。本轮只更新方案与独立实验文件，论文正文继续保留在原版本。
+## 1. 全文的论证顺序
 
-当前主要问题是：实验设置承载了过多评估器细节，结果段夹杂修复日志，部分分组出现时没有定义，仓库组件的独立作用也没有被现有累计消融区分。下一版围绕“迁移是否成功、成功需要多少成本、哪些设计带来改进”组织实验论证。
+论文的核心问题是：迁移后的程序即使能够运行，训练行为也可能改变。方法章围绕训练计算之间的依赖解释如何诊断和修复；实验章先展示迁移成功与成本，再解释新增成功来自哪里、哪些观测和组件发挥了作用。
 
-## 1. 优先验证自动结构映射
+| 部分 | 读者应得到的结论 | 本轮改法 |
+|---|---|---|
+| 方法概述 | 谁调查、谁修复、谁调度和验证 | 恢复 Orchestrator 的调度职责，以实际动作串起流程 |
+| 3.1 | 后文使用哪些 discrepancy | 保留执行、前向值、梯度、参数更新的定义，移出编辑计数和运行细节 |
+| 3.2、3.3 | 训练差异怎样缩小调查范围，证据怎样帮助修复 | 用依赖关系解释判断，保留 LLM 与工具调用的伪代码，删除逐行复述算法的正文 |
+| 3.4 | 多个文件如何组织，修改共享代码后如何继续检查 | 分清自动映射、智能体规划和依赖检查，说明上下文如何保存相关证据 |
+| 4.1 | 比较哪些任务、方法，以及什么算成功 | 先定义任务和初始状态分组，简述协议，复现细节集中到附录 |
+| 4.2 | LaDiM 在迁移接受、成本或功能覆盖上有什么优势 | 每段围绕一个比较结论，用少量数字和具体行为支撑 |
+| 4.3 | 新增成功和更早检测分别来自什么能力，能否迁移到 JAX | 分别讨论真实翻译错误、训练信号及新的 JAX 比较 |
+| 消融 | 哪项设计改变了接受结果或修复成本 | 区分组件的独立作用与组合效果，补充每次提交的修复进展 |
 
-现有累计消融最后一级同时加入结构映射、依赖规划、检查点、notebook 单元编辑、证据检索和上下文重建。时间序列上的成本改善属于这一整组组件，尚不能归因给结构映射。
+沿用已确认的摘要结构、跨框架结论和 Generalization Across Frameworks 标题。摘要本轮只统一 Orchestrator 的职责表述；新的 JAX 数字在完整结果返回后更新。
 
-子代理负责独立实验目录 `experiments/repository_map_ablation_20260922/`，使用原远端的冻结运行时。首轮固定比较完整 LaDiM 与移除自动结构映射的 LaDiM，在时间序列和推荐两个现有仓库各新运行一对，共四次运行。
+## 2. 方法章怎样改
 
-| 项目 | 固定设计 |
-|---|---|
-| 唯一移除项 | 工具自动提供的文件、导入、函数/类、notebook 单元结构，以及自动未分配文件清单 |
-| 保留能力 | 普通列目录、搜索、读取，智能体自行规划工作单元，依赖约束，局部检查，notebook 编辑，证据保存与上下文重建 |
-| 共同条件 | 同一源仓库、初始翻译、任务要求、LLM、输入、初始参数、评价种子、阈值和完整验收 |
-| 每次预算 | 80 次模型调用、480,000 输出 token、3,600 秒、最多四次提交 |
-| 主要结果 | 完整仓库是否通过、各类功能和训练检查的覆盖、总 token 与调用次数 |
-| 机制证据 | 映射是否被实际读取，规划了哪些关联文件，每次提交的通过情况及累计成本，依赖修改后的复查情况 |
+### 调度与反馈
 
-需同时核对初始提示、工具输出和上下文重建，确保移除的信息没有从其他入口自动返回。普通工具仍能读取相同源代码，因此两组比较的是结构整理的作用。
-
-首轮用于取得完整配对证据。建议随后预先固定追加两轮，在两个仓库都完成相同重复，报告三轮的配对结果及波动。重复 LLM 运行与评价程序使用的随机种子是两件事，不能用三个评价种子代替三次独立运行。追加重复和更大的组件矩阵列为后续实验方案，当前先执行上述四次运行。
-
-首轮四次运行已完成，129 项最终审计通过。时间序列两条件都通过完整验收，均在第二次外部提交后接受：完整方法使用 30 次调用和 2,126,900 总 token；移除自动映射后使用 42 次调用和 2,651,248 总 token，完整方法节省 19.8%。推荐两条件均用完 80 次调用，最终均为 131/145、未完整接受；完整方法使用 9,961,503 总 token，移除映射后为 7,172,218，前者多 38.9%。完整方法在推荐的第三次提交达到 131，移除映射后在第四次达到。费用核查、轨迹与小型可提交证据见 `docs/repository-map-ablation-20260922.md` 和 `data/audits/repository-map-ablation-20260922/`。
-
-当前结果适合将自动映射呈现为仓库调查与规划的辅助机制，并分别解释时间序列的成本改善及推荐的修复进展；它尚未提高两个仓库的最终接受结果，成本效应也随仓库不同。映射与依赖规划的组合价值需要另设“保留映射、关闭依赖规划”的对照来区分。现阶段保留仓库协调方法的位置，单独验证规划后再确定该模块在贡献和方法图中的权重。
-
-## 2. 方法章恢复职责与因果关系
-
-Orchestrator 的主句采用：
+摘要、方法概述及相关文字采用同一个职责定义：
 
 > The Orchestrator schedules their work and returns verification results after each submission to guide further repair.
 
-对应正文、摘要和图注统一“调度、验证、反馈”的职责。方法章先说明训练差异如何引导调查，再说明调查证据如何帮助修复，最后说明多个文件之间如何协调。
+方法概述按“初始翻译 → Verifier 调查差异 → Repair Agent 接收证据并修改 → Orchestrator 验证并反馈”展开。每个角色的动作在首次出现时讲清楚，后文直接使用角色名。
 
-仓库映射部分用具体动作解释：程序分析汇总文件、导入、函数和类、notebook 单元；智能体据此把相关文件组织成工作单元并记录依赖；共享实现被修改后，相关调用方需要重新检查。把结构信息、智能体制定的计划以及依赖检查分清，避免一句话堆叠多个未解释名词。
+### 训练差异与两个智能体
 
-删除重复讲解伪代码控制流的句子，包括 “Otherwise, the initial measurements support diagnosis, and the resulting evidence starts the repair loop.”。它的实际含义只是“初始程序未通过检查后，先调查失败原因，再交给修复智能体”，算法已经表达了这一顺序。
+3.1 保留四种 discrepancy 及其训练依赖关系。编辑操作如何计数、一次提交可能包含几次模型调用、预算变量如何递减，转入算法说明或附录。
 
-继续检查方法正文中的工具记账：edit 的操作计数、阶段 flags 的更新细节、预算变量如何扣减等，分别放在伪代码或附录。正文保留其作用，例如修复智能体测试修改后的代码，外部验证结果指导后续修改。
+3.2 和 3.3 的标题分别简化为 Verifier Agent 和 Repair Agent，两个标题保持一致，去掉冒号。算法 1 保留 Layered Diagnosis 名称。正文依次解释：执行异常引导检查出错调用，前向差异引导追踪算子，前向一致时的梯度差异引导检查求导路径，前向与梯度一致时的更新差异引导检查优化规则和状态。每一层都回答“这条观测为何能缩小调查范围”。
 
-## 3. 缩短 setup，把任务先讲清楚
+Repair Agent 段落先说明独立接收哪些证据，再说明如何测试修改及使用后续反馈。删除“证据被标记为来自 Verifier”、阶段 flags 如何更新等实现叙述。伪代码中保留这些控制所需的条件，正文只讲作用。
 
-沿用加粗标签，不增加多级标题。正文保留任务来源及用途、初态分组、比较方法、核心接受标准、主要调用预算和成本范围。数值容差、BF16 特例、seed、状态同步细节、各类检查的计数分解、输出 token/时间限制及停止处理统一放入附录。
+三个算法继续显式传入 LLM 参数 M；算法 2 复用算法 1 的 AgentStep。共享的模型查询、工具执行和记录操作只定义一次，算法 3 负责组合流程和仓库上下文操作。
 
-在 Tasks 中明确说明十个修复实例来自保存的首次翻译结果，其中五个需要修复、五个已通过初始检查；该研究允许修改候选程序及其支持库。这样读者在结果段看到修复与保留两列时已经知道比较对象。实际模型列表和详细运行条件仍在附录。16 个注入故障用于训练信号消融，JAX 六例用于检查另一目标框架上的适用性，各自用途在首次出现时交代。
+### 仓库协调
 
-初态分组统一使用普通描述：`programs that require repair` 与 `programs that pass the initial checks`。图中可用 `Needs repair` 与 `Passes initial checks`。正文不再把源输入称作 faulty inputs，也不把通过有限检查直接写成绝对正确。
+当前“map、work units、file scopes、interface goals、dependencies”集中在一句话里，需要拆成具有先后关系的动作：
 
-| 当前句子 | 实际含义 | 修改位置 |
+> The agent can inspect a repository map of files, imports, function and class definitions, and notebook cells. It uses this information to group related files into work units and record their dependencies. Local checks establish each unit's current status. When an edit changes a shared implementation, LaDiM invalidates the checks for affected units and their dependents, prompting the agent to check the relevant callers again.
+
+接着用一段说明上下文保留当前计划、相关代码和已有观测，以支持跨文件调查。完整历史和旧代码版本对应的测量留在可检索记录中。这里说明具体保留什么、何时需要取回，避免再造缩写或给实现机制起新名字。
+
+删除以下控制流复述：
+
+> Otherwise, the initial measurements support diagnosis, and the resulting evidence starts the repair loop.
+
+这句话重复算法中的“初始检查失败后诊断，再进入修复”。同段“算法先验证，已通过就立即返回”“这些上下文操作服务于算法 1 和 2”等重复说明一起清理。
+
+代码核对还发现，自动映射由 repository_map 工具调用时生成，初始化及上下文重建不会自动执行该扫描。因此算法 3 的 RepositoryContext(Map(T)) 拟改为 RepositoryContext(T)，映射通过共享工具调用取得。正文和伪代码统一为实际实现的行为。
+
+方法核心流程已经稳定。仓库映射与工作单元规划在方法图中的强调程度，根据各自实验确定；图由用户修改。
+
+## 3. 4.1 缩短 setup，先把比较对象讲清楚
+
+保留加粗标签，按 Tasks、Compared methods、Evaluation 三部分组织，不增加小标题层级。
+
+Tasks 交代主迁移集合、两个仓库、十个保存的首次翻译和训练信号研究分别用于什么问题。十个保存的翻译中，五个需要修复，五个已通过初始检查；该比较允许修改候选及其支持库。这一定义放在结果之前。
+
+初始分组统一为 programs that require repair 和 programs that pass the initial checks。图中采用 Needs repair 和 Passes initial checks。表 1 中 Natural translation faults 改为 Saved initial translations，与包含五个初始通过程序的事实一致；旧 JAX 六例那一行改为新研究的实际模型范围、候选来源和数量。
+
+Compared methods 区分主表的 Direct LLM 初次翻译与分析实验中的 Direct repair，避免两个 Direct 被读成同一种流程。说明 LaDiM、SWE-agent 和 MatchFixAgent 的比较角色，以及相同的 LLM 后端；各研究包含的方法由相应表格直接列明。
+
+Evaluation 正文保留共同源程序、初始候选和输入、核心接受标准、主要调用预算及成本范围。拟替换核心段落为：
+
+> Methods use common source programs, evaluation inputs, and corresponding initial parameters. Repair methods also receive the same initial translations. Acceptance requires agreement in execution, forward values, gradients, and parameter updates, together with the task's optimizer and interface checks. Repository evaluation also covers shared entry points and original tests. Candidates that pass the initial evaluation are checked on additional seeds. The appendix gives the numerical tolerances and detailed settings.
+
+正文再用简短文字说明每程序 40 次、仓库 80 次调用及四次提交上限。完整迁移和给定初译修复的成本范围在对应表注各交代一次。
+
+| 用户指出的句子或信息 | 含义 | 处理 |
 |---|---|---|
-| individual programs retain their own state over two consecutive steps, and repositories use three | 源和目标从相同参数开始，各自连续训练两步或三步，中途不把目标参数重新替换成源参数，从而检查更新误差是否传播 | 连续训练是评价设计；具体两步/三步与初态规则放附录，正文概括检查训练行为 |
-| A submission can follow several model calls and edits | 一次交给外部验证器检查之前，智能体可能多次读代码、调用模型和修改代码 | 从 setup 删除，必要的提交定义放方法或附录一次 |
-| Supplied-candidate studies report repair costs | 给定初始翻译的修复研究不把此前生成翻译的费用算入本次修复成本 | 对应表注说明 token 范围，详细成本规则放附录 |
-| Failures remain in the task denominator | 失败任务仍计入总任务数 | 附录的评分规则 |
-| acceptance at each budget scores the current candidate | 在某个预算下，评估当时的代码，而不是取历史上最好的版本 | 附录的预算与验收规则 |
+| individual programs retain their own state over two consecutive steps, and repositories use three | 源和目标从对应初态出发，分别连续训练，中途不重置目标为源状态 | 正文概括连续训练检查；两步/三步、初态与状态规则进入附录 |
+| A submission can follow several model calls and edits | 外部验证前可以有多次模型交互和修改 | 从 setup 删除；提交定义在方法中说明一次 |
+| Supplied-candidate studies report repair costs | 已给定初译的研究只统计本次诊断与修复费用 | 用对应表注说明，删除泛化的记账句 |
+| Failures remain in the task denominator | 失败任务计入总任务数 | 移至附录评分规则 |
+| acceptance at each budget scores the current candidate | 评价该预算下实际提交的程序 | 移至附录预算与验收说明 |
+| 数值容差、BF16 特例、seed、各类检查数量、时间和输出限制 | 完整复现条件 | 集中在已有协议与种子附录，正文引用一次 |
 
-上述规则继续用于实验和数据统计。正文用一句附录引用承接完整复现信息。
+## 4. 4.2 主结果如何写出优势
 
-Evaluation protocol 的拟替换核心段落如下，比较方法与共同预算另保留一小段：
+### MindSpore
 
-> We compare methods on common source programs, evaluation inputs, and corresponding initial parameters. Repair methods also receive the same initial translations. Acceptance requires agreement in execution, forward values, gradients, and parameter updates, together with the task's optimizer and interface checks. Repository evaluation also covers shared entry points and the original tests. Candidates that pass the initial evaluation are checked on additional seeds. The appendix gives the numerical tolerances, training schedules, and detailed checks.
+段落围绕“保持完整接受，同时显著降低模型使用成本”展开。主证据为 50/50 和 57.4% token 节省；图 3 说明成本改善覆盖需要修复与初始通过的两组。输入 token 占节省量的 93.0%，用于解释费用差异主要发生在哪一部分。
 
-此处的附录编号在应用方案时由 LaTeX 引用生成。训练步数、每类检查数量和停止规则不再挤在这段定义中。
+拟写为：
 
-## 4. 主结果围绕优势展开
+> LaDiM completes all 50 MindSpore migrations with 57.4% fewer tokens than MatchFixAgent. The savings cover both programs that require repair and programs that pass the initial checks (Figure 3). Reduced input usage accounts for 93.0% of the token savings. LaDiM accepts 46/50 tasks after the first submission and all 50 after the second, retaining full acceptance at four submissions.
 
-MindSpore 段落按“完整接受 → 成本优势 → 优势来源”组织：50/50 接受，较 MatchFixAgent 少用 57.4% token；46/50 在首次提交后通过，第二次达到 50/50；调用减少到 326 次，输入 token 的减少占总节省的 93.0%。解释效率优势同时出现在需要修复和初始检查已通过的程序中。图 3 为这种分解提供证据。
+调用次数等表中已有细目不再逐一复述。这里比较的是完整接受和 token 成本；预算 1、2、4 用于展示本方法的完成进展。
 
-主文删除 27/29、7/9 这组突然切换分母的叙述。7/9 指九个不同的、初态未通过的源程序与评价设置组合中，七个在首次提交后修复成功，既不是七类故障，也不是主表中的七个任务。50 个任务标识与不同组合的对应关系、实际调用去重方式保留在附录。图 3 的数据点保持真实，不扩充成 50 个独立运行；图注说明分组含义，精确计数与去重说明放附录。
+删除正文中的 27/29 和 7/9。7/9 原本指九个不同的初始失败输入组合中七个在首次提交后修复，并非七类故障。任务标识、不同输入组合与去重记录统一放附录。图 3 保留真实数据点和两组比较，图注解释每个点代表什么，不再把读者带入多个突然变化的分母。
 
-跨语言段落解释新增成功案例所体现的训练语义修复能力，并结合相同预算下的接受与成本比较。仓库段落分别解释“共享模型在多个入口中完成迁移”和“推荐任务的训练、推理、检索覆盖”，用最相关的数值支撑，不重复整行表格。
+### 跨语言
 
-## 5. 修复分析突出结果，案例细节进附录
+先说 LaDiM 的接受集合覆盖 MatchFixAgent 的成功程序，并增加一个循环网络实例，再给出与 SWE-agent、MatchFixAgent 相比 11.7% 和 24.2% 的成本节省。分析落在“训练行为引导的修复可以用于同时改变语言与框架的任务”，具体成功程序类型提供支撑。删除关于迁移接口和内部对接方式的枝节。
 
-将 `Repairing Natural Translation Faults` 改为更直接的 `Repairing Translation Errors`，并与 setup 中十个保存的初始翻译对应。
+### 仓库
 
-本段的主张是：LaDiM 修复了五个失败翻译中的四个，同时保留五个已通过检查的程序；三个对照方法保留原已通过的程序，但未修复这五个失败翻译。新增成功全部来自错误修复，可以直接支撑整个诊断与修复流程的有效性。独立调查这一组件的贡献由对应消融解释。
+时间序列段落突出共享模型在训练脚本、notebook 和教学示例中共同完成迁移，以及相同完成结果下的成本优势。正文保留 68.1% 和 80.8% 两个 token 比较，不复述主表每个梯度、更新及入口计数。
 
-拟替换段落先用下面两句表达实质结果，再根据修复记录选取一个能解释训练语义的例子：
+推荐段落围绕行为覆盖展开：LaDiM 恢复 reward model inference 和 retrieval，并执行训练命令，两个基线仍未完成前两项。用最高行为覆盖和十个原始测试支撑这一结论。18 项 loss、18 项 gradient、15 项 update 及后续 embedding 差异的拆解放附录，避免将段落写成检查日志。
 
-> LaDiM raises acceptance from five to nine of the ten saved translations by repairing four programs that fail the initial checks and preserving the five that already pass. Direct repair, SWE-agent, and MatchFixAgent retain the initial five successes but recover none of the failed programs.
+原始推荐测试继续按已核实结果保留 MatchFixAgent 0/10；其测试收集被未迁移的 PyTorch 导入阻断，原因放简短表注。其他执行失败后确实缺测的数值项按各自实际状态记录。
 
-将 LSTM 的运算注册、张量索引递归、dispatch cycle、三次提交日志全部移到附录。正文如保留案例，只用一句说明“修复涉及支持库中的运算实现与调用关系”，并连接到训练行为恢复这一结果。删除段末重复总结修复流程的句子。
+## 5. 4.3 分析实验如何衔接
 
-## 6. 图 4 与 JAX 各自回答明确的问题
+采用与 4.2 相同的加粗标签，各部分围绕一个问题形成连贯段落。
 
-图 4 的科学问题是：直接检查梯度和参数更新，能否比只检查损失更早发现差异。梯度错误可暂时不改变当前损失，更新错误可暂时不改变当前损失和梯度；在成文中用两句说明，去掉分号。阈值、状态同步对照及详细健康检查转入附录。
+Repairing Translation Errors 对应 setup 中十个保存的首次翻译。该研究分别统计失败程序的修复与初始通过程序的保留，直接观察方法修复实际翻译错误的能力。拟写为：
 
-图中文字拟用 `LaDiM detects at step 1` 和 `Loss check detects at step 31/18`，在对应文字或图注明确后者是均值曲线的检测位置。31/18 的现有数据来自损失曲线，不是 SWE-agent、MatchFixAgent 或笼统“common methods”的实测检测时间，因此不能替换成这些方法名称。
+> LaDiM raises acceptance from five to nine of the ten saved translations by repairing four programs that fail the initial checks and preserving the five that already pass. Direct repair, SWE-agent, and MatchFixAgent retain the initial five successes but recover none of the failed programs. In the LSTM case, LaDiM repairs recurrent operations and tensor indexing in the supporting library, restoring agreement in loss, gradients, and parameter updates.
 
-JAX 的当前正式修复比较运行了 LaDiM 与直接修复，两者都是 6/6，后者成本更低。另有 Ivy 和 torch2jax 的原生转换结果，但它们接收带故障的候选，测量的问题不同。当前六例没有 SWE-agent 或 MatchFixAgent 的修复运行。
+运算注册、dispatch cycle、第几次提交修复哪一步等过程移到附录。该段用一个可理解的例子说明修复延伸到了支持库，保持为一个段落。
 
-用户随后要求扩大 JAX 实例并研究提升方法表现。当前六例的最终补丁全部只改一行，分别修正多余函数参数、输出缩放或梯度截断，且只涉及 MLP/CNN 和单步 SGD。新研究应增加真实迁移中的模型结构、连续训练状态和优化器语义，并用开发实例改进方法。正式比较前固定未用于调试的任务、方法版本与预算，再让 LaDiM、直接修复、MatchFixAgent 和 SWE-agent 接收同一初始候选。旧六例及其成本保留为原有实验，不把新旧协议混成同一表。
+Training Signals and Detection Latency 接着解释为何观察训练行为能够发现这些问题。梯度错误可能暂时保持当前损失，更新错误可能暂时保持当前前向值和梯度；后续计算才会受到改变的参数状态影响。成文使用两句：
 
-JAX 子代理负责独立目录 `experiments/jax_expansion_20260922/`，先推进两个受控开发任务：残差 MLP 的连续 momentum SGD 更新，以及 attention 的连续 Adam 更新。每例运行三个训练步和三个评价种子，比较完整的逐参数梯度、更新与参数状态，同时检查前向值、损失和对应初态。启动前必须验证健康实现在两框架间通过、目标故障确实被检出。
+> Gradient errors can leave the current loss unchanged. Errors in parameter updates can preserve both current forward values and gradients, with their effects appearing in later steps.
 
-开发研究先运行 LaDiM 与共享工具的直接修复，共四个条件，每个条件最多 40 次模型调用、四次提交，单 worker 执行。它用于发现诊断、证据交接或修复流程中的具体改进点，所有版本和结果留档。初始注意力健康检查暴露的近零梯度数值问题已在离线阶段处理；第二版十二个健康/故障检查全部通过。四个开发条件现已全部完成，两方法均在首个提交后通过两例；LaDiM 使用 352,624 token，直接修复使用 278,439，前者多 26.6%。这一组尚未体现独立诊断收益，后续从轨迹检查额外开销，并继续完成下面的自然迁移研究。
+接下来给出 LaDiM 第一步检出的结果及损失检测对照。阈值列表、每步同步细节和健康控制的精确误差放附录。
 
-正式扩展的来源池已经冻结为 PyTorch 官方示例的八个原始文件、九个模型训练任务：MNIST CNN、超分辨 CNN、VAE、DCGAN Generator、RNN 语言模型、Transformer 语言模型、时间序列 LSTM、Actor-Critic 与 REINFORCE Policy。固定上游版本为 `acc295dc7b90714f1bf47f06004fc19a7fe235c4`，来源和逐文件哈希保存在 `experiments/jax_expansion_20260922/formal_source_pool/manifest.json`。该池在开发 API 结果出现前选定，九任务各三个种子的源端连续训练检查已全部通过。原生 JAX 验收及基线接入继续准备。
+图 4 标记采用 LaDiM detects at step 1 和 Loss check detects at step 31／18，去掉冒号。31／18 来自平均损失曲线的过阈位置，图注交代这一含义；现有数据没有测得 SWE-agent 或 MatchFixAgent 在这两个时刻检出，因此图中对照使用实际测量的 Loss check。
 
-用户进一步要求增加初始就存在问题的程序或更复杂的程序，并彻底替换旧六例。按此扩充来源准备，优先新增官方 GAT、minGPT 的三层因果语言模型以及带 BatchNorm 状态和跨阶段残差连接的 ResNet，目标为十二个模型任务的来源池。新增源码和许可证已下载，固定版本与哈希保存在 `output/jax-complex-source-review-20260922/manifest.json`；接入时保留原九任务准备记录，另写扩充后的任务清单。
+Generalization Across Frameworks 用新的复杂 JAX 程序完全替换旧六例正文比较。setup 先介绍共同首次翻译及初始失败的选择条件；新表列出四种方法的修复成功数、调用和 token 成本。正文按“修复差异 → 最主要的成本差异 → 一个能够解释差异的模型或状态问题”展开，内容长度服从实际发现。
 
-十二任务的扩充清单现已另行保存为 `formal_source_pool/manifest_12_tasks.json`，36/36 项源端三步训练检查通过。新增模型参数量分别为 GAT 214、GPT 86,928、ResNet 4,908,357；后者在远端 CPU 上每种子的三步源训练约 0.44 秒。源码结构、状态和完整梯度的检查范围共同描述任务复杂度，不以参数量独自代表难度。
+新研究验证原生 JAX 模型计算在连续训练中的一致性，候选负责模型计算及缓冲状态，外部执行器负责求导与 Optax 更新。最终任务数和结果由实验子代理交付；旧六例及其全部费用保留在实验记录和附录中。
 
-新修复组在任何修复方法运行前，由共同首次翻译的初始验收确定：纳入来源池中全部未通过检查的候选，让四种方法修复相同的问题程序。保留整个来源池的初始通过与失败记录，已通过的候选单独用于确认能力分析。这个设计直接测量修复成功率，能观察复杂程序中的分层诊断效果；不会将初始已通过的程序计作成功修复。
+## 6. 消融怎样支撑组件
 
-通过一次共同翻译得到每例的原生 JAX/Optax 初始候选，固定任务和候选后运行四种修复方法。任务测量给定模型的连续训练，不声称迁移源文件中的数据下载、环境交互和整个应用。Dropout 模式、VAE 采样及 BatchNorm 缓冲状态在所有方法共用的任务要求中预先声明。正式任务不使用上述两个开发程序，也不依据已经观察到的方法输赢选择实例。MatchFixAgent 与 SWE-agent 的原生算法、提示和工具流程保持一致，新增工作集中在共同的 JAX 执行和验收接入。最终报告接受率、达到接受所用的提交次数、调用及完整 token 成本，并用多步训练中的失败类型解释差异。
+训练信号消融回答“需要观察什么”，智能体和仓库消融回答“如何组织调查与修复”。沿用一张表内的小写 (a)、(b) 标记，并让每个面板的表头和表注独立说明比较对象。
 
-验收脚本的独立审阅还要求核对参数形状、从更新前快照计算参数变化，并验证梯度确实由 JAX 对当前计算求导。开发运行保留已冻结判定，最终候选另做这三项离线复验；正式验收内置相应检查。
+现有累计智能体消融的最后一项合并了映射、工作单元、证据和上下文机制。正文可解释完整组合的成本变化。自动映射的独立实验则单独说明：时间序列成本下降 19.8%；推荐较早达到同样的检查覆盖，但最终费用更高。它目前适合作为仓库协调中的辅助机制，贡献列表不据此新增“映射普遍提升效率”的主张。
 
-正式候选实现原生 JAX 的模型计算及缓冲状态更新，外部执行器对当前损失求导并执行合同指定的 Optax 优化过程。正文将其表述为模型迁移后的训练一致性比较。十二次共同初译和完整初始验收已在独立进程启动；修复集合据此确定。真实候选中的语法错误也进入修复组，API 无返回或没有任何候选程序的情况另记生成失败及费用。
+工作单元规划的作用与自动映射分开归因。后续组件结果采用完整方法与移除组件的配对比较，并在最终接受之外报告各次提交的通过情况及累计成本。正文用这些轨迹解释是否减少了定位工作、提前完成了接口修复；模型调用、种子和检查数量各自保持其实际统计单位。
 
-JAX 主文将以这组新程序及共同协议比较替换旧六例，保持 `Generalization Across Frameworks` 标题。结果段围绕修复成功、成本及复杂结构中的差异展开，旧六例及转换器结果保留在历史记录和附录，新的分母与其分开。此轮先完成实验与修改方案，正文在方案执行时更新。
+已有自然翻译上的历史保留、独立交接等实验，可用于解释这些设计的作用。其设置与仓库研究分别交代，结果不拼成同一组累计条件。实验执行和最终证据由子代理负责。
 
-新表统一列出 LaDiM、Direct、MatchFixAgent 和 SWE-agent 的修复成功数、调用次数与完整 token 成本。setup 先交代程序来源、自然初译及初始失败这一选择条件；结果段先比较修复能力，再用实际记录解释注意力、循环计算或缓冲状态等结构中解决了什么问题。通过预算 1、2、4 的结果只选必要数字写入分析，其余完整进展放附录。新的任务数量和成本都由冻结结果生成。
+## 7. 全文统一的行文处理
 
-## 7. 增强智能体消融的解释力
+每段先给主要判断，再提供支持该判断的机制、比较或例子。结果段围绕接受、效率和行为覆盖分别展开；表格承担完整数值，正文选最有解释力的数字。已有积极结果直接陈述，实质条件在最相关的位置说明一次。
 
-现有累计消融在两个仓库上最终结果均相同，每格只运行一次，且最后一级合并了多个组件。它适合报告这次运行的成本变化，对单个组件的因果贡献支持较弱。
+全文同步检查正文、摘要、标题、图注和表注。删除重复解释控制流、读者没有提出的防御性说明、内部流程记账及无助于段落主张的修复日志。They are not supplied as task inputs 一类句子从正文清理；确有复现用途的信息进入协议附录。
 
-下一组主消融建议以完整方法为共同参照，分别移除初始调查、独立证据交接、自动结构映射、依赖规划或上下文重建，每个对照清楚对应一个研究问题。优先完成当前已授权的映射对照，再决定后续矩阵。使用相同预算、相同初态的配对重复，完整报告两个仓库。
+减少临时拼接的连字符修饰语，例如 model-call 改为 LLM calls，tool-execution step 改为 tool execution，target-framework operations 改为 operations in the target framework。迁移方向用 from PyTorch to MindSpore 等自然表达。保留正式方法名称和用户已确认的 state-of-the-art。自动断词通过局部换行处理，不以全局缩字或压缩篇幅解决。
 
-从已有记录提取每次提交时的通过情况与累计 token，呈现修复进展和达到相同完成程度所需的成本。这样既看最终接受，也能看相同最终分数背后的修复效率。跨文件的入口通过情况、共享实现修改后的复查可辅助解释作用。以独立仓库运行作为比较单位，不把同一次运行中的 69 项检查当作 69 个独立实验。
+方法中使用已定义的 discrepancy、Verifier Agent、Repair Agent、Orchestrator、repository map 和 work unit；首次解释具体作用后保持名称一致，不增加 LD、IEH、DCM 等缩写。
 
-现有自然翻译的修复历史与独立交接消融也可辅助说明智能体机制，分别保留各自任务和实现设置。正式矩阵预先固定仓库、分母和预算，并汇总所有运行。
+## 8. 应用顺序与交付检查
 
-## 8. 行文和方法图
+先修改方法职责、任务定义及 setup，再重写主结果和分析段落，随后统一图 3／图 4 的文字与表注。新增 JAX 及组件结果由子代理交付后，更新相应任务行、结果表和分析。方法图仍由用户处理。
 
-全文逐段检查每个句子与段落主张的关系。能帮助理解设计、解释结果或明确关键比较条件的内容留在正文；复现步骤和案例日志进附录；已经由算法、表格或前文充分表达的重复句删除。
+应用方案时每轮先检查 Git 并保留提交；完成后编译 LaTeX，核对数值、公式、引用和局部排版，更新与昨晚修改前固定基线的逐词对比页面。此轮不以目标页数为依据删减内容。
 
-减少用连字符临时拼出的修饰语，例如 `model-call` 改为 `LLM calls`，`tool-execution step` 改为 `tool execution`，`target-framework operations` 改为 `operations in the target framework`，`loss-difference curves` 改为 `curves of the loss difference`，框架迁移方向用 `from PyTorch to MindSpore`。保留 SWE-agent 等正式名称，以及用户已经指定的 state-of-the-art。同步检查 PDF 自动断词，改善局部换行。
-
-方法的核心流程已稳定：初始翻译 → 调查训练差异 → 证据交接 → 修复 → 外部验证，验证后的反馈返回修复智能体。Orchestrator 明确承担调度和验证；各智能体使用 LLM。仓库协调支持调查与修复，包含结构映射、工作单元依赖和证据上下文。框架执行端包含 MindSpore 和 JAX。
-
-方法图由用户负责修改。待文件映射与工作单元规划的作用得到验证后，方法结构和该模块的贡献表述即可确定；本任务不修改或生成方法图。内容方案应用后，统一检查正文、图注、表头和伪代码，并更新固定基线的逐词对比页。
-
-## 核查来源
-
-- `docs/cumulative-component-ablation-20260922.md` 与对应冻结 runner：累计组件和已有八次运行。
-- `scripts/repository_agent_mode.py`：自动结构分析、工作单元、依赖约束、检查点和上下文行为。
-- `docs/maintext-jax-autonomous-rerun-20260918.md`：JAX 方法范围与正式结果。
-- `docs/autonomous-verifier-experiment-20260917.md`、`sections/supplementary_experiments.tex`：十个保存的初始翻译与可编辑范围。
-- `data/paper_figures/README.md`、`data/paper_figures/unified_results.json`：主比较任务、成本和不同初态分组。
+证据来源：data/paper_figures/unified_results.json；sections/supplementary_experiments.tex；docs/maintext-results-20260918.md；docs/cumulative-component-ablation-20260922.md；docs/repository-map-ablation-20260922.md；docs/jax-expansion-20260922.md；scripts/repository_agent_mode.py。行文参考 literature/zhekai-du/Academic-Writing-DNA.md 与仓库 humanizer 规则。
