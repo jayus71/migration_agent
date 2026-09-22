@@ -57,7 +57,7 @@ def build_figure(frame=None):
         first_loss = int(loss_crossings.index.min())
 
         diagnostic_color = METRICS[diagnostic][1]
-        ax.annotate(f"LaDiM: step {first_detection}",
+        ax.annotate(f"Detected at step {first_detection}",
                     xy=(first_detection, means[diagnostic].loc[first_detection]),
                     xytext=(0.08, 0.80), textcoords="axes fraction",
                     ha="left", va="top", color=diagnostic_color, fontsize=7.5,
@@ -65,7 +65,7 @@ def build_figure(frame=None):
                                     linewidth=0.8, shrinkA=3, shrinkB=3),
                     bbox=dict(facecolor="white", edgecolor="none", pad=1))
         ax.axvline(first_loss, color=GRAY, linewidth=0.6, linestyle=":")
-        ax.annotate(f"Loss-based detection\n(mean): step {first_loss}",
+        ax.annotate(f"Loss-based detection\nat step {first_loss} (mean)",
                     xy=(first_loss, means["loss_abs_diff"].loc[first_loss]),
                     xytext=(0.96, 0.26), textcoords="axes fraction",
                     ha="right", va="bottom", color=BLUE, fontsize=7.5,

@@ -1,0 +1,45 @@
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}
+\toprule
+\textbf{Method} & \textbf{Accepted} & \thead{Model\\calls} & \thead{Input tokens\\(millions)} & \thead{Output tokens\\(millions)} & \thead{Total tokens\\(millions)} \\
+\midrule
+\multicolumn{6}{l}{\textit{(a) PyTorch to MindSpore}} \\
+Direct LLM & 29/50 & 29 & 0.018 & 0.411 & 0.429 \\
+CodeTransEngine (direct) & 31/50 & 29 & 0.022 & 0.257 & 0.280 \\
+MSAdapter & 15/50 & 0 & 0.000 & 0.000 & 0.000 \\
+SWE-agent & 44/50 & 1,097 & 19.845 & 0.987 & 20.831 \\
+MatchFixAgent & 50/50 & 619 & 10.750 & 1.347 & 12.097 \\
+\textbf{LaDiM (ours)} & 50/50 & 326 & 4.298 & 0.861 & 5.159 \\
+\midrule
+\multicolumn{6}{l}{\textit{(b) Java/DJL to Python/PyTorch}} \\
+Direct LLM & 1/18 & 18 & 0.142 & 0.552 & 0.694 \\
+InterTrans & 1/18 & 89 & 0.680 & 1.606 & 2.286 \\
+Test-guided repair & 7/18 & 71 & 1.594 & 2.881 & 4.475 \\
+SWE-agent & 8/18 & 682 & 23.063 & 1.258 & 24.321 \\
+MatchFixAgent & 8/18 & 524 & 26.335 & 2.020 & 28.355 \\
+\textbf{LaDiM (ours)} & 9/18 & 345 & 19.470 & 2.009 & 21.479 \\
+\bottomrule
+\end{tabular*}
+\par\vspace{5pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrr@{}}
+\toprule
+\multicolumn{7}{l}{\textit{(c) Time series repository}} \\
+\midrule
+\textbf{Method} & \thead{Paired\\checks} & \textbf{Gradients} & \thead{Parameter\\updates} & \thead{Entry\\points} & \thead{Repair\\calls} & \thead{Total tokens\\(millions)} \\
+\midrule
+SWE-agent & 69/69 & 9/9 & 9/9 & 3/3 & 80 & 8.200 \\
+MatchFixAgent & 69/69 & 9/9 & 9/9 & 3/3 & 69 & 13.598 \\
+\textbf{LaDiM (ours)} & 69/69 & 9/9 & 9/9 & 3/3 & 35 & 2.614 \\
+\bottomrule
+\end{tabular*}
+\par\vspace{5pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrr@{}}
+\toprule
+\multicolumn{7}{l}{\textit{(d) Recommendation repository}} \\
+\midrule
+\textbf{Method} & \thead{Paired\\checks} & \textbf{Gradients} & \thead{Parameter\\updates} & \thead{Original\\tests} & \thead{Repair\\calls} & \thead{Total tokens\\(millions)} \\
+\midrule
+SWE-agent & 104/145 & 17/18 & 12/18 & 10/10 & 80 & 8.317 \\
+MatchFixAgent & 129/145 & 18/18 & 16/18 & n/a & 80 & 8.679 \\
+\textbf{LaDiM (ours)} & 130/145 & 18/18 & 15/18 & 10/10 & 80 & 8.811 \\
+\bottomrule
+\end{tabular*}

@@ -1,10 +1,10 @@
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l>{\raggedright\arraybackslash}p{4.8cm}rr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{4.9cm}r@{}}
 \toprule
-\textbf{Collection} & \textbf{Model or operation coverage} & \textbf{Tasks} & \thead{Mean\\lines} \\
+\textbf{Collection} & \textbf{Candidate construction} & \textbf{Model or operation coverage} & \textbf{Tasks} \\
 \midrule
-PyTorch to MindSpore & Operators, CNNs, MLPs, Transformers, language models & 50 & 24.0 \\
-Natural translation faults & Recurrent, convolutional, attention, and set models & 10 & 16.7 \\
-Training-signal ablation & CNN, image MLP, Transformer, causal language model & 16 & 24.0 \\
-JAX repair & MLP and CNN & 6 & 27.0 \\
+PyTorch to MindSpore & Generated translations & Operators, CNNs, MLPs, Transformers, language models & 50 \\
+Natural translation faults & Supplied translations & Recurrent, convolutional, attention, and set models & 10 \\
+Training-signal ablation & Controlled training faults & CNN, image MLP, Transformer, causal language model & 16 \\
+JAX repair & Supplied faulty candidates & MLP and CNN & 6 \\
 \bottomrule
 \end{tabular*}

@@ -1,0 +1,985 @@
+\documentclass{article}
+\usepackage{iclr2027_conference,times}
+
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{needspace}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{wrapfig}
+\usepackage{listings}
+\lstdefinestyle{repaircode}{
+  language=Python, basicstyle=\footnotesize\ttfamily,
+  columns=fullflexible, keepspaces=true, showstringspaces=false,
+  frame=tb, rulecolor=\color{black!40}, framerule=0.4pt,
+  aboveskip=3pt, belowskip=6pt, xleftmargin=3pt, xrightmargin=3pt
+}
+
+
+
+\newcommand{\hdr}[2]{\begin{tabular}[b]{@{}c@{}}\textbf{#1}\\\textbf{#2}\end{tabular}}
+\newcommand{\thead}[1]{\textbf{\shortstack[b]{#1}}}
+\usepackage[hyphens]{url}
+
+
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+
+\begin{document}
+
+\title{LaDiM: Layered Diagnosis for\\
+Multi-Agent Code Migration}
+
+\author{Anonymous Authors}
+
+\maketitle
+\suppressfloats[t]
+
+\begin{abstract}
+Migrating deep learning code across frameworks is a practical requirement for reusing training programs in new software and hardware environments. Framework differences can change how a translated program computes gradients and updates its parameters without causing runtime errors. To address this problem, we propose LaDiM, a multi-agent framework that uses dependencies between training computations to guide diagnosis and repair. Starting from an initial translation, the Verifier Agent investigates where the target program diverges from the source and passes supporting code observations and test results to a separate Repair Agent. The Orchestrator returns measurements after each submitted change to guide further repair. Repository context management supports repair across files by tracking dependencies and retaining relevant evidence. Experiments across frameworks and programming languages demonstrate LaDiM's effectiveness, with token savings of at most 57.4\% over state-of-the-art methods at matched migration acceptance.
+\end{abstract}
+
+\section{Introduction}
+
+Migrating deep learning code allows existing models and training programs to run in new software and hardware environments. Differences in operator semantics, numerical precision, and random number handling can change the computations performed after migration. Automatic differentiation and optimizer interfaces introduce further differences in how a model learns~\citep{paszke2019pytorch,mindspore2020whitepaper}. Large language models (LLMs) reduce the manual effort involved in code translation~\citep{he-etal-2025-execoder,macedo2024intertrans}, while automated tests and interactive repair help assess and correct translated behavior~\citep{roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent}. Training programs require these capabilities to preserve the computations that determine each parameter update.
+
+\begin{wrapfigure}{r}{0.44\textwidth}
+\centering
+\includegraphics[width=\linewidth]{figures/migration_motivation.pdf}
+\caption{MindSpore migration costs, including initial translation and all subsequent calls. Labels give accepted tasks out of 50.}
+\label{fig:migration-motivation}
+\end{wrapfigure}
+
+{\hyphenpenalty=10000\emergencystretch=1em
+A translated program can produce a loss close to that of the source while computing incorrect gradients. An optimizer error can also alter the parameter update without changing the current loss or gradients. We use semantic drift to describe these changes in training behavior caused by migration. Training computations have dependencies that help investigate such errors. A forward error may change gradients and updates, while an incorrect update may affect later forward computations. Locating the cause requires examining how the translated code produces the observed differences. This investigation also affects migration cost. Figure~\ref{fig:migration-motivation} compares complete token use on common migration tasks, where LaDiM achieves full acceptance with less than half the tokens used by MatchFixAgent.\par}
+
+We introduce LaDiM (Layered Diagnosis for Multi-Agent Code Migration), which uses dependencies between training computations to guide investigation of an initial translation. The Verifier Agent inspects code and runs tests to establish where source and target behavior diverge. For example, matching forward values with missing gradients directs attention to parameter registration and the differentiation path. The agent records the code and measurements supporting its hypotheses and passes this evidence to a separate Repair Agent. After a change is submitted, the Orchestrator runs the acceptance checks and returns new measurements to guide subsequent attempts. This feedback connects each correction to the behavior it changes and exposes the next computation to investigate.
+
+For repositories, migration must preserve shared implementations across multiple entry points. A change that corrects one caller can alter the behavior of another, and investigation may need evidence collected earlier in a different file. LaDiM tracks dependencies between work units and invalidates checks affected by changes. It retains observations and hypotheses in a retrievable archive and rebuilds the working context when the investigation moves between units. Together, these operations support repair across files while preserving the relationship between code changes and their measured effects.
+
+We evaluate migration acceptance and model use from common initial translations under a shared protocol. LaDiM's token savings cover both repair of faulty translations and confirmation of candidates that already pass the checks. On a time series repository, all three evaluated agents complete migration, with LaDiM using fewer tokens and repair calls. On a recommendation repository, LaDiM achieves the highest behavioral coverage and passes all ten original tests. Training signal and component ablations examine how observations and agent organization affect repair, while JAX and Java-to-Python experiments establish effectiveness across frameworks and languages. Our contributions are as follows.
+
+\begin{itemize}
+  \item We formulate training-code migration around execution, forward values, gradients, and parameter updates, using their dependencies to investigate semantic faults.
+  \item We develop LaDiM with independent investigation, evidence handoff, and verification after repair, together with dependency and context management for repositories.
+  \item We evaluate migration across frameworks and languages, comparing acceptance and total token use and analyzing repair behavior, training signals, and agent components.
+\end{itemize}
+
+\section{Related Work}
+
+\paragraph{Code Translation and Framework Migration.}
+Neural translation methods learn code mappings from multilingual corpora and use automated tests or compiler representations to improve translations~\citep{roziere2020transcoder,roziere2021unittests,szafraniec2023compiler}. ExeCoder encodes functional semantics, syntax structure, and variable dependencies~\citep{he-etal-2025-execoder}, while InterTrans explores intermediate translation paths~\citep{macedo2024intertrans}. Framework migration tools such as MindConverter supply mappings between programming interfaces~\citep{mindspore2023mindconverter}. RepoTransAgent uses repository context, test failures, and reflection to refine translated code~\citep{guan2025repotransagent}. LaDiM investigates how a translated training program computes and updates its state. At repository scale, it coordinates changes to shared interfaces and checks their effect across declared entry points.
+
+\paragraph{Differential Testing and Deep Learning Verification.}
+Differential testing exposes compiler and program faults through disagreement between related executions~\citep{yang2011csmith,le2014emi}. DeepXplore and DeepGauge investigate behavioral differences and test coverage in deep learning systems~\citep{pei2017deepxplore,ma2018deepgauge}. More directly related to framework migration, TensorScope tests corresponding APIs across frameworks to identify inconsistent behavior~\citep{deng2023tensorscope}. NablaFuzz compares execution scenarios to test automatic differentiation, including first-order and higher-order gradients~\citep{yang2023nablafuzz}. LaDiM uses training differences as evidence for code repair. Its Verifier Agent relates the measured forward values, gradients, and parameter updates to the implementation, develops hypotheses about their origin, and supplies evidence that the Repair Agent can test when selecting a change.
+
+\paragraph{Automated Program Repair and LLM Agents.}
+Automated program repair uses tests or semantic constraints to guide patch generation~\citep{nguyen2013semfix}, and pretrained language models generate patches from code and failure evidence~\citep{xia2023aprplm}. Interactive agents combine repository navigation, editing, and execution~\citep{yang2024sweagent,shinn2023reflexion,chen2023selfdebugging,wang2024codeact}. Multi-agent systems distribute development activities among specialized roles~\citep{qian2023chatdev,hong2023metagpt,wu2023autogen,chen2023agentverse}. MatchFixAgent takes a source program and an existing translation and uses several semantic analyses to guide test generation and repair~\citep{ibrahimzada2025matchfixagent}. LaDiM includes initial translation and organizes diagnosis around dependencies in training computations. The independent investigation and its supporting observations pass to a separate Repair Agent, which uses measurements after each submission to revise its hypotheses. The comparison evaluates both methods from the same initial translation and includes translation costs.
+
+
+\section{Methods}
+\label{sec:method}
+
+LaDiM uses dependencies between training computations to guide the investigation of a translated program. Starting from the Translator's candidate, the Verifier Agent examines the observed discrepancies and tests the code that could explain them. Its findings and supporting observations pass to a separate Repair Agent, which uses this evidence to select and evaluate changes. The Orchestrator returns measurements after each submission, allowing repair to follow the errors revealed as execution progresses. Figure~\ref{fig:architecture} shows this process.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\textwidth]{figures/hierarchical_feedback_architecture.pdf}
+\caption{LaDiM's migration workflow. The Translator generates a candidate for the Verifier Agent to investigate through code and training observations. The Repair Agent receives the evidence and revises the candidate. The Orchestrator checks submitted changes and returns measurements for subsequent attempts. Execution adapters obtain observations from the target framework.}
+\label{fig:architecture}
+\end{figure}
+
+\subsection{Preliminary}
+
+A migration task $\mathcal T=(P,L_s,F_s,L_t,F_t,W)$ specifies a source program $P$, its language and framework $(L_s,F_s)$, the requested target environment $(L_t,F_t)$, and an editable file scope $W$. Migration produces a target program $\hat P$ that preserves the source's training behavior. An edit is one successfully applied editing operation, which can replace several code blocks across files in $W$. A submission follows a repair stage containing code inspection, tests, and edits.
+
+At training step $t$, source and target executions produce corresponding observations $(e_t,v_t,g_t,\theta_{t+1}-\theta_t)$ and $(\hat e_t,\hat v_t,\hat g_t,\hat\theta_{t+1}-\hat\theta_t)$. Here $e_t$ records the execution outcome, including success or an exception, $v_t$ contains selected forward values and losses, $g_t$ contains gradients, and $\theta_t$ denotes the parameters before the update. After aligning corresponding tensors and parameters, we define
+\begin{align}
+d_{\mathrm{execution},t}&=\mathbf{1}[e_t\ne\hat e_t], &
+d_{\mathrm{forward},t}&=v_t-\hat v_t,\\
+d_{\mathrm{gradient},t}&=g_t-\hat g_t, &
+d_{\mathrm{update},t}&=(\theta_{t+1}-\theta_t)-(\hat\theta_{t+1}-\hat\theta_t).
+\end{align}
+For a numerical comparison $d=x-\hat x$, $d\simeq0$ denotes agreement within its tolerance, such as $|d_j|\leq\alpha+\beta|x_j|$ for absolute tolerance $\alpha$ and relative tolerance $\beta$, or a specified norm bound. These discrepancies follow the training computation. Forward values determine the loss, differentiation produces the gradients, and the optimizer uses those gradients and its state to update parameters. The updated parameters then affect subsequent forward computations.
+
+The LLM $M$ performs translation, investigation, and repair under the role instructions $A_T$, $A_V$, and $A_R$, respectively. The Orchestrator $\mathcal O$ evaluates candidates and manages the shared investigation and repair budget $B$. In the algorithms, $S$ holds the current candidate and observations, $q$ is its verification status, $H$ is a conversation, and $C$ manages retained evidence, preserving the conversation for individual programs and coordinating context for repositories. Each $\textsc{Query}(M,A,H,b,B)$ invokes $M$ with role instructions $A$ and conversation $H$, charging its usage to the stage allowance $b$ and shared budget $B$. The initial $\textsc{Translate}(M,A_T,\mathcal T)$ call uses the same LLM to generate a candidate. Tools return observations and update $S$ when an edit succeeds.
+
+\subsection{Verifier Agent: Layered Diagnosis}
+\label{sec:hierarchy}
+
+The Verifier Agent investigates the execution, forward, gradient, and update observations under $A_V$, which asks it to support hypotheses with code locations and distinguishing tests. Dependencies between these computations help narrow the causes. An \textbf{execution discrepancy} ($d_{\mathrm{execution},t}=1$) points to the exception and implicated calls. A \textbf{forward discrepancy} ($d_{\mathrm{forward},t}\not\simeq0$) motivates tracing the operators that produce different values. When forward values agree, a \textbf{gradient discrepancy} ($d_{\mathrm{gradient},t}\not\simeq0$) directs attention to parameter registration and differentiation. When forward values and gradients agree, an \textbf{update discrepancy} ($d_{\mathrm{update},t}\not\simeq0$) points to the optimizer's rule and state. The first affected step helps distinguish these causes because updates influence later forward values. The LLM selects code inspections and tests from this evidence. Algorithm~\ref{alg:diagnose} records the investigation and defines the shared model-call and tool-execution step. During diagnosis, production files are read-only and scratch tests remain editable.
+
+\begin{algorithm}[!htb]
+\caption{Layered Diagnosis}
+\label{alg:diagnose}
+\begin{algorithmic}[1]
+\Function{LayeredDiagnosis}{$\mathcal T,S,M,B,C$}
+  \State $H\gets\Call{StartConversation}{A_V,\mathcal T,S}$; $b\gets\Call{DiagnosisAllowance}{B}$
+  \While{$\Call{WithinLimits}{b,B}$}
+    \State $(H,a,R)\gets\Call{AgentStep}{M,A_V,H,S,b,B,C}$
+    \State \textbf{if} $a.\mathrm{complete}$ \textbf{then break}
+  \EndWhile
+  \State \Return $\Call{PublicEvidence}{H,C.\mathrm{archive}}$
+\EndFunction
+\Function{AgentStep}{$M,A,H,S,b,B,C$}
+  \State $H\gets C.\Call{BeforeCall}{H,S}$; $a\gets\Call{Query}{M,A,H,b,B}$
+  \State $H\gets H\mathbin{\|}a$; $R\gets[\,]$
+  \ForAll{$c\in a.\mathrm{toolCalls}$}
+    \State $r\gets\Call{Execute}{c,S,\mathrm{productionReadOnly}=(A=A_V)}$
+    \State $H\gets H\mathbin{\|}(c,r)$; $R\gets R\mathbin{\|}(c,r)$; $C.\Call{Record}{c,r,S}$
+  \EndFor
+  \State \Return $(H,a,R)$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Repair Agent: Evidence Handoff}
+
+The Repair Agent starts a separate conversation with the Verifier Agent's code observations, test results, and diagnosis, attributed to the Verifier Agent. It can reassess these findings, run further tests, and edit files in $W$. For individual programs, the Orchestrator refreshes the measurements after diagnosis and confirms candidates that pass the public checks. Unresolved discrepancies enter the repair loop in Algorithm~\ref{alg:repair} with the diagnosis evidence $E$, current observations $S.m$, and verification status $q$.
+
+The repair loop reuses \textsc{AgentStep} and its ordered tool results $R$. The stage flags $F$ record whether a production edit succeeded and whether a test ran after the latest edit. A final response ends the stage when both conditions hold; otherwise, the agent receives the pending action and continues within its allowance. After each submission, the Orchestrator measures the candidate and returns the unresolved differences. The candidate and repair conversation persist across attempts under the shared budget.
+
+\begin{algorithm}[!htb]
+\caption{\textsc{Repair}$(\mathcal T,S,E,q,M,B,C)$}
+\label{alg:repair}
+\begin{algorithmic}[1]
+\State $H\gets\Call{StartConversation}{A_R,\mathcal T,\operatorname{AttributeToVerifier}(E)}$
+\State $C.\mathrm{handoff}\gets\mathrm{true}$
+\While{$\Call{SubmissionsLeft}{B}\land\Call{BudgetLeft}{B}$}
+  \State $H\gets H\mathbin{\|}S.m$; $F\gets(\mathrm{false},\mathrm{false})$; $b\gets\Call{RepairAllowance}{B}$
+  \While{$\Call{WithinLimits}{b,B}$}
+    \State $(H,a,R)\gets\Call{AgentStep}{M,A_R,H,S,b,B,C}$; $F\gets\Call{UpdateFlags}{F,R}$
+    \State \textbf{if} $a.\mathrm{complete}\land F.\mathrm{edited}\land F.\mathrm{tested}$ \textbf{then break}
+    \State \textbf{if} $a.\mathrm{complete}$ \textbf{then} $H\gets H\mathbin{\|}\Call{PendingAction}{F}$
+  \EndWhile
+  \State $(S.m,q)\gets\mathcal O.\Call{Verify}{S.\hat P}$; $B.\mathrm{submissions}\gets B.\mathrm{submissions}+1$
+  \If{$q=\mathrm{accepted}$} \State \Return $(S.\hat P,q)$ \EndIf
+\EndWhile
+\State \Return $(S.\hat P,q)$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Repository Coordination}
+\label{sec:repository-method}
+
+A change to a shared implementation can affect several callers in a repository. LaDiM provides a map of files, imports, symbols, and notebook cells from which the agent proposes work units with file scopes, interface goals, and dependencies. It selects a unit whose prerequisites have current checkpoints, then investigates the related interfaces. Checkpoints record syntax validation and selected local tests. Code changes invalidate checkpoints for affected units and their dependents, prompting checks of the callers that may have changed behavior. The Orchestrator evaluates the complete repository, including its entry points and training computations, to determine acceptance.
+
+Repository context management carries relevant evidence as investigation moves across files. LaDiM archives observations and conversations and provides a tool for retrieving detailed records. At the role handoff, an actual switch between work units, or a context capacity boundary, it rebuilds the conversation around the current plan, hypotheses, measurements, and relevant code already inspected. Earlier measurements retain their association with the candidate on which they were obtained. Algorithm~\ref{alg:repository} starts with complete repository verification and returns an accepted candidate immediately. Otherwise, the initial measurements support diagnosis, and the resulting evidence starts the repair loop. Its context operations serve Algorithms~\ref{alg:diagnose} and~\ref{alg:repair}.
+
+\begin{algorithm}[!htb]
+\caption{Repository migration and context operations}
+\label{alg:repository}
+\begin{algorithmic}[1]
+\Function{RepositoryMigrate}{$\mathcal T,M,B$}
+  \State $S.\hat P\gets\Call{Translate}{M,A_T,\mathcal T}$; $C\gets\Call{RepositoryContext}{\operatorname{Map}(\mathcal T)}$
+  \State $(S.m,q)\gets\mathcal O.\Call{Verify}{S.\hat P}$
+  \If{$q=\mathrm{accepted}$} \State \Return $(S.\hat P,q)$ \EndIf
+  \State $E\gets\Call{LayeredDiagnosis}{\mathcal T,S,M,B,C}$
+  \State \Return $\Call{Repair}{\mathcal T,S,E,q,M,B,C}$
+\EndFunction
+\Function{$C$.Record}{$c,r,S$}
+  \State $C.\mathrm{archive}\gets C.\mathrm{archive}\mathbin{\|}(c,r)$
+  \If{$\Call{CodeChanged}{r}$}
+    \State $\Call{MarkHistorical}{C.\mathrm{measurements}}$
+    \State $\Call{Invalidate}{C.\mathrm{checkpoints},\operatorname{AffectedUnitsAndDependents}(r,C.\mathrm{plan})}$
+  \EndIf
+  \State $(C.\mathrm{plan},C.\mathrm{unit},C.\mathrm{checkpoints})\gets\Call{Update}{c,r,C}$
+\EndFunction
+\Function{$C$.BeforeCall}{$H,S$}
+  \If{$C.\mathrm{handoff}\lor\Call{UnitSwitched}{C}\lor\Call{AtCapacity}{H}$}
+    \State $\Call{Archive}{C,H}$
+    \State $K\gets\Call{CurrentReadCode}{C.\mathrm{unit},S.\hat P}$
+    \State $E\gets\Call{PublicFindings}{H,C.\mathrm{archive}}$
+    \State $H\gets\Call{Rebuild}{H.\mathrm{role},C.\mathrm{plan},E,S.m,K}$
+    \State $C.\mathrm{handoff}\gets\mathrm{false}$; $C.\mathrm{previousUnit}\gets C.\mathrm{unit}$
+  \EndIf
+  \State \Return $H$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+
+
+
+\section{Experiments}
+
+\subsection{Experimental Setup}
+\label{sec:setup}
+
+\textbf{Tasks.}
+The main comparison contains 50 PyTorch-to-MindSpore migration tasks covering tensor operations, CNNs, MLPs, Transformers, language models, and parameter and optimizer interfaces. Table~\ref{tab:collections} summarizes this collection and the supplied candidates used to study repair and training signals. Across languages, we migrate 18 Java/DJL programs to Python/PyTorch, comprising eight textbook examples and ten applications~\citep{djl2026,d2ljava2026}. Their sources average 221.2 nonblank lines. The public time series~\citep{jingles2026timeseries} and recommendation~\citep{chak2026twotower} repositories contain 13 and 24 code files or notebooks, totaling 865 and 2,086 nonblank lines, including original tests and notebook code cells.
+
+\begin{table}[!htb]
+\caption{Program collections for migration and repair, with their candidate construction, model coverage, and task counts.}
+\label{tab:collections}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{4.9cm}r@{}}
+\toprule
+\textbf{Collection} & \textbf{Candidate construction} & \textbf{Model or operation coverage} & \textbf{Tasks} \\
+\midrule
+PyTorch to MindSpore & Generated translations & Operators, CNNs, MLPs, Transformers, language models & 50 \\
+Natural translation faults & Supplied translations & Recurrent, convolutional, attention, and set models & 10 \\
+Training-signal ablation & Controlled training faults & CNN, image MLP, Transformer, causal language model & 16 \\
+JAX repair & Supplied faulty candidates & MLP and CNN & 6 \\
+\bottomrule
+\end{tabular*}
+
+
+\end{table}
+
+\textbf{Evaluation protocol.}
+Methods use common source programs, evaluation inputs, and corresponding initial parameters. Repair methods also share initial translations. Acceptance requires all applicable comparisons of execution, forward values, gradients, parameter updates, and specified optimizer state, together with shape, data type, and trainability checks. In the main migration comparisons, individual programs retain their own state over two consecutive steps, and repositories use three. Candidates that pass the public checks undergo confirmation on additional seeds. Main MindSpore absolute/relative tolerances are $10^{-4}/10^{-4}$ for forward values, $10^{-4}/10^{-3}$ for gradients, and $10^{-5}/10^{-3}$ for updates. BF16 matrix multiplication uses absolute tolerance $10^{-2}$. Appendix~\ref{sec:supplementary-protocols} gives the settings for each study.
+
+The repository tables report \emph{behavior checks passed}, counting numerical comparisons, execution, and source behavior. Time series has 69 checks across public and confirmation evaluations. Recommendation has 145 public checks, comprising 114 numerical, 24 execution and differentiation, and seven source-behavior checks. Its ten original tests are reported separately. Complete repository acceptance also requires the declared entry points, file coverage, and documentation checks.
+
+We retain the baselines' algorithms, prompts, tools, parsers, and retry policies, using the same DeepSeek backend. CodeTransEngine uses its direct translation configuration. Individual migration allows 40 investigation and repair calls, 120,000 output tokens, 1,800 seconds, and four external submissions. Repository limits are 80 calls, 480,000 output tokens, 3,600 seconds, and four submissions. A submission can follow several model calls and edits. Migration costs include the common initial translation once and all subsequent input and output tokens, including failed attempts. Supplied-candidate studies report repair costs. Failures remain in the task denominator, and acceptance at each budget scores the current candidate.
+
+\subsection{Main Results}
+\label{sec:main-results}
+
+\begin{table}[t]
+\caption{Migration results and model use on common inputs. Panels (a,b) report acceptance and complete token costs. Panels (c,d) report repository checks and costs. A dash denotes a method without LLM calls.}
+\label{tab:main-results}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}
+\toprule
+\textbf{Method} & \thead{Model\\calls} & \thead{Input tokens\\(millions)} & \thead{Output tokens\\(millions)} & \thead{Total tokens\\(millions)} & \textbf{Accepted} \\
+\midrule
+\multicolumn{6}{l}{\textit{(a) PyTorch to MindSpore}} \\
+Direct LLM & 29 & 0.018 & 0.411 & 0.429 & 29/50 \\
+CodeTransEngine~\citep{macedo2025codetransengine} & 29 & 0.022 & 0.257 & 0.280 & 31/50 \\
+MSAdapter~\citep{openi2025msadapter} & -- & -- & -- & -- & 15/50 \\
+SWE-agent~\citep{yang2024sweagent} & 1,097 & 19.845 & 0.987 & 20.831 & 44/50 \\
+MatchFixAgent~\citep{ibrahimzada2025matchfixagent} & 619 & 10.750 & 1.347 & 12.097 & \textbf{50/50} \\
+\textbf{LaDiM (ours)} & 326 & 4.298 & 0.861 & 5.159 & \textbf{50/50} \\
+\midrule
+\multicolumn{6}{l}{\textit{(b) Java/DJL to Python/PyTorch}} \\
+Direct LLM & 18 & 0.142 & 0.552 & 0.694 & 1/18 \\
+InterTrans~\citep{macedo2024intertrans} & 89 & 0.680 & 1.606 & 2.286 & 1/18 \\
+Test-guided repair & 71 & 1.594 & 2.881 & 4.475 & 7/18 \\
+SWE-agent & 682 & 23.063 & 1.258 & 24.321 & 8/18 \\
+MatchFixAgent & 524 & 26.335 & 2.020 & 28.355 & 8/18 \\
+\textbf{LaDiM (ours)} & 345 & 19.470 & 2.009 & 21.479 & \textbf{9/18} \\
+\bottomrule
+\end{tabular*}
+\par\vspace{5pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrr@{}}
+\toprule
+\multicolumn{7}{l}{\textit{(c) Time series repository}} \\
+\midrule
+\textbf{Method} & \thead{Behavior checks\\passed} & \textbf{Gradients} & \thead{Parameter\\updates} & \thead{Entry\\points} & \thead{Repair\\calls} & \thead{Total tokens\\(millions)} \\
+\midrule
+SWE-agent & 69/69 & 9/9 & 9/9 & 3/3 & 80 & 8.200 \\
+MatchFixAgent & 69/69 & 9/9 & 9/9 & 3/3 & 69 & 13.598 \\
+\textbf{LaDiM (ours)} & 69/69 & 9/9 & 9/9 & 3/3 & \textbf{35} & 2.614 \\
+\bottomrule
+\end{tabular*}
+\par\vspace{5pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrr@{}}
+\toprule
+\multicolumn{7}{l}{\textit{(d) Recommendation repository}} \\
+\midrule
+\textbf{Method} & \thead{Behavior checks\\passed} & \textbf{Gradients} & \thead{Parameter\\updates} & \thead{Original\\tests} & \thead{Repair\\calls} & \thead{Total tokens\\(millions)} \\
+\midrule
+SWE-agent & 104/145 & 17/18 & 12/18 & 10/10 & 80 & 8.317 \\
+MatchFixAgent & 129/145 & 18/18 & 16/18 & 0/10 & 80 & 8.679 \\
+\textbf{LaDiM (ours)} & \textbf{130/145} & 18/18 & 15/18 & 10/10 & 80 & 8.811 \\
+\bottomrule
+\end{tabular*}
+
+
+\par\smallskip
+\begin{minipage}{\linewidth}
+\footnotesize MatchFixAgent passes 0/10 original recommendation tests because an unmigrated PyTorch import prevents test collection.
+\end{minipage}
+\end{table}
+
+\textbf{Migration to MindSpore.}
+LaDiM completes all 50 migrations with less than half the total tokens used by MatchFixAgent (Table~\ref{tab:main-results}a). Its savings extend to both faulty translations and programs that are already correct. On faulty inputs, LaDiM uses training discrepancies to investigate the code and guide corrective edits. On initially correct inputs, investigation and confirmation establish acceptance without corrective changes. Figure~\ref{fig:repair-comparison} separates these costs and shows lower token use on 27 of the 29 distinct inputs. LaDiM reaches 46/50 acceptance after one submission and 50/50 after two, retaining full acceptance at four. Seven of the nine faulty inputs are repaired at the first submission, and new measurements guide the remaining two corrections. The complete process uses 326 model calls, compared with MatchFixAgent's 619, with reduced input usage accounting for 93.0\% of the token savings.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/repair_comparison.pdf}
+\caption{Token use on the common MindSpore collection. (a) Totals include initial translation and subsequent calls grouped by initial correctness. (b) Each bar shows MatchFixAgent tokens minus LaDiM tokens for one input, sorted within each group. Positive values indicate lower LaDiM cost, occurring on 19 of 20 initially correct and 8 of 9 initially incorrect inputs.}
+\label{fig:repair-comparison}
+\end{figure}
+
+\textbf{Migration across languages.}
+LaDiM completes all eight textbook examples and one application in the Java/DJL collection, covering MatchFixAgent's accepted set and an additional recurrent network example (Table~\ref{tab:main-results}b). All repair methods preserve the initially accepted application. The added coverage comes from training examples where corresponding interfaces permit comparison of the training computations. LaDiM achieves the highest acceptance with 11.7\% fewer tokens than SWE-agent and 24.2\% fewer than MatchFixAgent.
+
+\textbf{Repository migration.}
+All three agents pass 69/69 checks and execute the three time series entry points, which share a model across a training script, notebook, and teaching examples. LaDiM completes repair in 35 calls, compared with 80 for SWE-agent and 69 for MatchFixAgent, using 68.1\% and 80.8\% fewer total tokens. This result extends the efficiency advantage to changes that must work across several callers.
+
+On recommendation, LaDiM achieves the highest behavioral coverage, passing 130/145 checks and all ten original tests. Its repaired implementation supports reward model inference and retrieval, which remain unresolved in both baselines, and executes the training command. This coverage extends from the shared model computations to their use in training, inference, and retrieval, where repairs must work together across repository interfaces. Appendix~\ref{sec:repository-results} gives the detailed checks.
+
+\subsection{Analysis Experiments}
+\label{sec:fault-characterization}
+
+\textbf{Repairing Natural Translation Faults.}
+LaDiM repairs four of five initially incorrect translations and preserves all five initially correct programs, yielding 9/10 final acceptance (Table~\ref{tab:natural-repairs}). The baselines preserve the correct programs and leave all five faulty programs unresolved. An LSTM translation illustrates how successive measurements guide these corrections. After the first submission leaves an unregistered recurrent operator unresolved, LaDiM reproduces the failure, inspects registration, and adds the recurrence using target-framework operations. The second submission exposes recursive tensor indexing. A focused test identifies the dispatch cycle, and the third submission corrects it and passes loss, gradient, and update checks. As execution reaches further code, new measurements guide the next correction (Appendix~\ref{sec:natural-protocol}).
+
+\begin{table}[!htb]
+\caption{Repair and preservation on ten supplied translations. Direct repair shares LaDiM's inspection, testing, and editing tools. Costs include all investigation and repair calls.}
+\label{tab:natural-repairs}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}
+\toprule
+\textbf{Method} & \thead{Initially incorrect\\programs repaired} & \thead{Initially correct\\programs preserved} & \thead{Repair tokens\\(millions)} & \thead{Final\\accepted} \\
+\midrule
+Direct repair & 0/5 & 5/5 & 3.751 & 5/10 \\
+SWE-agent & 0/5 & 5/5 & 12.678 & 5/10 \\
+MatchFixAgent & 0/5 & 5/5 & 14.351 & 5/10 \\
+LaDiM & 4/5 & 5/5 & 13.207 & 9/10 \\
+\bottomrule
+\end{tabular*}
+
+
+\end{table}
+
+\textbf{Training Signals and Detection Latency.}
+LaDiM's gradient and update checks detect their respective faults at step~1 in all 12 runs per fault, while the mean loss-difference curves cross the detection threshold at steps 31 and 18 (Figure~\ref{fig:gradient-drift}). These trajectories follow four models for 50 steps with source and target executions retaining separate state. Gradient faults can preserve current loss, and update faults can preserve forward values and gradients; their effects enter later forward computations through the changed training state. Individual loss trajectories cross within 50 steps in only 3/12 and 4/12 runs. Direct checks expose the affected computation as soon as it diverges. The comparisons use loss absolute difference, gradient norm absolute difference, and relative update L2 difference at thresholds 0.02, 0.05, and 0.03. With per-step synchronization, each target starts the checked step from the source state. Correct translations pass the recorded checks, with maximum loss difference $3.815\times10^{-6}$.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\linewidth]{figures/gradient_drift.pdf}
+\caption{LaDiM detects gradient scaling (a) and partial update suppression (b) at step~1 in all 12 runs per panel through gradient and update discrepancies. Loss-based detection on the mean loss-difference curves occurs at steps 31 and 18. Individual loss trajectories cross within 50 steps in 3/12 and 4/12 cases. Differences are normalized by their thresholds; curves show means and shading shows ranges.}
+\label{fig:gradient-drift}
+\end{figure}
+
+\textbf{Generalization Across Frameworks.}
+\label{sec:generalization}
+LaDiM repairs all six MLP and CNN candidates in JAX within the first submission (Table~\ref{tab:jax}). The same diagnosis and repair procedure verifies JAX gradients and Optax updates, extending its application beyond MindSpore.
+
+\begin{table}[!htb]
+\caption{Repair of six supplied JAX candidates with up to four submissions. Costs cover investigation and repair.}
+\label{tab:jax}
+\centering
+\small
+
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}
+\toprule
+\textbf{Method} & \textbf{Model calls} & \textbf{Repair tokens} & \textbf{Accepted} \\
+\midrule
+Direct repair (shared tools) & 57 & 353,311 & 6/6 \\
+LaDiM & 76 & 674,009 & 6/6 \\
+\bottomrule
+\end{tabular*}
+
+
+\end{table}
+
+\subsection{Ablation Studies}
+\label{sec:ablations}
+
+\textbf{Training signals.}
+We compare cumulative feedback on 16 fixed candidates, with one execution, forward, gradient, and update fault in each CNN, image MLP, Transformer classifier, and small causal language model. Sources, candidates, tools, and budgets are fixed. Available feedback determines whether repair begins and stops. Table~\ref{tab:signal-ablation}a reports initially undetected faults and final acceptance under complete verification. Each added signal exposes another fault class, increasing acceptance from 4/16 to 16/16. Forward values reveal changed computations, gradients reveal differentiation faults, and updates reveal optimizer faults.
+
+\begin{table}[!htb]
+\caption{Cumulative ablations. (a) Training signals on 16 faulty candidates; tokens cover investigation and repair. Initially undetected faults trigger no repair, and final acceptance uses complete verification. (b) Agent components on the time series repository; calls count investigation and repair, and tokens additionally include the common initial translation. Each row retains the preceding signals or components within its panel.}
+\label{tab:signal-ablation}
+\label{tab:cumulative-components}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}
+\toprule
+\multicolumn{4}{l}{\textit{(a) Training signals: 16 faulty candidates}} \\
+\midrule
+\textbf{Available feedback} & \thead{Initially undetected\\faults} & \thead{Total tokens\\(millions)} & \thead{Final\\accepted} \\
+\midrule
+Execution and basic checks & 12 & 2.089 & 4/16 \\
+\quad + Forward values & 8 & 2.603 & 8/16 \\
+\quad + Gradients & 4 & 3.303 & 12/16 \\
+\quad + Parameter updates & \textbf{0} & 3.419 & \textbf{16/16} \\
+\bottomrule
+\end{tabular*}
+
+
+\par\vspace{5pt}
+
+
+
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{6.0cm}rrr@{}}
+\toprule
+\multicolumn{4}{l}{\textit{(b) Agent components: time series repository}} \\
+\midrule
+\textbf{Components} & \thead{Behavior\\checks passed} & \thead{Investigation\\and repair calls} & \thead{Total tokens\\(millions)} \\
+\midrule
+Repair Agent & 69/69 & 26 & 6.128 \\
+\quad + Verifier investigation & 69/69 & 18 & 3.896 \\
+\quad + Independent evidence handoff & 69/69 & 26 & 6.047 \\
+\quad + Repository context management & 69/69 & 22 & 1.937 \\
+\bottomrule
+\end{tabular*}
+
+
+\end{table}
+
+\textbf{Agent components.}
+We cumulatively add a read-only Verifier investigation, independent evidence handoff, and repository context management to the Repair Agent on the time series repository (Table~\ref{tab:cumulative-components}b). Each condition runs once with the same initial candidate, full training signals, base repair tools, and total budgets. The base condition retains the repair prompts and tool assistance. Investigation continues in the repair conversation until the independent handoff is added.
+
+All four conditions complete the migration and pass 69/69 behavior checks. The full method uses the fewest total tokens, 1.937 million, reducing cost by 68.4\% relative to the base Repair Agent. The cost of an independent handoff depends on how its evidence is carried forward: adding repository context management reduces investigation and repair input tokens from 5.731 million to 1.700 million. Retaining current findings and relevant code allows the Repair Agent to continue from the investigation with less repeated context.
+
+
+
+\section{Conclusion}
+
+We introduced LaDiM, a multi-agent framework for migrating deep learning code while preserving training behavior. LaDiM uses dependencies between training computations to guide diagnosis and passes the resulting evidence to a separate Repair Agent. Verification after each submission guides subsequent changes, and dependency tracking with evidence retrieval supports repair across files. This design detects and repairs semantic errors that remain hidden when evaluation checks only execution or loss. Experiments across frameworks and programming languages demonstrate LaDiM's effectiveness in preserving training behavior and its efficiency in diagnosis and repair.
+
+
+\subsection*{AI use statement}
+
+
+
+\bibliographystyle{iclr2027_conference}
+
+\section*{References}
+\begin{thebibliography}{33}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Chen et~al.(2024{\natexlab{a}})Chen, Su, Zuo, Yang, Yuan, Chan, Yu,
+  Lu, Hung, Qian, Qin, Cong, Xie, Liu, Sun, and Zhou]{chen2023agentverse}
+Weize Chen, Yusheng Su, Jingwei Zuo, Cheng Yang, Chenfei Yuan, Chi-Min Chan,
+  Heyang Yu, Yaxi Lu, Yi-Hsin Hung, Chen Qian, Yujia Qin, Xin Cong, Ruobing
+  Xie, Zhiyuan Liu, Maosong Sun, and Jie Zhou.
+\newblock {AgentVerse}: Facilitating multi-agent collaboration and exploring
+  emergent behaviors.
+\newblock In \emph{Proceedings of the Twelfth International Conference on
+  Learning Representations}, 2024{\natexlab{a}}.
+\newblock URL \url{https://openreview.net/forum?id=EHg5GDnyq1}.
+
+\bibitem[Chen et~al.(2024{\natexlab{b}})Chen, Lin, Sch{\"a}rli, and
+  Zhou]{chen2023selfdebugging}
+Xinyun Chen, Maxwell Lin, Nathanael Sch{\"a}rli, and Denny Zhou.
+\newblock Teaching large language models to self-debug.
+\newblock In \emph{Proceedings of the Twelfth International Conference on
+  Learning Representations}, 2024{\natexlab{b}}.
+\newblock URL \url{https://openreview.net/forum?id=KuPixIqPiq}.
+
+\bibitem[Deng et~al.(2023)Deng, Meng, Chen, Liu, Xiang, and
+  Chen]{deng2023tensorscope}
+Zizhuang Deng, Guozhu Meng, Kai Chen, Tong Liu, Lu~Xiang, and Chunyang Chen.
+\newblock Differential testing of cross deep learning framework {APIs}:
+  Revealing inconsistencies and vulnerabilities.
+\newblock In \emph{32nd USENIX Security Symposium (USENIX Security 23)}, pp.\
+  7393--7410. USENIX Association, 2023.
+\newblock URL
+  \url{https://www.usenix.org/conference/usenixsecurity23/presentation/deng-zizhuang}.
+
+\bibitem[{DJL Contributors}(2026{\natexlab{a}})]{d2ljava2026}
+{DJL Contributors}.
+\newblock Dive into deep learning with java.
+\newblock \url{https://github.com/deepjavalibrary/d2l-java},
+  2026{\natexlab{a}}.
+\newblock Source repository, accessed September 21, 2026.
+
+\bibitem[{DJL Contributors}(2026{\natexlab{b}})]{djl2026}
+{DJL Contributors}.
+\newblock Deep java library.
+\newblock \url{https://github.com/deepjavalibrary/djl}, 2026{\natexlab{b}}.
+\newblock Source repository, accessed September 21, 2026.
+
+\bibitem[{gauravchak}(2026)]{chak2026twotower}
+{gauravchak}.
+\newblock Two tower models.
+\newblock \url{https://github.com/gauravchak/two_tower_models}, 2026.
+\newblock Source repository, accessed September 21, 2026.
+
+\bibitem[{Google}(2025)]{google2025torchax}
+{Google}.
+\newblock {torchax}: A {PyTorch} frontend for {JAX}.
+\newblock \url{https://google.github.io/torchax/}, 2025.
+\newblock Accessed: 2026-06-02.
+
+\bibitem[Guan et~al.(2025)Guan, Yin, Peng, and Ni]{guan2025repotransagent}
+Ziqi Guan, Xin Yin, Zhiyuan Peng, and Chao Ni.
+\newblock {RepoTransAgent}: Multi-agent {LLM} framework for repository-aware
+  code translation.
+\newblock \emph{arXiv preprint arXiv:2508.17720}, 2025.
+\newblock \doi{10.48550/arXiv.2508.17720}.
+\newblock URL \url{https://arxiv.org/abs/2508.17720}.
+
+\bibitem[He et~al.(2025)He, Chen, Yang, Zhao, Yin, Kang, Lin, Rajmohan, and
+  Zhang]{he-etal-2025-execoder}
+Minghua He, Yue Chen, Fangkai Yang, Pu~Zhao, Wenjie Yin, Yu~Kang, Qingwei Lin,
+  Saravan Rajmohan, and Dongmei Zhang.
+\newblock {ExeCoder}: Empowering large language models with executability
+  representation for code translation.
+\newblock In \emph{Proceedings of the 2025 Conference on Empirical Methods in
+  Natural Language Processing}, pp.\  7099--7125, Suzhou, China, 2025.
+  Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/2025.emnlp-main.362}.
+\newblock URL \url{https://aclanthology.org/2025.emnlp-main.362/}.
+
+\bibitem[Hong et~al.(2024)Hong, Zhuge, Chen, Zheng, Cheng, Zhang, Wang, Wang,
+  Yau, Lin, Zhou, Ran, Xiao, Wu, and Schmidhuber]{hong2023metagpt}
+Sirui Hong, Mingchen Zhuge, Jiaqi Chen, Xiawu Zheng, Yuheng Cheng, Ceyao Zhang,
+  Jinlin Wang, Zili Wang, Steven Ka~Shing Yau, Zijuan Lin, Liyang Zhou, Chenyu
+  Ran, Lingfeng Xiao, Chenglin Wu, and J{\"u}rgen Schmidhuber.
+\newblock {MetaGPT}: Meta programming for a multi-agent collaborative
+  framework.
+\newblock In \emph{Proceedings of the Twelfth International Conference on
+  Learning Representations}, 2024.
+\newblock URL \url{https://openreview.net/forum?id=VtmBAGCN7o}.
+
+\bibitem[Ibrahimzada et~al.(2026)Ibrahimzada, Paulsen, Jabbarvand, Dodds, and
+  Kroening]{ibrahimzada2025matchfixagent}
+Ali~Reza Ibrahimzada, Brandon Paulsen, Reyhaneh Jabbarvand, Joey Dodds, and
+  Daniel Kroening.
+\newblock {MatchFixAgent}: Language-agnostic autonomous repository-level code
+  translation validation and repair.
+\newblock In \emph{Forty-third International Conference on Machine Learning},
+  2026.
+\newblock URL \url{https://openreview.net/forum?id=MuyXpH3GL1}.
+
+\bibitem[{jinglescode}(2026)]{jingles2026timeseries}
+{jinglescode}.
+\newblock Time series forecasting with pytorch.
+\newblock \url{https://github.com/jinglescode/time-series-forecasting-pytorch},
+  2026.
+\newblock Source repository, accessed September 21, 2026.
+
+\bibitem[Lachaux et~al.(2020)Lachaux, Rozi{\`e}re, Chanussot, and
+  Lample]{roziere2020transcoder}
+Marie-Anne Lachaux, Baptiste Rozi{\`e}re, Lowik Chanussot, and Guillaume
+  Lample.
+\newblock Unsupervised translation of programming languages.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~33, pp.\  20601--20611, 2020.
+\newblock URL
+  \url{https://proceedings.neurips.cc/paper/2020/hash/ed23fbf18c2cd35f8c7f8de44f85c08d-Abstract.html}.
+
+\bibitem[Le et~al.(2014)Le, Afshari, and Su]{le2014emi}
+Vu~Le, Mehrdad Afshari, and Zhendong Su.
+\newblock Compiler validation via equivalence modulo inputs.
+\newblock In \emph{Proceedings of the 35th ACM SIGPLAN Conference on
+  Programming Language Design and Implementation}, pp.\  216--226. ACM, 2014.
+\newblock \doi{10.1145/2594291.2594334}.
+\newblock URL \url{https://doi.org/10.1145/2594291.2594334}.
+
+\bibitem[Ma et~al.(2018)Ma, Juefei-Xu, Zhang, Sun, Xue, Li, Chen, Su, Li, Liu,
+  Zhao, and Wang]{ma2018deepgauge}
+Lei Ma, Felix Juefei-Xu, Fuyuan Zhang, Jiyuan Sun, Minhui Xue, Bo~Li, Chunyang
+  Chen, Ting Su, Li~Li, Yang Liu, Jianjun Zhao, and Yadong Wang.
+\newblock {DeepGauge}: Multi-granularity testing criteria for deep learning
+  systems.
+\newblock In \emph{Proceedings of the 33rd ACM/IEEE International Conference on
+  Automated Software Engineering}, pp.\  120--131. ACM, 2018.
+\newblock \doi{10.1145/3238147.3238202}.
+\newblock URL \url{https://doi.org/10.1145/3238147.3238202}.
+
+\bibitem[Macedo et~al.(2025{\natexlab{a}})Macedo, Tian, and
+  Adams]{macedo2025codetransengine}
+Marcos Macedo, Yuan Tian, and Bram Adams.
+\newblock {CodeTransEngine}: Ready-to-use backend for {LLM}-based code
+  translation.
+\newblock In \emph{ICLR 2025 Third Workshop on Deep Learning for Code},
+  2025{\natexlab{a}}.
+\newblock URL \url{https://openreview.net/forum?id=9WHJuzjPJf}.
+
+\bibitem[Macedo et~al.(2025{\natexlab{b}})Macedo, Tian, Nie, Cogo, and
+  Adams]{macedo2024intertrans}
+Marcos Macedo, Yuan Tian, Pengyu Nie, Filipe~R. Cogo, and Bram Adams.
+\newblock {InterTrans}: Leveraging transitive intermediate translations to
+  enhance {LLM}-based code translation.
+\newblock In \emph{Proceedings of the 47th International Conference on Software
+  Engineering}, pp.\  2819--2831. IEEE, 2025{\natexlab{b}}.
+\newblock \doi{10.1109/ICSE55347.2025.00236}.
+\newblock URL \url{https://doi.org/10.1109/ICSE55347.2025.00236}.
+
+\bibitem[{MindSpore}(2020)]{mindspore2020whitepaper}
+{MindSpore}.
+\newblock {MindSpore}: A new deep learning computing framework.
+\newblock \url{https://www.mindspore.cn/en}, 2020.
+\newblock Framework white paper and documentation.
+
+\bibitem[{MindSpore}(2023)]{mindspore2023mindconverter}
+{MindSpore}.
+\newblock Migrating from third party frameworks with {MindConverter}.
+\newblock
+  \url{https://www.mindspore.cn/mindinsight/docs/en/r2.0.0-alpha/migrate_3rd_scripts_mindconverter.html},
+  2023.
+\newblock Accessed: 2026-06-02.
+
+\bibitem[Nguyen et~al.(2013)Nguyen, Qi, Roychoudhury, and
+  Chandra]{nguyen2013semfix}
+Hoang Duong~Thien Nguyen, Dawei Qi, Abhik Roychoudhury, and Satish Chandra.
+\newblock {SemFix}: Program repair via semantic analysis.
+\newblock In \emph{Proceedings of the 35th International Conference on Software
+  Engineering}, pp.\  772--781. IEEE, 2013.
+\newblock \doi{10.1109/ICSE.2013.6606623}.
+\newblock URL \url{https://doi.org/10.1109/ICSE.2013.6606623}.
+
+\bibitem[{OpenI}(2025)]{openi2025msadapter}
+{OpenI}.
+\newblock {MSAdapter}.
+\newblock \url{https://openi.pcl.ac.cn/OpenI/MSAdapter/src/tag/v0.6.0}, 2025.
+\newblock Version 0.6.0. Accessed: 2026-09-20.
+
+\bibitem[Paszke et~al.(2019)Paszke, Gross, Massa, Lerer, Bradbury, Chanan,
+  Killeen, Lin, Gimelshein, Antiga, Desmaison, Kopf, Yang, DeVito, Raison,
+  Tejani, Chilamkurthy, Steiner, Fang, Bai, and Chintala]{paszke2019pytorch}
+Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory
+  Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, Alban
+  Desmaison, Andreas Kopf, Edward Yang, Zachary DeVito, Martin Raison, Alykhan
+  Tejani, Sasank Chilamkurthy, Benoit Steiner, Lu~Fang, Junjie Bai, and Soumith
+  Chintala.
+\newblock {PyTorch}: An imperative style, high-performance deep learning
+  library.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~32, pp.\  8024--8035, 2019.
+\newblock URL
+  \url{https://papers.neurips.cc/paper/9015-pytorch-an-imperative-style-high-performance-deep-learning-library}.
+
+\bibitem[Pei et~al.(2017)Pei, Cao, Yang, and Jana]{pei2017deepxplore}
+Kexin Pei, Yinzhi Cao, Junfeng Yang, and Suman Jana.
+\newblock {DeepXplore}: Automated whitebox testing of deep learning systems.
+\newblock In \emph{Proceedings of the 26th Symposium on Operating Systems
+  Principles}, pp.\  1--18. ACM, 2017.
+\newblock \doi{10.1145/3132747.3132785}.
+\newblock URL \url{https://doi.org/10.1145/3132747.3132785}.
+
+\bibitem[Qian et~al.(2024)Qian, Liu, Liu, Chen, Dang, Li, Yang, Chen, Su, Cong,
+  Xu, Li, Liu, and Sun]{qian2023chatdev}
+Chen Qian, Wei Liu, Hongzhang Liu, Nuo Chen, Yufan Dang, Jiahao Li, Cheng Yang,
+  Weize Chen, Yusheng Su, Xin Cong, Juyuan Xu, Dahai Li, Zhiyuan Liu, and
+  Maosong Sun.
+\newblock {ChatDev}: Communicative agents for software development.
+\newblock In \emph{Proceedings of the 62nd Annual Meeting of the Association
+  for Computational Linguistics}, pp.\  15174--15186. Association for
+  Computational Linguistics, 2024.
+\newblock \doi{10.18653/v1/2024.acl-long.810}.
+\newblock URL \url{https://aclanthology.org/2024.acl-long.810/}.
+
+\bibitem[Rozi{\`e}re et~al.(2022)Rozi{\`e}re, Zhang, Charton, Harman, Synnaeve,
+  and Lample]{roziere2021unittests}
+Baptiste Rozi{\`e}re, Jie~M. Zhang, Francois Charton, Mark Harman, Gabriel
+  Synnaeve, and Guillaume Lample.
+\newblock Leveraging automated unit tests for unsupervised code translation.
+\newblock In \emph{Proceedings of the Tenth International Conference on
+  Learning Representations}, 2022.
+\newblock URL \url{https://openreview.net/forum?id=cmt-6KtR4c4}.
+
+\bibitem[Shinn et~al.(2023)Shinn, Cassano, Berman, Gopinath, Narasimhan, and
+  Yao]{shinn2023reflexion}
+Noah Shinn, Federico Cassano, Edward Berman, Ashwin Gopinath, Karthik
+  Narasimhan, and Shunyu Yao.
+\newblock Reflexion: Language agents with verbal reinforcement learning.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2303.11366}.
+
+\bibitem[Szafraniec et~al.(2023)Szafraniec, Rozi{\`e}re, Leather, Labatut,
+  Charton, and Synnaeve]{szafraniec2023compiler}
+Marc Szafraniec, Baptiste Rozi{\`e}re, Hugh~James Leather, Patrick Labatut,
+  Francois Charton, and Gabriel Synnaeve.
+\newblock Code translation with compiler representations.
+\newblock In \emph{Proceedings of the Eleventh International Conference on
+  Learning Representations}, 2023.
+\newblock URL \url{https://openreview.net/forum?id=XomEU3eNeSQ}.
+
+\bibitem[Wang et~al.(2024)Wang, Chen, Yuan, Zhang, Li, Peng, and
+  Ji]{wang2024codeact}
+Xingyao Wang, Yangyi Chen, Lifan Yuan, Yizhe Zhang, Yunzhu Li, Hao Peng, and
+  Heng Ji.
+\newblock Executable code actions elicit better {LLM} agents.
+\newblock In \emph{Proceedings of the 41st International Conference on Machine
+  Learning}, volume 235 of \emph{Proceedings of Machine Learning Research},
+  pp.\  50733--50749, Vienna, Austria, 2024. PMLR.
+\newblock URL \url{https://proceedings.mlr.press/v235/wang24h.html}.
+
+\bibitem[Wu et~al.(2024)Wu, Bansal, Zhang, Wu, Li, Zhu, Jiang, Zhang, Zhang,
+  Liu, Awadallah, White, Burger, and Wang]{wu2023autogen}
+Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran Wu, Beibin Li, Erkang Zhu,
+  Li~Jiang, Xiaoyun Zhang, Shaokun Zhang, Jiale Liu, Ahmed~Hassan Awadallah,
+  Ryen~W. White, Doug Burger, and Chi Wang.
+\newblock {AutoGen}: Enabling next-gen {LLM} applications via multi-agent
+  conversation.
+\newblock In \emph{Proceedings of the First Conference on Language Modeling},
+  2024.
+\newblock URL \url{https://openreview.net/forum?id=uAjxFFing2}.
+
+\bibitem[Xia et~al.(2023)Xia, Wei, and Zhang]{xia2023aprplm}
+Chunqiu~Steven Xia, Yuxiang Wei, and Lingming Zhang.
+\newblock Automated program repair in the era of large pre-trained language
+  models.
+\newblock In \emph{Proceedings of the 45th International Conference on Software
+  Engineering}, pp.\  1482--1494. IEEE, 2023.
+\newblock \doi{10.1109/ICSE48619.2023.00129}.
+\newblock URL \url{https://doi.org/10.1109/ICSE48619.2023.00129}.
+
+\bibitem[Yang et~al.(2023)Yang, Deng, Yao, Tu, Li, and
+  Zhang]{yang2023nablafuzz}
+Chenyuan Yang, Yinlin Deng, Jiayi Yao, Yuxing Tu, Hanchi Li, and Lingming
+  Zhang.
+\newblock Fuzzing automatic differentiation in deep-learning libraries.
+\newblock In \emph{2023 IEEE/ACM 45th International Conference on Software
+  Engineering (ICSE)}, 2023.
+\newblock \doi{10.1109/ICSE48619.2023.00105}.
+\newblock URL \url{https://arxiv.org/abs/2302.04351}.
+
+\bibitem[Yang et~al.(2024)Yang, Jimenez, Wettig, Lieret, Yao, Narasimhan, and
+  Press]{yang2024sweagent}
+John Yang, Carlos~E. Jimenez, Alexander Wettig, Kilian Lieret, Shunyu Yao,
+  Karthik Narasimhan, and Ofir Press.
+\newblock {SWE-agent}: Agent-computer interfaces enable automated software
+  engineering.
+\newblock \emph{arXiv preprint arXiv:2405.15793}, 2024.
+\newblock \doi{10.48550/arXiv.2405.15793}.
+\newblock URL \url{https://arxiv.org/abs/2405.15793}.
+
+\bibitem[Yang et~al.(2011)Yang, Chen, Eide, and Regehr]{yang2011csmith}
+Xuejun Yang, Yang Chen, Eric Eide, and John Regehr.
+\newblock Finding and understanding bugs in {C} compilers.
+\newblock In \emph{Proceedings of the 32nd ACM SIGPLAN Conference on
+  Programming Language Design and Implementation}, pp.\  283--294. ACM, 2011.
+\newblock \doi{10.1145/1993498.1993532}.
+\newblock URL \url{https://doi.org/10.1145/1993498.1993532}.
+
+\end{thebibliography}
+
+
+\clearpage
+\appendix
+
+\section{Additional Experimental Protocols}
+\label{sec:supplementary-protocols}
+
+\subsection{Task Construction and Accounting}
+\label{sec:task-construction}
+
+The main MindSpore collection contains 50 task identifiers. Twelve entries reuse existing native source programs, and the remaining entries use programs authored from public interfaces and declared semantics. The identifiers correspond to 29 distinct combinations of source program and evaluation settings drawn from 24 source files. Conditions with identical source, evaluation settings, initial candidate, method, and inputs are executed once and associated with the corresponding identifiers. Acceptance in the main table uses all 50 identifiers, while token totals count actual calls. LaDiM, SWE-agent, and MatchFixAgent share the same initial translation for each distinct input. Production edits are restricted to the candidate program, with separate temporary tests available for investigation. Sources and task specifications remain fixed.
+
+The comparison across languages contains ten DJL application programs and eight textbook examples. LaDiM accepts one application and all eight examples. SWE-agent and MatchFixAgent each accept the same application and seven examples, while test-guided repair accepts seven examples. The saved initial translations and their generation costs are shared by the repair conditions. InterTrans uses its direct Java-to-Python path and an intermediate JavaScript path, with native search and extraction procedures. Its 2,286,034 tokens include 574,304 from incomplete generation calls and 1,711,730 from the completed search. The final evaluation compares outputs, losses, gradients, parameter updates, and observable optimizer state over two consecutive training steps.
+
+The common MindSpore initial translations cost 429,109 tokens. This amount is already included once in each repair method's total. Additional LaDiM investigation uses 1,409,686 tokens on initially accepted inputs and 3,320,339 on initially faulty inputs. The corresponding MatchFixAgent totals are 5,135,863 and 6,532,453. Across the 29 distinct inputs, the median ratio of LaDiM to MatchFixAgent total tokens is 0.588. Shared initial translation costs cancel when their paired costs are subtracted. MatchFixAgent reaches full acceptance within its first external submission through its internal analysis and repair orchestration.
+
+
+Source lengths count nonblank physical lines, including comments. Program means count each distinct source once. The 50 MindSpore identifiers use 24 source files, the signal study uses four, and the JAX study uses two. Repository lengths include all source Python files and notebook code cells, including original tests and excluding the external evaluation harness.
+
+\subsection{Numerical Comparisons and Migration Settings}
+\label{sec:migration-settings}
+
+The main MindSpore collection uses absolute/relative tolerances of $10^{-4}/10^{-4}$ for forward values, $10^{-4}/10^{-3}$ for gradients, and $10^{-5}/10^{-3}$ for updates. BF16 matrix multiplication uses absolute tolerance $10^{-2}$. Shapes, data types, initial values, and trainability must match. Parameter and optimizer tasks test their specified enumeration, gradient assignment, or update behavior. The source program and task requirements are available to each method. Acceptance also checks that the target framework executes the required computations.
+
+SWE-agent retains its native tools and controller. MatchFixAgent retains its analysis and repair orchestration through a shared DeepSeek tool backend. CodeTransEngine generates its own translation through the native direct path, and MSAdapter uses its native interface mapping. LaDiM allows eight calls per investigation or repair stage on individual programs. Agent calls allow at most 16,384 output tokens, while initial translation and the repair loop that rewrites the complete candidate allow at most 131,072 per call. The latter has four repair rounds. All diagnosis and repair stages share the cumulative limits in Section~\ref{sec:setup}. Repository calls allow at most 32,768 output tokens. Output budgets include reasoning tokens, and all input usage is recorded.
+
+\subsection{Random Seeds and Initial States}
+\label{sec:seeds}
+
+\textbf{Individual migration.}
+The main MindSpore and Java/DJL comparisons use seed 101 for public evaluation and seeds 202 and 303 for confirmation of a passing candidate. The MindSpore evaluator uses NumPy's random generator to sample numerical inputs and training targets. Corresponding parameters are assigned identical initial values generated from a hash of each parameter name; these values remain fixed across the three input seeds. Discrete inputs, masks, and prescribed optimizer-test values retain their task-specific settings. For Java/DJL programs, each paired evaluation supplies the original initial parameters and two preprocessed batches to the candidate for consecutive training steps. The component comparisons on these programs use the same settings.
+
+\textbf{Natural faults and training signals.}
+All ten natural translation tasks use seed 42 for public evaluation and 1042 and 2042 for confirmation. The 16 training-signal candidates use 4101, 5101, and 6101, with 4101 serving as the public seed. The paired evaluator sets the Python, NumPy, and PyTorch random states before constructing the source model and copies its initial state to both executions. A separate CPU PyTorch generator seeded with $s+101$ produces inputs and labels for evaluation seed $s$, including token inputs for text models. The signal study uses all three seeds when checking fault construction and scoring the final candidate with all signals. The additional repair collections retain their original unit probes and apply their task-specific acceptance checks without an additional multi-seed confirmation stage.
+
+\textbf{JAX repair.}
+The MLP and CNN programs use public seed 6701 and confirmation seeds 6702 and 6703. The evaluator initializes PyTorch's random state with the evaluation seed before constructing the source or candidate model. Inputs and class labels use a separate CPU generator with seed $s+101$. TorchAX transfers the candidate to JAX, where native differentiation and Optax perform the checked training step.
+
+\textbf{Detection trajectories.}
+Seeds 300, 301, and 302 define three repeated trajectories for each model. Each seed initializes the model's floating-point parameters, and its initial state is shared across the source and target executions. Image batch order uses seed $s+5000$, text-classification batch order uses $s+6000$, and language-model window selection uses $s+7000$. The fault and synchronization conditions for a given model and seed share the same initial state and 50-step batch sequence.
+
+\textbf{Time series repository.}
+The main comparison and component ablation use public seed 101 and confirmation seeds 202 and 303. The source model is initialized with the evaluation seed, and its parameters are copied to the target. NumPy generators use seed $s+47$ for the three training batches and seed $s$ for the synthetic price series. The target MindSpore random state also uses $s$. The training script, notebook, and teaching examples are exercised in the public evaluation; confirmation repeats the numerical checks on the remaining two seeds.
+
+\textbf{Recommendation repository.}
+The public numerical evaluation uses seed 101 for source model initialization and NumPy generation of user identifiers, features, histories, item identifiers, positions, and labels. The source parameters and retrieval corpus are then supplied to the target, whose MindSpore random state uses the same seed. The protocol assigns seeds 202 and 303 to confirmation after all public checks pass; the reported recommendation runs finish at the public evaluation. The original tests use seed 42, including Python, NumPy, and framework random states. For their exact-value history-encoder checks, the public task supplies the source parameters initialized with PyTorch seed 42. The one-epoch training command uses seed 101.
+
+\subsection{Training Signal and Framework Studies}
+
+The training signal and JAX studies use the same investigation and evidence handoff procedure with editing examples and format-correction feedback in their tool prompts. The signal experiment applies four controlled modifications to four model classes. The execution fault uses an invalid optimizer keyword, the forward fault adds a constant loss offset, the gradient fault scales gradients, and the update fault changes the learning rate. Each setting retains the initial investigation, current workspace, and cumulative call budget. Its visible checks determine whether repair starts and stops. Final acceptance uses all training signals on three seeds. MindSpore measurements use the \texttt{torch4ms} forward and backward bridge, followed by optimizer updates on its parameters.
+
+The JAX study contains six faults in MLP and CNN candidate programs. TorchAX exposes the PyTorch interface over JAX~\citep{google2025torchax}, with JAX computing gradients and Optax applying updates. Both LaDiM and direct repair allow four external submissions and accept every task at the first submission. LaDiM uses 674,009 tokens and direct repair uses 353,311. Native Ivy and \texttt{torch2jax} are also tested on these supplied faulty candidates and accept 0/6 repairs, while their healthy-input checks pass.
+
+\subsection{Detection Measurements}
+
+The detection study uses four models, three seeds, and 50 training steps. Gradient scaling and partial update suppression are evaluated both with per-step synchronization to the source state and with each execution retaining its own state. Loss, gradient norm, and relative update thresholds are 0.02, 0.05, and 0.03. Figure~\ref{fig:gradient-drift} uses trajectories with separate state and reports the mean and range across 12 runs per fault. The loss threshold crossings at steps 31 and 18 refer to mean curves. Direct gradient or update checks detect all respective faults at step~1.
+
+The scalar summaries are
+\begin{align}
+\Delta_{\mathrm{loss}} &= |L(P)-L(\hat P)|, \\
+\Delta_{\mathrm{grad}} &= \left|\|\nabla_{\theta}L(P)\|_2-\|\nabla_{\hat\theta}L(\hat P)\|_2\right|, \\
+\Delta_{\mathrm{param}} &= \frac{\|\Delta\theta-\Delta\hat\theta\|_2}{\|\Delta\theta\|_2+\epsilon}.
+\end{align}
+Here $\Delta\theta$ and $\Delta\hat\theta$ denote source and target parameter updates, and $\epsilon$ prevents division by zero. Figure~\ref{fig:gradient-drift} divides each difference by its detection threshold. The main migration comparison uses the task-specific tensor comparisons defined above.
+
+\section{Evidence Handoff and Agent Integration}
+\label{sec:component-study}
+
+The component study shares the main collection, initial translations, acceptance checks, and cumulative budgets. Continuing the original conversation retains its message roles and reasoning history when the agent begins editing. The independent handoff supplies the Verifier's evidence to a separate repair conversation. Removing prior repair conversation restarts each subsequent repair attempt from the initial investigation and latest observation, while retaining the current files and cumulative budget. Removing progress reminders preserves the call and submission limits.
+
+\begin{table}[!htb]
+\caption{Complete component and host-integration comparison on the common MindSpore collection. Token totals include initial translation and all subsequent calls.}
+\label{tab:components}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrr@{}}
+\toprule
+\textbf{Setting} & \textbf{Accepted} & \thead{Total tokens\\(millions)} \\
+\midrule
+LaDiM & 50/50 & 5.159 \\
+Continuous investigation and repair conversation & 49/50 & 5.603 \\
+Without prior repair conversation & 50/50 & 4.566 \\
+Without progress reminders & 50/50 & 4.562 \\
+MatchFixAgent & 50/50 & 12.097 \\
+MatchFixAgent with independent investigation & 50/50 & 19.480 \\
+SWE-agent & 44/50$^{\dagger}$ & 20.831 \\
+SWE-agent with independent investigation & 43/50 & 36.547 \\
+\bottomrule
+\end{tabular*}
+
+
+\par\vspace{3pt}
+\begin{minipage}{\linewidth}
+\footnotesize $\dagger$ Includes one task with unavailable final acceptance, which remains in the denominator and cost totals. Each condition uses the input reuse described in Appendix~\ref{sec:task-construction}.
+\end{minipage}
+\end{table}
+
+LaDiM accepts all 50 identifiers, while the continuous conversation accepts 49. Removing prior repair conversation or progress reminders preserves full acceptance and uses fewer tokens. Twenty distinct initial translations are already accepted, and only two of the nine faulty pairs require a second repair submission under the complete method. Most cases therefore finish before a later repair attempt can use earlier repair conversation.
+
+The natural translation component study uses the same ten supplied candidates as Table~\ref{tab:natural-repairs}. Its reference configuration includes examples of the edit format and corrective feedback for malformed edits. Each condition changes the named component while retaining the candidates, workspace access, acceptance checks, and repair budgets. Removing this format assistance gives the LaDiM configuration reported in the natural fault comparison.
+
+\begin{table}[!htb]
+\caption{Effect of repair context and editing assistance on natural translation faults. Tokens cover all ten repair runs.}
+\label{tab:natural-components}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}
+\toprule
+\textbf{Condition} & \thead{Initially incorrect\\programs repaired} & \thead{Initially correct\\programs preserved} & \thead{Repair tokens\\(millions)} & \thead{Final\\accepted} \\
+\midrule
+Independent evidence handoff & 4/5 & 5/5 & 15.548 & 9/10 \\
+Continuous conversation & 3/5 & 5/5 & 14.516 & 8/10 \\
+Without repair history & 0/5 & 5/5 & 10.852 & 5/10 \\
+Without progress reminders & 2/5 & 5/5 & 17.325 & 7/10 \\
+Without editing format assistance & 4/5 & 5/5 & 13.207 & 9/10 \\
+\bottomrule
+\end{tabular*}
+
+
+\end{table}
+
+
+The host-integration conditions prepend the same read-only investigation to SWE-agent or MatchFixAgent. Investigation calls share the host's total call, token, and time limits. The native host retains its own history and repair policy. MatchFixAgent with investigation retains 50/50 at a higher token total. SWE-agent with investigation accepts 43/50, compared with 44/50 and one interrupted task for its native condition. Across distinct inputs, the added investigation increases SWE-agent's repair count from seven to eight among nine initially faulty programs. It also leaves four initially accepted programs failing at the end. Table~\ref{tab:components} records both the repair and preservation consequences in final acceptance.
+
+\section{Additional Repair Collections}
+\label{sec:additional-repair}
+
+We also evaluate supplied faulty target programs under their respective acceptance criteria. A controlled MindSpore collection contains 50 injected faults with task-specific acceptance checks. LaDiM accepts 45/50 within four submissions, compared with 29/50 for SWE-agent and 35/50 for a direct repair agent using shared tools. LaDiM's cumulative accepted counts are 29, 41, and 45 at one, two, and four submissions. Total token use is 39,982,844, 42,579,064, and 12,459,013 for LaDiM, SWE-agent, and direct repair, respectively. The source and target inputs required by MatchFixAgent are supplied in the paired collection below.
+
+In a separate collection of twelve source and target repair tasks, LaDiM accepts 12/12 and MatchFixAgent accepts 11/12. They use 6,642,603 and 14,505,833 tokens, respectively. Both receive the complete source, candidate, task specification, and target library. Each repair collection uses its specified editable code scope and acceptance checks.
+
+\section{Natural Translation Repair Protocol}
+\label{sec:natural-protocol}
+
+The ten supplied translations contain five initially faulty programs and five that already pass the checks. Each method receives the same source, candidate, task requirements, and supporting library. The candidate and library may be edited. The source and acceptance criteria remain fixed. Target forward computation and differentiation execute in MindSpore through \texttt{torch4ms}, followed by PyTorch optimizer updates on its parameters. The comparison uses matching inputs and initial parameters with three-seed confirmation. Loss absolute difference, gradient norm absolute difference, and relative parameter update thresholds are 0.02, 0.05, and 0.03, with an additional gradient vector L2 threshold of 0.05 and the specified layer and parameter checks.
+
+Table~\ref{tab:natural-repairs} counts every call for each input, including failed repairs and investigation of initially accepted programs. LaDiM uses 193 calls, direct repair uses 120, SWE-agent uses 386, and MatchFixAgent uses 265. LaDiM uses 13,206,863 tokens.
+
+The LSTM repair in Section~\ref{sec:fault-characterization} adds a MindSpore recurrence and registers it in the supporting library, then corrects the tensor-indexing dispatch. On the final public check, loss absolute difference is $2.38\times10^{-7}$, gradient vector L2 difference is $4.19\times10^{-7}$, and relative parameter update difference is $8.11\times10^{-7}$. The example uses 32 model calls.
+
+\section{Repository Protocols and Detailed Results}
+\label{sec:repository-results}
+
+All methods receive byte-identical source repositories, common initial translations, task requirements, and acceptance procedures. The time series translation has three generation calls totaling 163,661 tokens. The recommendation translation uses 20 calls totaling 368,368 tokens. Generation proceeds from the public import structure and includes failed or truncated attempts. Each method's reported total contains one complete copy of this generation cost together with every repair call. Table~\ref{tab:repository-costs} separates input and output usage in repair.
+
+\begin{table}[!htb]
+\caption{Complete costs for the repository comparison. Total tokens include repair input and output plus common initial translation.}
+\label{tab:repository-costs}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}
+\toprule
+\textbf{Method} & \thead{Repair\\calls} & \textbf{Submissions} & \thead{Repair input\\tokens} & \thead{Repair output\\tokens} & \thead{Total\\tokens} \\
+\midrule
+\multicolumn{6}{l}{\textit{Time series}} \\
+LaDiM & 35 & 2 & 2,345,473 & 105,096 & 2,614,230 \\
+SWE-agent & 80 & 1 & 7,984,797 & 51,367 & 8,199,825 \\
+MatchFixAgent & 69 & 2 & 13,306,003 & 128,114 & 13,597,778 \\
+\midrule
+\multicolumn{6}{l}{\textit{Recommendation}} \\
+LaDiM & 80 & 4 & 8,147,846 & 295,032 & 8,811,246 \\
+SWE-agent & 80 & 1 & 7,889,936 & 58,248 & 8,316,552 \\
+MatchFixAgent & 80 & 1 & 8,215,327 & 95,385 & 8,679,080 \\
+\bottomrule
+\end{tabular*}
+
+
+\end{table}
+
+The time series protocol compares the core model for three consecutive Adam steps from corresponding source parameters, with dropout disabled and input shape $4\times20\times1$. Preprocessing and prediction absolute tolerances are $10^{-9}$ and $10^{-4}$. Loss absolute difference, gradient vector L2 difference, and relative parameter update tolerances are 0.02, 0.05, and 0.03. Learning rate behavior is checked around its schedule boundaries. The public evaluation executes the 100-epoch training workflow, notebook cells, and teaching snippets in their source order. Each entry point must produce the required predictions and plots and execute native differentiation. The notebook and snippets provide execution coverage, while the core model supplies paired numerical training measurements. All three methods pass 23 behavior checks per seed, giving 69/69 across the public and two confirmation seeds.
+
+The recommendation protocol covers six model paths that execute in the source framework with three sequential Adam updates. Source exceptions and empty returns are checked against the corresponding source behavior. Both the numerical worker and training command invoke the candidate's optimizer factory with learning rate 0.001. The source Adam settings use decay coefficients 0.9 and 0.999 and epsilon $10^{-8}$. Representation absolute tolerance is $10^{-4}$. Loss absolute/relative tolerances are $0.002/10^{-4}$, gradient tolerances are $10^{-4}/0.005$, and relative parameter update tolerance is 0.03. The evaluation includes all ten original tests and one epoch of the training command on 16 synthetic examples.
+
+Table~\ref{tab:repository-checks} reports the declared checks on the public seed. The 114 numerical comparisons comprise 108 checks over six paths, three steps, and six training signals, plus six inference retrieval checks. Twenty-four execution, step count, and native differentiation checks and seven source behavior checks bring the behavior-check total to 145. SWE-agent and MatchFixAgent each lack one retrieval measurement after reward model inference fails. That entry remains n/a in both the 114 and 145 denominators. MatchFixAgent passes 0/10 original tests: an unmigrated PyTorch import in its history-encoder test prevents collection under the native MindSpore requirement. No method reaches the two confirmation seeds on this repository.
+
+\begin{table}[!htb]
+\caption{Recommendation repository checks passed on the public seed. The numerical checks are a subset of behavior checks, and the six training signal rows break down the training checks. One unmeasured retrieval check remains in each baseline's denominator.}
+\label{tab:repository-checks}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}
+\toprule
+\textbf{Check} & \textbf{LaDiM} & \textbf{SWE-agent} & \textbf{MatchFixAgent} \\
+\midrule
+Behavior checks passed & 130/145 & 104/145 & 129/145 \\
+Numerical checks & 99/114 & 74/114 & 99/114 \\
+Training checks & 93/108 & 69/108 & 94/108 \\
+Inference retrieval & 6/6 & 5/6 & 5/6 \\
+\midrule
+User representations & 18/18 & 16/18 & 18/18 \\
+Item representations & 6/18 & 6/18 & 6/18 \\
+Forward loss & 18/18 & 18/18 & 18/18 \\
+Training return loss & 18/18 & 0/18 & 18/18 \\
+Gradients & 18/18 & 17/18 & 18/18 \\
+Parameter updates & 15/18 & 12/18 & 16/18 \\
+\midrule
+Original tests & 10/10 & 10/10 & 0/10 \\
+Training command & 1/1 & 1/1 & 1/1 \\
+File coverage & 1/1 & 1/1 & 0/1 \\
+Documentation and dependencies & 1/1 & 1/1 & 0/1 \\
+\bottomrule
+\end{tabular*}
+
+
+\end{table}
+
+\section{Repository Context and Evidence}
+\label{sec:repository-context}
+
+The repository extension separates the version of its dependency plan from the version of the candidate files. Every recorded test stores the candidate version on which it ran. An actual change to candidate code makes earlier measurements stale, and a new result replaces the preceding result for the same test even when the new test fails. Work-unit checkpoints additionally depend on their declared file scopes, test selections, and prerequisite units. A checkpoint without a selected test records syntax validation only. The final acceptance decision uses the complete repository evaluation.
+
+Full tool observations, file reads, and conversations are archived outside the editable workspace. Records carry content hashes and can be retrieved by identifier, JSON pointer, and character range. When the context is rebuilt, it retains the current dependency plan and generation status, the complete structured hypotheses and next steps, the latest measurements, and the last tool batch. Cached code consists only of content returned by earlier reads, with matching current file hashes and relevance to the active unit. The cache contains at most 120,000 characters. Reconstruction is triggered by an independent role handoff, an actual work-unit switch, or messages exceeding 75\% of the configured context capacity. Ordinary stage continuation and the first selection of a work unit retain the existing conversation.
+
+For the repository experiments, diagnosis allows up to six calls and 64,000 output tokens. The remaining repair calls and output budget are allocated over the remaining external submissions, with at most 16 calls in the first repair stage. The cumulative limits apply to the whole repository.
+
+
+
+\end{document}

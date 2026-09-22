@@ -11,6 +11,12 @@ before delivery, and commit the completed, verified task changes. Keep unrelated
 user files intact and out of task commits. Push, open a PR, or merge only as
 requested.
 
+Maintain the word-level manuscript comparison against the immutable baseline in
+`data/manuscript_baselines/pre-6pro-20260921/`. After each manuscript revision,
+run `scripts/update_manuscript_diff.py` and include the updated comparison with
+the delivery. The LaTeX build also refreshes it through `.latexmkrc`. Keep this
+baseline fixed unless the user explicitly selects another version.
+
 ## Writing
 
 Use clear paragraphs with one main point each. State the point early, use

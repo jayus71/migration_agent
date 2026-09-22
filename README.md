@@ -92,6 +92,21 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error conference_101719.tex
 ```
 
 LaTeX requires `latexmk`, `texlive-latex-extra`, and `texlive-fonts-recommended`.
+The successful build hook also refreshes the word-level comparison in
+`output/manuscript-comparison/index.html`, using `detex` from
+`texlive-extra-utils`. Its fixed baseline is the September 21 manuscript saved
+before the 6 Pro revision, under `data/manuscript_baselines/pre-6pro-20260921/`.
+Run `python3 scripts/update_manuscript_diff.py` to refresh it independently.
+The page compares prose and expanded LaTeX, highlights added and removed words,
+and links to both PDFs. To keep the page open with automatic refresh after builds:
+
+```bash
+python3 -m http.server 8766 --bind 127.0.0.1 --directory output/manuscript-comparison
+```
+
+Open `http://localhost:8766`. Opening the HTML file directly also supports
+comparison, search, and section navigation; reload it after subsequent builds.
+
 Figure export uses NumPy, pandas, Matplotlib, and Inkscape. The manuscript's main
 MindSpore comparison reports 50 task identifiers: LaDiM and MatchFixAgent both
 accept 50/50, with 57.4% fewer end-to-end tokens for LaDiM. The 50 identifiers

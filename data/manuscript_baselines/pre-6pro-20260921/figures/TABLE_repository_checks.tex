@@ -1,0 +1,22 @@
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}
+\toprule
+\textbf{Check} & \textbf{LaDiM} & \textbf{SWE-agent} & \textbf{MatchFixAgent} \\
+\midrule
+Paired checks & 130/145 & 104/145 & 129/145 \\
+Numerical checks & 99/114 & 74/114 & 99/114 \\
+Training checks & 93/108 & 69/108 & 94/108 \\
+Inference retrieval & 6/6 & 5/6 & 5/6 \\
+\midrule
+User representations & 18/18 & 16/18 & 18/18 \\
+Item representations & 6/18 & 6/18 & 6/18 \\
+Forward loss & 18/18 & 18/18 & 18/18 \\
+Training return loss & 18/18 & 0/18 & 18/18 \\
+Gradients & 18/18 & 17/18 & 18/18 \\
+Parameter updates & 15/18 & 12/18 & 16/18 \\
+\midrule
+Original tests & 10/10 & 10/10 & n/a \\
+Training command & Passed & Passed & Passed \\
+File coverage & Passed & Passed & Failed \\
+Documentation and dependencies & Passed & Passed & Failed \\
+\bottomrule
+\end{tabular*}

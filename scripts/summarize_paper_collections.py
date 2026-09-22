@@ -102,16 +102,16 @@ def main():
     target = ROOT / "data/paper_figures/collection_statistics.json"
     target.write_text(json.dumps(output, indent=2) + "\n")
     coverage = [
-        ("mindspore_migration", "PyTorch to MindSpore", "50", "Operators, CNNs, MLPs, Transformers, language models"),
-        ("natural_repairs", "Natural translation faults", "10", "Recurrent, convolutional, attention, and set models"),
-        ("training_signals", "Training-signal ablation", "16", "CNN, image MLP, Transformer, causal language model"),
-        ("jax_repairs", "JAX repair", "6", "MLP and CNN"),
+        ("mindspore_migration", "PyTorch to MindSpore", "Generated translations", "Operators, CNNs, MLPs, Transformers, language models"),
+        ("natural_repairs", "Natural translation faults", "Supplied translations", "Recurrent, convolutional, attention, and set models"),
+        ("training_signals", "Training-signal ablation", "Controlled training faults", "CNN, image MLP, Transformer, causal language model"),
+        ("jax_repairs", "JAX repair", "Supplied faulty candidates", "MLP and CNN"),
     ]
-    table = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l>{\raggedright\arraybackslash}p{4.8cm}rr@{}}',
-             r'\toprule', r'\textbf{Collection} & \textbf{Model or operation coverage} & \textbf{Tasks} & \thead{Mean\\lines} \\', r'\midrule']
-    for key, label, count, models in coverage:
-        mean = '--' if key is None else f"{output['collections'][key]['mean_lines']:.1f}"
-        table.append(f'{label} & {models} & {count} & {mean}' + r' \\')
+    table = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{4.9cm}r@{}}',
+             r'\toprule', r'\textbf{Collection} & \textbf{Candidate construction} & \textbf{Model or operation coverage} & \textbf{Tasks} \\', r'\midrule']
+    for key, label, construction, models in coverage:
+        count = output['collections'][key]['count']
+        table.append(f'{label} & {construction} & {models} & {count}' + r' \\')
     table += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_task_collections.tex').write_text('\n'.join(table) + '\n')
     print(json.dumps({key: {k: v for k, v in value.items() if k != "sources"}

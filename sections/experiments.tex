@@ -7,7 +7,7 @@
 The main comparison contains 50 PyTorch-to-MindSpore migration tasks covering tensor operations, CNNs, MLPs, Transformers, language models, and parameter and optimizer interfaces. Table~\ref{tab:collections} summarizes this collection and the supplied candidates used to study repair and training signals. Across languages, we migrate 18 Java/DJL programs to Python/PyTorch, comprising eight textbook examples and ten applications~\citep{djl2026,d2ljava2026}. Their sources average 221.2 nonblank lines. The public time series~\citep{jingles2026timeseries} and recommendation~\citep{chak2026twotower} repositories contain 13 and 24 code files or notebooks, totaling 865 and 2,086 nonblank lines, including original tests and notebook code cells.
 
 \begin{table}[!htb]
-\caption{Program collections constructed for migration and repair. Mean length counts nonblank lines per distinct source, including comments.}
+\caption{Program collections for migration and repair, with their candidate construction, model coverage, and task counts.}
 \label{tab:collections}
 \centering
 \small
@@ -83,7 +83,7 @@ LaDiM's gradient and update checks detect their respective faults at step~1 in a
 
 \textbf{Generalization Across Frameworks.}
 \label{sec:generalization}
-LaDiM repairs all six JAX candidates within the first submission and passes the complete verification (Table~\ref{tab:jax}). The cases cover MLP and CNN programs, extending the evaluation to both fully connected and convolutional computations in JAX. Gradients are computed through JAX automatic differentiation and parameter updates through Optax. The adapter supplies corresponding execution results, forward values, gradients, and updates to the Verifier Agent, so the same investigation and evidence-guided repair procedure operates across these differentiation and optimizer backends. Successful repair in both MindSpore and JAX demonstrates the procedure's applicability across target frameworks.
+LaDiM repairs all six MLP and CNN candidates in JAX within the first submission (Table~\ref{tab:jax}). The same diagnosis and repair procedure verifies JAX gradients and Optax updates, extending its application beyond MindSpore.
 
 \begin{table}[!htb]
 \caption{Repair of six supplied JAX candidates with up to four submissions. Costs cover investigation and repair.}
