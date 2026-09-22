@@ -1,0 +1,405 @@
+{
+  "source_pool_tasks": 12,
+  "selection": {
+    "rule": "All source-pool tasks failing initial common acceptance, before repair outcomes",
+    "repair_tasks": [
+      "time_sequence",
+      "residual_cnn"
+    ],
+    "initial_passes": [
+      "cnn_classifier",
+      "super_resolution",
+      "variational_autoencoder",
+      "recurrent_language_model",
+      "actor_critic",
+      "reinforce",
+      "graph_attention",
+      "gpt_nano"
+    ],
+    "generation_failures": [
+      "gan_generator",
+      "transformer_language_model"
+    ]
+  },
+  "conditions": [
+    {
+      "task": "time_sequence",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "accepted": true,
+      "repair_calls": 13,
+      "translation_usage": {
+        "prompt_tokens": 1922,
+        "completion_tokens": 9640,
+        "total_tokens": 11562,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 8974
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1922
+      },
+      "repair_usage": {
+        "prompt_tokens": 133219,
+        "completion_tokens": 10005,
+        "total_tokens": 143224,
+        "budget_output_tokens": 10005,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 4827,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 240.84323932393454
+      },
+      "accepted_at_submissions": {
+        "1": true
+      },
+      "end_to_end_total_tokens": 154786
+    },
+    {
+      "task": "time_sequence",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "accepted": true,
+      "repair_calls": 12,
+      "translation_usage": {
+        "prompt_tokens": 1922,
+        "completion_tokens": 9640,
+        "total_tokens": 11562,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 8974
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1922
+      },
+      "repair_usage": {
+        "prompt_tokens": 127332,
+        "completion_tokens": 15286,
+        "total_tokens": 142618,
+        "budget_output_tokens": 15286,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 7221,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 255.5160682629794
+      },
+      "accepted_at_submissions": {
+        "1": false,
+        "2": true
+      },
+      "end_to_end_total_tokens": 154180
+    },
+    {
+      "task": "time_sequence",
+      "method": "matchfix_full_orchestration",
+      "status": "completed",
+      "accepted": true,
+      "repair_calls": 19,
+      "translation_usage": {
+        "prompt_tokens": 1922,
+        "completion_tokens": 9640,
+        "total_tokens": 11562,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 8974
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1922
+      },
+      "repair_usage": {
+        "prompt_tokens": 212241,
+        "completion_tokens": 28263,
+        "total_tokens": 240504,
+        "budget_output_tokens": 28263,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 20088,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 478.7987119429745
+      },
+      "accepted_at_submissions": {
+        "1": true
+      },
+      "end_to_end_total_tokens": 252066
+    },
+    {
+      "task": "time_sequence",
+      "method": "swe_native_isolated",
+      "status": "completed",
+      "accepted": true,
+      "repair_calls": 26,
+      "translation_usage": {
+        "prompt_tokens": 1922,
+        "completion_tokens": 9640,
+        "total_tokens": 11562,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 8974
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1922
+      },
+      "repair_usage": {
+        "prompt_tokens": 266652,
+        "completion_tokens": 7640,
+        "total_tokens": 274292,
+        "budget_output_tokens": 7640,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 2615,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 478.9744990019826
+      },
+      "accepted_at_submissions": {
+        "1": true
+      },
+      "end_to_end_total_tokens": 285854
+    },
+    {
+      "task": "residual_cnn",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "accepted": false,
+      "repair_calls": 22,
+      "translation_usage": {
+        "prompt_tokens": 3481,
+        "completion_tokens": 16384,
+        "total_tokens": 19865,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 16303
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3481
+      },
+      "repair_usage": {
+        "prompt_tokens": 1576842,
+        "completion_tokens": 120000,
+        "total_tokens": 1696842,
+        "budget_output_tokens": 120000,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 103809,
+        "truncated_calls": 2,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 1648.4945768259931
+      },
+      "accepted_at_submissions": {
+        "1": false,
+        "2": false,
+        "3": false
+      },
+      "end_to_end_total_tokens": 1716707
+    },
+    {
+      "task": "residual_cnn",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "accepted": false,
+      "repair_calls": 16,
+      "translation_usage": {
+        "prompt_tokens": 3481,
+        "completion_tokens": 16384,
+        "total_tokens": 19865,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 16303
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3481
+      },
+      "repair_usage": {
+        "prompt_tokens": 515499,
+        "completion_tokens": 102818,
+        "total_tokens": 618317,
+        "budget_output_tokens": 102818,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 91362,
+        "truncated_calls": 4,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 688.5032547529554
+      },
+      "accepted_at_submissions": {
+        "1": false,
+        "2": false,
+        "3": false,
+        "4": false
+      },
+      "end_to_end_total_tokens": 638182
+    },
+    {
+      "task": "residual_cnn",
+      "method": "matchfix_full_orchestration",
+      "status": "infrastructure_error",
+      "accepted": false,
+      "repair_calls": 4,
+      "translation_usage": {
+        "prompt_tokens": 3481,
+        "completion_tokens": 16384,
+        "total_tokens": 19865,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 16303
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3481
+      },
+      "repair_usage": {
+        "prompt_tokens": 13493,
+        "completion_tokens": 4917,
+        "total_tokens": 18410,
+        "budget_output_tokens": 4917,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 2883,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 35.07739336998202
+      },
+      "accepted_at_submissions": {
+        "1": false
+      },
+      "end_to_end_total_tokens": 38275
+    },
+    {
+      "task": "residual_cnn",
+      "method": "swe_native_isolated",
+      "status": "completed",
+      "accepted": false,
+      "repair_calls": 40,
+      "translation_usage": {
+        "prompt_tokens": 3481,
+        "completion_tokens": 16384,
+        "total_tokens": 19865,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 16303
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3481
+      },
+      "repair_usage": {
+        "prompt_tokens": 715710,
+        "completion_tokens": 23530,
+        "total_tokens": 739240,
+        "budget_output_tokens": 23530,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 12275,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 1243.343449565
+      },
+      "accepted_at_submissions": {
+        "1": false
+      },
+      "end_to_end_total_tokens": 759105
+    }
+  ],
+  "source_pool_translation_usage": {
+    "prompt_tokens": 29455,
+    "completion_tokens": 110269,
+    "total_tokens": 139724
+  },
+  "source_pool_translation_usage_complete": true,
+  "method_totals": {
+    "autonomous_layered": {
+      "repair_accepted": 1,
+      "repair_denominator": 2,
+      "repair_total_tokens": 1840066,
+      "selected_task_end_to_end_tokens": 1871493,
+      "shared_translation_then_repair_accepted": 9,
+      "source_pool_denominator": 12,
+      "shared_translation_then_repair_total_tokens": 1979790
+    },
+    "direct_shared_tools": {
+      "repair_accepted": 1,
+      "repair_denominator": 2,
+      "repair_total_tokens": 760935,
+      "selected_task_end_to_end_tokens": 792362,
+      "shared_translation_then_repair_accepted": 9,
+      "source_pool_denominator": 12,
+      "shared_translation_then_repair_total_tokens": 900659
+    },
+    "matchfix_full_orchestration": {
+      "repair_accepted": 1,
+      "repair_denominator": 2,
+      "repair_total_tokens": 258914,
+      "selected_task_end_to_end_tokens": 290341,
+      "shared_translation_then_repair_accepted": 9,
+      "source_pool_denominator": 12,
+      "shared_translation_then_repair_total_tokens": 398638
+    },
+    "swe_native_isolated": {
+      "repair_accepted": 1,
+      "repair_denominator": 2,
+      "repair_total_tokens": 1013532,
+      "selected_task_end_to_end_tokens": 1044959,
+      "shared_translation_then_repair_accepted": 9,
+      "source_pool_denominator": 12,
+      "shared_translation_then_repair_total_tokens": 1153256
+    }
+  },
+  "cost_accounting": "Each selected task includes its one actual shared initial translation in each method end-to-end total; all attempted repair calls retained. Generation failures and initial passes remain in the separate full source-pool ledger."
+}

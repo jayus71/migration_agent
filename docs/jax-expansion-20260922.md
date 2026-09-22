@@ -1,4 +1,4 @@
-# JAX 扩展开发与自然迁移准备
+# JAX 扩展开发与自然迁移实验
 
 本轮由用户授权扩展 JAX 实例、验证方法后再作原生基线比较。论文和方法图未修改。历史六例及所有旧结果保持原样。新目录为 `experiments/jax_expansion_20260922/`，远端工作目录为 `/media/main/whj/projects/torch4ms/experiments/jax_expansion_20260922/`。
 
@@ -75,3 +75,60 @@ v2 于本轮启动，PID `3373399`；日志为 `development_v2/development.log`�
 12次初译均取得API响应，实际返回模型名为 `deepseek-flash`，请求模型名为 `deepseek-v4-flash`。其中10次生成非空候选，8个通过三种子初始验收，2个失败进入全部四方法的条件修复比较。通过者为CNN分类、超分辨、VAE、循环语言模型、Actor-Critic、REINFORCE、GAT和GPT-nano。时间序列候选把二维输入按三维索引，触发IndexError；ResNet候选返回了非空但截断的代码，首行SyntaxError，按既定规则保留在修复集合。GAN生成器和Transformer语言模型两次响应均耗尽16,384输出token额度且没有正文，记为生成失败，其费用留在12来源账本中。没有为这两项制造候选或补发初译。
 
 选择文件SHA-256为 `dd4864873d813c9ebca58e4154c298fb40ab4e80a42980c7daa61df1ce2ea8e0`，翻译后输入hash清单SHA-256为 `df1f2708a4e271d9a7975dc3bb1e208eb2b757c1efbc5670dc9b75a52bb4968a`。2任务×4方法的正式launch manifest SHA-256为 `f78fe078c66e9cd9375c5bbfbca4660b383168c440ce978824a706eb59dcad64`，冻结dispatcher SHA-256为 `f820d3b54ba91e93eeb9a6f3f4d2117b9045c63d0ebec2fcf6edb9cf9f74dd76`。正式调度PID为 `3473891`，两组CPU为 `[0,1]`、`[2,3]`。结束后由 `finalize_formal.py`（PID `3502833`，CPU `[0,1,2,3]`）一次性执行最终复验、原始usage核对和证据清单归档；不触发新的API调用。
+
+## 正式比较完成结果
+
+八个条件均已结束，四方法均通过时间序列任务、未通过ResNet，最终修复接受为1/2。两项来源在任何修复结果产生前即按共同初始验收选入；初始错误分别为输入索引错误与非空截断代码的语法错误。12个来源只产生两个待修任务，尚未达到扩大修复比较规模的目标。本轮保留为自然初译流量和两例修复的证据，是否用于论文及如何处理旧六例由后续整体方案决定。
+
+| 方法 | 修复接受 | 修复调用 | 修复输入token | 修复输出token | 修复总token | 两任务端到端token | 全12来源端到端token |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| LaDiM | 1/2 | 35 | 1,710,061 | 130,005 | 1,840,066 | 1,871,493 | 1,979,790 |
+| Direct LLM | 1/2 | 28 | 642,831 | 118,104 | 760,935 | 792,362 | 900,659 |
+| MatchFixAgent | 1/2 | 23 | 225,734 | 33,180 | 258,914 | 290,341 | 398,638 |
+| SWE-agent | 1/2 | 66 | 982,362 | 31,170 | 1,013,532 | 1,044,959 | 1,153,256 |
+
+12次共同初译使用29,455输入token与110,269输出token，合计139,724。其中两项待修任务的初译为31,427 tokens。表中两任务端到端费用为各方法全部修复费加31,427；全来源费用为各方法全部修复费加139,724，包含初始通过和空正文生成失败。共同初译后再执行各方法修复，均有9/12来源最终通过。四方法共享同一初译批次，整轮实际总消耗为164调用、4,013,171 tokens；汇总实际账单时初译只计一次。
+
+时间序列任务中，LaDiM、MatchFixAgent、SWE-agent的首个验收记录通过，Direct LLM的第二个验收记录通过。四方法均修复了每步输入切片与输出拼接形状，随后通过三个种子的三步梯度、更新和参数检查。该修复的代码变化主要恢复了可执行的张量形状；通过训练验收证明修复后轨迹一致，尚未提供定位并纠正独立训练语义错误的成功案例。
+
+ResNet条件保留全部失败费用。LaDiM有3条验收记录，最后耗尽120,000输出token；修复阶段16调用占1,646,642 tokens，诊断6调用占50,200。Direct LLM完成4条验收记录，全部未通过。SWE-agent耗尽40调用，最终候选未通过。MatchFixAgent调用原生完整编排后，控制流与数据流分析器解析共享的截断候选时报告首行SyntaxError；原生异常被现有接入层记为`infrastructure_error`，4次已完成模型调用保留，候选未改动。其具体失败发生在原生语法处理阶段，网络和依赖运行正常；原状态码不改写，数值测量记为n/a。未为任何失败条件增加重试或修复baseline代码。
+
+LaDiM、Direct LLM与SWE-agent均将ResNet的截断候选改成可执行实现并接受三步训练检查，最终仍存在数值差异。这轮因此实际测试了训练行为，但成功修复证据来自时间序列的形状错误。数值记录的`0:`、`1:`、`2:`分别表示第一、第二、第三个优化步；部分智能体诊断把`1:`误称第一步，分析以数组记录为准。
+
+最终复验中，这三个方法的ResNet第一步全部数组均通过。种子8101在第二步的梯度、更新和参数开始超阈值，第三步扩展到loss、输出和buffers；8102到第三步才出现梯度、更新和参数失败；8103第二步先出现梯度失败。LaDiM与Direct LLM在三个种子分别失败173、88、115个数组，SWE-agent为173、90、115。差异由完整数组验收确认，当前证据尚未把它唯一归因于某项候选计算或跨后端的数值传播机制。
+
+## 最终审计与归档
+
+`audit_formal.py`对8个最终候选分别复验3个种子，24项结果全部复现原判定：时间序列12项通过，ResNet的9项可执行结果未通过数值验收，MatchFixAgent的3项因SyntaxError无法取得数值测量。冻结输入、原始usage及生产依赖检查均通过，`backend_flags`为空。完成标志与各项通过标志分别检查，未将`complete=true`直接解释为所有核查通过。
+
+`audit_frozen_evidence.py`另行执行无API独立审计：核对248项冻结hash记录、各workspace的公共只读文件、152次修复的request/metadata/response一一对应和调用总数、全部未知usage计数为零，以及12次初译usage和总账。从公共`source.py`与冻结NPZ重放2任务×3种子的三步PyTorch源轨迹，1,908个数组与冻结参考逐值完全相同；独立NumPy检查重新计算最终目标NPZ中6,042个数组的逐元素阈值，逐数组判定和最终接受均一致。源参考重放排除了公共源导出或参考数组不一致这一具体疑点。无候选修改、额外模型调用或实验条件重跑。
+
+独立审计脚本首次执行因Python导入公共源时产生的两份bytecode缓存进入文件遍历而停止，尚未输出最终审计报告；随后禁用bytecode写入并只按冻结清单确定待核对文件，清除这两份已确认不属于原始清单的缓存后完成审计。该修正仅涉及新增的审计工具，冻结实验程序、输入、候选和结果字节保持原样。
+
+交付文件位于 `output/jax-expansion-20260922/formal/`：`formal_report.json`及`.md`提供紧凑结果，`formal_summary.json`为原始调度摘要，`independent_audit.json`保存独立检查，`formal_launch_manifest.json`保留冻结预算与方法hash，`formal_archive_record.json`与`formal_evidence_inventory.json`记录归档和每份原始文件的hash。完整元数据归档为 `output/jax-expansion-20260922/formal_metadata_complete_20260922.tar.gz`，371,568,164 bytes，SHA-256 `005a21a6640ce24fe28baa692a1ae5eb7eed64d1af7249b218bdf4861bd62485`；本地归档大小、归档hash和清单hash均已核对。226份NPZ共5,202,234,201 bytes仍保留在远端原始运行目录，逐文件hash在清单中；大归档和NPZ不加入Git。
+
+实际验证命令如下。远端独立审计绑定CPU2、3，未占用另一实验的CPU4、5；原正式调度和finalizer已完成退出。
+
+```bash
+# 本地：数值比较已有测试，6项通过。
+.venv/bin/python -m unittest discover -s experiments/jax_expansion_20260922 -p test_formal_validation.py
+.venv/bin/python -m py_compile experiments/jax_expansion_20260922/audit_frozen_evidence.py experiments/jax_expansion_20260922/summarize_formal.py
+
+# 远端：独立审计，全部汇总标志为true；输出已复制为independent_audit.json。
+taskset -c 2,3 /media/main/whj/miniconda3/envs/torchax311/bin/python \
+  /media/main/whj/projects/torch4ms/experiments/jax_expansion_20260922/audit_frozen_evidence.py \
+  /media/main/whj/projects/torch4ms/experiments/jax_expansion_20260922/natural12_v2 \
+  /media/main/whj/projects/torch4ms/experiments/jax_expansion_20260922/independent_frozen_audit.json
+
+# 本地：从已核对hash的原始归档与独立审计生成报告。
+.venv/bin/python experiments/jax_expansion_20260922/summarize_formal.py \
+  output/jax-expansion-20260922/formal_metadata_complete_20260922.tar.gz \
+  output/jax-expansion-20260922/formal/independent_audit.json \
+  output/jax-expansion-20260922/formal
+```
+
+## 结果的用途与后续所缺证据
+
+本轮可以回答：12个公开模型工作负载在一次固定预算自然初译后的生成与初始通过情况，以及四种冻结方法在同样两个自然失败候选上的行为、终止原因和成本。两例修复的接受结果完全相同；MatchFixAgent在ResNet上提前因原生解析失败终止，较低费用包含这种终止行为。方法效率排序需要更多独立、具有代表性的修复任务，且需要把成功、失败原因与费用共同分析。
+
+若后续获准扩大比较，应先固定更大的公开来源池、来源去重规则、覆盖的训练机制和总初译预算，再统一进行初译、记录全部生成失败与初始通过，最后把所有取得非空候选的初始失败交给各方法。准备阶段可预先规定进入正式比较所需的最小独立失败任务数；若固定来源池不足，则报告不足并另行设计下一批。应覆盖可执行但梯度、状态或多步更新错误的自然候选，并在来源层区分普通形状/语法错误与训练行为错误。候选若要承担优化器实现，还需在新协议中明确该职责并先验证验收后端；本轮优化器由可信Optax执行。上述建议未启动新来源、初译或实验。

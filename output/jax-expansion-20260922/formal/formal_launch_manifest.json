@@ -1,0 +1,104 @@
+{
+  "api_workers": 2,
+  "cpu_groups": [
+    [
+      0,
+      1
+    ],
+    [
+      2,
+      3
+    ]
+  ],
+  "conditions": [
+    {
+      "task": "time_sequence",
+      "method": "autonomous_layered"
+    },
+    {
+      "task": "time_sequence",
+      "method": "direct_shared_tools"
+    },
+    {
+      "task": "time_sequence",
+      "method": "matchfix_full_orchestration"
+    },
+    {
+      "task": "time_sequence",
+      "method": "swe_native_isolated"
+    },
+    {
+      "task": "residual_cnn",
+      "method": "autonomous_layered"
+    },
+    {
+      "task": "residual_cnn",
+      "method": "direct_shared_tools"
+    },
+    {
+      "task": "residual_cnn",
+      "method": "matchfix_full_orchestration"
+    },
+    {
+      "task": "residual_cnn",
+      "method": "swe_native_isolated"
+    }
+  ],
+  "selection": {
+    "rule": "All source-pool tasks failing initial common acceptance, before repair outcomes",
+    "repair_tasks": [
+      "time_sequence",
+      "residual_cnn"
+    ],
+    "initial_passes": [
+      "cnn_classifier",
+      "super_resolution",
+      "variational_autoencoder",
+      "recurrent_language_model",
+      "actor_critic",
+      "reinforce",
+      "graph_attention",
+      "gpt_nano"
+    ],
+    "generation_failures": [
+      "gan_generator",
+      "transformer_language_model"
+    ]
+  },
+  "dispatcher_sha256": "f820d3b54ba91e93eeb9a6f3f4d2117b9045c63d0ebec2fcf6edb9cf9f74dd76",
+  "manifest_sha256": "86cd79ff7037a5435b6d5abfe74a87b95730b6859888f8dffdbcfd95a8509f0c",
+  "selection_sha256": "dd4864873d813c9ebca58e4154c298fb40ab4e80a42980c7daa61df1ce2ea8e0",
+  "translated_hashes_sha256": "df1f2708a4e271d9a7975dc3bb1e208eb2b757c1efbc5670dc9b75a52bb4968a",
+  "method_snapshot_hashes": {
+    "code_snapshot/autofix/__init__.py": "5cff9985ed68aed8d90ae1ec2021addc03e8b147875216812be5b71e87310292",
+    "code_snapshot/autofix/autonomous/tools.py": "cef50a6433c4a7310cb4f6249429821af48b3d59567971a0244ba8cd4b31d131",
+    "code_snapshot/autofix/autonomous/repository.py": "a5aee1004b2d368f9ccfa12900efafb15655d0ea37c13732044b8a8be9c4da0a",
+    "code_snapshot/autofix/autonomous/__init__.py": "dbe111d17243bdaaccb3952be068dcd47b0d8620def2fc9b9a0010210ae09916",
+    "code_snapshot/autofix/autonomous/agent.py": "0e91f00023f450165d56c52334cb85440f632e189e74fd50c7179f2ab2d2dffd",
+    "code_snapshot/autofix/autonomous/__main__.py": "c354651dcd4c55e1a4325c16b9374fe15b3b3948c92aa042d9e9340e86c6fe9d",
+    "code_snapshot/autofix/autonomous/swe_upstream.py": "62b931e98ff526644ea4cd2013f668ef62e7441fc5ec27375180dab0e583790c",
+    "code_snapshot/autofix/autonomous/experiment.py": "f4220d4e1ffe70805cb96f09994e644a81f50b64a2feb0981615e07af345cf27",
+    "code_snapshot/autofix/autonomous/memory_ablation.py": "e7b06a54f57516f1624e479446d41f0cc7e95234fcfad4b7c70cd59f2154d884",
+    "code_snapshot/autofix/autonomous/sandbox.py": "192602cef12840b1c9592ec11ac0c538618c911de2fe362f9581907b8bc9bf6a",
+    "code_snapshot/autofix/autonomous/observations.py": "4d226a3bf4ce51061494e8dc837698dc9f7243478e5c09c77619ab7497a6e2a6",
+    "code_snapshot/autofix/autonomous/evaluation.py": "7f422559d5f8ffcda5961776dc9cc802c9b9e77a1fdb63b09d7f0faa5494d192",
+    "code_snapshot/autofix/autonomous/fixed50.py": "f46789a0da2d2a3ab4609de21a1105bef7a7c6b7ce258a4607daa0ff3c1ff28e",
+    "code_snapshot/autofix/autonomous/comparison.py": "db0ad08eafd56858031027f7a49b6d6644edf4b8e55072270ce84d3522fa7911",
+    "code_snapshot/autofix/autonomous/baselines.py": "fa29283e13b74ea303b300bef93a656c6e432e0ee43dfb6e11299275b9d87498",
+    "code_snapshot/autofix/autonomous/progress.py": "47a18096b8953ecdf08ba924e6737c3fadae04a780d9b034d8038f4d74e978ed",
+    "code_snapshot/autofix/autonomous/batch.py": "6aae3758815d439e0b23cc832a78817f88e20359bd30c577b2df34c974c125f7",
+    "code_snapshot/autofix/verifiers/__init__.py": "02153fc702d8dffc0324d43b9c7f58cc974f7905c4c527487a335b242309b230",
+    "code_snapshot/autofix/verifiers/backend_execution.py": "fa1dd6c27aadd236f2ad9cc2660624b38d93659bf51123377de48854c426152e",
+    "code_snapshot/autofix/verifiers/paired_code_report.py": "d60773cb1bd954a396fa934325fb158e410617db88afee86419d33f4375e3b82"
+  },
+  "budgets": {
+    "max_calls": 40,
+    "max_output_tokens": 120000,
+    "max_seconds": 1800,
+    "max_repair_attempts": 4,
+    "per_call_output_tokens": 16384
+  },
+  "max_total_repair_calls": 320,
+  "max_total_repair_output_tokens": 960000,
+  "retry_policy": "No dispatcher retry; each native method keeps its own frozen retry behavior within existing budgets."
+}

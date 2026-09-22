@@ -1,0 +1,1413 @@
+{
+  "source_pool_tasks": 12,
+  "generated_candidates": 10,
+  "initial_passes": 8,
+  "generation_failures": [
+    "gan_generator",
+    "transformer_language_model"
+  ],
+  "repair_tasks": [
+    "time_sequence",
+    "residual_cnn"
+  ],
+  "source_pool_translation_usage": {
+    "prompt_tokens": 29455,
+    "completion_tokens": 110269,
+    "total_tokens": 139724
+  },
+  "methods": [
+    {
+      "method": "autonomous_layered",
+      "label": "LaDiM",
+      "repair_accepted": 1,
+      "repair_denominator": 2,
+      "repair_total_tokens": 1840066,
+      "selected_task_end_to_end_tokens": 1871493,
+      "shared_translation_then_repair_accepted": 9,
+      "source_pool_denominator": 12,
+      "shared_translation_then_repair_total_tokens": 1979790,
+      "repair_calls": 35,
+      "repair_input_tokens": 1710061,
+      "repair_output_tokens": 130005,
+      "acceptance_at_submission_budget": {
+        "1": 1,
+        "2": 1,
+        "4": 1
+      }
+    },
+    {
+      "method": "direct_shared_tools",
+      "label": "Direct LLM",
+      "repair_accepted": 1,
+      "repair_denominator": 2,
+      "repair_total_tokens": 760935,
+      "selected_task_end_to_end_tokens": 792362,
+      "shared_translation_then_repair_accepted": 9,
+      "source_pool_denominator": 12,
+      "shared_translation_then_repair_total_tokens": 900659,
+      "repair_calls": 28,
+      "repair_input_tokens": 642831,
+      "repair_output_tokens": 118104,
+      "acceptance_at_submission_budget": {
+        "1": 0,
+        "2": 1,
+        "4": 1
+      }
+    },
+    {
+      "method": "matchfix_full_orchestration",
+      "label": "MatchFixAgent",
+      "repair_accepted": 1,
+      "repair_denominator": 2,
+      "repair_total_tokens": 258914,
+      "selected_task_end_to_end_tokens": 290341,
+      "shared_translation_then_repair_accepted": 9,
+      "source_pool_denominator": 12,
+      "shared_translation_then_repair_total_tokens": 398638,
+      "repair_calls": 23,
+      "repair_input_tokens": 225734,
+      "repair_output_tokens": 33180,
+      "acceptance_at_submission_budget": {
+        "1": 1,
+        "2": 1,
+        "4": 1
+      }
+    },
+    {
+      "method": "swe_native_isolated",
+      "label": "SWE-agent",
+      "repair_accepted": 1,
+      "repair_denominator": 2,
+      "repair_total_tokens": 1013532,
+      "selected_task_end_to_end_tokens": 1044959,
+      "shared_translation_then_repair_accepted": 9,
+      "source_pool_denominator": 12,
+      "shared_translation_then_repair_total_tokens": 1153256,
+      "repair_calls": 66,
+      "repair_input_tokens": 982362,
+      "repair_output_tokens": 31170,
+      "acceptance_at_submission_budget": {
+        "1": 1,
+        "2": 1,
+        "4": 1
+      }
+    }
+  ],
+  "conditions": [
+    {
+      "task": "time_sequence",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "accepted": true,
+      "repair_calls": 13,
+      "translation_usage": {
+        "prompt_tokens": 1922,
+        "completion_tokens": 9640,
+        "total_tokens": 11562,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 8974
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1922
+      },
+      "repair_usage": {
+        "prompt_tokens": 133219,
+        "completion_tokens": 10005,
+        "total_tokens": 143224,
+        "budget_output_tokens": 10005,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 4827,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 240.84323932393454
+      },
+      "accepted_at_submissions": {
+        "1": true
+      },
+      "end_to_end_total_tokens": 154786,
+      "submissions": [
+        {
+          "submission": 1,
+          "accepted": true,
+          "stage_status": "invalid_final",
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "changed_files": [
+            "candidate.py"
+          ]
+        }
+      ],
+      "final_seeds": [
+        {
+          "seed": 8101,
+          "accepted": true,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "failed_array_groups_zero_based_steps": {}
+        },
+        {
+          "seed": 8102,
+          "accepted": true,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "failed_array_groups_zero_based_steps": {}
+        },
+        {
+          "seed": 8103,
+          "accepted": true,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "failed_array_groups_zero_based_steps": {}
+        }
+      ],
+      "wall_time_sec": 240.8422443009913,
+      "budget_elapsed_seconds": 240.84323932393454,
+      "failure_detail": null,
+      "final_stage": "invalid_final",
+      "usage_by_stage": {
+        "diagnose": {
+          "calls": 8,
+          "prompt_tokens": 59008,
+          "completion_tokens": 7708,
+          "total_tokens": 66716
+        },
+        "repair": {
+          "calls": 5,
+          "prompt_tokens": 74211,
+          "completion_tokens": 2297,
+          "total_tokens": 76508
+        }
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ]
+    },
+    {
+      "task": "time_sequence",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "accepted": true,
+      "repair_calls": 12,
+      "translation_usage": {
+        "prompt_tokens": 1922,
+        "completion_tokens": 9640,
+        "total_tokens": 11562,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 8974
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1922
+      },
+      "repair_usage": {
+        "prompt_tokens": 127332,
+        "completion_tokens": 15286,
+        "total_tokens": 142618,
+        "budget_output_tokens": 15286,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 7221,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 255.5160682629794
+      },
+      "accepted_at_submissions": {
+        "1": false,
+        "2": true
+      },
+      "end_to_end_total_tokens": 154180,
+      "submissions": [
+        {
+          "submission": 1,
+          "accepted": false,
+          "stage_status": "completed",
+          "execution": {
+            "status": "failed",
+            "error_type": "ValueError",
+            "message": "Incompatible shapes for broadcasting: shapes=[(2, 6, 1), (2, 6)]"
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 0,
+            "failed_arrays": 0
+          },
+          "changed_files": [
+            "candidate.py"
+          ]
+        },
+        {
+          "submission": 2,
+          "accepted": true,
+          "stage_status": "completed",
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "changed_files": [
+            "candidate.py"
+          ]
+        }
+      ],
+      "final_seeds": [
+        {
+          "seed": 8101,
+          "accepted": true,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "failed_array_groups_zero_based_steps": {}
+        },
+        {
+          "seed": 8102,
+          "accepted": true,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "failed_array_groups_zero_based_steps": {}
+        },
+        {
+          "seed": 8103,
+          "accepted": true,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "failed_array_groups_zero_based_steps": {}
+        }
+      ],
+      "wall_time_sec": 255.5152032270562,
+      "budget_elapsed_seconds": 255.5160682629794,
+      "failure_detail": null,
+      "final_stage": "completed",
+      "usage_by_stage": {
+        "diagnose": {
+          "calls": 8,
+          "prompt_tokens": 59678,
+          "completion_tokens": 9277,
+          "total_tokens": 68955
+        },
+        "repair": {
+          "calls": 4,
+          "prompt_tokens": 67654,
+          "completion_tokens": 6009,
+          "total_tokens": 73663
+        }
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ]
+    },
+    {
+      "task": "time_sequence",
+      "method": "matchfix_full_orchestration",
+      "status": "completed",
+      "accepted": true,
+      "repair_calls": 19,
+      "translation_usage": {
+        "prompt_tokens": 1922,
+        "completion_tokens": 9640,
+        "total_tokens": 11562,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 8974
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1922
+      },
+      "repair_usage": {
+        "prompt_tokens": 212241,
+        "completion_tokens": 28263,
+        "total_tokens": 240504,
+        "budget_output_tokens": 28263,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 20088,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 478.7987119429745
+      },
+      "accepted_at_submissions": {
+        "1": true
+      },
+      "end_to_end_total_tokens": 252066,
+      "submissions": [
+        {
+          "submission": 1,
+          "accepted": true,
+          "stage_status": "completed",
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "changed_files": [
+            "candidate.py"
+          ]
+        }
+      ],
+      "final_seeds": [
+        {
+          "seed": 8101,
+          "accepted": true,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "failed_array_groups_zero_based_steps": {}
+        },
+        {
+          "seed": 8102,
+          "accepted": true,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "failed_array_groups_zero_based_steps": {}
+        },
+        {
+          "seed": 8103,
+          "accepted": true,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "failed_array_groups_zero_based_steps": {}
+        }
+      ],
+      "wall_time_sec": 478.77794617100153,
+      "budget_elapsed_seconds": 478.7987119429745,
+      "failure_detail": null,
+      "final_stage": "completed",
+      "usage_by_stage": {
+        "matchfix_control_flow_agent": {
+          "calls": 1,
+          "prompt_tokens": 6312,
+          "completion_tokens": 3457,
+          "total_tokens": 9769
+        },
+        "matchfix_data_flow_agent": {
+          "calls": 1,
+          "prompt_tokens": 23743,
+          "completion_tokens": 1151,
+          "total_tokens": 24894
+        },
+        "matchfix_io_agent": {
+          "calls": 1,
+          "prompt_tokens": 2445,
+          "completion_tokens": 1687,
+          "total_tokens": 4132
+        },
+        "matchfix_library_equivalence_agent": {
+          "calls": 1,
+          "prompt_tokens": 2380,
+          "completion_tokens": 2145,
+          "total_tokens": 4525
+        },
+        "matchfix_exception_error_agent": {
+          "calls": 1,
+          "prompt_tokens": 2401,
+          "completion_tokens": 2802,
+          "total_tokens": 5203
+        },
+        "matchfix_spec_agent": {
+          "calls": 1,
+          "prompt_tokens": 2403,
+          "completion_tokens": 7395,
+          "total_tokens": 9798
+        },
+        "matchfix_test_gen_repair_agent": {
+          "calls": 10,
+          "prompt_tokens": 141145,
+          "completion_tokens": 8628,
+          "total_tokens": 149773
+        },
+        "matchfix_verdict_agent": {
+          "calls": 3,
+          "prompt_tokens": 31412,
+          "completion_tokens": 998,
+          "total_tokens": 32410
+        }
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ]
+    },
+    {
+      "task": "time_sequence",
+      "method": "swe_native_isolated",
+      "status": "completed",
+      "accepted": true,
+      "repair_calls": 26,
+      "translation_usage": {
+        "prompt_tokens": 1922,
+        "completion_tokens": 9640,
+        "total_tokens": 11562,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 8974
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1922
+      },
+      "repair_usage": {
+        "prompt_tokens": 266652,
+        "completion_tokens": 7640,
+        "total_tokens": 274292,
+        "budget_output_tokens": 7640,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 2615,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 478.9744990019826
+      },
+      "accepted_at_submissions": {
+        "1": true
+      },
+      "end_to_end_total_tokens": 285854,
+      "submissions": [
+        {
+          "submission": 1,
+          "accepted": true,
+          "stage_status": "submitted",
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "changed_files": [
+            "candidate.py"
+          ]
+        }
+      ],
+      "final_seeds": [
+        {
+          "seed": 8101,
+          "accepted": true,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "failed_array_groups_zero_based_steps": {}
+        },
+        {
+          "seed": 8102,
+          "accepted": true,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "failed_array_groups_zero_based_steps": {}
+        },
+        {
+          "seed": 8103,
+          "accepted": true,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": true,
+            "checked_arrays": 106,
+            "failed_arrays": 0
+          },
+          "failed_array_groups_zero_based_steps": {}
+        }
+      ],
+      "wall_time_sec": 478.9637068330776,
+      "budget_elapsed_seconds": 478.9744990019826,
+      "failure_detail": null,
+      "final_stage": "submitted",
+      "usage_by_stage": {
+        "swe_native": {
+          "calls": 26,
+          "prompt_tokens": 266652,
+          "completion_tokens": 7640,
+          "total_tokens": 274292
+        }
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ]
+    },
+    {
+      "task": "residual_cnn",
+      "method": "autonomous_layered",
+      "status": "completed",
+      "accepted": false,
+      "repair_calls": 22,
+      "translation_usage": {
+        "prompt_tokens": 3481,
+        "completion_tokens": 16384,
+        "total_tokens": 19865,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 16303
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3481
+      },
+      "repair_usage": {
+        "prompt_tokens": 1576842,
+        "completion_tokens": 120000,
+        "total_tokens": 1696842,
+        "budget_output_tokens": 120000,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 103809,
+        "truncated_calls": 2,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 1648.4945768259931
+      },
+      "accepted_at_submissions": {
+        "1": false,
+        "2": false,
+        "3": false
+      },
+      "end_to_end_total_tokens": 1716707,
+      "submissions": [
+        {
+          "submission": 1,
+          "accepted": false,
+          "stage_status": "completed",
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 173
+          },
+          "changed_files": [
+            "candidate.py"
+          ]
+        },
+        {
+          "submission": 2,
+          "accepted": false,
+          "stage_status": "output_truncated",
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 173
+          },
+          "changed_files": []
+        },
+        {
+          "submission": 3,
+          "accepted": false,
+          "stage_status": "output_budget_exhausted",
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 173
+          },
+          "changed_files": []
+        }
+      ],
+      "final_seeds": [
+        {
+          "seed": 8101,
+          "accepted": false,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 173
+          },
+          "failed_array_groups_zero_based_steps": {
+            "1:gradients": 27,
+            "1:parameters": 9,
+            "1:updates": 9,
+            "2:buffers": 12,
+            "2:gradients": 38,
+            "2:loss": 1,
+            "2:outputs": 1,
+            "2:parameters": 38,
+            "2:updates": 38
+          }
+        },
+        {
+          "seed": 8102,
+          "accepted": false,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 88
+          },
+          "failed_array_groups_zero_based_steps": {
+            "2:gradients": 34,
+            "2:parameters": 27,
+            "2:updates": 27
+          }
+        },
+        {
+          "seed": 8103,
+          "accepted": false,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 115
+          },
+          "failed_array_groups_zero_based_steps": {
+            "1:gradients": 9,
+            "2:buffers": 1,
+            "2:gradients": 37,
+            "2:loss": 1,
+            "2:outputs": 1,
+            "2:parameters": 32,
+            "2:updates": 34
+          }
+        }
+      ],
+      "wall_time_sec": 1648.4935035170056,
+      "budget_elapsed_seconds": 1648.4945768259931,
+      "failure_detail": null,
+      "final_stage": "output_budget_exhausted",
+      "usage_by_stage": {
+        "diagnose": {
+          "calls": 6,
+          "prompt_tokens": 44301,
+          "completion_tokens": 5899,
+          "total_tokens": 50200
+        },
+        "repair": {
+          "calls": 16,
+          "prompt_tokens": 1532541,
+          "completion_tokens": 114101,
+          "total_tokens": 1646642
+        }
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ]
+    },
+    {
+      "task": "residual_cnn",
+      "method": "direct_shared_tools",
+      "status": "completed",
+      "accepted": false,
+      "repair_calls": 16,
+      "translation_usage": {
+        "prompt_tokens": 3481,
+        "completion_tokens": 16384,
+        "total_tokens": 19865,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 16303
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3481
+      },
+      "repair_usage": {
+        "prompt_tokens": 515499,
+        "completion_tokens": 102818,
+        "total_tokens": 618317,
+        "budget_output_tokens": 102818,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 91362,
+        "truncated_calls": 4,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 688.5032547529554
+      },
+      "accepted_at_submissions": {
+        "1": false,
+        "2": false,
+        "3": false,
+        "4": false
+      },
+      "end_to_end_total_tokens": 638182,
+      "submissions": [
+        {
+          "submission": 1,
+          "accepted": false,
+          "stage_status": "completed",
+          "execution": {
+            "status": "failed",
+            "error_type": "SyntaxError",
+            "message": "invalid syntax (candidate.py, line 1)"
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 0,
+            "failed_arrays": 0
+          },
+          "changed_files": []
+        },
+        {
+          "submission": 2,
+          "accepted": false,
+          "stage_status": "completed",
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 173
+          },
+          "changed_files": [
+            "candidate.py"
+          ]
+        },
+        {
+          "submission": 3,
+          "accepted": false,
+          "stage_status": "output_truncated",
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 173
+          },
+          "changed_files": []
+        },
+        {
+          "submission": 4,
+          "accepted": false,
+          "stage_status": "completed",
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 173
+          },
+          "changed_files": []
+        }
+      ],
+      "final_seeds": [
+        {
+          "seed": 8101,
+          "accepted": false,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 173
+          },
+          "failed_array_groups_zero_based_steps": {
+            "1:gradients": 27,
+            "1:parameters": 9,
+            "1:updates": 9,
+            "2:buffers": 12,
+            "2:gradients": 38,
+            "2:loss": 1,
+            "2:outputs": 1,
+            "2:parameters": 38,
+            "2:updates": 38
+          }
+        },
+        {
+          "seed": 8102,
+          "accepted": false,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 88
+          },
+          "failed_array_groups_zero_based_steps": {
+            "2:gradients": 34,
+            "2:parameters": 27,
+            "2:updates": 27
+          }
+        },
+        {
+          "seed": 8103,
+          "accepted": false,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 115
+          },
+          "failed_array_groups_zero_based_steps": {
+            "1:gradients": 9,
+            "2:buffers": 1,
+            "2:gradients": 37,
+            "2:loss": 1,
+            "2:outputs": 1,
+            "2:parameters": 32,
+            "2:updates": 34
+          }
+        }
+      ],
+      "wall_time_sec": 688.502208118909,
+      "budget_elapsed_seconds": 688.5032547529554,
+      "failure_detail": null,
+      "final_stage": "completed",
+      "usage_by_stage": {
+        "diagnose": {
+          "calls": 8,
+          "prompt_tokens": 50963,
+          "completion_tokens": 6537,
+          "total_tokens": 57500
+        },
+        "repair": {
+          "calls": 8,
+          "prompt_tokens": 464536,
+          "completion_tokens": 96281,
+          "total_tokens": 560817
+        }
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ]
+    },
+    {
+      "task": "residual_cnn",
+      "method": "matchfix_full_orchestration",
+      "status": "infrastructure_error",
+      "accepted": false,
+      "repair_calls": 4,
+      "translation_usage": {
+        "prompt_tokens": 3481,
+        "completion_tokens": 16384,
+        "total_tokens": 19865,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 16303
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3481
+      },
+      "repair_usage": {
+        "prompt_tokens": 13493,
+        "completion_tokens": 4917,
+        "total_tokens": 18410,
+        "budget_output_tokens": 4917,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 2883,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 35.07739336998202
+      },
+      "accepted_at_submissions": {
+        "1": false
+      },
+      "end_to_end_total_tokens": 38275,
+      "submissions": [
+        {
+          "submission": 1,
+          "accepted": false,
+          "stage_status": "infrastructure_error",
+          "execution": {
+            "status": "failed",
+            "error_type": "SyntaxError",
+            "message": "invalid syntax (candidate.py, line 1)"
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 0,
+            "failed_arrays": 0
+          },
+          "changed_files": []
+        }
+      ],
+      "final_seeds": [
+        {
+          "seed": 8101,
+          "accepted": false,
+          "execution": {
+            "status": "failed",
+            "error_type": "SyntaxError",
+            "message": "invalid syntax (candidate.py, line 1)"
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 0,
+            "failed_arrays": 0
+          },
+          "failed_array_groups_zero_based_steps": {}
+        },
+        {
+          "seed": 8102,
+          "accepted": false,
+          "execution": {
+            "status": "failed",
+            "error_type": "SyntaxError",
+            "message": "invalid syntax (candidate.py, line 1)"
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 0,
+            "failed_arrays": 0
+          },
+          "failed_array_groups_zero_based_steps": {}
+        },
+        {
+          "seed": 8103,
+          "accepted": false,
+          "execution": {
+            "status": "failed",
+            "error_type": "SyntaxError",
+            "message": "invalid syntax (candidate.py, line 1)"
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 0,
+            "failed_arrays": 0
+          },
+          "failed_array_groups_zero_based_steps": {}
+        }
+      ],
+      "wall_time_sec": 35.04628473392222,
+      "budget_elapsed_seconds": 35.07739336998202,
+      "failure_detail": "infrastructure_error",
+      "final_stage": "infrastructure_error",
+      "usage_by_stage": {
+        "matchfix_io_agent": {
+          "calls": 1,
+          "prompt_tokens": 3411,
+          "completion_tokens": 516,
+          "total_tokens": 3927
+        },
+        "matchfix_library_equivalence_agent": {
+          "calls": 1,
+          "prompt_tokens": 3346,
+          "completion_tokens": 2196,
+          "total_tokens": 5542
+        },
+        "matchfix_exception_error_agent": {
+          "calls": 1,
+          "prompt_tokens": 3367,
+          "completion_tokens": 1284,
+          "total_tokens": 4651
+        },
+        "matchfix_spec_agent": {
+          "calls": 1,
+          "prompt_tokens": 3369,
+          "completion_tokens": 921,
+          "total_tokens": 4290
+        }
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ]
+    },
+    {
+      "task": "residual_cnn",
+      "method": "swe_native_isolated",
+      "status": "completed",
+      "accepted": false,
+      "repair_calls": 40,
+      "translation_usage": {
+        "prompt_tokens": 3481,
+        "completion_tokens": 16384,
+        "total_tokens": 19865,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 16303
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3481
+      },
+      "repair_usage": {
+        "prompt_tokens": 715710,
+        "completion_tokens": 23530,
+        "total_tokens": 739240,
+        "budget_output_tokens": 23530,
+        "unknown_usage_calls": 0,
+        "unknown_prompt_usage_calls": 0,
+        "unknown_completion_usage_calls": 0,
+        "reasoning_tokens": 12275,
+        "truncated_calls": 0,
+        "input_budget": "recorded without a cumulative input-token limit",
+        "requested_model": "deepseek-v4-flash",
+        "actual_models": [
+          "deepseek-flash"
+        ],
+        "elapsed_seconds": 1243.343449565
+      },
+      "accepted_at_submissions": {
+        "1": false
+      },
+      "end_to_end_total_tokens": 759105,
+      "submissions": [
+        {
+          "submission": 1,
+          "accepted": false,
+          "stage_status": "call_budget_exhausted",
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 173
+          },
+          "changed_files": [
+            "candidate.py"
+          ]
+        }
+      ],
+      "final_seeds": [
+        {
+          "seed": 8101,
+          "accepted": false,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 173
+          },
+          "failed_array_groups_zero_based_steps": {
+            "1:gradients": 27,
+            "1:parameters": 9,
+            "1:updates": 9,
+            "2:buffers": 12,
+            "2:gradients": 38,
+            "2:loss": 1,
+            "2:outputs": 1,
+            "2:parameters": 38,
+            "2:updates": 38
+          }
+        },
+        {
+          "seed": 8102,
+          "accepted": false,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 90
+          },
+          "failed_array_groups_zero_based_steps": {
+            "2:gradients": 34,
+            "2:parameters": 27,
+            "2:updates": 29
+          }
+        },
+        {
+          "seed": 8103,
+          "accepted": false,
+          "execution": {
+            "status": "ok",
+            "error_type": null,
+            "message": ""
+          },
+          "acceptance": {
+            "accepted": false,
+            "checked_arrays": 530,
+            "failed_arrays": 115
+          },
+          "failed_array_groups_zero_based_steps": {
+            "1:gradients": 9,
+            "2:buffers": 1,
+            "2:gradients": 37,
+            "2:loss": 1,
+            "2:outputs": 1,
+            "2:parameters": 32,
+            "2:updates": 34
+          }
+        }
+      ],
+      "wall_time_sec": 1243.3270902619697,
+      "budget_elapsed_seconds": 1243.343449565,
+      "failure_detail": null,
+      "final_stage": "call_budget_exhausted",
+      "usage_by_stage": {
+        "swe_native": {
+          "calls": 40,
+          "prompt_tokens": 715710,
+          "completion_tokens": 23530,
+          "total_tokens": 739240
+        }
+      },
+      "actual_models": [
+        "deepseek-flash"
+      ]
+    }
+  ],
+  "original_final_audit_flags": {
+    "all_acceptances_reproduced": true,
+    "all_immutable": true,
+    "all_repair_usage_reconciled": true,
+    "backend_flags": []
+  },
+  "independent_audit_flags": {
+    "frozen_files_match": true,
+    "all_source_replays_pass": true,
+    "all_acceptances_match": true,
+    "all_per_array_verdicts_match": true,
+    "all_immutable_files_match": true,
+    "all_usage_matches": true,
+    "translation_ledger_matches": true
+  },
+  "source_replays": [
+    {
+      "task": "time_sequence",
+      "seed": 8101,
+      "keys_equal": true,
+      "checked_arrays": 106,
+      "accepted": true,
+      "all_bitwise_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "failures": {}
+    },
+    {
+      "task": "time_sequence",
+      "seed": 8102,
+      "keys_equal": true,
+      "checked_arrays": 106,
+      "accepted": true,
+      "all_bitwise_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "failures": {}
+    },
+    {
+      "task": "time_sequence",
+      "seed": 8103,
+      "keys_equal": true,
+      "checked_arrays": 106,
+      "accepted": true,
+      "all_bitwise_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "failures": {}
+    },
+    {
+      "task": "residual_cnn",
+      "seed": 8101,
+      "keys_equal": true,
+      "checked_arrays": 530,
+      "accepted": true,
+      "all_bitwise_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "failures": {}
+    },
+    {
+      "task": "residual_cnn",
+      "seed": 8102,
+      "keys_equal": true,
+      "checked_arrays": 530,
+      "accepted": true,
+      "all_bitwise_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "failures": {}
+    },
+    {
+      "task": "residual_cnn",
+      "seed": 8103,
+      "keys_equal": true,
+      "checked_arrays": 530,
+      "accepted": true,
+      "all_bitwise_equal": true,
+      "maximum_absolute_difference": 0.0,
+      "failures": {}
+    }
+  ],
+  "archive_sha256": "005a21a6640ce24fe28baa692a1ae5eb7eed64d1af7249b218bdf4861bd62485",
+  "independent_audit_sha256": "2ddd79291ed0dc44ca5a1e738faa8c11f957edaafbcb58bbb375ecbb705c872a"
+}
