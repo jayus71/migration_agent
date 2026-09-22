@@ -11,7 +11,7 @@
 | 方法概述 | 谁调查、谁修复、谁调度和验证 | 恢复 Orchestrator 的调度职责，以实际动作串起流程 |
 | 3.1 | 后文使用哪些 discrepancy | 保留执行、前向值、梯度、参数更新的定义，移出编辑计数和运行细节 |
 | 3.2、3.3 | 训练差异怎样缩小调查范围，证据怎样帮助修复 | 用依赖关系解释判断，保留 LLM 与工具调用的伪代码，删除逐行复述算法的正文 |
-| 3.4 | 多个文件如何组织，修改共享代码后如何继续检查 | 分清自动映射、智能体规划和依赖检查，说明上下文如何保存相关证据 |
+| 3.4 | 多个文件如何组织，修改共享代码后如何继续检查 | 依次介绍仓库结构分析与修复依赖图规划，说明依赖检查及相关证据的保存 |
 | 4.1 | 比较哪些任务、方法，以及什么算成功 | 先定义任务和初始状态分组，简述协议，复现细节集中到附录 |
 | 4.2 | LaDiM 在迁移接受、成本或功能覆盖上有什么优势 | 每段围绕一个比较结论，用少量数字和具体行为支撑 |
 | 4.3 | 新增成功和更早检测分别来自什么能力，能否迁移到 JAX | 分别讨论真实翻译错误、训练信号及新的 JAX 比较 |
@@ -39,11 +39,18 @@ Repair Agent 段落先说明独立接收哪些证据，再说明如何测试修�
 
 三个算法继续显式传入 LLM 参数 M；算法 2 复用算法 1 的 AgentStep。共享的模型查询、工具执行和记录操作只定义一次，算法 3 负责组合流程和仓库上下文操作。
 
-### 仓库协调
+### 仓库结构分析与修复依赖图规划
 
-当前“map、work units、file scopes、interface goals、dependencies”集中在一句话里，需要拆成具有先后关系的动作：
+两个模块采用以下正式名称，统一用于方法介绍、贡献陈述、消融条件、图表标题和相关讨论：
 
-> The agent can inspect a repository map of files, imports, function and class definitions, and notebook cells. It uses this information to group related files into work units and record their dependencies. Local checks establish each unit's current status. When an edit changes a shared implementation, LaDiM invalidates the checks for affected units and their dependents, prompting the agent to check the relevant callers again.
+| 模块名称 | 作用 |
+|---|---|
+| Repository Structural Analysis（仓库结构分析） | 提取文件、导入和符号结构，为修复提供上下文 |
+| Repair Dependency Graph Planning（修复依赖图规划） | 将修复单元及其先后关系组织成图，并据此协调执行 |
+
+方法段按“提取仓库结构 → 智能体组织修复依赖图 → 沿依赖执行与验证”展开。仓库结构分析提供文件、导入、定义和 notebook 单元信息；智能体据此划分修复单元并声明前置关系，形成有向无环图。拟写为：
+
+> Repository Structural Analysis exposes files, imports, function and class definitions, and notebook cells for the agent to inspect. The agent uses Repair Dependency Graph Planning to group related files into work units, specify their repair goals, and organize their prerequisites as a directed acyclic graph. It selects a unit whose prerequisites have current checkpoints, then edits the files assigned to that unit. Local checks establish each unit's current status. When an edit changes a shared implementation, LaDiM invalidates the checks for affected units and their dependents, prompting the agent to check the relevant callers again.
 
 接着用一段说明上下文保留当前计划、相关代码和已有观测，以支持跨文件调查。完整历史和旧代码版本对应的测量留在可检索记录中。这里说明具体保留什么、何时需要取回，避免再造缩写或给实现机制起新名字。
 
@@ -53,9 +60,9 @@ Repair Agent 段落先说明独立接收哪些证据，再说明如何测试修�
 
 这句话重复算法中的“初始检查失败后诊断，再进入修复”。同段“算法先验证，已通过就立即返回”“这些上下文操作服务于算法 1 和 2”等重复说明一起清理。
 
-代码核对还发现，自动映射由 repository_map 工具调用时生成，初始化及上下文重建不会自动执行该扫描。因此算法 3 的 RepositoryContext(Map(T)) 拟改为 RepositoryContext(T)，映射通过共享工具调用取得。正文和伪代码统一为实际实现的行为。
+代码核对还发现，仓库结构分析由 `repository_map` 工具调用触发，初始化及上下文重建不会自动执行该扫描。因此算法 3 的 `RepositoryContext(Map(T))` 拟改为 `RepositoryContext(T)`，结构分析结果通过共享工具调用取得。正文和伪代码统一为实际实现的行为，代码中的工具标识保持不变。
 
-方法核心流程已经稳定。仓库映射与工作单元规划在方法图中的强调程度，根据各自实验确定；图由用户修改。
+方法核心流程已经稳定。仓库结构分析与修复依赖图规划在方法图中的强调程度，根据各自实验确定；图由用户修改。
 
 ## 3. 4.1 缩短 setup，先把比较对象讲清楚
 
@@ -138,13 +145,13 @@ setup 先交代这条任务来源流程。任务表分别写清十二个来源�
 
 训练信号消融回答“需要观察什么”，智能体和仓库消融回答“如何组织调查与修复”。沿用一张表内的小写 (a)、(b) 标记，并让每个面板的表头和表注独立说明比较对象。
 
-现有累计智能体消融的最后一项合并了映射、工作单元、证据和上下文机制。正文可解释完整组合的成本变化。自动映射的独立实验则单独说明：时间序列成本下降 19.8%；推荐较早达到同样的检查覆盖，但最终费用更高。它目前适合作为仓库协调中的辅助机制，贡献列表不据此新增“映射普遍提升效率”的主张。
+现有累计智能体消融的最后一项合并了仓库结构分析、修复依赖图规划、证据和上下文机制。正文可解释完整组合的成本变化。仓库结构分析的独立实验则单独说明：时间序列成本下降 19.8%；推荐较早达到同样的检查覆盖，但最终费用更高。它目前适合作为仓库协调中的辅助机制，贡献列表不据此新增“仓库结构分析普遍提升效率”的主张。
 
-工作单元规划的独立消融已交由实验子代理执行。复用自动映射消融中已经完成的时间序列与推荐完整方法结果，仅新增两个仓库关闭工作单元规划的运行。启动前核对源程序、共同初译、输入、种子、阈值、模型、预算及冻结核心实现一致，保留自动映射。完整条件没有改动，无需重复运行；已有结果来源在实验记录中注明。
+修复依赖图规划的独立消融已交由实验子代理执行。复用仓库结构分析消融中已经完成的时间序列与推荐完整方法结果，仅新增两个仓库关闭修复依赖图规划的运行。启动前核对源程序、共同初译、输入、种子、阈值、模型、预算及冻结核心实现一致，保留仓库结构分析。完整条件没有改动，无需重复运行；已有结果来源在实验记录中注明。
 
-消融对象统一称工作单元规划，包括生成单元计划及依照计划执行的规则：依赖就绪检查、当前单元的文件范围、检查点依赖传播和单元切换时的上下文整理。关闭规划时取消计划及依赖该计划的约束，使智能体可以直接跨文件修复；普通代码检查、证据检索和容量触发的上下文重建保留。结果解释为这一完整规划模块的作用。最终接受之外报告各次提交的通过情况及累计成本，结合轨迹分析是否提前完成相关文件的修复；模型调用、种子和检查数量各自保持其实际统计单位。待两项消融结果返回后，再确定该组件在方法贡献与结果分析中的强调程度。
+修复依赖图规划消融包括移除单元计划及依照计划执行的规则：依赖就绪检查、当前单元的文件范围、检查点依赖传播和单元切换时的上下文整理。关闭该模块时取消计划及依赖该计划的约束，使智能体可以直接跨文件修复；普通代码检查、证据检索和容量触发的上下文重建保留。结果解释为修复依赖图规划这一完整模块的作用。最终接受之外报告各次提交的通过情况及累计成本，结合轨迹分析是否提前完成相关文件的修复；模型调用、种子和检查数量各自保持其实际统计单位。待两项消融结果返回后，再确定该组件在方法贡献与结果分析中的强调程度。
 
-仓库独立消融可合并为一张表：每个仓库列完整方法、关闭仓库结构分析、关闭工作单元规划三行，完整方法只出现一次。各行保留最终接受、检查通过数、调用和端到端 token，检查数用于描述同一仓库的完成程度。表注说明两个消融共享完整方法结果，每个条件各运行一次；新增调用开销只计两个关闭规划的运行。正文分别解释两个组件的配对差异，并用提交轨迹说明差异产生在哪个修复阶段。累计组件实验仍回答逐步加入整套机制的问题，保留其独立协议。
+仓库独立消融可合并为一张表：每个仓库列完整方法、关闭仓库结构分析、关闭修复依赖图规划三行，完整方法只出现一次。英文条件名使用 Full LaDiM、Without Repository Structural Analysis 和 Without Repair Dependency Graph Planning。各行保留最终接受、检查通过数、调用和端到端 token，检查数用于描述同一仓库的完成程度。表注说明两个消融共享完整方法结果，每个条件各运行一次；新增调用开销只计两个关闭修复依赖图规划的运行。正文分别解释两个组件的配对差异，并用提交轨迹说明差异产生在哪个修复阶段。累计组件实验仍回答逐步加入整套机制的问题，保留其独立协议。
 
 已有自然翻译上的历史保留、独立交接等实验，可用于解释这些设计的作用。其设置与仓库研究分别交代，结果不拼成同一组累计条件。实验执行和最终证据由子代理负责。
 
@@ -156,7 +163,7 @@ setup 先交代这条任务来源流程。任务表分别写清十二个来源�
 
 减少临时拼接的连字符修饰语，例如 model-call 改为 LLM calls，tool-execution step 改为 tool execution，target-framework operations 改为 operations in the target framework。迁移方向用 from PyTorch to MindSpore 等自然表达。保留正式方法名称和用户已确认的 state-of-the-art。自动断词通过局部换行处理，不以全局缩字或压缩篇幅解决。
 
-方法中使用已定义的 discrepancy、Verifier Agent、Repair Agent、Orchestrator、repository map 和 work unit；首次解释具体作用后保持名称一致，不增加 LD、IEH、DCM 等缩写。
+方法中使用已定义的 discrepancy、Verifier Agent、Repair Agent 和 Orchestrator。两个仓库模块统一称 Repository Structural Analysis 和 Repair Dependency Graph Planning，首次出现时解释作用，后文及图表沿用全称，不增加模块缩写。`repository map` 指仓库结构分析提供的结构清单，`work unit` 指修复依赖图中的单元；两者作为具体对象名称保留。
 
 ## 8. 应用顺序与交付检查
 
