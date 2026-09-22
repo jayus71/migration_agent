@@ -1,10 +1,10 @@
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}
 \toprule
-\textbf{Available feedback} & \textbf{Accepted} & \thead{Faults passing\\initial checks} & \thead{Total tokens\\(millions)} \\
+\textbf{Available feedback} & \thead{Initially undetected\\faults} & \thead{Total tokens\\(millions)} & \thead{Final\\accepted} \\
 \midrule
-Execution and basic contract & 4/16 & 12 & 2.089 \\
-\quad + Forward values & 8/16 & 8 & 2.603 \\
-\quad + Gradients & 12/16 & 4 & 3.303 \\
-\quad + Parameter updates & \textbf{16/16} & \textbf{0} & 3.419 \\
+Execution and basic checks & 12 & 2.089 & 4/16 \\
+\quad + Forward values & 8 & 2.603 & 8/16 \\
+\quad + Gradients & 4 & 3.303 & 12/16 \\
+\quad + Parameter updates & \textbf{0} & 3.419 & \textbf{16/16} \\
 \bottomrule
 \end{tabular*}

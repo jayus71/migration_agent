@@ -1,20 +1,68 @@
 \section{Additional Experimental Protocols}
 \label{sec:supplementary-protocols}
 
-The main MindSpore experiment restricts production edits to the candidate program. Sources and public contracts remain fixed, and scratch tests provide a separate space for investigation. Identical source-and-contract pairs use the same initial translation for LaDiM, SWE-agent, and MatchFixAgent. Each accepted candidate passes all applicable checks at seeds 101, 202, and 303. The 29 distinct pairs underlie the 50 identifiers reported in the main table; they also define the unit of physical execution and model-use accounting.
+\subsection{Task Construction and Accounting}
+\label{sec:task-construction}
 
-The cross-language collection contains ten DJL application programs and eight textbook examples. LaDiM accepts one application program and all eight examples; SWE-agent and MatchFixAgent each accept one application program and seven examples. Test-guided repair accepts seven examples. The saved initial translations and their model usage are shared by the four repair conditions. InterTrans uses its direct Java-to-Python path and an intermediate JavaScript path, with its native search and extraction procedures. Its total of 2,286,034 tokens comprises 1,711,730 tokens in the completed search and 574,304 tokens in incomplete generation calls. The final verifier compares source and candidate outputs, losses, gradients, parameter updates, and observed optimizer state over two training steps.
+The main MindSpore collection contains 50 task identifiers. Twelve entries reuse existing native source programs, and the remaining entries use programs authored from public interfaces and declared semantics. The identifiers correspond to 29 distinct combinations of source program and evaluation settings drawn from 24 source files. Conditions with identical source, evaluation settings, initial candidate, method, and inputs are executed once and associated with the corresponding identifiers. Acceptance in the main table uses all 50 identifiers, while token totals count actual calls. LaDiM, SWE-agent, and MatchFixAgent share the same initial translation for each distinct input. Production edits are restricted to the candidate program, with separate temporary tests available for investigation. Sources and task specifications remain fixed.
 
-The training-signal and JAX studies use the same investigation and evidence-handoff procedure with editing examples and format-correction feedback in the tool prompts. The signal experiment uses four actual model classes and four controlled modifications: an invalid optimizer keyword, a constant loss offset, gradient scaling, and a changed learning rate. Each setting retains the initial investigation, current workspace, and cumulative call budget. Its visible checks determine whether repair starts and when it stops; final acceptance uses execution, forward values, gradients, and updates on all three seeds. The MindSpore measurements use the \texttt{torch4ms} forward and backward bridge, followed by optimizer updates on its parameters.
+The comparison across languages contains ten DJL application programs and eight textbook examples. LaDiM accepts one application and all eight examples. SWE-agent and MatchFixAgent each accept the same application and seven examples, while test-guided repair accepts seven examples. The saved initial translations and their generation costs are shared by the repair conditions. InterTrans uses its direct Java-to-Python path and an intermediate JavaScript path, with native search and extraction procedures. Its 2,286,034 tokens include 574,304 from incomplete generation calls and 1,711,730 from the completed search. The final evaluation compares outputs, losses, gradients, parameter updates, and observable optimizer state over two consecutive training steps.
 
-The JAX study contains six candidate-program faults in MLP and CNN workloads. Both LaDiM and direct repair allow four external submissions and pass all six tasks at the first submission. LaDiM uses 674,009 tokens and direct repair uses 353,311. Native Ivy and \texttt{torch2jax} are additionally tested on these faulty candidates, yielding 0/6 accepted repairs; their healthy-input checks pass. This study evaluates repair of supplied target candidates through the JAX runtime.
+The common MindSpore initial translations cost 429,109 tokens. This amount is already included once in each repair method's total. Additional LaDiM investigation uses 1,409,686 tokens on initially accepted inputs and 3,320,339 on initially faulty inputs. The corresponding MatchFixAgent totals are 5,135,863 and 6,532,453. Across the 29 distinct inputs, the median ratio of LaDiM to MatchFixAgent total tokens is 0.588. Shared initial translation costs cancel when their paired costs are subtracted. MatchFixAgent reaches full acceptance within its first external submission through its internal analysis and repair orchestration.
 
-The detection study uses four models, three seeds, and 50 training steps. Its gradient scaling and partial update suppression conditions are evaluated with per-step source-state synchronization and with each execution retaining its own state. The loss, gradient-norm, and relative update thresholds are 0.02, 0.05, and 0.03. Figure~\ref{fig:gradient-drift} uses the latter trajectories and reports the mean and range over 12 runs for each fault. The threshold crossings at steps 31 and 18 refer to the mean loss-difference curves. Direct gradient or update measurements detect all 12 faults in their respective panels at step~1.
+
+Source lengths count nonblank physical lines, including comments. Program means count each distinct source once. The 50 MindSpore identifiers use 24 source files, the signal study uses four, and the JAX study uses two. Repository lengths include all source Python files and notebook code cells, including original tests and excluding the external evaluation harness.
+
+\subsection{Numerical Comparisons and Migration Settings}
+\label{sec:migration-settings}
+
+The main MindSpore collection uses absolute/relative tolerances of $10^{-4}/10^{-4}$ for forward values, $10^{-4}/10^{-3}$ for gradients, and $10^{-5}/10^{-3}$ for updates. BF16 matrix multiplication uses absolute tolerance $10^{-2}$. Shapes, data types, initial values, and trainability must match. Parameter and optimizer tasks test their specified enumeration, gradient assignment, or update behavior. The source program and task requirements are available to each method. Acceptance also checks that the target framework executes the required computations.
+
+SWE-agent retains its native tools and controller. MatchFixAgent retains its analysis and repair orchestration through a shared DeepSeek tool backend. CodeTransEngine generates its own translation through the native direct path, and MSAdapter uses its native interface mapping. LaDiM allows eight calls per investigation or repair stage on individual programs. Agent calls allow at most 16,384 output tokens, while initial translation and the repair loop that rewrites the complete candidate allow at most 131,072 per call. The latter has four repair rounds. All diagnosis and repair stages share the cumulative limits in Section~\ref{sec:setup}. Repository calls allow at most 32,768 output tokens. Output budgets include reasoning tokens, and all input usage is recorded.
+
+\subsection{Random Seeds and Initial States}
+\label{sec:seeds}
+
+\textbf{Individual migration.}
+The main MindSpore and Java/DJL comparisons use seed 101 for public evaluation and seeds 202 and 303 for confirmation of a passing candidate. The MindSpore evaluator uses NumPy's random generator to sample numerical inputs and training targets. Corresponding parameters are assigned identical initial values generated from a hash of each parameter name; these values remain fixed across the three input seeds. Discrete inputs, masks, and prescribed optimizer-test values retain their task-specific settings. For Java/DJL programs, each paired evaluation supplies the original initial parameters and two preprocessed batches to the candidate for consecutive training steps. The component comparisons on these programs use the same settings.
+
+\textbf{Natural faults and training signals.}
+All ten natural translation tasks use seed 42 for public evaluation and 1042 and 2042 for confirmation. The 16 training-signal candidates use 4101, 5101, and 6101, with 4101 serving as the public seed. The paired evaluator sets the Python, NumPy, and PyTorch random states before constructing the source model and copies its initial state to both executions. A separate CPU PyTorch generator seeded with $s+101$ produces inputs and labels for evaluation seed $s$, including token inputs for text models. The signal study uses all three seeds when checking fault construction and scoring the final candidate with all signals. The additional repair collections retain their original unit probes and apply their task-specific acceptance checks without an additional multi-seed confirmation stage.
+
+\textbf{JAX repair.}
+The MLP and CNN programs use public seed 6701 and confirmation seeds 6702 and 6703. The evaluator initializes PyTorch's random state with the evaluation seed before constructing the source or candidate model. Inputs and class labels use a separate CPU generator with seed $s+101$. TorchAX transfers the candidate to JAX, where native differentiation and Optax perform the checked training step.
+
+\textbf{Detection trajectories.}
+Seeds 300, 301, and 302 define three repeated trajectories for each model. Each seed initializes the model's floating-point parameters, and its initial state is shared across the source and target executions. Image batch order uses seed $s+5000$, text-classification batch order uses $s+6000$, and language-model window selection uses $s+7000$. The fault and synchronization conditions for a given model and seed share the same initial state and 50-step batch sequence.
+
+\textbf{Time series repository.}
+The main comparison and component ablation use public seed 101 and confirmation seeds 202 and 303. The source model is initialized with the evaluation seed, and its parameters are copied to the target. NumPy generators use seed $s+47$ for the three training batches and seed $s$ for the synthetic price series. The target MindSpore random state also uses $s$. The training script, notebook, and teaching examples are exercised in the public evaluation; confirmation repeats the numerical checks on the remaining two seeds.
+
+\textbf{Recommendation repository.}
+The public numerical evaluation uses seed 101 for source model initialization and NumPy generation of user identifiers, features, histories, item identifiers, positions, and labels. The source parameters and retrieval corpus are then supplied to the target, whose MindSpore random state uses the same seed. The protocol assigns seeds 202 and 303 to confirmation after all public checks pass; the reported recommendation runs finish at the public evaluation. The original tests use seed 42, including Python, NumPy, and framework random states. For their exact-value history-encoder checks, the public task supplies the source parameters initialized with PyTorch seed 42. The one-epoch training command uses seed 101.
+
+\subsection{Training Signal and Framework Studies}
+
+The training signal and JAX studies use the same investigation and evidence handoff procedure with editing examples and format-correction feedback in their tool prompts. The signal experiment applies four controlled modifications to four model classes. The execution fault uses an invalid optimizer keyword, the forward fault adds a constant loss offset, the gradient fault scales gradients, and the update fault changes the learning rate. Each setting retains the initial investigation, current workspace, and cumulative call budget. Its visible checks determine whether repair starts and stops. Final acceptance uses all training signals on three seeds. MindSpore measurements use the \texttt{torch4ms} forward and backward bridge, followed by optimizer updates on its parameters.
+
+The JAX study contains six faults in MLP and CNN candidate programs. TorchAX exposes the PyTorch interface over JAX~\citep{google2025torchax}, with JAX computing gradients and Optax applying updates. Both LaDiM and direct repair allow four external submissions and accept every task at the first submission. LaDiM uses 674,009 tokens and direct repair uses 353,311. Native Ivy and \texttt{torch2jax} are also tested on these supplied faulty candidates and accept 0/6 repairs, while their healthy-input checks pass.
+
+\subsection{Detection Measurements}
+
+The detection study uses four models, three seeds, and 50 training steps. Gradient scaling and partial update suppression are evaluated both with per-step synchronization to the source state and with each execution retaining its own state. Loss, gradient norm, and relative update thresholds are 0.02, 0.05, and 0.03. Figure~\ref{fig:gradient-drift} uses trajectories with separate state and reports the mean and range across 12 runs per fault. The loss threshold crossings at steps 31 and 18 refer to mean curves. Direct gradient or update checks detect all respective faults at step~1.
+
+The scalar summaries are
+\begin{align}
+\Delta_{\mathrm{loss}} &= |L(P)-L(\hat P)|, \\
+\Delta_{\mathrm{grad}} &= \left|\|\nabla_{\theta}L(P)\|_2-\|\nabla_{\hat\theta}L(\hat P)\|_2\right|, \\
+\Delta_{\mathrm{param}} &= \frac{\|\Delta\theta-\Delta\hat\theta\|_2}{\|\Delta\theta\|_2+\epsilon}.
+\end{align}
+Here $\Delta\theta$ and $\Delta\hat\theta$ denote source and target parameter updates, and $\epsilon$ prevents division by zero. Figure~\ref{fig:gradient-drift} divides each difference by its detection threshold. The main migration comparison uses the task-specific tensor comparisons defined above.
 
 \section{Evidence Handoff and Agent Integration}
 \label{sec:component-study}
 
-The component study shares the main collection, initial translations, acceptance checks, and cumulative budgets. Continuing the original conversation retains its message roles and reasoning history when the agent begins editing. The independent handoff supplies the verifier's evidence to a separate repair conversation. Removing prior repair conversation restarts each subsequent repair attempt from the initial investigation and latest observation, while retaining the current files and cumulative budget. Removing progress reminders preserves the call and submission limits.
+The component study shares the main collection, initial translations, acceptance checks, and cumulative budgets. Continuing the original conversation retains its message roles and reasoning history when the agent begins editing. The independent handoff supplies the Verifier's evidence to a separate repair conversation. Removing prior repair conversation restarts each subsequent repair attempt from the initial investigation and latest observation, while retaining the current files and cumulative budget. Removing progress reminders preserves the call and submission limits.
 
 \begin{table}[!htb]
 \caption{Complete component and host-integration comparison on the common MindSpore collection. Token totals include initial translation and all subsequent calls.}
@@ -25,19 +73,76 @@ The component study shares the main collection, initial translations, acceptance
 \input{figures/TABLE_unified_components.tex}
 \par\vspace{3pt}
 \begin{minipage}{\linewidth}
-\footnotesize $\dagger$ Includes the task with unavailable final acceptance identified in Table~\ref{tab:main-results}. Each condition uses the source-and-contract reuse described in Section~\ref{sec:setup}.
+\footnotesize $\dagger$ Includes one task with unavailable final acceptance, which remains in the denominator and cost totals. Each condition uses the input reuse described in Appendix~\ref{sec:task-construction}.
 \end{minipage}
 \end{table}
 
-LaDiM accepts all 50 identifiers, while the continuous conversation accepts 49. Removing prior repair conversation or progress reminders preserves full acceptance and uses fewer tokens. Twenty distinct initial translations are already accepted, and only two of the nine faulty pairs require a second repair submission under the complete method. The observed outcomes therefore involve few opportunities for prior repair conversation to influence a later attempt.
+LaDiM accepts all 50 identifiers, while the continuous conversation accepts 49. Removing prior repair conversation or progress reminders preserves full acceptance and uses fewer tokens. Twenty distinct initial translations are already accepted, and only two of the nine faulty pairs require a second repair submission under the complete method. Most cases therefore finish before a later repair attempt can use earlier repair conversation.
 
-The host-integration conditions prepend the same read-only investigation to SWE-agent or MatchFixAgent. Investigation calls share the host's total call, token, and time limits; the native host retains its own history and repair policy. MatchFixAgent with investigation retains 50/50 at a higher token total. SWE-agent with investigation accepts 43/50, compared with 44/50 and one interrupted task for its native condition. At the distinct-pair level, the added investigation increases SWE-agent's repair count from seven to eight among nine faulty initials; it also leaves four previously accepted pairs failing at the end. Table~\ref{tab:components} records both the repair and preservation consequences in final acceptance.
+The natural translation component study uses the same ten supplied candidates as Table~\ref{tab:natural-repairs}. Its reference configuration includes examples of the edit format and corrective feedback for malformed edits. Each condition changes the named component while retaining the candidates, workspace access, acceptance checks, and repair budgets. Removing this format assistance gives the LaDiM configuration reported in the natural fault comparison.
+
+\begin{table}[!htb]
+\caption{Effect of repair context and editing assistance on natural translation faults. Tokens cover all ten repair runs.}
+\label{tab:natural-components}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\input{figures/TABLE_natural_components.tex}
+\end{table}
+
+
+The host-integration conditions prepend the same read-only investigation to SWE-agent or MatchFixAgent. Investigation calls share the host's total call, token, and time limits. The native host retains its own history and repair policy. MatchFixAgent with investigation retains 50/50 at a higher token total. SWE-agent with investigation accepts 43/50, compared with 44/50 and one interrupted task for its native condition. Across distinct inputs, the added investigation increases SWE-agent's repair count from seven to eight among nine initially faulty programs. It also leaves four initially accepted programs failing at the end. Table~\ref{tab:components} records both the repair and preservation consequences in final acceptance.
 
 \section{Additional Repair Collections}
 \label{sec:additional-repair}
 
-We also evaluate supplied faulty target programs under their respective repair contracts. A controlled MindSpore collection contains 50 injected faults with task-specific acceptance checks. LaDiM accepts 45/50 within four submissions, compared with 29/50 for SWE-agent and 35/50 for a direct repair agent using shared tools. LaDiM's cumulative accepted counts are 29, 41, and 45 at one, two, and four submissions. Total token use is 39,982,844, 42,579,064, and 12,459,013 for LaDiM, SWE-agent, and direct repair, respectively. The source-and-target inputs required by MatchFixAgent are supplied in the paired collection below.
+We also evaluate supplied faulty target programs under their respective acceptance criteria. A controlled MindSpore collection contains 50 injected faults with task-specific acceptance checks. LaDiM accepts 45/50 within four submissions, compared with 29/50 for SWE-agent and 35/50 for a direct repair agent using shared tools. LaDiM's cumulative accepted counts are 29, 41, and 45 at one, two, and four submissions. Total token use is 39,982,844, 42,579,064, and 12,459,013 for LaDiM, SWE-agent, and direct repair, respectively. The source and target inputs required by MatchFixAgent are supplied in the paired collection below.
 
-Ten existing natural translations provide a further repair collection with five faulty and five initially accepted programs. LaDiM repairs four of the five faults and preserves all five accepted programs. The shared-tool direct repair control, SWE-agent, and MatchFixAgent preserve the initially accepted programs and repair none of the five faults. LaDiM uses 13,206,863 tokens across the ten tasks. Acceptance compares source and target training observations under matched inputs and initialization with three-seed confirmation.
+In a separate collection of twelve source and target repair tasks, LaDiM accepts 12/12 and MatchFixAgent accepts 11/12. They use 6,642,603 and 14,505,833 tokens, respectively. Both receive the complete source, candidate, task specification, and target library. Each repair collection uses its specified editable code scope and acceptance checks.
 
-In a separate collection of twelve source-and-target repair tasks, LaDiM accepts 12/12 and MatchFixAgent accepts 11/12. They use 6,642,603 and 14,505,833 tokens, respectively. Both receive the complete source, candidate, public contract, and target library. These repair collections retain their declared editable code scopes and acceptance checks, with each denominator attached to its own task definition. Their agent and tool-backend configurations are recorded alongside the frozen sources and result files.
+\section{Natural Translation Repair Protocol}
+\label{sec:natural-protocol}
+
+The ten supplied translations contain five initially faulty programs and five that already pass the checks. Each method receives the same source, candidate, task requirements, and supporting library. The candidate and library may be edited. The source and acceptance criteria remain fixed. Target forward computation and differentiation execute in MindSpore through \texttt{torch4ms}, followed by PyTorch optimizer updates on its parameters. The comparison uses matching inputs and initial parameters with three-seed confirmation. Loss absolute difference, gradient norm absolute difference, and relative parameter update thresholds are 0.02, 0.05, and 0.03, with an additional gradient vector L2 threshold of 0.05 and the specified layer and parameter checks.
+
+Table~\ref{tab:natural-repairs} counts every call for each input, including failed repairs and investigation of initially accepted programs. LaDiM uses 193 calls, direct repair uses 120, SWE-agent uses 386, and MatchFixAgent uses 265. LaDiM uses 13,206,863 tokens.
+
+The LSTM repair in Section~\ref{sec:fault-characterization} adds a MindSpore recurrence and registers it in the supporting library, then corrects the tensor-indexing dispatch. On the final public check, loss absolute difference is $2.38\times10^{-7}$, gradient vector L2 difference is $4.19\times10^{-7}$, and relative parameter update difference is $8.11\times10^{-7}$. The example uses 32 model calls.
+
+\section{Repository Protocols and Detailed Results}
+\label{sec:repository-results}
+
+All methods receive byte-identical source repositories, common initial translations, task requirements, and acceptance procedures. The time series translation has three generation calls totaling 163,661 tokens. The recommendation translation uses 20 calls totaling 368,368 tokens. Generation proceeds from the public import structure and includes failed or truncated attempts. Each method's reported total contains one complete copy of this generation cost together with every repair call. Table~\ref{tab:repository-costs} separates input and output usage in repair.
+
+\begin{table}[!htb]
+\caption{Complete costs for the repository comparison. Total tokens include repair input and output plus common initial translation.}
+\label{tab:repository-costs}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\input{figures/TABLE_repository_costs.tex}
+\end{table}
+
+The time series protocol compares the core model for three consecutive Adam steps from corresponding source parameters, with dropout disabled and input shape $4\times20\times1$. Preprocessing and prediction absolute tolerances are $10^{-9}$ and $10^{-4}$. Loss absolute difference, gradient vector L2 difference, and relative parameter update tolerances are 0.02, 0.05, and 0.03. Learning rate behavior is checked around its schedule boundaries. The public evaluation executes the 100-epoch training workflow, notebook cells, and teaching snippets in their source order. Each entry point must produce the required predictions and plots and execute native differentiation. The notebook and snippets provide execution coverage, while the core model supplies paired numerical training measurements. All three methods pass 23 behavior checks per seed, giving 69/69 across the public and two confirmation seeds.
+
+The recommendation protocol covers six model paths that execute in the source framework with three sequential Adam updates. Source exceptions and empty returns are checked against the corresponding source behavior. Both the numerical worker and training command invoke the candidate's optimizer factory with learning rate 0.001. The source Adam settings use decay coefficients 0.9 and 0.999 and epsilon $10^{-8}$. Representation absolute tolerance is $10^{-4}$. Loss absolute/relative tolerances are $0.002/10^{-4}$, gradient tolerances are $10^{-4}/0.005$, and relative parameter update tolerance is 0.03. The evaluation includes all ten original tests and one epoch of the training command on 16 synthetic examples.
+
+Table~\ref{tab:repository-checks} reports the declared checks on the public seed. The 114 numerical comparisons comprise 108 checks over six paths, three steps, and six training signals, plus six inference retrieval checks. Twenty-four execution, step count, and native differentiation checks and seven source behavior checks bring the behavior-check total to 145. SWE-agent and MatchFixAgent each lack one retrieval measurement after reward model inference fails. That entry remains n/a in both the 114 and 145 denominators. MatchFixAgent passes 0/10 original tests: an unmigrated PyTorch import in its history-encoder test prevents collection under the native MindSpore requirement. No method reaches the two confirmation seeds on this repository.
+
+\begin{table}[!htb]
+\caption{Recommendation repository checks passed on the public seed. The numerical checks are a subset of behavior checks, and the six training signal rows break down the training checks. One unmeasured retrieval check remains in each baseline's denominator.}
+\label{tab:repository-checks}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\input{figures/TABLE_repository_checks.tex}
+\end{table}
+
+\section{Repository Context and Evidence}
+\label{sec:repository-context}
+
+The repository extension separates the version of its dependency plan from the version of the candidate files. Every recorded test stores the candidate version on which it ran. An actual change to candidate code makes earlier measurements stale, and a new result replaces the preceding result for the same test even when the new test fails. Work-unit checkpoints additionally depend on their declared file scopes, test selections, and prerequisite units. A checkpoint without a selected test records syntax validation only. The final acceptance decision uses the complete repository evaluation.
+
+Full tool observations, file reads, and conversations are archived outside the editable workspace. Records carry content hashes and can be retrieved by identifier, JSON pointer, and character range. When the context is rebuilt, it retains the current dependency plan and generation status, the complete structured hypotheses and next steps, the latest measurements, and the last tool batch. Cached code consists only of content returned by earlier reads, with matching current file hashes and relevance to the active unit. The cache contains at most 120,000 characters. Reconstruction is triggered by an independent role handoff, an actual work-unit switch, or messages exceeding 75\% of the configured context capacity. Ordinary stage continuation and the first selection of a work unit retain the existing conversation.
+
+For the repository experiments, diagnosis allows up to six calls and 64,000 output tokens. The remaining repair calls and output budget are allocated over the remaining external submissions, with at most 16 calls in the first repair stage. The cumulative limits apply to the whole repository.

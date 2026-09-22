@@ -59,6 +59,75 @@ class UnifiedPaperResultsTests(unittest.TestCase):
         self.assertEqual(sum(r['calls'] for r in signals), 690)
         self.assertEqual(sum(r['unknown_usage_calls'] for r in signals), 0)
 
+    def test_repository_checks_keep_missing_measurements_in_denominator(self):
+        rows = self.data['repository']
+        self.assertEqual(len(rows), 6)
+        expected_tokens = {
+            ('timeseries', 'ladim'): 2614230, ('timeseries', 'swe'): 8199825,
+            ('timeseries', 'matchfix'): 13597778, ('twotower', 'ladim'): 8811246,
+            ('twotower', 'swe'): 8316552, ('twotower', 'matchfix'): 8679080}
+        for row in rows:
+            key = row['repository'], row['method']
+            self.assertEqual(row['tokens'], expected_tokens[key])
+            self.assertEqual(row['tokens'], row['translation_tokens'] +
+                             row['repair_prompt_tokens'] + row['repair_completion_tokens'])
+            self.assertEqual(row['accepted'], row['repository'] == 'timeseries')
+            paired = row['paired_checks']
+            self.assertEqual(paired['expected'], 69 if row['repository'] == 'timeseries' else 145)
+            if row['repository'] == 'twotower':
+                numerical = row['details']['numerical_checks']
+                self.assertEqual(numerical['expected'], 114)
+                missing = 0 if row['method'] == 'ladim' else 1
+                self.assertEqual(len(paired['not_measured']), missing)
+                self.assertEqual(len(numerical['not_measured']), missing)
+                self.assertEqual(paired['passed'] + len(paired['failed']) + missing, 145)
+                self.assertEqual(numerical['passed'] + len(numerical['failed']) + missing, 114)
+
+    def test_natural_repairs_use_selected_method_and_preserve_initial_acceptance(self):
+        rows = self.data['natural_repairs']
+        self.assertEqual({r['method'] for r in rows}, {'ladim', 'swe', 'matchfix', 'direct'})
+        for row in rows:
+            self.assertEqual(row['retained'], 5)
+            self.assertEqual(row['denominator'], 10)
+            self.assertEqual(row['accepted'], row['repaired'] + row['retained'])
+            self.assertEqual(row['repaired'], 4 if row['method'] == 'ladim' else 0)
+        ladim = next(r for r in rows if r['method'] == 'ladim')
+        self.assertEqual((ladim['tokens'], ladim['calls']), (13206863, 193))
+
+    def test_natural_components_keep_same_program_denominators(self):
+        rows = self.data['natural_components']
+        self.assertEqual(len(rows), 5)
+        self.assertEqual([r['repaired'] for r in rows], [4, 3, 0, 2, 4])
+        self.assertEqual([r['tokens'] for r in rows],
+                         [15547813, 14516463, 10851537, 17325026, 13206863])
+        for row in rows:
+            self.assertEqual(row['retained'], 5)
+            self.assertEqual(row['accepted'], row['repaired'] + row['retained'])
+        selected = next(r for r in self.data['natural_repairs'] if r['method'] == 'ladim')
+        self.assertEqual(rows[-1]['tokens'], selected['tokens'])
+
+    def test_main_table_cost_breakdowns_and_repository_signal_counts(self):
+        for row in [*self.data['main'].values(), *self.data['cross_language']]:
+            self.assertEqual(row['input_tokens'] + row['output_tokens'], row['tokens'])
+        for row in self.data['repository']:
+            signals = row['main_table_signals']
+            if row['repository'] == 'timeseries':
+                for key in ('loss', 'gradient', 'update'):
+                    self.assertEqual(signals[key], {'passed': 9, 'expected': 9})
+                self.assertEqual(signals['entry_points'], {'passed': 3, 'expected': 3})
+            elif row['method'] == 'matchfix':
+                self.assertEqual(signals['entry_points'], {'passed': 0, 'expected': 10})
+                tests = row['details']['original_tests']
+                self.assertEqual(tests['status'], 'collection_failed')
+                self.assertEqual(tests['exit_code'], 2)
+                self.assertEqual(tests['observed_outcomes'], [])
+        table = (ROOT / 'figures/TABLE_unified_comparison.tex').read_text()
+        self.assertNotIn('Passed', table)
+        self.assertNotIn('Failed', table)
+        for key in ('macedo2025codetransengine', 'openi2025msadapter',
+                    'yang2024sweagent', 'ibrahimzada2025matchfixagent', 'macedo2024intertrans'):
+            self.assertEqual(table.count(r'\citep{' + key + '}'), 1)
+
     def test_generated_export_matches_its_frozen_inputs(self):
         saved = json.loads((ROOT / 'data/paper_figures/unified_results.json').read_text())
         self.assertEqual(saved, self.data)

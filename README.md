@@ -1,6 +1,7 @@
 # LaDiM / migration_agent
 
-Paper sources and experiment evidence for cross-framework training-code repair.
+Paper sources and experiment evidence for training-code migration across
+frameworks and programming languages.
 LaDiM stands for Layered Diagnosis for Multi-Agent Code Migration, the current
 paper title. Earlier drafts used MARS and LADDER for the same method.
 This checkout supports cloud-based manuscript editing and CPU result analysis.
@@ -81,7 +82,9 @@ for the template source, build instructions, and current page count.
 
 ```bash
 .venv/bin/python figures/make_gradient_drift.py
+.venv/bin/python figures/make_migration_motivation.py
 .venv/bin/python figures/make_unified_results.py
+.venv/bin/python figures/make_cumulative_components.py
 .venv/bin/python figures/update_overview_labels.py
 .venv/bin/python -m unittest discover -s tests -p 'test_paper_figure*.py'
 .venv/bin/python -m unittest discover -s tests -p 'test_unified_paper_results.py'
@@ -99,15 +102,20 @@ all six methods on 18 Java/DJL-to-Python/PyTorch tasks.
 
 The experimental section is organized into Experimental Setup, Main Experiments,
 Analysis Experiments, and Ablation Studies, in `sections/experiments.tex`.
-Two main tables report migration outcomes and the 16-task training-signal
-ablation. Analyses explain repair versus preservation, per-task cost, retries,
-detection latency, and transfer across languages and target frameworks. The
-complete component matrix and additional repair protocols are in
+Main tables report source collections, migration outcomes, natural fault repairs,
+JAX repairs, cumulative training signals, and cumulative agent components.
+The consolidated migration table covers framework and language migration and
+both repository tasks.
+Analyses explain repair and preservation, per-task cost, retries, detection
+latency, and repair in another target framework. The
+complete component matrices, repository check details, and additional repair protocols are in
 `sections/supplementary_experiments.tex`. Answer-guided historical experiments
 remain in the repository archives.
 
-The three figures show training-signal detection, the investigation and repair
-procedure, and total model use with per-input LaDiM/MatchFixAgent token costs.
+The four figures show complete migration costs in the introduction, the
+investigation and repair procedure, total model use with signed per-input
+token savings, and training-signal detection beside its analysis. The savings bars show all 29 distinct inputs, sorted
+within initially accepted and initially faulty groups.
 The measured acceptance at one, two, and four submissions remains in the text.
 The overview is a simple placeholder for the author's replacement. Its editable
 PowerPoint and SVG share the same labels and layout; `update_overview_labels.py`

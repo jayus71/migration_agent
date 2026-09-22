@@ -7,27 +7,27 @@ import hashlib
 import csv
 import json
 from pathlib import Path
-from matplotlib.ticker import FixedLocator, FuncFormatter, NullLocator
+from matplotlib.patches import Patch
+import numpy as np
 
-from paper_plot_style import BLUE, GRAY, GREEN, ORANGE, plt, save_figure
+from paper_plot_style import BLUE, GRAY, GREEN, ORANGE, plt
 
 ROOT = Path(__file__).resolve().parents[1]
 AUDIT = ROOT / 'data/audits/unified50-preflight-20260918/formal_launch/results_audit_final.json'
 SUMMARY = AUDIT.with_name('final_summary.json')
 SIGNALS = ROOT / 'data/paper_figures/autonomous_training_signals.csv'
+REPOSITORY_SUMMARY = ROOT / 'output/repository-migration-20260921/final/summary.json'
+REPOSITORY_CHECKS = ROOT / 'output/repository-migration-20260921/partial_results.json'
+REPOSITORY_AUDIT = ROOT / 'output/repository-migration-20260921/final/final_integrity_audit.json'
+NATURAL_METHOD = ROOT / 'output/maintext-results-20260918/slim_main.csv'
+NATURAL_BASELINES = ROOT / 'output/maintext-results-20260918/main_comparison.csv'
+REPOSITORY_SIGNALS = ROOT / 'data/paper_figures/repository_training_check_details.json'
+NATURAL_COMPONENTS = ROOT / 'output/maintext-ablations-20260918/recovery_final.json'
 LABELS = {'ladim': 'LaDiM', 'matchfix': 'MatchFixAgent', 'swe': 'SWE-agent',
-          'direct': 'Direct LLM', 'cte': 'CodeTransEngine (direct)', 'msadapter': 'MSAdapter',
+          'direct': 'Direct LLM', 'cte': 'CodeTransEngine', 'msadapter': 'MSAdapter',
           'test_repair': 'Test-guided repair'}
-TABLE_LABELS = {
-    'ladim': r'\textbf{LaDiM (ours)}',
-    'matchfix': r'MatchFixAgent~\citep{ibrahimzada2025matchfixagent}',
-    'swe': r'SWE-agent~\citep{yang2024sweagent}',
-    'direct': 'Direct LLM',
-    'cte': r'CodeTransEngine (direct)~\citep{macedo2025codetransengine}',
-    'msadapter': r'MSAdapter~\citep{openi2025msadapter}',
-    'test_repair': 'Test-guided repair',
-    'intertrans': r'InterTrans~\citep{macedo2024intertrans}',
-}
+TABLE_LABELS = {**LABELS, 'ladim': r'\textbf{LaDiM (ours)}', 'intertrans': 'InterTrans'}
+
 ORDER = ['direct', 'cte', 'msadapter', 'swe', 'matchfix', 'ladim']
 COLORS = {'direct': GREEN, 'cte': '#a6761d', 'msadapter': '#9467bd',
           'swe': GRAY, 'matchfix': ORANGE, 'ladim': BLUE}
@@ -44,6 +44,18 @@ def load_data():
                                    for row in csv.DictReader(SIGNALS.read_text().splitlines())]}
     for row, method in zip(output['cross_language'], ['ladim', 'swe', 'matchfix', 'test_repair', 'direct', 'intertrans']):
         row['key'] = method
+        if method == 'intertrans':
+            usage = audit['historical_intertrans_summary']['cumulative_usage']
+        elif method == 'direct':
+            shared_keys = set().union(*(set(r['end_to_end_call_keys']) - set(r['incremental_call_keys'])
+                for r in rows if r['phase'] == 'cross_language' and r['method'] == 'ladim'))
+            assert len(shared_keys) == 18
+            usage = {field: sum(audit['provider_calls'][k]['usage'][field] for k in shared_keys)
+                     for field in ('prompt_tokens', 'completion_tokens', 'total_tokens')}
+        else:
+            usage = audit['aggregates']['cross_language/' + method]['end_to_end_observed_usage']['usage']
+        row['input_tokens'], row['output_tokens'] = usage['prompt_tokens'], usage['completion_tokens']
+        assert row['input_tokens'] + row['output_tokens'] == row['tokens']
         row['calls'] = (audit['aggregates']['cross_language/' + method]['end_to_end_observed_usage']['observed_calls']
                         if method not in ('direct', 'intertrans') else 18 if method == 'direct'
                         else audit['historical_intertrans_summary']['cumulative_usage']['calls'])
@@ -71,6 +83,8 @@ def load_data():
                   'accepted_groups': aggregate['accepted'], 'groups': 29,
                   'missing': sum(len(r['aliases']) for r in subset if r['accepted'] is None),
                   'tokens': aggregate['end_to_end_observed_usage']['usage'].get('total_tokens', 0),
+                  'input_tokens': aggregate['end_to_end_observed_usage']['usage'].get('prompt_tokens', 0),
+                  'output_tokens': aggregate['end_to_end_observed_usage']['usage'].get('completion_tokens', 0),
                   'calls': aggregate['end_to_end_observed_usage']['observed_calls'],
                   'at_budget': at_budget,
                   'faults_repaired': sum(len(r['aliases']) for r in subset if not initial[r['group']] and r['accepted'] is True),
@@ -95,32 +109,133 @@ def load_data():
     for method in ('ladim', 'matchfix'):
         assert sum(p[method + '_tokens'] for p in paired_costs) == output['main'][method]['tokens']
     output['paired_costs'] = paired_costs
+    output['cost_stages'] = {}
+    for method in ('ladim', 'matchfix', 'swe'):
+        conditions = [r for r in rows if r['variant'] == 'main' and r['method'] == method]
+        stages = {'initially_accepted': 0, 'initially_faulty': 0}
+        for row in conditions:
+            state = 'initially_accepted' if initial[row['group']] else 'initially_faulty'
+            stages[state] += sum(provider_calls[k]['usage']['total_tokens']
+                                  for k in set(row['incremental_call_keys']))
+            shared = set(paired_rows[row['group'], 'direct']['end_to_end_call_keys'])
+            assert shared.issubset(row['end_to_end_call_keys'])
+        stages['translation'] = output['main'][method]['tokens'] - sum(stages.values())
+        assert stages['translation'] == output['main']['direct']['tokens']
+        output['cost_stages'][method] = stages
+
+    repository = json.loads(REPOSITORY_SUMMARY.read_text())
+    checks = json.loads(REPOSITORY_CHECKS.read_text())
+    integrity = json.loads(REPOSITORY_AUDIT.read_text())
+    repository_signals = json.loads(REPOSITORY_SIGNALS.read_text())['timeseries']
+    output['repository'] = []
+    for row in repository['rows']:
+        repository_name, method = row['repository'], row['method']
+        checked = checks[repository_name][method]
+        audit_row = integrity['conditions'][repository_name + '/' + method]
+        assert not audit_row['source_mismatches'] and audit_row['task_matches']
+        assert not audit_row['initial_target_mismatches']
+        assert audit_row['response_count_matches'] and all(audit_row['usage_matches'].values())
+        assert audit_row['end_to_end_cost_matches']
+        assert row['accepted'] == checked['complete_acceptance'] == audit_row['accepted']
+        assert row['end_to_end_tokens'] == checked['end_to_end_tokens']
+        assert row['calls'] == checked['repair_calls']
+        assert row['end_to_end_tokens'] == row['usage']['total_tokens'] + row['translation_usage']['total_tokens']
+        paired = checked['all_seed_checks'] if repository_name == 'timeseries' else checked['protocol_checks']
+        assert paired['passed'] + len(paired['failed']) + len(paired['not_measured']) == paired['expected']
+        if repository_name == 'timeseries':
+            counts = repository_signals[method]['counts']
+            signals = {'loss': counts['forward_loss'], 'gradient': counts['gradients'],
+                       'update': counts['parameter_updates'], 'entry_points': counts['entry_points']}
+        else:
+            signals = {k: {'passed': checked['training_signals'][k]['passed'], 'expected': 18}
+                       for k in ('loss', 'gradient', 'update')}
+            signals['entry_points'] = {'passed': checked['original_tests']['passed'], 'expected': 10}
+        output['repository'].append({'repository': repository_name, 'method': method,
+            'accepted': row['accepted'], 'tokens': row['end_to_end_tokens'],
+            'repair_calls': row['calls'], 'submissions': row['submissions'],
+            'repair_prompt_tokens': row['usage']['prompt_tokens'],
+            'repair_completion_tokens': row['usage']['completion_tokens'],
+            'translation_tokens': row['translation_usage']['total_tokens'],
+            'paired_checks': paired, 'details': checked, 'main_table_signals': signals})
+    natural_rows = list(csv.DictReader(NATURAL_BASELINES.read_text().splitlines()))
+    natural_method = next(r for r in csv.DictReader(NATURAL_METHOD.read_text().splitlines())
+                          if r['benchmark'] == 'Natural10' and r['version'] == 'slim_v4')
+    output['natural_repairs'] = []
+    for method, source_name in [('direct', 'direct_shared_tools'), ('swe', 'swe_native_isolated'),
+                                ('matchfix', 'matchfix_full_orchestration'), ('ladim', None)]:
+        row = natural_method if method == 'ladim' else next(r for r in natural_rows
+            if r['benchmark'] == 'Natural10' and r['version'] == 'formal_v3' and r['method'] == source_name)
+        output['natural_repairs'].append({'method': method, 'accepted': int(row['accepted']),
+            'denominator': int(row['planned']), 'repaired': int(row['actual_faults_repaired']),
+            'retained': int(row['healthy_retained']), 'faults': 5, 'initially_accepted': 5,
+            'tokens': int(row['selected_tokens']), 'calls': int(row['selected_calls'])})
+    groups = [g for g in json.loads(NATURAL_COMPONENTS.read_text())['groups']
+              if g['study'] == 'natural10_v3']
+    reference = groups[0]['reference_v4']
+    output['natural_components'] = []
+    for label, row in [('Independent evidence handoff', reference)] + [
+            ({'continuous_role': 'Continuous conversation',
+              'without_repair_history': 'Without repair history',
+              'without_progress_prompt': 'Without progress reminders',
+              'without_edit_format_feedback': 'Without editing format assistance'}[g['variant']], g)
+            for g in groups]:
+        assert row['complete'] and row['planned'] == row['recorded'] == 10
+        assert row['actual_faults_repaired'] + row['healthy_retained'] == row['accepted']
+        output['natural_components'].append({'label': label, 'accepted': row['accepted'],
+            'repaired': row['actual_faults_repaired'], 'retained': row['healthy_retained'],
+            'tokens': row['known_tokens']})
     output['provenance'] = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
-                            for p in (AUDIT, SUMMARY, SIGNALS)}
+                            for p in (AUDIT, SUMMARY, SIGNALS, REPOSITORY_SUMMARY, REPOSITORY_CHECKS,
+                                      REPOSITORY_AUDIT, NATURAL_METHOD, NATURAL_BASELINES, NATURAL_COMPONENTS, REPOSITORY_SIGNALS)}
     return output
 
 
 def export_tables(data):
-    main_rows = []
-    for method in ORDER:
-        row = data['main'][method]
-        name = TABLE_LABELS[method]
-        count = f"{row['accepted']}/50"
-        if method == 'ladim':
-            count = r'\textbf{' + count + '}'
-        main_rows.append(f"{name} & {count} & {row['tokens']/1e6:.3f} & {row['calls']:,}" + r' \\')
-    cross_rows = []
-    for method in ['direct', 'intertrans', 'test_repair', 'swe', 'matchfix', 'ladim']:
-        row = next(r for r in data['cross_language'] if r['key'] == method)
-        label = TABLE_LABELS[method]
-        cross_rows.append(f"{label} & {row['accepted']}/18 & {row['tokens']/1e6:.3f} & {row['calls']:,}" + r' \\')
-    comparison = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}',
-                  r'\toprule',
-                  r'\textbf{Method} & \textbf{Accepted} & \thead{Total tokens\\(millions)} & \thead{Model\\calls} \\',
-                  r'\midrule', r'\multicolumn{4}{l}{\textit{(a) PyTorch to MindSpore}} \\',
-                  *main_rows, r'\midrule',
-                  r'\multicolumn{4}{l}{\textit{(b) Java/DJL to Python/PyTorch}} \\',
-                  *cross_rows, r'\bottomrule', r'\end{tabular*}']
+    header = r'\textbf{Method} & \thead{Model\\calls} & \thead{Input tokens\\(millions)} & \thead{Output tokens\\(millions)} & \thead{Total tokens\\(millions)} & \textbf{Accepted} \\'
+    comparison = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}', r'\toprule', header]
+    citations = {'cte': 'macedo2025codetransengine', 'msadapter': 'openi2025msadapter',
+                 'swe': 'yang2024sweagent', 'matchfix': 'ibrahimzada2025matchfixagent',
+                 'intertrans': 'macedo2024intertrans'}
+    cited = set()
+    for source, order, denominator, panel in [
+            ('main', ORDER, 50, '(a) PyTorch to MindSpore'),
+            ('cross_language', ['direct', 'intertrans', 'test_repair', 'swe', 'matchfix', 'ladim'], 18,
+             '(b) Java/DJL to Python/PyTorch')]:
+        comparison += [r'\midrule', r'\multicolumn{6}{l}{\textit{' + panel + r'}} \\']
+        for method in order:
+            row = data['main'][method] if source == 'main' else next(r for r in data[source] if r['key'] == method)
+            assert row['input_tokens'] + row['output_tokens'] == row['tokens']
+            label = TABLE_LABELS[method]
+            if method in citations and method not in cited:
+                label += r'~\citep{' + citations[method] + '}'
+                cited.add(method)
+            accepted = f"{row['accepted']}/{denominator}"
+            if (source == 'main' and row['accepted'] == 50) or (source == 'cross_language' and row['accepted'] == 9):
+                accepted = r'\textbf{' + accepted + '}'
+            usage = ('-- & -- & -- & --' if method == 'msadapter' else
+                     f"{row['calls']:,} & {row['input_tokens']/1e6:.3f} & {row['output_tokens']/1e6:.3f} & {row['tokens']/1e6:.3f}")
+            comparison.append(f"{label} & {usage} & {accepted}" + r' \\')
+    comparison += [r'\bottomrule', r'\end{tabular*}']
+    for repository_name, panel in [('timeseries', '(c) Time series repository'),
+                                    ('twotower', '(d) Recommendation repository')]:
+        entry_label = r'\thead{Entry\\points}' if repository_name == 'timeseries' else r'\thead{Original\\tests}'
+        comparison += [r'\par\vspace{5pt}', r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrr@{}}',
+            r'\toprule', r'\multicolumn{7}{l}{\textit{' + panel + r'}} \\', r'\midrule',
+            r'\textbf{Method} & \thead{Behavior checks\\passed} & \textbf{Gradients} & \thead{Parameter\\updates} & ' + entry_label + r' & \thead{Repair\\calls} & \thead{Total tokens\\(millions)} \\', r'\midrule']
+        for method in ('swe', 'matchfix', 'ladim'):
+            row = next(r for r in data['repository'] if r['repository'] == repository_name and r['method'] == method)
+            checked = row['paired_checks']
+            signals = row['main_table_signals']
+            gradient, update, entry = [signals[key] for key in ('gradient', 'update', 'entry_points')]
+            ratio = lambda value: 'n/a' if value['passed'] is None else f"{value['passed']}/{value['expected']}"
+            passed, calls = f"{checked['passed']}/{checked['expected']}", str(row['repair_calls'])
+            if method == 'ladim':
+                if repository_name == 'twotower':
+                    passed = r'\textbf{' + passed + '}'
+                else:
+                    calls = r'\textbf{' + calls + '}'
+            comparison.append(f"{TABLE_LABELS[method]} & {passed} & {ratio(gradient)} & {ratio(update)} & {ratio(entry)} & {calls} & {row['tokens']/1e6:.3f}" + r' \\')
+        comparison += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_unified_comparison.tex').write_text('\n'.join(comparison) + '\n')
     labels = [('main/ladim', 'LaDiM'), ('continuous_role/ladim', 'Continuous investigation and repair conversation'),
               ('without_repair_history/ladim', 'Without prior repair conversation'),
@@ -137,7 +252,7 @@ def export_tables(data):
                   r'\textbf{Setting} & \textbf{Accepted} & \thead{Total tokens\\(millions)} \\',
                   r'\midrule', *component_rows, r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_unified_components.tex').write_text('\n'.join(components) + '\n')
-    signal_labels = {'execution': 'Execution and basic contract',
+    signal_labels = {'execution': 'Execution and basic checks',
                      'execution_forward': r'\quad + Forward values',
                      'execution_forward_gradient': r'\quad + Gradients',
                      'all_observations': r'\quad + Parameter updates'}
@@ -147,62 +262,137 @@ def export_tables(data):
         missed = str(row['initially_accepted_by_visible_checks'])
         if row['variant'] == 'all_observations':
             count, missed = r'\textbf{' + count + '}', r'\textbf{' + missed + '}'
-        signal_rows.append(f"{signal_labels[row['variant']]} & {count} & {missed} & {row['tokens']/1e6:.3f}" + r' \\')
+        signal_rows.append(f"{signal_labels[row['variant']]} & {missed} & {row['tokens']/1e6:.3f} & {count}" + r' \\')
     signals = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}',
                r'\toprule',
-               r'\textbf{Available feedback} & \textbf{Accepted} & \thead{Faults passing\\initial checks} & \thead{Total tokens\\(millions)} \\',
+               r'\textbf{Available feedback} & \thead{Initially undetected\\faults} & \thead{Total tokens\\(millions)} & \thead{Final\\accepted} \\',
                r'\midrule', *signal_rows, r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_training_signals.tex').write_text('\n'.join(signals) + '\n')
+    natural = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}', r'\toprule',
+        r'\textbf{Method} & \thead{Initially incorrect\\programs repaired} & \thead{Initially correct\\programs preserved} & \thead{Repair tokens\\(millions)} & \thead{Final\\accepted} \\', r'\midrule']
+    for row in data['natural_repairs']:
+        label = 'Direct repair' if row['method'] == 'direct' else LABELS[row['method']]
+        natural.append(f"{label} & {row['repaired']}/5 & {row['retained']}/5 & {row['tokens']/1e6:.3f} & {row['accepted']}/10" + r' \\')
+    natural += [r'\bottomrule', r'\end{tabular*}']
+    (ROOT / 'figures/TABLE_natural_repairs.tex').write_text('\n'.join(natural) + '\n')
+    jax_path = ROOT / 'output/maintext-jax-autonomous-20260918/final_analysis/summary.json'
+    jax_data = json.loads(jax_path.read_text())['summaries']
+    jax = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}', r'\toprule',
+           r'\textbf{Method} & \textbf{Model calls} & \textbf{Repair tokens} & \textbf{Accepted} \\', r'\midrule']
+    for key, label in [('direct_shared_tools', 'Direct repair (shared tools)'), ('autonomous_layered', 'LaDiM')]:
+        row = next(r for r in jax_data if r['method'] == key)
+        assert row['complete'] and row['unknown_usage_calls'] == 0
+        jax.append(f"{label} & {row['calls']} & {row['known_total_tokens']:,} & {row['accepted']}/{row['planned']}" + r' \\')
+    jax += [r'\bottomrule', r'\end{tabular*}']
+    (ROOT / 'figures/TABLE_jax_repairs.tex').write_text('\n'.join(jax) + '\n')
+    components = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}', r'\toprule',
+        r'\textbf{Condition} & \thead{Initially incorrect\\programs repaired} & \thead{Initially correct\\programs preserved} & \thead{Repair tokens\\(millions)} & \thead{Final\\accepted} \\', r'\midrule']
+    for row in data['natural_components']:
+        components.append(f"{row['label']} & {row['repaired']}/5 & {row['retained']}/5 & {row['tokens']/1e6:.3f} & {row['accepted']}/10" + r' \\')
+    components += [r'\bottomrule', r'\end{tabular*}']
+    (ROOT / 'figures/TABLE_natural_components.tex').write_text('\n'.join(components) + '\n')
+    costs = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}', r'\toprule',
+        r'\textbf{Method} & \thead{Repair\\calls} & \textbf{Submissions} & \thead{Repair input\\tokens} & \thead{Repair output\\tokens} & \thead{Total\\tokens} \\']
+    for repo, label in [('timeseries', 'Time series'), ('twotower', 'Recommendation')]:
+        costs += [r'\midrule', r'\multicolumn{6}{l}{\textit{' + label + r'}} \\']
+        for row in (r for r in data['repository'] if r['repository'] == repo):
+            costs.append(f"{LABELS[row['method']]} & {row['repair_calls']} & {row['submissions']} & {row['repair_prompt_tokens']:,} & {row['repair_completion_tokens']:,} & {row['tokens']:,}" + r' \\')
+    costs += [r'\bottomrule', r'\end{tabular*}']
+    (ROOT / 'figures/TABLE_repository_costs.tex').write_text('\n'.join(costs) + '\n')
+    details = {r['method']: r['details'] for r in data['repository'] if r['repository'] == 'twotower'}
+    check_table = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}', r'\toprule',
+        r'\textbf{Check} & \textbf{LaDiM} & \textbf{SWE-agent} & \textbf{MatchFixAgent} \\', r'\midrule']
+    for label, key in [('Behavior checks passed', 'protocol_checks'), ('Numerical checks', 'numerical_checks'),
+                       ('Training checks', 'training_checks'), ('Inference retrieval', 'retrieval_checks')]:
+        values = [f"{details[m][key]['passed']}/{details[m][key]['expected']}" for m in ('ladim', 'swe', 'matchfix')]
+        check_table.append(label + ' & ' + ' & '.join(values) + r' \\')
+    check_table += [r'\midrule']
+    for label, key in [('User representations', 'user_embedding'), ('Item representations', 'item_embedding'),
+                       ('Forward loss', 'loss'), ('Training return loss', 'epoch_loss'),
+                       ('Gradients', 'gradient'), ('Parameter updates', 'update')]:
+        values = [f"{details[m]['training_signals'][key]['passed']}/18" for m in ('ladim', 'swe', 'matchfix')]
+        check_table.append(label + ' & ' + ' & '.join(values) + r' \\')
+    check_table += [r'\midrule']
+    for label, key in [('Original tests', 'original_tests'), ('Training command', 'workflow_accepted'),
+                       ('File coverage', 'coverage_accepted'), ('Documentation and dependencies', 'documentation_accepted')]:
+        values=[]
+        for method in ('ladim', 'swe', 'matchfix'):
+            value=details[method][key]
+            values.append(('n/a' if value['passed'] is None else f"{value['passed']}/10") if key=='original_tests'
+                          else ('1/1' if value else '0/1'))
+        check_table.append(label + ' & ' + ' & '.join(values) + r' \\')
+    check_table += [r'\bottomrule', r'\end{tabular*}']
+    (ROOT / 'figures/TABLE_repository_checks.tex').write_text('\n'.join(check_table) + '\n')
     target = ROOT / 'data/paper_figures/unified_results.json'
     target.write_text(json.dumps(data, indent=2) + '\n')
 
 
 def build_figure():
+    """Actual manuscript width, with every paired input shown as signed savings."""
     data = load_data()
-    fig, axes = plt.subplots(1, 2, figsize=(5.5, 2.85))
-    agents = ['swe', 'matchfix', 'ladim']
-    ax = axes[0]
-    for y, method in enumerate(agents):
-        row = data['main'][method]
-        value = row['tokens'] / 1e6
-        ax.barh(y, value, color=COLORS[method], height=.55)
-        ax.text(value + .4, y, f"{value:.2f}", ha='left', va='center', fontsize=7.5)
-    ax.set(yticks=range(3), yticklabels=[LABELS[m] for m in agents],
-           xlabel='End-to-end tokens (millions)', xlim=(0, 25), ylim=(-.65, 3.1))
-    ax.text(.03, .97, '(a) Agent token use', transform=ax.transAxes, va='top', fontsize=8)
-    ax.grid(axis='x', color='#dddddd', linewidth=.4)
-    ax = axes[1]
-    for initial, marker, color, label in [(True, 'o', GRAY, 'Initially accepted'),
-                                          (False, '^', BLUE, 'Initially faulty')]:
-        points = [p for p in data['paired_costs'] if p['initially_accepted'] == initial]
-        ax.scatter([p['matchfix_tokens'] / 1000 for p in points],
-                   [p['ladim_tokens'] / 1000 for p in points],
-                   label=label, marker=marker, color=color, s=18, linewidths=.4,
-                   edgecolors='white', zorder=3)
-    ax.plot([30, 2000], [30, 2000], '--', color='#888888', linewidth=.8, zorder=1)
-    ax.set(xscale='log', yscale='log', xlim=(30, 2000), ylim=(30, 2000),
-           xlabel='MatchFixAgent tokens\n(thousands)', ylabel='LaDiM tokens (thousands)')
-    for axis in (ax.xaxis, ax.yaxis):
-        axis.set_major_locator(FixedLocator([50, 200, 1000]))
-        axis.set_major_formatter(FuncFormatter(lambda value, _: f'{value:g}'))
-        axis.set_minor_locator(NullLocator())
-    ax.text(.03, .97, '(b) Tokens per input', transform=ax.transAxes, va='top', fontsize=8)
-    cheaper = sum(p['ladim_tokens'] < p['matchfix_tokens'] for p in data['paired_costs'])
-    ax.text(.96, .04, f'Lower LaDiM use\non {cheaper}/{len(data["paired_costs"])} inputs',
-            transform=ax.transAxes, ha='right', va='bottom', fontsize=7)
-    ax.legend(loc='upper left', bbox_to_anchor=(0, .87), frameon=False, fontsize=7,
-              borderaxespad=.2, handletextpad=.3)
-    ax.grid(color='#dddddd', linewidth=.4)
-    for ax in axes:
+    fig, (a, b) = plt.subplots(1, 2, figsize=(5.5, 2.65),
+                              gridspec_kw={'width_ratios': [1, 1.25]})
+    stage_keys = ['translation', 'initially_accepted', 'initially_faulty']
+    stage_colors = ['#E2E6E9', '#7BB2C9', BLUE]
+    for y, method in enumerate(('ladim', 'matchfix', 'swe')):
+        left = 0
+        for key, color in zip(stage_keys, stage_colors):
+            value = data['cost_stages'][method][key] / 1e6
+            a.barh(y, value, left=left, height=.43, color=color,
+                   edgecolor='white', linewidth=.4)
+            left += value
+        a.text(left + .35, y, f'{left:.2f}', va='center', fontsize=8)
+    a.set(yticks=range(3), yticklabels=['LaDiM', 'MatchFixAgent', 'SWE-agent'],
+          xlim=(0, 24), ylim=(2.55, -1.85), xlabel='Total tokens (millions)')
+    a.set_xticks([0, 10, 20])
+    a.set_title('(a) Total tokens', loc='left', fontsize=9, pad=8)
+    a.legend(handles=[Patch(facecolor=color, label=label) for color, label in zip(
+             stage_colors, ['Initial translation', 'Initially correct inputs', 'Initially incorrect inputs'])],
+             loc='upper left', frameon=False, fontsize=8, handlelength=1.05,
+             handletextpad=.4, labelspacing=.3, borderaxespad=.25)
+    a.grid(axis='x', color='#E9ECEF', linewidth=.45)
+    ordered = []
+    for state in (True, False):
+        ordered.extend(sorted((p for p in data['paired_costs'] if p['initially_accepted'] == state),
+                              key=lambda p: p['matchfix_tokens'] - p['ladim_tokens']))
+    savings = np.array([(p['matchfix_tokens'] - p['ladim_tokens']) / 1000 for p in ordered])
+    b.bar(np.arange(len(ordered)), savings, width=.76,
+          color=['#009E73' if value >= 0 else ORANGE for value in savings], zorder=3)
+    b.axhline(0, color=GRAY, linewidth=.7, zorder=4)
+    b.axvline(19.5, color=GRAY, linestyle=(0, (2, 3)), linewidth=.55)
+    b.set(xlim=(-1, 29), ylim=(-200, 1650), ylabel='Tokens saved by LaDiM\n(thousands)',
+          yticks=[0, 250, 500, 750, 1000, 1250], xticks=[9.5, 24],
+          xticklabels=['Initially correct', 'Initially incorrect'],
+          xlabel='Migration inputs')
+    b.legend(handles=[Patch(facecolor='#009E73', label='Lower token use by LaDiM'),
+                      Patch(facecolor=ORANGE, label='Higher token use by LaDiM')],
+             loc='upper left', frameon=False, fontsize=8, handlelength=1,
+             handletextpad=.35, labelspacing=.25, borderaxespad=.2)
+    b.set_title('(b) Savings on each input', loc='left', fontsize=9, pad=8)
+    b.grid(axis='y', color='#E9ECEF', linewidth=.45)
+    for ax in (a, b):
         ax.set_axisbelow(True)
-    fig.subplots_adjust(left=.18, right=.99, bottom=.25, top=.98, wspace=.63)
+        ax.tick_params(axis='both', labelsize=8, length=2, color='#92989E')
+        for side in ('left', 'bottom'):
+            ax.spines[side].set_color('#B3BAC0')
+        ax.xaxis.label.set_fontsize(8)
+        ax.yaxis.label.set_fontsize(8)
+    fig.subplots_adjust(left=.165, right=.985, top=.86, bottom=.27, wspace=.72)
     return fig
+
+
+def export_figure():
+    fig = build_figure()
+    with plt.rc_context({'svg.fonttype': 'none'}):
+        for suffix in ('pdf', 'png', 'svg'):
+            fig.savefig(ROOT / f'figures/repair_comparison.{suffix}', dpi=300)
+    plt.close(fig)
 
 
 def main():
     data = load_data()
     export_tables(data)
-    save_figure(build_figure(), 'repair_comparison')
+    export_figure()
     print(json.dumps({'main': data['main'], 'variants': data['variants']}, indent=2))
 
 

@@ -14,7 +14,7 @@ import traceback
 import numpy as np
 
 BASE=Path('/media/main/whj/projects/torch4ms')
-ROOT=BASE/'ascend-torch4ms-repository-pilot-20260920'
+ROOT=Path(__file__).resolve().parents[1]
 RUN=ROOT/'experiments/repository_timeseries_20260920'
 SOURCE=BASE/'repository-pilot-assessment-20260920/time-series-forecasting-pytorch'
 SOURCE_PY=BASE/'repository-pilot-assessment-20260920/assessment_env/bin/python'

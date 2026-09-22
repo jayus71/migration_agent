@@ -1,0 +1,128 @@
+{
+  "conditions": {
+    "timeseries/ladim": {
+      "source_mismatches": [],
+      "task_matches": true,
+      "initial_target_mismatches": [],
+      "final_target_mismatches": [],
+      "response_count_matches": true,
+      "usage_matches": {
+        "prompt_tokens": true,
+        "completion_tokens": true,
+        "total_tokens": true
+      },
+      "end_to_end_cost_matches": true,
+      "accepted": true
+    },
+    "timeseries/swe": {
+      "source_mismatches": [],
+      "task_matches": true,
+      "initial_target_mismatches": [],
+      "final_target_mismatches": [],
+      "response_count_matches": true,
+      "usage_matches": {
+        "prompt_tokens": true,
+        "completion_tokens": true,
+        "total_tokens": true
+      },
+      "end_to_end_cost_matches": true,
+      "accepted": true,
+      "native_memory": true,
+      "standard_workflow": true,
+      "repository_context_events": 0,
+      "repository_evidence_tool_calls": []
+    },
+    "timeseries/matchfix": {
+      "source_mismatches": [],
+      "task_matches": true,
+      "initial_target_mismatches": [],
+      "final_target_mismatches": [],
+      "response_count_matches": true,
+      "usage_matches": {
+        "prompt_tokens": true,
+        "completion_tokens": true,
+        "total_tokens": true
+      },
+      "end_to_end_cost_matches": true,
+      "accepted": true,
+      "native_memory": true,
+      "standard_workflow": true,
+      "repository_context_events": 0,
+      "repository_evidence_tool_calls": []
+    },
+    "twotower/ladim": {
+      "source_mismatches": [],
+      "task_matches": true,
+      "initial_target_mismatches": [],
+      "final_target_mismatches": [],
+      "response_count_matches": true,
+      "usage_matches": {
+        "prompt_tokens": true,
+        "completion_tokens": true,
+        "total_tokens": true
+      },
+      "end_to_end_cost_matches": true,
+      "accepted": false
+    },
+    "twotower/swe": {
+      "source_mismatches": [],
+      "task_matches": true,
+      "initial_target_mismatches": [],
+      "final_target_mismatches": [],
+      "response_count_matches": true,
+      "usage_matches": {
+        "prompt_tokens": true,
+        "completion_tokens": true,
+        "total_tokens": true
+      },
+      "end_to_end_cost_matches": true,
+      "accepted": false,
+      "native_memory": true,
+      "standard_workflow": true,
+      "repository_context_events": 0,
+      "repository_evidence_tool_calls": []
+    },
+    "twotower/matchfix": {
+      "source_mismatches": [],
+      "task_matches": true,
+      "initial_target_mismatches": [],
+      "final_target_mismatches": [],
+      "response_count_matches": true,
+      "usage_matches": {
+        "prompt_tokens": true,
+        "completion_tokens": true,
+        "total_tokens": true
+      },
+      "end_to_end_cost_matches": true,
+      "accepted": false,
+      "native_memory": true,
+      "standard_workflow": true,
+      "repository_context_events": 0,
+      "repository_evidence_tool_calls": []
+    }
+  },
+  "baseline_modules": {
+    "agent.py": {
+      "initial": "0e91f00023f450165d56c52334cb85440f632e189e74fd50c7179f2ab2d2dffd",
+      "final": "0e91f00023f450165d56c52334cb85440f632e189e74fd50c7179f2ab2d2dffd",
+      "unchanged": true
+    },
+    "tools.py": {
+      "initial": "cef50a6433c4a7310cb4f6249429821af48b3d59567971a0244ba8cd4b31d131",
+      "final": "cef50a6433c4a7310cb4f6249429821af48b3d59567971a0244ba8cd4b31d131",
+      "unchanged": true
+    },
+    "baselines.py": {
+      "initial": "fa29283e13b74ea303b300bef93a656c6e432e0ee43dfb6e11299275b9d87498",
+      "final": "fa29283e13b74ea303b300bef93a656c6e432e0ee43dfb6e11299275b9d87498",
+      "unchanged": true
+    },
+    "swe_upstream.py": {
+      "initial": "5fb7e01a1ce34cbac1d98166da47519666e2269cf4d29285234a2cfe79bda5a2",
+      "final": "5fb7e01a1ce34cbac1d98166da47519666e2269cf4d29285234a2cfe79bda5a2",
+      "unchanged": true
+    }
+  },
+  "freeze_mismatches": [],
+  "all_checks_passed": true
+}

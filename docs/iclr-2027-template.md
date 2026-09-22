@@ -22,28 +22,33 @@ template. The example manuscript, bibliography, and optional math macros are not
 needed by this paper. `conference_101719.bbl` is regenerated from `ref.bib` using
 the official bibliography style.
 
-## Current build and layout (2026-09-20)
+## Current build and layout (2026-09-21)
 
 Build commands are maintained in [README.md](../README.md#figures-and-pdf).
 The entry point includes `sections/experiments.tex` and
-`sections/supplementary_experiments.tex`. The comparison table has separate
-MindSpore and cross-language panels; the second main-text table reports the
-training-signal ablation. Figure 3 shows total agent tokens and a matched
-per-input LaDiM/MatchFixAgent cost scatter. Acceptance at the measured budgets
-of one, two, and four submissions remains in the prose. The editable method
-overview remains a simple placeholder for the author to replace.
+`sections/supplementary_experiments.tex`. The consolidated comparison table has
+MindSpore, cross-language, time series repository, and recommendation repository
+panels. Its program panels include input/output token breakdowns; repository
+panels show counts of passed checks, training signals, and entry points or tests.
+Two further main tables cover natural fault repair and training signal ablation.
+Figure 3 shows stacked total agent tokens and 29 signed per-input token savings
+bars, with separate sorting for initially accepted and initially faulty inputs.
+Acceptance at one, two, and four submissions remains in the prose. The method
+overview remains a placeholder; work on it stopped at the user's request.
 
+The main chapters are Introduction, Related Work, LaDiM, Experiments, and
+Conclusion. LaDiM includes the repository coordination and context mechanism.
 The experiment sections are Experimental Setup, Main Experiments, Analysis
-Experiments, and Ablation Studies. Generalization Across Frameworks retains its
-heading. Supplementary sections cover complete protocols, component and host
-integration results, and additional supplied-candidate repair studies.
+Experiments, and Ablation Studies. Generalization Across Frameworks retains
+its heading. Supplementary sections contain task construction and protocols,
+component matrices for the common collection and natural faults, repository
+checks and costs, and context reconstruction details.
 
-The compiled PDF has 13 pages. The conclusion and main text end on page 9;
-the AI use statement and references occupy pages 9–11, and supplementary
-material occupies pages 12–13. The official style, margins, body font, and line
-spacing are unchanged. This fits the nine-page initial-submission main-text limit.
+The compiled PDF has 17 pages. The main text ends on page 9. The official style,
+margins, body font, and line spacing are unchanged, within the nine-page main
+text limit.
 The AI use statement remains blank for the authors to complete.
 
-The [revision record](paper-revision-20260920.md) lists evidence sources and the
+The [revision record](paper-revision-execution-20260921.md) lists evidence sources and the
 data, layout, compilation, and visual checks. This revision uses completed
 experiments and makes no model calls.

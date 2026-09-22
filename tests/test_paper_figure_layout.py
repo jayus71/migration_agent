@@ -67,10 +67,10 @@ class PaperFigureLayoutTests(unittest.TestCase):
                 np.testing.assert_allclose(lines[label].get_ydata(),
                                            (means[column] / THRESHOLDS[column]).clip(lower=1e-7))
             labels = {label.get_text(): label for label in ax.texts}
-            first = labels["Detected at step 1"]
+            first = labels["LaDiM: step 1"]
             self.assertEqual(first.xy[0], 1)
             self.assertAlmostEqual(first.xy[1], means.loc[1, metric] / THRESHOLDS[metric])
-            loss = labels[f"Mean loss difference\ncrosses at step {loss_step}"]
+            loss = labels[f"Loss-based detection\n(mean): step {loss_step}"]
             self.assertEqual(loss.xy[0], loss_step)
             self.assertAlmostEqual(loss.xy[1], means.loc[loss_step, "loss_abs_diff"]
                                    / THRESHOLDS["loss_abs_diff"])
@@ -106,27 +106,36 @@ class PaperFigureLayoutTests(unittest.TestCase):
 
     def test_composite_paired_cost_labels_and_data(self):
         fig = build_figure()
-        ax = fig.axes[1]
-        self.assert_labels_do_not_overlap(fig, ax)
-        pairs = load_data()['paired_costs']
-        self.assertEqual((ax.get_xscale(), ax.get_yscale()), ('log', 'log'))
-        self.assertEqual(len(ax.collections), 2)
-        for collection, initially_accepted, label in zip(
-                ax.collections, [True, False], ['Initially accepted', 'Initially faulty']):
-            points = [p for p in pairs if p['initially_accepted'] == initially_accepted]
-            self.assertEqual(collection.get_label(), label)
-            np.testing.assert_allclose(collection.get_offsets(),
-                [[p['matchfix_tokens'] / 1000, p['ladim_tokens'] / 1000] for p in points])
-        self.assertEqual(sum(len(c.get_offsets()) for c in ax.collections), 29)
-        self.assertEqual(len(ax.lines), 1)
-        np.testing.assert_allclose(ax.lines[0].get_xdata(), ax.lines[0].get_ydata())
+        self.addCleanup(plt.close, fig)
+        data = load_data()
+        a, b = fig.axes
+        np.testing.assert_allclose(fig.get_size_inches(), [5.5, 2.65])
+        groups = [sorted([p['matchfix_tokens'] - p['ladim_tokens']
+                          for p in data['paired_costs'] if p['initially_accepted'] == state])
+                  for state in (True, False)]
+        self.assertEqual(list(map(len, groups)), [20, 9])
+        expected = groups[0] + groups[1]
+        self.assertEqual(sum(v < 0 for v in expected), 2)
+        self.assertEqual(sum(expected), 6938291)
+        self.assertEqual(len(b.patches), 29)
+        np.testing.assert_allclose([p.get_height() for p in b.patches], np.array(expected) / 1000)
+        for index, method in enumerate(('ladim', 'matchfix', 'swe')):
+            self.assertAlmostEqual(sum(p.get_width() for p in a.patches[index*3:index*3+3]),
+                                   data['main'][method]['tokens'] / 1e6)
         fig.canvas.draw()
         renderer = fig.canvas.get_renderer()
-        legend_box = ax.get_legend().get_window_extent(renderer)
-        for label in ax.texts:
-            self.assertFalse(label.get_window_extent(renderer).overlaps(legend_box))
-            for x, y in label.get_window_extent(renderer).get_points():
-                self.assertTrue(fig.bbox.contains(x, y))
+        for ax in (a, b):
+            for x, y in ax.get_legend().get_window_extent(renderer).get_points():
+                self.assertTrue(ax.bbox.contains(x, y))
+        for ax in fig.axes:
+            labels = [*ax.texts, *ax.get_xticklabels(), *ax.get_yticklabels(),
+                      ax.xaxis.label, ax.yaxis.label, ax._left_title]
+            for label in labels:
+                if not label.get_text():
+                    continue
+                self.assertGreaterEqual(label.get_fontsize(), 8)
+                for x, y in label.get_window_extent(renderer).get_points():
+                    self.assertTrue(fig.bbox.contains(x, y), label.get_text())
 
     def test_standalone_budget_labels(self):
         fig, ax = plt.subplots(figsize=(3.6, 2.8))

@@ -7,8 +7,12 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{booktabs}
+\usepackage{array}
 \usepackage{multirow}
 \usepackage{needspace}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{wrapfig}
 \usepackage{listings}
 \lstdefinestyle{repaircode}{
   language=Python, basicstyle=\footnotesize\ttfamily,
@@ -35,115 +39,55 @@ Multi-Agent Code Migration}
 \author{Anonymous Authors}
 
 \maketitle
+\suppressfloats[t]
 
 \begin{abstract}
-Migrating deep learning training code across frameworks requires preserving
-training behavior. Large language models can produce executable translations
-whose forward values agree with the source while gradients or parameter updates
-are incorrect. Error propagation can then produce several discrepancies,
-obscuring which computation needs repair. We propose LaDiM, a multi-agent repair
-framework that organizes evidence from execution, forward values, gradients,
-and parameter updates according to their computational dependencies. An
-independent verifier inspects source and translated code and runs tests to
-develop fault hypotheses and identify repair locations. Its findings guide a
-repair agent, with external training checks evaluating each change and returning
-measurements for subsequent attempts. On 50 PyTorch-to-MindSpore migration tasks,
-LaDiM achieves 50/50 acceptance, matching MatchFixAgent while using
-57.4\% fewer end-to-end tokens. Experiments on MindSpore and JAX, together with
-Java-to-Python migration tasks, demonstrate LaDiM's effectiveness across
-frameworks and programming languages.
+Migrating deep learning code across frameworks is a practical requirement for reusing training programs in new software and hardware environments. Framework differences can change how a translated program computes gradients and updates its parameters without causing runtime errors. To address this problem, we propose LaDiM, a multi-agent framework that uses dependencies between training computations to guide diagnosis and repair. Starting from an initial translation, the Verifier Agent investigates where the target program diverges from the source and passes supporting code observations and test results to a separate Repair Agent. The Orchestrator returns measurements after each submitted change to guide further repair. Repository context management supports repair across files by tracking dependencies and retaining relevant evidence. Experiments on MindSpore and JAX, together with Java-to-Python migration, demonstrate LaDiM's effectiveness across frameworks and programming languages. Compared with MatchFixAgent, LaDiM matches full acceptance on 50 PyTorch-to-MindSpore tasks and achieves higher acceptance on Java-to-Python migration, using 57.4\% and 24.2\% fewer total tokens, respectively.
 \end{abstract}
 
 \section{Introduction}
 
-Migrating deep learning training code makes existing models and training programs available in another framework and its software and hardware ecosystem. Such migration requires reconciling differences in operator conventions, automatic differentiation, and optimizer interfaces~\citep{paszke2019pytorch,mindspore2020whitepaper,google2025torchax}. Large language models (LLMs) reduce the manual effort involved in code translation~\citep{he-etal-2025-execoder,macedo2024intertrans}, and automated tests help assess translated behavior~\citep{roziere2021unittests}. Interactive agents extend this process through code inspection, execution, and repair~\citep{yang2024sweagent,guan2025repotransagent}. MatchFixAgent, a state-of-the-art translation repair method, combines multiple semantic analyses to guide test generation and correction~\citep{ibrahimzada2025matchfixagent}. Applying these capabilities to training code requires evidence about the forward values, gradients, and parameter updates that determine how a model learns.
+Migrating deep learning code allows existing models and training programs to run in new software and hardware environments. Differences in operator semantics, numerical precision, and random number handling can change the computations performed after migration. Automatic differentiation and optimizer interfaces introduce further differences in how a model learns~\citep{paszke2019pytorch,mindspore2020whitepaper}. Large language models (LLMs) reduce the manual effort involved in code translation~\citep{he-etal-2025-execoder,macedo2024intertrans}, while automated tests and interactive repair help assess and correct translated behavior~\citep{roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent}. Training programs require these capabilities to preserve the computations that determine each parameter update.
 
-\begin{figure}[t]
+\begin{wrapfigure}{r}{0.55\textwidth}
 \centering
-\includegraphics[width=\linewidth]{figures/gradient_drift.pdf}
-\caption{Loss and gradient differences (a) and loss and update differences (b), normalized by each signal's threshold. Gradient and update checks detect faults at step~1 in all 12 runs per panel. The mean loss difference crosses the detection threshold (dashed) at steps 31 and 18, respectively. Curves show means and shading shows ranges.}
-\label{fig:gradient-drift}
-\end{figure}
+\includegraphics[width=\linewidth]{figures/migration_motivation.pdf}
+\caption{MindSpore migration costs, including initial translation and all subsequent calls. Labels give accepted tasks out of 50.}
+\label{fig:migration-motivation}
+\end{wrapfigure}
 
-Training computations create a diagnostic difficulty because errors can remain hidden in one stage and propagate through others. A translated program may execute and match the source loss while computing incorrect gradients; an optimizer error can preserve both forward values and current gradients. Figure~\ref{fig:gradient-drift} illustrates this behavior: gradient and update checks expose faults at the first training step, before the mean loss difference crosses its threshold. At the same time, a forward error can change gradients and parameter updates, and an incorrect update can affect subsequent forward computations. Several discrepancies may therefore share one origin, while their appearance can depend on which training step is observed. Repair requires investigating the relationships between these measurements and the code that produced them to determine where a change is needed.
+A translated program can produce a loss close to that of the source while computing incorrect gradients. An optimizer error can also alter the parameter update without changing the current loss or gradients. We use semantic drift to describe these changes in training behavior caused by migration. Training computations have dependencies that help investigate such errors. A forward error may change gradients and updates, while an incorrect update may affect later forward computations. Locating the cause requires examining how the translated code produces the observed differences. This investigation also affects migration cost. Figure~\ref{fig:migration-motivation} compares complete token use on common migration tasks, where LaDiM achieves full acceptance with less than half the tokens used by MatchFixAgent.
 
-We introduce LaDiM (Layered Diagnosis for Multi-Agent Code Migration), which organizes verification evidence around the dependencies between training stages. Successful execution makes numerical comparisons available; when forward values agree, discrepancies in gradients or parameter updates provide evidence for investigating differentiation or optimizer behavior. An independent verifier uses these relationships to investigate the initial translation through code inspection and tests. It develops hypotheses about the fault, examines candidate repair locations, and records the observations supporting its findings. This evidence passes to a repair agent, connecting proposed edits with the computations and measurements that motivated them. External checks evaluate execution, forward values, gradients, and parameter updates after each submitted change. If a candidate fails acceptance, the returned measurements guide further investigation and repair within the remaining budget.
+We introduce LaDiM (Layered Diagnosis for Multi-Agent Code Migration), which uses dependencies between training computations to guide investigation of an initial translation. The Verifier Agent inspects code and runs tests to establish where source and target behavior diverge. For example, matching forward values with missing gradients directs attention to parameter registration and the differentiation path. The agent records the code and measurements supporting its hypotheses and passes this evidence to a separate Repair Agent. After a change is submitted, the Orchestrator runs the acceptance checks and returns new measurements to guide subsequent attempts. This feedback connects each correction to the behavior it changes and exposes the next computation to investigate.
 
-We evaluate LaDiM's migration acceptance and end-to-end model use under a common evaluation protocol. On 50 PyTorch-to-MindSpore migration tasks, LaDiM achieves 50/50 acceptance, matching MatchFixAgent while using 57.4\% fewer end-to-end tokens. Analyses of individual inputs and repair attempts examine where this efficiency advantage arises, and controlled signal studies evaluate how training measurements affect fault detection and repair. Experiments with JAX and Java-to-Python migration further demonstrate LaDiM's effectiveness across target frameworks and programming languages. Our contributions are as follows.
+For repositories, migration must preserve shared implementations across multiple entry points. A change that corrects one caller can alter the behavior of another, and investigation may need evidence collected earlier in a different file. LaDiM tracks dependencies between work units and invalidates checks affected by changes. It retains observations and hypotheses in a retrievable archive and rebuilds the working context when the investigation moves between units. Together, these operations support repair across files while preserving the relationship between code changes and their measured effects.
+
+We evaluate migration acceptance and model use from common initial translations under a shared protocol. LaDiM's token savings cover both repair of faulty translations and confirmation of candidates that already pass the checks. On a time series repository, all three evaluated agents complete migration, with LaDiM using fewer tokens and repair calls. On a recommendation repository, LaDiM achieves the highest behavioral coverage and passes all ten original tests. Training signal and component ablations examine how observations and agent organization affect repair, while JAX and Java-to-Python experiments establish effectiveness across frameworks and languages. Our contributions are as follows.
 
 \begin{itemize}
-  \item We formulate autonomous training-code repair using execution, forward values, gradients, and parameter updates as evidence for investigating unknown faults and verifying candidate changes.
-  \item We develop LaDiM, a multi-agent repair framework with an independent investigation, explicit evidence handoff, and a shared acceptance and retry loop.
-  \item We evaluate LaDiM across frameworks and languages, and analyze its token use and training signals.
+  \item We formulate training-code migration around execution, forward values, gradients, and parameter updates, using their dependencies to investigate semantic faults.
+  \item We develop LaDiM with independent investigation, evidence handoff, and verification after repair, together with dependency and context management for repositories.
+  \item We evaluate migration across frameworks and languages, comparing acceptance and total token use and analyzing repair behavior, training signals, and agent components.
 \end{itemize}
 
 \section{Related Work}
 
 \paragraph{Code Translation and Framework Migration.}
-Neural translation methods learn code mappings from multilingual corpora and incorporate automated tests or compiler representations to improve translations~\citep{roziere2020transcoder,roziere2021unittests,szafraniec2023compiler}. ExeCoder encodes functional semantics, syntax structure, and variable dependencies~\citep{he-etal-2025-execoder}; InterTrans explores intermediate translation paths~\citep{macedo2024intertrans}; and RepoTransAgent uses repository context, test failures, and reflection to refine translated code~\citep{guan2025repotransagent}. Framework migration tools supply mappings between programming interfaces: MindConverter targets MindSpore~\citep{mindspore2023mindconverter}, Ivy\footnote{\url{https://github.com/unifyai/ivy}} and \texttt{torch2jax}\footnote{\url{https://github.com/rdyro/torch2jax}} convert computations to JAX, and TorchAX exposes the PyTorch interface over a JAX backend~\citep{google2025torchax}. Executable translations can still compute incorrect forward values, gradients, or parameter updates. LaDiM addresses these training faults through semantic repair of both the translated program and the compatibility-layer implementations on which it depends.
+Neural translation methods learn code mappings from multilingual corpora and use automated tests or compiler representations to improve translations~\citep{roziere2020transcoder,roziere2021unittests,szafraniec2023compiler}. ExeCoder encodes functional semantics, syntax structure, and variable dependencies~\citep{he-etal-2025-execoder}, while InterTrans explores intermediate translation paths~\citep{macedo2024intertrans}. Framework migration tools such as MindConverter supply mappings between programming interfaces~\citep{mindspore2023mindconverter}. RepoTransAgent uses repository context, test failures, and reflection to refine translated code~\citep{guan2025repotransagent}. LaDiM investigates how a translated training program computes and updates its state. At repository scale, it coordinates changes to shared interfaces and checks their effect across declared entry points.
 
 \paragraph{Differential Testing and Deep Learning Verification.}
-Differential testing exposes compiler and program faults through disagreement between related executions~\citep{yang2011csmith,le2014emi}. DeepXplore combines neuron coverage with differences between the outputs of functionally similar networks to search for inputs that expose erroneous behavior~\citep{pei2017deepxplore}. DeepGauge develops testing criteria at multiple granularities to assess how thoroughly a test set exercises a deep learning system~\citep{ma2018deepgauge}. These studies examine test adequacy and behavioral differences, providing ways to select inputs and identify inconsistent observations. Cross-framework training repair also requires interpreting the dependencies between observations: a forward error can propagate to gradients and parameter updates, so several discrepancies may originate from one faulty computation. LaDiM supplies measurements from these stages to an autonomous verifier, which examines code and runs further tests to develop a diagnosis and locate a repair target.
+Differential testing exposes compiler and program faults through disagreement between related executions~\citep{yang2011csmith,le2014emi}. DeepXplore and DeepGauge investigate behavioral differences and test coverage in deep learning systems~\citep{pei2017deepxplore,ma2018deepgauge}. More directly related to framework migration, TensorScope tests corresponding APIs across frameworks to identify inconsistent behavior~\citep{deng2023tensorscope}. NablaFuzz compares execution scenarios to test automatic differentiation, including first-order and higher-order gradients~\citep{yang2023nablafuzz}. LaDiM uses training differences as evidence for code repair. Its Verifier Agent relates the measured forward values, gradients, and parameter updates to the implementation, develops hypotheses about their origin, and supplies evidence that the Repair Agent can test when selecting a change.
 
 \paragraph{Automated Program Repair and LLM Agents.}
-Automated program repair uses tests or semantic constraints to guide patch generation~\citep{nguyen2013semfix}, and pretrained language models generate patches from code and failure evidence~\citep{xia2023aprplm}. Interactive agents extend this process through repository navigation, editing, and execution, as in SWE-agent~\citep{yang2024sweagent}, or through reflection, self-debugging, and executable code actions~\citep{shinn2023reflexion,chen2023selfdebugging,wang2024codeact}. Multi-agent systems distribute these activities among specialized roles: ChatDev and MetaGPT organize software development~\citep{qian2023chatdev,hong2023metagpt}, while AutoGen and AgentVerse support agent communication and cooperation~\citep{wu2023autogen,chen2023agentverse}. For translation repair, MatchFixAgent combines semantic validation with autonomous patch generation~\citep{ibrahimzada2025matchfixagent}. Its analyzers examine control flow, data flow, input and output behavior, libraries, exceptions, and specifications; their reports guide test generation, patching, and equivalence judgments. LaDiM focuses on training measurements and their use across repair attempts. The verifier's investigation forms an evidence record for the repair agent, which compares new measurements with earlier observations when an edit fails acceptance.
+Automated program repair uses tests or semantic constraints to guide patch generation~\citep{nguyen2013semfix}, and pretrained language models generate patches from code and failure evidence~\citep{xia2023aprplm}. Interactive agents combine repository navigation, editing, and execution~\citep{yang2024sweagent,shinn2023reflexion,chen2023selfdebugging,wang2024codeact}. Multi-agent systems distribute development activities among specialized roles~\citep{qian2023chatdev,hong2023metagpt,wu2023autogen,chen2023agentverse}. MatchFixAgent takes a source program and an existing translation and uses several semantic analyses to guide test generation and repair~\citep{ibrahimzada2025matchfixagent}. LaDiM includes initial translation and organizes diagnosis around dependencies in training computations. The independent investigation and its supporting observations pass to a separate Repair Agent, which uses measurements after each submission to revise its hypotheses. The comparison evaluates both methods from the same initial translation and includes translation costs.
 
-\section{Method}
-
-% Place the overview near the method description in the single-column layout.
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=\textwidth]{figures/hierarchical_feedback_architecture.pdf}
-\caption{LaDiM's repair loop. The verifier investigates public code and measurements before handing its evidence to the fixer. The controller evaluates each submitted workspace and returns observations for subsequent attempts. Execution adapters expose forward values, gradients, and parameter updates from the target runtime.}
-\label{fig:architecture}
-\end{figure}
-
-\subsection{Problem Setup}
-Given a training program $P$ in a source framework $F_s$ and a target framework $F_t$, migration produces a target program $\hat{P}$ that preserves the source's training computations. We examine execution, forward values, gradients, and parameter updates. The repair task takes the source program, an initial target implementation, and the code the repair agent is permitted to edit. It returns a revised implementation that passes the specified verification checks. The permitted code can include the translated program or the framework implementation needed to execute it. The verifier runs the source and target programs with controlled inputs, synchronized initialization, and matched optimizer settings. Let $\mathcal{O}_{t}(P)$ denote the observations at training step $t$, including execution status, selected outputs or losses, gradients, and parameter updates. Differences between $\mathcal{O}_{t}(P)$ and $\mathcal{O}_{t}(\hat{P})$ provide the evidence for diagnosis. Section~\ref{sec:setup} specifies the checked conditions, tolerances, and repair acceptance criteria used in the experiments.
-
-\subsection{Layered Diagnosis}
-LaDiM exposes measurements from successive training computations. Execution failures prevent numerical comparison. A discrepancy in forward computation can propagate to gradients and parameter updates, so several failing measurements may reflect the same earlier error. The autonomous verifier investigates these measurements using the public task contract, candidate, target library, and source program when supplied by the task. It can read and search code, execute supplied tests, and create scratch tests while production code remains read-only. Its output is an evidence record,
-\begin{equation}
-D = \{\text{observations},\ \text{hypotheses},\ \text{locations},\ \text{uncertainty}\}.
-\end{equation}
-Each supported location is linked to an observation or inspected code, and a hypothesis can include a test that would refute it. The agent chooses what to inspect from the observed discrepancies and its evolving hypotheses. The independent repair role receives the recorded investigation, including tool observations, and can test these hypotheses before editing. This evidence record connects a proposed change to the computation and measurements that motivated it.
-
-\subsection{Diagnostic Signals}
-\label{sec:hierarchy}
-
-The execution signal checks whether $\hat{P}$ completes the training step under the target runtime. When execution fails, it records the operation, exception, and location available from the run. Failures can occur during module construction, data movement, forward computation, loss computation, backward computation, or parameter updates. These observations direct repair toward compatibility, operator implementation, device placement, data type, shape, or parameter registration. Numerical measurements are unavailable after an execution failure. Omitting a backward call can pass the execution check, leaving missing gradients and parameter updates to be detected by the third signal.
-
-Once both executions complete, the signal for forward values compares logits, selected intermediate activations, and losses under controlled inputs $(x,y)$ and synchronized initialization. The simplest comparison uses the loss difference,
-\begin{equation}
-\Delta_{\mathrm{loss}} =
-\left| L(P; x, y) - L(\hat{P}; x, y) \right|.
-\end{equation}
-When intermediate outputs are available, the verifier can use them to investigate the earliest module whose difference exceeds tolerance. This helps locate mismatches in operators, reductions, broadcasting, normalization, or loss computation that would otherwise appear only in the final loss. Backward computation and optimizer behavior are checked through gradients and parameter updates. Diagnostic summaries include differences in gradient norms and relative differences in parameter updates,
-\begin{equation}
-\Delta_{\mathrm{grad}} =
-\left|
-\|\nabla_{\theta} L(P)\|_2 -
-\|\nabla_{\hat{\theta}} L(\hat{P})\|_2
-\right|,
-\end{equation}
-\begin{equation}
-\Delta_{\mathrm{param}} =
-\frac{\|\Delta \theta - \Delta \hat{\theta}\|_2}
-{\|\Delta \theta\|_2 + \epsilon}.
-\end{equation}
-Here $\Delta\theta$ and $\Delta\hat{\theta}$ are the source and target parameter updates, and $\epsilon$ prevents division by zero. The migration evaluator additionally compares the complete measured tensors element by element with absolute and relative tolerances. It checks shapes, data types, initial values, and trainability as specified by the task contract. Missing target gradients for parameters differentiated in the source direct attention to automatic differentiation or parameter registration. Matching gradient measurements with divergent parameter updates direct attention to optimizer behavior.
-
-\subsection{Multi-Agent Repair}
-
-The translator receives the source program and target framework information and produces the initial target program. Figure~\ref{fig:architecture} shows the subsequent investigation and repair. The verifier investigates the candidate, and the repair agent uses the resulting evidence and the permitted code to make changes. Both roles use the same read, list, search, edit, and test tools, with production edits disabled during diagnosis. Syntax validation rejects an invalid edit transaction before changing files. Accepted edit transactions remain in the workspace across attempts, and the repair conversation retains observations and earlier hypotheses. The orchestrator evaluates each submitted workspace and returns measured failures for the next attempt. Progress reminders expose remaining calls within the shared budget. The loop ends when acceptance and confirmation checks succeed or the budget is exhausted.
-
-The verifier collects observations through execution adapters. The primary migration study executes native MindSpore candidates and compares their measurements with the PyTorch source. The cross-language study executes Python/PyTorch candidates for Java/DJL sources, and the JAX study uses TorchAX, JAX automatic differentiation, and Optax updates. The controlled signal studies use \texttt{torch4ms} to obtain MindSpore forward and backward measurements with optimizer updates applied to the adapter's parameters. These adapters return execution status, forward values, gradients, and parameter updates in a common format. Backend checks verify actual target computation, and the controller uses external tests to decide acceptance.
+\input{sections/methods}
 
 \input{sections/experiments}
 
 \section{Conclusion}
 
-We introduced LaDiM, a multi-agent framework that investigates migration faults through execution, forward values, gradients, and parameter updates. On the unified MindSpore collection, LaDiM achieves 50/50 acceptance with 57.4\% fewer end-to-end tokens than MatchFixAgent at the same coverage. Its repair loop resolves every failing initial translation and preserves every initially accepted program. Controlled signal studies show how complete training observations expose faults and guide the process to a verified result. Cross-language and JAX experiments support applying the same investigation and repair procedure across migration settings.
+We introduced LaDiM, a multi-agent framework for migrating deep learning code while preserving training behavior. LaDiM uses dependencies between training computations to guide diagnosis and passes the resulting evidence to a separate Repair Agent. Verification after each submission guides subsequent changes, and dependency tracking with evidence retrieval supports repair across files. This design detects and repairs semantic errors that remain hidden when evaluation checks only execution or loss. Experiments across frameworks and programming languages demonstrate LaDiM's effectiveness in preserving training behavior and its efficiency in diagnosis and repair.
 
 % Required by ICLR 2027; left blank at the author's request.
 \subsection*{AI use statement}

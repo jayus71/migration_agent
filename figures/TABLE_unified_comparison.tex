@@ -1,21 +1,45 @@
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}
 \toprule
-\textbf{Method} & \textbf{Accepted} & \thead{Total tokens\\(millions)} & \thead{Model\\calls} \\
+\textbf{Method} & \thead{Model\\calls} & \thead{Input tokens\\(millions)} & \thead{Output tokens\\(millions)} & \thead{Total tokens\\(millions)} & \textbf{Accepted} \\
 \midrule
-\multicolumn{4}{l}{\textit{(a) PyTorch to MindSpore}} \\
-Direct LLM & 29/50 & 0.429 & 29 \\
-CodeTransEngine (direct)~\citep{macedo2025codetransengine} & 31/50 & 0.280 & 29 \\
-MSAdapter~\citep{openi2025msadapter} & 15/50 & 0.000 & 0 \\
-SWE-agent~\citep{yang2024sweagent} & 44/50 & 20.831 & 1,097 \\
-MatchFixAgent~\citep{ibrahimzada2025matchfixagent} & 50/50 & 12.097 & 619 \\
-\textbf{LaDiM (ours)} & \textbf{50/50} & 5.159 & 326 \\
+\multicolumn{6}{l}{\textit{(a) PyTorch to MindSpore}} \\
+Direct LLM & 29 & 0.018 & 0.411 & 0.429 & 29/50 \\
+CodeTransEngine~\citep{macedo2025codetransengine} & 29 & 0.022 & 0.257 & 0.280 & 31/50 \\
+MSAdapter~\citep{openi2025msadapter} & -- & -- & -- & -- & 15/50 \\
+SWE-agent~\citep{yang2024sweagent} & 1,097 & 19.845 & 0.987 & 20.831 & 44/50 \\
+MatchFixAgent~\citep{ibrahimzada2025matchfixagent} & 619 & 10.750 & 1.347 & 12.097 & \textbf{50/50} \\
+\textbf{LaDiM (ours)} & 326 & 4.298 & 0.861 & 5.159 & \textbf{50/50} \\
 \midrule
-\multicolumn{4}{l}{\textit{(b) Java/DJL to Python/PyTorch}} \\
-Direct LLM & 1/18 & 0.694 & 18 \\
-InterTrans~\citep{macedo2024intertrans} & 1/18 & 2.286 & 89 \\
-Test-guided repair & 7/18 & 4.475 & 71 \\
-SWE-agent~\citep{yang2024sweagent} & 8/18 & 24.321 & 682 \\
-MatchFixAgent~\citep{ibrahimzada2025matchfixagent} & 8/18 & 28.355 & 524 \\
-\textbf{LaDiM (ours)} & 9/18 & 21.479 & 345 \\
+\multicolumn{6}{l}{\textit{(b) Java/DJL to Python/PyTorch}} \\
+Direct LLM & 18 & 0.142 & 0.552 & 0.694 & 1/18 \\
+InterTrans~\citep{macedo2024intertrans} & 89 & 0.680 & 1.606 & 2.286 & 1/18 \\
+Test-guided repair & 71 & 1.594 & 2.881 & 4.475 & 7/18 \\
+SWE-agent & 682 & 23.063 & 1.258 & 24.321 & 8/18 \\
+MatchFixAgent & 524 & 26.335 & 2.020 & 28.355 & 8/18 \\
+\textbf{LaDiM (ours)} & 345 & 19.470 & 2.009 & 21.479 & \textbf{9/18} \\
+\bottomrule
+\end{tabular*}
+\par\vspace{5pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrr@{}}
+\toprule
+\multicolumn{7}{l}{\textit{(c) Time series repository}} \\
+\midrule
+\textbf{Method} & \thead{Behavior checks\\passed} & \textbf{Gradients} & \thead{Parameter\\updates} & \thead{Entry\\points} & \thead{Repair\\calls} & \thead{Total tokens\\(millions)} \\
+\midrule
+SWE-agent & 69/69 & 9/9 & 9/9 & 3/3 & 80 & 8.200 \\
+MatchFixAgent & 69/69 & 9/9 & 9/9 & 3/3 & 69 & 13.598 \\
+\textbf{LaDiM (ours)} & 69/69 & 9/9 & 9/9 & 3/3 & \textbf{35} & 2.614 \\
+\bottomrule
+\end{tabular*}
+\par\vspace{5pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrr@{}}
+\toprule
+\multicolumn{7}{l}{\textit{(d) Recommendation repository}} \\
+\midrule
+\textbf{Method} & \thead{Behavior checks\\passed} & \textbf{Gradients} & \thead{Parameter\\updates} & \thead{Original\\tests} & \thead{Repair\\calls} & \thead{Total tokens\\(millions)} \\
+\midrule
+SWE-agent & 104/145 & 17/18 & 12/18 & 10/10 & 80 & 8.317 \\
+MatchFixAgent & 129/145 & 18/18 & 16/18 & 0/10 & 80 & 8.679 \\
+\textbf{LaDiM (ours)} & \textbf{130/145} & 18/18 & 15/18 & 10/10 & 80 & 8.811 \\
 \bottomrule
 \end{tabular*}

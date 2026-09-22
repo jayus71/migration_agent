@@ -3,7 +3,7 @@
 from make_cost_quality import draw_cost_quality
 from make_repair_by_budget import draw_repair_by_budget
 from paper_plot_style import panel_label, plt, save_figure
-from make_unified_results import build_figure as build_unified_figure, export_tables, load_data
+from make_unified_results import build_figure as build_unified_figure, export_tables, export_figure, load_data
 
 
 def build_historical_figure():
@@ -31,7 +31,7 @@ def build_figure():
 
 def main():
     export_tables(load_data())
-    save_figure(build_figure(), "repair_comparison")
+    export_figure()
 
 
 if __name__ == "__main__":

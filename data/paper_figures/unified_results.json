@@ -8,6 +8,8 @@
       "groups": 29,
       "missing": 0,
       "tokens": 429109,
+      "input_tokens": 17933,
+      "output_tokens": 411176,
       "calls": 29,
       "at_budget": {
         "1": 29,
@@ -25,6 +27,8 @@
       "groups": 29,
       "missing": 0,
       "tokens": 279536,
+      "input_tokens": 22207,
+      "output_tokens": 257329,
       "calls": 29,
       "at_budget": {
         "1": 31,
@@ -42,6 +46,8 @@
       "groups": 29,
       "missing": 0,
       "tokens": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
       "calls": 0,
       "at_budget": {
         "1": 15,
@@ -59,6 +65,8 @@
       "groups": 29,
       "missing": 0,
       "tokens": 5159134,
+      "input_tokens": 4297816,
+      "output_tokens": 861318,
       "calls": 326,
       "at_budget": {
         "1": 46,
@@ -76,6 +84,8 @@
       "groups": 29,
       "missing": 1,
       "tokens": 20831495,
+      "input_tokens": 19844907,
+      "output_tokens": 986588,
       "calls": 1097,
       "at_budget": {
         "1": 44,
@@ -93,6 +103,8 @@
       "groups": 29,
       "missing": 0,
       "tokens": 12097425,
+      "input_tokens": 10750327,
+      "output_tokens": 1347098,
       "calls": 619,
       "at_budget": {
         "1": 50,
@@ -112,6 +124,8 @@
       "groups": 29,
       "missing": 0,
       "tokens": 5603194,
+      "input_tokens": 4687934,
+      "output_tokens": 915260,
       "calls": 317,
       "at_budget": {
         "1": 46,
@@ -129,6 +143,8 @@
       "groups": 29,
       "missing": 0,
       "tokens": 19480375,
+      "input_tokens": 17898469,
+      "output_tokens": 1581906,
       "calls": 742,
       "at_budget": {
         "1": 50,
@@ -146,6 +162,8 @@
       "groups": 29,
       "missing": 0,
       "tokens": 36547007,
+      "input_tokens": 35312072,
+      "output_tokens": 1234935,
       "calls": 1137,
       "at_budget": {
         "1": 43,
@@ -163,6 +181,8 @@
       "groups": 29,
       "missing": 0,
       "tokens": 4562389,
+      "input_tokens": 3778213,
+      "output_tokens": 784176,
       "calls": 321,
       "at_budget": {
         "1": 47,
@@ -180,6 +200,8 @@
       "groups": 29,
       "missing": 0,
       "tokens": 4566058,
+      "input_tokens": 3770014,
+      "output_tokens": 796044,
       "calls": 320,
       "at_budget": {
         "1": 47,
@@ -197,6 +219,8 @@
       "denominator": 18,
       "tokens": 21479058,
       "key": "ladim",
+      "input_tokens": 19470100,
+      "output_tokens": 2008958,
       "calls": 345
     },
     {
@@ -205,6 +229,8 @@
       "denominator": 18,
       "tokens": 24320695,
       "key": "swe",
+      "input_tokens": 23062850,
+      "output_tokens": 1257845,
       "calls": 682
     },
     {
@@ -213,6 +239,8 @@
       "denominator": 18,
       "tokens": 28354720,
       "key": "matchfix",
+      "input_tokens": 26335064,
+      "output_tokens": 2019656,
       "calls": 524
     },
     {
@@ -221,6 +249,8 @@
       "denominator": 18,
       "tokens": 4475292,
       "key": "test_repair",
+      "input_tokens": 1593988,
+      "output_tokens": 2881304,
       "calls": 71
     },
     {
@@ -229,6 +259,8 @@
       "denominator": 18,
       "tokens": 693790,
       "key": "direct",
+      "input_tokens": 142215,
+      "output_tokens": 551575,
       "calls": 18
     },
     {
@@ -237,6 +269,8 @@
       "denominator": 18,
       "tokens": 2286034,
       "key": "intertrans",
+      "input_tokens": 679831,
+      "output_tokens": 1606203,
       "calls": 89
     }
   ],
@@ -458,9 +492,1183 @@
       "matchfix_tokens": 188983
     }
   ],
+  "cost_stages": {
+    "ladim": {
+      "initially_accepted": 1409686,
+      "initially_faulty": 3320339,
+      "translation": 429109
+    },
+    "matchfix": {
+      "initially_accepted": 5135863,
+      "initially_faulty": 6532453,
+      "translation": 429109
+    },
+    "swe": {
+      "initially_accepted": 15524108,
+      "initially_faulty": 4878278,
+      "translation": 429109
+    }
+  },
+  "repository": [
+    {
+      "repository": "timeseries",
+      "method": "ladim",
+      "accepted": true,
+      "tokens": 2614230,
+      "repair_calls": 35,
+      "submissions": 2,
+      "repair_prompt_tokens": 2345473,
+      "repair_completion_tokens": 105096,
+      "translation_tokens": 163661,
+      "paired_checks": {
+        "passed": 69,
+        "expected": 69,
+        "failed": [],
+        "not_measured": [],
+        "passed_fraction": 1.0
+      },
+      "details": {
+        "complete_acceptance": true,
+        "repair_calls": 35,
+        "end_to_end_tokens": 2614230,
+        "public_checks": {
+          "passed": 23,
+          "expected": 23,
+          "failed": [],
+          "not_measured": [],
+          "passed_fraction": 1.0
+        },
+        "all_seed_checks": {
+          "passed": 69,
+          "expected": 69,
+          "failed": [],
+          "not_measured": [],
+          "passed_fraction": 1.0
+        }
+      },
+      "main_table_signals": {
+        "loss": {
+          "passed": 9,
+          "expected": 9
+        },
+        "gradient": {
+          "passed": 9,
+          "expected": 9
+        },
+        "update": {
+          "passed": 9,
+          "expected": 9
+        },
+        "entry_points": {
+          "passed": 3,
+          "expected": 3
+        }
+      }
+    },
+    {
+      "repository": "timeseries",
+      "method": "swe",
+      "accepted": true,
+      "tokens": 8199825,
+      "repair_calls": 80,
+      "submissions": 1,
+      "repair_prompt_tokens": 7984797,
+      "repair_completion_tokens": 51367,
+      "translation_tokens": 163661,
+      "paired_checks": {
+        "passed": 69,
+        "expected": 69,
+        "failed": [],
+        "not_measured": [],
+        "passed_fraction": 1.0
+      },
+      "details": {
+        "complete_acceptance": true,
+        "repair_calls": 80,
+        "end_to_end_tokens": 8199825,
+        "public_checks": {
+          "passed": 23,
+          "expected": 23,
+          "failed": [],
+          "not_measured": [],
+          "passed_fraction": 1.0
+        },
+        "all_seed_checks": {
+          "passed": 69,
+          "expected": 69,
+          "failed": [],
+          "not_measured": [],
+          "passed_fraction": 1.0
+        }
+      },
+      "main_table_signals": {
+        "loss": {
+          "passed": 9,
+          "expected": 9
+        },
+        "gradient": {
+          "passed": 9,
+          "expected": 9
+        },
+        "update": {
+          "passed": 9,
+          "expected": 9
+        },
+        "entry_points": {
+          "passed": 3,
+          "expected": 3
+        }
+      }
+    },
+    {
+      "repository": "timeseries",
+      "method": "matchfix",
+      "accepted": true,
+      "tokens": 13597778,
+      "repair_calls": 69,
+      "submissions": 2,
+      "repair_prompt_tokens": 13306003,
+      "repair_completion_tokens": 128114,
+      "translation_tokens": 163661,
+      "paired_checks": {
+        "passed": 69,
+        "expected": 69,
+        "failed": [],
+        "not_measured": [],
+        "passed_fraction": 1.0
+      },
+      "details": {
+        "complete_acceptance": true,
+        "repair_calls": 69,
+        "end_to_end_tokens": 13597778,
+        "public_checks": {
+          "passed": 23,
+          "expected": 23,
+          "failed": [],
+          "not_measured": [],
+          "passed_fraction": 1.0
+        },
+        "all_seed_checks": {
+          "passed": 69,
+          "expected": 69,
+          "failed": [],
+          "not_measured": [],
+          "passed_fraction": 1.0
+        }
+      },
+      "main_table_signals": {
+        "loss": {
+          "passed": 9,
+          "expected": 9
+        },
+        "gradient": {
+          "passed": 9,
+          "expected": 9
+        },
+        "update": {
+          "passed": 9,
+          "expected": 9
+        },
+        "entry_points": {
+          "passed": 3,
+          "expected": 3
+        }
+      }
+    },
+    {
+      "repository": "twotower",
+      "method": "ladim",
+      "accepted": false,
+      "tokens": 8811246,
+      "repair_calls": 80,
+      "submissions": 4,
+      "repair_prompt_tokens": 8147846,
+      "repair_completion_tokens": 295032,
+      "translation_tokens": 368368,
+      "paired_checks": {
+        "passed": 130,
+        "expected": 145,
+        "failed": [
+          "base_step2_item_embedding",
+          "base_step3_item_embedding",
+          "history_step1_update",
+          "history_step2_item_embedding",
+          "history_step3_item_embedding",
+          "position_step2_item_embedding",
+          "position_step2_update",
+          "position_step3_item_embedding",
+          "position_step3_update",
+          "user_step2_item_embedding",
+          "user_step3_item_embedding",
+          "debias_step2_item_embedding",
+          "debias_step3_item_embedding",
+          "reward_step2_item_embedding",
+          "reward_step3_item_embedding"
+        ],
+        "not_measured": [],
+        "passed_fraction": 0.896551724137931
+      },
+      "details": {
+        "complete_acceptance": false,
+        "repair_calls": 80,
+        "end_to_end_tokens": 8811246,
+        "protocol_checks": {
+          "passed": 130,
+          "expected": 145,
+          "failed": [
+            "base_step2_item_embedding",
+            "base_step3_item_embedding",
+            "history_step1_update",
+            "history_step2_item_embedding",
+            "history_step3_item_embedding",
+            "position_step2_item_embedding",
+            "position_step2_update",
+            "position_step3_item_embedding",
+            "position_step3_update",
+            "user_step2_item_embedding",
+            "user_step3_item_embedding",
+            "debias_step2_item_embedding",
+            "debias_step3_item_embedding",
+            "reward_step2_item_embedding",
+            "reward_step3_item_embedding"
+          ],
+          "not_measured": [],
+          "passed_fraction": 0.896551724137931
+        },
+        "numerical_checks": {
+          "passed": 99,
+          "expected": 114,
+          "failed": [
+            "base_step2_item_embedding",
+            "base_step3_item_embedding",
+            "history_step1_update",
+            "history_step2_item_embedding",
+            "history_step3_item_embedding",
+            "position_step2_item_embedding",
+            "position_step2_update",
+            "position_step3_item_embedding",
+            "position_step3_update",
+            "user_step2_item_embedding",
+            "user_step3_item_embedding",
+            "debias_step2_item_embedding",
+            "debias_step3_item_embedding",
+            "reward_step2_item_embedding",
+            "reward_step3_item_embedding"
+          ],
+          "not_measured": [],
+          "passed_fraction": 0.868421052631579
+        },
+        "training_checks": {
+          "passed": 93,
+          "expected": 108,
+          "failed": [
+            "base_step2_item_embedding",
+            "base_step3_item_embedding",
+            "history_step1_update",
+            "history_step2_item_embedding",
+            "history_step3_item_embedding",
+            "position_step2_item_embedding",
+            "position_step2_update",
+            "position_step3_item_embedding",
+            "position_step3_update",
+            "user_step2_item_embedding",
+            "user_step3_item_embedding",
+            "debias_step2_item_embedding",
+            "debias_step3_item_embedding",
+            "reward_step2_item_embedding",
+            "reward_step3_item_embedding"
+          ],
+          "not_measured": [],
+          "passed_fraction": 0.8611111111111112
+        },
+        "retrieval_checks": {
+          "passed": 6,
+          "expected": 6,
+          "failed": [],
+          "not_measured": [],
+          "passed_fraction": 1.0
+        },
+        "training_signals": {
+          "user_embedding": {
+            "passed": 18,
+            "expected": 18,
+            "failed": [],
+            "not_measured": [],
+            "passed_fraction": 1.0
+          },
+          "item_embedding": {
+            "passed": 6,
+            "expected": 18,
+            "failed": [
+              "base_step2_item_embedding",
+              "base_step3_item_embedding",
+              "history_step2_item_embedding",
+              "history_step3_item_embedding",
+              "position_step2_item_embedding",
+              "position_step3_item_embedding",
+              "user_step2_item_embedding",
+              "user_step3_item_embedding",
+              "debias_step2_item_embedding",
+              "debias_step3_item_embedding",
+              "reward_step2_item_embedding",
+              "reward_step3_item_embedding"
+            ],
+            "not_measured": [],
+            "passed_fraction": 0.3333333333333333
+          },
+          "loss": {
+            "passed": 18,
+            "expected": 18,
+            "failed": [],
+            "not_measured": [],
+            "passed_fraction": 1.0
+          },
+          "epoch_loss": {
+            "passed": 18,
+            "expected": 18,
+            "failed": [],
+            "not_measured": [],
+            "passed_fraction": 1.0
+          },
+          "gradient": {
+            "passed": 18,
+            "expected": 18,
+            "failed": [],
+            "not_measured": [],
+            "passed_fraction": 1.0
+          },
+          "update": {
+            "passed": 15,
+            "expected": 18,
+            "failed": [
+              "history_step1_update",
+              "position_step2_update",
+              "position_step3_update"
+            ],
+            "not_measured": [],
+            "passed_fraction": 0.8333333333333334
+          }
+        },
+        "training_steps_complete": {
+          "passed": 5,
+          "expected": 18,
+          "failed": [
+            "base_step2",
+            "base_step3",
+            "history_step1",
+            "history_step2",
+            "history_step3",
+            "position_step2",
+            "position_step3",
+            "user_step2",
+            "user_step3",
+            "debias_step2",
+            "debias_step3",
+            "reward_step2",
+            "reward_step3"
+          ],
+          "not_measured": [],
+          "passed_fraction": 0.2777777777777778
+        },
+        "original_tests": {
+          "expected": 10,
+          "observed_outcomes": [
+            {
+              "nodeid": "tests/test_baseline_mips_module.py::TestBaselineMIPSModule::test_output_shapes",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_baseline_mips_module.py::TestBaselineMIPSModule::test_output_values",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_two_tower_base_retrieval.py::TestTwoTowerBaseRetrieval::test_forward_pass",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_two_tower_base_retrieval.py::TestTwoTowerBaseRetrieval::test_train_forward",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_two_tower_user_hist.py::TestTwoTowerWithUserHistoryEncoder::test_forward_pass",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_two_tower_user_hist_position_debias.py::TestTwoTowerWithPositionDebiasedWeights::test_forward_pass",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_two_tower_user_hist_position_debias.py::TestTwoTowerWithPositionDebiasedWeights::test_train_forward",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_user_history_enc.py::TestUserHistoryEncoder::test_forward",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_user_history_enc.py::TestUserHistoryEncoder::test_values",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_user_history_enc.py::TestUserHistoryEncoder::test_values_pos",
+              "outcome": "passed"
+            }
+          ],
+          "exit_code": 0,
+          "passed": 10,
+          "status": "collected"
+        },
+        "workflow_accepted": true,
+        "coverage_accepted": true,
+        "documentation_accepted": true
+      },
+      "main_table_signals": {
+        "loss": {
+          "passed": 18,
+          "expected": 18
+        },
+        "gradient": {
+          "passed": 18,
+          "expected": 18
+        },
+        "update": {
+          "passed": 15,
+          "expected": 18
+        },
+        "entry_points": {
+          "passed": 10,
+          "expected": 10
+        }
+      }
+    },
+    {
+      "repository": "twotower",
+      "method": "swe",
+      "accepted": false,
+      "tokens": 8316552,
+      "repair_calls": 80,
+      "submissions": 1,
+      "repair_prompt_tokens": 7889936,
+      "repair_completion_tokens": 58248,
+      "translation_tokens": 368368,
+      "paired_checks": {
+        "passed": 104,
+        "expected": 145,
+        "failed": [
+          "base_step1_epoch_loss",
+          "base_step2_item_embedding",
+          "base_step2_epoch_loss",
+          "base_step3_item_embedding",
+          "base_step3_epoch_loss",
+          "history_step1_epoch_loss",
+          "history_step1_update",
+          "history_step2_item_embedding",
+          "history_step2_epoch_loss",
+          "history_step3_item_embedding",
+          "history_step3_epoch_loss",
+          "position_step1_epoch_loss",
+          "position_step1_update",
+          "position_step2_user_embedding",
+          "position_step2_item_embedding",
+          "position_step2_epoch_loss",
+          "position_step2_update",
+          "position_step3_user_embedding",
+          "position_step3_item_embedding",
+          "position_step3_epoch_loss",
+          "position_step3_update",
+          "user_step1_epoch_loss",
+          "user_step1_update",
+          "user_step2_item_embedding",
+          "user_step2_epoch_loss",
+          "user_step3_item_embedding",
+          "user_step3_epoch_loss",
+          "debias_step1_epoch_loss",
+          "debias_step1_update",
+          "debias_step2_item_embedding",
+          "debias_step2_epoch_loss",
+          "debias_step3_item_embedding",
+          "debias_step3_epoch_loss",
+          "debias_step3_gradient",
+          "reward_step1_epoch_loss",
+          "reward_step2_item_embedding",
+          "reward_step2_epoch_loss",
+          "reward_step3_item_embedding",
+          "reward_step3_epoch_loss",
+          "reward_inference_status"
+        ],
+        "not_measured": [
+          "reward_retrieval"
+        ],
+        "passed_fraction": 0.7172413793103448
+      },
+      "details": {
+        "complete_acceptance": false,
+        "repair_calls": 80,
+        "end_to_end_tokens": 8316552,
+        "protocol_checks": {
+          "passed": 104,
+          "expected": 145,
+          "failed": [
+            "base_step1_epoch_loss",
+            "base_step2_item_embedding",
+            "base_step2_epoch_loss",
+            "base_step3_item_embedding",
+            "base_step3_epoch_loss",
+            "history_step1_epoch_loss",
+            "history_step1_update",
+            "history_step2_item_embedding",
+            "history_step2_epoch_loss",
+            "history_step3_item_embedding",
+            "history_step3_epoch_loss",
+            "position_step1_epoch_loss",
+            "position_step1_update",
+            "position_step2_user_embedding",
+            "position_step2_item_embedding",
+            "position_step2_epoch_loss",
+            "position_step2_update",
+            "position_step3_user_embedding",
+            "position_step3_item_embedding",
+            "position_step3_epoch_loss",
+            "position_step3_update",
+            "user_step1_epoch_loss",
+            "user_step1_update",
+            "user_step2_item_embedding",
+            "user_step2_epoch_loss",
+            "user_step3_item_embedding",
+            "user_step3_epoch_loss",
+            "debias_step1_epoch_loss",
+            "debias_step1_update",
+            "debias_step2_item_embedding",
+            "debias_step2_epoch_loss",
+            "debias_step3_item_embedding",
+            "debias_step3_epoch_loss",
+            "debias_step3_gradient",
+            "reward_step1_epoch_loss",
+            "reward_step2_item_embedding",
+            "reward_step2_epoch_loss",
+            "reward_step3_item_embedding",
+            "reward_step3_epoch_loss",
+            "reward_inference_status"
+          ],
+          "not_measured": [
+            "reward_retrieval"
+          ],
+          "passed_fraction": 0.7172413793103448
+        },
+        "numerical_checks": {
+          "passed": 74,
+          "expected": 114,
+          "failed": [
+            "base_step1_epoch_loss",
+            "base_step2_item_embedding",
+            "base_step2_epoch_loss",
+            "base_step3_item_embedding",
+            "base_step3_epoch_loss",
+            "history_step1_epoch_loss",
+            "history_step1_update",
+            "history_step2_item_embedding",
+            "history_step2_epoch_loss",
+            "history_step3_item_embedding",
+            "history_step3_epoch_loss",
+            "position_step1_epoch_loss",
+            "position_step1_update",
+            "position_step2_user_embedding",
+            "position_step2_item_embedding",
+            "position_step2_epoch_loss",
+            "position_step2_update",
+            "position_step3_user_embedding",
+            "position_step3_item_embedding",
+            "position_step3_epoch_loss",
+            "position_step3_update",
+            "user_step1_epoch_loss",
+            "user_step1_update",
+            "user_step2_item_embedding",
+            "user_step2_epoch_loss",
+            "user_step3_item_embedding",
+            "user_step3_epoch_loss",
+            "debias_step1_epoch_loss",
+            "debias_step1_update",
+            "debias_step2_item_embedding",
+            "debias_step2_epoch_loss",
+            "debias_step3_item_embedding",
+            "debias_step3_epoch_loss",
+            "debias_step3_gradient",
+            "reward_step1_epoch_loss",
+            "reward_step2_item_embedding",
+            "reward_step2_epoch_loss",
+            "reward_step3_item_embedding",
+            "reward_step3_epoch_loss"
+          ],
+          "not_measured": [
+            "reward_retrieval"
+          ],
+          "passed_fraction": 0.6491228070175439
+        },
+        "training_checks": {
+          "passed": 69,
+          "expected": 108,
+          "failed": [
+            "base_step1_epoch_loss",
+            "base_step2_item_embedding",
+            "base_step2_epoch_loss",
+            "base_step3_item_embedding",
+            "base_step3_epoch_loss",
+            "history_step1_epoch_loss",
+            "history_step1_update",
+            "history_step2_item_embedding",
+            "history_step2_epoch_loss",
+            "history_step3_item_embedding",
+            "history_step3_epoch_loss",
+            "position_step1_epoch_loss",
+            "position_step1_update",
+            "position_step2_user_embedding",
+            "position_step2_item_embedding",
+            "position_step2_epoch_loss",
+            "position_step2_update",
+            "position_step3_user_embedding",
+            "position_step3_item_embedding",
+            "position_step3_epoch_loss",
+            "position_step3_update",
+            "user_step1_epoch_loss",
+            "user_step1_update",
+            "user_step2_item_embedding",
+            "user_step2_epoch_loss",
+            "user_step3_item_embedding",
+            "user_step3_epoch_loss",
+            "debias_step1_epoch_loss",
+            "debias_step1_update",
+            "debias_step2_item_embedding",
+            "debias_step2_epoch_loss",
+            "debias_step3_item_embedding",
+            "debias_step3_epoch_loss",
+            "debias_step3_gradient",
+            "reward_step1_epoch_loss",
+            "reward_step2_item_embedding",
+            "reward_step2_epoch_loss",
+            "reward_step3_item_embedding",
+            "reward_step3_epoch_loss"
+          ],
+          "not_measured": [],
+          "passed_fraction": 0.6388888888888888
+        },
+        "retrieval_checks": {
+          "passed": 5,
+          "expected": 6,
+          "failed": [],
+          "not_measured": [
+            "reward_retrieval"
+          ],
+          "passed_fraction": 0.8333333333333334
+        },
+        "training_signals": {
+          "user_embedding": {
+            "passed": 16,
+            "expected": 18,
+            "failed": [
+              "position_step2_user_embedding",
+              "position_step3_user_embedding"
+            ],
+            "not_measured": [],
+            "passed_fraction": 0.8888888888888888
+          },
+          "item_embedding": {
+            "passed": 6,
+            "expected": 18,
+            "failed": [
+              "base_step2_item_embedding",
+              "base_step3_item_embedding",
+              "history_step2_item_embedding",
+              "history_step3_item_embedding",
+              "position_step2_item_embedding",
+              "position_step3_item_embedding",
+              "user_step2_item_embedding",
+              "user_step3_item_embedding",
+              "debias_step2_item_embedding",
+              "debias_step3_item_embedding",
+              "reward_step2_item_embedding",
+              "reward_step3_item_embedding"
+            ],
+            "not_measured": [],
+            "passed_fraction": 0.3333333333333333
+          },
+          "loss": {
+            "passed": 18,
+            "expected": 18,
+            "failed": [],
+            "not_measured": [],
+            "passed_fraction": 1.0
+          },
+          "epoch_loss": {
+            "passed": 0,
+            "expected": 18,
+            "failed": [
+              "base_step1_epoch_loss",
+              "base_step2_epoch_loss",
+              "base_step3_epoch_loss",
+              "history_step1_epoch_loss",
+              "history_step2_epoch_loss",
+              "history_step3_epoch_loss",
+              "position_step1_epoch_loss",
+              "position_step2_epoch_loss",
+              "position_step3_epoch_loss",
+              "user_step1_epoch_loss",
+              "user_step2_epoch_loss",
+              "user_step3_epoch_loss",
+              "debias_step1_epoch_loss",
+              "debias_step2_epoch_loss",
+              "debias_step3_epoch_loss",
+              "reward_step1_epoch_loss",
+              "reward_step2_epoch_loss",
+              "reward_step3_epoch_loss"
+            ],
+            "not_measured": [],
+            "passed_fraction": 0.0
+          },
+          "gradient": {
+            "passed": 17,
+            "expected": 18,
+            "failed": [
+              "debias_step3_gradient"
+            ],
+            "not_measured": [],
+            "passed_fraction": 0.9444444444444444
+          },
+          "update": {
+            "passed": 12,
+            "expected": 18,
+            "failed": [
+              "history_step1_update",
+              "position_step1_update",
+              "position_step2_update",
+              "position_step3_update",
+              "user_step1_update",
+              "debias_step1_update"
+            ],
+            "not_measured": [],
+            "passed_fraction": 0.6666666666666666
+          }
+        },
+        "training_steps_complete": {
+          "passed": 0,
+          "expected": 18,
+          "failed": [
+            "base_step1",
+            "base_step2",
+            "base_step3",
+            "history_step1",
+            "history_step2",
+            "history_step3",
+            "position_step1",
+            "position_step2",
+            "position_step3",
+            "user_step1",
+            "user_step2",
+            "user_step3",
+            "debias_step1",
+            "debias_step2",
+            "debias_step3",
+            "reward_step1",
+            "reward_step2",
+            "reward_step3"
+          ],
+          "not_measured": [],
+          "passed_fraction": 0.0
+        },
+        "original_tests": {
+          "expected": 10,
+          "observed_outcomes": [
+            {
+              "nodeid": "tests/test_baseline_mips_module.py::TestBaselineMIPSModule::test_output_shapes",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_baseline_mips_module.py::TestBaselineMIPSModule::test_output_values",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_two_tower_base_retrieval.py::TestTwoTowerBaseRetrieval::test_forward_pass",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_two_tower_base_retrieval.py::TestTwoTowerBaseRetrieval::test_train_forward",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_two_tower_user_hist.py::TestTwoTowerWithUserHistoryEncoder::test_forward_pass",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_two_tower_user_hist_position_debias.py::TestTwoTowerWithPositionDebiasedWeights::test_forward_pass",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_two_tower_user_hist_position_debias.py::TestTwoTowerWithPositionDebiasedWeights::test_train_forward",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_user_history_enc.py::TestUserHistoryEncoder::test_forward",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_user_history_enc.py::TestUserHistoryEncoder::test_values",
+              "outcome": "passed"
+            },
+            {
+              "nodeid": "tests/test_user_history_enc.py::TestUserHistoryEncoder::test_values_pos",
+              "outcome": "passed"
+            }
+          ],
+          "exit_code": 0,
+          "passed": 10,
+          "status": "collected"
+        },
+        "workflow_accepted": true,
+        "coverage_accepted": true,
+        "documentation_accepted": true
+      },
+      "main_table_signals": {
+        "loss": {
+          "passed": 18,
+          "expected": 18
+        },
+        "gradient": {
+          "passed": 17,
+          "expected": 18
+        },
+        "update": {
+          "passed": 12,
+          "expected": 18
+        },
+        "entry_points": {
+          "passed": 10,
+          "expected": 10
+        }
+      }
+    },
+    {
+      "repository": "twotower",
+      "method": "matchfix",
+      "accepted": false,
+      "tokens": 8679080,
+      "repair_calls": 80,
+      "submissions": 1,
+      "repair_prompt_tokens": 8215327,
+      "repair_completion_tokens": 95385,
+      "translation_tokens": 368368,
+      "paired_checks": {
+        "passed": 129,
+        "expected": 145,
+        "failed": [
+          "base_step2_item_embedding",
+          "base_step3_item_embedding",
+          "history_step1_update",
+          "history_step2_item_embedding",
+          "history_step3_item_embedding",
+          "position_step2_item_embedding",
+          "position_step2_update",
+          "position_step3_item_embedding",
+          "user_step2_item_embedding",
+          "user_step3_item_embedding",
+          "debias_step2_item_embedding",
+          "debias_step3_item_embedding",
+          "reward_step2_item_embedding",
+          "reward_step3_item_embedding",
+          "reward_inference_status"
+        ],
+        "not_measured": [
+          "reward_retrieval"
+        ],
+        "passed_fraction": 0.8896551724137931
+      },
+      "details": {
+        "complete_acceptance": false,
+        "repair_calls": 80,
+        "end_to_end_tokens": 8679080,
+        "protocol_checks": {
+          "passed": 129,
+          "expected": 145,
+          "failed": [
+            "base_step2_item_embedding",
+            "base_step3_item_embedding",
+            "history_step1_update",
+            "history_step2_item_embedding",
+            "history_step3_item_embedding",
+            "position_step2_item_embedding",
+            "position_step2_update",
+            "position_step3_item_embedding",
+            "user_step2_item_embedding",
+            "user_step3_item_embedding",
+            "debias_step2_item_embedding",
+            "debias_step3_item_embedding",
+            "reward_step2_item_embedding",
+            "reward_step3_item_embedding",
+            "reward_inference_status"
+          ],
+          "not_measured": [
+            "reward_retrieval"
+          ],
+          "passed_fraction": 0.8896551724137931
+        },
+        "numerical_checks": {
+          "passed": 99,
+          "expected": 114,
+          "failed": [
+            "base_step2_item_embedding",
+            "base_step3_item_embedding",
+            "history_step1_update",
+            "history_step2_item_embedding",
+            "history_step3_item_embedding",
+            "position_step2_item_embedding",
+            "position_step2_update",
+            "position_step3_item_embedding",
+            "user_step2_item_embedding",
+            "user_step3_item_embedding",
+            "debias_step2_item_embedding",
+            "debias_step3_item_embedding",
+            "reward_step2_item_embedding",
+            "reward_step3_item_embedding"
+          ],
+          "not_measured": [
+            "reward_retrieval"
+          ],
+          "passed_fraction": 0.868421052631579
+        },
+        "training_checks": {
+          "passed": 94,
+          "expected": 108,
+          "failed": [
+            "base_step2_item_embedding",
+            "base_step3_item_embedding",
+            "history_step1_update",
+            "history_step2_item_embedding",
+            "history_step3_item_embedding",
+            "position_step2_item_embedding",
+            "position_step2_update",
+            "position_step3_item_embedding",
+            "user_step2_item_embedding",
+            "user_step3_item_embedding",
+            "debias_step2_item_embedding",
+            "debias_step3_item_embedding",
+            "reward_step2_item_embedding",
+            "reward_step3_item_embedding"
+          ],
+          "not_measured": [],
+          "passed_fraction": 0.8703703703703703
+        },
+        "retrieval_checks": {
+          "passed": 5,
+          "expected": 6,
+          "failed": [],
+          "not_measured": [
+            "reward_retrieval"
+          ],
+          "passed_fraction": 0.8333333333333334
+        },
+        "training_signals": {
+          "user_embedding": {
+            "passed": 18,
+            "expected": 18,
+            "failed": [],
+            "not_measured": [],
+            "passed_fraction": 1.0
+          },
+          "item_embedding": {
+            "passed": 6,
+            "expected": 18,
+            "failed": [
+              "base_step2_item_embedding",
+              "base_step3_item_embedding",
+              "history_step2_item_embedding",
+              "history_step3_item_embedding",
+              "position_step2_item_embedding",
+              "position_step3_item_embedding",
+              "user_step2_item_embedding",
+              "user_step3_item_embedding",
+              "debias_step2_item_embedding",
+              "debias_step3_item_embedding",
+              "reward_step2_item_embedding",
+              "reward_step3_item_embedding"
+            ],
+            "not_measured": [],
+            "passed_fraction": 0.3333333333333333
+          },
+          "loss": {
+            "passed": 18,
+            "expected": 18,
+            "failed": [],
+            "not_measured": [],
+            "passed_fraction": 1.0
+          },
+          "epoch_loss": {
+            "passed": 18,
+            "expected": 18,
+            "failed": [],
+            "not_measured": [],
+            "passed_fraction": 1.0
+          },
+          "gradient": {
+            "passed": 18,
+            "expected": 18,
+            "failed": [],
+            "not_measured": [],
+            "passed_fraction": 1.0
+          },
+          "update": {
+            "passed": 16,
+            "expected": 18,
+            "failed": [
+              "history_step1_update",
+              "position_step2_update"
+            ],
+            "not_measured": [],
+            "passed_fraction": 0.8888888888888888
+          }
+        },
+        "training_steps_complete": {
+          "passed": 5,
+          "expected": 18,
+          "failed": [
+            "base_step2",
+            "base_step3",
+            "history_step1",
+            "history_step2",
+            "history_step3",
+            "position_step2",
+            "position_step3",
+            "user_step2",
+            "user_step3",
+            "debias_step2",
+            "debias_step3",
+            "reward_step2",
+            "reward_step3"
+          ],
+          "not_measured": [],
+          "passed_fraction": 0.2777777777777778
+        },
+        "original_tests": {
+          "expected": 10,
+          "observed_outcomes": [],
+          "exit_code": 2,
+          "passed": 0,
+          "status": "collection_failed"
+        },
+        "workflow_accepted": true,
+        "coverage_accepted": false,
+        "documentation_accepted": false
+      },
+      "main_table_signals": {
+        "loss": {
+          "passed": 18,
+          "expected": 18
+        },
+        "gradient": {
+          "passed": 18,
+          "expected": 18
+        },
+        "update": {
+          "passed": 16,
+          "expected": 18
+        },
+        "entry_points": {
+          "passed": 0,
+          "expected": 10
+        }
+      }
+    }
+  ],
+  "natural_repairs": [
+    {
+      "method": "direct",
+      "accepted": 5,
+      "denominator": 10,
+      "repaired": 0,
+      "retained": 5,
+      "faults": 5,
+      "initially_accepted": 5,
+      "tokens": 3751123,
+      "calls": 120
+    },
+    {
+      "method": "swe",
+      "accepted": 5,
+      "denominator": 10,
+      "repaired": 0,
+      "retained": 5,
+      "faults": 5,
+      "initially_accepted": 5,
+      "tokens": 12678285,
+      "calls": 386
+    },
+    {
+      "method": "matchfix",
+      "accepted": 5,
+      "denominator": 10,
+      "repaired": 0,
+      "retained": 5,
+      "faults": 5,
+      "initially_accepted": 5,
+      "tokens": 14351140,
+      "calls": 265
+    },
+    {
+      "method": "ladim",
+      "accepted": 9,
+      "denominator": 10,
+      "repaired": 4,
+      "retained": 5,
+      "faults": 5,
+      "initially_accepted": 5,
+      "tokens": 13206863,
+      "calls": 193
+    }
+  ],
+  "natural_components": [
+    {
+      "label": "Independent evidence handoff",
+      "accepted": 9,
+      "repaired": 4,
+      "retained": 5,
+      "tokens": 15547813
+    },
+    {
+      "label": "Continuous conversation",
+      "accepted": 8,
+      "repaired": 3,
+      "retained": 5,
+      "tokens": 14516463
+    },
+    {
+      "label": "Without repair history",
+      "accepted": 5,
+      "repaired": 0,
+      "retained": 5,
+      "tokens": 10851537
+    },
+    {
+      "label": "Without progress reminders",
+      "accepted": 7,
+      "repaired": 2,
+      "retained": 5,
+      "tokens": 17325026
+    },
+    {
+      "label": "Without editing format assistance",
+      "accepted": 9,
+      "repaired": 4,
+      "retained": 5,
+      "tokens": 13206863
+    }
+  ],
   "provenance": {
     "data/audits/unified50-preflight-20260918/formal_launch/results_audit_final.json": "69e64ebf2f95a60a932b99b2074b2edb241bd4e853d8b40f2f6fac274cb67026",
     "data/audits/unified50-preflight-20260918/formal_launch/final_summary.json": "f6539d99b26a106e469b608e9ccbd84771c4c192976b758de96f97a210d6bd47",
-    "data/paper_figures/autonomous_training_signals.csv": "8d4634ecf83f2ae02494d3e69e67a7a89ba43bd6140ebed1149762107edc0fa6"
+    "data/paper_figures/autonomous_training_signals.csv": "8d4634ecf83f2ae02494d3e69e67a7a89ba43bd6140ebed1149762107edc0fa6",
+    "output/repository-migration-20260921/final/summary.json": "dbf36b7197045701312dd2ac8de65b4e75b3ddf1e6d1d4cae9f3dfc2a1a9d1b2",
+    "output/repository-migration-20260921/partial_results.json": "7f8f7fe525ba3d21c8069e52469873c8a2e08b385b3162f4a8f60d424fea64cd",
+    "output/repository-migration-20260921/final/final_integrity_audit.json": "38d4c284eba20f9787befbec3cf40b668e9e14e413a73b5bdeb0dce60093b9c7",
+    "output/maintext-results-20260918/slim_main.csv": "4528b5ae1153227270d2ab1c9cf3d4d09b8ecaac8f2f587202d35a43c035336f",
+    "output/maintext-results-20260918/main_comparison.csv": "d9b9b03e463b3c11b513ee4444cf9962f7d5f6bbd8f2e8d468490fff7ec78a45",
+    "output/maintext-ablations-20260918/recovery_final.json": "6d09ffb3ec6c379d1261be2887f3a4322ec60d94e521a42bf07a140dcd0c86ff",
+    "data/paper_figures/repository_training_check_details.json": "59ea9f8620161e53a47bff01159798ef1893deb141391de11f188a06853b05ab"
   }
 }

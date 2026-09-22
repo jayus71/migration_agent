@@ -1,19 +1,25 @@
 # Inputs for manuscript figures and tables
 
-## Current unified migration comparison (2026-09-20)
+## Current unified migration comparison (2026-09-21)
 
 `figures/make_unified_results.py` reads the completed audit and summary under
 `data/audits/unified50-preflight-20260918/formal_launch/`. It generates
 `TABLE_unified_comparison.tex`, `TABLE_unified_components.tex`,
-`TABLE_training_signals.tex`, `repair_comparison.pdf`/`.png`, and
+`TABLE_training_signals.tex`, `TABLE_natural_repairs.tex`,
+`TABLE_natural_components.tex`, `TABLE_repository_costs.tex`,
+`TABLE_repository_checks.tex`, `TABLE_jax_repairs.tex`, `repair_comparison.pdf`/`.png`/`.svg`, and
 `data/paper_figures/unified_results.json`. `make_repair_comparison.py` calls the
 same exporter. The JSON records SHA-256 hashes of its inputs.
 
-Main-table labels include citations for the external methods. CodeTransEngine
-uses its own system-paper citation, InterTrans its ICSE paper, and MSAdapter
-the official version 0.6.0 project. Direct LLM and test-guided repair retain
-their descriptive labels, and LaDiM is marked as ours. The main table has no
-special SWE-agent marker; its acceptance and cost accounting are unchanged.
+Method citations appear once per baseline in the main table. Program panels
+show calls, input/output/total tokens, and acceptance in the final column; repository panels show
+passed check counts, gradients, parameter updates, entry points or original
+tests, repair calls, and total tokens. The time series signal counts come from
+`repository_training_check_details.json`, which records the source archive and
+member hashes and all three seeds' numerical check booleans. Original test
+counts report confirmed passes out of the ten declared tests. MatchFixAgent
+passes 0/10 after an unmigrated PyTorch import prevents collection; its raw
+test outcomes remain empty with exit code 2. Unmeasured numerical values remain n/a.
 
 The main panel uses all 50 task identifiers for every method. They map to 29
 distinct source-and-contract pairs from 24 source files. A condition with
@@ -26,14 +32,21 @@ stays unavailable and remains in the denominator. Acceptance at a budget scores
 the last candidate checkpoint, including any regression after an earlier pass.
 LaDiM's counts at one, two, and four submissions are 46, 50, and 50.
 
-Figure 3(b) compares end-to-end LaDiM and MatchFixAgent tokens on all 29 distinct
-pairs. Each point sums its unique `end_to_end_call_keys` from the audited
-`provider_calls` ledger, and symbols use the shared Direct translation's
-initial acceptance. The JSON export stores these points in `paired_costs`.
-Both methods ultimately accept every pair. LaDiM uses fewer tokens on 27/29:
-19/20 initially accepted pairs and 8/9 initially faulty pairs. Point totals
-reconcile with the method totals. This plot replaces the largely flat budget
-curves at the user's request; the measured budget results remain in the prose.
+Figure 3(a) stacks the shared initial translation, subsequent calls on initially
+accepted inputs, and subsequent calls on initially faulty inputs. Stage costs
+sum unique audited `incremental_call_keys`; translation is counted once.
+Figure 3(b) shows MatchFixAgent minus LaDiM tokens for all 29 distinct inputs,
+sorted within groups of 20 initially accepted and nine initially faulty inputs.
+Each input sums unique `end_to_end_call_keys` from the audited `provider_calls`
+ledger. The JSON stores these costs in `paired_costs` and stages in `cost_stages`.
+Two bars are negative: LaDiM uses fewer tokens on 19/20 and 8/9 inputs,
+respectively. The signed savings sum to 6,938,291 tokens. The figure is exported
+at the manuscript width of 5.5 inches with text of at least 8 points; its legend
+is inside each panel. The right legend distinguishes lower and higher token use
+by LaDiM, and its horizontal label reads `Migration inputs`; sorting is described
+in the caption.
+Acceptance at one, two, and four submissions remains
+in the prose.
 
 The second panel uses 18 cross-language tasks and includes LaDiM, SWE-agent,
 MatchFixAgent, whole-file test-guided repair, Direct LLM, and native InterTrans
@@ -52,14 +65,57 @@ independent validation are in
 The current method uses the frozen slim-v4 implementation. Signal and JAX studies
 use the earlier editing examples and format-correction feedback; this scientific
 difference is described in the supplementary protocol, with internal version
-identities retained only in provenance. Detection data and the Figure 1 exporter
-are unchanged by this revision.
+identities retained only in provenance. The September 22 content revision keeps
+the detection data fixed, reduces Figure 4's canvas height to two inches, and
+labels LaDiM's step-1 detection and loss-based detection on the mean curves at
+steps 31 and 18. These latter times are not measurements of competing agents.
 
-The method overview is a simple placeholder for the author's replacement.
-`make_slim_v4_overview.py` records the shared PowerPoint/SVG layout and labels;
-`update_overview_labels.py` exports the vector PDF and PNG. The current label edit
-preserves native editable objects and identifies the native MindSpore/PyTorch
-and TorchAX/JAX execution paths.
+The introduction's Figure 1 is generated by `figures/make_migration_motivation.py`.
+It contains a single horizontal bar chart with complete token totals from the
+audit (LaDiM 5,159,134; MatchFixAgent 12,097,425; SWE-agent 20,831,495),
+exported at three inches wide for the introduction's wrapped figure. Acceptance
+labels use the common denominator of 50. These are complete migration costs.
+The former Figure 1 (`gradient_drift.pdf`) now appears beside the detection study.
+
+`scripts/summarize_paper_collections.py` reads frozen sources and archive members,
+checks available manifest hashes, and generates `collection_statistics.json`
+and `TABLE_task_collections.tex`. Length counts nonblank physical source lines,
+including comments, and notebook code cells. Means deduplicate identical source
+hashes; counts and repository total lines do not. Repository totals include the
+original tests and exclude external evaluation harnesses. The twelve-task source
+and target study has short wrappers around attention, embedding, and activation
+operators; its 4.3-line mean describes those wrappers. The main-text table contains the MindSpore migration, natural translation,
+training-signal, and JAX collections. The separate source-and-target repair
+statistics stay in provenance and the corresponding study stays in the appendix.
+Detection trajectories and the separate injected-fault collection are not rows
+in the main task table.
+
+`TABLE_jax_repairs.tex` reads the frozen
+`output/maintext-jax-autonomous-20260918/final_analysis/summary.json`:
+LaDiM uses 76 calls and 674,009 tokens; direct repair uses 57 calls and 353,311.
+Both accept 6/6 on their first submission. Native converters on supplied faulty
+targets remain a separate supplementary repair result.
+
+The September 21 web-6-Pro revision, implementation mapping, verification record,
+and designs for measurements requiring new runs are documented in
+`docs/paper-6pro-execution-20260921.md`.
+
+The repository table panels read the frozen summary, paired checks, and final
+integrity audit under `output/repository-migration-20260921/`. Natural fault
+repairs use `slim_main.csv` for LaDiM and the selected `formal_v3` baseline rows
+of `main_comparison.csv`. Natural context ablations read the selected complete
+`natural10_v3` groups and their `reference_v4` from
+`output/maintext-ablations-20260918/recovery_final.json`. The reference includes
+editing examples and format correction; removing that assistance matches the
+LaDiM configuration in the natural fault comparison. Input hashes are in the
+JSON export. No experiments were executed for this revision.
+
+The method overview remains a placeholder for the author's replacement.
+`make_overview.mjs` defines its native editable PowerPoint objects and matching
+SVG; `make_slim_v4_overview.py` is its launcher. The current assets show the four
+roles, MindSpore and JAX execution, and repository coordination. Work on this
+placeholder stopped at the user's request on September 21; the current files
+are retained. The SVG supplies the vector PDF used by LaTeX.
 
 The sections below document historical assets and generators. Their descriptions
 of main tables, figures, or appendices refer to earlier manuscripts. The current
@@ -208,3 +264,16 @@ Other figure inputs already tracked in this repository:
 The diagnostic matrix shows threshold crossings for at least one measured run.
 Missing metrics after an execution failure are marked `n/a`, not zero.
 The localization matrix measures diagnosis accuracy, separately from repair acceptance.
+
+## Cumulative repository components
+
+`figures/make_cumulative_components.py` reads the eight final rows in
+`output/cumulative-component-ablation-20260922/summary.json` and generates
+`TABLE_cumulative_components.tex`. The four cumulative conditions add a read-only
+investigation, an independent evidence handoff, and repository context management
+to the Repair Agent, with one run per condition per repository. The table keeps
+the 69 and 145 check denominators and reports all investigation/repair calls.
+Total tokens add the common initial translation exactly once to every run's
+complete investigation and repair usage. The generator checks this accounting
+and embeds the source summary SHA-256 in the table source. These new runs are
+separate from the historical unified main comparison.

@@ -4,7 +4,7 @@ The manuscript on `codex/iclr-2027-template` now follows the approved evidence
 plan and the user's request to present the main result as 50/50. Main-table
 acceptance uses the 50 frozen task identifiers; per-input token comparisons use
 the 29 distinct source-and-contract pairs.
-Section 4.1 explains that they correspond to 29 distinct source-and-contract
+Experimental Setup explains that they correspond to 29 distinct source-and-contract
 pairs from 24 source files. Identical conditions reuse one physical execution;
 token totals count actual calls. No experiments or model calls were launched
 for this revision.
@@ -171,3 +171,51 @@ result JSON is byte-identical to the pre-edit copy, and the original numerical
 table cells were verified before the requested dagger removal. The manuscript
 compiles without undefined citations or overfull boxes. The main table was
 rendered and visually checked after the final label cleanup.
+
+## Method and experiment revision (2026-09-21)
+
+The approved [method and experiment plan](method-experiments-logic-20260920.md)
+is implemented on `codex/iclr-2027-template`. At the start of this revision,
+nine files had uncommitted changes. Their contents were preserved in the local
+pre-edit snapshot, and the manuscript edits continued from that working state.
+This revision remains uncommitted.
+
+The method now defines the migration task and comparable training observations
+together, then explains autonomous diagnosis and evidence-guided repair.
+Translator remains the entry role in the overview and placeholder diagram.
+The diagnosis section describes how observed discrepancies motivate code
+inspection, hypotheses, and additional tests. The repair section explains the
+independent handoff, retained workspace and conversation, and acceptance loop.
+Related Work follows Experiments, and the MatchFixAgent input requirement is
+stated there with its existing citation.
+
+Main Experiments discusses both main-table panels. The framework comparison
+explains repair and preservation at full acceptance; the language comparison
+describes the additional accepted programs and token savings. The analysis
+connects aggregate cost to matched input costs and submission behavior, then
+examines detection latency and JAX repair. The signal ablation explains how
+available observations affect repair initiation and stopping, with final full
+verification. The complete component outcomes remain in the supplementary table.
+
+Before prose polishing, the upstream Humanizer skill was checked through GitHub.
+The latest commit affecting `SKILL.md` was
+`9862685f575c65a8247f90369951df1b3416e3d6`, dated 2026-09-06. Its version is 3.0.0,
+and the downloaded file, repository skill, and installed Codex skill have the
+same SHA-256:
+`e8269e236bed06ed0fe4824c274112e54950b0cb46b0bafe5e1576ef7c9f93d5`.
+The humanizer review covered the abstract, introduction, method, experiments,
+related work, conclusion, supplementary prose, captions, headings, and table
+notes. It removed repeated explanations and tightened sentence structure while
+retaining the main claims and the cross-framework and cross-language conclusion.
+
+Six unified-result tests and seven figure-layout tests pass. The result JSON,
+three numerical tables, figure assets and generator, and bibliography are
+byte-identical to the pre-edit snapshot. All 27 citation keys used in the prose
+are retained. `latexmk` builds a 13-page PDF without warnings, unresolved
+references, or overfull or underfull boxes. The main text ends on page 8,
+the AI use statement and references occupy pages 9--11, and the supplementary
+material occupies pages 12--13. All pages were rendered; the complete montage
+and the changed text and table/figure pages were visually inspected. No model
+experiments were launched. Local snapshots, the skill update check, build log,
+rendered pages, and validation record are under
+`tmp/manuscript-revision-20260921/`.

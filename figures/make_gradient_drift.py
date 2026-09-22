@@ -21,7 +21,7 @@ def build_figure(frame=None):
     if frame is None:
         frame = pd.read_csv(GRADIENT_STEPS)
     # Two panels across the ICLR text width, with labels at their printed size.
-    fig, axes = plt.subplots(1, 2, figsize=(5.5, 2.45), sharex=True, sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(5.5, 2.0), sharex=True, sharey=True)
     for ax, (fault, diagnostic, panel, check) in zip(axes, PANELS):
         subset = frame[frame.fault.eq(fault) & frame.coupling.eq("free-running")]
         runs = subset.groupby(["model", "seed"])
@@ -57,7 +57,7 @@ def build_figure(frame=None):
         first_loss = int(loss_crossings.index.min())
 
         diagnostic_color = METRICS[diagnostic][1]
-        ax.annotate(f"Detected at step {first_detection}",
+        ax.annotate(f"LaDiM: step {first_detection}",
                     xy=(first_detection, means[diagnostic].loc[first_detection]),
                     xytext=(0.08, 0.80), textcoords="axes fraction",
                     ha="left", va="top", color=diagnostic_color, fontsize=7.5,
@@ -65,9 +65,9 @@ def build_figure(frame=None):
                                     linewidth=0.8, shrinkA=3, shrinkB=3),
                     bbox=dict(facecolor="white", edgecolor="none", pad=1))
         ax.axvline(first_loss, color=GRAY, linewidth=0.6, linestyle=":")
-        ax.annotate(f"Mean loss difference\ncrosses at step {first_loss}",
+        ax.annotate(f"Loss-based detection\n(mean): step {first_loss}",
                     xy=(first_loss, means["loss_abs_diff"].loc[first_loss]),
-                    xytext=(0.96, 0.24), textcoords="axes fraction",
+                    xytext=(0.96, 0.26), textcoords="axes fraction",
                     ha="right", va="bottom", color=BLUE, fontsize=7.5,
                     arrowprops=dict(arrowstyle="->", color=BLUE,
                                     linewidth=0.8, shrinkA=3, shrinkB=3),
@@ -91,7 +91,7 @@ def build_figure(frame=None):
                   borderaxespad=0.5, labelspacing=0.4)
         ax.set_xlabel("Training step")
         ax.set_xticks([1, 10, 20, 30, 40, 50])
-    fig.subplots_adjust(left=0.105, right=0.99, bottom=0.20, top=0.98, wspace=0.20)
+    fig.subplots_adjust(left=0.105, right=0.99, bottom=0.24, top=0.98, wspace=0.20)
     return fig
 
 
