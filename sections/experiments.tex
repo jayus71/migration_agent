@@ -45,7 +45,7 @@ LaDiM completes all 50 MindSpore migrations with 57.4\% fewer tokens than MatchF
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figures/repair_comparison.pdf}
-\caption{Total and per-input token costs for LaDiM and MatchFixAgent on MindSpore migration. Both accept 50/50 tasks; LaDiM uses 57.4\% fewer tokens. (a) Totals include initial translation and subsequent calls grouped by the initial checks. (b) Each bar shows MatchFixAgent tokens minus LaDiM tokens for one distinct source and evaluation input, sorted within each group. Positive values indicate lower LaDiM cost.}
+\caption{Token costs on MindSpore migration. (a) LaDiM, MatchFixAgent, and SWE-agent totals include initial translation and subsequent calls grouped by the initial checks. (b) Each bar shows MatchFixAgent tokens minus LaDiM tokens for one distinct source and evaluation input, sorted within each group. Both methods accept 50/50 tasks; LaDiM uses 57.4\% fewer tokens. Positive values indicate lower LaDiM cost.}
 \label{fig:repair-comparison}
 \end{figure}
 

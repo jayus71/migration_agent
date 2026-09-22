@@ -119,7 +119,7 @@ class PaperFigureLayoutTests(unittest.TestCase):
         self.assertEqual(sum(expected), 6938291)
         self.assertEqual(len(b.patches), 29)
         np.testing.assert_allclose([p.get_height() for p in b.patches], np.array(expected) / 1000)
-        for index, method in enumerate(('ladim', 'matchfix')):
+        for index, method in enumerate(('ladim', 'matchfix', 'swe')):
             self.assertAlmostEqual(sum(p.get_width() for p in a.patches[index*3:index*3+3]),
                                    data['main'][method]['tokens'] / 1e6)
         fig.canvas.draw()

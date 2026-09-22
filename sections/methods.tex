@@ -14,7 +14,7 @@ LaDiM uses dependencies between training computations to guide diagnosis and rep
 
 A migration task $\mathcal T=(P,L_s,F_s,L_t,F_t,W)$ specifies a source program $P$, its language and framework $(L_s,F_s)$, the requested target environment $(L_t,F_t)$, and an editable file scope $W$. Migration produces a target program $\hat P$ that preserves the source's training behavior. The scope can include the translated program, its supporting library, or a repository.
 
-At training step $t$, source and target executions produce corresponding observations $(e_t,v_t,g_t,\theta_{t+1}-\theta_t)$ and $(\hat e_t,\hat v_t,\hat g_t,\hat\theta_{t+1}-\hat\theta_t)$. Here $e_t$ records the execution outcome, including success or an exception, $v_t$ contains selected forward values and losses, $g_t$ contains gradients, and $\theta_t$ denotes the parameters before the update. After aligning corresponding tensors and parameters, we define
+At step $t$, the source produces $(e_t,v_t,g_t,\theta_{t+1}-\theta_t)$, and the target produces $(\hat e_t,\hat v_t,\hat g_t,\hat\theta_{t+1}-\hat\theta_t)$. Here $e_t$ records the execution outcome, including success or an exception, $v_t$ contains selected forward values and losses, $g_t$ contains gradients, and $\theta_t$ denotes the parameters before the update. After aligning corresponding tensors and parameters, we define
 \begin{align}
 d_{\mathrm{execution},t}&=\mathbf{1}[e_t\ne\hat e_t], &
 d_{\mathrm{forward},t}&=v_t-\hat v_t,\\

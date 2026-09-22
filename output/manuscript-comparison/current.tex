@@ -99,7 +99,7 @@ LaDiM uses dependencies between training computations to guide diagnosis and rep
 
 A migration task $\mathcal T=(P,L_s,F_s,L_t,F_t,W)$ specifies a source program $P$, its language and framework $(L_s,F_s)$, the requested target environment $(L_t,F_t)$, and an editable file scope $W$. Migration produces a target program $\hat P$ that preserves the source's training behavior. The scope can include the translated program, its supporting library, or a repository.
 
-At training step $t$, source and target executions produce corresponding observations $(e_t,v_t,g_t,\theta_{t+1}-\theta_t)$ and $(\hat e_t,\hat v_t,\hat g_t,\hat\theta_{t+1}-\hat\theta_t)$. Here $e_t$ records the execution outcome, including success or an exception, $v_t$ contains selected forward values and losses, $g_t$ contains gradients, and $\theta_t$ denotes the parameters before the update. After aligning corresponding tensors and parameters, we define
+At step $t$, the source produces $(e_t,v_t,g_t,\theta_{t+1}-\theta_t)$, and the target produces $(\hat e_t,\hat v_t,\hat g_t,\hat\theta_{t+1}-\hat\theta_t)$. Here $e_t$ records the execution outcome, including success or an exception, $v_t$ contains selected forward values and losses, $g_t$ contains gradients, and $\theta_t$ denotes the parameters before the update. After aligning corresponding tensors and parameters, we define
 \begin{align}
 d_{\mathrm{execution},t}&=\mathbf{1}[e_t\ne\hat e_t], &
 d_{\mathrm{forward},t}&=v_t-\hat v_t,\\
@@ -318,7 +318,7 @@ LaDiM completes all 50 MindSpore migrations with 57.4\% fewer tokens than MatchF
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figures/repair_comparison.pdf}
-\caption{Total and per-input token costs for LaDiM and MatchFixAgent on MindSpore migration. Both accept 50/50 tasks; LaDiM uses 57.4\% fewer tokens. (a) Totals include initial translation and subsequent calls grouped by the initial checks. (b) Each bar shows MatchFixAgent tokens minus LaDiM tokens for one distinct source and evaluation input, sorted within each group. Positive values indicate lower LaDiM cost.}
+\caption{Token costs on MindSpore migration. (a) LaDiM, MatchFixAgent, and SWE-agent totals include initial translation and subsequent calls grouped by the initial checks. (b) Each bar shows MatchFixAgent tokens minus LaDiM tokens for one distinct source and evaluation input, sorted within each group. Both methods accept 50/50 tasks; LaDiM uses 57.4\% fewer tokens. Positive values indicate lower LaDiM cost.}
 \label{fig:repair-comparison}
 \end{figure}
 
@@ -1127,7 +1127,7 @@ The recommendation trajectories show how this final difference develops. Without
 This study uses twelve public model workloads from PyTorch examples, minGPT, and torchvision. They cover image classification, super-resolution, a variational autoencoder, image generation, recurrent and Transformer language models, time series, two policy learning models, graph attention, GPT, and ResNet. Each workload executes three optimization steps. The shared initial translation produces ten nonempty candidates: eight pass the three-seed evaluation, and two fail. The image generator and Transformer language model exhaust their initial output budget without returning code. The failed nonempty candidates, a time series model and ResNet, form the common repair collection for all four methods.
 
 \begin{table}[!htb]
-\caption{Repair of two initially failing native JAX translations from twelve source workloads. Two-task end-to-end tokens include their shared 31,427-token initial translation; full-source tokens include all 139,724 translation tokens. All four methods accept 1/2 repair tasks and 9/12 sources after repair.}
+\caption{Repair of two initially failing native JAX translations from twelve source workloads. End-to-end tokens for the two repair tasks include 31,427 shared translation tokens; costs for all twelve sources include all 139,724 translation tokens. All four methods accept 1/2 repair tasks and 9/12 sources after repair.}
 \label{tab:native-jax}
 \centering
 \small

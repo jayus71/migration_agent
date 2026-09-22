@@ -85,7 +85,7 @@ for the template source, build instructions, and current page count.
 .venv/bin/python figures/make_migration_motivation.py
 .venv/bin/python figures/make_unified_results.py
 .venv/bin/python figures/make_cumulative_components.py
-.venv/bin/python figures/update_overview_labels.py
+.venv/bin/python scripts/summarize_paper_collections.py
 .venv/bin/python -m unittest discover -s tests -p 'test_paper_figure*.py'
 .venv/bin/python -m unittest discover -s tests -p 'test_unified_paper_results.py'
 latexmk -pdf -interaction=nonstopmode -halt-on-error conference_101719.tex
@@ -118,12 +118,14 @@ all six methods on 18 Java/DJL-to-Python/PyTorch tasks.
 The experimental section is organized into Experimental Setup, Main Experiments,
 Analysis Experiments, and Ablation Studies, in `sections/experiments.tex`.
 Main tables report source collections, migration outcomes, natural fault repairs,
-JAX repairs, cumulative training signals, and cumulative agent components.
+JAX repairs and native conversion controls, and three panels of training signals,
+program repair components, and repository components.
 The consolidated migration table covers framework and language migration and
 both repository tasks.
 Analyses explain repair and preservation, per-task cost, retries, detection
 latency, and repair in another target framework. The
-complete component matrices, repository check details, and additional repair protocols are in
+complete component matrices, independent repository ablations, the separate native
+JAX study with twelve sources and two repair tasks, repository checks, and additional repair protocols are in
 `sections/supplementary_experiments.tex`. Answer-guided historical experiments
 remain in the repository archives.
 
@@ -132,14 +134,17 @@ investigation and repair procedure, total model use with signed per-input
 token savings, and training-signal detection beside its analysis. The savings bars show all 29 distinct inputs, sorted
 within initially accepted and initially faulty groups.
 The measured acceptance at one, two, and four submissions remains in the text.
-The overview is a simple placeholder for the author's replacement. Its editable
-PowerPoint and SVG share the same labels and layout; `update_overview_labels.py`
-exports the SVG as a vector PDF and PNG. The compiled manuscript PDF remains
-local and ignored by Git.
+The author maintains the method overview separately; its editable PowerPoint,
+SVG, and exported PDF/PNG are excluded from this content revision. The current
+compiled manuscript has 22 pages, with the main text ending on page 11. This
+revision preserves the approved content without reducing it to the submission
+page limit. The compiled manuscript PDF remains local and ignored by Git.
 
 See [figure inputs and provenance](data/paper_figures/README.md),
 [revision record](docs/paper-revision-20260920.md), and
 [evidence and claims](docs/paper-evidence-and-claims-plan-20260920.md).
+The [September 22 revision record](docs/paper-clarity-execution-20260922.md)
+documents the current manuscript changes, evidence sources, and verification.
 
 ## Re-running experiments
 

@@ -206,7 +206,7 @@ The recommendation trajectories show how this final difference develops. Without
 This study uses twelve public model workloads from PyTorch examples, minGPT, and torchvision. They cover image classification, super-resolution, a variational autoencoder, image generation, recurrent and Transformer language models, time series, two policy learning models, graph attention, GPT, and ResNet. Each workload executes three optimization steps. The shared initial translation produces ten nonempty candidates: eight pass the three-seed evaluation, and two fail. The image generator and Transformer language model exhaust their initial output budget without returning code. The failed nonempty candidates, a time series model and ResNet, form the common repair collection for all four methods.
 
 \begin{table}[!htb]
-\caption{Repair of two initially failing native JAX translations from twelve source workloads. Two-task end-to-end tokens include their shared 31,427-token initial translation; full-source tokens include all 139,724 translation tokens. All four methods accept 1/2 repair tasks and 9/12 sources after repair.}
+\caption{Repair of two initially failing native JAX translations from twelve source workloads. End-to-end tokens for the two repair tasks include 31,427 shared translation tokens; costs for all twelve sources include all 139,724 translation tokens. All four methods accept 1/2 repair tasks and 9/12 sources after repair.}
 \label{tab:native-jax}
 \centering
 \small

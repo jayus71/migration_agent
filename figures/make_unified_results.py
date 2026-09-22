@@ -23,6 +23,7 @@ NATURAL_METHOD = ROOT / 'output/maintext-results-20260918/slim_main.csv'
 NATURAL_BASELINES = ROOT / 'output/maintext-results-20260918/main_comparison.csv'
 REPOSITORY_SIGNALS = ROOT / 'data/paper_figures/repository_training_check_details.json'
 NATURAL_COMPONENTS = ROOT / 'output/maintext-ablations-20260918/recovery_final.json'
+JAX_SUMMARY = ROOT / 'output/maintext-jax-autonomous-20260918/final_analysis/summary.json'
 LABELS = {'ladim': 'LaDiM', 'matchfix': 'MatchFixAgent', 'swe': 'SWE-agent',
           'direct': 'Direct LLM', 'cte': 'CodeTransEngine', 'msadapter': 'MSAdapter',
           'test_repair': 'Test-guided repair'}
@@ -186,7 +187,8 @@ def load_data():
             'tokens': row['known_tokens']})
     output['provenance'] = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                             for p in (AUDIT, SUMMARY, SIGNALS, REPOSITORY_SUMMARY, REPOSITORY_CHECKS,
-                                      REPOSITORY_AUDIT, NATURAL_METHOD, NATURAL_BASELINES, NATURAL_COMPONENTS, REPOSITORY_SIGNALS)}
+                                      REPOSITORY_AUDIT, NATURAL_METHOD, NATURAL_BASELINES, NATURAL_COMPONENTS,
+                                      REPOSITORY_SIGNALS, JAX_SUMMARY)}
     return output
 
 
@@ -277,8 +279,7 @@ def export_tables(data):
         natural.append(f"{label} & {row['repaired']}/5 & {row['retained']}/5 & {row['tokens']/1e6:.3f} & {row['accepted']}/10" + r' \\')
     natural += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_natural_repairs.tex').write_text('\n'.join(natural) + '\n')
-    jax_path = ROOT / 'output/maintext-jax-autonomous-20260918/final_analysis/summary.json'
-    jax_data = json.loads(jax_path.read_text())['summaries']
+    jax_data = json.loads(JAX_SUMMARY.read_text())['summaries']
     jax = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrr@{}}', r'\toprule',
            r'\textbf{Method} & \textbf{LLM calls} & \textbf{LLM tokens} & \textbf{Accepted} \\']
     for group, methods in [
@@ -348,7 +349,7 @@ def build_figure():
                               gridspec_kw={'width_ratios': [1, 1.25]})
     stage_keys = ['translation', 'initially_accepted', 'initially_faulty']
     stage_colors = ['#E2E6E9', '#7BB2C9', BLUE]
-    for y, method in enumerate(('ladim', 'matchfix')):
+    for y, method in enumerate(('ladim', 'matchfix', 'swe')):
         left = 0
         for key, color in zip(stage_keys, stage_colors):
             value = data['cost_stages'][method][key] / 1e6
@@ -356,9 +357,9 @@ def build_figure():
                    edgecolor='white', linewidth=.4)
             left += value
         a.text(left + .35, y, f'{left:.2f}', va='center', fontsize=8)
-    a.set(yticks=range(2), yticklabels=['LaDiM', 'MatchFixAgent'],
-          xlim=(0, 14), ylim=(1.65, -1.85), xlabel='Total tokens (millions)')
-    a.set_xticks([0, 5, 10])
+    a.set(yticks=range(3), yticklabels=['LaDiM', 'MatchFixAgent', 'SWE-agent'],
+          xlim=(0, 24), ylim=(2.55, -1.85), xlabel='Total tokens (millions)')
+    a.set_xticks([0, 10, 20])
     a.set_title('(a) Total tokens', loc='left', fontsize=9, pad=8)
     a.legend(handles=[Patch(facecolor=color, label=label) for color, label in zip(
              stage_colors, ['Initial translation', 'Passes initial checks', 'Needs repair'])],
@@ -401,6 +402,8 @@ def export_figure():
         for suffix in ('pdf', 'png', 'svg'):
             fig.savefig(ROOT / f'figures/repair_comparison.{suffix}', dpi=300,
                         bbox_inches='tight', pad_inches=.02)
+    svg_path = ROOT / 'figures/repair_comparison.svg'
+    svg_path.write_text('\n'.join(line.rstrip() for line in svg_path.read_text().splitlines()) + '\n')
     plt.close(fig)
 
 

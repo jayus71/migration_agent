@@ -27,13 +27,13 @@
     }
   },
   "current": {
-    "base_commit": "d29e94e",
-    "pdf_sha256": "9c40d014efb4e67018771b3e58d33c6152b25aa854ab0410684c46a750fad1e1"
+    "base_commit": "04ea2cf",
+    "pdf_sha256": "84f9558ddcb2b4580bd8fb132112f491aafc6ac7984e7611be9078e2da71a5b2"
   },
-  "updated": "2026-09-22T19:33:05+08:00",
-  "version": "bd22a9ff8ac65f0142c85f4f1411a2b708accbbcc3cf22f0d4986c9ee9be687a",
-  "reading_words_added": 5863,
-  "reading_words_removed": 3206,
+  "updated": "2026-09-22T19:46:37+08:00",
+  "version": "d2463e2b11e47eb8230ef2cf1554f4152bb604417709ea467ac46ded36feff0d",
+  "reading_words_added": 5867,
+  "reading_words_removed": 3207,
   "sections": {
     "Title": {
       "reading": [
@@ -7933,15 +7933,27 @@
         {
           "kind": "equal",
           "before": [
-            "At",
-            "training",
+            "At"
+          ],
+          "after": [
+            "At"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "training"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
             "step",
             "$t$",
             ","
           ],
           "after": [
-            "At",
-            "training",
             "step",
             "$t$",
             ","
@@ -7963,15 +7975,15 @@
             "where"
           ],
           "after": [
+            "the",
             "source",
-            "and",
-            "target",
-            "executions",
-            "produce",
-            "corresponding",
-            "observations",
+            "produces",
             "$(e_t,v_t,g_t,\\theta_{t+1}-\\theta_t)$",
+            ",",
             "and",
+            "the",
+            "target",
+            "produces",
             "$(\\hat",
             "e_t,\\hat",
             "v_t,\\hat",
@@ -11487,9 +11499,45 @@
           "before": [
             "task",
             "specification",
-            "identifies",
+            "identifies"
+          ],
+          "after": [
+            "scope",
+            "can",
+            "include",
             "the",
-            "target",
+            "translated",
+            "program,",
+            "its",
+            "supporting",
+            "library,",
+            "or",
+            "a",
+            "repository.",
+            "At",
+            "step",
+            "$t$,",
+            "the",
+            "source",
+            "produces",
+            "$(e_t,v_t,g_t,\\theta_{t+1}-\\theta_t)$,",
+            "and"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "the",
+            "target"
+          ],
+          "after": [
+            "the",
+            "target"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "environment",
             "and",
             "the",
@@ -11504,51 +11552,12 @@
             "task,",
             "edits",
             "may",
-            "affect"
-          ],
-          "after": [
-            "scope",
-            "can",
-            "include"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "affect",
             "the",
-            "translated"
-          ],
-          "after": [
-            "the",
-            "translated"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "program"
-          ],
-          "after": [
-            "program,",
-            "its",
-            "supporting",
-            "library,"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "translated",
+            "program",
             "or",
-            "a"
-          ],
-          "after": [
-            "or",
-            "a"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "a",
             "library",
             "implementation",
             "it",
@@ -11597,30 +11606,11 @@
             "in",
             "a",
             "common",
-            "format."
-          ],
-          "after": [
-            "repository."
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "format.",
             "At",
             "training",
             "step",
-            "$t$,"
-          ],
-          "after": [
-            "At",
-            "training",
-            "step",
-            "$t$,"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "$t$,",
             "we",
             "write",
             "\\begin{equation}",
@@ -11634,15 +11624,7 @@
             "where"
           ],
           "after": [
-            "source",
-            "and",
-            "target",
-            "executions",
-            "produce",
-            "corresponding",
-            "observations",
-            "$(e_t,v_t,g_t,\\theta_{t+1}-\\theta_t)$",
-            "and",
+            "produces",
             "$(\\hat",
             "e_t,\\hat",
             "v_t,\\hat",
@@ -17342,11 +17324,8 @@
           ]
         },
         {
-          "kind": "replace",
-          "before": [
-            "Token",
-            "use"
-          ],
+          "kind": "insert",
+          "before": [],
           "after": [
             "Reduced",
             "input",
@@ -17390,16 +17369,25 @@
             "acceptance",
             "at",
             "four",
-            "submissions.",
-            "Total",
-            "and",
-            "per-input",
-            "token",
-            "costs",
-            "for",
-            "LaDiM",
-            "and",
-            "MatchFixAgent"
+            "submissions."
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "Token"
+          ],
+          "after": [
+            "Token"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "use"
+          ],
+          "after": [
+            "costs"
           ]
         },
         {
@@ -17434,28 +17422,37 @@
             "collection."
           ],
           "after": [
-            "migration.",
-            "Both",
-            "accept",
-            "50/50",
-            "tasks;",
-            "LaDiM",
-            "uses",
-            "57.4%",
-            "fewer",
-            "tokens."
+            "migration."
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "(a)",
-            "Totals",
+            "(a)"
+          ],
+          "after": [
+            "(a)"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "Totals"
+          ],
+          "after": [
+            "LaDiM,",
+            "MatchFixAgent,",
+            "and",
+            "SWE-agent",
+            "totals"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "include"
           ],
           "after": [
-            "(a)",
-            "Totals",
             "include"
           ]
         },
@@ -17616,6 +17613,16 @@
           ],
           "after": [
             "group.",
+            "Both",
+            "methods",
+            "accept",
+            "50/50",
+            "tasks;",
+            "LaDiM",
+            "uses",
+            "57.4%",
+            "fewer",
+            "tokens.",
             "Positive"
           ]
         },
@@ -24923,30 +24930,23 @@
           "before": [
             "\\begin{figure}[t]",
             "\\centering",
-            "\\includegraphics[width=\\linewidth]{figures/repair_comparison.pdf}"
+            "\\includegraphics[width=\\linewidth]{figures/repair_comparison.pdf}",
+            "\\caption{Token"
           ],
           "after": [
             "\\begin{figure}[t]",
             "\\centering",
-            "\\includegraphics[width=\\linewidth]{figures/repair_comparison.pdf}"
+            "\\includegraphics[width=\\linewidth]{figures/repair_comparison.pdf}",
+            "\\caption{Token"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "\\caption{Token",
             "use"
           ],
           "after": [
-            "\\caption{Total",
-            "and",
-            "per-input",
-            "token",
-            "costs",
-            "for",
-            "LaDiM",
-            "and",
-            "MatchFixAgent"
+            "costs"
           ]
         },
         {
@@ -24981,28 +24981,37 @@
             "collection."
           ],
           "after": [
-            "migration.",
-            "Both",
-            "accept",
-            "50/50",
-            "tasks;",
-            "LaDiM",
-            "uses",
-            "57.4\\%",
-            "fewer",
-            "tokens."
+            "migration."
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "(a)",
-            "Totals",
+            "(a)"
+          ],
+          "after": [
+            "(a)"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "Totals"
+          ],
+          "after": [
+            "LaDiM,",
+            "MatchFixAgent,",
+            "and",
+            "SWE-agent",
+            "totals"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "include"
           ],
           "after": [
-            "(a)",
-            "Totals",
             "include"
           ]
         },
@@ -25163,6 +25172,16 @@
           ],
           "after": [
             "group.",
+            "Both",
+            "methods",
+            "accept",
+            "50/50",
+            "tasks;",
+            "LaDiM",
+            "uses",
+            "57.4\\%",
+            "fewer",
+            "tokens.",
             "Positive"
           ]
         },
@@ -53599,17 +53618,23 @@
             "twelve",
             "source",
             "workloads.",
-            "Two-task",
-            "end-to-end",
+            "End-to-end",
             "tokens",
+            "for",
+            "the",
+            "two",
+            "repair",
+            "tasks",
             "include",
-            "their",
+            "31,427",
             "shared",
-            "31,427-token",
-            "initial",
-            "translation;",
-            "full-source",
-            "tokens",
+            "translation",
+            "tokens;",
+            "costs",
+            "for",
+            "all",
+            "twelve",
+            "sources",
             "include",
             "all",
             "139,724",
@@ -54120,17 +54145,23 @@
             "twelve",
             "source",
             "workloads.",
-            "Two-task",
-            "end-to-end",
+            "End-to-end",
             "tokens",
+            "for",
+            "the",
+            "two",
+            "repair",
+            "tasks",
             "include",
-            "their",
+            "31,427",
             "shared",
-            "31,427-token",
-            "initial",
-            "translation;",
-            "full-source",
-            "tokens",
+            "translation",
+            "tokens;",
+            "costs",
+            "for",
+            "all",
+            "twelve",
+            "sources",
             "include",
             "all",
             "139,724",
