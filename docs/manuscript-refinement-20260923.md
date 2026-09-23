@@ -38,6 +38,8 @@ MatchFixAgent 的算法使用具名函数、条件和 LLM 调用。本稿采用�
 - `test_paper_figure*.py` 15 项和 `test_unified_paper_results.py` 10 项全部通过。
 - 对照检查点，25 张表的数值行完全一致；方法和附录原有公式块完全一致；34 个定量来源、固定基线及用户图形文件哈希不变。
 - `latexmk` 编译成功，23 页，无 overfull 或未定义引用。全页缩略巡检并放大检查摘要、算法、主表、图 3/4、第 10 页及附录表格。官方模板在部分附录页面仍报告 underfull vbox，不影响内容完整性。
-- HTML 固定基线比较随构建刷新。LaTeX 差异稿在论文提交后重建；其最终状态追加到主清单复核日志。
+- HTML 固定基线比较随构建刷新。论文提交 `019411a` 后重建33页 LaTeX 差异稿，编译无警告、越界或未定义引用，已巡检所有差异页。
 
 本轮只修改论文表达和排版，没有运行或扩展实验。中间快照、数值核对及渲染记录位于 `output/manuscript-refinement-20260923/`。
+
+主稿 PDF SHA-256：`8e6b45d58da546c1657212627dbb1164a4ac1fc7f20e4b342d9567a9ac724f4a`。主源码：`48e5cd11d7d7ffcb5b5936362bb7487195811c27e8221de29261d2e793fca4b8`。差异 PDF 的来源提交和完整哈希见 `output/manuscript-latexdiff/manifest.json`。
