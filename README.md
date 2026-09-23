@@ -109,10 +109,11 @@ and links to both PDFs.
 
 The collaboration repository is `../migration_agent_overleaf/`. Its single
 `conference_101719.tex` contains the complete paper, appendices, and table source.
-Keep prose readable with sentence line breaks and approximately 100-character
-source lines. Blank lines create printed paragraphs: use them for explicit
-subheadings and named groups, while keeping continuous discussion within a
-subsection together. Figures and `ref.bib` remain separate supporting assets.
+Keep each prose paragraph on one physical source line, letting the editor wrap
+it for display. Blank lines separate changes of topic or reasoning within a
+section; a paragraph does not need an explicit subheading. Preserve structured
+line breaks in equations, algorithms, and tables. Figures and `ref.bib` remain
+separate supporting assets.
 
 For a PDF with changes marked in the typeset manuscript, install `latexdiff`
 and run:

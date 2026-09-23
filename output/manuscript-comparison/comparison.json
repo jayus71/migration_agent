@@ -27,13 +27,13 @@
     }
   },
   "current": {
-    "base_commit": "aa78f59",
-    "pdf_sha256": "a0ea88a49693e9e61f0fd4cde4caa9f388fdada6f625321f20d75226015b1f19"
+    "base_commit": "ed04673",
+    "pdf_sha256": "8e08c8d132a9e9cbe4df7245d30c6c50c8c18dd5584cae9f8ed75900e845f513"
   },
-  "updated": "2026-09-23T16:21:01+08:00",
-  "version": "3c8876164507a29b8a47e041cf626da78747334e706ea86bd4b9f9548a894157",
-  "reading_words_added": 7819,
-  "reading_words_removed": 4085,
+  "updated": "2026-09-23T17:19:11+08:00",
+  "version": "2ef472fa6ecfcb605d1171fe5efea9fe119b0aa72897d958ced7d8bbd9adedf5",
+  "reading_words_added": 7816,
+  "reading_words_removed": 4087,
   "sections": {
     "Title": {
       "reading": [
@@ -1136,7 +1136,40 @@
         {
           "kind": "equal",
           "before": [
-            "Introduction",
+            "Introduction"
+          ],
+          "after": [
+            "Introduction"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "Total",
+            "tokens",
+            "on",
+            "50",
+            "PyTorch",
+            "to",
+            "MindSpore",
+            "migrations,",
+            "including",
+            "initial",
+            "translation",
+            "and",
+            "all",
+            "subsequent",
+            "calls.",
+            "Labels",
+            "give",
+            "acceptance",
+            "rates."
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "Migrating",
             "deep",
             "learning",
@@ -1217,7 +1250,6 @@
             "."
           ],
           "after": [
-            "Introduction",
             "Migrating",
             "deep",
             "learning",
@@ -1352,37 +1384,10 @@
           ]
         },
         {
-          "kind": "replace",
+          "kind": "delete",
           "before": [
-            "Loss"
-          ],
-          "after": [
-            "Total",
-            "token",
-            "costs",
-            "for",
-            "migration",
-            "from",
-            "PyTorch",
-            "to",
-            "MindSpore,",
-            "including",
-            "initial",
-            "translation"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "and"
-          ],
-          "after": [
-            "and"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "Loss",
+            "and",
             "gradient",
             "differences",
             "(a)",
@@ -1405,32 +1410,8 @@
             "(a)",
             "and",
             "suppress",
-            "part"
-          ],
-          "after": [
-            "all",
-            "subsequent",
-            "LLM",
-            "calls.",
-            "Labels",
-            "give",
-            "accepted",
-            "tasks",
-            "out"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "of"
-          ],
-          "after": [
-            "of"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "part",
+            "of",
             "the",
             "parameter",
             "update",
@@ -1476,9 +1457,7 @@
             "shows",
             "ranges."
           ],
-          "after": [
-            "50."
-          ]
+          "after": []
         },
         {
           "kind": "equal",
@@ -3405,7 +3384,32 @@
           "kind": "insert",
           "before": [],
           "after": [
-            "{\\hyphenpenalty=10000\\emergencystretch=1em"
+            "{\\hyphenpenalty=10000\\emergencystretch=1em",
+            "\\begin{wrapfigure}{r}{0.43\\textwidth}",
+            "\\vspace{-\\intextsep}",
+            "\\centering",
+            "\\includegraphics[width=\\linewidth]{figures/migration_motivation.pdf}",
+            "\\caption{Total",
+            "tokens",
+            "on",
+            "50",
+            "PyTorch",
+            "to",
+            "MindSpore",
+            "migrations,",
+            "including",
+            "initial",
+            "translation",
+            "and",
+            "all",
+            "subsequent",
+            "calls.",
+            "Labels",
+            "give",
+            "acceptance",
+            "rates.}",
+            "\\label{fig:migration-motivation}",
+            "\\end{wrapfigure}"
           ]
         },
         {
@@ -3613,57 +3617,13 @@
           ]
         },
         {
-          "kind": "replace",
+          "kind": "delete",
           "before": [
-            "\\begin{figure}[t]"
-          ],
-          "after": [
-            "\\begin{wrapfigure}{r}{0.44\\textwidth}"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "\\centering"
-          ],
-          "after": [
-            "\\centering"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "\\begin{figure}[t]",
+            "\\centering",
             "\\includegraphics[width=\\linewidth]{figures/gradient_drift.pdf}",
-            "\\caption{Loss"
-          ],
-          "after": [
-            "\\includegraphics[width=\\linewidth]{figures/migration_motivation.pdf}",
-            "\\caption{Total",
-            "token",
-            "costs",
-            "for",
-            "migration",
-            "from",
-            "PyTorch",
-            "to",
-            "MindSpore,",
-            "including",
-            "initial",
-            "translation"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "and"
-          ],
-          "after": [
-            "and"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "\\caption{Loss",
+            "and",
             "gradient",
             "differences",
             "(a)",
@@ -3686,32 +3646,8 @@
             "(a)",
             "and",
             "suppress",
-            "part"
-          ],
-          "after": [
-            "all",
-            "subsequent",
-            "LLM",
-            "calls.",
-            "Labels",
-            "give",
-            "accepted",
-            "tasks",
-            "out"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "of"
-          ],
-          "after": [
-            "of"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "part",
+            "of",
             "the",
             "parameter",
             "update",
@@ -3758,11 +3694,7 @@
             "\\label{fig:gradient-drift}",
             "\\end{figure}"
           ],
-          "after": [
-            "50.}",
-            "\\label{fig:migration-motivation}",
-            "\\end{wrapfigure}"
-          ]
+          "after": []
         },
         {
           "kind": "equal",
