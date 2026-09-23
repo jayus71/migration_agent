@@ -27,12 +27,12 @@
     }
   },
   "current": {
-    "base_commit": "56f1d82",
-    "pdf_sha256": "8e08c8d132a9e9cbe4df7245d30c6c50c8c18dd5584cae9f8ed75900e845f513"
+    "base_commit": "9808210",
+    "pdf_sha256": "04121c3ed5e0d385c60e86d1b4fdfd8ed5d67585520630d2d7ac37c9d35bcb4f"
   },
-  "updated": "2026-09-23T17:21:38+08:00",
-  "version": "2ef472fa6ecfcb605d1171fe5efea9fe119b0aa72897d958ced7d8bbd9adedf5",
-  "reading_words_added": 7816,
+  "updated": "2026-09-23T17:49:37+08:00",
+  "version": "44767fabdc4d7de078e70e5977fb8559d90e9af508e998dbbe66c3bed784d2e5",
+  "reading_words_added": 7826,
   "reading_words_removed": 4087,
   "sections": {
     "Title": {
@@ -22131,6 +22131,9 @@
             "feedback"
           ],
           "after": [
+            "(a)",
+            "Training",
+            "signals",
             "Feedback"
           ]
         },
@@ -22279,6 +22282,13 @@
           ],
           "after": [
             "3,418,960",
+            "(b)",
+            "Repair",
+            "history",
+            "and",
+            "independent",
+            "evidence",
+            "handoff",
             "Condition"
           ]
         },
@@ -24439,18 +24449,17 @@
           "kind": "equal",
           "before": [
             "\\label{tab:main-results}",
-            "\\centering",
-            "\\small"
+            "\\centering"
           ],
           "after": [
             "\\label{tab:main-results}",
-            "\\centering",
-            "\\small"
+            "\\centering"
           ]
         },
         {
           "kind": "replace",
           "before": [
+            "\\small",
             "\\setlength{\\tabcolsep}{5pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrr@{}}"
           ],
@@ -24463,7 +24472,7 @@
             "to",
             "MindSpore}\\par\\smallskip",
             "\\setlength{\\tabcolsep}{2pt}",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{2.3cm}rrr@{}}"
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{2.8cm}rrr@{}}"
           ]
         },
         {
@@ -24870,7 +24879,7 @@
             "to",
             "Python/PyTorch}\\par\\smallskip",
             "\\setlength{\\tabcolsep}{2pt}",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{2.3cm}rrr@{}}",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{2.8cm}rrr@{}}",
             "\\toprule",
             "\\textbf{Method}"
           ]
@@ -25785,7 +25794,6 @@
           "after": [
             "\\par\\smallskip",
             "\\begin{minipage}{\\linewidth}",
-            "\\footnotesize",
             "MatchFixAgent",
             "passes",
             "0/10",
@@ -28266,18 +28274,17 @@
           "kind": "equal",
           "before": [
             "\\label{tab:natural-repairs}",
-            "\\centering",
-            "\\small"
+            "\\centering"
           ],
           "after": [
             "\\label{tab:natural-repairs}",
-            "\\centering",
-            "\\small"
+            "\\centering"
           ]
         },
         {
           "kind": "replace",
           "before": [
+            "\\small",
             "\\setlength{\\tabcolsep}{4pt}"
           ],
           "after": [
@@ -29523,7 +29530,6 @@
             "removed.}",
             "\\label{tab:jax}",
             "\\centering",
-            "\\small",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrr@{}}",
             "\\toprule",
             "&",
@@ -30279,27 +30285,26 @@
         {
           "kind": "equal",
           "before": [
-            "\\centering",
-            "\\small"
+            "\\centering"
           ],
           "after": [
-            "\\centering",
-            "\\small"
+            "\\centering"
           ]
         },
         {
           "kind": "replace",
           "before": [
+            "\\small",
             "\\setlength{\\tabcolsep}{4pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrr@{}}"
           ],
           "after": [
-            "\\setlength{\\tabcolsep}{2pt}",
-            "\\begin{minipage}[t]{0.485\\linewidth}",
+            "\\setlength{\\tabcolsep}{1.75pt}",
+            "\\begin{minipage}[t]{0.495\\linewidth}",
             "\\vspace{0pt}",
-            "\\raggedright\\textit{(a)",
+            "\\parbox[t][2\\baselineskip][t]{\\linewidth}{\\raggedright\\textit{(a)",
             "Training",
-            "signals}\\par\\smallskip",
+            "signals}}\\par\\smallskip",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrr@{}}"
           ]
         },
@@ -30503,15 +30508,15 @@
           "before": [],
           "after": [
             "\\end{minipage}\\hfill",
-            "\\begin{minipage}[t]{0.485\\linewidth}",
+            "\\begin{minipage}[t]{0.495\\linewidth}",
             "\\vspace{0pt}",
-            "\\raggedright\\textit{(b)",
+            "\\parbox[t][2\\baselineskip][t]{\\linewidth}{\\raggedright\\textit{(b)",
             "Repair",
             "history",
             "and",
             "independent",
             "evidence",
-            "handoff}\\par\\smallskip",
+            "handoff}}\\par\\smallskip",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrr@{}}",
             "\\toprule",
             "\\textbf{Condition}",
@@ -30612,7 +30617,6 @@
             "\\end{tabular*}",
             "\\par\\smallskip",
             "\\begin{minipage}{\\linewidth}",
-            "\\footnotesize",
             "Tokens",
             "are",
             "reported",
@@ -41531,7 +41535,6 @@
             "counts.}",
             "\\label{tab:collections}",
             "\\centering",
-            "\\small",
             "\\setlength{\\tabcolsep}{3pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{3.1cm}>{\\raggedright\\arraybackslash}p{3.1cm}>{\\raggedright\\arraybackslash}p{4.9cm}r@{}}",
             "\\toprule",
@@ -42682,7 +42685,6 @@
             "collection.}",
             "\\label{tab:program-costs}",
             "\\centering",
-            "\\small",
             "\\setlength{\\tabcolsep}{3pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrr@{}}",
             "\\toprule",
@@ -48432,15 +48434,7 @@
             "subsequent",
             "calls.}",
             "\\label{tab:components}",
-            "\\centering",
-            "\\small",
-            "\\setlength{\\tabcolsep}{4pt}",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrr@{}}",
-            "\\toprule",
-            "\\textbf{Setting}",
-            "&",
-            "\\textbf{Accepted}",
-            "&"
+            "\\centering"
           ],
           "after": [
             "include",
@@ -48451,8 +48445,28 @@
             "subsequent",
             "calls.}",
             "\\label{tab:components}",
-            "\\centering",
-            "\\small",
+            "\\centering"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "\\small"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "\\setlength{\\tabcolsep}{4pt}",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrr@{}}",
+            "\\toprule",
+            "\\textbf{Setting}",
+            "&",
+            "\\textbf{Accepted}",
+            "&"
+          ],
+          "after": [
             "\\setlength{\\tabcolsep}{4pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrr@{}}",
             "\\toprule",
@@ -48591,9 +48605,7 @@
             "\\bottomrule",
             "\\end{tabular*}",
             "\\par\\vspace{3pt}",
-            "\\begin{minipage}{\\linewidth}",
-            "\\footnotesize",
-            "$\\dagger$"
+            "\\begin{minipage}{\\linewidth}"
           ],
           "after": [
             "&",
@@ -48642,8 +48654,22 @@
             "\\bottomrule",
             "\\end{tabular*}",
             "\\par\\vspace{3pt}",
-            "\\begin{minipage}{\\linewidth}",
-            "\\footnotesize",
+            "\\begin{minipage}{\\linewidth}"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "\\footnotesize"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "$\\dagger$"
+          ],
+          "after": [
             "$\\dagger$"
           ]
         },
@@ -49449,14 +49475,26 @@
           "kind": "equal",
           "before": [
             "\\label{tab:natural-components}",
-            "\\centering",
-            "\\small",
-            "\\setlength{\\tabcolsep}{3pt}"
+            "\\centering"
           ],
           "after": [
             "\\label{tab:natural-components}",
-            "\\centering",
-            "\\small",
+            "\\centering"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "\\small"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "\\setlength{\\tabcolsep}{3pt}"
+          ],
+          "after": [
             "\\setlength{\\tabcolsep}{3pt}"
           ]
         },
@@ -56553,18 +56591,17 @@
           "kind": "equal",
           "before": [
             "\\label{tab:repository-costs}",
-            "\\centering",
-            "\\small"
+            "\\centering"
           ],
           "after": [
             "\\label{tab:repository-costs}",
-            "\\centering",
-            "\\small"
+            "\\centering"
           ]
         },
         {
           "kind": "replace",
           "before": [
+            "\\small",
             "\\setlength{\\tabcolsep}{3pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrr@{}}"
           ],
@@ -58553,8 +58590,23 @@
           "kind": "equal",
           "before": [
             "\\label{tab:repository-checks}",
-            "\\centering",
-            "\\small",
+            "\\centering"
+          ],
+          "after": [
+            "\\label{tab:repository-checks}",
+            "\\centering"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "\\small"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
             "\\setlength{\\tabcolsep}{4pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrr@{}}",
             "\\toprule",
@@ -58569,9 +58621,6 @@
             "\\midrule"
           ],
           "after": [
-            "\\label{tab:repository-checks}",
-            "\\centering",
-            "\\small",
             "\\setlength{\\tabcolsep}{4pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrr@{}}",
             "\\toprule",
@@ -62628,7 +62677,6 @@
             "row.}",
             "\\label{tab:repository-cumulative-full}",
             "\\centering",
-            "\\small",
             "\\setlength{\\tabcolsep}{3pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{5.4cm}rrrrrr@{}}",
             "\\toprule",
@@ -63001,7 +63049,6 @@
             "translation.}",
             "\\label{tab:repository-independent}",
             "\\centering",
-            "\\small",
             "\\setlength{\\tabcolsep}{3pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{5.4cm}rrrrrr@{}}",
             "\\toprule",
@@ -64199,7 +64246,6 @@
             "counts.}",
             "\\label{tab:native-jax}",
             "\\centering",
-            "\\small",
             "\\setlength{\\tabcolsep}{3pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrr@{}}",
             "\\toprule",

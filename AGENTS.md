@@ -34,6 +34,19 @@ a plan first. Every manuscript delivery must update the register's review log.
 
 ## Writing
 
+In prose source, break lines between complete sentences. Keep long sentences
+intact and preserve logical paragraph breaks; do not put a whole paragraph on
+one source line or hard-wrap sentences to a fixed width.
+
+Keep the official ICLR style files byte-for-byte identical to the package
+linked by the current Author Guidelines. Do not redefine the template's page
+dimensions, body font sizes, or line spacing. The 2027 formatting instructions
+prohibit font-size changes and give no algorithm exception; keep pseudocode at
+the default size unless the official rules explicitly change.
+Do not treat absence from the official example TeX as a prohibition. Preserve
+permitted URL wrapping, local hyphenation, pagination, and figure/table layout
+controls. Follow explicit user preferences for optional hyperlink styling.
+
 Use clear paragraphs with one main point each. State the point early, use
 concrete subjects and verbs, and prefer active voice. Use lists when the items
 need comparison or have an explicit order. Avoid nested lists, filler,

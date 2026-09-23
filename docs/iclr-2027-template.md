@@ -38,7 +38,8 @@ translations, and two separate repository context and structural analysis pairs.
 The first two panels sit side by side; each repository component occupies one
 row with separate without/with columns. The JAX table groups method columns by
 LLM repair or native conversion. Appendix repository ablations use shared condition
-rows and separate columns for both repositories. These tables use 9-point text.
+rows and separate columns for both repositories. These tables use the template's
+default 10-point text following the September 23 formatting review.
 Figure 3 shows stacked total tokens for LaDiM, MatchFixAgent, and SWE-agent beside
 29 signed per-input token savings bars for the LaDiM/MatchFixAgent pair, sorted
 within the two initial-check groups.
@@ -55,7 +56,7 @@ component matrices for the common collection and natural faults, repository
 checks and costs, context reconstruction details, complete repository component
 results, and the separate native JAX study with consecutive training steps.
 
-The compiled PDF has 23 pages. The main text ends on page 10, references begin on
+The compiled PDF has 24 pages. The main text ends on page 10, references begin on
 page 11, and the appendix starts on page 14. The official style, margins, body font,
 and line spacing are unchanged. The user authorized horizontal table organization
 after the content revision, preserving the prose and evidence. Further compression
@@ -65,3 +66,34 @@ The AI use statement remains blank for the authors to complete.
 The [revision record](paper-clarity-execution-20260922.md) lists evidence sources and the
 data, layout, compilation, and visual checks. This revision uses completed
 experiments and makes no model calls.
+
+## Official-file and main-TeX audit (2026-09-23)
+
+The [Author Guidelines](https://iclr.cc/Conferences/2027/AuthorGuidelines) link
+the [official archive](https://media.iclr.cc/Conferences/ICLR2027/iclr-2027-style-files.zip).
+A fresh download on September 23 has SHA-256
+`0d940dfa9398ae99a18f24a85a8a683f367204b6af6d17d2899e60a67102529e`.
+The four style files listed above are byte-for-byte identical to that archive
+in both the source and Overleaf repositories. Their Git history contains the
+official-template import (`f77519b`) and no later edits.
+
+The main TeX is also checked. `hidelinks` was an extra hyperlink option and is
+removed at the user's request; the official example loads `hyperref` without
+options. The user clarified that settings absent from the example are allowed
+unless prohibited. URL line breaking, local hyphenation controls, pagination
+guards, and figure/table placement are consequently retained. No page dimensions,
+font-size definitions, paragraph spacing, or line-spacing definitions are
+overridden in the main TeX or included sections.
+
+The official example's [Final instructions](https://github.com/ICLR/Master-Template/blob/master/iclr2027/iclr2027_conference.tex#L318-L323)
+say not to change font sizes, with a possible exception for references. It gives
+no algorithm-specific exception. This revision therefore keeps pseudocode at
+the default size and removes local reductions from tables and table notes.
+Table widths and column spacing accommodate the default 10-point text without
+changing data. The official style definitions remain untouched.
+
+The body still ends on page 10; the initial-submission limit is nine pages.
+Page-count reduction remains a content/layout task rather than a reason to
+change the template. The AI use statement remains reserved for the author as
+previously instructed. These outstanding submission tasks are separate from the
+byte-level template verification.

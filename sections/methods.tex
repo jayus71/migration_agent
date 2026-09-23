@@ -1,26 +1,47 @@
 \section{Methods}
 \label{sec:method}
-LaDiM uses dependencies between training computations to guide diagnosis and repair. The Translator first produces a candidate in the requested language and framework. The Verifier Agent investigates discrepancies between source and target executions and passes its findings and supporting observations to a separate Repair Agent. The Repair Agent tests these hypotheses and revises the candidate. The Orchestrator schedules their work and returns verification results after each submission to guide further repair. Figure~\ref{fig:architecture} shows this process.
+LaDiM uses dependencies between training computations to guide diagnosis and repair.
+The Translator first produces a candidate in the requested language and framework.
+The Verifier Agent investigates discrepancies between source and target executions and passes its findings and supporting observations to a separate Repair Agent.
+The Repair Agent tests these hypotheses and revises the candidate.
+The Orchestrator schedules their work and returns verification results after each submission to guide further repair.
+Figure~\ref{fig:architecture} shows this process.
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{figures/hierarchical_feedback_architecture.pdf}
-\caption{LaDiM's migration workflow. The Translator generates a candidate, the Verifier Agent investigates code and training observations, and the Repair Agent receives the evidence and revises the candidate. The Orchestrator schedules their work, checks submissions, and returns measurements.}
+\caption{LaDiM's migration workflow.
+The Translator generates a candidate, the Verifier Agent investigates code and training observations, and the Repair Agent receives the evidence and revises the candidate.
+The Orchestrator schedules their work, checks submissions, and returns measurements.}
 \label{fig:architecture}
 \end{figure}
 
 \subsection{Preliminary}
-A migration task $\mathcal T=(P,L_s,F_s,L_t,F_t,W)$ specifies a source program $P$, its language and framework $(L_s,F_s)$, the requested target environment $(L_t,F_t)$, and an editable file scope $W$. Migration produces a target program $\hat P$ that preserves the source's training behavior. The scope can include the translated program, its supporting library, or a repository. An edit modifies code within $W$.
+A migration task $\mathcal T=(P,L_s,F_s,L_t,F_t,W)$ specifies a source program $P$, its language and framework $(L_s,F_s)$, the requested target environment $(L_t,F_t)$, and an editable file scope $W$.
+Migration produces a target program $\hat P$ that preserves the source's training behavior.
+The scope can include the translated program, its supporting library, or a repository.
+An edit modifies code within $W$.
 
-At step $t$, we record source observations $(e_t,v_t,g_t,\theta_{t+1}-\theta_t)$ and target observations $(\hat e_t,\hat v_t,\hat g_t,\hat\theta_{t+1}-\hat\theta_t)$, with numerical values recorded when available. Here $e_t$ records the execution outcome, including success or an exception, $v_t$ contains selected forward values and losses, $g_t$ contains gradients, and $\theta_t$ denotes the parameters before the update. After aligning corresponding tensors and parameters, we define
+At step $t$, we record source observations $(e_t,v_t,g_t,\theta_{t+1}-\theta_t)$ and target observations $(\hat e_t,\hat v_t,\hat g_t,\hat\theta_{t+1}-\hat\theta_t)$, with numerical values recorded when available.
+Here $e_t$ records the execution outcome, including success or an exception, $v_t$ contains selected forward values and losses, $g_t$ contains gradients, and $\theta_t$ denotes the parameters before the update.
+After aligning corresponding tensors and parameters, we define
 \begin{align}
 d_{\mathrm{execution},t}&=\mathbf{1}[e_t\ne\hat e_t], &
 d_{\mathrm{forward},t}&=v_t-\hat v_t,\\
 d_{\mathrm{gradient},t}&=g_t-\hat g_t, &
 d_{\mathrm{update},t}&=(\theta_{t+1}-\theta_t)-(\hat\theta_{t+1}-\hat\theta_t).
 \end{align}
-For a numerical comparison $d=x-\hat x$, $d\simeq0$ denotes agreement within its tolerance, such as $|d_j|\leq\alpha+\beta|x_j|$ for absolute tolerance $\alpha$ and relative tolerance $\beta$, or a specified norm bound. Forward values determine the loss, differentiation produces the gradients, and the optimizer uses those gradients and its state to update parameters. The updated parameters then affect subsequent forward computations.
+For a numerical comparison $d=x-\hat x$, $d\simeq0$ denotes agreement within its tolerance, such as $|d_j|\leq\alpha+\beta|x_j|$ for absolute tolerance $\alpha$ and relative tolerance $\beta$, or a specified norm bound.
+Forward values determine the loss, differentiation produces the gradients, and the optimizer uses those gradients and its state to update parameters.
+The updated parameters then affect subsequent forward computations.
 
-The LLM $M$ performs translation, investigation, and repair under role instructions $A_T$, $A_V$, and $A_R$. The Orchestrator $\mathcal O$ evaluates candidates and manages their shared investigation and repair budget $B$. In the algorithms, $S.\hat P$ is the candidate, $S.m$ contains its measurements, $q$ is its verification status, and $H$ is a conversation. Context $C$ retains evidence and provides tools; for repository tasks, it also stores the dependency plan and local check results. A submission sends the complete candidate for external verification after a repair stage that can contain several LLM calls, tests, and edits. Each $\textsc{LLMCall}(M,A,H,b,B)$ invokes $M$ with instructions $A$ and conversation $H$, charging its usage to the stage allowance $b$ and shared budget $B$. The Orchestrator counts each submission against $B$.
+The LLM $M$ performs translation, investigation, and repair under role instructions $A_T$, $A_V$, and $A_R$.
+The Orchestrator $\mathcal O$ evaluates candidates and manages their shared investigation and repair budget $B$.
+In the algorithms, $S.\hat P$ is the candidate, $S.m$ contains its measurements, $q$ is its verification status, and $H$ is a conversation.
+Context $C$ retains evidence and provides tools; for repository tasks, it also stores the dependency plan and local check results.
+A submission sends the complete candidate for external verification after a repair stage that can contain several LLM calls, tests, and edits.
+Each $\textsc{LLMCall}(M,A,H,b,B)$ invokes $M$ with instructions $A$ and conversation $H$, charging its usage to the stage allowance $b$ and shared budget $B$.
+The Orchestrator counts each submission against $B$.
+
 \Needspace{16\baselineskip}
 
 \subsection{Verifier Agent with Layered Diagnosis}
@@ -56,9 +77,22 @@ The LLM $M$ performs translation, investigation, and repair under role instructi
 \end{algorithm}
 \end{minipage}
 \end{wrapfigure}
-The Verifier Agent receives the Translator Agent's candidate and the Orchestrator's measurements. It uses Layered Diagnosis to focus its investigation on the computations responsible for observed discrepancies. For an \textbf{execution discrepancy} ($d_{\mathrm{execution},t}=1$), it inspects the exception and the calls that produced it. For a \textbf{forward discrepancy} ($d_{\mathrm{forward},t}\not\simeq0$), it traces the operators that produce different values and tests the suspected computation. When forward values agree but a \textbf{gradient discrepancy} ($d_{\mathrm{gradient},t}\not\simeq0$) remains, it examines parameter registration and the path from the parameters to the loss. When both forward values and gradients agree, it investigates an \textbf{update discrepancy} ($d_{\mathrm{update},t}\not\simeq0$) through the optimizer's rule and state. The first step with an observed discrepancy further guides this investigation because a changed update can alter later forward computations. The LLM selects code inspections and tests that distinguish possible causes, then records the code locations and observations supporting its hypotheses. These records form the evidence for the independent handoff to the Repair Agent.
+The Verifier Agent receives the Translator Agent's candidate and the Orchestrator's measurements.
+It uses Layered Diagnosis to focus its investigation on the computations responsible for observed discrepancies.
+For an \textbf{execution discrepancy} ($d_{\mathrm{execution},t}=1$), it inspects the exception and the calls that produced it.
+For a \textbf{forward discrepancy} ($d_{\mathrm{forward},t}\not\simeq0$), it traces the operators that produce different values and tests the suspected computation.
+When forward values agree but a \textbf{gradient discrepancy} ($d_{\mathrm{gradient},t}\not\simeq0$) remains, it examines parameter registration and the path from the parameters to the loss.
+When both forward values and gradients agree, it investigates an \textbf{update discrepancy} ($d_{\mathrm{update},t}\not\simeq0$) through the optimizer's rule and state.
+The first step with an observed discrepancy further guides this investigation because a changed update can alter later forward computations.
+The LLM selects code inspections and tests that distinguish possible causes, then records the code locations and observations supporting its hypotheses.
+These records form the evidence for the independent handoff to the Repair Agent.
 
-Algorithm~\ref{alg:diagnose} expresses this reasoning through the training dependency relation $\mathcal D$, where $\Delta\theta_t=\theta_{t+1}-\theta_t$. The symbols $\ell$ and $h$ summarize the LLM's choice of computation and hypothesized cause within a call, and $a$ is its tool request or completion response. The Verifier uses both agreement and disagreement between layers to select $\ell$, then tests $h$ against code and execution evidence. The shared \textsc{ToolFeedback} operation executes requests in order and adds their results to the conversation. During investigation, the Verifier Agent can create and run scratch tests while candidate and supporting library code remain unchanged.\par}
+Algorithm~\ref{alg:diagnose} expresses this reasoning through the training dependency relation $\mathcal D$, where $\Delta\theta_t=\theta_{t+1}-\theta_t$.
+The symbols $\ell$ and $h$ summarize the LLM's choice of computation and hypothesized cause within a call, and $a$ is its tool request or completion response.
+The Verifier uses both agreement and disagreement between layers to select $\ell$, then tests $h$ against code and execution evidence.
+The shared \textsc{ToolFeedback} operation executes requests in order and adds their results to the conversation.
+During investigation, the Verifier Agent can create and run scratch tests while candidate and supporting library code remain unchanged.\par}
+
 \Needspace{4\baselineskip}
 
 \subsection{Repair Agent with Evidence Handoff and History}
@@ -66,7 +100,9 @@ Algorithm~\ref{alg:diagnose} expresses this reasoning through the training depen
 % Keep wrapping local to this subsection.
 {
 
-Independent evidence handoff gives the Repair Agent the Verifier Agent's recorded code observations, test results, and hypotheses, identified as the Verifier Agent's findings. The Repair Agent reassesses this evidence, runs further tests, and edits files in $W$, including supporting library code when the task permits it. The Orchestrator verifies each submission and returns the remaining discrepancies to guide the Repair Agent's next investigation and edits.
+Independent evidence handoff gives the Repair Agent the Verifier Agent's recorded code observations, test results, and hypotheses, identified as the Verifier Agent's findings.
+The Repair Agent reassesses this evidence, runs further tests, and edits files in $W$, including supporting library code when the task permits it.
+The Orchestrator verifies each submission and returns the remaining discrepancies to guide the Repair Agent's next investigation and edits.
 \Needspace{18\baselineskip}
 \begin{wrapfigure}{l}{0.55\textwidth}
 \begin{minipage}{\linewidth}
@@ -93,19 +129,39 @@ Independent evidence handoff gives the Repair Agent the Verifier Agent's recorde
 \end{algorithm}
 \end{minipage}
 \end{wrapfigure}
-Repair history preserves earlier edits, observations, and hypotheses across attempts. The continuing conversation includes failed tests and verification feedback, allowing the agent to relate a changed result to the preceding modification and revise explanations that did not resolve the fault. The current candidate also persists, so later attempts build on applied changes.
+Repair history preserves earlier edits, observations, and hypotheses across attempts.
+The continuing conversation includes failed tests and verification feedback, allowing the agent to relate a changed result to the preceding modification and revise explanations that did not resolve the fault.
+The current candidate also persists, so later attempts build on applied changes.
 
-Algorithm~\ref{alg:repair} reuses \textsc{ToolFeedback} from Algorithm~\ref{alg:diagnose}, with $H\mathbin{\|}x$ denoting the addition of a record $x$ to the repair history. Its \textsc{RepairComplete} condition requires a completion response, an applied edit in the current stage, and a test executed after the last edit. If an edit or test is missing, the conversation requests that action within the remaining budget. The Orchestrator evaluates the candidate when the repair stage ends.\par}
+Algorithm~\ref{alg:repair} reuses \textsc{ToolFeedback} from Algorithm~\ref{alg:diagnose}, with $H\mathbin{\|}x$ denoting the addition of a record $x$ to the repair history.
+Its \textsc{RepairComplete} condition requires a completion response, an applied edit in the current stage, and a test executed after the last edit.
+If an edit or test is missing, the conversation requests that action within the remaining budget.
+The Orchestrator evaluates the candidate when the repair stage ends.\par}
 
 \subsection{Repository Coordination}
 \label{sec:repository-method}
-A change to a shared implementation can affect several callers in a repository. Repository context management retains the dependency plan, relevant code observations, and investigation evidence across files and conversations. It combines Repository Structural Analysis, Repair Dependency Graph Planning, notebook tools with edit validation, an archive of evidence associated with code versions, and context reconstruction.
+A change to a shared implementation can affect several callers in a repository.
+Repository context management retains the dependency plan, relevant code observations, and investigation evidence across files and conversations.
+It combines Repository Structural Analysis, Repair Dependency Graph Planning, notebook tools with edit validation, an archive of evidence associated with code versions, and context reconstruction.
 
-Through Repository Structural Analysis, the agent can inspect the repository's files, imports, function and class definitions, and notebook structure on demand. The agent uses Repair Dependency Graph Planning to group related target files into work units, each with a repair goal and selected tests, and organize their prerequisites as a directed acyclic graph. It selects a unit whose prerequisite units have valid local checks, then edits the files assigned to it. For each unit, LaDiM records the results of syntax checks and the tests selected in the plan. Changes to target files or the dependency plan invalidate the checks for affected units and their dependents in the plan, prompting the agent to check the corresponding files again. The Orchestrator evaluates the complete repository, including its entry points and training computations, to determine acceptance.
+Through Repository Structural Analysis, the agent can inspect the repository's files, imports, function and class definitions, and notebook structure on demand.
+The agent uses Repair Dependency Graph Planning to group related target files into work units, each with a repair goal and selected tests, and organize their prerequisites as a directed acyclic graph.
+It selects a unit whose prerequisite units have valid local checks, then edits the files assigned to it.
+For each unit, LaDiM records the results of syntax checks and the tests selected in the plan.
+Changes to target files or the dependency plan invalidate the checks for affected units and their dependents in the plan, prompting the agent to check the corresponding files again.
+The Orchestrator evaluates the complete repository, including its entry points and training computations, to determine acceptance.
 
-Notebook tools let the agent inspect and revise code cells while checking that edits preserve valid syntax. The evidence archive retains code observations, measurements, hypotheses, and conversations with their code versions, and supports retrieval of relevant records. The \textsc{PrepareContext} operation rebuilds the conversation around the current plan, findings, and measurements when evidence passes to the Repair Agent, work shifts to another unit, or the conversation approaches its capacity. It restores relevant observations from earlier code reads when the corresponding files remain unchanged.
+Notebook tools let the agent inspect and revise code cells while checking that edits preserve valid syntax.
+The evidence archive retains code observations, measurements, hypotheses, and conversations with their code versions, and supports retrieval of relevant records.
+The \textsc{PrepareContext} operation rebuilds the conversation around the current plan, findings, and measurements when evidence passes to the Repair Agent, work shifts to another unit, or the conversation approaches its capacity.
+It restores relevant observations from earlier code reads when the corresponding files remain unchanged.
 
-Algorithm~\ref{alg:repository} connects this context to Algorithms~\ref{alg:diagnose} and~\ref{alg:repair}. Here $C.G$ is the work dependency graph, $C.Q$ stores local check results, and $C.E$ archives evidence. The \textsc{UpdateDependencyGraph} operation applies Repair Dependency Graph Planning. The \textsc{Execute} operation dispatches unit selection, file or notebook operations, tests, and evidence retrieval. These tools update the shared state $S$ and context $C$, returning observations $o$ and the units $U$ affected by changes to files or the plan. All work units share the repository files, repair history, and total budget.
+Algorithm~\ref{alg:repository} connects this context to Algorithms~\ref{alg:diagnose} and~\ref{alg:repair}.
+Here $C.G$ is the work dependency graph, $C.Q$ stores local check results, and $C.E$ archives evidence.
+The \textsc{UpdateDependencyGraph} operation applies Repair Dependency Graph Planning.
+The \textsc{Execute} operation dispatches unit selection, file or notebook operations, tests, and evidence retrieval.
+These tools update the shared state $S$ and context $C$, returning observations $o$ and the units $U$ affected by changes to files or the plan.
+All work units share the repository files, repair history, and total budget.
 \begin{algorithm}[!htb]
 \caption{Repository migration and repair coordination}
 \label{alg:repository}

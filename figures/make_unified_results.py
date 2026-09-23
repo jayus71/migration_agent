@@ -364,7 +364,7 @@ def export_compact_tables(data):
         compact += [r'\begin{minipage}[t]{0.485\linewidth}', r'\vspace{0pt}',
                     r'\raggedright\textit{' + title + r'}\par\smallskip',
                     r'\setlength{\tabcolsep}{2pt}',
-                    r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.3cm}rrr@{}}',
+                    r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.8cm}rrr@{}}',
                     r'\toprule', r'\textbf{Method} & \textbf{Calls} & \textbf{Tokens} & \textbf{Accepted} \\', r'\midrule']
         for method in order:
             row = data['main'][method] if source == 'main' else next(r for r in data[source] if r['key'] == method)

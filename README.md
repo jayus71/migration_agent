@@ -109,11 +109,11 @@ and links to both PDFs.
 
 The collaboration repository is `../migration_agent_overleaf/`. Its single
 `conference_101719.tex` contains the complete paper, appendices, and table source.
-Keep each prose paragraph on one physical source line, letting the editor wrap
-it for display. Blank lines separate changes of topic or reasoning within a
-section; a paragraph does not need an explicit subheading. Preserve structured
-line breaks in equations, algorithms, and tables. Figures and `ref.bib` remain
-separate supporting assets.
+Break prose source at complete sentence boundaries. Do not manually wrap a long
+sentence at a fixed column, or join an entire paragraph into one source line.
+Blank lines separate changes of topic or reasoning within a section. Preserve
+structured line breaks in equations, algorithms, and tables. Figures and
+`ref.bib` remain separate supporting assets.
 
 For a PDF with changes marked in the typeset manuscript, install `latexdiff`
 and run:
