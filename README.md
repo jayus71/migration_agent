@@ -105,7 +105,24 @@ The successful build hook also refreshes the word-level comparison in
 before the 6 Pro revision, under `data/manuscript_baselines/pre-6pro-20260921/`.
 Run `python3 scripts/update_manuscript_diff.py` to refresh it independently.
 The page compares prose and expanded LaTeX, highlights added and removed words,
-and links to both PDFs. To keep the page open with automatic refresh after builds:
+and links to both PDFs.
+
+For a PDF with changes marked in the typeset manuscript, install `latexdiff`
+and run:
+
+```bash
+python3 scripts/build_manuscript_latexdiff.py
+```
+
+The result is `output/manuscript-latexdiff/manuscript-diff.pdf`. Blue underlining
+marks additions and red strikethrough marks deletions against the same fixed
+baseline. Changed tables appear as complete previous and current versions.
+The comparison uses the current bibliography to keep citation keys unique;
+changes to citations in the manuscript remain marked. It displays current
+figure assets without comparing their image pixels. The clean manuscript and
+the HTML word comparison are unchanged.
+
+To keep the HTML comparison page open with automatic refresh after builds:
 
 ```bash
 python3 -m http.server 8766 --bind 127.0.0.1 --directory output/manuscript-comparison
