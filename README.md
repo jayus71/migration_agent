@@ -107,6 +107,13 @@ Run `python3 scripts/update_manuscript_diff.py` to refresh it independently.
 The page compares prose and expanded LaTeX, highlights added and removed words,
 and links to both PDFs.
 
+The collaboration repository is `../migration_agent_overleaf/`. Its single
+`conference_101719.tex` contains the complete paper, appendices, and table source.
+Keep prose readable with sentence line breaks and approximately 100-character
+source lines. Blank lines create printed paragraphs: use them for explicit
+subheadings and named groups, while keeping continuous discussion within a
+subsection together. Figures and `ref.bib` remain separate supporting assets.
+
 For a PDF with changes marked in the typeset manuscript, install `latexdiff`
 and run:
 

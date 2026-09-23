@@ -27,13 +27,13 @@
     }
   },
   "current": {
-    "base_commit": "120f8c1",
-    "pdf_sha256": "dff72afa5ec5af0c6fed54a848b29c162bf06a96c39b77058581b890f6fa74d9"
+    "base_commit": "e04fa99",
+    "pdf_sha256": "742a9c0c152462a1faa8d5c07aea5f6955724e0583268ab7874e8a5d8bfa25ae"
   },
-  "updated": "2026-09-23T15:28:28+08:00",
-  "version": "96d51bc79a25cb1932ef40716c62576e598bdf84d19081e75a2c787c99067e08",
-  "reading_words_added": 7816,
-  "reading_words_removed": 4084,
+  "updated": "2026-09-23T16:05:20+08:00",
+  "version": "1fa8a7db7d576905613f9fee00bb79f0625b3248e47fc21cd811d8db40d21a41",
+  "reading_words_added": 7819,
+  "reading_words_removed": 4085,
   "sections": {
     "Title": {
       "reading": [
@@ -3395,7 +3395,22 @@
         {
           "kind": "equal",
           "before": [
-            "\\section{Introduction}",
+            "\\section{Introduction}"
+          ],
+          "after": [
+            "\\section{Introduction}"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "{\\hyphenpenalty=10000\\emergencystretch=1em"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "Migrating",
             "deep",
             "learning",
@@ -3470,7 +3485,6 @@
             "behavior~\\citep{roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent}."
           ],
           "after": [
-            "\\section{Introduction}",
             "Migrating",
             "deep",
             "learning",
@@ -3604,7 +3618,6 @@
             "\\begin{figure}[t]"
           ],
           "after": [
-            "{\\hyphenpenalty=10000\\emergencystretch=1em",
             "\\begin{wrapfigure}{r}{0.44\\textwidth}"
           ]
         },
@@ -4104,7 +4117,7 @@
             "tokens",
             "used",
             "by",
-            "MatchFixAgent.\\par"
+            "MatchFixAgent."
           ]
         },
         {
@@ -4596,7 +4609,7 @@
           "after": [
             "the",
             "next",
-            "attempt.\\par}",
+            "attempt.",
             "Repository",
             "migration"
           ]
@@ -5315,17 +5328,31 @@
             "contributions",
             "are",
             "as",
-            "follows.",
-            "\\begin{itemize}",
-            "\\item",
-            "We"
+            "follows."
           ],
           "after": [
             "Our",
             "contributions",
             "are",
             "as",
-            "follows.",
+            "follows."
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "\\par}"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "\\begin{itemize}",
+            "\\item",
+            "We"
+          ],
+          "after": [
             "\\begin{itemize}",
             "\\item",
             "We"
@@ -9505,7 +9532,7 @@
           "after": [
             "remain",
             "unchanged.",
-            "16",
+            "4",
             "Repair",
             "Agent",
             "with",
@@ -9560,40 +9587,8 @@
             "parameter",
             "to",
             "the",
-            "loss,"
-          ],
-          "after": [
-            "History",
-            "Repair",
-            "$(\\mathcal",
-            "T,S,E,q,M,B,C)$",
-            "$H\\gets\\Call{IndependentHandoff}{A_R,\\mathcal",
-            "T,E,C}$",
-            "$\\Call{SubmissionsLeft}{B}\\land\\allowbreak\\Call{BudgetLeft}{B}$",
-            "$H\\gets",
-            "H\\mathbin{\\|}S.m$",
-            ";",
-            "$b\\gets\\Call{RepairAllowance}{B}$",
-            "$\\Call{WithinLimits}{b,B}$",
-            "$H\\gets",
-            "C.\\Call{PrepareContext}{H,S}$",
-            "$a\\gets\\Call{LLMCall}{M,A_R,H,b,B}$",
-            "Test",
-            "hypotheses"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "and"
-          ],
-          "after": [
-            "and"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "loss,",
+            "and",
             "run",
             "a",
             "small",
@@ -9659,24 +9654,7 @@
             "give"
           ],
           "after": [
-            "select",
-            "edits",
-            "$H\\gets\\Call{ToolFeedback}{a,H,S,A_R,C}$",
-            "if",
-            "$\\Call{RepairComplete}{a,H}$",
-            "then",
-            "break",
-            "$(S.m,q)\\gets\\mathcal",
-            "O.\\Call{Submit}{S.\\hat",
-            "P,B}$",
-            "if",
-            "$q=\\mathrm{accepted}$",
-            "then",
-            "return",
-            "$(S.\\hat",
-            "P,q)$",
-            "$(S.\\hat",
-            "P,q)$",
+            "History",
             "Independent",
             "evidence",
             "handoff",
@@ -9853,6 +9831,42 @@
             "investigation",
             "and",
             "edits.",
+            "18",
+            "Repair",
+            "$(\\mathcal",
+            "T,S,E,q,M,B,C)$",
+            "$H\\gets\\Call{IndependentHandoff}{A_R,\\mathcal",
+            "T,E,C}$",
+            "$\\Call{SubmissionsLeft}{B}\\land\\allowbreak\\Call{BudgetLeft}{B}$",
+            "$H\\gets",
+            "H\\mathbin{\\|}S.m$",
+            ";",
+            "$b\\gets\\Call{RepairAllowance}{B}$",
+            "$\\Call{WithinLimits}{b,B}$",
+            "$H\\gets",
+            "C.\\Call{PrepareContext}{H,S}$",
+            "$a\\gets\\Call{LLMCall}{M,A_R,H,b,B}$",
+            "Test",
+            "hypotheses",
+            "and",
+            "select",
+            "edits",
+            "$H\\gets\\Call{ToolFeedback}{a,H,S,A_R,C}$",
+            "if",
+            "$\\Call{RepairComplete}{a,H}$",
+            "then",
+            "break",
+            "$(S.m,q)\\gets\\mathcal",
+            "O.\\Call{Submit}{S.\\hat",
+            "P,B}$",
+            "if",
+            "$q=\\mathrm{accepted}$",
+            "then",
+            "return",
+            "$(S.\\hat",
+            "P,q)$",
+            "$(S.\\hat",
+            "P,q)$",
             "Repair",
             "history",
             "preserves",
@@ -13483,7 +13497,7 @@
           "after": [
             "remain",
             "unchanged.\\par}",
-            "\\Needspace{16\\baselineskip}",
+            "\\Needspace{4\\baselineskip}",
             "\\subsection{Repair",
             "Agent",
             "with",
@@ -13538,51 +13552,8 @@
             "parameter",
             "to",
             "the",
-            "loss,"
-          ],
-          "after": [
-            "History}",
-            "\\label{sec:repair-agent}",
-            "{",
-            "\\begin{wrapfigure}{l}{0.55\\textwidth}",
-            "\\begin{minipage}{\\linewidth}",
-            "\\setlength{\\intextsep}{0pt}",
-            "\\begin{algorithm}[H]",
-            "\\caption{\\textsc{Repair}$(\\mathcal",
-            "T,S,E,q,M,B,C)$}",
-            "\\label{alg:repair}",
-            "\\raggedright",
-            "\\begin{algorithmic}[1]",
-            "\\State",
-            "$H\\gets\\Call{IndependentHandoff}{A_R,\\mathcal",
-            "T,E,C}$",
-            "\\While{$\\Call{SubmissionsLeft}{B}\\land\\allowbreak\\Call{BudgetLeft}{B}$}",
-            "\\State",
-            "$H\\gets",
-            "H\\mathbin{\\|}S.m$;",
-            "$b\\gets\\Call{RepairAllowance}{B}$",
-            "\\While{$\\Call{WithinLimits}{b,B}$}",
-            "\\State",
-            "$H\\gets",
-            "C.\\Call{PrepareContext}{H,S}$",
-            "\\State",
-            "$a\\gets\\Call{LLMCall}{M,A_R,H,b,B}$",
-            "\\Comment{Test",
-            "hypotheses"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "and"
-          ],
-          "after": [
-            "and"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "loss,",
+            "and",
             "run",
             "a",
             "small",
@@ -13648,36 +13619,9 @@
             "give"
           ],
           "after": [
-            "select",
-            "edits}",
-            "\\State",
-            "$H\\gets\\Call{ToolFeedback}{a,H,S,A_R,C}$",
-            "\\State",
-            "\\textbf{if}",
-            "$\\Call{RepairComplete}{a,H}$",
-            "\\textbf{then",
-            "break}",
-            "\\EndWhile",
-            "\\State",
-            "$(S.m,q)\\gets\\mathcal",
-            "O.\\Call{Submit}{S.\\hat",
-            "P,B}$",
-            "\\State",
-            "\\textbf{if}",
-            "$q=\\mathrm{accepted}$",
-            "\\textbf{then",
-            "return}",
-            "$(S.\\hat",
-            "P,q)$",
-            "\\EndWhile",
-            "\\State",
-            "\\Return",
-            "$(S.\\hat",
-            "P,q)$",
-            "\\end{algorithmic}",
-            "\\end{algorithm}",
-            "\\end{minipage}",
-            "\\end{wrapfigure}",
+            "History}",
+            "\\label{sec:repair-agent}",
+            "{",
             "Independent",
             "evidence",
             "handoff",
@@ -13853,6 +13797,63 @@
             "investigation",
             "and",
             "edits.",
+            "\\Needspace{18\\baselineskip}",
+            "\\begin{wrapfigure}{l}{0.55\\textwidth}",
+            "\\begin{minipage}{\\linewidth}",
+            "\\setlength{\\intextsep}{0pt}",
+            "\\begin{algorithm}[H]",
+            "\\caption{\\textsc{Repair}$(\\mathcal",
+            "T,S,E,q,M,B,C)$}",
+            "\\label{alg:repair}",
+            "\\raggedright",
+            "\\begin{algorithmic}[1]",
+            "\\State",
+            "$H\\gets\\Call{IndependentHandoff}{A_R,\\mathcal",
+            "T,E,C}$",
+            "\\While{$\\Call{SubmissionsLeft}{B}\\land\\allowbreak\\Call{BudgetLeft}{B}$}",
+            "\\State",
+            "$H\\gets",
+            "H\\mathbin{\\|}S.m$;",
+            "$b\\gets\\Call{RepairAllowance}{B}$",
+            "\\While{$\\Call{WithinLimits}{b,B}$}",
+            "\\State",
+            "$H\\gets",
+            "C.\\Call{PrepareContext}{H,S}$",
+            "\\State",
+            "$a\\gets\\Call{LLMCall}{M,A_R,H,b,B}$",
+            "\\Comment{Test",
+            "hypotheses",
+            "and",
+            "select",
+            "edits}",
+            "\\State",
+            "$H\\gets\\Call{ToolFeedback}{a,H,S,A_R,C}$",
+            "\\State",
+            "\\textbf{if}",
+            "$\\Call{RepairComplete}{a,H}$",
+            "\\textbf{then",
+            "break}",
+            "\\EndWhile",
+            "\\State",
+            "$(S.m,q)\\gets\\mathcal",
+            "O.\\Call{Submit}{S.\\hat",
+            "P,B}$",
+            "\\State",
+            "\\textbf{if}",
+            "$q=\\mathrm{accepted}$",
+            "\\textbf{then",
+            "return}",
+            "$(S.\\hat",
+            "P,q)$",
+            "\\EndWhile",
+            "\\State",
+            "\\Return",
+            "$(S.\\hat",
+            "P,q)$",
+            "\\end{algorithmic}",
+            "\\end{algorithm}",
+            "\\end{minipage}",
+            "\\end{wrapfigure}",
             "Repair",
             "history",
             "preserves",
@@ -23084,7 +23085,8 @@
             "Repair",
             "Dependency",
             "Graph",
-            "Planning."
+            "Planning.",
+            "6"
           ]
         }
       ],
@@ -31385,7 +31387,8 @@
             "Repair",
             "Dependency",
             "Graph",
-            "Planning."
+            "Planning.",
+            "\\Needspace{6\\baselineskip}"
           ]
         }
       ]
