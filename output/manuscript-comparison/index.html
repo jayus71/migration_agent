@@ -11,14 +11,14 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 </style>
 <body class="only-changes"><header><div class="eyebrow">LADIM / REVISION HISTORY</div>
 <h1>论文逐词对照</h1><p>固定原稿与当前稿并排显示。红色为删除，绿色为新增；移动或重写的文字会同时显示在两侧。</p>
-<p class="meta">基线：2026-09-21，6 Pro 修改前保存的原稿 · 当前稿更新于 <strong>2026-09-23T14:46:22+08:00</strong> · <span id="live">编译后自动更新</span></p>
+<p class="meta">基线：2026-09-21，6 Pro 修改前保存的原稿 · 当前稿更新于 <strong>2026-09-23T14:48:59+08:00</strong> · <span id="live">编译后自动更新</span></p>
 <p class="meta"><a href="baseline.pdf" target="_blank">查看原稿 PDF</a>　<a href="current.pdf" target="_blank">查看当前 PDF</a>　<a href="baseline.tex" download>原稿展开源码</a>　<a href="current.tex" download>当前展开源码</a>　<a href="comparison.json" download>下载完整对照记录</a></p></header>
 <div class="tools"><select id="mode" aria-label="对照内容"><option value="reading">正文逐词</option><option value="latex">LaTeX 逐词</option></select>
 <select id="jump" aria-label="跳转章节"><option value="">跳转章节</option><option value="0">Title</option><option value="1">Abstract</option><option value="2">Introduction</option><option value="3">Related Work</option><option value="4">Methods</option><option value="5">Experiments</option><option value="6">Conclusion</option><option value="7">References</option><option value="8">Appendix — Additional Experimental Protocols</option><option value="9">Appendix — Evidence Handoff and Agent Integration</option><option value="10">Appendix — Additional Repair Collections</option><option value="11">Appendix — Natural Translation Repair Protocol</option><option value="12">Appendix — Repository Protocols and Detailed Results</option><option value="13">Appendix — Repository Context and Evidence</option><option value="14">Appendix — Repository Component Results</option><option value="15">Appendix — Native JAX Migration with Consecutive Training Steps</option></select>
 <input type="search" id="search" placeholder="按章节或文字筛选" aria-label="搜索对照文字">
 <label><input id="changes" type="checkbox" checked> 只看有改动的章节</label><button id="context">展开全部上下文</button><button onclick="location.reload()">刷新</button>
-<span class="legend"><span class="removed">− 删除 4046 词</span>　<span class="added">+ 新增 7772 词</span></span></div>
-<main><div class="column-head"><div>修改前<small>2026-09-21 · 固定基线</small></div><div>当前版本<small>4649468 · 本地工作区</small></div></div>
+<span class="legend"><span class="removed">− 删除 4070 词</span>　<span class="added">+ 新增 7798 词</span></span></div>
+<main><div class="column-head"><div>修改前<small>2026-09-21 · 固定基线</small></div><div>当前版本<small>a1e091e · 本地工作区</small></div></div>
 <div id="reading" class="view"><section class="section unchanged" id="reading-0" data-title="Title"><h2>Title<span class="count"><b class="removed">−0</b> <b class="added">+0</b></span></h2>
 <div class="pair equal"><div class="old">LaDiM: Layered Diagnosis for Multi-Agent Code Migration</div><div class="new">LaDiM: Layered Diagnosis for Multi-Agent Code Migration</div></div>
 </section>
@@ -250,7 +250,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">to revise its hypotheses.</div><div class="new">to revise its hypotheses.</div></div>
 <div class="pair delete"><div class="old">The comparison evaluates both methods from the same initial translation and includes translation costs.</div><div class="new">&nbsp;</div></div>
 </section>
-<section class="section changed" id="reading-4" data-title="Methods"><h2>Methods<span class="count"><b class="removed">−856</b> <b class="added">+1186</b></span></h2>
+<section class="section changed" id="reading-4" data-title="Methods"><h2>Methods<span class="count"><b class="removed">−880</b> <b class="added">+1212</b></span></h2>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">Methods</div></div>
 <div class="pair equal"><div class="old">LaDiM</div><div class="new">LaDiM</div></div>
 <div class="pair replace"><div class="old">LaDiM migrates</div><div class="new">uses dependencies between training computations to guide diagnosis and repair. The Translator first produces</div></div>
@@ -331,71 +331,39 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
 <div class="pair replace"><div class="old">parameters. Some tasks</div><div class="new">algorithms, $S.\hat P$ is the candidate, $S.m$ contains its measurements, $q$ is its verification status, and $H$ is a conversation. Context $C$ retains evidence and provides tools; for repository tasks, it</div></div>
 <div class="pair equal"><div class="old">also</div><div class="new">also</div></div>
-<div class="pair replace"><div class="old">expose buffers or optimizer state. If execution fails,</div><div class="new">stores</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">adapter returns the exception</div><div class="new">dependency plan</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">observations already obtained. Acceptance uses</div><div class="new">local check results. A submission sends</div></div>
-<div class="pair equal"><div class="old">the complete</div><div class="new">the complete</div></div>
-<div class="pair replace"><div class="old">comparisons required</div><div class="new">candidate</div></div>
-<div class="pair equal"><div class="old">for</div><div class="new">for</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">external verification after a repair stage that can contain several LLM calls, tests, and edits. Each $\textsc{LLMCall}(M,A,H,b,B)$ invokes $M$ with instructions $A$ and conversation $H$ , charging its usage to</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">task, including checks on shapes, data types,</div><div class="new">stage allowance $b$</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">trainability. Section [sec:setup] specifies which observations apply to</div><div class="new">shared budget $B$ . The Orchestrator counts</div></div>
-<div class="pair equal"><div class="old">each</div><div class="new">each</div></div>
-<div class="pair replace"><div class="old">collection and how state is maintained across training steps. Autonomous</div><div class="new">submission against $B$ . Verifier Agent with</div></div>
-<div class="pair equal"><div class="old">Layered Diagnosis The Verifier</div><div class="new">Layered Diagnosis The Verifier</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">Agent receives the Translator Agent&#x27;s candidate and the Orchestrator&#x27;s measurements. It</div></div>
-<div class="pair equal"><div class="old">uses</div><div class="new">uses</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">Layered Diagnosis to focus its investigation on</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair delete"><div class="old">dependencies between training</div><div class="new">&nbsp;</div></div>
-<div class="pair equal"><div class="old">computations</div><div class="new">computations</div></div>
-<div class="pair replace"><div class="old">to narrow its investigation. An</div><div class="new">responsible for observed discrepancies. For an</div></div>
+<div class="pair replace"><div class="old">expose buffers or optimizer state. If</div><div class="new">stores the dependency plan and local check results. A submission sends the complete candidate for external verification after a repair stage that can contain several LLM calls, tests, and edits. Each $\textsc{LLMCall}(M,A,H,b,B)$ invokes $M$ with instructions $A$ and conversation $H$ , charging its usage to the stage allowance $b$ and shared budget $B$ . The Orchestrator counts each submission against $B$ . 16 Verifier Agent with Layered Diagnosis Layered Diagnosis Task $\mathcal T$ , candidate and measurements $S$ , LLM $M$ , budget $B$ , context $C$ Evidence $E$ : code observations, test results, locations, and hypotheses LayeredDiagnosis $\mathcal T,S,M,B,C$ $H\gets\Call{StartConversation}{A_V,\mathcal T,S}$ ; $b\gets\Call{DiagnosisAllowance}{B}$ $\mathcal D:\ \mathrm{execution}\to v_t\to g_t\to\Delta\theta_t\to v_{t+1}$ $\Call{WithinLimits}{b,B}$ $H\gets C.\Call{PrepareContext}{H,S}$ $(\ell,h,a)\gets\Call{LLMCall}{M,A_V,H,b,B}$ Trace $\mathcal D$ , test causes $H\gets\Call{ToolFeedback}{a,H,S,A_V,C}$ if $a.\mathrm{complete}$ then break $\Call{PublicEvidence}{H,C}$ ToolFeedback $a,H,S,A,C$ $(C,S,r)\gets C.\Call{ExecuteTools}{a,S,A}$ $H\mathbin{\|}(a,r)$ Append response and tool observations The Verifier Agent receives the Translator Agent&#x27;s candidate and the Orchestrator&#x27;s measurements. It uses Layered Diagnosis to focus its investigation on the computations responsible for observed discrepancies. For an</div></div>
 <div class="pair equal"><div class="old">execution</div><div class="new">execution</div></div>
-<div class="pair replace"><div class="old">failure supplies an</div><div class="new">discrepancy ( $d_{\mathrm{execution},t}=1$ ), it inspects the</div></div>
-<div class="pair equal"><div class="old">exception and</div><div class="new">exception and</div></div>
-<div class="pair replace"><div class="old">any reported code location.</div><div class="new">the calls that produced it. For a forward discrepancy ( $d_{\mathrm{forward},t}\not\simeq0$ ), it traces the operators that produce different values and tests the suspected computation.</div></div>
-<div class="pair equal"><div class="old">When forward values</div><div class="new">When forward values</div></div>
-<div class="pair replace"><div class="old">differ, the Verifier examines whether the same error explains later gradient and update differences. If forward values agree,</div><div class="new">agree but</div></div>
-<div class="pair equal"><div class="old">a gradient discrepancy</div><div class="new">a gradient discrepancy</div></div>
-<div class="pair replace"><div class="old">directs attention</div><div class="new">( $d_{\mathrm{gradient},t}\not\simeq0$ ) remains, it examines parameter registration and the path from the parameters</div></div>
-<div class="pair equal"><div class="old">to</div><div class="new">to</div></div>
-<div class="pair replace"><div class="old">differentiation. Agreement in</div><div class="new">the loss. When both forward values and</div></div>
-<div class="pair equal"><div class="old">gradients</div><div class="new">gradients</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">agree, it investigates an update discrepancy ( $d_{\mathrm{update},t}\not\simeq0$ ) through the optimizer&#x27;s rule and state. The first step</div></div>
-<div class="pair equal"><div class="old">with</div><div class="new">with</div></div>
-<div class="pair replace"><div class="old">different parameter updates motivates</div><div class="new">an observed discrepancy further guides this</div></div>
-<div class="pair equal"><div class="old">investigation</div><div class="new">investigation</div></div>
-<div class="pair replace"><div class="old">of the optimizer. The training step at which</div><div class="new">because</div></div>
-<div class="pair equal"><div class="old">a</div><div class="new">a</div></div>
-<div class="pair replace"><div class="old">discrepancy first appears also matters because updates affect</div><div class="new">changed update can alter</div></div>
-<div class="pair equal"><div class="old">later forward computations.</div><div class="new">later forward computations.</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">The LLM selects code inspections and tests that distinguish possible causes, then records the code locations and observations supporting its hypotheses.</div></div>
-<div class="pair equal"><div class="old">These</div><div class="new">These</div></div>
-<div class="pair replace"><div class="old">relationships guide hypotheses that</div><div class="new">records form the evidence for the independent handoff to the Repair Agent. Algorithm [alg:diagnose] expresses this reasoning through the training dependency relation $\mathcal D$ , where $\Delta\theta_t=\theta_{t+1}-\theta_t$ . The symbols $\ell$ and $h$ summarize the LLM&#x27;s choice of computation and hypothesized cause within a call, and $a$ is its tool request or completion response. The Verifier uses both agreement and disagreement between layers to select $\ell$ , then tests $h$ against code and execution evidence. The shared ToolFeedback operation executes requests in order and adds their results to the conversation. During investigation,</div></div>
+<div class="pair replace"><div class="old">fails, the adapter returns</div><div class="new">discrepancy ( $d_{\mathrm{execution},t}=1$ ), it inspects</div></div>
+<div class="pair equal"><div class="old">the exception and</div><div class="new">the exception and</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">the calls that produced it. For a forward discrepancy ( $d_{\mathrm{forward},t}\not\simeq0$ ), it traces the operators that produce different values and tests the suspected computation. When forward values agree but a gradient discrepancy ( $d_{\mathrm{gradient},t}\not\simeq0$ ) remains, it examines parameter registration and the path from the parameters to the loss. When both forward values and gradients agree, it investigates an update discrepancy ( $d_{\mathrm{update},t}\not\simeq0$ ) through the optimizer&#x27;s rule and state. The first step with an observed discrepancy further guides this investigation because a changed update can alter later forward computations. The LLM selects code inspections and tests that distinguish possible causes, then records the code locations and</div></div>
+<div class="pair equal"><div class="old">observations</div><div class="new">observations</div></div>
+<div class="pair replace"><div class="old">already obtained. Acceptance uses</div><div class="new">supporting its hypotheses. These records form</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">complete comparisons required</div><div class="new">evidence</div></div>
+<div class="pair equal"><div class="old">for the</div><div class="new">for the</div></div>
+<div class="pair replace"><div class="old">task, including checks on shapes, data types,</div><div class="new">independent handoff to the Repair Agent. Algorithm [alg:diagnose] expresses this reasoning through the training dependency relation $\mathcal D$ , where $\Delta\theta_t=\theta_{t+1}-\theta_t$ . The symbols $\ell$</div></div>
+<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
+<div class="pair replace"><div class="old">trainability. Section [sec:setup] specifies which observations apply to each collection</div><div class="new">$h$ summarize the LLM&#x27;s choice of computation</div></div>
+<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
+<div class="pair replace"><div class="old">how state</div><div class="new">hypothesized cause within a call, and $a$</div></div>
+<div class="pair equal"><div class="old">is</div><div class="new">is</div></div>
+<div class="pair replace"><div class="old">maintained across training steps. Autonomous Layered Diagnosis</div><div class="new">its tool request or completion response.</div></div>
+<div class="pair equal"><div class="old">The Verifier uses</div><div class="new">The Verifier uses</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">both agreement and disagreement between layers to select $\ell$ , then tests $h$ against code and execution evidence. The shared ToolFeedback operation executes requests in order and adds their results to</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">dependencies between training computations to narrow its investigation. An execution failure supplies an exception and any reported code location. When forward values differ,</div><div class="new">conversation. During investigation,</div></div>
 <div class="pair equal"><div class="old">the Verifier</div><div class="new">the Verifier</div></div>
-<div class="pair replace"><div class="old">checks against the code</div><div class="new">Agent can create</div></div>
+<div class="pair replace"><div class="old">examines whether the same error explains later gradient</div><div class="new">Agent can create</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">additional tests. During diagnosis, the Verifier can read the source, candidate,</div><div class="new">run scratch tests while candidate</div></div>
+<div class="pair replace"><div class="old">update differences. If forward values agree, a gradient discrepancy directs attention to differentiation. Agreement in gradients with different parameter updates motivates investigation of the optimizer. The training step at which a discrepancy first appears also matters because updates affect later forward computations. These relationships guide hypotheses that the Verifier checks against the code</div><div class="new">run scratch tests while candidate</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">relevant</div><div class="new">supporting</div></div>
+<div class="pair replace"><div class="old">additional tests. During diagnosis, the Verifier can read the source, candidate, and relevant</div><div class="new">supporting</div></div>
 <div class="pair equal"><div class="old">library code</div><div class="new">library code</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">remain unchanged. Layered Diagnosis Task $\mathcal T$ , candidate</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">remain unchanged. 16 Repair Agent with Evidence Handoff</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">create temporary tests. Production files remain read-only. Consider a parameter whose source gradient is present but whose target gradient is missing. The Verifier can inspect parameter registration, trace the operations connecting that parameter to the loss,</div><div class="new">measurements $S$ , LLM $M$ , budget $B$ , context $C$ Evidence $E$ : code observations, test results, locations,</div></div>
+<div class="pair replace"><div class="old">create temporary tests. Production files remain read-only. Consider a parameter whose source gradient is present but whose target gradient is missing. The Verifier can inspect parameter registration, trace the operations connecting that parameter to the loss,</div><div class="new">History Repair $(\mathcal T,S,E,q,M,B,C)$ $H\gets\Call{IndependentHandoff}{A_R,\mathcal T,E,C}$ $\Call{SubmissionsLeft}{B}\land\allowbreak\Call{BudgetLeft}{B}$ $H\gets H\mathbin{\|}S.m$ ; $b\gets\Call{RepairAllowance}{B}$ $\Call{WithinLimits}{b,B}$ $H\gets C.\Call{PrepareContext}{H,S}$ $a\gets\Call{LLMCall}{M,A_R,H,b,B}$ Test hypotheses</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">run a small</div><div class="new">hypotheses LayeredDiagnosis $\mathcal T,S,M,B,C$ $H\gets\Call{StartConversation}{A_V,\mathcal T,S}$ ; $b\gets\Call{DiagnosisAllowance}{B}$ $\mathcal D:\ \mathrm{execution}\to v_t\to g_t\to\Delta\theta_t\to v_{t+1}$ $\Call{WithinLimits}{b,B}$ $H\gets C.\Call{PrepareContext}{H,S}$ $(\ell,h,a)\gets\Call{LLMCall}{M,A_V,H,b,B}$ Trace $\mathcal D$ ,</div></div>
-<div class="pair equal"><div class="old">test</div><div class="new">test</div></div>
-<div class="pair replace"><div class="old">to distinguish an unregistered parameter from a disconnected computation. It records the measured outcome</div><div class="new">causes $H\gets\Call{ToolFeedback}{a,H,S,A_V,C}$ if $a.\mathrm{complete}$ then break $\Call{PublicEvidence}{H,C}$ ToolFeedback $a,H,S,A,C$ $(C,S,r)\gets C.\Call{ExecuteTools}{a,S,A}$ $H\mathbin{\|}(a,r)$ Append response</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">code location supporting a hypothesis, along</div><div class="new">tool observations Repair Agent</div></div>
-<div class="pair equal"><div class="old">with</div><div class="new">with</div></div>
-<div class="pair replace"><div class="old">unresolved questions. This record can include a further test to distinguish competing explanations. Fault categories</div><div class="new">Evidence Handoff</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">repair locations emerge from this investigation. They are not supplied as task inputs. The recorded code observations and test results give</div><div class="new">History Independent evidence handoff gives</div></div>
+<div class="pair replace"><div class="old">run a small test to distinguish an unregistered parameter from a disconnected computation. It records the measured outcome and code location supporting a hypothesis, along with unresolved questions. This record can include a further test to distinguish competing explanations. Fault categories and repair locations emerge from this investigation. They are not supplied as task inputs. The recorded code observations and test results give</div><div class="new">select edits $H\gets\Call{ToolFeedback}{a,H,S,A_R,C}$ if $\Call{RepairComplete}{a,H}$ then break $(S.m,q)\gets\mathcal O.\Call{Submit}{S.\hat P,B}$ if $q=\mathrm{accepted}$ then return $(S.\hat P,q)$ $(S.\hat P,q)$ Independent evidence handoff gives</div></div>
 <div class="pair equal"><div class="old">the Repair Agent</div><div class="new">the Repair Agent</div></div>
 <div class="pair delete"><div class="old">enough context to reassess</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
@@ -427,13 +395,9 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">Orchestrator evaluates the</div><div class="new">Orchestrator evaluates the</div></div>
 <div class="pair delete"><div class="old">current</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">candidate</div><div class="new">candidate</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">when the repair stage ends. Repair $(\mathcal T,S,E,q,M,B,C)$ $H\gets\Call{IndependentHandoff}{A_R,\mathcal T,E,C}$ $\Call{SubmissionsLeft}{B}\land\Call{BudgetLeft}{B}$ $H\gets H\mathbin{\|}S.m$ ; $b\gets\Call{RepairAllowance}{B}$ $\Call{WithinLimits}{b,B}$ $H\gets C.\Call{PrepareContext}{H,S}$ $a\gets\Call{LLMCall}{M,A_R,H,b,B}$ Test hypotheses</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">when the repair stage ends. Repository Coordination A change to a shared implementation can affect several callers in a repository. Repository context management retains the dependency plan, relevant code observations,</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">returns</div><div class="new">select edits $H\gets\Call{ToolFeedback}{a,H,S,A_R,C}$ if $\Call{RepairComplete}{a,H}$ then break $(S.m,q)\gets\mathcal O.\Call{Submit}{S.\hat P,B}$ if $q=\mathrm{accepted}$ then return $(S.\hat P,q)$ $(S.\hat P,q)$ Repository Coordination A change to a shared implementation can affect several callers in a repository. Repository context management retains</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">measured discrepancies. The Repair Agent compares them with earlier observations to assess the change</div><div class="new">dependency plan, relevant code observations,</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">decide which hypothesis or code location to investigate next. The current</div><div class="new">investigation evidence across</div></div>
+<div class="pair replace"><div class="old">returns the measured discrepancies. The Repair Agent compares them with earlier observations to assess the change and decide which hypothesis or code location to investigate next. The current</div><div class="new">investigation evidence across</div></div>
 <div class="pair equal"><div class="old">files and</div><div class="new">files and</div></div>
 <div class="pair replace"><div class="old">repair conversation persist across attempts,</div><div class="new">conversations. It combines Repository Structural Analysis, Repair Dependency Graph Planning, notebook tools with edit validation, an archive of evidence associated with code versions,</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
@@ -1934,7 +1898,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">to revise its hypotheses.</div><div class="new">to revise its hypotheses.</div></div>
 <div class="pair delete"><div class="old">The comparison evaluates both methods from the same initial translation and includes translation costs.</div><div class="new">&nbsp;</div></div>
 </section>
-<section class="section changed" id="latex-4" data-title="Methods"><h2>Methods<span class="count"><b class="removed">−860</b> <b class="added">+1203</b></span></h2>
+<section class="section changed" id="latex-4" data-title="Methods"><h2>Methods<span class="count"><b class="removed">−880</b> <b class="added">+1239</b></span></h2>
 <div class="pair replace"><div class="old">\section{LaDiM}</div><div class="new">\section{Methods}</div></div>
 <div class="pair equal"><div class="old">\label{sec:method} LaDiM</div><div class="new">\label{sec:method} LaDiM</div></div>
 <div class="pair replace"><div class="old">migrates</div><div class="new">uses dependencies between training computations to guide diagnosis and repair. The Translator first produces</div></div>
@@ -2015,67 +1979,37 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">also</div><div class="new">also</div></div>
 <div class="pair replace"><div class="old">expose buffers or optimizer state. If execution fails,</div><div class="new">stores</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">adapter returns the exception</div><div class="new">dependency plan</div></div>
+<div class="pair replace"><div class="old">adapter returns</div><div class="new">dependency plan and local check results. A submission sends the complete candidate for external verification after a repair stage that can contain several LLM calls, tests, and edits. Each $\textsc{LLMCall}(M,A,H,b,B)$ invokes $M$ with instructions $A$ and conversation $H$, charging its usage to the stage allowance $b$ and shared budget $B$. The Orchestrator counts each submission against $B$. \Needspace{16\baselineskip} \subsection{Verifier Agent with Layered Diagnosis} \label{sec:hierarchy} { \begin{wrapfigure}{l}{0.55\textwidth} \begin{minipage}{\linewidth} \setlength{\intextsep}{0pt} \begin{algorithm}[H] \caption{Layered Diagnosis} \label{alg:diagnose} \raggedright \begin{algorithmic}[1] \Require Task $\mathcal T$, candidate and measurements $S$, LLM $M$, budget $B$, context $C$ \Ensure Evidence $E$: code observations, test results, locations, and hypotheses \Function{LayeredDiagnosis}{$\mathcal T,S,M,B,C$} \State $H\gets\Call{StartConversation}{A_V,\mathcal T,S}$; $b\gets\Call{DiagnosisAllowance}{B}$ \State $\mathcal D:\ \mathrm{execution}\to v_t\to g_t\to\Delta\theta_t\to v_{t+1}$ \While{$\Call{WithinLimits}{b,B}$} \State $H\gets C.\Call{PrepareContext}{H,S}$ \State $(\ell,h,a)\gets\Call{LLMCall}{M,A_V,H,b,B}$ \Comment{Trace $\mathcal D$, test causes} \State $H\gets\Call{ToolFeedback}{a,H,S,A_V,C}$ \State \textbf{if} $a.\mathrm{complete}$ \textbf{then break} \EndWhile \State \Return $\Call{PublicEvidence}{H,C}$ \EndFunction \Function{ToolFeedback}{$a,H,S,A,C$} \State $(C,S,r)\gets C.\Call{ExecuteTools}{a,S,A}$ \State \Return $H\mathbin{\|}(a,r)$ \Comment{Append response and tool observations} \EndFunction \end{algorithmic} \end{algorithm} \end{minipage} \end{wrapfigure} The Verifier Agent receives the Translator Agent&#x27;s candidate and the Orchestrator&#x27;s measurements. It uses Layered Diagnosis to focus its investigation on the computations responsible for observed discrepancies. For an \textbf{execution discrepancy} ($d_{\mathrm{execution},t}=1$), it inspects</div></div>
+<div class="pair equal"><div class="old">the exception and</div><div class="new">the exception and</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">the calls that produced it. For a \textbf{forward discrepancy} ($d_{\mathrm{forward},t}\not\simeq0$), it traces the operators that produce different values and tests the suspected computation. When forward values agree but a \textbf{gradient discrepancy} ($d_{\mathrm{gradient},t}\not\simeq0$) remains, it examines parameter registration and the path from the parameters to the loss. When both forward values and gradients agree, it investigates an \textbf{update discrepancy} ($d_{\mathrm{update},t}\not\simeq0$) through the optimizer&#x27;s rule and state. The first step with an observed discrepancy further guides this investigation because a changed update can alter later forward computations. The LLM selects code inspections and tests that distinguish possible causes, then records the code locations and</div></div>
+<div class="pair equal"><div class="old">observations</div><div class="new">observations</div></div>
+<div class="pair replace"><div class="old">already obtained. Acceptance uses</div><div class="new">supporting its hypotheses. These records form</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">complete comparisons required</div><div class="new">evidence</div></div>
+<div class="pair equal"><div class="old">for the</div><div class="new">for the</div></div>
+<div class="pair replace"><div class="old">task, including checks on shapes, data types,</div><div class="new">independent handoff to the Repair Agent. Algorithm~\ref{alg:diagnose} expresses this reasoning through the training dependency relation $\mathcal D$, where $\Delta\theta_t=\theta_{t+1}-\theta_t$. The symbols $\ell$</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">observations already obtained. Acceptance uses</div><div class="new">local check results. A submission sends</div></div>
-<div class="pair equal"><div class="old">the complete</div><div class="new">the complete</div></div>
-<div class="pair replace"><div class="old">comparisons required</div><div class="new">candidate</div></div>
-<div class="pair equal"><div class="old">for</div><div class="new">for</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">external verification after a repair stage that can contain several LLM calls, tests, and edits. Each $\textsc{LLMCall}(M,A,H,b,B)$ invokes $M$ with instructions $A$ and conversation $H$, charging its usage to</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">task, including checks on shapes, data types,</div><div class="new">stage allowance $b$</div></div>
+<div class="pair replace"><div class="old">trainability. Section~\ref{sec:setup} specifies which observations apply to each collection</div><div class="new">$h$ summarize the LLM&#x27;s choice of computation</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">trainability. Section~\ref{sec:setup} specifies which observations apply to</div><div class="new">shared budget $B$. The Orchestrator counts</div></div>
-<div class="pair equal"><div class="old">each</div><div class="new">each</div></div>
-<div class="pair replace"><div class="old">collection and how state is maintained across training steps. \subsection{Autonomous</div><div class="new">submission against $B$. \subsection{Verifier Agent with</div></div>
-<div class="pair equal"><div class="old">Layered Diagnosis} \label{sec:hierarchy} The Verifier</div><div class="new">Layered Diagnosis} \label{sec:hierarchy} The Verifier</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">Agent receives the Translator Agent&#x27;s candidate and the Orchestrator&#x27;s measurements. It</div></div>
-<div class="pair equal"><div class="old">uses</div><div class="new">uses</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">Layered Diagnosis to focus its investigation on</div></div>
+<div class="pair replace"><div class="old">how state</div><div class="new">hypothesized cause within a call, and $a$</div></div>
+<div class="pair equal"><div class="old">is</div><div class="new">is</div></div>
+<div class="pair replace"><div class="old">maintained across training steps. \subsection{Autonomous Layered Diagnosis} \label{sec:hierarchy}</div><div class="new">its tool request or completion response.</div></div>
+<div class="pair equal"><div class="old">The Verifier uses</div><div class="new">The Verifier uses</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">both agreement and disagreement between layers to select $\ell$, then tests $h$ against code and execution evidence. The shared \textsc{ToolFeedback} operation executes requests in order and adds their results to</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair delete"><div class="old">dependencies between training</div><div class="new">&nbsp;</div></div>
-<div class="pair equal"><div class="old">computations</div><div class="new">computations</div></div>
-<div class="pair replace"><div class="old">to narrow its investigation. An execution failure supplies</div><div class="new">responsible for observed discrepancies. For</div></div>
-<div class="pair equal"><div class="old">an</div><div class="new">an</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">\textbf{execution discrepancy} ($d_{\mathrm{execution},t}=1$), it inspects the</div></div>
-<div class="pair equal"><div class="old">exception and</div><div class="new">exception and</div></div>
-<div class="pair replace"><div class="old">any reported code location.</div><div class="new">the calls that produced it. For a \textbf{forward discrepancy} ($d_{\mathrm{forward},t}\not\simeq0$), it traces the operators that produce different values and tests the suspected computation.</div></div>
-<div class="pair equal"><div class="old">When forward values</div><div class="new">When forward values</div></div>
-<div class="pair replace"><div class="old">differ,</div><div class="new">agree but a \textbf{gradient discrepancy} ($d_{\mathrm{gradient},t}\not\simeq0$) remains, it examines parameter registration and</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">Verifier examines whether</div><div class="new">path from</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">same error explains later gradient and update differences. If</div><div class="new">parameters to the loss. When both</div></div>
-<div class="pair equal"><div class="old">forward values</div><div class="new">forward values</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">and gradients</div></div>
-<div class="pair equal"><div class="old">agree,</div><div class="new">agree,</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">it investigates an \textbf{update discrepancy} ($d_{\mathrm{update},t}\not\simeq0$) through the optimizer&#x27;s rule and state. The first step with an observed discrepancy further guides this investigation because</div></div>
-<div class="pair equal"><div class="old">a</div><div class="new">a</div></div>
-<div class="pair replace"><div class="old">gradient discrepancy directs attention to differentiation. Agreement in gradients with different parameter updates motivates investigation of the optimizer. The training step at which a discrepancy first appears also matters because updates affect</div><div class="new">changed update can alter</div></div>
-<div class="pair equal"><div class="old">later forward computations.</div><div class="new">later forward computations.</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">The LLM selects code inspections and tests that distinguish possible causes, then records the code locations and observations supporting its hypotheses.</div></div>
-<div class="pair equal"><div class="old">These</div><div class="new">These</div></div>
-<div class="pair replace"><div class="old">relationships guide hypotheses that</div><div class="new">records form the evidence for the independent handoff to the Repair Agent. Algorithm~\ref{alg:diagnose} expresses this reasoning through the training dependency relation $\mathcal D$, where $\Delta\theta_t=\theta_{t+1}-\theta_t$. The symbols $\ell$ and $h$ summarize the LLM&#x27;s choice of computation and hypothesized cause within a call, and $a$ is its tool request or completion response. The Verifier uses both agreement and disagreement between layers to select $\ell$, then tests $h$ against code and execution evidence. The shared \textsc{ToolFeedback} operation executes requests in order and adds their results to the conversation. During investigation,</div></div>
+<div class="pair replace"><div class="old">dependencies between training computations to narrow its investigation. An execution failure supplies an exception and any reported code location. When forward values differ,</div><div class="new">conversation. During investigation,</div></div>
 <div class="pair equal"><div class="old">the Verifier</div><div class="new">the Verifier</div></div>
-<div class="pair replace"><div class="old">checks against the code</div><div class="new">Agent can create</div></div>
+<div class="pair replace"><div class="old">examines whether the same error explains later gradient</div><div class="new">Agent can create</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">additional tests. During diagnosis, the Verifier can read the source, candidate,</div><div class="new">run scratch tests while candidate</div></div>
+<div class="pair replace"><div class="old">update differences. If forward values agree, a gradient discrepancy directs attention to differentiation. Agreement in gradients with different parameter updates motivates investigation of the optimizer. The training step at which a discrepancy first appears also matters because updates affect later forward computations. These relationships guide hypotheses that the Verifier checks against the code</div><div class="new">run scratch tests while candidate</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">relevant</div><div class="new">supporting</div></div>
+<div class="pair replace"><div class="old">additional tests. During diagnosis, the Verifier can read the source, candidate, and relevant</div><div class="new">supporting</div></div>
 <div class="pair equal"><div class="old">library code</div><div class="new">library code</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">remain unchanged. \begin{algorithm}[!htb] \caption{Layered Diagnosis} \label{alg:diagnose} \begin{algorithmic}[1] \Require Task $\mathcal T$, candidate</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">remain unchanged.\par} \Needspace{16\baselineskip} \subsection{Repair Agent with Evidence Handoff</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">create temporary tests. Production files remain read-only. Consider a parameter whose source gradient is present but whose target gradient is missing. The Verifier can inspect parameter registration, trace the operations connecting that parameter to the loss,</div><div class="new">measurements $S$, LLM $M$, budget $B$, context $C$ \Ensure Evidence $E$: code observations, test results, locations,</div></div>
+<div class="pair replace"><div class="old">create temporary tests. Production files remain read-only. Consider a parameter whose source gradient is present but whose target gradient is missing. The Verifier can inspect parameter registration, trace the operations connecting that parameter to the loss,</div><div class="new">History} \label{sec:repair-agent} { \begin{wrapfigure}{l}{0.55\textwidth} \begin{minipage}{\linewidth} \setlength{\intextsep}{0pt} \begin{algorithm}[H] \caption{\textsc{Repair}$(\mathcal T,S,E,q,M,B,C)$} \label{alg:repair} \raggedright \begin{algorithmic}[1] \State $H\gets\Call{IndependentHandoff}{A_R,\mathcal T,E,C}$ \While{$\Call{SubmissionsLeft}{B}\land\allowbreak\Call{BudgetLeft}{B}$} \State $H\gets H\mathbin{\|}S.m$; $b\gets\Call{RepairAllowance}{B}$ \While{$\Call{WithinLimits}{b,B}$} \State $H\gets C.\Call{PrepareContext}{H,S}$ \State $a\gets\Call{LLMCall}{M,A_R,H,b,B}$ \Comment{Test hypotheses</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">run a small</div><div class="new">hypotheses \Function{LayeredDiagnosis}{$\mathcal T,S,M,B,C$} \State $H\gets\Call{StartConversation}{A_V,\mathcal T,S}$; $b\gets\Call{DiagnosisAllowance}{B}$ \State $\mathcal D:\ \mathrm{execution}\to v_t\to g_t\to\Delta\theta_t\to v_{t+1}$ \While{$\Call{WithinLimits}{b,B}$} \State $H\gets C.\Call{PrepareContext}{H,S}$ \State $(\ell,h,a)\gets\Call{LLMCall}{M,A_V,H,b,B}$ \Comment{Trace $\mathcal D$,</div></div>
-<div class="pair equal"><div class="old">test</div><div class="new">test</div></div>
-<div class="pair replace"><div class="old">to distinguish an unregistered parameter from a disconnected computation. It records the measured outcome</div><div class="new">causes} \State $H\gets\Call{ToolFeedback}{a,H,S,A_V,C}$ \State \textbf{if} $a.\mathrm{complete}$ \textbf{then break} \EndWhile \State \Return $\Call{PublicEvidence}{H,C}$ \EndFunction \Function{ToolFeedback}{$a,H,S,A,C$} \State $(C,S,r)\gets C.\Call{ExecuteTools}{a,S,A}$ \State \Return $H\mathbin{\|}(a,r)$ \Comment{Append response</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">code location supporting a hypothesis, along</div><div class="new">tool observations} \EndFunction \end{algorithmic} \end{algorithm} \subsection{Repair Agent</div></div>
-<div class="pair equal"><div class="old">with</div><div class="new">with</div></div>
-<div class="pair replace"><div class="old">unresolved questions. This record can include a further test to distinguish competing explanations. Fault categories</div><div class="new">Evidence Handoff</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">repair locations emerge from this investigation. They are not supplied as task inputs. The recorded code observations and test results give</div><div class="new">History} \label{sec:repair-agent} Independent evidence handoff gives</div></div>
+<div class="pair replace"><div class="old">run a small test to distinguish an unregistered parameter from a disconnected computation. It records the measured outcome and code location supporting a hypothesis, along with unresolved questions. This record can include a further test to distinguish competing explanations. Fault categories and repair locations emerge from this investigation. They are not supplied as task inputs. The recorded code observations and test results give</div><div class="new">select edits} \State $H\gets\Call{ToolFeedback}{a,H,S,A_R,C}$ \State \textbf{if} $\Call{RepairComplete}{a,H}$ \textbf{then break} \EndWhile \State $(S.m,q)\gets\mathcal O.\Call{Submit}{S.\hat P,B}$ \State \textbf{if} $q=\mathrm{accepted}$ \textbf{then return} $(S.\hat P,q)$ \EndWhile \State \Return $(S.\hat P,q)$ \end{algorithmic} \end{algorithm} \end{minipage} \end{wrapfigure} Independent evidence handoff gives</div></div>
 <div class="pair equal"><div class="old">the Repair Agent</div><div class="new">the Repair Agent</div></div>
 <div class="pair delete"><div class="old">enough context to reassess</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
@@ -2107,9 +2041,11 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">Orchestrator evaluates the</div><div class="new">Orchestrator evaluates the</div></div>
 <div class="pair delete"><div class="old">current</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">candidate</div><div class="new">candidate</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">when the repair stage ends. \begin{algorithm}[!htb] \caption{\textsc{Repair}$(\mathcal T,S,E,q,M,B,C)$} \label{alg:repair} \begin{algorithmic}[1] \State $H\gets\Call{IndependentHandoff}{A_R,\mathcal T,E,C}$ \While{$\Call{SubmissionsLeft}{B}\land\Call{BudgetLeft}{B}$} \State $H\gets H\mathbin{\|}S.m$; $b\gets\Call{RepairAllowance}{B}$ \While{$\Call{WithinLimits}{b,B}$} \State $H\gets C.\Call{PrepareContext}{H,S}$ \State $a\gets\Call{LLMCall}{M,A_R,H,b,B}$ \Comment{Test hypotheses</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">returns the measured discrepancies. The Repair Agent compares them with earlier observations to assess the change and decide which hypothesis or code location to investigate next. The current files and repair conversation persist across attempts, and all calls count against one cumulative task budget. Progress reminders report the remaining allowance. When all required checks and confirmation runs pass, the Orchestrator accepts the candidate. A candidate that initially passes the checks can finish investigation and confirmation without corrective edits. If the budget is exhausted, LaDiM returns the current candidate and its verification status.</div><div class="new">select edits} \State $H\gets\Call{ToolFeedback}{a,H,S,A_R,C}$ \State \textbf{if} $\Call{RepairComplete}{a,H}$ \textbf{then break} \EndWhile \State $(S.m,q)\gets\mathcal O.\Call{Submit}{S.\hat P,B}$ \State \textbf{if} $q=\mathrm{accepted}$ \textbf{then return} $(S.\hat P,q)$ \EndWhile \State \Return $(S.\hat P,q)$ \end{algorithmic} \end{algorithm}</div></div>
+<div class="pair replace"><div class="old">and returns</div><div class="new">when</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair delete"><div class="old">measured discrepancies. The Repair Agent compares them with earlier observations to assess the change and decide which hypothesis or code location to investigate next. The current files and</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">repair</div><div class="new">repair</div></div>
+<div class="pair replace"><div class="old">conversation persist across attempts, and all calls count against one cumulative task budget. Progress reminders report the remaining allowance. When all required checks and confirmation runs pass, the Orchestrator accepts the candidate. A candidate that initially passes the checks can finish investigation and confirmation without corrective edits. If the budget is exhausted, LaDiM returns the current candidate and its verification status.</div><div class="new">stage ends.\par}</div></div>
 <div class="pair equal"><div class="old">\subsection{Repository Coordination} \label{sec:repository-method}</div><div class="new">\subsection{Repository Coordination} \label{sec:repository-method}</div></div>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">A change to a shared implementation can affect several callers in a repository.</div></div>
 <div class="pair equal"><div class="old">Repository</div><div class="new">Repository</div></div>
@@ -3478,7 +3414,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 </section></div>
 <p class="footer">正文视图去除排版指令，保留文字、表格内容和公式源码；LaTeX 视图保留展开后的完整指令。图形外观请对照两份 PDF。基线文件逐项校验，后续更新保持基线不变。</p></main>
 <script>
-const version='ea6571f664d9348f8b661fc04581fde9fe1bde36d361210a6013244653973aa8',mode=document.getElementById('mode'),search=document.getElementById('search');
+const version='53b7deb6ba48cf6d67a8aafd7c26f6f9a6fc3846ebb8c57331aa4d80a611ecd5',mode=document.getElementById('mode'),search=document.getElementById('search');
 new ResizeObserver(([entry])=>document.documentElement.style.setProperty('--tools-height',entry.target.offsetHeight+'px')).observe(document.querySelector('.tools'));
 function filter(){const q=search.value.trim().toLowerCase();document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',q&&!s.textContent.toLowerCase().includes(q)))}
 mode.onchange=()=>{document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!==mode.value));filter()};search.oninput=filter;

@@ -75,6 +75,19 @@ def restore_tables(diff: str, blocks: dict[str, str]) -> str:
 def review_layout(source: str) -> str:
     """Use ordinary figure placement in the review copy to keep marks readable."""
     source = re.sub(r'\\hyphenpenalty\s*=\s*\d+|\\emergencystretch\s*=\s*[\d.]+\w+', '', source)
+    # Wrapped algorithms use a minipage only in the clean manuscript. Present
+    # them at full width here so the change marks have room and floats do not
+    # become nested after removing the surrounding wrapfigure.
+    def unwrap_algorithm(match):
+        body = match.group(1).replace(r'\raggedright', '').replace(r'\allowbreak', '')
+        return r'\begin{algorithm}[!htb]' + body + r'\end{algorithm}'
+    source = re.sub(
+        r'\\begin\{wrapfigure\}\{[rlRL]\}\{[^}]+\}\s*'
+        r'\\begin\{minipage\}\{\\linewidth\}\s*'
+        r'\\setlength\{\\intextsep\}\{0pt\}\s*'
+        r'\\begin\{algorithm\}\[H\](.*?)\\end\{algorithm\}\s*'
+        r'\\end\{minipage\}\s*\\end\{wrapfigure\}',
+        unwrap_algorithm, source, flags=re.S)
     def unwrap(match):
         body = match.group(2).replace(r'width=\linewidth', 'width=' + match.group(1))
         return r'\begin{figure}[htbp]' + body + r'\end{figure}'
