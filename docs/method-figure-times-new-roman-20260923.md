@@ -1,5 +1,8 @@
 # 方法图 Times New Roman 预览稿
 
+当前交付为保留原图Python / Java语言对照的版本，见文末后续纠正。
+中间Python / Python预览保留作历史记录。
+
 日期：2026-09-23。
 修改前检查点：`07e0e64`。
 用户认为按上一轮建议生成的图不及前一版，并明确要求后续生成指定 Times New Roman。
@@ -80,5 +83,36 @@ Make ONE tiny text correction to this exact diagram. In the small document box a
 Use TIMES NEW ROMAN, same dark navy color, comfortably readable. Keep the small document icon above these words. Keep that box's dimensions and position exactly unchanged.
 
 Do not change any other text, shapes, arrows, colors, icons, sizing, margins, or layout anywhere in the image. Preserve every other pixel as closely as possible. This is a local text replacement, not a redesign.
+```
+
+## 用户后续纠正：保留 Python / Java 的跨语言对照
+
+用户指出，将右侧 Java 换为 Python 后，图上失去了原有的源/目标语言差异。
+此前代理把总览收窄为 Python 的跨框架示例，是对图意的擅自调整。
+本轮在检查点 `342b421` 后恢复左侧 Python、右侧 Java，保留 Times New Roman 和其余布局。
+右侧语言、代码与文件后缀一并恢复，框架迁移改为独立小分区，避免把 MindSpore / JAX 标为 Java 的运行框架。
+这仍是用户要求的总览设计示意，不将示意方向记成新测量的实验。
+
+当前交付预览：`figures/design-drafts/ladim_method_times_new_roman_python_java_20260923.png`。
+此前 Python / Python 预览保留作历史版本。
+视觉检查确认 Java 标识、Java 代码和文件后缀恢复，源侧 Python、所有中央模块和验证出口保留。
+使用内置 `image_gen` 完成局部修改。
+
+### 恢复 Java 的完整提示词
+
+```text
+Image 1 is the editable image target. Perform only this local correction on the RIGHTMOST tower. Preserve all other panels, text, linework, waveforms, arrows, colors and layout exactly. ALL text remains TIMES NEW ROMAN, bold Times New Roman headings and regular Times New Roman labels. The user specifically wants source Python and target Java to visually demonstrate cross-language migration. Do not change the left source Python.
+
+RIGHTMOST TOWER CHANGES:
+- Keep the heading "Accepted target program (repository)".
+- Replace only the rightmost Python logo with the familiar small Java steaming-cup logo, and set its caption to "Java".
+- The code card should say "// target code" then "public void train() {" then "..." then "}". Use Times New Roman and fit comfortably.
+- In the file tree retain "src/" and "model/", change "train.py" to "Train.java", and "utils.py" to "Utils.java".
+- Under "Target language", set the value to "Java".
+- Replace the current "Target framework / MindSpore / JAX" block with a visually separate compact inset titled "Framework migration", followed by these TWO small lines: "PyTorch →" and "MindSpore / JAX". Put a thin divider above this inset. This inset lists a SEPARATE framework-migration capability; do NOT label MindSpore/JAX as Java frameworks or place them beneath "Target framework".
+- Keep the bottom capability labels "Cross-framework", "Cross-language", "Repository-scale" in their current locations.
+- Keep the verification arrow entering the rightmost tower from the Orchestrator unchanged.
+
+No other changes anywhere. In particular keep left source Python/PyTorch, all central components, simple waveform diagnosis, three Orchestrator action cells, repository components and font unchanged. Do not add explanations outside the diagram. Keep the same canvas and all panel boundaries.
 ```
 
