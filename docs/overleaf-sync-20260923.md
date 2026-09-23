@@ -13,3 +13,5 @@
 协作者原稿保留的具体问题：仓库句停在“introduces repository.”；“agents work”在当前句式中缺连接；“revises”缺宾语；“evidences”用词；摘要未再写Orchestrator返回每次提交的验证结果。已在持久清单登记，未将这些文字问题标为通过。对其他旧反馈按未改内容及新PDF核对回退，未把未执行的旧实验/联网调研重新记成完成。
 
 完整哈希、检查点、原稿和日志存于output/overleaf-sync-20260923/verification.json及同目录。完成提交、差异稿和push的结果在下方追加。
+
+完成：主仓库论文提交49ee58c，Overleaf合并提交16e5808已推送origin/main并核对远端提交一致。HTML已刷新，33页LaTeX差异稿已生成并查看封面与摘要页，最终日志没有警告、overfull或未定义引用。Overleaf工作区干净；主仓库原有用户图形和其他文件保持，仅本轮记录与对照更新另行提交，主仓库未push。
