@@ -1,5 +1,7 @@
 # 方法图 Times New Roman 预览稿
 
+后续用户要求进一步删除每个标题下的职责说明。最新精简预览和完整提示词见[删减说明文字记录](method-figure-concise-20260923.md)，Times New Roman和Python / Java对照继续保留。
+
 当前交付为保留原图Python / Java语言对照的版本，见文末后续纠正。
 中间Python / Python预览保留作历史记录。
 
@@ -115,4 +117,3 @@ RIGHTMOST TOWER CHANGES:
 
 No other changes anywhere. In particular keep left source Python/PyTorch, all central components, simple waveform diagnosis, three Orchestrator action cells, repository components and font unchanged. Do not add explanations outside the diagram. Keep the same canvas and all panel boundaries.
 ```
-
