@@ -42,7 +42,7 @@ Multi-Agent Code Migration}
 \suppressfloats[t]
 
 \begin{abstract}
-Migrating deep learning code across frameworks enables the reuse of training programs in new software and hardware environments. Framework differences can silently change gradients and parameter updates even when a translated program runs successfully. To address this problem, we propose LaDiM, a framework with multiple agents that uses dependencies between training computations to guide diagnosis and repair. The Verifier Agent investigates discrepancies and passes supporting evidence to a separate Repair Agent. The Orchestrator schedules their work and returns verification results after each submission. Repository context management preserves relevant evidence to coordinate repair across dependent files. On 50 migrations from PyTorch to MindSpore, LaDiM matches the state of the art in acceptance with 57.4\% fewer total tokens, including initial translation. Evaluation across framework migration, language migration, and repository tasks demonstrates LaDiM's effectiveness in preserving training behavior.
+Migrating deep learning code across frameworks enables the reuse of training programs in new software and hardware environments. Framework differences can silently change gradients and parameter updates even when a translated program runs successfully. To address this problem, we propose LaDiM, a framework with multiple agents that uses dependencies between training computations to guide diagnosis and repair. The Translator Agent generates an initial candidate. The Verifier Agent investigates discrepancies and passes supporting evidence to a separate Repair Agent. The Orchestrator schedules their work and returns verification results after each submission. Repository context management preserves relevant evidence to coordinate repair across dependent files. On 50 migrations from PyTorch to MindSpore, LaDiM matches the state of the art in acceptance with 57.4\% fewer total tokens. Evaluation across framework migration, language migration, and repository tasks demonstrates LaDiM's effectiveness in preserving training behavior.
 \end{abstract}
 
 \section{Introduction}
@@ -68,9 +68,9 @@ Repository migration must preserve the behavior of shared code when it is called
 The agent comparisons start from the same initial translations and measure migration acceptance and total token use under a shared evaluation protocol. LaDiM completes all 50 migrations from PyTorch to MindSpore with 57.4\% fewer total tokens than MatchFixAgent. The savings cover programs that require repair and programs that pass evaluation before repair. It also accepts 9/18 migrations from Java/DJL to Python/PyTorch, compared with 8/18 for SWE-agent and MatchFixAgent. All three agents complete migration of the time series repository. LaDiM uses 68.1\% fewer total tokens than SWE-agent and 80.8\% fewer than MatchFixAgent. On the recommendation repository, LaDiM passes the most behavior checks and all ten original tests. The JAX study verifies the same repair procedure on a second target framework. Our contributions are as follows.
 
 \begin{itemize}
-  \item We develop Layered Diagnosis, which uses dependencies among execution, forward values, gradients, and parameter updates to identify the computations to investigate. In the controlled repair study, adding forward values, gradients, and parameter updates to execution feedback increases acceptance from 4/16 to 16/16 under complete verification.
-  \item We introduce independent evidence handoff and repair history to connect investigation, edits, and verification, together with repository context management for shared code. LaDiM repairs four of the five programs that fail evaluation after initial translation, including errors in a supporting library. Direct repair, SWE-agent, and MatchFixAgent repair none of these five programs.
-  \item We establish migration acceptance and efficiency under common evaluation protocols across frameworks, programming languages, and repositories. LaDiM preserves complete MindSpore acceptance with 57.4\% fewer tokens than MatchFixAgent and reduces token use in the Java/DJL and time series comparisons.
+  \item We develop Layered Diagnosis, which uses dependencies among execution, forward values, gradients, and parameter updates to locate the causes of changed training behavior.
+  \item We design an agent framework with independent evidence handoff and repair history to connect investigation, edits, and verification. Repository context management coordinates this process across dependent files through Repository Structural Analysis and Repair Dependency Graph Planning.
+  \item We demonstrate LaDiM's effectiveness and token efficiency across framework, language, and repository migration, and identify the contributions of training signals and agent components through ablation studies.
 \end{itemize}
 
 \section{Related Work}
@@ -112,10 +112,12 @@ For a numerical comparison $d=x-\hat x$, $d\simeq0$ denotes agreement within its
 
 The LLM $M$ performs translation, investigation, and repair under role instructions $A_T$, $A_V$, and $A_R$. The Orchestrator $\mathcal O$ evaluates candidates and manages their shared investigation and repair budget $B$. In the algorithms, $S.\hat P$ is the candidate, $S.m$ contains its measurements, $q$ is its verification status, and $H$ is a conversation. Context $C$ retains evidence and provides tools; for repository tasks, it also stores the dependency plan and local check results. A submission sends the complete candidate for external verification after a repair stage that can contain several LLM calls, tests, and edits. Each $\textsc{LLMCall}(M,A,H,b,B)$ invokes $M$ with instructions $A$ and conversation $H$, charging its usage to the stage allowance $b$ and shared budget $B$. The Orchestrator counts each submission against $B$.
 
-\subsection{Verifier Agent}
+\subsection{Verifier Agent with Layered Diagnosis}
 \label{sec:hierarchy}
 
-The Verifier Agent uses Layered Diagnosis to focus its investigation on the computations responsible for observed discrepancies. For an \textbf{execution discrepancy} ($d_{\mathrm{execution},t}=1$), it inspects the exception and the calls that produced it. For a \textbf{forward discrepancy} ($d_{\mathrm{forward},t}\not\simeq0$), it traces the operators that produce different values and tests the suspected computation. When forward values agree but a \textbf{gradient discrepancy} ($d_{\mathrm{gradient},t}\not\simeq0$) remains, it examines parameter registration and the path from the parameters to the loss. When both forward values and gradients agree, it investigates an \textbf{update discrepancy} ($d_{\mathrm{update},t}\not\simeq0$) through the optimizer's rule and state. The first step with an observed discrepancy further guides this investigation because a changed update can alter later forward computations. The LLM selects code inspections and tests that distinguish possible causes, then records the code locations and observations supporting its hypotheses. Algorithm~\ref{alg:diagnose} organizes this investigation through the shared \textsc{LLMToolStep}, which calls the LLM, executes its requested tools in order, and retains their results. During investigation, the Verifier Agent can create and run scratch tests while candidate and supporting library code remain unchanged.
+The Verifier Agent receives the Translator Agent's candidate and the Orchestrator's measurements. It uses Layered Diagnosis to focus its investigation on the computations responsible for observed discrepancies. For an \textbf{execution discrepancy} ($d_{\mathrm{execution},t}=1$), it inspects the exception and the calls that produced it. For a \textbf{forward discrepancy} ($d_{\mathrm{forward},t}\not\simeq0$), it traces the operators that produce different values and tests the suspected computation. When forward values agree but a \textbf{gradient discrepancy} ($d_{\mathrm{gradient},t}\not\simeq0$) remains, it examines parameter registration and the path from the parameters to the loss. When both forward values and gradients agree, it investigates an \textbf{update discrepancy} ($d_{\mathrm{update},t}\not\simeq0$) through the optimizer's rule and state. The first step with an observed discrepancy further guides this investigation because a changed update can alter later forward computations. The LLM selects code inspections and tests that distinguish possible causes, then records the code locations and observations supporting its hypotheses. These records form the evidence for the independent handoff to the Repair Agent.
+
+Algorithm~\ref{alg:diagnose} expresses this reasoning through the training dependency relation $\mathcal D$, where $\Delta\theta_t=\theta_{t+1}-\theta_t$. The symbols $\ell$ and $h$ summarize the LLM's choice of computation and hypothesized cause within a call, and $a$ is its tool request or completion response. The Verifier uses both agreement and disagreement between layers to select $\ell$, then tests $h$ against code and execution evidence. The shared \textsc{ToolFeedback} operation executes requests in order and adds their results to the conversation. During investigation, the Verifier Agent can create and run scratch tests while candidate and supporting library code remain unchanged.
 
 \begin{algorithm}[!htb]
 \caption{Layered Diagnosis}
@@ -125,27 +127,31 @@ The Verifier Agent uses Layered Diagnosis to focus its investigation on the comp
 \Ensure Evidence $E$: code observations, test results, locations, and hypotheses
 \Function{LayeredDiagnosis}{$\mathcal T,S,M,B,C$}
   \State $H\gets\Call{StartConversation}{A_V,\mathcal T,S}$; $b\gets\Call{DiagnosisAllowance}{B}$
+  \State $\mathcal D:\ \mathrm{execution}\to v_t\to g_t\to\Delta\theta_t\to v_{t+1}$
   \While{$\Call{WithinLimits}{b,B}$}
-    \State $(H,a)\gets\Call{LLMToolStep}{M,A_V,H,S,b,B,C}$
+    \State $H\gets C.\Call{PrepareContext}{H,S}$
+    \State $(\ell,h,a)\gets\Call{LLMCall}{M,A_V,H,b,B}$
+    \Statex \hspace{\algorithmicindent}\hspace{\algorithmicindent}$\ell$: locate the discrepant computation along $\mathcal D$
+    \Statex \hspace{\algorithmicindent}\hspace{\algorithmicindent}$h$: explain its cause using agreeing and differing observations
+    \Statex \hspace{\algorithmicindent}\hspace{\algorithmicindent}$a$: inspect code or test $h$ at the suspected locations
+    \State $H\gets\Call{ToolFeedback}{a,H,S,A_V,C}$
     \State \textbf{if} $a.\mathrm{complete}$ \textbf{then break}
   \EndWhile
   \State \Return $\Call{PublicEvidence}{H,C}$
 \EndFunction
-\Function{LLMToolStep}{$M,A,H,S,b,B,C$}
-  \State $H\gets C.\Call{PrepareContext}{H,S}$
-  \State $a\gets\Call{LLMCall}{M,A,H,b,B}$ \Comment{Select inspections, tests, or edits}
-  \State $H\gets C.\Call{ExecuteTools}{a,H,S,A}$ \Comment{Execute requests and retain evidence}
-  \State \Return $(H,a)$
+\Function{ToolFeedback}{$a,H,S,A,C$}
+  \State $(C,S,r)\gets C.\Call{ExecuteTools}{a,S,A}$
+  \State \Return $H\mathbin{\|}(a,r)$ \Comment{Append response and tool observations}
 \EndFunction
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Repair Agent}
+\subsection{Repair Agent with Evidence Handoff and History}
 \label{sec:repair-agent}
 
 Independent evidence handoff gives the Repair Agent the Verifier Agent's recorded code observations, test results, and hypotheses, identified as the Verifier Agent's findings. The Repair Agent reassesses this evidence, runs further tests, and edits files in $W$, including supporting library code when the task permits it. The Orchestrator verifies each submission and returns the remaining discrepancies to guide the Repair Agent's next investigation and edits.
 
-Repair history preserves earlier edits, observations, and hypotheses across attempts. The continuing conversation includes failed tests and verification feedback, allowing the agent to relate a changed result to the preceding modification and revise explanations that did not resolve the fault. The current candidate also persists, so later attempts build on applied changes. Algorithm~\ref{alg:repair} reuses \textsc{LLMToolStep} from Algorithm~\ref{alg:diagnose}. Its \textsc{RepairComplete} condition requires a completion response, an applied edit in the current stage, and a test executed after the last edit. If an edit or test is missing, the conversation requests that action within the remaining budget. The Orchestrator evaluates the candidate when the repair stage ends.
+Repair history preserves earlier edits, observations, and hypotheses across attempts. The continuing conversation includes failed tests and verification feedback, allowing the agent to relate a changed result to the preceding modification and revise explanations that did not resolve the fault. The current candidate also persists, so later attempts build on applied changes. Algorithm~\ref{alg:repair} reuses \textsc{ToolFeedback} from Algorithm~\ref{alg:diagnose}, with $H\mathbin{\|}x$ denoting the addition of a record $x$ to the repair history. Its \textsc{RepairComplete} condition requires a completion response, an applied edit in the current stage, and a test executed after the last edit. If an edit or test is missing, the conversation requests that action within the remaining budget. The Orchestrator evaluates the candidate when the repair stage ends.
 
 \begin{algorithm}[!htb]
 \caption{\textsc{Repair}$(\mathcal T,S,E,q,M,B,C)$}
@@ -153,9 +159,11 @@ Repair history preserves earlier edits, observations, and hypotheses across atte
 \begin{algorithmic}[1]
 \State $H\gets\Call{IndependentHandoff}{A_R,\mathcal T,E,C}$
 \While{$\Call{SubmissionsLeft}{B}\land\Call{BudgetLeft}{B}$}
-  \State $(H,b)\gets\Call{BeginRepairStage}{H,S.m,B}$
+  \State $H\gets H\mathbin{\|}S.m$; $b\gets\Call{RepairAllowance}{B}$
   \While{$\Call{WithinLimits}{b,B}$}
-    \State $(H,a)\gets\Call{LLMToolStep}{M,A_R,H,S,b,B,C}$
+    \State $H\gets C.\Call{PrepareContext}{H,S}$
+    \State $a\gets\Call{LLMCall}{M,A_R,H,b,B}$ \Comment{Test hypotheses and select edits}
+    \State $H\gets\Call{ToolFeedback}{a,H,S,A_R,C}$
     \State \textbf{if} $\Call{RepairComplete}{a,H}$ \textbf{then break}
   \EndWhile
   \State $(S.m,q)\gets\mathcal O.\Call{Submit}{S.\hat P,B}$
@@ -172,36 +180,42 @@ A change to a shared implementation can affect several callers in a repository. 
 
 Through Repository Structural Analysis, the agent can inspect the repository's files, imports, function and class definitions, and notebook structure on demand. The agent uses Repair Dependency Graph Planning to group related target files into work units, each with a repair goal and selected tests, and organize their prerequisites as a directed acyclic graph. It selects a unit whose prerequisite units have valid local checks, then edits the files assigned to it. For each unit, LaDiM records the results of syntax checks and the tests selected in the plan. Changes to target files or the dependency plan invalidate the checks for affected units and their dependents in the plan, prompting the agent to check the corresponding files again. The Orchestrator evaluates the complete repository, including its entry points and training computations, to determine acceptance.
 
-Notebook tools let the agent inspect and revise code cells while checking that edits preserve valid syntax. The evidence archive retains code observations, measurements, hypotheses, and conversations with their code versions, and supports retrieval of relevant records. LaDiM rebuilds the conversation around the current plan, findings, and measurements when evidence passes to the Repair Agent, work shifts to another unit, or the conversation approaches its capacity. It restores relevant observations from earlier code reads when the corresponding files remain unchanged. Algorithm~\ref{alg:repository} provides these operations through the shared context used by Algorithms~\ref{alg:diagnose} and~\ref{alg:repair}. All work units share the repository files, repair history, and total budget.
+Notebook tools let the agent inspect and revise code cells while checking that edits preserve valid syntax. The evidence archive retains code observations, measurements, hypotheses, and conversations with their code versions, and supports retrieval of relevant records. LaDiM rebuilds the conversation around the current plan, findings, and measurements when evidence passes to the Repair Agent, work shifts to another unit, or the conversation approaches its capacity. It restores relevant observations from earlier code reads when the corresponding files remain unchanged. Algorithm~\ref{alg:repository} provides these operations through the shared context used by Algorithms~\ref{alg:diagnose} and~\ref{alg:repair}. Here $C.G$ is the work dependency graph, $C.Q$ stores local check results, and $C.E$ archives evidence. Tool calls update the shared state $S$ and context $C$; $U$ contains the units affected by changes to files or the plan. The agent selects structural analysis, graph planning, unit selection, file or notebook operations, tests, and evidence retrieval as tools within the investigation and repair loops. All work units share the repository files, repair history, and total budget.
 
 \begin{algorithm}[!htb]
 \caption{Repository migration and repair coordination}
 \label{alg:repository}
 \begin{algorithmic}[1]
 \Function{RepositoryMigrate}{$\mathcal T,M,B$}
-  \State $C\gets\Call{RepositoryContext}{\mathcal T}$ \Comment{Make repository tools available}
+  \State $C\gets\Call{RepositoryContext}{\mathcal T}$
   \State $S.\hat P\gets\Call{LLMTranslate}{M,A_T,\mathcal T}$
-  \State $(S.m,q)\gets\mathcal O.\Call{Verify}{S.\hat P}$ \Comment{Evaluate the complete repository}
+  \State $(S.m,q)\gets\mathcal O.\Call{Verify}{S.\hat P}$ \Comment{Complete repository}
   \If{$q=\mathrm{accepted}$} \State \Return $(S.\hat P,q)$ \EndIf
   \State $E\gets\Call{LayeredDiagnosis}{\mathcal T,S,M,B,C}$ \Comment{Algorithm~\ref{alg:diagnose}}
-  \State \Return $\Call{Repair}{\mathcal T,S,E,q,M,B,C}$ \Comment{Algorithm~\ref{alg:repair}; full repository submissions}
+  \State \Return $\Call{Repair}{\mathcal T,S,E,q,M,B,C}$ \Comment{Algorithm~\ref{alg:repair}}
 \EndFunction
-\Function{$C$.ExecuteTools}{$a,H,S,A$}
-  \ForAll{tool requests $c$ selected in $a$, in order}
-    \State Execute $c$ to inspect structure, plan dependencies, select a ready unit,
-    \Statex \hspace{\algorithmicindent}\hspace{\algorithmicindent}read or edit its files, run local checks, or retrieve evidence
-    \State Retain the result and its code version in $C$
-    \If{target files or the dependency plan changed}
-      \State Invalidate local checks for affected units and their dependents in the plan
-      \State Identify earlier measurements by the code version they evaluated
+\Function{$C$.ExecuteTools}{$a,S,A$}
+  \State $r\gets[\,]$
+  \ForAll{$c\in a.\mathrm{tools}$}
+    \State $U\gets\varnothing$
+    \If{$c.\mathrm{kind}=\mathrm{structure}$}
+      \State $o\gets\Call{RepositoryStructuralAnalysis}{C,S.\hat P}$
+    \ElsIf{$c.\mathrm{kind}=\mathrm{plan}$}
+      \State $(C.G,U,o)\gets\Call{RepairDependencyGraphPlanning}{c,C}$
+    \ElsIf{$c.\mathrm{kind}=\mathrm{select}$}
+      \State $(C.u,o)\gets\Call{SelectReadyUnit}{c,C.G,C.Q}$
+    \Else
+      \State $(C,S,o,U)\gets\Call{Execute}{c,C,S,A}$
     \EndIf
+    \State $C.E\gets C.E\mathbin{\|}(o,\Call{CodeVersion}{S})$; $r\gets r\mathbin{\|}o$
+    \State $C.Q[U\cup\Call{Dependents}{C.G,U}]\gets\mathrm{invalid}$
   \EndFor
-  \State \Return $H$ with the response $a$ and ordered tool results
+  \State \Return $(C,S,r)$
 \EndFunction
 \Function{$C$.PrepareContext}{$H,S$}
-  \If{evidence handoff, a unit switch, or context capacity requires reconstruction}
-    \State Rebuild $H$ for its current role from the plan, findings, and measurements
-    \State Restore relevant prior code reads whose files remain unchanged
+  \If{$\Call{Handoff}{C}\lor\Call{UnitChanged}{C}\lor\Call{NearCapacity}{H}$}
+    \State $R\gets\Call{RelevantUnchangedReads}{C.E,S}$
+    \State $H\gets\Call{Rebuild}{C.G,C.E,S.m,R}$
   \EndIf
   \State \Return $H$
 \EndFunction
@@ -217,7 +231,7 @@ Notebook tools let the agent inspect and revise code cells while checking that e
 \label{sec:setup}
 
 \textbf{Tasks.}
-The main comparison contains 50 migration tasks from PyTorch to MindSpore, covering tensor operations, CNNs, MLPs, Transformers, language models, and parameter and optimizer interfaces. We also migrate 18 Java/DJL programs to Python/PyTorch, comprising eight textbook examples and ten applications~\citep{djl2026,d2ljava2026}, and two public repositories for time series~\citep{jingles2026timeseries} and recommendation~\citep{chak2026twotower}. The repositories contain 13 and 24 code files or notebooks, totaling 865 and 2,086 nonblank lines. To examine repair of actual translation errors, we use ten programs produced by the initial translation, of which five fail evaluation and five pass before repair. This study permits changes to the candidates and their supporting library. A separate study varies the training signals provided as feedback for repairing 16 faulty candidates. The JAX study uses six candidates, with execution, forward, and gradient faults in an MLP and a CNN. A separate detection study compares direct gradient and update checks with loss checks as source and target executions train from the same initial state. Appendix~\ref{sec:task-construction} summarizes the program collections in Table~\ref{tab:collections}.
+The main comparison contains 50 migration tasks from PyTorch to MindSpore, covering tensor operations, CNNs, MLPs, Transformers, language models, and parameter and optimizer interfaces. We also migrate 18 Java/DJL programs to Python/PyTorch, comprising eight textbook examples and ten applications~\citep{djl2026,d2ljava2026}, and two public repositories for time series~\citep{jingles2026timeseries} and recommendation~\citep{chak2026twotower}. The repositories contain 13 and 24 code files or notebooks, totaling 865 and 2,086 nonblank lines. To examine repair of actual translation errors, we use ten programs produced by the initial translation, of which five fail evaluation and five pass before repair. We use 16 faulty candidates to study training signals and six faulty MLP and CNN candidates to study repair on JAX. A separate detection study examines how early gradient, update, and loss checks reveal training faults. Appendix~\ref{sec:task-construction} summarizes the program collections in Table~\ref{tab:collections}.
 
 \textbf{Compared methods.}
 We compare LaDiM with SWE-agent~\citep{yang2024sweagent} and MatchFixAgent~\citep{ibrahimzada2025matchfixagent} using a common DeepSeek backend and each baseline's native repair procedure. The main table also includes Direct LLM for initial translation, CodeTransEngine's direct translation configuration~\citep{macedo2025codetransengine}, MSAdapter~\citep{openi2025msadapter}, and InterTrans~\citep{macedo2024intertrans}. Test-guided repair rewrites the complete candidate using test feedback. Direct repair in the analysis studies receives the same candidate as LaDiM and uses LaDiM's inspection, testing, and editing tools.
@@ -225,13 +239,13 @@ We compare LaDiM with SWE-agent~\citep{yang2024sweagent} and MatchFixAgent~\cite
 For JAX, Ivy converts code between frameworks by transpiling the supplied model~\citep{ivy2026transpiler}, while \texttt{torch2jax} maps PyTorch operations and tensors to JAX through native conversion~\citep{torch2jax2026}. We apply each converter once to the supplied faulty candidates and measure whether the existing faults are removed, without LLM repair.
 
 \textbf{Evaluation Protocol.}
-Methods use common source programs, evaluation inputs, and corresponding initial parameters. Repair methods also receive the same initial translations. Acceptance requires agreement in execution, forward values, gradients, and parameter updates, together with the task's optimizer and interface checks. For repositories, \emph{Behavior checks passed} counts successful execution, numerical, and interface checks. \emph{Entry points} counts successful execution of the training script, notebook, and teaching examples. \emph{Original tests} counts passing tests supplied by the repository. Candidates that pass the evaluation available during repair are checked on additional seeds. Investigation and repair allow up to 40 LLM calls per program and 80 per repository, with at most four submissions. Appendix~\ref{sec:supplementary-protocols} gives the numerical tolerances, seeds, and complete budgets.
+Methods use common source programs, evaluation inputs, and corresponding initial parameters. Repair methods also receive the same initial translations. Acceptance requires agreement in execution, forward values, gradients, and parameter updates, together with the task's optimizer and interface checks. For repositories, \emph{Checks} counts successful execution, numerical, and interface checks. \emph{Entries} counts successful execution of the training script, notebook, and teaching examples. \emph{Tests} counts passing tests supplied by the repository. Candidates that pass the evaluation available during repair are checked on additional seeds. Investigation and repair allow up to 40 LLM calls per program and 80 per repository, with at most four submissions. Appendix~\ref{sec:supplementary-protocols} gives the numerical tolerances, seeds, and complete budgets.
 
 \subsection{Main Results}
 \label{sec:main-results}
 
 \begin{table}[t]
-\caption{Migration acceptance and token use on common inputs. Panels (a,b) compare individual programs, and panels (c,d) compare repositories. End-to-end costs include the shared initial translation once and all subsequent calls, including failed attempts. A dash denotes a method without LLM calls.}
+\caption{Migration acceptance and token use on common inputs. Panels (a,b) compare individual programs, and panels (c,d) compare repositories. End-to-end costs include the shared initial translation once and all subsequent calls, including failed attempts. Tokens are in millions. Calls count all LLM calls in (a,b) and investigation and repair calls in (c,d). A dash denotes a method without LLM calls.}
 \label{tab:main-results}
 \centering
 \small
@@ -243,7 +257,7 @@ Methods use common source programs, evaluation inputs, and corresponding initial
 \setlength{\tabcolsep}{2pt}
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.3cm}rrr@{}}
 \toprule
-\textbf{Method} & \thead{LLM\\calls} & \thead{Tokens\\(millions)} & \textbf{Accepted} \\
+\textbf{Method} & \textbf{Calls} & \textbf{Tokens} & \textbf{Accepted} \\
 \midrule
 Direct LLM & 29 & 0.429 & 29/50 \\
 CodeTransEngine & 29 & 0.280 & 31/50 \\
@@ -261,7 +275,7 @@ MatchFixAgent & 619 & 12.097 & \textbf{50/50} \\
 \setlength{\tabcolsep}{2pt}
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.3cm}rrr@{}}
 \toprule
-\textbf{Method} & \thead{LLM\\calls} & \thead{Tokens\\(millions)} & \textbf{Accepted} \\
+\textbf{Method} & \textbf{Calls} & \textbf{Tokens} & \textbf{Accepted} \\
 \midrule
 Direct LLM & 18 & 0.694 & 1/18 \\
 InterTrans & 89 & 2.286 & 1/18 \\
@@ -277,7 +291,7 @@ MatchFixAgent & 524 & 28.355 & 8/18 \\
 \toprule
 & \multicolumn{4}{c}{\textit{(c) Time series repository}} & \multicolumn{4}{c}{\textit{(d) Recommendation repository}} \\
 \cmidrule(lr){2-5}\cmidrule(l){6-9}
-\textbf{Method} & \thead{Behavior\\checks\\passed} & \thead{Entry\\points} & \thead{Repair\\calls} & \thead{Tokens\\(millions)} & \thead{Behavior\\checks\\passed} & \thead{Original\\tests} & \thead{Repair\\calls} & \thead{Tokens\\(millions)} \\
+\textbf{Method} & \textbf{Checks} & \textbf{Entries} & \textbf{Calls} & \textbf{Tokens} & \textbf{Checks} & \textbf{Tests} & \textbf{Calls} & \textbf{Tokens} \\
 \midrule
 SWE-agent & 69/69 & 3/3 & 80 & 8.200 & 104/145 & 10/10 & 80 & 8.317 \\
 MatchFixAgent & 69/69 & 3/3 & 69 & 13.598 & 129/145 & 0/10 & 80 & 8.679 \\
@@ -293,31 +307,31 @@ MatchFixAgent & 69/69 & 3/3 & 69 & 13.598 & 129/145 & 0/10 & 80 & 8.679 \\
 \end{table}
 
 \textbf{Migration to MindSpore.}
-LaDiM completes all 50 MindSpore migrations with 57.4\% fewer tokens than MatchFixAgent (Table~\ref{tab:main-results}a). The savings cover both programs that require repair and programs that pass evaluation before repair (Figure~\ref{fig:repair-comparison}). Reduced input token usage accounts for 93.0\% of the savings, so most of the reduction comes from processing less context during investigation and repair. With submission limits of one, two, and four, LaDiM accepts 46/50, 50/50, and 50/50 tasks, respectively.
+LaDiM completes all 50 MindSpore migrations with 57.4\% fewer tokens than MatchFixAgent (Table~\ref{tab:main-results}a). The savings cover both programs that require repair and programs that pass evaluation before repair (Figure~\ref{fig:repair-comparison}). Reduced input token usage accounts for 93.0\% of the savings, so most of the reduction comes from processing less context during investigation and repair. With submission limits of one, two, and four, LaDiM accepts 46/50, 50/50, and 50/50 tasks, respectively. It therefore achieves complete migration with at most two submissions per program while substantially reducing the context processed by the LLM.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{figures/repair_comparison.pdf}
-\caption{Token costs on MindSpore migration. (a) Total tokens for LaDiM, MatchFixAgent, and SWE-agent are divided into initial translation and subsequent calls for programs that pass or fail their first evaluation before repair. The latter costs are labeled \emph{Passes before repair} and \emph{Needs repair}. (b) Each bar shows MatchFixAgent tokens minus LaDiM tokens for one distinct combination of source program and evaluation requirements, sorted by increasing difference within each group. LaDiM and MatchFixAgent both accept 50/50 tasks. LaDiM uses 57.4\% fewer tokens. Positive values indicate lower LaDiM cost.}
+\includegraphics[width=0.96\linewidth]{figures/repair_comparison.pdf}
+\caption{Token costs on MindSpore migration. (a) Costs comprise initial translation and subsequent calls, grouped by whether programs pass evaluation before repair. (b) Each bar gives MatchFixAgent tokens minus LaDiM tokens for one source program and evaluation setting, sorted within each group. Positive values favor LaDiM. Both methods accept 50/50 tasks. LaDiM uses 57.4\% fewer tokens.}
 \label{fig:repair-comparison}
 \end{figure}
 
 \textbf{Migration across languages.}
-LaDiM accepts all programs completed by MatchFixAgent and an additional recurrent network example in the Java/DJL collection (Table~\ref{tab:main-results}b). Its 9/18 accepted programs comprise all eight textbook examples and one application, compared with 8/18 for SWE-agent and MatchFixAgent. LaDiM uses 11.7\% fewer tokens than SWE-agent and 24.2\% fewer than MatchFixAgent. These results extend training behavior repair to tasks that change both the programming language and framework.
+LaDiM accepts all programs completed by MatchFixAgent and an additional recurrent network example in the Java/DJL collection (Table~\ref{tab:main-results}b). Its 9/18 accepted programs comprise all eight textbook examples and one application, compared with 8/18 for SWE-agent and MatchFixAgent. LaDiM uses 11.7\% fewer tokens than SWE-agent and 24.2\% fewer than MatchFixAgent. LaDiM thus extends training behavior repair across languages, accepting more programs with fewer tokens than both agent baselines.
 
 \textbf{Repository migration.}
 All three agents complete the time series migration, preserving the shared model across a training script, notebook, and teaching examples. At the same complete acceptance of 69/69 checks, LaDiM uses 68.1\% fewer end-to-end tokens than SWE-agent and 80.8\% fewer than MatchFixAgent.
 
-On recommendation, LaDiM restores reward model inference and retrieval, which remain unresolved in both baselines, and executes the training command. It achieves the highest behavioral coverage, passing 130/145 checks and all ten original tests. These results cover the shared model's use in training, inference, and retrieval. Appendix~\ref{sec:repository-results} gives the remaining numerical differences and detailed checks.
+On recommendation, LaDiM restores reward model inference and retrieval, which remain unresolved in both baselines, and executes the training command. It achieves the highest behavioral coverage, passing 130/145 checks and all ten original tests. The repository results show that LaDiM combines lower migration costs on time series with broader behavioral coverage on recommendation, where shared implementations serve training, inference, and retrieval. Appendix~\ref{sec:repository-results} gives the remaining numerical differences and detailed checks.
 
 \subsection{Analysis Experiments}
 \label{sec:fault-characterization}
 
 \textbf{Repairing Translation Errors.}
-Table~\ref{tab:natural-repairs} reports failed programs repaired, passing programs preserved, and final accepted programs for the ten translated programs. LaDiM repairs four of the five failed programs and preserves all five programs that pass evaluation before repair, raising final acceptance from five to nine. Direct repair, SWE-agent, and MatchFixAgent retain the initial five successes but recover none of the failed programs. In the LSTM case, LaDiM repairs recurrent operations and tensor indexing in the supporting library, restoring agreement in loss, gradients, and parameter updates. This example shows how training discrepancies guide repair into library implementations used by the translated program (Appendix~\ref{sec:natural-protocol}).
+Methods may edit both the ten translated programs and their supporting library. Table~\ref{tab:natural-repairs} reports how many failed programs are \emph{Repaired}, how many passing programs are \emph{Preserved}, and how many programs are finally \emph{Accepted}. LaDiM repairs four of the five failed programs and preserves all five programs that pass evaluation before repair, raising final acceptance from five to nine. Direct repair, SWE-agent, and MatchFixAgent retain the initial five successes but recover none of the failed programs. In the LSTM case, LaDiM repairs recurrent operations and tensor indexing in the supporting library, restoring agreement in loss, gradients, and parameter updates. This example shows how training discrepancies guide repair into library implementations used by the translated program (Appendix~\ref{sec:natural-protocol}).
 
 \begin{table}[!htb]
-\caption{Repair and preservation on ten programs produced by the initial translation. Five programs fail evaluation and five pass before repair. Costs include all investigation and repair calls, with candidates and supporting libraries editable.}
+\caption{Repair and preservation on ten programs produced by the initial translation. Five programs fail evaluation and five pass before repair. Tokens are in millions and include all investigation and repair calls, with candidates and supporting libraries editable.}
 \label{tab:natural-repairs}
 \centering
 \small
@@ -325,7 +339,7 @@ Table~\ref{tab:natural-repairs} reports failed programs repaired, passing progra
 
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}
 \toprule
-\textbf{Method} & \thead{Failed programs\\repaired} & \thead{Passing programs\\preserved} & \thead{Repair tokens\\(millions)} & \thead{Final\\accepted} \\
+\textbf{Method} & \textbf{Repaired} & \textbf{Preserved} & \textbf{Tokens} & \textbf{Accepted} \\
 \midrule
 Direct repair & 0/5 & 5/5 & 3.751 & 5/10 \\
 SWE-agent & 0/5 & 5/5 & 12.678 & 5/10 \\
@@ -338,12 +352,12 @@ LaDiM & \textbf{4/5} & 5/5 & 13.207 & \textbf{9/10} \\
 \end{table}
 
 \textbf{Training Signals and Detection Latency.}
-Gradient errors can leave the current loss unchanged. Errors in parameter updates can preserve both current forward values and gradients, with their effects appearing in later steps. LaDiM's gradient and update checks detect their respective faults at step~1 in every run (Figure~\ref{fig:gradient-drift}). Source and target executions retain separate state as training proceeds. Observing the affected training computation therefore exposes these faults before they produce a detectable loss difference. Appendix~\ref{sec:detection-measurements} gives the thresholds, checks with synchronized states, and evaluations of programs without these faults.
+Gradient errors can leave the current loss unchanged. Errors in parameter updates can preserve both current forward values and gradients, with their effects appearing in later steps. LaDiM's gradient and update checks detect their respective faults at step~1 in every run (Figure~\ref{fig:gradient-drift}). Source and target executions start from the same initial state and then train independently. Each fault is evaluated in 12 runs from four models and three seeds. Within 50 steps, loss checks detect gradient faults in 3 of 12 runs and update faults in 4 of 12 runs. Observing the affected training computation therefore exposes these faults before they produce a detectable loss difference. Appendix~\ref{sec:detection-measurements} gives the thresholds, checks with synchronized states, and evaluations of programs without these faults.
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=\linewidth]{figures/gradient_drift.pdf}
-\caption{Training signal detection and loss difference threshold crossings. Each panel contains 12 runs from four models and three seeds. LaDiM detects gradient scaling (a) and partial update suppression (b) at step~1 in every run. The mean loss difference crosses its threshold at step~31 in (a) and step~18 in (b). Within 50 training steps, the loss difference exceeds its threshold in 3 of 12 runs with gradient errors and 4 of 12 runs with update errors. Differences are divided by their detection thresholds. Curves show means, and shading spans the minimum and maximum across runs.}
+\includegraphics[width=0.96\linewidth]{figures/gradient_drift.pdf}
+\caption{Detection of (a) gradient scaling and (b) partial update suppression. LaDiM detects both faults at step~1 in every run. Mean loss differences cross the threshold at steps~31 and~18, respectively. Individual runs cross at different times or remain below it. Curves show means and shading spans the minimum and maximum over 12 runs. Differences are divided by their detection thresholds.}
 \label{fig:gradient-drift}
 \end{figure}
 
@@ -393,7 +407,7 @@ We compare cumulative feedback on 16 fixed candidates from a CNN, an image MLP, 
 
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.7cm}rr@{}}
 \toprule
-\textbf{Feedback} & \textbf{Accepted} & \thead{Repair\\tokens} \\
+\textbf{Feedback} & \textbf{Accepted} & \textbf{Tokens} \\
 \midrule
 Execution and basic checks & 4/16 & 2,088,915 \\
 \quad + Forward values & 8/16 & 2,603,211 \\
@@ -410,7 +424,7 @@ Execution and basic checks & 4/16 & 2,088,915 \\
 
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.7cm}rr@{}}
 \toprule
-\textbf{Condition} & \thead{Accepted\\(repaired)} & \thead{Repair\\tokens} \\
+\textbf{Condition} & \textbf{Accepted} & \textbf{Tokens} \\
 \midrule
 LaDiM & \textbf{9/10 (4/5)} & 15,547,813 \\
 Continuous conversation & 8/10 (3/5) & 14,516,463 \\
@@ -431,7 +445,7 @@ Without repair history & 5/10 (0/5) & 10,851,537 \\
 \toprule
 & \multicolumn{2}{c}{\textbf{Without component}} & \multicolumn{2}{c}{\textbf{With component}} & \\
 \cmidrule(lr){2-3}\cmidrule(lr){4-5}
-\textbf{Component} & \thead{LLM\\calls} & \textbf{Tokens} & \thead{LLM\\calls} & \textbf{Tokens} & \thead{Token\\reduction} \\
+\textbf{Component} & \textbf{Calls} & \textbf{Tokens} & \textbf{Calls} & \textbf{Tokens} & \textbf{Saved} \\
 \midrule
 Repository context management & 26 & 6,047,074 & 22 & 1,936,579 & \textbf{68.0\%} \\
 Repository Structural Analysis & 42 & 2,651,248 & 30 & 2,126,900 & \textbf{19.8\%} \\
@@ -441,7 +455,7 @@ Repository Structural Analysis & 42 & 2,651,248 & 30 & 2,126,900 & \textbf{19.8\
 
 \par\smallskip
 \begin{minipage}{\linewidth}
-\footnotesize In (a,b), repair tokens include investigation and repair. Panel (b) uses editing examples and feedback when edits are incorrectly formatted. In (c), calls cover investigation and repair, and tokens also include initial translation. Each setting in (c) is run once. The two comparisons use separate runs of LaDiM with all components enabled, so their token costs differ.
+\footnotesize Tokens are reported as counts. In (a,b), they cover investigation and repair. Panel (b) uses editing examples and feedback when edits are incorrectly formatted. In (c), calls cover investigation and repair, and tokens also include initial translation. Saved is the percentage reduction in tokens. Each setting in (c) is run once. The two comparisons use separate runs of LaDiM with all components enabled, so their token costs differ.
 \end{minipage}
 \end{table}
 
@@ -824,7 +838,7 @@ The common MindSpore initial translations cost 429,109 tokens. This amount is in
 All failed tasks remain in each study's declared denominator, and all failed calls remain in its cost totals. Acceptance at a submission budget scores the current candidate, including any regression after an earlier pass. An edit counts one successfully applied editing operation and can replace several code blocks across files in the declared scope. Investigation and repair share cumulative call, output token, and time budgets across submissions.
 
 \begin{table}[!htb]
-\caption{Complete input and output token costs by method for the two program migration collections. Costs include initial translation and every subsequent call. Acceptance uses the declared task denominator for each collection.}
+\caption{Complete input and output token costs by method for the two program migration collections. Input, output, and total tokens are in millions. Calls and tokens include initial translation and every subsequent call. Acceptance uses the declared task denominator for each collection.}
 \label{tab:program-costs}
 \centering
 \small
@@ -832,7 +846,7 @@ All failed tasks remain in each study's declared denominator, and all failed cal
 
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}
 \toprule
-\textbf{Method} & \thead{LLM\\calls} & \thead{Input tokens\\(millions)} & \thead{Output tokens\\(millions)} & \thead{Total tokens\\(millions)} & \textbf{Accepted} \\
+\textbf{Method} & \textbf{Calls} & \textbf{Input} & \textbf{Output} & \textbf{Tokens} & \textbf{Accepted} \\
 \midrule
 \multicolumn{6}{l}{\textit{(a) PyTorch to MindSpore}} \\
 Direct LLM & 29 & 0.018 & 0.411 & 0.429 & 29/50 \\
@@ -913,7 +927,7 @@ Here $\Delta\theta$ and $\Delta\hat\theta$ denote source and target parameter up
 The component study uses the same 50 MindSpore task identifiers, initial translations, acceptance checks, and budgets as the main comparison. The continuous conversation condition keeps investigation and repair in one conversation, including earlier messages and reasoning history. Independent evidence handoff supplies the Verifier's evidence to a separate repair conversation. Without repair history, the context for each repair attempt after the first starts from the initial investigation and latest observation. The current files and cumulative budget are retained. Disabling progress reminders leaves the call and submission limits unchanged.
 
 \begin{table}[!htb]
-\caption{Component variants and added investigation for baseline agents on the 50 MindSpore task identifiers. Token totals include initial translation and all subsequent calls.}
+\caption{Component variants and added investigation for baseline agents on the 50 MindSpore task identifiers. Tokens are in millions and include initial translation and all subsequent calls.}
 \label{tab:components}
 \centering
 \small
@@ -921,7 +935,7 @@ The component study uses the same 50 MindSpore task identifiers, initial transla
 
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrr@{}}
 \toprule
-\textbf{Setting} & \textbf{Accepted} & \thead{Total tokens\\(millions)} \\
+\textbf{Setting} & \textbf{Accepted} & \textbf{Tokens} \\
 \midrule
 LaDiM & 50/50 & 5.159 \\
 Continuous investigation and repair conversation & 49/50 & 5.603 \\
@@ -946,7 +960,7 @@ LaDiM accepts 50/50 task identifiers, compared with 49/50 when investigation and
 The second component study uses the same ten programs produced by initial translation as Table~\ref{tab:natural-repairs}, of which five fail evaluation and five pass before repair. Methods may edit these programs and their supporting libraries. LaDiM in Table~\ref{tab:natural-components} uses independent evidence handoff and repair history, with examples of the edit format and corrective feedback for malformed edits. Each other condition changes one component while retaining the candidates, workspace access, acceptance checks, and repair budgets. Removing the edit examples and format correction gives the LaDiM configuration reported in Table~\ref{tab:natural-repairs}. All conditions also pass evaluation on the five programs that pass before repair.
 
 \begin{table}[!htb]
-\caption{Complete component results on ten programs produced by initial translation. Total tokens cover investigation and repair on all ten programs, including failed attempts.}
+\caption{Complete component results on ten programs produced by initial translation. Repaired counts failed programs corrected, and Preserved counts passing programs that remain accepted. Tokens are in millions and cover investigation and repair on all ten programs, including failed attempts.}
 \label{tab:natural-components}
 \centering
 \small
@@ -954,7 +968,7 @@ The second component study uses the same ten programs produced by initial transl
 
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{4.6cm}rrrr@{}}
 \toprule
-\textbf{Condition} & \thead{Failed programs\\repaired} & \thead{Passing programs\\preserved} & \thead{Repair tokens\\(millions)} & \thead{Final\\accepted} \\
+\textbf{Condition} & \textbf{Repaired} & \textbf{Preserved} & \textbf{Tokens} & \textbf{Accepted} \\
 \midrule
 LaDiM & 4/5 & 5/5 & 15.548 & 9/10 \\
 Continuous conversation & 3/5 & 5/5 & 14.516 & 8/10 \\
@@ -992,7 +1006,7 @@ In the LSTM example in Section~\ref{sec:fault-characterization}, LaDiM repairs t
 All methods receive identical copies of the source repositories and the same initial translations, task requirements, and acceptance procedures. The time series translation has three generation calls totaling 163,661 tokens. The recommendation translation uses 20 calls totaling 368,368 tokens. Translation follows the source repository's imports, and its cost includes failed or truncated attempts. In Table~\ref{tab:repository-costs}, each method's total includes the common initial translation once and all subsequent investigation and repair calls.
 
 \begin{table}[!htb]
-\caption{Training checks and complete costs for repository migration. Each training signal has nine checks for time series, from three steps on three seeds, and 18 for recommendation, from six model execution paths and three steps on the public seed. Total tokens include investigation and repair input and output plus the common initial translation.}
+\caption{Training checks and complete costs for repository migration. Each training signal has nine checks for time series, from three steps on three seeds, and 18 for recommendation, from six model execution paths and three steps on the public seed. Calls, input tokens, and output tokens cover investigation and repair. Tokens reports the total including the common initial translation. Token values are counts.}
 \label{tab:repository-costs}
 \centering
 \small
@@ -1000,7 +1014,7 @@ All methods receive identical copies of the source repositories and the same ini
 
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrrr@{}}
 \toprule
-\textbf{Method} & \textbf{Gradients} & \thead{Parameter\\updates} & \thead{Repair\\calls} & \textbf{Submissions} & \thead{Repair input\\tokens} & \thead{Repair output\\tokens} & \thead{Total\\tokens} \\
+\textbf{Method} & \textbf{Gradients} & \thead{Parameter\\updates} & \textbf{Calls} & \textbf{Submissions} & \textbf{Input} & \textbf{Output} & \textbf{Tokens} \\
 \midrule
 \multicolumn{8}{l}{\textit{Time series}} \\
 LaDiM & 9/9 & 9/9 & 35 & 2 & 2,345,473 & 105,096 & 2,614,230 \\
@@ -1077,7 +1091,7 @@ For the repository experiments, investigation allows up to six LLM calls and 64,
 We add Verifier investigation, independent evidence handoff, and repository context management cumulatively to the Repair Agent on the time series and recommendation repositories (Table~\ref{tab:repository-cumulative-full}). Each condition runs once with the same source, initial candidate, evaluation inputs, seeds, thresholds, full training signals, and total budgets. The base condition retains the repair prompts, ordinary inspection and editing tools, syntax checks, and progress reminders. After adding investigation, investigation and repair share one conversation until independent evidence handoff is also added. All four conditions accept the time series repository with 69/69 checks and pass 131/145 checks on recommendation. Each condition therefore fully accepts one of the two repositories.
 
 \begin{table}[!htb]
-\caption{Cumulative agent components on both repositories. LLM calls cover investigation and repair, and total tokens also include the shared initial translation. Each row adds a component to the preceding row.}
+\caption{Cumulative agent components on both repositories. Checks reports passed behavior checks. Calls cover investigation and repair, and tokens also include the shared initial translation. Each row adds a component to the preceding row.}
 \label{tab:repository-cumulative-full}
 \centering
 \small
@@ -1089,7 +1103,7 @@ We add Verifier investigation, independent evidence handoff, and repository cont
 \toprule
 & \multicolumn{3}{c}{\textbf{Time series}} & \multicolumn{3}{c}{\textbf{Recommendation}} \\
 \cmidrule(lr){2-4}\cmidrule(l){5-7}
-\textbf{Condition} & \thead{Behavior\\checks\\passed} & \thead{LLM\\calls} & \thead{Total\\tokens} & \thead{Behavior\\checks\\passed} & \thead{LLM\\calls} & \thead{Total\\tokens} \\
+\textbf{Condition} & \textbf{Checks} & \textbf{Calls} & \textbf{Tokens} & \textbf{Checks} & \textbf{Calls} & \textbf{Tokens} \\
 \midrule
 Repair Agent & 69/69 & 26 & 6,128,331 & 131/145 & 62 & 8,335,687 \\
 \quad + Verifier investigation & 69/69 & 18 & 3,896,158 & 131/145 & 59 & 8,912,546 \\
@@ -1110,7 +1124,7 @@ On recommendation, adding the components increases token use while all four cond
 The comparison with and without Repository Structural Analysis retains Repair Dependency Graph Planning, notebook tools, ordinary file inspection, independent evidence handoff, and evidence management in both conditions. Removing Repository Structural Analysis removes the inventory of files, imports, symbols, and notebook cells, together with the list of files not yet assigned to a work unit. With the component enabled, the agent requests structural analysis when needed. Initialization and context reconstruction do not perform this analysis. Each condition runs once on each repository with the same initial translation and repository budgets.
 
 \begin{table}[!htb]
-\caption{Repository comparisons that remove one component at a time. Both comparisons use the same LaDiM run with all components for each repository. LLM calls cover investigation and repair, and total tokens include initial translation.}
+\caption{Repository comparisons that remove one component at a time. Both comparisons use the same LaDiM run with all components for each repository. Checks reports passed behavior checks. Calls cover investigation and repair, and tokens include initial translation.}
 \label{tab:repository-independent}
 \centering
 \small
@@ -1124,7 +1138,7 @@ The comparison with and without Repository Structural Analysis retains Repair De
 \toprule
 & \multicolumn{3}{c}{\textbf{Time series}} & \multicolumn{3}{c}{\textbf{Recommendation}} \\
 \cmidrule(lr){2-4}\cmidrule(l){5-7}
-\textbf{Condition} & \thead{Behavior\\checks\\passed} & \thead{LLM\\calls} & \thead{Total\\tokens} & \thead{Behavior\\checks\\passed} & \thead{LLM\\calls} & \thead{Total\\tokens} \\
+\textbf{Condition} & \textbf{Checks} & \textbf{Calls} & \textbf{Tokens} & \textbf{Checks} & \textbf{Calls} & \textbf{Tokens} \\
 \midrule
 LaDiM & 69/69 & 30 & 2,126,900 & 131/145 & 80 & 9,961,503 \\
 Without Repository Structural Analysis & 69/69 & 42 & 2,651,248 & 131/145 & 80 & 7,172,218 \\
@@ -1151,7 +1165,7 @@ Without planning, submissions one through four pass 128, 103, 133, and 130 of th
 This study uses twelve public model workloads from PyTorch examples, minGPT, and torchvision.\footnote{\url{https://github.com/pytorch/examples}, \url{https://github.com/karpathy/minGPT}, and \url{https://github.com/pytorch/vision}.} They cover image classification, super-resolution, a variational autoencoder, image generation, recurrent and Transformer language models, time series, two policy learning models, graph attention, GPT, and ResNet. Initial translation returns code for ten workloads. Eight translated programs pass evaluation on all three seeds before repair, and two fail. Initial translation of the image generation and Transformer language modeling workloads exhausts the output budget without returning code. All four methods receive the same two failing translations, for the time series model and ResNet, for repair.
 
 \begin{table}[!htb]
-\caption{Repair of two failing native JAX translations from twelve source workloads. For each method, total tokens for the two repair tasks include their 31,427 shared initial translation tokens once. Totals for all twelve sources include all 139,724 initial translation tokens once. Each method accepts 1/2 repair tasks and 9/12 source workloads overall.}
+\caption{Repair of two failing native JAX translations from twelve source workloads. Calls and Tokens cover repair. Two tasks and All sources report total tokens including 31,427 and 139,724 shared initial translation tokens, respectively, counted once. Each method accepts 1/2 repair tasks and 9/12 source workloads overall. Token values are counts.}
 \label{tab:native-jax}
 \centering
 \small
@@ -1161,7 +1175,7 @@ This study uses twelve public model workloads from PyTorch examples, minGPT, and
 
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}
 \toprule
-\textbf{Method} & \thead{Repair\\calls} & \thead{Repair\\tokens} & \thead{Two repair tasks\\total tokens} & \thead{All twelve sources\\total tokens} \\
+\textbf{Method} & \textbf{Calls} & \textbf{Tokens} & \textbf{Two tasks} & \textbf{All sources} \\
 \midrule
 LaDiM & 35 & 1,840,066 & 1,871,493 & 1,979,790 \\
 Direct repair & 28 & 760,935 & 792,362 & 900,659 \\

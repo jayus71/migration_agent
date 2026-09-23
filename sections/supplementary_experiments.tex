@@ -22,7 +22,7 @@ The common MindSpore initial translations cost 429,109 tokens. This amount is in
 All failed tasks remain in each study's declared denominator, and all failed calls remain in its cost totals. Acceptance at a submission budget scores the current candidate, including any regression after an earlier pass. An edit counts one successfully applied editing operation and can replace several code blocks across files in the declared scope. Investigation and repair share cumulative call, output token, and time budgets across submissions.
 
 \begin{table}[!htb]
-\caption{Complete input and output token costs by method for the two program migration collections. Costs include initial translation and every subsequent call. Acceptance uses the declared task denominator for each collection.}
+\caption{Complete input and output token costs by method for the two program migration collections. Input, output, and total tokens are in millions. Calls and tokens include initial translation and every subsequent call. Acceptance uses the declared task denominator for each collection.}
 \label{tab:program-costs}
 \centering
 \small
@@ -88,7 +88,7 @@ Here $\Delta\theta$ and $\Delta\hat\theta$ denote source and target parameter up
 The component study uses the same 50 MindSpore task identifiers, initial translations, acceptance checks, and budgets as the main comparison. The continuous conversation condition keeps investigation and repair in one conversation, including earlier messages and reasoning history. Independent evidence handoff supplies the Verifier's evidence to a separate repair conversation. Without repair history, the context for each repair attempt after the first starts from the initial investigation and latest observation. The current files and cumulative budget are retained. Disabling progress reminders leaves the call and submission limits unchanged.
 
 \begin{table}[!htb]
-\caption{Component variants and added investigation for baseline agents on the 50 MindSpore task identifiers. Token totals include initial translation and all subsequent calls.}
+\caption{Component variants and added investigation for baseline agents on the 50 MindSpore task identifiers. Tokens are in millions and include initial translation and all subsequent calls.}
 \label{tab:components}
 \centering
 \small
@@ -105,7 +105,7 @@ LaDiM accepts 50/50 task identifiers, compared with 49/50 when investigation and
 The second component study uses the same ten programs produced by initial translation as Table~\ref{tab:natural-repairs}, of which five fail evaluation and five pass before repair. Methods may edit these programs and their supporting libraries. LaDiM in Table~\ref{tab:natural-components} uses independent evidence handoff and repair history, with examples of the edit format and corrective feedback for malformed edits. Each other condition changes one component while retaining the candidates, workspace access, acceptance checks, and repair budgets. Removing the edit examples and format correction gives the LaDiM configuration reported in Table~\ref{tab:natural-repairs}. All conditions also pass evaluation on the five programs that pass before repair.
 
 \begin{table}[!htb]
-\caption{Complete component results on ten programs produced by initial translation. Total tokens cover investigation and repair on all ten programs, including failed attempts.}
+\caption{Complete component results on ten programs produced by initial translation. Repaired counts failed programs corrected, and Preserved counts passing programs that remain accepted. Tokens are in millions and cover investigation and repair on all ten programs, including failed attempts.}
 \label{tab:natural-components}
 \centering
 \small
@@ -138,7 +138,7 @@ In the LSTM example in Section~\ref{sec:fault-characterization}, LaDiM repairs t
 All methods receive identical copies of the source repositories and the same initial translations, task requirements, and acceptance procedures. The time series translation has three generation calls totaling 163,661 tokens. The recommendation translation uses 20 calls totaling 368,368 tokens. Translation follows the source repository's imports, and its cost includes failed or truncated attempts. In Table~\ref{tab:repository-costs}, each method's total includes the common initial translation once and all subsequent investigation and repair calls.
 
 \begin{table}[!htb]
-\caption{Training checks and complete costs for repository migration. Each training signal has nine checks for time series, from three steps on three seeds, and 18 for recommendation, from six model execution paths and three steps on the public seed. Total tokens include investigation and repair input and output plus the common initial translation.}
+\caption{Training checks and complete costs for repository migration. Each training signal has nine checks for time series, from three steps on three seeds, and 18 for recommendation, from six model execution paths and three steps on the public seed. Calls, input tokens, and output tokens cover investigation and repair. Tokens reports the total including the common initial translation. Token values are counts.}
 \label{tab:repository-costs}
 \centering
 \small
@@ -182,7 +182,7 @@ For the repository experiments, investigation allows up to six LLM calls and 64,
 We add Verifier investigation, independent evidence handoff, and repository context management cumulatively to the Repair Agent on the time series and recommendation repositories (Table~\ref{tab:repository-cumulative-full}). Each condition runs once with the same source, initial candidate, evaluation inputs, seeds, thresholds, full training signals, and total budgets. The base condition retains the repair prompts, ordinary inspection and editing tools, syntax checks, and progress reminders. After adding investigation, investigation and repair share one conversation until independent evidence handoff is also added. All four conditions accept the time series repository with 69/69 checks and pass 131/145 checks on recommendation. Each condition therefore fully accepts one of the two repositories.
 
 \begin{table}[!htb]
-\caption{Cumulative agent components on both repositories. LLM calls cover investigation and repair, and total tokens also include the shared initial translation. Each row adds a component to the preceding row.}
+\caption{Cumulative agent components on both repositories. Checks reports passed behavior checks. Calls cover investigation and repair, and tokens also include the shared initial translation. Each row adds a component to the preceding row.}
 \label{tab:repository-cumulative-full}
 \centering
 \small
@@ -199,7 +199,7 @@ On recommendation, adding the components increases token use while all four cond
 The comparison with and without Repository Structural Analysis retains Repair Dependency Graph Planning, notebook tools, ordinary file inspection, independent evidence handoff, and evidence management in both conditions. Removing Repository Structural Analysis removes the inventory of files, imports, symbols, and notebook cells, together with the list of files not yet assigned to a work unit. With the component enabled, the agent requests structural analysis when needed. Initialization and context reconstruction do not perform this analysis. Each condition runs once on each repository with the same initial translation and repository budgets.
 
 \begin{table}[!htb]
-\caption{Repository comparisons that remove one component at a time. Both comparisons use the same LaDiM run with all components for each repository. LLM calls cover investigation and repair, and total tokens include initial translation.}
+\caption{Repository comparisons that remove one component at a time. Both comparisons use the same LaDiM run with all components for each repository. Checks reports passed behavior checks. Calls cover investigation and repair, and tokens include initial translation.}
 \label{tab:repository-independent}
 \centering
 \small
@@ -223,7 +223,7 @@ Without planning, submissions one through four pass 128, 103, 133, and 130 of th
 This study uses twelve public model workloads from PyTorch examples, minGPT, and torchvision.\footnote{\url{https://github.com/pytorch/examples}, \url{https://github.com/karpathy/minGPT}, and \url{https://github.com/pytorch/vision}.} They cover image classification, super-resolution, a variational autoencoder, image generation, recurrent and Transformer language models, time series, two policy learning models, graph attention, GPT, and ResNet. Initial translation returns code for ten workloads. Eight translated programs pass evaluation on all three seeds before repair, and two fail. Initial translation of the image generation and Transformer language modeling workloads exhausts the output budget without returning code. All four methods receive the same two failing translations, for the time series model and ResNet, for repair.
 
 \begin{table}[!htb]
-\caption{Repair of two failing native JAX translations from twelve source workloads. For each method, total tokens for the two repair tasks include their 31,427 shared initial translation tokens once. Totals for all twelve sources include all 139,724 initial translation tokens once. Each method accepts 1/2 repair tasks and 9/12 source workloads overall.}
+\caption{Repair of two failing native JAX translations from twelve source workloads. Calls and Tokens cover repair. Two tasks and All sources report total tokens including 31,427 and 139,724 shared initial translation tokens, respectively, counted once. Each method accepts 1/2 repair tasks and 9/12 source workloads overall. Token values are counts.}
 \label{tab:native-jax}
 \centering
 \small

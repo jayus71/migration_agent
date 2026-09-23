@@ -41,7 +41,7 @@ def table_start():
             r"\toprule",
             r"& \multicolumn{3}{c}{\textbf{Time series}} & \multicolumn{3}{c}{\textbf{Recommendation}} \\",
             r"\cmidrule(lr){2-4}\cmidrule(l){5-7}",
-            r"\textbf{Condition} & \thead{Behavior\\checks\\passed} & \thead{LLM\\calls} & \thead{Total\\tokens} & \thead{Behavior\\checks\\passed} & \thead{LLM\\calls} & \thead{Total\\tokens} \\",
+            r"\textbf{Condition} & \textbf{Checks} & \textbf{Calls} & \textbf{Tokens} & \textbf{Checks} & \textbf{Calls} & \textbf{Tokens} \\",
             r"\midrule"]
 
 
@@ -72,7 +72,7 @@ def main():
              r"\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{4.8cm}rrrrr@{}}", r"\toprule",
              r"& \multicolumn{2}{c}{\textbf{Without component}} & \multicolumn{2}{c}{\textbf{With component}} & \\",
              r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}",
-             r"\textbf{Component} & \thead{LLM\\calls} & \textbf{Tokens} & \thead{LLM\\calls} & \textbf{Tokens} & \thead{Token\\reduction} \\", r"\midrule"]
+             r"\textbf{Component} & \textbf{Calls} & \textbf{Tokens} & \textbf{Calls} & \textbf{Tokens} & \textbf{Saved} \\", r"\midrule"]
     for label, without, with_component in [
             ("Repository context management", cumulative["timeseries", "handoff"], cumulative["timeseries", "repository_context"]),
             ("Repository Structural Analysis", structure["timeseries", "no_automatic_map"], structure["timeseries", "full"])]:
@@ -95,7 +95,7 @@ def main():
     native = json.loads(NATIVE_JAX.read_text())
     assert (native["source_pool_tasks"], native["generated_candidates"], native["initial_passes"]) == (12, 10, 8)
     lines = [r"\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}", r"\toprule",
-             r"\textbf{Method} & \thead{Repair\\calls} & \thead{Repair\\tokens} & \thead{Two repair tasks\\total tokens} & \thead{All twelve sources\\total tokens} \\", r"\midrule"]
+             r"\textbf{Method} & \textbf{Calls} & \textbf{Tokens} & \textbf{Two tasks} & \textbf{All sources} \\", r"\midrule"]
     for row in native["methods"]:
         assert row["repair_accepted"] == 1 and row["repair_denominator"] == 2
         assert row["shared_translation_then_repair_accepted"] == 9

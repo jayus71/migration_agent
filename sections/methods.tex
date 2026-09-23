@@ -25,10 +25,12 @@ For a numerical comparison $d=x-\hat x$, $d\simeq0$ denotes agreement within its
 
 The LLM $M$ performs translation, investigation, and repair under role instructions $A_T$, $A_V$, and $A_R$. The Orchestrator $\mathcal O$ evaluates candidates and manages their shared investigation and repair budget $B$. In the algorithms, $S.\hat P$ is the candidate, $S.m$ contains its measurements, $q$ is its verification status, and $H$ is a conversation. Context $C$ retains evidence and provides tools; for repository tasks, it also stores the dependency plan and local check results. A submission sends the complete candidate for external verification after a repair stage that can contain several LLM calls, tests, and edits. Each $\textsc{LLMCall}(M,A,H,b,B)$ invokes $M$ with instructions $A$ and conversation $H$, charging its usage to the stage allowance $b$ and shared budget $B$. The Orchestrator counts each submission against $B$.
 
-\subsection{Verifier Agent}
+\subsection{Verifier Agent with Layered Diagnosis}
 \label{sec:hierarchy}
 
-The Verifier Agent uses Layered Diagnosis to focus its investigation on the computations responsible for observed discrepancies. For an \textbf{execution discrepancy} ($d_{\mathrm{execution},t}=1$), it inspects the exception and the calls that produced it. For a \textbf{forward discrepancy} ($d_{\mathrm{forward},t}\not\simeq0$), it traces the operators that produce different values and tests the suspected computation. When forward values agree but a \textbf{gradient discrepancy} ($d_{\mathrm{gradient},t}\not\simeq0$) remains, it examines parameter registration and the path from the parameters to the loss. When both forward values and gradients agree, it investigates an \textbf{update discrepancy} ($d_{\mathrm{update},t}\not\simeq0$) through the optimizer's rule and state. The first step with an observed discrepancy further guides this investigation because a changed update can alter later forward computations. The LLM selects code inspections and tests that distinguish possible causes, then records the code locations and observations supporting its hypotheses. Algorithm~\ref{alg:diagnose} organizes this investigation through the shared \textsc{LLMToolStep}, which calls the LLM, executes its requested tools in order, and retains their results. During investigation, the Verifier Agent can create and run scratch tests while candidate and supporting library code remain unchanged.
+The Verifier Agent receives the Translator Agent's candidate and the Orchestrator's measurements. It uses Layered Diagnosis to focus its investigation on the computations responsible for observed discrepancies. For an \textbf{execution discrepancy} ($d_{\mathrm{execution},t}=1$), it inspects the exception and the calls that produced it. For a \textbf{forward discrepancy} ($d_{\mathrm{forward},t}\not\simeq0$), it traces the operators that produce different values and tests the suspected computation. When forward values agree but a \textbf{gradient discrepancy} ($d_{\mathrm{gradient},t}\not\simeq0$) remains, it examines parameter registration and the path from the parameters to the loss. When both forward values and gradients agree, it investigates an \textbf{update discrepancy} ($d_{\mathrm{update},t}\not\simeq0$) through the optimizer's rule and state. The first step with an observed discrepancy further guides this investigation because a changed update can alter later forward computations. The LLM selects code inspections and tests that distinguish possible causes, then records the code locations and observations supporting its hypotheses. These records form the evidence for the independent handoff to the Repair Agent.
+
+Algorithm~\ref{alg:diagnose} expresses this reasoning through the training dependency relation $\mathcal D$, where $\Delta\theta_t=\theta_{t+1}-\theta_t$. The symbols $\ell$ and $h$ summarize the LLM's choice of computation and hypothesized cause within a call, and $a$ is its tool request or completion response. The Verifier uses both agreement and disagreement between layers to select $\ell$, then tests $h$ against code and execution evidence. The shared \textsc{ToolFeedback} operation executes requests in order and adds their results to the conversation. During investigation, the Verifier Agent can create and run scratch tests while candidate and supporting library code remain unchanged.
 
 \begin{algorithm}[!htb]
 \caption{Layered Diagnosis}
@@ -38,27 +40,31 @@ The Verifier Agent uses Layered Diagnosis to focus its investigation on the comp
 \Ensure Evidence $E$: code observations, test results, locations, and hypotheses
 \Function{LayeredDiagnosis}{$\mathcal T,S,M,B,C$}
   \State $H\gets\Call{StartConversation}{A_V,\mathcal T,S}$; $b\gets\Call{DiagnosisAllowance}{B}$
+  \State $\mathcal D:\ \mathrm{execution}\to v_t\to g_t\to\Delta\theta_t\to v_{t+1}$
   \While{$\Call{WithinLimits}{b,B}$}
-    \State $(H,a)\gets\Call{LLMToolStep}{M,A_V,H,S,b,B,C}$
+    \State $H\gets C.\Call{PrepareContext}{H,S}$
+    \State $(\ell,h,a)\gets\Call{LLMCall}{M,A_V,H,b,B}$
+    \Statex \hspace{\algorithmicindent}\hspace{\algorithmicindent}$\ell$: locate the discrepant computation along $\mathcal D$
+    \Statex \hspace{\algorithmicindent}\hspace{\algorithmicindent}$h$: explain its cause using agreeing and differing observations
+    \Statex \hspace{\algorithmicindent}\hspace{\algorithmicindent}$a$: inspect code or test $h$ at the suspected locations
+    \State $H\gets\Call{ToolFeedback}{a,H,S,A_V,C}$
     \State \textbf{if} $a.\mathrm{complete}$ \textbf{then break}
   \EndWhile
   \State \Return $\Call{PublicEvidence}{H,C}$
 \EndFunction
-\Function{LLMToolStep}{$M,A,H,S,b,B,C$}
-  \State $H\gets C.\Call{PrepareContext}{H,S}$
-  \State $a\gets\Call{LLMCall}{M,A,H,b,B}$ \Comment{Select inspections, tests, or edits}
-  \State $H\gets C.\Call{ExecuteTools}{a,H,S,A}$ \Comment{Execute requests and retain evidence}
-  \State \Return $(H,a)$
+\Function{ToolFeedback}{$a,H,S,A,C$}
+  \State $(C,S,r)\gets C.\Call{ExecuteTools}{a,S,A}$
+  \State \Return $H\mathbin{\|}(a,r)$ \Comment{Append response and tool observations}
 \EndFunction
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Repair Agent}
+\subsection{Repair Agent with Evidence Handoff and History}
 \label{sec:repair-agent}
 
 Independent evidence handoff gives the Repair Agent the Verifier Agent's recorded code observations, test results, and hypotheses, identified as the Verifier Agent's findings. The Repair Agent reassesses this evidence, runs further tests, and edits files in $W$, including supporting library code when the task permits it. The Orchestrator verifies each submission and returns the remaining discrepancies to guide the Repair Agent's next investigation and edits.
 
-Repair history preserves earlier edits, observations, and hypotheses across attempts. The continuing conversation includes failed tests and verification feedback, allowing the agent to relate a changed result to the preceding modification and revise explanations that did not resolve the fault. The current candidate also persists, so later attempts build on applied changes. Algorithm~\ref{alg:repair} reuses \textsc{LLMToolStep} from Algorithm~\ref{alg:diagnose}. Its \textsc{RepairComplete} condition requires a completion response, an applied edit in the current stage, and a test executed after the last edit. If an edit or test is missing, the conversation requests that action within the remaining budget. The Orchestrator evaluates the candidate when the repair stage ends.
+Repair history preserves earlier edits, observations, and hypotheses across attempts. The continuing conversation includes failed tests and verification feedback, allowing the agent to relate a changed result to the preceding modification and revise explanations that did not resolve the fault. The current candidate also persists, so later attempts build on applied changes. Algorithm~\ref{alg:repair} reuses \textsc{ToolFeedback} from Algorithm~\ref{alg:diagnose}, with $H\mathbin{\|}x$ denoting the addition of a record $x$ to the repair history. Its \textsc{RepairComplete} condition requires a completion response, an applied edit in the current stage, and a test executed after the last edit. If an edit or test is missing, the conversation requests that action within the remaining budget. The Orchestrator evaluates the candidate when the repair stage ends.
 
 \begin{algorithm}[!htb]
 \caption{\textsc{Repair}$(\mathcal T,S,E,q,M,B,C)$}
@@ -66,9 +72,11 @@ Repair history preserves earlier edits, observations, and hypotheses across atte
 \begin{algorithmic}[1]
 \State $H\gets\Call{IndependentHandoff}{A_R,\mathcal T,E,C}$
 \While{$\Call{SubmissionsLeft}{B}\land\Call{BudgetLeft}{B}$}
-  \State $(H,b)\gets\Call{BeginRepairStage}{H,S.m,B}$
+  \State $H\gets H\mathbin{\|}S.m$; $b\gets\Call{RepairAllowance}{B}$
   \While{$\Call{WithinLimits}{b,B}$}
-    \State $(H,a)\gets\Call{LLMToolStep}{M,A_R,H,S,b,B,C}$
+    \State $H\gets C.\Call{PrepareContext}{H,S}$
+    \State $a\gets\Call{LLMCall}{M,A_R,H,b,B}$ \Comment{Test hypotheses and select edits}
+    \State $H\gets\Call{ToolFeedback}{a,H,S,A_R,C}$
     \State \textbf{if} $\Call{RepairComplete}{a,H}$ \textbf{then break}
   \EndWhile
   \State $(S.m,q)\gets\mathcal O.\Call{Submit}{S.\hat P,B}$
@@ -85,36 +93,42 @@ A change to a shared implementation can affect several callers in a repository. 
 
 Through Repository Structural Analysis, the agent can inspect the repository's files, imports, function and class definitions, and notebook structure on demand. The agent uses Repair Dependency Graph Planning to group related target files into work units, each with a repair goal and selected tests, and organize their prerequisites as a directed acyclic graph. It selects a unit whose prerequisite units have valid local checks, then edits the files assigned to it. For each unit, LaDiM records the results of syntax checks and the tests selected in the plan. Changes to target files or the dependency plan invalidate the checks for affected units and their dependents in the plan, prompting the agent to check the corresponding files again. The Orchestrator evaluates the complete repository, including its entry points and training computations, to determine acceptance.
 
-Notebook tools let the agent inspect and revise code cells while checking that edits preserve valid syntax. The evidence archive retains code observations, measurements, hypotheses, and conversations with their code versions, and supports retrieval of relevant records. LaDiM rebuilds the conversation around the current plan, findings, and measurements when evidence passes to the Repair Agent, work shifts to another unit, or the conversation approaches its capacity. It restores relevant observations from earlier code reads when the corresponding files remain unchanged. Algorithm~\ref{alg:repository} provides these operations through the shared context used by Algorithms~\ref{alg:diagnose} and~\ref{alg:repair}. All work units share the repository files, repair history, and total budget.
+Notebook tools let the agent inspect and revise code cells while checking that edits preserve valid syntax. The evidence archive retains code observations, measurements, hypotheses, and conversations with their code versions, and supports retrieval of relevant records. LaDiM rebuilds the conversation around the current plan, findings, and measurements when evidence passes to the Repair Agent, work shifts to another unit, or the conversation approaches its capacity. It restores relevant observations from earlier code reads when the corresponding files remain unchanged. Algorithm~\ref{alg:repository} provides these operations through the shared context used by Algorithms~\ref{alg:diagnose} and~\ref{alg:repair}. Here $C.G$ is the work dependency graph, $C.Q$ stores local check results, and $C.E$ archives evidence. Tool calls update the shared state $S$ and context $C$; $U$ contains the units affected by changes to files or the plan. The agent selects structural analysis, graph planning, unit selection, file or notebook operations, tests, and evidence retrieval as tools within the investigation and repair loops. All work units share the repository files, repair history, and total budget.
 
 \begin{algorithm}[!htb]
 \caption{Repository migration and repair coordination}
 \label{alg:repository}
 \begin{algorithmic}[1]
 \Function{RepositoryMigrate}{$\mathcal T,M,B$}
-  \State $C\gets\Call{RepositoryContext}{\mathcal T}$ \Comment{Make repository tools available}
+  \State $C\gets\Call{RepositoryContext}{\mathcal T}$
   \State $S.\hat P\gets\Call{LLMTranslate}{M,A_T,\mathcal T}$
-  \State $(S.m,q)\gets\mathcal O.\Call{Verify}{S.\hat P}$ \Comment{Evaluate the complete repository}
+  \State $(S.m,q)\gets\mathcal O.\Call{Verify}{S.\hat P}$ \Comment{Complete repository}
   \If{$q=\mathrm{accepted}$} \State \Return $(S.\hat P,q)$ \EndIf
   \State $E\gets\Call{LayeredDiagnosis}{\mathcal T,S,M,B,C}$ \Comment{Algorithm~\ref{alg:diagnose}}
-  \State \Return $\Call{Repair}{\mathcal T,S,E,q,M,B,C}$ \Comment{Algorithm~\ref{alg:repair}; full repository submissions}
+  \State \Return $\Call{Repair}{\mathcal T,S,E,q,M,B,C}$ \Comment{Algorithm~\ref{alg:repair}}
 \EndFunction
-\Function{$C$.ExecuteTools}{$a,H,S,A$}
-  \ForAll{tool requests $c$ selected in $a$, in order}
-    \State Execute $c$ to inspect structure, plan dependencies, select a ready unit,
-    \Statex \hspace{\algorithmicindent}\hspace{\algorithmicindent}read or edit its files, run local checks, or retrieve evidence
-    \State Retain the result and its code version in $C$
-    \If{target files or the dependency plan changed}
-      \State Invalidate local checks for affected units and their dependents in the plan
-      \State Identify earlier measurements by the code version they evaluated
+\Function{$C$.ExecuteTools}{$a,S,A$}
+  \State $r\gets[\,]$
+  \ForAll{$c\in a.\mathrm{tools}$}
+    \State $U\gets\varnothing$
+    \If{$c.\mathrm{kind}=\mathrm{structure}$}
+      \State $o\gets\Call{RepositoryStructuralAnalysis}{C,S.\hat P}$
+    \ElsIf{$c.\mathrm{kind}=\mathrm{plan}$}
+      \State $(C.G,U,o)\gets\Call{RepairDependencyGraphPlanning}{c,C}$
+    \ElsIf{$c.\mathrm{kind}=\mathrm{select}$}
+      \State $(C.u,o)\gets\Call{SelectReadyUnit}{c,C.G,C.Q}$
+    \Else
+      \State $(C,S,o,U)\gets\Call{Execute}{c,C,S,A}$
     \EndIf
+    \State $C.E\gets C.E\mathbin{\|}(o,\Call{CodeVersion}{S})$; $r\gets r\mathbin{\|}o$
+    \State $C.Q[U\cup\Call{Dependents}{C.G,U}]\gets\mathrm{invalid}$
   \EndFor
-  \State \Return $H$ with the response $a$ and ordered tool results
+  \State \Return $(C,S,r)$
 \EndFunction
 \Function{$C$.PrepareContext}{$H,S$}
-  \If{evidence handoff, a unit switch, or context capacity requires reconstruction}
-    \State Rebuild $H$ for its current role from the plan, findings, and measurements
-    \State Restore relevant prior code reads whose files remain unchanged
+  \If{$\Call{Handoff}{C}\lor\Call{UnitChanged}{C}\lor\Call{NearCapacity}{H}$}
+    \State $R\gets\Call{RelevantUnchangedReads}{C.E,S}$
+    \State $H\gets\Call{Rebuild}{C.G,C.E,S.m,R}$
   \EndIf
   \State \Return $H$
 \EndFunction

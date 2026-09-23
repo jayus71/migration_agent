@@ -344,3 +344,16 @@ Total tokens add the common initial translation exactly once to every run's
 complete investigation and repair usage. The generator checks this accounting
 and embeds the source summary SHA-256 in the table source. These new runs are
 separate from the historical unified main comparison.
+
+## September 23 presentation refinement
+
+The main tables now use single-line headers. Calls, Tokens, Checks, Entries,
+Tests, Repaired, and Preserved are defined in the manuscript's setup, result
+text, or captions. Token units move from headers to captions without changing
+numeric values. Saved remains the percentage reduction in total tokens. The
+appendix repository cost table keeps the complete Parameter updates term on
+two lines. Figures 3 and 4 are included at 96% of the manuscript width; their
+plotted data, labels, and assets are unchanged. Both captions occupy five lines,
+with Figure 4's individual-run detection counts in the adjacent paragraph.
+Source and layout checks are recorded in
+`docs/manuscript-refinement-20260923.md`. No experiments were rerun.

@@ -1,6 +1,6 @@
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}
 \toprule
-\textbf{Method} & \thead{LLM\\calls} & \thead{Input tokens\\(millions)} & \thead{Output tokens\\(millions)} & \thead{Total tokens\\(millions)} & \textbf{Accepted} \\
+\textbf{Method} & \textbf{Calls} & \textbf{Input} & \textbf{Output} & \textbf{Tokens} & \textbf{Accepted} \\
 \midrule
 \multicolumn{6}{l}{\textit{(a) PyTorch to MindSpore}} \\
 Direct LLM & 29 & 0.018 & 0.411 & 0.429 & 29/50 \\
@@ -24,7 +24,7 @@ MatchFixAgent & 524 & 26.335 & 2.020 & 28.355 & 8/18 \\
 \toprule
 \multicolumn{7}{l}{\textit{(c) Time series repository}} \\
 \midrule
-\textbf{Method} & \thead{Behavior checks\\passed} & \textbf{Gradients} & \thead{Parameter\\updates} & \thead{Entry\\points} & \thead{Repair\\calls} & \thead{Total tokens\\(millions)} \\
+\textbf{Method} & \textbf{Checks} & \textbf{Gradients} & \thead{Parameter\\updates} & \textbf{Entries} & \textbf{Calls} & \textbf{Tokens} \\
 \midrule
 SWE-agent & 69/69 & 9/9 & 9/9 & 3/3 & 80 & 8.200 \\
 MatchFixAgent & 69/69 & 9/9 & 9/9 & 3/3 & 69 & 13.598 \\
@@ -36,7 +36,7 @@ MatchFixAgent & 69/69 & 9/9 & 9/9 & 3/3 & 69 & 13.598 \\
 \toprule
 \multicolumn{7}{l}{\textit{(d) Recommendation repository}} \\
 \midrule
-\textbf{Method} & \thead{Behavior checks\\passed} & \textbf{Gradients} & \thead{Parameter\\updates} & \thead{Original\\tests} & \thead{Repair\\calls} & \thead{Total tokens\\(millions)} \\
+\textbf{Method} & \textbf{Checks} & \textbf{Gradients} & \thead{Parameter\\updates} & \textbf{Tests} & \textbf{Calls} & \textbf{Tokens} \\
 \midrule
 SWE-agent & 104/145 & 17/18 & 12/18 & 10/10 & 80 & 8.317 \\
 MatchFixAgent & 129/145 & 18/18 & 16/18 & 0/10 & 80 & 8.679 \\
