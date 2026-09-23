@@ -11,50 +11,38 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 </style>
 <body class="only-changes"><header><div class="eyebrow">LADIM / REVISION HISTORY</div>
 <h1>论文逐词对照</h1><p>固定原稿与当前稿并排显示。红色为删除，绿色为新增；移动或重写的文字会同时显示在两侧。</p>
-<p class="meta">基线：2026-09-21，6 Pro 修改前保存的原稿 · 当前稿更新于 <strong>2026-09-23T17:58:51+08:00</strong> · <span id="live">编译后自动更新</span></p>
+<p class="meta">基线：2026-09-21，6 Pro 修改前保存的原稿 · 当前稿更新于 <strong>2026-09-23T20:11:32+08:00</strong> · <span id="live">编译后自动更新</span></p>
 <p class="meta"><a href="baseline.pdf" target="_blank">查看原稿 PDF</a>　<a href="current.pdf" target="_blank">查看当前 PDF</a>　<a href="baseline.tex" download>原稿展开源码</a>　<a href="current.tex" download>当前展开源码</a>　<a href="comparison.json" download>下载完整对照记录</a></p></header>
 <div class="tools"><select id="mode" aria-label="对照内容"><option value="reading">正文逐词</option><option value="latex">LaTeX 逐词</option></select>
 <select id="jump" aria-label="跳转章节"><option value="">跳转章节</option><option value="0">Title</option><option value="1">Abstract</option><option value="2">Introduction</option><option value="3">Related Work</option><option value="4">Methods</option><option value="5">Experiments</option><option value="6">Conclusion</option><option value="7">References</option><option value="8">Appendix — Additional Experimental Protocols</option><option value="9">Appendix — Evidence Handoff and Agent Integration</option><option value="10">Appendix — Additional Repair Collections</option><option value="11">Appendix — Natural Translation Repair Protocol</option><option value="12">Appendix — Repository Protocols and Detailed Results</option><option value="13">Appendix — Repository Context and Evidence</option><option value="14">Appendix — Repository Component Results</option><option value="15">Appendix — Native JAX Migration with Consecutive Training Steps</option></select>
 <input type="search" id="search" placeholder="按章节或文字筛选" aria-label="搜索对照文字">
 <label><input id="changes" type="checkbox" checked> 只看有改动的章节</label><button id="context">展开全部上下文</button><button onclick="location.reload()">刷新</button>
-<span class="legend"><span class="removed">− 删除 4087 词</span>　<span class="added">+ 新增 7826 词</span></span></div>
-<main><div class="column-head"><div>修改前<small>2026-09-21 · 固定基线</small></div><div>当前版本<small>c6631ff · 本地工作区</small></div></div>
+<span class="legend"><span class="removed">− 删除 4122 词</span>　<span class="added">+ 新增 7884 词</span></span></div>
+<main><div class="column-head"><div>修改前<small>2026-09-21 · 固定基线</small></div><div>当前版本<small>c261512 · 本地工作区</small></div></div>
 <div id="reading" class="view"><section class="section unchanged" id="reading-0" data-title="Title"><h2>Title<span class="count"><b class="removed">−0</b> <b class="added">+0</b></span></h2>
 <div class="pair equal"><div class="old">LaDiM: Layered Diagnosis for Multi-Agent Code Migration</div><div class="new">LaDiM: Layered Diagnosis for Multi-Agent Code Migration</div></div>
 </section>
-<section class="section changed" id="reading-1" data-title="Abstract"><h2>Abstract<span class="count"><b class="removed">−105</b> <b class="added">+88</b></span></h2>
-<div class="pair equal"><div class="old">Migrating deep learning code across frameworks</div><div class="new">Migrating deep learning code across frameworks</div></div>
+<section class="section changed" id="reading-1" data-title="Abstract"><h2>Abstract<span class="count"><b class="removed">−140</b> <b class="added">+146</b></span></h2>
+<div class="pair equal"><div class="old">Migrating</div><div class="new">Migrating</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">code across</div></div>
+<div class="pair equal"><div class="old">deep learning</div><div class="new">deep learning</div></div>
+<div class="pair delete"><div class="old">code across</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">frameworks</div><div class="new">frameworks</div></div>
 <div class="pair replace"><div class="old">is a practical requirement for reusing</div><div class="new">enables the reuse of</div></div>
-<div class="pair equal"><div class="old">training programs in new software and hardware environments. Framework differences can</div><div class="new">training programs in new software and hardware environments. Framework differences can</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">silently</div></div>
-<div class="pair equal"><div class="old">change</div><div class="new">change</div></div>
-<div class="pair replace"><div class="old">how</div><div class="new">gradients and parameter updates even when</div></div>
+<div class="pair equal"><div class="old">training programs in new software and hardware environments.</div><div class="new">training programs in new software and hardware environments.</div></div>
+<div class="pair replace"><div class="old">Framework differences can change how</div><div class="new">Different frameworks, however, might compute gradients or update parameters in different ways, leading to wrong results even when</div></div>
 <div class="pair equal"><div class="old">a translated program</div><div class="new">a translated program</div></div>
-<div class="pair delete"><div class="old">computes gradients and updates its parameters without causing runtime errors. Such semantic drift may remain hidden even when the program</div><div class="new">&nbsp;</div></div>
-<div class="pair equal"><div class="old">runs</div><div class="new">runs</div></div>
-<div class="pair replace"><div class="old">successfully and its loss initially agrees with the source. We</div><div class="new">successfully. To address this problem, we</div></div>
-<div class="pair equal"><div class="old">propose LaDiM, a</div><div class="new">propose LaDiM, a</div></div>
-<div class="pair delete"><div class="old">multi-agent</div><div class="new">&nbsp;</div></div>
-<div class="pair equal"><div class="old">framework</div><div class="new">framework</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">with multiple agents</div></div>
-<div class="pair equal"><div class="old">that uses dependencies between training computations to guide diagnosis and repair. The</div><div class="new">that uses dependencies between training computations to guide diagnosis and repair. The</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">Translator Agent generates an initial candidate. The</div></div>
-<div class="pair equal"><div class="old">Verifier</div><div class="new">Verifier</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">Agent</div></div>
-<div class="pair equal"><div class="old">investigates</div><div class="new">investigates</div></div>
-<div class="pair replace"><div class="old">where the translated program diverges from the source</div><div class="new">discrepancies</div></div>
-<div class="pair equal"><div class="old">and passes supporting evidence to a separate Repair Agent.</div><div class="new">and passes supporting evidence to a separate Repair Agent.</div></div>
-<div class="pair replace"><div class="old">Measurements</div><div class="new">The Orchestrator schedules their work and returns verification results</div></div>
-<div class="pair equal"><div class="old">after each</div><div class="new">after each</div></div>
-<div class="pair replace"><div class="old">submitted change guide further repair. For repositories,</div><div class="new">submission. To prevent these agents from losing relevant code context and diagnostic evidence during repository repair, we introduce repository context management. Evaluation across framework migration, language migration, and repository tasks shows that</div></div>
-<div class="pair equal"><div class="old">LaDiM</div><div class="new">LaDiM</div></div>
-<div class="pair replace"><div class="old">tracks dependencies between files and retains evidence as work moves between them. On 50</div><div class="new">achieves comparable or better</div></div>
-<div class="pair equal"><div class="old">migration</div><div class="new">migration</div></div>
-<div class="pair replace"><div class="old">tasks from PyTorch</div><div class="new">results with up</div></div>
-<div class="pair equal"><div class="old">to</div><div class="new">to</div></div>
-<div class="pair replace"><div class="old">MindSpore, LaDiM matches MatchFixAgent&#x27;s full acceptance with 57.4%</div><div class="new">80.8%</div></div>
-<div class="pair equal"><div class="old">fewer</div><div class="new">fewer</div></div>
-<div class="pair replace"><div class="old">total tokens, including initial translation. Experiments on MindSpore and JAX, together with migration tasks from Java to Python, demonstrate LaDiM&#x27;s effectiveness across frameworks and programming languages.</div><div class="new">tokens than state of the art methods, demonstrating its effectiveness.</div></div>
+<div class="pair replace"><div class="old">computes gradients</div><div class="new">runs without error. Current methods are mostly designed for language transfer, neglecting the subtle differences in framework level. To address this, LaDiM preserves the underlying training computation order, e.g., forward, gradient computation, update,</div></div>
+<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
+<div class="pair replace"><div class="old">updates</div><div class="new">uses the dependencies among these stages to detect and localize silent computational errors. LaDiM includes Translator, Verifier, and Repair agents work under a shared Orchestrator: the Translator produces an initial candidate, the Verifier traces discrepancies along the computation order and hands</div></div>
+<div class="pair equal"><div class="old">its</div><div class="new">its</div></div>
+<div class="pair replace"><div class="old">parameters without causing runtime errors. Such semantic drift may remain hidden even when</div><div class="new">findings to</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">program runs successfully</div><div class="new">Repair Agent, which revises using evidences</div></div>
+<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">a persistent repair history. For repository-scale migrations, LaDiM further introduces repository. Evaluation across framework migration, language migration, and repository tasks shows that LaDiM achieves comparable or better migration results with up to 80.8% fewer tokens than state-of-the-art methods, demonstrating</div></div>
+<div class="pair equal"><div class="old">its</div><div class="new">its</div></div>
+<div class="pair replace"><div class="old">loss initially agrees with the source. We propose LaDiM, a multi-agent framework that uses dependencies between training computations to guide diagnosis and repair. The Verifier investigates where the translated program diverges from the source and passes supporting evidence to a separate Repair Agent. Measurements after each submitted change guide further repair. For repositories, LaDiM tracks dependencies between files and retains evidence as work moves between them. On 50 migration tasks from PyTorch to MindSpore, LaDiM matches MatchFixAgent&#x27;s full acceptance with 57.4% fewer total tokens, including initial translation. Experiments on MindSpore and JAX, together with migration tasks from Java to Python, demonstrate LaDiM&#x27;s effectiveness across frameworks and programming languages.</div><div class="new">effectiveness.</div></div>
 </section>
 <section class="section changed" id="reading-2" data-title="Introduction"><h2>Introduction<span class="count"><b class="removed">−322</b> <b class="added">+377</b></span></h2>
 <div class="pair equal"><div class="old">Introduction</div><div class="new">Introduction</div></div>
@@ -1659,39 +1647,27 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 </section></div><div id="latex" class="view latex hidden"><section class="section unchanged" id="latex-0" data-title="Title"><h2>Title<span class="count"><b class="removed">−0</b> <b class="added">+0</b></span></h2>
 <div class="pair equal"><div class="old">LaDiM: Layered Diagnosis for\\ Multi-Agent Code Migration</div><div class="new">LaDiM: Layered Diagnosis for\\ Multi-Agent Code Migration</div></div>
 </section>
-<section class="section changed" id="latex-1" data-title="Abstract"><h2>Abstract<span class="count"><b class="removed">−105</b> <b class="added">+88</b></span></h2>
-<div class="pair equal"><div class="old">Migrating deep learning code across frameworks</div><div class="new">Migrating deep learning code across frameworks</div></div>
+<section class="section changed" id="latex-1" data-title="Abstract"><h2>Abstract<span class="count"><b class="removed">−140</b> <b class="added">+146</b></span></h2>
+<div class="pair equal"><div class="old">Migrating</div><div class="new">Migrating</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">code across</div></div>
+<div class="pair equal"><div class="old">deep learning</div><div class="new">deep learning</div></div>
+<div class="pair delete"><div class="old">code across</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">frameworks</div><div class="new">frameworks</div></div>
 <div class="pair replace"><div class="old">is a practical requirement for reusing</div><div class="new">enables the reuse of</div></div>
-<div class="pair equal"><div class="old">training programs in new software and hardware environments. Framework differences can</div><div class="new">training programs in new software and hardware environments. Framework differences can</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">silently</div></div>
-<div class="pair equal"><div class="old">change</div><div class="new">change</div></div>
-<div class="pair replace"><div class="old">how</div><div class="new">gradients and parameter updates even when</div></div>
+<div class="pair equal"><div class="old">training programs in new software and hardware environments.</div><div class="new">training programs in new software and hardware environments.</div></div>
+<div class="pair replace"><div class="old">Framework differences can change how</div><div class="new">Different frameworks, however, might compute gradients or update parameters in different ways, leading to wrong results even when</div></div>
 <div class="pair equal"><div class="old">a translated program</div><div class="new">a translated program</div></div>
-<div class="pair delete"><div class="old">computes gradients and updates its parameters without causing runtime errors. Such semantic drift may remain hidden even when the program</div><div class="new">&nbsp;</div></div>
-<div class="pair equal"><div class="old">runs</div><div class="new">runs</div></div>
-<div class="pair replace"><div class="old">successfully and its loss initially agrees with the source. We</div><div class="new">successfully. To address this problem, we</div></div>
-<div class="pair equal"><div class="old">propose LaDiM, a</div><div class="new">propose LaDiM, a</div></div>
-<div class="pair delete"><div class="old">multi-agent</div><div class="new">&nbsp;</div></div>
-<div class="pair equal"><div class="old">framework</div><div class="new">framework</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">with multiple agents</div></div>
-<div class="pair equal"><div class="old">that uses dependencies between training computations to guide diagnosis and repair. The</div><div class="new">that uses dependencies between training computations to guide diagnosis and repair. The</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">Translator Agent generates an initial candidate. The</div></div>
-<div class="pair equal"><div class="old">Verifier</div><div class="new">Verifier</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">Agent</div></div>
-<div class="pair equal"><div class="old">investigates</div><div class="new">investigates</div></div>
-<div class="pair replace"><div class="old">where the translated program diverges from the source</div><div class="new">discrepancies</div></div>
-<div class="pair equal"><div class="old">and passes supporting evidence to a separate Repair Agent.</div><div class="new">and passes supporting evidence to a separate Repair Agent.</div></div>
-<div class="pair replace"><div class="old">Measurements</div><div class="new">The Orchestrator schedules their work and returns verification results</div></div>
-<div class="pair equal"><div class="old">after each</div><div class="new">after each</div></div>
-<div class="pair replace"><div class="old">submitted change guide further repair. For repositories,</div><div class="new">submission. To prevent these agents from losing relevant code context and diagnostic evidence during repository repair, we introduce repository context management. Evaluation across framework migration, language migration, and repository tasks shows that</div></div>
-<div class="pair equal"><div class="old">LaDiM</div><div class="new">LaDiM</div></div>
-<div class="pair replace"><div class="old">tracks dependencies between files and retains evidence as work moves between them. On 50</div><div class="new">achieves comparable or better</div></div>
-<div class="pair equal"><div class="old">migration</div><div class="new">migration</div></div>
-<div class="pair replace"><div class="old">tasks from PyTorch</div><div class="new">results with up</div></div>
-<div class="pair equal"><div class="old">to</div><div class="new">to</div></div>
-<div class="pair replace"><div class="old">MindSpore, LaDiM matches MatchFixAgent&#x27;s full acceptance with 57.4\%</div><div class="new">80.8\%</div></div>
-<div class="pair equal"><div class="old">fewer</div><div class="new">fewer</div></div>
-<div class="pair replace"><div class="old">total tokens, including initial translation. Experiments on MindSpore and JAX, together with migration tasks from Java to Python, demonstrate LaDiM&#x27;s effectiveness across frameworks and programming languages.</div><div class="new">tokens than state of the art methods, demonstrating its effectiveness.</div></div>
+<div class="pair replace"><div class="old">computes gradients</div><div class="new">runs without error. Current methods are mostly designed for language transfer, neglecting the subtle differences in framework level. To address this, LaDiM preserves the underlying training computation order, e.g., forward, gradient computation, update,</div></div>
+<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
+<div class="pair replace"><div class="old">updates</div><div class="new">uses the dependencies among these stages to detect and localize silent computational errors. LaDiM includes Translator, Verifier, and Repair agents work under a shared Orchestrator: the Translator produces an initial candidate, the Verifier traces discrepancies along the computation order and hands</div></div>
+<div class="pair equal"><div class="old">its</div><div class="new">its</div></div>
+<div class="pair replace"><div class="old">parameters without causing runtime errors. Such semantic drift may remain hidden even when</div><div class="new">findings to</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">program runs successfully</div><div class="new">Repair Agent, which revises using evidences</div></div>
+<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">a persistent repair history. For repository-scale migrations, LaDiM further introduces repository. Evaluation across framework migration, language migration, and repository tasks shows that LaDiM achieves comparable or better migration results with up to 80.8\% fewer tokens than state-of-the-art methods, demonstrating</div></div>
+<div class="pair equal"><div class="old">its</div><div class="new">its</div></div>
+<div class="pair replace"><div class="old">loss initially agrees with the source. We propose LaDiM, a multi-agent framework that uses dependencies between training computations to guide diagnosis and repair. The Verifier investigates where the translated program diverges from the source and passes supporting evidence to a separate Repair Agent. Measurements after each submitted change guide further repair. For repositories, LaDiM tracks dependencies between files and retains evidence as work moves between them. On 50 migration tasks from PyTorch to MindSpore, LaDiM matches MatchFixAgent&#x27;s full acceptance with 57.4\% fewer total tokens, including initial translation. Experiments on MindSpore and JAX, together with migration tasks from Java to Python, demonstrate LaDiM&#x27;s effectiveness across frameworks and programming languages.</div><div class="new">effectiveness.</div></div>
 </section>
 <section class="section changed" id="latex-2" data-title="Introduction"><h2>Introduction<span class="count"><b class="removed">−325</b> <b class="added">+384</b></span></h2>
 <div class="pair equal"><div class="old">\section{Introduction}</div><div class="new">\section{Introduction}</div></div>
@@ -3400,7 +3376,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 </section></div>
 <p class="footer">正文视图去除排版指令，保留文字、表格内容和公式源码；LaTeX 视图保留展开后的完整指令。图形外观请对照两份 PDF。基线文件逐项校验，后续更新保持基线不变。</p></main>
 <script>
-const version='44767fabdc4d7de078e70e5977fb8559d90e9af508e998dbbe66c3bed784d2e5',mode=document.getElementById('mode'),search=document.getElementById('search');
+const version='563ae5ff59737c5f969c36d3cac974ff00ef3d47473ec41a8740bd9798f77814',mode=document.getElementById('mode'),search=document.getElementById('search');
 new ResizeObserver(([entry])=>document.documentElement.style.setProperty('--tools-height',entry.target.offsetHeight+'px')).observe(document.querySelector('.tools'));
 function filter(){const q=search.value.trim().toLowerCase();document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',q&&!s.textContent.toLowerCase().includes(q)))}
 mode.onchange=()=>{document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!==mode.value));filter()};search.oninput=filter;
