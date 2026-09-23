@@ -41,7 +41,7 @@ def table_start():
             r"\toprule",
             r"& \multicolumn{3}{c}{\textbf{Time series}} & \multicolumn{3}{c}{\textbf{Recommendation}} \\",
             r"\cmidrule(lr){2-4}\cmidrule(l){5-7}",
-            r"\textbf{Condition} & \thead{Behavior\\checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} & \thead{Behavior\\checks\\passed} & \textbf{Calls} & \thead{End-to-end\\tokens} \\",
+            r"\textbf{Condition} & \thead{Behavior\\checks\\passed} & \thead{LLM\\calls} & \thead{Total\\tokens} & \thead{Behavior\\checks\\passed} & \thead{LLM\\calls} & \thead{Total\\tokens} \\",
             r"\midrule"]
 
 
@@ -68,11 +68,11 @@ def main():
     lines += [r"\bottomrule", r"\end{tabular*}"]
     write_table("TABLE_cumulative_components.tex", lines, [SOURCE])
 
-    lines = [r"\raggedright\textit{(c) Repository components on time series}\par\smallskip",
+    lines = [r"\raggedright\textit{(c) Components on the time series repository}\par\smallskip",
              r"\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{4.8cm}rrrrr@{}}", r"\toprule",
              r"& \multicolumn{2}{c}{\textbf{Without component}} & \multicolumn{2}{c}{\textbf{With component}} & \\",
              r"\cmidrule(lr){2-3}\cmidrule(lr){4-5}",
-             r"\textbf{Component} & \textbf{Calls} & \textbf{Tokens} & \textbf{Calls} & \textbf{Tokens} & \thead{Token\\reduction} \\", r"\midrule"]
+             r"\textbf{Component} & \thead{LLM\\calls} & \textbf{Tokens} & \thead{LLM\\calls} & \textbf{Tokens} & \thead{Token\\reduction} \\", r"\midrule"]
     for label, without, with_component in [
             ("Repository context management", cumulative["timeseries", "handoff"], cumulative["timeseries", "repository_context"]),
             ("Repository Structural Analysis", structure["timeseries", "no_automatic_map"], structure["timeseries", "full"])]:
@@ -85,7 +85,7 @@ def main():
 
     lines = table_start()
     for label, data, condition in [
-            ("Complete method", structure, "full"),
+            ("LaDiM", structure, "full"),
             ("Without Repository Structural Analysis", structure, "no_automatic_map"),
             ("Without Repair Dependency Graph Planning", planning, "no_work_unit_planning")]:
         lines.append(row_text(label, [data[repository, condition] for repository in ("timeseries", "twotower")]))
@@ -95,7 +95,7 @@ def main():
     native = json.loads(NATIVE_JAX.read_text())
     assert (native["source_pool_tasks"], native["generated_candidates"], native["initial_passes"]) == (12, 10, 8)
     lines = [r"\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}", r"\toprule",
-             r"\textbf{Method} & \thead{Repair\\calls} & \thead{Repair\\tokens} & \thead{Two repair tasks\\end-to-end tokens} & \thead{All twelve sources\\end-to-end tokens} \\", r"\midrule"]
+             r"\textbf{Method} & \thead{Repair\\calls} & \thead{Repair\\tokens} & \thead{Two repair tasks\\total tokens} & \thead{All twelve sources\\total tokens} \\", r"\midrule"]
     for row in native["methods"]:
         assert row["repair_accepted"] == 1 and row["repair_denominator"] == 2
         assert row["shared_translation_then_repair_accepted"] == 9

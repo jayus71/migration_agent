@@ -1,6 +1,6 @@
 # 2026-09-22 论文综合修改方案
 
-当前入口已更新为[2026-09-23 全文逐句审查后的修改方案](manuscript-review-20260923/00-revision-plan.md)。本文件保留9月22日的决定与执行经过；最新要求及冲突处理以[持久意见清单](manuscript-feedback-register.md)为准。
+当前入口已更新为[2026-09-23 全文逐句审查后的修改方案](manuscript-review-20260923/00-revision-plan.md)，该方案已按用户批准完成，见[执行记录](manuscript-implementation-20260923.md)。本文件保留9月22日的决定与执行经过；最新要求及冲突处理以[持久意见清单](manuscript-feedback-register.md)为准。
 
 2026-09-22。依据[持久意见清单](manuscript-feedback-register.md)，已检查 `04a66f8` 版本。本文件给出核验后的具体改法。摘要局部修复已完成。用户现已明确要求落实所有剩余意见，本轮已完成执行，并采用最新的数据集表安排。清单持续维护，本方案按最新意见更新实施范围。
 

@@ -8,7 +8,7 @@ from paper_plot_style import BLUE, GREEN, GRAY, INK, ORANGE, plt, save_figure
 
 METRICS = {
     "loss_abs_diff": ("Loss difference", BLUE, "o"),
-    "grad_norm_abs_diff": ("Gradient difference", ORANGE, "^"),
+    "grad_norm_abs_diff": ("Gradient norm difference", ORANGE, "^"),
     "param_update_rel_l2": ("Update difference", GREEN, "s"),
 }
 PANELS = [
@@ -65,7 +65,7 @@ def build_figure(frame=None):
                                     linewidth=0.8, shrinkA=3, shrinkB=3),
                     bbox=dict(facecolor="white", edgecolor="none", pad=1))
         ax.axvline(first_loss, color=GRAY, linewidth=0.6, linestyle=":")
-        ax.annotate(f"Loss check detects\nat step {first_loss}",
+        ax.annotate(f"Mean loss difference\ncrosses threshold at step {first_loss}",
                     xy=(first_loss, means["loss_abs_diff"].loc[first_loss]),
                     xytext=(0.96, 0.26), textcoords="axes fraction",
                     ha="right", va="bottom", color=BLUE, fontsize=7.5,

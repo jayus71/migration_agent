@@ -103,8 +103,8 @@ def main():
     target.write_text(json.dumps(output, indent=2) + "\n")
     coverage = [
         ("mindspore_migration", "PyTorch to MindSpore", "Generated translations", "Operators, CNNs, MLPs, Transformers, language models"),
-        ("natural_repairs", "Saved initial translations", "Five failing and five passing translations", "Recurrent, convolutional, attention, and set models"),
-        ("training_signals", "Training-signal ablation", "Controlled training faults", "CNN, image MLP, Transformer, causal language model"),
+        ("natural_repairs", "Initial translations", "Five fail and five pass their first evaluation", "Recurrent, convolutional, attention, and set models"),
+        ("training_signals", "Training signal ablation", "Controlled training faults", "CNN, image MLP, Transformer, causal language model"),
         ("jax_repairs", "JAX repair", "Supplied faulty candidates", "MLP and CNN"),
     ]
     table = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{4.9cm}r@{}}',

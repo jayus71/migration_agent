@@ -174,7 +174,7 @@ def load_data():
               if g['study'] == 'natural10_v3']
     reference = groups[0]['reference_v4']
     output['natural_components'] = []
-    for label, row in [('Independent evidence handoff', reference)] + [
+    for label, row in [('LaDiM', reference)] + [
             ({'continuous_role': 'Continuous conversation',
               'without_repair_history': 'Without repair history',
               'without_progress_prompt': 'Without progress reminders',
@@ -297,7 +297,7 @@ def export_tables(data):
            r'\textbf{Metric} & \textbf{LaDiM} & \textbf{Direct repair} & \textbf{Ivy} & \textbf{\texttt{torch2jax}} \\', r'\midrule']
     jax.append('Accepted & ' + ' & '.join(f"{r['accepted']}/{r['planned']}" for r in jax_rows) + r' \\')
     jax.append('LLM calls & ' + ' & '.join(str(r['calls']) for r in jax_rows) + r' \\')
-    jax.append('LLM tokens & ' + ' & '.join(f"{r['known_total_tokens']:,}" for r in jax_rows) + r' \\')
+    jax.append('Total tokens & ' + ' & '.join(f"{r['known_total_tokens']:,}" for r in jax_rows) + r' \\')
     jax += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_jax_repairs.tex').write_text('\n'.join(jax) + '\n')
     components = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{4.6cm}rrrr@{}}', r'\toprule',
@@ -306,7 +306,7 @@ def export_tables(data):
         components.append(f"{row['label']} & {row['repaired']}/5 & {row['retained']}/5 & {row['tokens']/1e6:.3f} & {row['accepted']}/10" + r' \\')
     components += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_natural_components.tex').write_text('\n'.join(components) + '\n')
-    program = [r'\textit{(b) Repair history and independent evidence handoff on saved initial translations}\par\smallskip',
+    program = [r'\textit{(b) Repair history and independent evidence handoff on ten translated programs}\par\smallskip',
         r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{4.3cm}rrrr@{}}', r'\toprule',
         r'\textbf{Condition} & \thead{Failed programs\\repaired} & \thead{Passing programs\\preserved} & \thead{Final\\accepted} & \thead{Repair\\tokens} \\', r'\midrule']
     for row in data['natural_components'][:3]:
@@ -437,7 +437,7 @@ def build_figure():
     a.set_xticks([0, 10, 20])
     a.set_title('(a) Total tokens', loc='left', fontsize=9, pad=8)
     a.legend(handles=[Patch(facecolor=color, label=label) for color, label in zip(
-             stage_colors, ['Initial translation', 'Passes initial checks', 'Needs repair'])],
+             stage_colors, ['Initial translation', 'Passes before repair', 'Needs repair'])],
              loc='upper left', frameon=False, fontsize=8, handlelength=1.05,
              handletextpad=.4, labelspacing=.3, borderaxespad=.25)
     a.grid(axis='x', color='#E9ECEF', linewidth=.45)
@@ -452,7 +452,7 @@ def build_figure():
     b.axvline(19.5, color=GRAY, linestyle=(0, (2, 3)), linewidth=.55)
     b.set(xlim=(-1, 29), ylim=(-200, 1650), ylabel='Tokens saved by LaDiM\n(thousands)',
           yticks=[0, 250, 500, 750, 1000, 1250], xticks=[9.5, 24],
-          xticklabels=['Passes initial checks', 'Needs repair'],
+          xticklabels=['Passes before repair', 'Needs repair'],
           xlabel='Migration inputs')
     b.legend(handles=[Patch(facecolor='#009E73', label='Lower token use by LaDiM'),
                       Patch(facecolor=ORANGE, label='Higher token use by LaDiM')],

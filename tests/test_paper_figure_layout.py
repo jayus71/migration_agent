@@ -54,7 +54,7 @@ class PaperFigureLayoutTests(unittest.TestCase):
         for ax, fault, metric, check, loss_step in zip(
                 fig.axes, ["grad_wrong", "param_wrong"],
                 ["grad_norm_abs_diff", "param_update_rel_l2"],
-                ["Gradient", "Update"], [31, 18]):
+                ["Gradient norm", "Update"], [31, 18]):
             subset = frame[frame.fault.eq(fault) & frame.coupling.eq("free-running")]
             means = subset.groupby("step")[["loss_abs_diff", metric]].mean()
             lines = {line.get_label(): line for line in ax.lines
@@ -70,7 +70,7 @@ class PaperFigureLayoutTests(unittest.TestCase):
             first = labels["LaDiM detects at step 1"]
             self.assertEqual(first.xy[0], 1)
             self.assertAlmostEqual(first.xy[1], means.loc[1, metric] / THRESHOLDS[metric])
-            loss = labels[f"Loss check detects\nat step {loss_step}"]
+            loss = labels[f"Mean loss difference\ncrosses threshold at step {loss_step}"]
             self.assertEqual(loss.xy[0], loss_step)
             self.assertAlmostEqual(loss.xy[1], means.loc[loss_step, "loss_abs_diff"]
                                    / THRESHOLDS["loss_abs_diff"])
