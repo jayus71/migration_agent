@@ -371,3 +371,10 @@ meaning. Both figures retain their previous font sizes and 96% inclusion width.
 The 15 figure data/layout checks and 10 unified-result checks pass. The compiled
 PDF was inspected at manuscript size. See
 `docs/manuscript-layout-20260923.md` for the layout and algorithm review.
+
+The later single-file Overleaf preparation also adjusts the two compact ablation
+panels. Their first columns use natural text widths instead of fixed 2.7 cm
+paragraph columns. Parameter updates no longer contains an explicit line break.
+Execution and basic checks, Continuous conversation, and Without repair history
+fit on one line at the existing font size. Numeric cells and the panel widths
+are unchanged; the generator and included tables are updated together.

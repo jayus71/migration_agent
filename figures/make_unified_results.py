@@ -395,8 +395,8 @@ def export_compact_tables(data):
     compact += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_main_comparison.tex').write_text('\n'.join(compact) + '\n')
 
-    signal_labels = ['Execution and basic checks', r'\quad + Forward values', r'\quad + Gradients', r'\quad + \begin{tabular}[t]{@{}l@{}}Parameter\\updates\end{tabular}']
-    signals = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.7cm}rr@{}}',
+    signal_labels = ['Execution and basic checks', r'\quad + Forward values', r'\quad + Gradients', r'\quad + Parameter updates']
+    signals = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrr@{}}',
                r'\toprule', r'\textbf{Feedback} & \textbf{Accepted} & \textbf{Tokens} \\', r'\midrule']
     for label, row in zip(signal_labels, data['training_signals']):
         accepted = f"{row['accepted']}/{row['planned']}"
@@ -406,7 +406,7 @@ def export_compact_tables(data):
     signals += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_training_signals_compact.tex').write_text('\n'.join(signals) + '\n')
 
-    program = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.7cm}rr@{}}',
+    program = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrr@{}}',
                r'\toprule', r'\textbf{Condition} & \textbf{Accepted} & \textbf{Tokens} \\', r'\midrule']
     for row in data['natural_components'][:3]:
         accepted = f"{row['accepted']}/10 ({row['repaired']}/5)"

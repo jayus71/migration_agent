@@ -731,14 +731,14 @@ Every setting passes all 69 behavior checks across three seeds.}
 \vspace{0pt}
 \raggedright\textit{(a) Training signals}\par\smallskip
 
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.7cm}rr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrr@{}}
 \toprule
 \textbf{Feedback} & \textbf{Accepted} & \textbf{Tokens} \\
 \midrule
 Execution and basic checks & 4/16 & 2,088,915 \\
 \quad + Forward values & 8/16 & 2,603,211 \\
 \quad + Gradients & 12/16 & 3,302,873 \\
-\quad + \begin{tabular}[t]{@{}l@{}}Parameter\\updates\end{tabular} & \textbf{16/16} & 3,418,960 \\
+\quad + Parameter updates & \textbf{16/16} & 3,418,960 \\
 \bottomrule
 \end{tabular*}
 
@@ -748,7 +748,7 @@ Execution and basic checks & 4/16 & 2,088,915 \\
 \vspace{0pt}
 \raggedright\textit{(b) Repair history and independent evidence handoff}\par\smallskip
 
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.7cm}rr@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrr@{}}
 \toprule
 \textbf{Condition} & \textbf{Accepted} & \textbf{Tokens} \\
 \midrule
