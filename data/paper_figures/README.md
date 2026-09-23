@@ -357,3 +357,17 @@ plotted data, labels, and assets are unchanged. Both captions occupy five lines,
 with Figure 4's individual-run detection counts in the adjacent paragraph.
 Source and layout checks are recorded in
 `docs/manuscript-refinement-20260923.md`. No experiments were rerun.
+
+## September 23 compact figure layout
+
+The subsequent layout revision reduces Figure 3's canvas from 5.5 × 2.65 inches
+to 5.5 × 2.2 inches. The legends now occupy unused plotting space. The signed
+per-input differences, all three methods, and all cost stages remain unchanged.
+Figure 4 uses a 5.5 × 1.8 inch canvas, with panel names at the bottom inside the
+axes. Its upper axis limit is 1,000 times the threshold; the largest observation
+in either panel is 33.21 times its threshold, so the upper data envelope remains
+visible. Step 1 and mean crossings at steps 31 and 18 retain their original
+meaning. Both figures retain their previous font sizes and 96% inclusion width.
+The 15 figure data/layout checks and 10 unified-result checks pass. The compiled
+PDF was inspected at manuscript size. See
+`docs/manuscript-layout-20260923.md` for the layout and algorithm review.

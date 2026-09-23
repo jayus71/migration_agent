@@ -27,13 +27,13 @@
     }
   },
   "current": {
-    "base_commit": "019411a",
-    "pdf_sha256": "8e6b45d58da546c1657212627dbb1164a4ac1fc7f20e4b342d9567a9ac724f4a"
+    "base_commit": "4649468",
+    "pdf_sha256": "6d90979c2b24523d05d3494e3cca4c062eb2c2b8252da6edc834e93aba31d5c4"
   },
-  "updated": "2026-09-23T14:25:46+08:00",
-  "version": "d1aeab26c803b37aefd31b350a4271f9b4b24a71d7debc79617d1d6932cdfad6",
-  "reading_words_added": 7795,
-  "reading_words_removed": 4044,
+  "updated": "2026-09-23T14:46:22+08:00",
+  "version": "ea6571f664d9348f8b661fc04581fde9fe1bde36d361210a6013244653973aa8",
+  "reading_words_added": 7772,
+  "reading_words_removed": 4046,
   "sections": {
     "Title": {
       "reading": [
@@ -9720,7 +9720,19 @@
             "missing.",
             "The",
             "Verifier",
-            "can"
+            "can",
+            "inspect",
+            "parameter",
+            "registration,",
+            "trace",
+            "the",
+            "operations",
+            "connecting",
+            "that",
+            "parameter",
+            "to",
+            "the",
+            "loss,"
           ],
           "after": [
             "measurements",
@@ -9741,8 +9753,26 @@
             "observations,",
             "test",
             "results,",
-            "locations,",
-            "and",
+            "locations,"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "run",
+            "a",
+            "small"
+          ],
+          "after": [
             "hypotheses",
             "LayeredDiagnosis",
             "$\\mathcal",
@@ -9761,76 +9791,41 @@
             "$H\\gets",
             "C.\\Call{PrepareContext}{H,S}$",
             "$(\\ell,h,a)\\gets\\Call{LLMCall}{M,A_V,H,b,B}$",
-            "$\\ell$",
-            ":",
-            "locate",
-            "the",
-            "discrepant",
-            "computation",
-            "along",
+            "Trace",
             "$\\mathcal",
             "D$",
-            "$h$",
-            ":",
-            "explain",
-            "its",
-            "cause",
-            "using",
-            "agreeing",
-            "and",
-            "differing",
-            "observations",
-            "$a$",
-            ":"
+            ","
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "inspect"
+            "test"
           ],
           "after": [
-            "inspect"
+            "test"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "parameter",
-            "registration,",
-            "trace"
-          ],
-          "after": [
-            "code",
-            "or",
-            "test",
-            "$h$",
-            "at"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "the"
-          ],
-          "after": [
-            "the"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "operations",
-            "connecting",
-            "that",
-            "parameter",
             "to",
+            "distinguish",
+            "an",
+            "unregistered",
+            "parameter",
+            "from",
+            "a",
+            "disconnected",
+            "computation.",
+            "It",
+            "records",
             "the",
-            "loss,"
+            "measured",
+            "outcome"
           ],
           "after": [
-            "suspected",
-            "locations",
+            "causes",
             "$H\\gets\\Call{ToolFeedback}{a,H,S,A_V,C}$",
             "if",
             "$a.\\mathrm{complete}$",
@@ -9858,31 +9853,49 @@
         {
           "kind": "replace",
           "before": [
-            "run",
+            "code",
+            "location",
+            "supporting",
             "a",
-            "small",
-            "test",
-            "to",
-            "distinguish",
-            "an",
-            "unregistered",
-            "parameter",
-            "from",
-            "a",
-            "disconnected",
-            "computation.",
-            "It",
-            "records",
-            "the",
-            "measured",
-            "outcome"
+            "hypothesis,",
+            "along"
           ],
           "after": [
             "tool",
             "observations",
             "Repair",
-            "Agent",
-            "with",
+            "Agent"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "with"
+          ],
+          "after": [
+            "with"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "unresolved",
+            "questions.",
+            "This",
+            "record",
+            "can",
+            "include",
+            "a",
+            "further",
+            "test",
+            "to",
+            "distinguish",
+            "competing",
+            "explanations.",
+            "Fault",
+            "categories"
+          ],
+          "after": [
             "Evidence",
             "Handoff"
           ]
@@ -9899,29 +9912,6 @@
         {
           "kind": "replace",
           "before": [
-            "code",
-            "location",
-            "supporting",
-            "a",
-            "hypothesis,",
-            "along",
-            "with",
-            "unresolved",
-            "questions.",
-            "This",
-            "record",
-            "can",
-            "include",
-            "a",
-            "further",
-            "test",
-            "to",
-            "distinguish",
-            "competing",
-            "explanations.",
-            "Fault",
-            "categories",
-            "and",
             "repair",
             "locations",
             "emerge",
@@ -10527,7 +10517,10 @@
             "$(S.m,q)\\gets\\mathcal",
             "O.\\Call{Submit}{S.\\hat",
             "P,B}$",
+            "if",
             "$q=\\mathrm{accepted}$",
+            "then",
+            "return",
             "$(S.\\hat",
             "P,q)$",
             "$(S.\\hat",
@@ -11418,17 +11411,20 @@
             "a",
             "context",
             "capacity",
-            "boundary,"
+            "boundary,",
+            "LaDiM"
           ],
           "after": [
             "relevant",
-            "records."
+            "records.",
+            "The",
+            "PrepareContext",
+            "operation"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "LaDiM",
             "rebuilds",
             "the",
             "conversation",
@@ -11437,7 +11433,6 @@
             "current"
           ],
           "after": [
-            "LaDiM",
             "rebuilds",
             "the",
             "conversation",
@@ -11506,15 +11501,10 @@
             "unchanged.",
             "Algorithm",
             "[alg:repository]",
-            "provides",
-            "these",
-            "operations",
-            "through",
-            "the",
-            "shared",
+            "connects",
+            "this",
             "context",
-            "used",
-            "by",
+            "to",
             "Algorithms",
             "[alg:diagnose]",
             "and",
@@ -11553,8 +11543,30 @@
             "retains"
           ],
           "after": [
-            "Tool",
-            "calls",
+            "The",
+            "UpdateDependencyGraph",
+            "operation",
+            "applies",
+            "Repair",
+            "Dependency",
+            "Graph",
+            "Planning.",
+            "The",
+            "Execute",
+            "operation",
+            "dispatches",
+            "unit",
+            "selection,",
+            "file",
+            "or",
+            "notebook",
+            "operations,",
+            "tests,",
+            "and",
+            "evidence",
+            "retrieval.",
+            "These",
+            "tools",
             "update"
           ]
         },
@@ -11600,33 +11612,10 @@
           "after": [
             "context",
             "$C$",
-            ";",
-            "$U$",
-            "contains",
-            "the",
-            "units",
-            "affected",
-            "by",
-            "changes",
-            "to",
-            "files",
-            "or",
-            "the",
-            "plan.",
-            "The",
-            "agent",
-            "selects",
-            "structural",
-            "analysis,",
-            "graph",
-            "planning,",
-            "unit",
-            "selection,",
-            "file",
-            "or",
-            "notebook",
-            "operations,",
-            "tests,"
+            ",",
+            "returning",
+            "observations",
+            "$o$"
           ]
         },
         {
@@ -11639,13 +11628,27 @@
           ]
         },
         {
-          "kind": "replace",
+          "kind": "delete",
           "before": [
             "recently",
             "read",
             "code",
-            "for",
-            "the",
+            "for"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "the"
+          ],
+          "after": [
+            "the"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "active",
             "unit",
             "whose",
@@ -11656,102 +11659,24 @@
             "First",
             "selecting",
             "a",
-            "unit",
-            "and",
-            "continuing",
-            "an",
-            "ordinary",
-            "repair",
-            "stage",
-            "preserve",
-            "the",
-            "existing",
-            "conversation.",
-            "These",
-            "rules",
-            "carry",
-            "the",
-            "state",
-            "of"
+            "unit"
           ],
           "after": [
-            "evidence",
-            "retrieval",
-            "as",
-            "tools",
-            "within"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "units",
+            "$U$",
+            "affected",
+            "by",
+            "changes",
+            "to",
+            "files",
+            "or",
             "the",
-            "investigation"
-          ],
-          "after": [
-            "the",
-            "investigation"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "between"
-          ],
-          "after": [
-            "and",
-            "repair",
-            "loops.",
+            "plan.",
             "All",
-            "work"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "units"
-          ],
-          "after": [
-            "units"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "while",
-            "keeping"
-          ],
-          "after": [
-            "share"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "the"
-          ],
-          "after": [
-            "the"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "evidence",
-            "associated",
-            "with",
+            "work",
+            "units",
+            "share",
             "the",
-            "code",
-            "it",
-            "describes.",
-            "Appendix",
-            "[sec:repository-context]",
-            "gives",
-            "the",
-            "context",
-            "limits"
-          ],
-          "after": [
             "repository",
             "files,",
             "repair",
@@ -11770,16 +11695,66 @@
         {
           "kind": "replace",
           "before": [
-            "stage",
-            "budgets."
+            "continuing",
+            "an",
+            "ordinary"
           ],
           "after": [
             "total",
             "budget.",
             "Repository",
             "migration",
+            "and"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "repair"
+          ],
+          "after": [
+            "repair"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "stage",
+            "preserve",
+            "the",
+            "existing",
+            "conversation.",
+            "These",
+            "rules",
+            "carry",
+            "the",
+            "state",
+            "of",
+            "the",
+            "investigation",
+            "between",
+            "units",
+            "while",
+            "keeping",
+            "the",
+            "evidence",
+            "associated",
+            "with",
+            "the",
+            "code",
+            "it",
+            "describes.",
+            "Appendix",
+            "[sec:repository-context]",
+            "gives",
+            "the",
+            "context",
+            "limits",
             "and",
-            "repair",
+            "stage",
+            "budgets."
+          ],
+          "after": [
             "coordination",
             "RepositoryMigrate",
             "$\\mathcal",
@@ -11794,7 +11769,10 @@
             "P}$",
             "Complete",
             "repository",
+            "if",
             "$q=\\mathrm{accepted}$",
+            "then",
+            "return",
             "$(S.\\hat",
             "P,q)$",
             "$E\\gets\\Call{LayeredDiagnosis}{\\mathcal",
@@ -11812,13 +11790,16 @@
             "$c\\in",
             "a.\\mathrm{tools}$",
             "$U\\gets\\varnothing$",
+            "if",
             "$c.\\mathrm{kind}=\\mathrm{structure}$",
-            "$o\\gets\\Call{RepositoryStructuralAnalysis}{C,S.\\hat",
-            "P}$",
+            "then",
+            "$o\\gets\\Call{RepositoryStructuralAnalysis}{C,S}$",
+            "else",
+            "if",
             "$c.\\mathrm{kind}=\\mathrm{plan}$",
-            "$(C.G,U,o)\\gets\\Call{RepairDependencyGraphPlanning}{c,C}$",
-            "$c.\\mathrm{kind}=\\mathrm{select}$",
-            "$(C.u,o)\\gets\\Call{SelectReadyUnit}{c,C.G,C.Q}$",
+            "then",
+            "$(C.G,U,o)\\gets\\Call{UpdateDependencyGraph}{c,C}$",
+            "else",
             "$(C,S,o,U)\\gets\\Call{Execute}{c,C,S,A}$",
             "$C.E\\gets",
             "C.E\\mathbin{\\|}(o,\\Call{CodeVersion}{S})$",
@@ -11826,14 +11807,7 @@
             "$r\\gets",
             "r\\mathbin{\\|}o$",
             "$C.Q[U\\cup\\Call{Dependents}{C.G,U}]\\gets\\mathrm{invalid}$",
-            "$(C,S,r)$",
-            "$C$",
-            ".PrepareContext",
-            "$H,S$",
-            "$\\Call{Handoff}{C}\\lor\\Call{UnitChanged}{C}\\lor\\Call{NearCapacity}{H}$",
-            "$R\\gets\\Call{RelevantUnchangedReads}{C.E,S}$",
-            "$H\\gets\\Call{Rebuild}{C.G,C.E,S.m,R}$",
-            "$H$"
+            "$(C,S,r)$"
           ]
         }
       ],
@@ -13938,7 +13912,19 @@
             "missing.",
             "The",
             "Verifier",
-            "can"
+            "can",
+            "inspect",
+            "parameter",
+            "registration,",
+            "trace",
+            "the",
+            "operations",
+            "connecting",
+            "that",
+            "parameter",
+            "to",
+            "the",
+            "loss,"
           ],
           "after": [
             "measurements",
@@ -13956,8 +13942,26 @@
             "observations,",
             "test",
             "results,",
-            "locations,",
-            "and",
+            "locations,"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "run",
+            "a",
+            "small"
+          ],
+          "after": [
             "hypotheses",
             "\\Function{LayeredDiagnosis}{$\\mathcal",
             "T,S,M,B,C$}",
@@ -13978,76 +13982,40 @@
             "C.\\Call{PrepareContext}{H,S}$",
             "\\State",
             "$(\\ell,h,a)\\gets\\Call{LLMCall}{M,A_V,H,b,B}$",
-            "\\Statex",
-            "\\hspace{\\algorithmicindent}\\hspace{\\algorithmicindent}$\\ell$:",
-            "locate",
-            "the",
-            "discrepant",
-            "computation",
-            "along",
+            "\\Comment{Trace",
             "$\\mathcal",
-            "D$",
-            "\\Statex",
-            "\\hspace{\\algorithmicindent}\\hspace{\\algorithmicindent}$h$:",
-            "explain",
-            "its",
-            "cause",
-            "using",
-            "agreeing",
-            "and",
-            "differing",
-            "observations",
-            "\\Statex",
-            "\\hspace{\\algorithmicindent}\\hspace{\\algorithmicindent}$a$:"
+            "D$,"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "inspect"
+            "test"
           ],
           "after": [
-            "inspect"
+            "test"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "parameter",
-            "registration,",
-            "trace"
-          ],
-          "after": [
-            "code",
-            "or",
-            "test",
-            "$h$",
-            "at"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "the"
-          ],
-          "after": [
-            "the"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "operations",
-            "connecting",
-            "that",
-            "parameter",
             "to",
+            "distinguish",
+            "an",
+            "unregistered",
+            "parameter",
+            "from",
+            "a",
+            "disconnected",
+            "computation.",
+            "It",
+            "records",
             "the",
-            "loss,"
+            "measured",
+            "outcome"
           ],
           "after": [
-            "suspected",
-            "locations",
+            "causes}",
             "\\State",
             "$H\\gets\\Call{ToolFeedback}{a,H,S,A_V,C}$",
             "\\State",
@@ -14083,24 +14051,12 @@
         {
           "kind": "replace",
           "before": [
-            "run",
+            "code",
+            "location",
+            "supporting",
             "a",
-            "small",
-            "test",
-            "to",
-            "distinguish",
-            "an",
-            "unregistered",
-            "parameter",
-            "from",
-            "a",
-            "disconnected",
-            "computation.",
-            "It",
-            "records",
-            "the",
-            "measured",
-            "outcome"
+            "hypothesis,",
+            "along"
           ],
           "after": [
             "tool",
@@ -14109,8 +14065,38 @@
             "\\end{algorithmic}",
             "\\end{algorithm}",
             "\\subsection{Repair",
-            "Agent",
-            "with",
+            "Agent"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "with"
+          ],
+          "after": [
+            "with"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "unresolved",
+            "questions.",
+            "This",
+            "record",
+            "can",
+            "include",
+            "a",
+            "further",
+            "test",
+            "to",
+            "distinguish",
+            "competing",
+            "explanations.",
+            "Fault",
+            "categories"
+          ],
+          "after": [
             "Evidence",
             "Handoff"
           ]
@@ -14127,29 +14113,6 @@
         {
           "kind": "replace",
           "before": [
-            "code",
-            "location",
-            "supporting",
-            "a",
-            "hypothesis,",
-            "along",
-            "with",
-            "unresolved",
-            "questions.",
-            "This",
-            "record",
-            "can",
-            "include",
-            "a",
-            "further",
-            "test",
-            "to",
-            "distinguish",
-            "competing",
-            "explanations.",
-            "Fault",
-            "categories",
-            "and",
             "repair",
             "locations",
             "emerge",
@@ -14852,12 +14815,13 @@
             "$(S.m,q)\\gets\\mathcal",
             "O.\\Call{Submit}{S.\\hat",
             "P,B}$",
-            "\\If{$q=\\mathrm{accepted}$}",
             "\\State",
-            "\\Return",
+            "\\textbf{if}",
+            "$q=\\mathrm{accepted}$",
+            "\\textbf{then",
+            "return}",
             "$(S.\\hat",
             "P,q)$",
-            "\\EndIf",
             "\\EndWhile",
             "\\State",
             "\\Return",
@@ -15633,17 +15597,20 @@
             "a",
             "context",
             "capacity",
-            "boundary,"
+            "boundary,",
+            "LaDiM"
           ],
           "after": [
             "relevant",
-            "records."
+            "records.",
+            "The",
+            "\\textsc{PrepareContext}",
+            "operation"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "LaDiM",
             "rebuilds",
             "the",
             "conversation",
@@ -15652,7 +15619,6 @@
             "current"
           ],
           "after": [
-            "LaDiM",
             "rebuilds",
             "the",
             "conversation",
@@ -15720,15 +15686,10 @@
             "remain",
             "unchanged.",
             "Algorithm~\\ref{alg:repository}",
-            "provides",
-            "these",
-            "operations",
-            "through",
-            "the",
-            "shared",
+            "connects",
+            "this",
             "context",
-            "used",
-            "by",
+            "to",
             "Algorithms~\\ref{alg:diagnose}",
             "and~\\ref{alg:repair}.",
             "Here",
@@ -15764,8 +15725,30 @@
             "retains"
           ],
           "after": [
-            "Tool",
-            "calls",
+            "The",
+            "\\textsc{UpdateDependencyGraph}",
+            "operation",
+            "applies",
+            "Repair",
+            "Dependency",
+            "Graph",
+            "Planning.",
+            "The",
+            "\\textsc{Execute}",
+            "operation",
+            "dispatches",
+            "unit",
+            "selection,",
+            "file",
+            "or",
+            "notebook",
+            "operations,",
+            "tests,",
+            "and",
+            "evidence",
+            "retrieval.",
+            "These",
+            "tools",
             "update"
           ]
         },
@@ -15810,33 +15793,10 @@
           ],
           "after": [
             "context",
-            "$C$;",
-            "$U$",
-            "contains",
-            "the",
-            "units",
-            "affected",
-            "by",
-            "changes",
-            "to",
-            "files",
-            "or",
-            "the",
-            "plan.",
-            "The",
-            "agent",
-            "selects",
-            "structural",
-            "analysis,",
-            "graph",
-            "planning,",
-            "unit",
-            "selection,",
-            "file",
-            "or",
-            "notebook",
-            "operations,",
-            "tests,"
+            "$C$,",
+            "returning",
+            "observations",
+            "$o$"
           ]
         },
         {
@@ -15849,13 +15809,27 @@
           ]
         },
         {
-          "kind": "replace",
+          "kind": "delete",
           "before": [
             "recently",
             "read",
             "code",
-            "for",
-            "the",
+            "for"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "the"
+          ],
+          "after": [
+            "the"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "active",
             "unit",
             "whose",
@@ -15866,101 +15840,24 @@
             "First",
             "selecting",
             "a",
-            "unit",
-            "and",
-            "continuing",
-            "an",
-            "ordinary",
-            "repair",
-            "stage",
-            "preserve",
-            "the",
-            "existing",
-            "conversation.",
-            "These",
-            "rules",
-            "carry",
-            "the",
-            "state",
-            "of"
+            "unit"
           ],
           "after": [
-            "evidence",
-            "retrieval",
-            "as",
-            "tools",
-            "within"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "units",
+            "$U$",
+            "affected",
+            "by",
+            "changes",
+            "to",
+            "files",
+            "or",
             "the",
-            "investigation"
-          ],
-          "after": [
-            "the",
-            "investigation"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "between"
-          ],
-          "after": [
-            "and",
-            "repair",
-            "loops.",
+            "plan.",
             "All",
-            "work"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "units"
-          ],
-          "after": [
-            "units"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "while",
-            "keeping"
-          ],
-          "after": [
-            "share"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "the"
-          ],
-          "after": [
-            "the"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "evidence",
-            "associated",
-            "with",
+            "work",
+            "units",
+            "share",
             "the",
-            "code",
-            "it",
-            "describes.",
-            "Appendix~\\ref{sec:repository-context}",
-            "gives",
-            "the",
-            "context",
-            "limits"
-          ],
-          "after": [
             "repository",
             "files,",
             "repair",
@@ -15979,8 +15876,9 @@
         {
           "kind": "replace",
           "before": [
-            "stage",
-            "budgets."
+            "continuing",
+            "an",
+            "ordinary"
           ],
           "after": [
             "total",
@@ -15988,8 +15886,56 @@
             "\\begin{algorithm}[!htb]",
             "\\caption{Repository",
             "migration",
+            "and"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "repair"
+          ],
+          "after": [
+            "repair"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "stage",
+            "preserve",
+            "the",
+            "existing",
+            "conversation.",
+            "These",
+            "rules",
+            "carry",
+            "the",
+            "state",
+            "of",
+            "the",
+            "investigation",
+            "between",
+            "units",
+            "while",
+            "keeping",
+            "the",
+            "evidence",
+            "associated",
+            "with",
+            "the",
+            "code",
+            "it",
+            "describes.",
+            "Appendix~\\ref{sec:repository-context}",
+            "gives",
+            "the",
+            "context",
+            "limits",
             "and",
-            "repair",
+            "stage",
+            "budgets."
+          ],
+          "after": [
             "coordination}",
             "\\label{alg:repository}",
             "\\begin{algorithmic}[1]",
@@ -16008,12 +15954,13 @@
             "P}$",
             "\\Comment{Complete",
             "repository}",
-            "\\If{$q=\\mathrm{accepted}$}",
             "\\State",
-            "\\Return",
+            "\\textbf{if}",
+            "$q=\\mathrm{accepted}$",
+            "\\textbf{then",
+            "return}",
             "$(S.\\hat",
             "P,q)$",
-            "\\EndIf",
             "\\State",
             "$E\\gets\\Call{LayeredDiagnosis}{\\mathcal",
             "T,S,M,B,C}$",
@@ -16031,20 +15978,20 @@
             "a.\\mathrm{tools}$}",
             "\\State",
             "$U\\gets\\varnothing$",
-            "\\If{$c.\\mathrm{kind}=\\mathrm{structure}$}",
             "\\State",
-            "$o\\gets\\Call{RepositoryStructuralAnalysis}{C,S.\\hat",
-            "P}$",
-            "\\ElsIf{$c.\\mathrm{kind}=\\mathrm{plan}$}",
+            "\\textbf{if}",
+            "$c.\\mathrm{kind}=\\mathrm{structure}$",
+            "\\textbf{then}",
+            "$o\\gets\\Call{RepositoryStructuralAnalysis}{C,S}$",
             "\\State",
-            "$(C.G,U,o)\\gets\\Call{RepairDependencyGraphPlanning}{c,C}$",
-            "\\ElsIf{$c.\\mathrm{kind}=\\mathrm{select}$}",
+            "\\textbf{else",
+            "if}",
+            "$c.\\mathrm{kind}=\\mathrm{plan}$",
+            "\\textbf{then}",
+            "$(C.G,U,o)\\gets\\Call{UpdateDependencyGraph}{c,C}$",
             "\\State",
-            "$(C.u,o)\\gets\\Call{SelectReadyUnit}{c,C.G,C.Q}$",
-            "\\Else",
-            "\\State",
+            "\\textbf{else}",
             "$(C,S,o,U)\\gets\\Call{Execute}{c,C,S,A}$",
-            "\\EndIf",
             "\\State",
             "$C.E\\gets",
             "C.E\\mathbin{\\|}(o,\\Call{CodeVersion}{S})$;",
@@ -16056,17 +16003,6 @@
             "\\State",
             "\\Return",
             "$(C,S,r)$",
-            "\\EndFunction",
-            "\\Function{$C$.PrepareContext}{$H,S$}",
-            "\\If{$\\Call{Handoff}{C}\\lor\\Call{UnitChanged}{C}\\lor\\Call{NearCapacity}{H}$}",
-            "\\State",
-            "$R\\gets\\Call{RelevantUnchangedReads}{C.E,S}$",
-            "\\State",
-            "$H\\gets\\Call{Rebuild}{C.G,C.E,S.m,R}$",
-            "\\EndIf",
-            "\\State",
-            "\\Return",
-            "$H$",
             "\\EndFunction",
             "\\end{algorithmic}",
             "\\end{algorithm}"

@@ -420,7 +420,7 @@ def export_compact_tables(data):
 def build_figure():
     """Actual manuscript width, with every paired input shown as signed savings."""
     data = load_data()
-    fig, (a, b) = plt.subplots(1, 2, figsize=(5.5, 2.65),
+    fig, (a, b) = plt.subplots(1, 2, figsize=(5.5, 2.2),
                               gridspec_kw={'width_ratios': [1, 1.25]})
     stage_keys = ['translation', 'initially_accepted', 'initially_faulty']
     stage_colors = ['#E2E6E9', '#7BB2C9', BLUE]
@@ -433,13 +433,14 @@ def build_figure():
             left += value
         a.text(left + .35, y, f'{left:.2f}', va='center', fontsize=8)
     a.set(yticks=range(3), yticklabels=['LaDiM', 'MatchFixAgent', 'SWE-agent'],
-          xlim=(0, 24), ylim=(2.55, -1.85), xlabel='Total tokens (millions)')
+          xlim=(0, 24), ylim=(2.55, -.75), xlabel='Total tokens (millions)')
     a.set_xticks([0, 10, 20])
     a.set_title('(a) Total tokens', loc='left', fontsize=9, pad=8)
     a.legend(handles=[Patch(facecolor=color, label=label) for color, label in zip(
              stage_colors, ['Initial translation', 'Passes before repair', 'Needs repair'])],
-             loc='upper left', frameon=False, fontsize=8, handlelength=1.05,
-             handletextpad=.4, labelspacing=.3, borderaxespad=.25)
+             loc='upper right', bbox_to_anchor=(1.16, 1.0),
+             frameon=False, fontsize=8, handlelength=.85,
+             handletextpad=.35, labelspacing=.2, borderaxespad=.15)
     a.grid(axis='x', color='#E9ECEF', linewidth=.45)
     ordered = []
     for state in (True, False):
@@ -450,14 +451,14 @@ def build_figure():
           color=['#009E73' if value >= 0 else ORANGE for value in savings], zorder=3)
     b.axhline(0, color=GRAY, linewidth=.7, zorder=4)
     b.axvline(19.5, color=GRAY, linestyle=(0, (2, 3)), linewidth=.55)
-    b.set(xlim=(-1, 29), ylim=(-200, 1650), ylabel='Tokens saved by LaDiM\n(thousands)',
+    b.set(xlim=(-1, 29), ylim=(-200, 1400), ylabel='Tokens saved by LaDiM\n(thousands)',
           yticks=[0, 250, 500, 750, 1000, 1250], xticks=[9.5, 24],
           xticklabels=['Passes before repair', 'Needs repair'],
           xlabel='Migration inputs')
-    b.legend(handles=[Patch(facecolor='#009E73', label='Lower token use by LaDiM'),
-                      Patch(facecolor=ORANGE, label='Higher token use by LaDiM')],
-             loc='upper left', frameon=False, fontsize=8, handlelength=1,
-             handletextpad=.35, labelspacing=.25, borderaxespad=.2)
+    b.legend(handles=[Patch(facecolor='#009E73', label='Fewer tokens'),
+                      Patch(facecolor=ORANGE, label='More tokens')],
+             loc='upper left', frameon=False, fontsize=8, handlelength=.85,
+             handletextpad=.35, labelspacing=.2, borderaxespad=.15)
     b.set_title('(b) Savings on each input', loc='left', fontsize=9, pad=8)
     b.grid(axis='y', color='#E9ECEF', linewidth=.45)
     for ax in (a, b):
@@ -467,7 +468,7 @@ def build_figure():
             ax.spines[side].set_color('#B3BAC0')
         ax.xaxis.label.set_fontsize(8)
         ax.yaxis.label.set_fontsize(8)
-    fig.subplots_adjust(left=.165, right=.985, top=.86, bottom=.27, wspace=.72)
+    fig.subplots_adjust(left=.165, right=.985, top=.84, bottom=.30, wspace=.72)
     return fig
 
 

@@ -130,10 +130,7 @@ Algorithm~\ref{alg:diagnose} expresses this reasoning through the training depen
   \State $\mathcal D:\ \mathrm{execution}\to v_t\to g_t\to\Delta\theta_t\to v_{t+1}$
   \While{$\Call{WithinLimits}{b,B}$}
     \State $H\gets C.\Call{PrepareContext}{H,S}$
-    \State $(\ell,h,a)\gets\Call{LLMCall}{M,A_V,H,b,B}$
-    \Statex \hspace{\algorithmicindent}\hspace{\algorithmicindent}$\ell$: locate the discrepant computation along $\mathcal D$
-    \Statex \hspace{\algorithmicindent}\hspace{\algorithmicindent}$h$: explain its cause using agreeing and differing observations
-    \Statex \hspace{\algorithmicindent}\hspace{\algorithmicindent}$a$: inspect code or test $h$ at the suspected locations
+    \State $(\ell,h,a)\gets\Call{LLMCall}{M,A_V,H,b,B}$ \Comment{Trace $\mathcal D$, test causes}
     \State $H\gets\Call{ToolFeedback}{a,H,S,A_V,C}$
     \State \textbf{if} $a.\mathrm{complete}$ \textbf{then break}
   \EndWhile
@@ -167,7 +164,7 @@ Repair history preserves earlier edits, observations, and hypotheses across atte
     \State \textbf{if} $\Call{RepairComplete}{a,H}$ \textbf{then break}
   \EndWhile
   \State $(S.m,q)\gets\mathcal O.\Call{Submit}{S.\hat P,B}$
-  \If{$q=\mathrm{accepted}$} \State \Return $(S.\hat P,q)$ \EndIf
+  \State \textbf{if} $q=\mathrm{accepted}$ \textbf{then return} $(S.\hat P,q)$
 \EndWhile
 \State \Return $(S.\hat P,q)$
 \end{algorithmic}
@@ -180,7 +177,7 @@ A change to a shared implementation can affect several callers in a repository. 
 
 Through Repository Structural Analysis, the agent can inspect the repository's files, imports, function and class definitions, and notebook structure on demand. The agent uses Repair Dependency Graph Planning to group related target files into work units, each with a repair goal and selected tests, and organize their prerequisites as a directed acyclic graph. It selects a unit whose prerequisite units have valid local checks, then edits the files assigned to it. For each unit, LaDiM records the results of syntax checks and the tests selected in the plan. Changes to target files or the dependency plan invalidate the checks for affected units and their dependents in the plan, prompting the agent to check the corresponding files again. The Orchestrator evaluates the complete repository, including its entry points and training computations, to determine acceptance.
 
-Notebook tools let the agent inspect and revise code cells while checking that edits preserve valid syntax. The evidence archive retains code observations, measurements, hypotheses, and conversations with their code versions, and supports retrieval of relevant records. LaDiM rebuilds the conversation around the current plan, findings, and measurements when evidence passes to the Repair Agent, work shifts to another unit, or the conversation approaches its capacity. It restores relevant observations from earlier code reads when the corresponding files remain unchanged. Algorithm~\ref{alg:repository} provides these operations through the shared context used by Algorithms~\ref{alg:diagnose} and~\ref{alg:repair}. Here $C.G$ is the work dependency graph, $C.Q$ stores local check results, and $C.E$ archives evidence. Tool calls update the shared state $S$ and context $C$; $U$ contains the units affected by changes to files or the plan. The agent selects structural analysis, graph planning, unit selection, file or notebook operations, tests, and evidence retrieval as tools within the investigation and repair loops. All work units share the repository files, repair history, and total budget.
+Notebook tools let the agent inspect and revise code cells while checking that edits preserve valid syntax. The evidence archive retains code observations, measurements, hypotheses, and conversations with their code versions, and supports retrieval of relevant records. The \textsc{PrepareContext} operation rebuilds the conversation around the current plan, findings, and measurements when evidence passes to the Repair Agent, work shifts to another unit, or the conversation approaches its capacity. It restores relevant observations from earlier code reads when the corresponding files remain unchanged. Algorithm~\ref{alg:repository} connects this context to Algorithms~\ref{alg:diagnose} and~\ref{alg:repair}. Here $C.G$ is the work dependency graph, $C.Q$ stores local check results, and $C.E$ archives evidence. The \textsc{UpdateDependencyGraph} operation applies Repair Dependency Graph Planning. The \textsc{Execute} operation dispatches unit selection, file or notebook operations, tests, and evidence retrieval. These tools update the shared state $S$ and context $C$, returning observations $o$ and the units $U$ affected by changes to files or the plan. All work units share the repository files, repair history, and total budget.
 
 \begin{algorithm}[!htb]
 \caption{Repository migration and repair coordination}
@@ -190,7 +187,7 @@ Notebook tools let the agent inspect and revise code cells while checking that e
   \State $C\gets\Call{RepositoryContext}{\mathcal T}$
   \State $S.\hat P\gets\Call{LLMTranslate}{M,A_T,\mathcal T}$
   \State $(S.m,q)\gets\mathcal O.\Call{Verify}{S.\hat P}$ \Comment{Complete repository}
-  \If{$q=\mathrm{accepted}$} \State \Return $(S.\hat P,q)$ \EndIf
+  \State \textbf{if} $q=\mathrm{accepted}$ \textbf{then return} $(S.\hat P,q)$
   \State $E\gets\Call{LayeredDiagnosis}{\mathcal T,S,M,B,C}$ \Comment{Algorithm~\ref{alg:diagnose}}
   \State \Return $\Call{Repair}{\mathcal T,S,E,q,M,B,C}$ \Comment{Algorithm~\ref{alg:repair}}
 \EndFunction
@@ -198,26 +195,13 @@ Notebook tools let the agent inspect and revise code cells while checking that e
   \State $r\gets[\,]$
   \ForAll{$c\in a.\mathrm{tools}$}
     \State $U\gets\varnothing$
-    \If{$c.\mathrm{kind}=\mathrm{structure}$}
-      \State $o\gets\Call{RepositoryStructuralAnalysis}{C,S.\hat P}$
-    \ElsIf{$c.\mathrm{kind}=\mathrm{plan}$}
-      \State $(C.G,U,o)\gets\Call{RepairDependencyGraphPlanning}{c,C}$
-    \ElsIf{$c.\mathrm{kind}=\mathrm{select}$}
-      \State $(C.u,o)\gets\Call{SelectReadyUnit}{c,C.G,C.Q}$
-    \Else
-      \State $(C,S,o,U)\gets\Call{Execute}{c,C,S,A}$
-    \EndIf
+    \State \textbf{if} $c.\mathrm{kind}=\mathrm{structure}$ \textbf{then} $o\gets\Call{RepositoryStructuralAnalysis}{C,S}$
+    \State \textbf{else if} $c.\mathrm{kind}=\mathrm{plan}$ \textbf{then} $(C.G,U,o)\gets\Call{UpdateDependencyGraph}{c,C}$
+    \State \textbf{else} $(C,S,o,U)\gets\Call{Execute}{c,C,S,A}$
     \State $C.E\gets C.E\mathbin{\|}(o,\Call{CodeVersion}{S})$; $r\gets r\mathbin{\|}o$
     \State $C.Q[U\cup\Call{Dependents}{C.G,U}]\gets\mathrm{invalid}$
   \EndFor
   \State \Return $(C,S,r)$
-\EndFunction
-\Function{$C$.PrepareContext}{$H,S$}
-  \If{$\Call{Handoff}{C}\lor\Call{UnitChanged}{C}\lor\Call{NearCapacity}{H}$}
-    \State $R\gets\Call{RelevantUnchangedReads}{C.E,S}$
-    \State $H\gets\Call{Rebuild}{C.G,C.E,S.m,R}$
-  \EndIf
-  \State \Return $H$
 \EndFunction
 \end{algorithmic}
 \end{algorithm}

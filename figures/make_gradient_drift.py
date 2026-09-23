@@ -21,7 +21,7 @@ def build_figure(frame=None):
     if frame is None:
         frame = pd.read_csv(GRADIENT_STEPS)
     # Two panels across the ICLR text width, with labels at their printed size.
-    fig, axes = plt.subplots(1, 2, figsize=(5.5, 2.0), sharex=True, sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(5.5, 1.8), sharex=True, sharey=True)
     for ax, (fault, diagnostic, panel, check) in zip(axes, PANELS):
         subset = frame[frame.fault.eq(fault) & frame.coupling.eq("free-running")]
         runs = subset.groupby(["model", "seed"])
@@ -59,7 +59,7 @@ def build_figure(frame=None):
         diagnostic_color = METRICS[diagnostic][1]
         ax.annotate(f"LaDiM detects at step {first_detection}",
                     xy=(first_detection, means[diagnostic].loc[first_detection]),
-                    xytext=(0.08, 0.80), textcoords="axes fraction",
+                    xytext=(0.08, 0.98), textcoords="axes fraction",
                     ha="left", va="top", color=diagnostic_color, fontsize=7.5,
                     arrowprops=dict(arrowstyle="->", color=diagnostic_color,
                                     linewidth=0.8, shrinkA=3, shrinkB=3),
@@ -67,7 +67,7 @@ def build_figure(frame=None):
         ax.axvline(first_loss, color=GRAY, linewidth=0.6, linestyle=":")
         ax.annotate(f"Mean loss difference\ncrosses threshold at step {first_loss}",
                     xy=(first_loss, means["loss_abs_diff"].loc[first_loss]),
-                    xytext=(0.96, 0.26), textcoords="axes fraction",
+                    xytext=(0.98, 0.35), textcoords="axes fraction",
                     ha="right", va="bottom", color=BLUE, fontsize=7.5,
                     arrowprops=dict(arrowstyle="->", color=BLUE,
                                     linewidth=0.8, shrinkA=3, shrinkB=3),
@@ -76,22 +76,22 @@ def build_figure(frame=None):
         ax.annotate("Detection threshold", xy=(50, 1), xytext=(0, -4),
                     textcoords="offset points", ha="right", va="top", fontsize=7,
                     color=GRAY, bbox=dict(facecolor="white", edgecolor="none", pad=1))
-        ax.text(0.98, 0.98, panel, transform=ax.transAxes,
-                ha="right", va="top", fontsize=8,
+        ax.text(0.98, 0.01, panel, transform=ax.transAxes,
+                ha="right", va="bottom", fontsize=8,
                 bbox=dict(facecolor="white", edgecolor="none", pad=0.5))
         ax.set_yscale("log")
-        ax.set_ylim(1e-6, 1e4)
-        ax.set_yticks([1e-6, 1e-3, 1, 1e4])
+        ax.set_ylim(1e-6, 1e3)
+        ax.set_yticks([1e-6, 1e-3, 1, 1e3])
         ax.set_xlim(0, 51)
         ax.set_ylabel("Difference / threshold")
         ax.grid(axis="y", linewidth=0.4, color="#dddddd")
         ax.set_axisbelow(True)
-        ax.legend(loc="lower left", bbox_to_anchor=(0.02, 0.00),
+        ax.legend(loc="lower left", bbox_to_anchor=(0.00, 0.09),
                   frameon=False, fontsize=7, handlelength=1.6,
-                  borderaxespad=0.5, labelspacing=0.4)
+                  borderaxespad=0.25, labelspacing=0.1)
         ax.set_xlabel("Training step")
         ax.set_xticks([1, 10, 20, 30, 40, 50])
-    fig.subplots_adjust(left=0.105, right=0.99, bottom=0.24, top=0.98, wspace=0.20)
+    fig.subplots_adjust(left=0.105, right=0.99, bottom=.27, top=.97, wspace=.20)
     return fig
 
 

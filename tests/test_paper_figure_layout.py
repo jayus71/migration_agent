@@ -109,7 +109,8 @@ class PaperFigureLayoutTests(unittest.TestCase):
         self.addCleanup(plt.close, fig)
         data = load_data()
         a, b = fig.axes
-        np.testing.assert_allclose(fig.get_size_inches(), [5.5, 2.65])
+        self.assertAlmostEqual(fig.get_size_inches()[0], 5.5)
+        self.assertLessEqual(fig.get_size_inches()[1], 2.3)
         groups = [sorted([p['matchfix_tokens'] - p['ladim_tokens']
                           for p in data['paired_costs'] if p['initially_accepted'] == state])
                   for state in (True, False)]
@@ -125,8 +126,13 @@ class PaperFigureLayoutTests(unittest.TestCase):
         fig.canvas.draw()
         renderer = fig.canvas.get_renderer()
         for ax in (a, b):
-            for x, y in ax.get_legend().get_window_extent(renderer).get_points():
-                self.assertTrue(ax.bbox.contains(x, y))
+            legend_box = ax.get_legend().get_window_extent(renderer)
+            for x, y in legend_box.get_points():
+                self.assertTrue(fig.bbox.contains(x, y))
+            for label in ax.texts:
+                self.assertFalse(legend_box.overlaps(label.get_window_extent(renderer)))
+            for bar in ax.patches:
+                self.assertFalse(legend_box.overlaps(bar.get_window_extent(renderer)))
         for ax in fig.axes:
             labels = [*ax.texts, *ax.get_xticklabels(), *ax.get_yticklabels(),
                       ax.xaxis.label, ax.yaxis.label, ax._left_title]
