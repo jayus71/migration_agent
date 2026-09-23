@@ -131,7 +131,11 @@ for readability. The clean manuscript is unchanged.
 \clearpage
 '''.replace('REVISION', revision[:7])
     diff = restore_tables(result.stdout, blocks)
-    diff = diff.replace(r'\begin{document}', r'\begin{document}' + legend, 1)
+    # Deleted headings can reuse counters in a latexdiff document. Give the
+    # review copy unique hyperlink targets for both old and current headings.
+    diff = diff.replace(r'\begin{document}',
+                        r'\hypersetup{hypertexnames=false}' + '\n'
+                        + r'\begin{document}' + legend, 1)
     (OUTPUT/'manuscript-diff.tex').write_text(diff)
     build = subprocess.run(['latexmk', '-norc', '-pdf', '-interaction=nonstopmode',
                             '-halt-on-error', f'-outdir={OUTPUT}',
