@@ -11,11 +11,17 @@ def build_figure():
     fig, cost = plt.subplots(figsize=(2.365, 1.30))
     for x, method, color in [(0, 'ladim', BLUE), (1, 'matchfix', ORANGE), (2, 'swe', GRAY)]:
         row = data['main'][method]
-        cost.bar(x, row['tokens'] / 1e6, width=.48, color=color)
+        cost.bar(x, row['tokens'] / 1e6, width=.32, color=color)
         cost.text(x, row['tokens'] / 1e6 + .6, f"{row['tokens'] / 1e6:.2f}",
                   fontsize=8, ha='center', va='bottom')
-    cost.set(xticks=range(3), xticklabels=['LaDiM\n100%', 'MatchFixAgent\n100%', 'SWE-agent\n88%'],
+    cost.set(xticks=range(3), xticklabels=['', '', ''],
              xlim=(-.5, 2.5), ylim=(0, 25), yticks=[0, 10, 20])
+    for x, method, acceptance in [(0, 'Ours', '100%'), (1, 'MatchFixAgent', '100%'), (2, 'SWE-agent', '88%')]:
+        cost.text(x, -.055, method, transform=cost.get_xaxis_transform(),
+                  fontsize=8, fontweight='bold' if method == 'Ours' else 'normal',
+                  ha='center', va='top')
+        cost.text(x, -.18, f'Acc. {acceptance}', transform=cost.get_xaxis_transform(),
+                  fontsize=8, ha='center', va='top')
     cost.set_title('Total tokens (millions)', loc='left', fontsize=8, pad=3)
     cost.tick_params(labelsize=8, length=2, pad=2)
     cost.tick_params(axis='x', length=0)
