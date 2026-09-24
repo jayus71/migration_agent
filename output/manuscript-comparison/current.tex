@@ -32,19 +32,12 @@
 \usepackage{hyperref}
 
 \begin{document}
-\title{LaDiM: Layered Diagnosis for\\
-Multi-Agent Code Migration}
+\title{LaDiM: Layered Diagnosis for Multi-Agent Code Migration}
 \author{Anonymous Authors}
 \maketitle
 \suppressfloats[t]
 \begin{abstract}
-Migrating code across deep learning frameworks enables the reuse of training programs in new software and hardware environments.
-Different frameworks, however, might compute gradients or update parameters in different ways, leading to wrong results even when a translated program runs without error.
-Current methods are mostly designed for language transfer, neglecting the subtle differences in framework level.
-To address this, LaDiM preserves the underlying training computation order, e.g., forward, gradient computation, update, and uses the dependencies among these stages to detect and localize silent computational errors.
-LaDiM includes Translator, Verifier, and Repair agents work under a shared Orchestrator: the Translator produces an initial candidate, the Verifier traces discrepancies along the computation order and hands its findings to the Repair Agent, which revises  using evidences and a persistent repair history.
-For repository-scale migrations, LaDiM further introduces repository.
-Evaluation across framework migration, language migration, and repository tasks shows that LaDiM achieves comparable or better migration results with up to 80.8\% fewer tokens than state-of-the-art methods, demonstrating its effectiveness.
+Migrating code across deep learning frameworks enables the reuse of training programs in new software and hardware environments. Different frameworks, however, might compute gradients or update parameters in different ways, leading to wrong results even when a translated program runs without error. Current methods are mostly designed for language transfer, neglecting the subtle differences in framework level. To address this, LaDiM preserves the underlying training computation order, e.g., forward, gradient computation, update, and uses the dependencies among these stages to detect and localize silent computational errors. LaDiM includes Translator, Verifier, and Repair agents work under a shared Orchestrator. The Translator produces an initial output. The Verifier traces discrepancies along the computation order and hands its findings to the Repair Agent, which revises  using evidences and a persistent repair history. For repository-scale migrations, LaDiM further introduces repository context management which tracks cross-file dependencies and preserves diagnostic context as agents move across the repository. Evaluation across framework migration, language migration, and repository-level translate tasks shows that LaDiM achieves comparable or better migration results with up to 80.8\% fewer tokens than state-of-the-art methods, demonstrating its effectiveness.
 \end{abstract}
 
 \section{Introduction}
@@ -53,23 +46,14 @@ Evaluation across framework migration, language migration, and repository tasks 
 \vspace{-\intextsep}
 \centering
 \includegraphics[width=\linewidth]{figures/migration_motivation.pdf}
-\caption{Total tokens on 50 PyTorch to MindSpore migrations, including initial translation and all subsequent calls.
-Labels give acceptance rates.}
+\caption{Tokens used on 50 PyTorch to MindSpore migrations tasks.}
 \label{fig:migration-motivation}
 \end{wrapfigure}
-Migrating deep learning code allows existing models and training programs to run in new software and hardware environments.
-Differences in operator semantics, numerical precision, and random number handling can change the computations performed after migration.
-Automatic differentiation and optimizer interfaces introduce further differences in how a model learns~\citep{paszke2019pytorch,mindspore2020whitepaper}.
-Large language models (LLMs) reduce the manual effort involved in code translation~\citep{he-etal-2025-execoder,macedo2024intertrans}, while automated tests and interactive repair help assess and correct translated behavior~\citep{roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent}.
-Successful migration must preserve the training computations that determine each parameter update.
+Code development environments and languages have grown increasingly diverse. Focusing on deep learning, popular frameworks such as PyTorch, Tensorflow and MindSpore provide programming interfaces, execution semantics, and hardware backends (Paszke et al., 2019; MindSpore, 2020). To enable easy adaptation of deep models and training pipelines on new software and hardware environments, migrating existing code across languages and frameworks has become a vital technique for reducing development cost (Guan et al., 2025). This need has driven the development of numerous code translation methods.  With the help of large language models (LLMs), these methods now achieve strong translation results at the level of syntax and program semantics (He et al., 2025; Macedo et al., 2025b; Roziere et al., 2022).
 
-A translated program can produce a loss close to that of the source while computing incorrect gradients.
-An optimizer error can also alter the parameter update without changing the current loss or gradients.
-We use semantic drift to describe these changes in training behavior caused by migration.
-A forward error may change gradients and updates, while an incorrect update may affect later forward computations.
-Locating the cause requires examining how the translated code produces the observed differences.
-Figure~\ref{fig:migration-motivation} compares total token use on the same 50 migrations from PyTorch to MindSpore.
-LaDiM completes all 50 with less than half the tokens used by MatchFixAgent.
+However, success at translating code does not guarantee equal translation performance across deep learning frameworks, for example, migrating from PyTorch to MindSpore. Different frameworks define and order their forward, backward, and parameter-update computations differently []. Further differences in operator semantics, automatic differentiation, and optimizer interfaces can change model behavior after migration (Paszke et al., 2019; MindSpore, 2020). As a result, a translated program can run without raising error while still producing incorrect results due to silent failures in computing losses, gradients or parameter updates. We use semantic drift to describe the changes in such training behavior introduced by migration.  Current translation and repair methods are designed mainly for language-level correctness, being unable to detect or repair such semantic drift.
+
+To address this, we aim to locate and repair the true cause of semantic drift after initial translation. We propose LaDiM (Layered Diagnosis for Multi-Agent Code Migration), a multi-agent framework that preserves the training computation order of a deep learning program and uses the dependencies among these stages to guide diagnosis and repair of an initial translation.
 
 We introduce LaDiM (Layered Diagnosis for Multi-Agent Code Migration), which uses training behavior to guide diagnosis and repair of an initial translation.
 Its Verifier Agent uses Layered Diagnosis to guide code inspections and tests that locate differences between source and target computations.
@@ -661,7 +645,7 @@ Results across framework, language, and repository migration establish the effec
 \bibliographystyle{iclr2027_conference}
 
 \section*{References}
-\begin{thebibliography}{35}
+\begin{thebibliography}{33}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -824,12 +808,6 @@ Marcos Macedo, Yuan Tian, Pengyu Nie, Filipe~R. Cogo, and Bram Adams.
 \newblock \doi{10.1109/ICSE55347.2025.00236}.
 \newblock URL \url{https://doi.org/10.1109/ICSE55347.2025.00236}.
 
-\bibitem[{MindSpore}(2020)]{mindspore2020whitepaper}
-{MindSpore}.
-\newblock {MindSpore}: A new deep learning computing framework.
-\newblock \url{https://www.mindspore.cn/en}, 2020.
-\newblock Framework white paper and documentation.
-
 \bibitem[{MindSpore}(2023)]{mindspore2023mindconverter}
 {MindSpore}.
 \newblock Migrating from third party frameworks with {MindConverter}.
@@ -852,21 +830,6 @@ Hoang Duong~Thien Nguyen, Dawei Qi, Abhik Roychoudhury, and Satish Chandra.
 \newblock {MSAdapter}.
 \newblock \url{https://openi.pcl.ac.cn/OpenI/MSAdapter/src/tag/v0.6.0}, 2025.
 \newblock Version 0.6.0. Accessed: 2026-09-20.
-
-\bibitem[Paszke et~al.(2019)Paszke, Gross, Massa, Lerer, Bradbury, Chanan,
-  Killeen, Lin, Gimelshein, Antiga, Desmaison, Kopf, Yang, DeVito, Raison,
-  Tejani, Chilamkurthy, Steiner, Fang, Bai, and Chintala]{paszke2019pytorch}
-Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory
-  Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, Alban
-  Desmaison, Andreas Kopf, Edward Yang, Zachary DeVito, Martin Raison, Alykhan
-  Tejani, Sasank Chilamkurthy, Benoit Steiner, Lu~Fang, Junjie Bai, and Soumith
-  Chintala.
-\newblock {PyTorch}: An imperative style, high-performance deep learning
-  library.
-\newblock In \emph{Advances in Neural Information Processing Systems},
-  volume~32, pp.\  8024--8035, 2019.
-\newblock URL
-  \url{https://papers.neurips.cc/paper/9015-pytorch-an-imperative-style-high-performance-deep-learning-library}.
 
 \bibitem[Pei et~al.(2017)Pei, Cao, Yang, and Jana]{pei2017deepxplore}
 Kexin Pei, Yinzhi Cao, Junfeng Yang, and Suman Jana.

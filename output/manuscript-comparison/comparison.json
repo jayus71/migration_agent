@@ -27,13 +27,13 @@
     }
   },
   "current": {
-    "base_commit": "49ee58c",
-    "pdf_sha256": "bb1beff57f559ae7d7a8f22768ba16669c9f57172c846bb380b27a5d0588ca3c"
+    "base_commit": "9bafbcd",
+    "pdf_sha256": "d06a0be03ad75d61389616bae130b5986541322b772761a0d26536512524096e"
   },
-  "updated": "2026-09-23T20:15:48+08:00",
-  "version": "563ae5ff59737c5f969c36d3cac974ff00ef3d47473ec41a8740bd9798f77814",
-  "reading_words_added": 7884,
-  "reading_words_removed": 4122,
+  "updated": "2026-09-24T13:28:50+08:00",
+  "version": "4eec1f7467471f6d07a5fdbc76dca19c92b8185582b2c6df8acd2ffb788ce30c",
+  "reading_words_added": 8105,
+  "reading_words_removed": 4318,
   "sections": {
     "Title": {
       "reading": [
@@ -65,17 +65,31 @@
           "before": [
             "LaDiM:",
             "Layered",
-            "Diagnosis",
-            "for\\\\",
+            "Diagnosis"
+          ],
+          "after": [
+            "LaDiM:",
+            "Layered",
+            "Diagnosis"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "for\\\\"
+          ],
+          "after": [
+            "for"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "Multi-Agent",
             "Code",
             "Migration"
           ],
           "after": [
-            "LaDiM:",
-            "Layered",
-            "Diagnosis",
-            "for\\\\",
             "Multi-Agent",
             "Code",
             "Migration"
@@ -267,7 +281,12 @@
         {
           "kind": "replace",
           "before": [
-            "updates"
+            "updates",
+            "its",
+            "parameters",
+            "without",
+            "causing",
+            "runtime"
           ],
           "after": [
             "uses",
@@ -281,55 +300,21 @@
             "and",
             "localize",
             "silent",
-            "computational",
-            "errors.",
-            "LaDiM",
-            "includes",
-            "Translator,",
-            "Verifier,",
-            "and",
-            "Repair",
-            "agents",
-            "work",
-            "under",
-            "a",
-            "shared",
-            "Orchestrator:",
-            "the",
-            "Translator",
-            "produces",
-            "an",
-            "initial",
-            "candidate,",
-            "the",
-            "Verifier",
-            "traces",
-            "discrepancies",
-            "along",
-            "the",
-            "computation",
-            "order",
-            "and",
-            "hands"
+            "computational"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "its"
+            "errors."
           ],
           "after": [
-            "its"
+            "errors."
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "parameters",
-            "without",
-            "causing",
-            "runtime",
-            "errors.",
             "Such",
             "semantic",
             "drift",
@@ -337,9 +322,132 @@
             "remain",
             "hidden",
             "even",
-            "when"
+            "when",
+            "the",
+            "program",
+            "runs",
+            "successfully"
           ],
           "after": [
+            "LaDiM",
+            "includes",
+            "Translator,",
+            "Verifier,"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "its",
+            "loss",
+            "initially",
+            "agrees",
+            "with",
+            "the",
+            "source.",
+            "We",
+            "propose",
+            "LaDiM,"
+          ],
+          "after": [
+            "Repair",
+            "agents",
+            "work",
+            "under"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "a"
+          ],
+          "after": [
+            "a"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "multi-agent",
+            "framework",
+            "that",
+            "uses",
+            "dependencies",
+            "between",
+            "training",
+            "computations",
+            "to",
+            "guide",
+            "diagnosis",
+            "and",
+            "repair."
+          ],
+          "after": [
+            "shared",
+            "Orchestrator.",
+            "The",
+            "Translator",
+            "produces",
+            "an",
+            "initial",
+            "output."
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "The",
+            "Verifier"
+          ],
+          "after": [
+            "The",
+            "Verifier"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "investigates",
+            "where"
+          ],
+          "after": [
+            "traces",
+            "discrepancies",
+            "along"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "the"
+          ],
+          "after": [
+            "the"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "translated",
+            "program",
+            "diverges",
+            "from"
+          ],
+          "after": [
+            "computation",
+            "order",
+            "and",
+            "hands",
+            "its",
             "findings",
             "to"
           ]
@@ -356,9 +464,7 @@
         {
           "kind": "replace",
           "before": [
-            "program",
-            "runs",
-            "successfully"
+            "source"
           ],
           "after": [
             "Repair",
@@ -379,8 +485,12 @@
           ]
         },
         {
-          "kind": "insert",
-          "before": [],
+          "kind": "replace",
+          "before": [
+            "passes",
+            "supporting",
+            "evidence"
+          ],
           "after": [
             "a",
             "persistent",
@@ -392,6 +502,22 @@
             "LaDiM",
             "further",
             "introduces",
+            "repository",
+            "context",
+            "management",
+            "which",
+            "tracks",
+            "cross-file",
+            "dependencies",
+            "and",
+            "preserves",
+            "diagnostic",
+            "context",
+            "as",
+            "agents",
+            "move",
+            "across",
+            "the",
             "repository.",
             "Evaluation",
             "across",
@@ -400,7 +526,8 @@
             "language",
             "migration,",
             "and",
-            "repository",
+            "repository-level",
+            "translate",
             "tasks",
             "shows",
             "that",
@@ -412,68 +539,21 @@
             "migration",
             "results",
             "with",
-            "up",
-            "to",
-            "80.8%",
-            "fewer",
-            "tokens",
-            "than",
-            "state-of-the-art",
-            "methods,",
-            "demonstrating"
+            "up"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "its"
+            "to"
           ],
           "after": [
-            "its"
+            "to"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "loss",
-            "initially",
-            "agrees",
-            "with",
-            "the",
-            "source.",
-            "We",
-            "propose",
-            "LaDiM,",
-            "a",
-            "multi-agent",
-            "framework",
-            "that",
-            "uses",
-            "dependencies",
-            "between",
-            "training",
-            "computations",
-            "to",
-            "guide",
-            "diagnosis",
-            "and",
-            "repair.",
-            "The",
-            "Verifier",
-            "investigates",
-            "where",
-            "the",
-            "translated",
-            "program",
-            "diverges",
-            "from",
-            "the",
-            "source",
-            "and",
-            "passes",
-            "supporting",
-            "evidence",
-            "to",
             "a",
             "separate",
             "Repair",
@@ -515,8 +595,24 @@
             "full",
             "acceptance",
             "with",
-            "57.4%",
-            "fewer",
+            "57.4%"
+          ],
+          "after": [
+            "80.8%"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "fewer"
+          ],
+          "after": [
+            "fewer"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "total",
             "tokens,",
             "including",
@@ -545,6 +641,12 @@
             "languages."
           ],
           "after": [
+            "tokens",
+            "than",
+            "state-of-the-art",
+            "methods,",
+            "demonstrating",
+            "its",
             "effectiveness."
           ]
         }
@@ -732,7 +834,12 @@
         {
           "kind": "replace",
           "before": [
-            "updates"
+            "updates",
+            "its",
+            "parameters",
+            "without",
+            "causing",
+            "runtime"
           ],
           "after": [
             "uses",
@@ -746,55 +853,21 @@
             "and",
             "localize",
             "silent",
-            "computational",
-            "errors.",
-            "LaDiM",
-            "includes",
-            "Translator,",
-            "Verifier,",
-            "and",
-            "Repair",
-            "agents",
-            "work",
-            "under",
-            "a",
-            "shared",
-            "Orchestrator:",
-            "the",
-            "Translator",
-            "produces",
-            "an",
-            "initial",
-            "candidate,",
-            "the",
-            "Verifier",
-            "traces",
-            "discrepancies",
-            "along",
-            "the",
-            "computation",
-            "order",
-            "and",
-            "hands"
+            "computational"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "its"
+            "errors."
           ],
           "after": [
-            "its"
+            "errors."
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "parameters",
-            "without",
-            "causing",
-            "runtime",
-            "errors.",
             "Such",
             "semantic",
             "drift",
@@ -802,9 +875,132 @@
             "remain",
             "hidden",
             "even",
-            "when"
+            "when",
+            "the",
+            "program",
+            "runs",
+            "successfully"
           ],
           "after": [
+            "LaDiM",
+            "includes",
+            "Translator,",
+            "Verifier,"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "its",
+            "loss",
+            "initially",
+            "agrees",
+            "with",
+            "the",
+            "source.",
+            "We",
+            "propose",
+            "LaDiM,"
+          ],
+          "after": [
+            "Repair",
+            "agents",
+            "work",
+            "under"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "a"
+          ],
+          "after": [
+            "a"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "multi-agent",
+            "framework",
+            "that",
+            "uses",
+            "dependencies",
+            "between",
+            "training",
+            "computations",
+            "to",
+            "guide",
+            "diagnosis",
+            "and",
+            "repair."
+          ],
+          "after": [
+            "shared",
+            "Orchestrator.",
+            "The",
+            "Translator",
+            "produces",
+            "an",
+            "initial",
+            "output."
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "The",
+            "Verifier"
+          ],
+          "after": [
+            "The",
+            "Verifier"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "investigates",
+            "where"
+          ],
+          "after": [
+            "traces",
+            "discrepancies",
+            "along"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "the"
+          ],
+          "after": [
+            "the"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "translated",
+            "program",
+            "diverges",
+            "from"
+          ],
+          "after": [
+            "computation",
+            "order",
+            "and",
+            "hands",
+            "its",
             "findings",
             "to"
           ]
@@ -821,9 +1017,7 @@
         {
           "kind": "replace",
           "before": [
-            "program",
-            "runs",
-            "successfully"
+            "source"
           ],
           "after": [
             "Repair",
@@ -844,8 +1038,12 @@
           ]
         },
         {
-          "kind": "insert",
-          "before": [],
+          "kind": "replace",
+          "before": [
+            "passes",
+            "supporting",
+            "evidence"
+          ],
           "after": [
             "a",
             "persistent",
@@ -857,6 +1055,22 @@
             "LaDiM",
             "further",
             "introduces",
+            "repository",
+            "context",
+            "management",
+            "which",
+            "tracks",
+            "cross-file",
+            "dependencies",
+            "and",
+            "preserves",
+            "diagnostic",
+            "context",
+            "as",
+            "agents",
+            "move",
+            "across",
+            "the",
             "repository.",
             "Evaluation",
             "across",
@@ -865,7 +1079,8 @@
             "language",
             "migration,",
             "and",
-            "repository",
+            "repository-level",
+            "translate",
             "tasks",
             "shows",
             "that",
@@ -877,68 +1092,21 @@
             "migration",
             "results",
             "with",
-            "up",
-            "to",
-            "80.8\\%",
-            "fewer",
-            "tokens",
-            "than",
-            "state-of-the-art",
-            "methods,",
-            "demonstrating"
+            "up"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "its"
+            "to"
           ],
           "after": [
-            "its"
+            "to"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "loss",
-            "initially",
-            "agrees",
-            "with",
-            "the",
-            "source.",
-            "We",
-            "propose",
-            "LaDiM,",
-            "a",
-            "multi-agent",
-            "framework",
-            "that",
-            "uses",
-            "dependencies",
-            "between",
-            "training",
-            "computations",
-            "to",
-            "guide",
-            "diagnosis",
-            "and",
-            "repair.",
-            "The",
-            "Verifier",
-            "investigates",
-            "where",
-            "the",
-            "translated",
-            "program",
-            "diverges",
-            "from",
-            "the",
-            "source",
-            "and",
-            "passes",
-            "supporting",
-            "evidence",
-            "to",
             "a",
             "separate",
             "Repair",
@@ -980,8 +1148,24 @@
             "full",
             "acceptance",
             "with",
-            "57.4\\%",
-            "fewer",
+            "57.4\\%"
+          ],
+          "after": [
+            "80.8\\%"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "fewer"
+          ],
+          "after": [
+            "fewer"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "total",
             "tokens,",
             "including",
@@ -1010,6 +1194,12 @@
             "languages."
           ],
           "after": [
+            "tokens",
+            "than",
+            "state-of-the-art",
+            "methods,",
+            "demonstrating",
+            "its",
             "effectiveness."
           ]
         }
@@ -1027,249 +1217,386 @@
           ]
         },
         {
-          "kind": "insert",
-          "before": [],
+          "kind": "replace",
+          "before": [
+            "Migrating"
+          ],
           "after": [
-            "Total",
-            "tokens",
+            "Tokens",
+            "used",
             "on",
             "50",
             "PyTorch",
             "to",
             "MindSpore",
-            "migrations,",
-            "including",
-            "initial",
-            "translation",
+            "migrations",
+            "tasks.",
+            "Code",
+            "development",
+            "environments",
             "and",
-            "all",
-            "subsequent",
-            "calls.",
-            "Labels",
-            "give",
-            "acceptance",
-            "rates."
+            "languages",
+            "have",
+            "grown",
+            "increasingly",
+            "diverse.",
+            "Focusing",
+            "on"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "Migrating",
-            "deep",
-            "learning",
-            "code",
-            "allows",
-            "existing",
-            "models",
-            "and",
-            "training",
-            "programs",
-            "to",
-            "run",
-            "in",
-            "new",
-            "software",
-            "and",
-            "hardware",
-            "environments.",
-            "Differences",
-            "in",
-            "operator",
-            "semantics,",
-            "numerical",
-            "precision,",
-            "and",
-            "random",
-            "number",
-            "handling",
-            "can",
-            "change",
-            "the",
-            "computations",
-            "performed",
-            "after",
-            "migration.",
-            "Automatic",
-            "differentiation",
-            "and",
-            "optimizer",
-            "interfaces",
-            "introduce",
-            "further",
-            "differences",
-            "in",
-            "how",
-            "a",
-            "model",
-            "learns",
-            "[paszke2019pytorch,mindspore2020whitepaper]",
-            ".",
-            "Large",
-            "language",
-            "models",
-            "(LLMs)",
-            "reduce",
-            "the",
-            "manual",
-            "effort",
-            "involved",
-            "in",
-            "code",
-            "translation",
-            "[he-etal-2025-execoder,macedo2024intertrans]",
-            ",",
-            "while",
-            "automated",
-            "tests",
-            "and",
-            "interactive",
-            "repair",
-            "help",
-            "assess",
-            "and",
-            "correct",
-            "translated",
-            "behavior",
-            "[roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent]",
-            "."
+            "deep"
           ],
           "after": [
-            "Migrating",
-            "deep",
-            "learning",
-            "code",
-            "allows",
-            "existing",
-            "models",
-            "and",
-            "training",
-            "programs",
-            "to",
-            "run",
-            "in",
-            "new",
-            "software",
-            "and",
-            "hardware",
-            "environments.",
-            "Differences",
-            "in",
-            "operator",
-            "semantics,",
-            "numerical",
-            "precision,",
-            "and",
-            "random",
-            "number",
-            "handling",
-            "can",
-            "change",
-            "the",
-            "computations",
-            "performed",
-            "after",
-            "migration.",
-            "Automatic",
-            "differentiation",
-            "and",
-            "optimizer",
-            "interfaces",
-            "introduce",
-            "further",
-            "differences",
-            "in",
-            "how",
-            "a",
-            "model",
-            "learns",
-            "[paszke2019pytorch,mindspore2020whitepaper]",
-            ".",
-            "Large",
-            "language",
-            "models",
-            "(LLMs)",
-            "reduce",
-            "the",
-            "manual",
-            "effort",
-            "involved",
-            "in",
-            "code",
-            "translation",
-            "[he-etal-2025-execoder,macedo2024intertrans]",
-            ",",
-            "while",
-            "automated",
-            "tests",
-            "and",
-            "interactive",
-            "repair",
-            "help",
-            "assess",
-            "and",
-            "correct",
-            "translated",
-            "behavior",
-            "[roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent]",
-            "."
+            "deep"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "Training",
-            "programs",
-            "require",
-            "these",
-            "capabilities",
-            "to"
+            "learning",
+            "code",
+            "allows",
+            "existing"
           ],
           "after": [
-            "Successful",
-            "migration",
-            "must"
+            "learning,",
+            "popular",
+            "frameworks",
+            "such",
+            "as",
+            "PyTorch,",
+            "Tensorflow",
+            "and",
+            "MindSpore",
+            "provide",
+            "programming",
+            "interfaces,",
+            "execution",
+            "semantics,",
+            "and",
+            "hardware",
+            "backends",
+            "(Paszke",
+            "et",
+            "al.,",
+            "2019;",
+            "MindSpore,",
+            "2020).",
+            "To",
+            "enable",
+            "easy",
+            "adaptation",
+            "of",
+            "deep"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "preserve",
-            "the"
+            "models",
+            "and",
+            "training"
           ],
           "after": [
-            "preserve",
-            "the"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
+            "models",
+            "and",
             "training"
           ]
         },
         {
-          "kind": "equal",
+          "kind": "replace",
           "before": [
-            "computations",
-            "that",
-            "determine",
-            "each",
-            "parameter",
-            "update."
+            "programs",
+            "to",
+            "run",
+            "in"
           ],
           "after": [
+            "pipelines",
+            "on"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "new",
+            "software",
+            "and",
+            "hardware"
+          ],
+          "after": [
+            "new",
+            "software",
+            "and",
+            "hardware"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "environments.",
+            "Differences"
+          ],
+          "after": [
+            "environments,",
+            "migrating",
+            "existing",
+            "code",
+            "across",
+            "languages",
+            "and",
+            "frameworks",
+            "has",
+            "become",
+            "a",
+            "vital",
+            "technique",
+            "for",
+            "reducing",
+            "development",
+            "cost",
+            "(Guan",
+            "et",
+            "al.,",
+            "2025).",
+            "This",
+            "need",
+            "has",
+            "driven",
+            "the",
+            "development",
+            "of",
+            "numerous",
+            "code",
+            "translation",
+            "methods.",
+            "With",
+            "the",
+            "help",
+            "of",
+            "large",
+            "language",
+            "models",
+            "(LLMs),",
+            "these",
+            "methods",
+            "now",
+            "achieve",
+            "strong",
+            "translation",
+            "results",
+            "at",
+            "the",
+            "level",
+            "of",
+            "syntax",
+            "and",
+            "program",
+            "semantics",
+            "(He",
+            "et",
+            "al.,",
+            "2025;",
+            "Macedo",
+            "et",
+            "al.,",
+            "2025b;",
+            "Roziere",
+            "et",
+            "al.,",
+            "2022).",
+            "However,",
+            "success",
+            "at",
+            "translating",
+            "code",
+            "does",
+            "not",
+            "guarantee",
+            "equal",
+            "translation",
+            "performance",
+            "across",
+            "deep",
+            "learning",
+            "frameworks,",
+            "for",
+            "example,",
+            "migrating",
+            "from",
+            "PyTorch",
+            "to",
+            "MindSpore.",
+            "Different",
+            "frameworks",
+            "define",
+            "and",
+            "order",
+            "their",
+            "forward,",
+            "backward,",
+            "and",
+            "parameter-update",
             "computations",
-            "that",
-            "determine",
-            "each",
-            "parameter",
-            "update."
+            "differently",
+            "[].",
+            "Further",
+            "differences"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "in",
+            "operator",
+            "semantics,"
+          ],
+          "after": [
+            "in",
+            "operator",
+            "semantics,"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "numerical",
+            "precision,",
+            "and",
+            "random",
+            "number",
+            "handling",
+            "can",
+            "change",
+            "the",
+            "computations",
+            "performed",
+            "after",
+            "migration.",
+            "Automatic",
+            "differentiation"
+          ],
+          "after": [
+            "automatic",
+            "differentiation,"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and",
+            "optimizer",
+            "interfaces"
+          ],
+          "after": [
+            "and",
+            "optimizer",
+            "interfaces"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "introduce",
+            "further",
+            "differences",
+            "in",
+            "how"
+          ],
+          "after": [
+            "can",
+            "change",
+            "model",
+            "behavior",
+            "after",
+            "migration",
+            "(Paszke",
+            "et",
+            "al.,",
+            "2019;",
+            "MindSpore,",
+            "2020).",
+            "As"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "a"
+          ],
+          "after": [
+            "a"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "model",
+            "learns",
+            "[paszke2019pytorch,mindspore2020whitepaper]",
+            ".",
+            "Large",
+            "language",
+            "models",
+            "(LLMs)",
+            "reduce",
+            "the",
+            "manual",
+            "effort",
+            "involved",
+            "in",
+            "code",
+            "translation",
+            "[he-etal-2025-execoder,macedo2024intertrans]",
+            ",",
+            "while",
+            "automated",
+            "tests",
+            "and",
+            "interactive",
+            "repair",
+            "help",
+            "assess",
+            "and",
+            "correct"
+          ],
+          "after": [
+            "result,",
+            "a"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "translated"
+          ],
+          "after": [
+            "translated"
           ]
         },
         {
           "kind": "delete",
           "before": [
+            "behavior",
+            "[roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent]",
+            ".",
+            "Training",
+            "programs",
+            "require",
+            "these",
+            "capabilities",
+            "to",
+            "preserve",
+            "the",
+            "computations",
+            "that",
+            "determine",
+            "each",
+            "parameter",
+            "update.",
             "Loss",
             "and",
             "gradient",
@@ -1339,24 +1666,9 @@
             "and",
             "shading",
             "shows",
-            "ranges."
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "ranges.",
             "A",
-            "translated"
-          ],
-          "after": [
-            "A",
-            "translated"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
+            "translated",
             "training"
           ],
           "after": []
@@ -1365,74 +1677,100 @@
           "kind": "equal",
           "before": [
             "program",
-            "can",
-            "produce",
-            "a",
-            "loss",
-            "close",
-            "to",
-            "that",
-            "of",
-            "the",
-            "source",
-            "while",
-            "computing",
-            "incorrect",
-            "gradients.",
-            "An"
+            "can"
           ],
           "after": [
             "program",
-            "can",
+            "can"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "produce",
             "a",
             "loss",
-            "close",
-            "to",
+            "close"
+          ],
+          "after": [
+            "run",
+            "without",
+            "raising",
+            "error",
+            "while",
+            "still",
+            "producing",
+            "incorrect",
+            "results",
+            "due"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "to"
+          ],
+          "after": [
+            "to"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "that",
             "of",
             "the",
             "source",
-            "while",
-            "computing",
+            "while"
+          ],
+          "after": [
+            "silent",
+            "failures",
+            "in"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "computing"
+          ],
+          "after": [
+            "computing"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "incorrect",
             "gradients.",
-            "An"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "optimizer"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "error"
-          ],
-          "after": [
-            "error"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
+            "An",
+            "error",
             "in",
             "the",
-            "optimizer"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "optimizer",
             "can",
             "also",
             "alter",
-            "the",
-            "parameter",
+            "the"
+          ],
+          "after": [
+            "losses,",
+            "gradients",
+            "or"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "parameter"
+          ],
+          "after": [
+            "parameter"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "update",
             "without",
             "changing",
@@ -1440,7 +1778,15 @@
             "current",
             "loss",
             "or",
-            "gradients.",
+            "gradients."
+          ],
+          "after": [
+            "updates."
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "We",
             "use",
             "semantic",
@@ -1449,19 +1795,6 @@
             "describe"
           ],
           "after": [
-            "can",
-            "also",
-            "alter",
-            "the",
-            "parameter",
-            "update",
-            "without",
-            "changing",
-            "the",
-            "current",
-            "loss",
-            "or",
-            "gradients.",
             "We",
             "use",
             "semantic",
@@ -1476,46 +1809,177 @@
             "such"
           ],
           "after": [
-            "these"
+            "the"
           ]
         },
         {
           "kind": "equal",
           "before": [
             "changes",
-            "in",
+            "in"
+          ],
+          "after": [
+            "changes",
+            "in"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "such"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "training",
-            "behavior",
-            "caused",
+            "behavior"
+          ],
+          "after": [
+            "training",
+            "behavior"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "caused"
+          ],
+          "after": [
+            "introduced"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "by",
             "migration."
           ],
           "after": [
-            "changes",
-            "in",
-            "training",
-            "behavior",
-            "caused",
             "by",
             "migration."
           ]
         },
         {
-          "kind": "delete",
+          "kind": "replace",
           "before": [
             "Figure",
             "[fig:gradient-drift]",
-            "illustrates",
-            "these",
+            "illustrates"
+          ],
+          "after": [
+            "Current",
+            "translation",
+            "and",
+            "repair",
+            "methods",
+            "are",
+            "designed",
+            "mainly",
+            "for",
+            "language-level",
+            "correctness,",
+            "being",
+            "unable",
+            "to",
+            "detect",
+            "or",
+            "repair",
+            "such",
+            "semantic",
+            "drift.",
+            "To",
+            "address",
+            "this,",
+            "we",
+            "aim",
+            "to",
+            "locate",
+            "and",
+            "repair",
+            "the",
+            "true",
+            "cause",
+            "of",
+            "semantic",
+            "drift",
+            "after",
+            "initial",
+            "translation.",
+            "We",
+            "propose",
+            "LaDiM",
+            "(Layered",
+            "Diagnosis",
+            "for",
+            "Multi-Agent",
+            "Code",
+            "Migration),",
+            "a",
+            "multi-agent",
+            "framework",
+            "that",
+            "preserves",
+            "the",
+            "training",
+            "computation",
+            "order",
+            "of",
+            "a",
+            "deep",
+            "learning",
+            "program",
+            "and",
+            "uses",
+            "the",
+            "dependencies",
+            "among"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "these"
+          ],
+          "after": [
+            "these"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "cases",
             "by",
             "perturbing",
             "gradients",
             "or",
             "suppressing",
-            "part",
+            "part"
+          ],
+          "after": [
+            "stages",
+            "to",
+            "guide",
+            "diagnosis",
+            "and",
+            "repair"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "of",
-            "an",
+            "an"
+          ],
+          "after": [
+            "of",
+            "an"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "update.",
             "The",
             "corresponding",
@@ -1553,60 +2017,17 @@
             "affect",
             "several",
             "downstream",
-            "measurements."
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "measurements.",
             "A",
             "forward",
             "error",
             "may",
-            "change"
-          ],
-          "after": [
-            "A",
-            "forward",
-            "error",
-            "may",
-            "change"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "change",
             "the",
-            "gradient"
-          ],
-          "after": [
-            "gradients"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "and"
-          ],
-          "after": [
-            "and"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "gradient",
+            "and",
             "update,",
-            "and"
-          ],
-          "after": [
-            "updates,",
-            "while"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "and",
             "an",
             "incorrect",
             "update",
@@ -1617,32 +2038,8 @@
             "computations.",
             "Locating",
             "the",
-            "cause"
-          ],
-          "after": [
-            "an",
-            "incorrect",
-            "update",
-            "may",
-            "affect",
-            "later",
-            "forward",
-            "computations.",
-            "Locating",
-            "the",
-            "cause"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "therefore"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "cause",
+            "therefore",
             "requires",
             "examining",
             "how",
@@ -1655,50 +2052,8 @@
             "differences."
           ],
           "after": [
-            "requires",
-            "examining",
-            "how",
-            "the",
-            "translated",
-            "code",
-            "produces",
-            "the",
-            "observed",
-            "differences."
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "Figure",
-            "[fig:migration-motivation]",
-            "compares",
-            "total",
-            "token",
-            "use",
-            "on",
-            "the",
-            "same",
-            "50",
-            "migrations",
-            "from",
-            "PyTorch",
-            "to",
-            "MindSpore.",
-            "LaDiM",
-            "completes",
-            "all",
-            "50",
-            "with",
-            "less",
-            "than",
-            "half",
-            "the",
-            "tokens",
-            "used",
-            "by",
-            "MatchFixAgent."
+            "initial",
+            "translation."
           ]
         },
         {
@@ -3265,244 +3620,387 @@
           ]
         },
         {
-          "kind": "insert",
-          "before": [],
+          "kind": "replace",
+          "before": [
+            "Migrating"
+          ],
           "after": [
             "{\\hyphenpenalty=10000\\emergencystretch=1em",
             "\\begin{wrapfigure}{r}{0.43\\textwidth}",
             "\\vspace{-\\intextsep}",
             "\\centering",
             "\\includegraphics[width=\\linewidth]{figures/migration_motivation.pdf}",
-            "\\caption{Total",
-            "tokens",
+            "\\caption{Tokens",
+            "used",
             "on",
             "50",
             "PyTorch",
             "to",
             "MindSpore",
-            "migrations,",
-            "including",
-            "initial",
-            "translation",
-            "and",
-            "all",
-            "subsequent",
-            "calls.",
-            "Labels",
-            "give",
-            "acceptance",
-            "rates.}",
+            "migrations",
+            "tasks.}",
             "\\label{fig:migration-motivation}",
-            "\\end{wrapfigure}"
+            "\\end{wrapfigure}",
+            "Code",
+            "development",
+            "environments",
+            "and",
+            "languages",
+            "have",
+            "grown",
+            "increasingly",
+            "diverse.",
+            "Focusing",
+            "on"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "Migrating",
-            "deep",
-            "learning",
-            "code",
-            "allows",
-            "existing",
-            "models",
-            "and",
-            "training",
-            "programs",
-            "to",
-            "run",
-            "in",
-            "new",
-            "software",
-            "and",
-            "hardware",
-            "environments.",
-            "Differences",
-            "in",
-            "operator",
-            "semantics,",
-            "numerical",
-            "precision,",
-            "and",
-            "random",
-            "number",
-            "handling",
-            "can",
-            "change",
-            "the",
-            "computations",
-            "performed",
-            "after",
-            "migration.",
-            "Automatic",
-            "differentiation",
-            "and",
-            "optimizer",
-            "interfaces",
-            "introduce",
-            "further",
-            "differences",
-            "in",
-            "how",
-            "a",
-            "model",
-            "learns~\\citep{paszke2019pytorch,mindspore2020whitepaper}.",
-            "Large",
-            "language",
-            "models",
-            "(LLMs)",
-            "reduce",
-            "the",
-            "manual",
-            "effort",
-            "involved",
-            "in",
-            "code",
-            "translation~\\citep{he-etal-2025-execoder,macedo2024intertrans},",
-            "while",
-            "automated",
-            "tests",
-            "and",
-            "interactive",
-            "repair",
-            "help",
-            "assess",
-            "and",
-            "correct",
-            "translated",
-            "behavior~\\citep{roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent}."
+            "deep"
           ],
           "after": [
-            "Migrating",
-            "deep",
-            "learning",
-            "code",
-            "allows",
-            "existing",
-            "models",
-            "and",
-            "training",
-            "programs",
-            "to",
-            "run",
-            "in",
-            "new",
-            "software",
-            "and",
-            "hardware",
-            "environments.",
-            "Differences",
-            "in",
-            "operator",
-            "semantics,",
-            "numerical",
-            "precision,",
-            "and",
-            "random",
-            "number",
-            "handling",
-            "can",
-            "change",
-            "the",
-            "computations",
-            "performed",
-            "after",
-            "migration.",
-            "Automatic",
-            "differentiation",
-            "and",
-            "optimizer",
-            "interfaces",
-            "introduce",
-            "further",
-            "differences",
-            "in",
-            "how",
-            "a",
-            "model",
-            "learns~\\citep{paszke2019pytorch,mindspore2020whitepaper}.",
-            "Large",
-            "language",
-            "models",
-            "(LLMs)",
-            "reduce",
-            "the",
-            "manual",
-            "effort",
-            "involved",
-            "in",
-            "code",
-            "translation~\\citep{he-etal-2025-execoder,macedo2024intertrans},",
-            "while",
-            "automated",
-            "tests",
-            "and",
-            "interactive",
-            "repair",
-            "help",
-            "assess",
-            "and",
-            "correct",
-            "translated",
-            "behavior~\\citep{roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent}."
+            "deep"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "Training",
-            "programs",
-            "require",
-            "these",
-            "capabilities",
-            "to"
+            "learning",
+            "code",
+            "allows",
+            "existing"
           ],
           "after": [
-            "Successful",
-            "migration",
-            "must"
+            "learning,",
+            "popular",
+            "frameworks",
+            "such",
+            "as",
+            "PyTorch,",
+            "Tensorflow",
+            "and",
+            "MindSpore",
+            "provide",
+            "programming",
+            "interfaces,",
+            "execution",
+            "semantics,",
+            "and",
+            "hardware",
+            "backends",
+            "(Paszke",
+            "et",
+            "al.,",
+            "2019;",
+            "MindSpore,",
+            "2020).",
+            "To",
+            "enable",
+            "easy",
+            "adaptation",
+            "of",
+            "deep"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "preserve",
-            "the"
+            "models",
+            "and",
+            "training"
           ],
           "after": [
-            "preserve",
-            "the"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
+            "models",
+            "and",
             "training"
           ]
         },
         {
-          "kind": "equal",
+          "kind": "replace",
           "before": [
-            "computations",
-            "that",
-            "determine",
-            "each",
-            "parameter",
-            "update."
+            "programs",
+            "to",
+            "run",
+            "in"
           ],
           "after": [
+            "pipelines",
+            "on"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "new",
+            "software",
+            "and",
+            "hardware"
+          ],
+          "after": [
+            "new",
+            "software",
+            "and",
+            "hardware"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "environments.",
+            "Differences"
+          ],
+          "after": [
+            "environments,",
+            "migrating",
+            "existing",
+            "code",
+            "across",
+            "languages",
+            "and",
+            "frameworks",
+            "has",
+            "become",
+            "a",
+            "vital",
+            "technique",
+            "for",
+            "reducing",
+            "development",
+            "cost",
+            "(Guan",
+            "et",
+            "al.,",
+            "2025).",
+            "This",
+            "need",
+            "has",
+            "driven",
+            "the",
+            "development",
+            "of",
+            "numerous",
+            "code",
+            "translation",
+            "methods.",
+            "With",
+            "the",
+            "help",
+            "of",
+            "large",
+            "language",
+            "models",
+            "(LLMs),",
+            "these",
+            "methods",
+            "now",
+            "achieve",
+            "strong",
+            "translation",
+            "results",
+            "at",
+            "the",
+            "level",
+            "of",
+            "syntax",
+            "and",
+            "program",
+            "semantics",
+            "(He",
+            "et",
+            "al.,",
+            "2025;",
+            "Macedo",
+            "et",
+            "al.,",
+            "2025b;",
+            "Roziere",
+            "et",
+            "al.,",
+            "2022).",
+            "However,",
+            "success",
+            "at",
+            "translating",
+            "code",
+            "does",
+            "not",
+            "guarantee",
+            "equal",
+            "translation",
+            "performance",
+            "across",
+            "deep",
+            "learning",
+            "frameworks,",
+            "for",
+            "example,",
+            "migrating",
+            "from",
+            "PyTorch",
+            "to",
+            "MindSpore.",
+            "Different",
+            "frameworks",
+            "define",
+            "and",
+            "order",
+            "their",
+            "forward,",
+            "backward,",
+            "and",
+            "parameter-update",
             "computations",
-            "that",
-            "determine",
-            "each",
-            "parameter",
-            "update."
+            "differently",
+            "[].",
+            "Further",
+            "differences"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "in",
+            "operator",
+            "semantics,"
+          ],
+          "after": [
+            "in",
+            "operator",
+            "semantics,"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "numerical",
+            "precision,",
+            "and",
+            "random",
+            "number",
+            "handling",
+            "can",
+            "change",
+            "the",
+            "computations",
+            "performed",
+            "after",
+            "migration.",
+            "Automatic",
+            "differentiation"
+          ],
+          "after": [
+            "automatic",
+            "differentiation,"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and",
+            "optimizer",
+            "interfaces"
+          ],
+          "after": [
+            "and",
+            "optimizer",
+            "interfaces"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "introduce",
+            "further",
+            "differences",
+            "in",
+            "how"
+          ],
+          "after": [
+            "can",
+            "change",
+            "model",
+            "behavior",
+            "after",
+            "migration",
+            "(Paszke",
+            "et",
+            "al.,",
+            "2019;",
+            "MindSpore,",
+            "2020).",
+            "As"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "a"
+          ],
+          "after": [
+            "a"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "model",
+            "learns~\\citep{paszke2019pytorch,mindspore2020whitepaper}.",
+            "Large",
+            "language",
+            "models",
+            "(LLMs)",
+            "reduce",
+            "the",
+            "manual",
+            "effort",
+            "involved",
+            "in",
+            "code",
+            "translation~\\citep{he-etal-2025-execoder,macedo2024intertrans},",
+            "while",
+            "automated",
+            "tests",
+            "and",
+            "interactive",
+            "repair",
+            "help",
+            "assess",
+            "and",
+            "correct"
+          ],
+          "after": [
+            "result,",
+            "a"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "translated"
+          ],
+          "after": [
+            "translated"
           ]
         },
         {
           "kind": "delete",
           "before": [
+            "behavior~\\citep{roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent}.",
+            "Training",
+            "programs",
+            "require",
+            "these",
+            "capabilities",
+            "to",
+            "preserve",
+            "the",
+            "computations",
+            "that",
+            "determine",
+            "each",
+            "parameter",
+            "update.",
             "\\begin{figure}[t]",
             "\\centering",
             "\\includegraphics[width=\\linewidth]{figures/gradient_drift.pdf}",
@@ -3576,24 +4074,9 @@
             "shows",
             "ranges.}",
             "\\label{fig:gradient-drift}",
-            "\\end{figure}"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "\\end{figure}",
             "A",
-            "translated"
-          ],
-          "after": [
-            "A",
-            "translated"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
+            "translated",
             "training"
           ],
           "after": []
@@ -3602,74 +4085,100 @@
           "kind": "equal",
           "before": [
             "program",
-            "can",
-            "produce",
-            "a",
-            "loss",
-            "close",
-            "to",
-            "that",
-            "of",
-            "the",
-            "source",
-            "while",
-            "computing",
-            "incorrect",
-            "gradients.",
-            "An"
+            "can"
           ],
           "after": [
             "program",
-            "can",
+            "can"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "produce",
             "a",
             "loss",
-            "close",
-            "to",
+            "close"
+          ],
+          "after": [
+            "run",
+            "without",
+            "raising",
+            "error",
+            "while",
+            "still",
+            "producing",
+            "incorrect",
+            "results",
+            "due"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "to"
+          ],
+          "after": [
+            "to"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "that",
             "of",
             "the",
             "source",
-            "while",
-            "computing",
+            "while"
+          ],
+          "after": [
+            "silent",
+            "failures",
+            "in"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "computing"
+          ],
+          "after": [
+            "computing"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "incorrect",
             "gradients.",
-            "An"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "optimizer"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "error"
-          ],
-          "after": [
-            "error"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
+            "An",
+            "error",
             "in",
             "the",
-            "optimizer"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "optimizer",
             "can",
             "also",
             "alter",
-            "the",
-            "parameter",
+            "the"
+          ],
+          "after": [
+            "losses,",
+            "gradients",
+            "or"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "parameter"
+          ],
+          "after": [
+            "parameter"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "update",
             "without",
             "changing",
@@ -3677,7 +4186,15 @@
             "current",
             "loss",
             "or",
-            "gradients.",
+            "gradients."
+          ],
+          "after": [
+            "updates."
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "We",
             "use",
             "semantic",
@@ -3686,19 +4203,6 @@
             "describe"
           ],
           "after": [
-            "can",
-            "also",
-            "alter",
-            "the",
-            "parameter",
-            "update",
-            "without",
-            "changing",
-            "the",
-            "current",
-            "loss",
-            "or",
-            "gradients.",
             "We",
             "use",
             "semantic",
@@ -3713,45 +4217,176 @@
             "such"
           ],
           "after": [
-            "these"
+            "the"
           ]
         },
         {
           "kind": "equal",
           "before": [
             "changes",
-            "in",
+            "in"
+          ],
+          "after": [
+            "changes",
+            "in"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "such"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "training",
-            "behavior",
-            "caused",
+            "behavior"
+          ],
+          "after": [
+            "training",
+            "behavior"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "caused"
+          ],
+          "after": [
+            "introduced"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "by",
             "migration."
           ],
           "after": [
-            "changes",
-            "in",
-            "training",
-            "behavior",
-            "caused",
             "by",
             "migration."
           ]
         },
         {
-          "kind": "delete",
+          "kind": "replace",
           "before": [
             "Figure~\\ref{fig:gradient-drift}",
-            "illustrates",
-            "these",
+            "illustrates"
+          ],
+          "after": [
+            "Current",
+            "translation",
+            "and",
+            "repair",
+            "methods",
+            "are",
+            "designed",
+            "mainly",
+            "for",
+            "language-level",
+            "correctness,",
+            "being",
+            "unable",
+            "to",
+            "detect",
+            "or",
+            "repair",
+            "such",
+            "semantic",
+            "drift.",
+            "To",
+            "address",
+            "this,",
+            "we",
+            "aim",
+            "to",
+            "locate",
+            "and",
+            "repair",
+            "the",
+            "true",
+            "cause",
+            "of",
+            "semantic",
+            "drift",
+            "after",
+            "initial",
+            "translation.",
+            "We",
+            "propose",
+            "LaDiM",
+            "(Layered",
+            "Diagnosis",
+            "for",
+            "Multi-Agent",
+            "Code",
+            "Migration),",
+            "a",
+            "multi-agent",
+            "framework",
+            "that",
+            "preserves",
+            "the",
+            "training",
+            "computation",
+            "order",
+            "of",
+            "a",
+            "deep",
+            "learning",
+            "program",
+            "and",
+            "uses",
+            "the",
+            "dependencies",
+            "among"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "these"
+          ],
+          "after": [
+            "these"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "cases",
             "by",
             "perturbing",
             "gradients",
             "or",
             "suppressing",
-            "part",
+            "part"
+          ],
+          "after": [
+            "stages",
+            "to",
+            "guide",
+            "diagnosis",
+            "and",
+            "repair"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "of",
-            "an",
+            "an"
+          ],
+          "after": [
+            "of",
+            "an"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "update.",
             "The",
             "corresponding",
@@ -3789,60 +4424,17 @@
             "affect",
             "several",
             "downstream",
-            "measurements."
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "measurements.",
             "A",
             "forward",
             "error",
             "may",
-            "change"
-          ],
-          "after": [
-            "A",
-            "forward",
-            "error",
-            "may",
-            "change"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "change",
             "the",
-            "gradient"
-          ],
-          "after": [
-            "gradients"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "and"
-          ],
-          "after": [
-            "and"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "gradient",
+            "and",
             "update,",
-            "and"
-          ],
-          "after": [
-            "updates,",
-            "while"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "and",
             "an",
             "incorrect",
             "update",
@@ -3853,32 +4445,8 @@
             "computations.",
             "Locating",
             "the",
-            "cause"
-          ],
-          "after": [
-            "an",
-            "incorrect",
-            "update",
-            "may",
-            "affect",
-            "later",
-            "forward",
-            "computations.",
-            "Locating",
-            "the",
-            "cause"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "therefore"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "cause",
+            "therefore",
             "requires",
             "examining",
             "how",
@@ -3891,49 +4459,8 @@
             "differences."
           ],
           "after": [
-            "requires",
-            "examining",
-            "how",
-            "the",
-            "translated",
-            "code",
-            "produces",
-            "the",
-            "observed",
-            "differences."
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "Figure~\\ref{fig:migration-motivation}",
-            "compares",
-            "total",
-            "token",
-            "use",
-            "on",
-            "the",
-            "same",
-            "50",
-            "migrations",
-            "from",
-            "PyTorch",
-            "to",
-            "MindSpore.",
-            "LaDiM",
-            "completes",
-            "all",
-            "50",
-            "with",
-            "less",
-            "than",
-            "half",
-            "the",
-            "tokens",
-            "used",
-            "by",
-            "MatchFixAgent."
+            "initial",
+            "translation."
           ]
         },
         {
@@ -32648,7 +33175,195 @@
             "10.1109/ICSE55347.2025.00236.",
             "URL",
             "https://doi.org/10.1109/ICSE55347.2025.00236.",
-            "MindSpore.",
+            "MindSpore."
+          ],
+          "after": [
+            "Marie-Anne",
+            "Lachaux,",
+            "Baptiste",
+            "Roziere,",
+            "Lowik",
+            "Chanussot,",
+            "and",
+            "Guillaume",
+            "Lample.",
+            "Unsupervised",
+            "translation",
+            "of",
+            "programming",
+            "languages.",
+            "In",
+            "Advances",
+            "in",
+            "Neural",
+            "Information",
+            "Processing",
+            "Systems,",
+            "volume",
+            "33,",
+            "pp.",
+            "20601-20611,",
+            "2020.",
+            "URL",
+            "https://proceedings.neurips.cc/paper/2020/hash/ed23fbf18c2cd35f8c7f8de44f85c08d-Abstract.html.",
+            "Vu",
+            "Le,",
+            "Mehrdad",
+            "Afshari,",
+            "and",
+            "Zhendong",
+            "Su.",
+            "Compiler",
+            "validation",
+            "via",
+            "equivalence",
+            "modulo",
+            "inputs.",
+            "In",
+            "Proceedings",
+            "of",
+            "the",
+            "35th",
+            "ACM",
+            "SIGPLAN",
+            "Conference",
+            "on",
+            "Programming",
+            "Language",
+            "Design",
+            "and",
+            "Implementation,",
+            "pp.",
+            "216-226.",
+            "ACM,",
+            "2014.",
+            "10.1145/2594291.2594334.",
+            "URL",
+            "https://doi.org/10.1145/2594291.2594334.",
+            "Lei",
+            "Ma,",
+            "Felix",
+            "Juefei-Xu,",
+            "Fuyuan",
+            "Zhang,",
+            "Jiyuan",
+            "Sun,",
+            "Minhui",
+            "Xue,",
+            "Bo",
+            "Li,",
+            "Chunyang",
+            "Chen,",
+            "Ting",
+            "Su,",
+            "Li",
+            "Li,",
+            "Yang",
+            "Liu,",
+            "Jianjun",
+            "Zhao,",
+            "and",
+            "Yadong",
+            "Wang.",
+            "DeepGauge:",
+            "Multi-granularity",
+            "testing",
+            "criteria",
+            "for",
+            "deep",
+            "learning",
+            "systems.",
+            "In",
+            "Proceedings",
+            "of",
+            "the",
+            "33rd",
+            "ACM/IEEE",
+            "International",
+            "Conference",
+            "on",
+            "Automated",
+            "Software",
+            "Engineering,",
+            "pp.",
+            "120-131.",
+            "ACM,",
+            "2018.",
+            "10.1145/3238147.3238202.",
+            "URL",
+            "https://doi.org/10.1145/3238147.3238202.",
+            "Marcos",
+            "Macedo,",
+            "Yuan",
+            "Tian,",
+            "and",
+            "Bram",
+            "Adams.",
+            "CodeTransEngine:",
+            "Ready-to-use",
+            "backend",
+            "for",
+            "LLM-based",
+            "code",
+            "translation.",
+            "In",
+            "ICLR",
+            "2025",
+            "Third",
+            "Workshop",
+            "on",
+            "Deep",
+            "Learning",
+            "for",
+            "Code,",
+            "2025a.",
+            "URL",
+            "https://openreview.net/forum?id=9WHJuzjPJf.",
+            "Marcos",
+            "Macedo,",
+            "Yuan",
+            "Tian,",
+            "Pengyu",
+            "Nie,",
+            "Filipe",
+            "R.",
+            "Cogo,",
+            "and",
+            "Bram",
+            "Adams.",
+            "InterTrans:",
+            "Leveraging",
+            "transitive",
+            "intermediate",
+            "translations",
+            "to",
+            "enhance",
+            "LLM-based",
+            "code",
+            "translation.",
+            "In",
+            "Proceedings",
+            "of",
+            "the",
+            "47th",
+            "International",
+            "Conference",
+            "on",
+            "Software",
+            "Engineering,",
+            "pp.",
+            "2819-2831.",
+            "IEEE,",
+            "2025b.",
+            "10.1109/ICSE55347.2025.00236.",
+            "URL",
+            "https://doi.org/10.1109/ICSE55347.2025.00236.",
+            "MindSpore."
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
             "MindSpore:",
             "A",
             "new",
@@ -32663,7 +33378,13 @@
             "paper",
             "and",
             "documentation.",
-            "MindSpore.",
+            "MindSpore."
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
             "Migrating",
             "from",
             "third",
@@ -32716,7 +33437,67 @@
             "Version",
             "0.6.0.",
             "Accessed:",
-            "2026-09-20.",
+            "2026-09-20."
+          ],
+          "after": [
+            "Migrating",
+            "from",
+            "third",
+            "party",
+            "frameworks",
+            "with",
+            "MindConverter.",
+            "https://www.mindspore.cn/mindinsight/docs/en/r2.0.0-alpha/migrate_3rd_scripts_mindconverter.html,",
+            "2023.",
+            "Accessed:",
+            "2026-06-02.",
+            "Hoang",
+            "Duong",
+            "Thien",
+            "Nguyen,",
+            "Dawei",
+            "Qi,",
+            "Abhik",
+            "Roychoudhury,",
+            "and",
+            "Satish",
+            "Chandra.",
+            "SemFix:",
+            "Program",
+            "repair",
+            "via",
+            "semantic",
+            "analysis.",
+            "In",
+            "Proceedings",
+            "of",
+            "the",
+            "35th",
+            "International",
+            "Conference",
+            "on",
+            "Software",
+            "Engineering,",
+            "pp.",
+            "772-781.",
+            "IEEE,",
+            "2013.",
+            "10.1109/ICSE.2013.6606623.",
+            "URL",
+            "https://doi.org/10.1109/ICSE.2013.6606623.",
+            "OpenI.",
+            "MSAdapter.",
+            "https://openi.pcl.ac.cn/OpenI/MSAdapter/src/tag/v0.6.0,",
+            "2025.",
+            "Version",
+            "0.6.0.",
+            "Accessed:",
+            "2026-09-20."
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
             "Adam",
             "Paszke,",
             "Sam",
@@ -32781,7 +33562,13 @@
             "8024-8035,",
             "2019.",
             "URL",
-            "https://papers.neurips.cc/paper/9015-pytorch-an-imperative-style-high-performance-deep-learning-library.",
+            "https://papers.neurips.cc/paper/9015-pytorch-an-imperative-style-high-performance-deep-learning-library."
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
             "Kexin",
             "Pei,",
             "Yinzhi",
@@ -32973,320 +33760,6 @@
             "https://openreview.net/forum?id=XomEU3eNeSQ."
           ],
           "after": [
-            "Marie-Anne",
-            "Lachaux,",
-            "Baptiste",
-            "Roziere,",
-            "Lowik",
-            "Chanussot,",
-            "and",
-            "Guillaume",
-            "Lample.",
-            "Unsupervised",
-            "translation",
-            "of",
-            "programming",
-            "languages.",
-            "In",
-            "Advances",
-            "in",
-            "Neural",
-            "Information",
-            "Processing",
-            "Systems,",
-            "volume",
-            "33,",
-            "pp.",
-            "20601-20611,",
-            "2020.",
-            "URL",
-            "https://proceedings.neurips.cc/paper/2020/hash/ed23fbf18c2cd35f8c7f8de44f85c08d-Abstract.html.",
-            "Vu",
-            "Le,",
-            "Mehrdad",
-            "Afshari,",
-            "and",
-            "Zhendong",
-            "Su.",
-            "Compiler",
-            "validation",
-            "via",
-            "equivalence",
-            "modulo",
-            "inputs.",
-            "In",
-            "Proceedings",
-            "of",
-            "the",
-            "35th",
-            "ACM",
-            "SIGPLAN",
-            "Conference",
-            "on",
-            "Programming",
-            "Language",
-            "Design",
-            "and",
-            "Implementation,",
-            "pp.",
-            "216-226.",
-            "ACM,",
-            "2014.",
-            "10.1145/2594291.2594334.",
-            "URL",
-            "https://doi.org/10.1145/2594291.2594334.",
-            "Lei",
-            "Ma,",
-            "Felix",
-            "Juefei-Xu,",
-            "Fuyuan",
-            "Zhang,",
-            "Jiyuan",
-            "Sun,",
-            "Minhui",
-            "Xue,",
-            "Bo",
-            "Li,",
-            "Chunyang",
-            "Chen,",
-            "Ting",
-            "Su,",
-            "Li",
-            "Li,",
-            "Yang",
-            "Liu,",
-            "Jianjun",
-            "Zhao,",
-            "and",
-            "Yadong",
-            "Wang.",
-            "DeepGauge:",
-            "Multi-granularity",
-            "testing",
-            "criteria",
-            "for",
-            "deep",
-            "learning",
-            "systems.",
-            "In",
-            "Proceedings",
-            "of",
-            "the",
-            "33rd",
-            "ACM/IEEE",
-            "International",
-            "Conference",
-            "on",
-            "Automated",
-            "Software",
-            "Engineering,",
-            "pp.",
-            "120-131.",
-            "ACM,",
-            "2018.",
-            "10.1145/3238147.3238202.",
-            "URL",
-            "https://doi.org/10.1145/3238147.3238202.",
-            "Marcos",
-            "Macedo,",
-            "Yuan",
-            "Tian,",
-            "and",
-            "Bram",
-            "Adams.",
-            "CodeTransEngine:",
-            "Ready-to-use",
-            "backend",
-            "for",
-            "LLM-based",
-            "code",
-            "translation.",
-            "In",
-            "ICLR",
-            "2025",
-            "Third",
-            "Workshop",
-            "on",
-            "Deep",
-            "Learning",
-            "for",
-            "Code,",
-            "2025a.",
-            "URL",
-            "https://openreview.net/forum?id=9WHJuzjPJf.",
-            "Marcos",
-            "Macedo,",
-            "Yuan",
-            "Tian,",
-            "Pengyu",
-            "Nie,",
-            "Filipe",
-            "R.",
-            "Cogo,",
-            "and",
-            "Bram",
-            "Adams.",
-            "InterTrans:",
-            "Leveraging",
-            "transitive",
-            "intermediate",
-            "translations",
-            "to",
-            "enhance",
-            "LLM-based",
-            "code",
-            "translation.",
-            "In",
-            "Proceedings",
-            "of",
-            "the",
-            "47th",
-            "International",
-            "Conference",
-            "on",
-            "Software",
-            "Engineering,",
-            "pp.",
-            "2819-2831.",
-            "IEEE,",
-            "2025b.",
-            "10.1109/ICSE55347.2025.00236.",
-            "URL",
-            "https://doi.org/10.1109/ICSE55347.2025.00236.",
-            "MindSpore.",
-            "MindSpore:",
-            "A",
-            "new",
-            "deep",
-            "learning",
-            "computing",
-            "framework.",
-            "https://www.mindspore.cn/en,",
-            "2020.",
-            "Framework",
-            "white",
-            "paper",
-            "and",
-            "documentation.",
-            "MindSpore.",
-            "Migrating",
-            "from",
-            "third",
-            "party",
-            "frameworks",
-            "with",
-            "MindConverter.",
-            "https://www.mindspore.cn/mindinsight/docs/en/r2.0.0-alpha/migrate_3rd_scripts_mindconverter.html,",
-            "2023.",
-            "Accessed:",
-            "2026-06-02.",
-            "Hoang",
-            "Duong",
-            "Thien",
-            "Nguyen,",
-            "Dawei",
-            "Qi,",
-            "Abhik",
-            "Roychoudhury,",
-            "and",
-            "Satish",
-            "Chandra.",
-            "SemFix:",
-            "Program",
-            "repair",
-            "via",
-            "semantic",
-            "analysis.",
-            "In",
-            "Proceedings",
-            "of",
-            "the",
-            "35th",
-            "International",
-            "Conference",
-            "on",
-            "Software",
-            "Engineering,",
-            "pp.",
-            "772-781.",
-            "IEEE,",
-            "2013.",
-            "10.1109/ICSE.2013.6606623.",
-            "URL",
-            "https://doi.org/10.1109/ICSE.2013.6606623.",
-            "OpenI.",
-            "MSAdapter.",
-            "https://openi.pcl.ac.cn/OpenI/MSAdapter/src/tag/v0.6.0,",
-            "2025.",
-            "Version",
-            "0.6.0.",
-            "Accessed:",
-            "2026-09-20.",
-            "Adam",
-            "Paszke,",
-            "Sam",
-            "Gross,",
-            "Francisco",
-            "Massa,",
-            "Adam",
-            "Lerer,",
-            "James",
-            "Bradbury,",
-            "Gregory",
-            "Chanan,",
-            "Trevor",
-            "Killeen,",
-            "Zeming",
-            "Lin,",
-            "Natalia",
-            "Gimelshein,",
-            "Luca",
-            "Antiga,",
-            "Alban",
-            "Desmaison,",
-            "Andreas",
-            "Kopf,",
-            "Edward",
-            "Yang,",
-            "Zachary",
-            "DeVito,",
-            "Martin",
-            "Raison,",
-            "Alykhan",
-            "Tejani,",
-            "Sasank",
-            "Chilamkurthy,",
-            "Benoit",
-            "Steiner,",
-            "Lu",
-            "Fang,",
-            "Junjie",
-            "Bai,",
-            "and",
-            "Soumith",
-            "Chintala.",
-            "PyTorch:",
-            "An",
-            "imperative",
-            "style,",
-            "high-performance",
-            "deep",
-            "learning",
-            "library.",
-            "In",
-            "Advances",
-            "in",
-            "Neural",
-            "Information",
-            "Processing",
-            "Systems,",
-            "volume",
-            "32,",
-            "pp.",
-            "8024-8035,",
-            "2019.",
-            "URL",
-            "https://papers.neurips.cc/paper/9015-pytorch-an-imperative-style-high-performance-deep-learning-library.",
             "Kexin",
             "Pei,",
             "Yinzhi",
@@ -33989,7 +34462,7 @@
             "\\begin{thebibliography}{29}"
           ],
           "after": [
-            "\\begin{thebibliography}{35}"
+            "\\begin{thebibliography}{33}"
           ]
         },
         {
@@ -35163,7 +35636,244 @@
             "\\doi{10.1109/ICSE55347.2025.00236}.",
             "\\newblock",
             "URL",
-            "\\url{https://doi.org/10.1109/ICSE55347.2025.00236}.",
+            "\\url{https://doi.org/10.1109/ICSE55347.2025.00236}."
+          ],
+          "after": [
+            "\\bibitem[Lachaux",
+            "et~al.(2020)Lachaux,",
+            "Rozi{\\`e}re,",
+            "Chanussot,",
+            "and",
+            "Lample]{roziere2020transcoder}",
+            "Marie-Anne",
+            "Lachaux,",
+            "Baptiste",
+            "Rozi{\\`e}re,",
+            "Lowik",
+            "Chanussot,",
+            "and",
+            "Guillaume",
+            "Lample.",
+            "\\newblock",
+            "Unsupervised",
+            "translation",
+            "of",
+            "programming",
+            "languages.",
+            "\\newblock",
+            "In",
+            "\\emph{Advances",
+            "in",
+            "Neural",
+            "Information",
+            "Processing",
+            "Systems},",
+            "volume~33,",
+            "pp.\\",
+            "20601--20611,",
+            "2020.",
+            "\\newblock",
+            "URL",
+            "\\url{https://proceedings.neurips.cc/paper/2020/hash/ed23fbf18c2cd35f8c7f8de44f85c08d-Abstract.html}.",
+            "\\bibitem[Le",
+            "et~al.(2014)Le,",
+            "Afshari,",
+            "and",
+            "Su]{le2014emi}",
+            "Vu~Le,",
+            "Mehrdad",
+            "Afshari,",
+            "and",
+            "Zhendong",
+            "Su.",
+            "\\newblock",
+            "Compiler",
+            "validation",
+            "via",
+            "equivalence",
+            "modulo",
+            "inputs.",
+            "\\newblock",
+            "In",
+            "\\emph{Proceedings",
+            "of",
+            "the",
+            "35th",
+            "ACM",
+            "SIGPLAN",
+            "Conference",
+            "on",
+            "Programming",
+            "Language",
+            "Design",
+            "and",
+            "Implementation},",
+            "pp.\\",
+            "216--226.",
+            "ACM,",
+            "2014.",
+            "\\newblock",
+            "\\doi{10.1145/2594291.2594334}.",
+            "\\newblock",
+            "URL",
+            "\\url{https://doi.org/10.1145/2594291.2594334}.",
+            "\\bibitem[Ma",
+            "et~al.(2018)Ma,",
+            "Juefei-Xu,",
+            "Zhang,",
+            "Sun,",
+            "Xue,",
+            "Li,",
+            "Chen,",
+            "Su,",
+            "Li,",
+            "Liu,",
+            "Zhao,",
+            "and",
+            "Wang]{ma2018deepgauge}",
+            "Lei",
+            "Ma,",
+            "Felix",
+            "Juefei-Xu,",
+            "Fuyuan",
+            "Zhang,",
+            "Jiyuan",
+            "Sun,",
+            "Minhui",
+            "Xue,",
+            "Bo~Li,",
+            "Chunyang",
+            "Chen,",
+            "Ting",
+            "Su,",
+            "Li~Li,",
+            "Yang",
+            "Liu,",
+            "Jianjun",
+            "Zhao,",
+            "and",
+            "Yadong",
+            "Wang.",
+            "\\newblock",
+            "{DeepGauge}:",
+            "Multi-granularity",
+            "testing",
+            "criteria",
+            "for",
+            "deep",
+            "learning",
+            "systems.",
+            "\\newblock",
+            "In",
+            "\\emph{Proceedings",
+            "of",
+            "the",
+            "33rd",
+            "ACM/IEEE",
+            "International",
+            "Conference",
+            "on",
+            "Automated",
+            "Software",
+            "Engineering},",
+            "pp.\\",
+            "120--131.",
+            "ACM,",
+            "2018.",
+            "\\newblock",
+            "\\doi{10.1145/3238147.3238202}.",
+            "\\newblock",
+            "URL",
+            "\\url{https://doi.org/10.1145/3238147.3238202}.",
+            "\\bibitem[Macedo",
+            "et~al.(2025{\\natexlab{a}})Macedo,",
+            "Tian,",
+            "and",
+            "Adams]{macedo2025codetransengine}",
+            "Marcos",
+            "Macedo,",
+            "Yuan",
+            "Tian,",
+            "and",
+            "Bram",
+            "Adams.",
+            "\\newblock",
+            "{CodeTransEngine}:",
+            "Ready-to-use",
+            "backend",
+            "for",
+            "{LLM}-based",
+            "code",
+            "translation.",
+            "\\newblock",
+            "In",
+            "\\emph{ICLR",
+            "2025",
+            "Third",
+            "Workshop",
+            "on",
+            "Deep",
+            "Learning",
+            "for",
+            "Code},",
+            "2025{\\natexlab{a}}.",
+            "\\newblock",
+            "URL",
+            "\\url{https://openreview.net/forum?id=9WHJuzjPJf}.",
+            "\\bibitem[Macedo",
+            "et~al.(2025{\\natexlab{b}})Macedo,",
+            "Tian,",
+            "Nie,",
+            "Cogo,",
+            "and",
+            "Adams]{macedo2024intertrans}",
+            "Marcos",
+            "Macedo,",
+            "Yuan",
+            "Tian,",
+            "Pengyu",
+            "Nie,",
+            "Filipe~R.",
+            "Cogo,",
+            "and",
+            "Bram",
+            "Adams.",
+            "\\newblock",
+            "{InterTrans}:",
+            "Leveraging",
+            "transitive",
+            "intermediate",
+            "translations",
+            "to",
+            "enhance",
+            "{LLM}-based",
+            "code",
+            "translation.",
+            "\\newblock",
+            "In",
+            "\\emph{Proceedings",
+            "of",
+            "the",
+            "47th",
+            "International",
+            "Conference",
+            "on",
+            "Software",
+            "Engineering},",
+            "pp.\\",
+            "2819--2831.",
+            "IEEE,",
+            "2025{\\natexlab{b}}.",
+            "\\newblock",
+            "\\doi{10.1109/ICSE55347.2025.00236}.",
+            "\\newblock",
+            "URL",
+            "\\url{https://doi.org/10.1109/ICSE55347.2025.00236}."
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
             "\\bibitem[{MindSpore}(2020)]{mindspore2020whitepaper}",
             "{MindSpore}.",
             "\\newblock",
@@ -35182,7 +35892,13 @@
             "white",
             "paper",
             "and",
-            "documentation.",
+            "documentation."
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
             "\\bibitem[{MindSpore}(2023)]{mindspore2023mindconverter}",
             "{MindSpore}.",
             "\\newblock",
@@ -35253,7 +35969,85 @@
             "Version",
             "0.6.0.",
             "Accessed:",
-            "2026-09-20.",
+            "2026-09-20."
+          ],
+          "after": [
+            "\\bibitem[{MindSpore}(2023)]{mindspore2023mindconverter}",
+            "{MindSpore}.",
+            "\\newblock",
+            "Migrating",
+            "from",
+            "third",
+            "party",
+            "frameworks",
+            "with",
+            "{MindConverter}.",
+            "\\newblock",
+            "\\url{https://www.mindspore.cn/mindinsight/docs/en/r2.0.0-alpha/migrate_3rd_scripts_mindconverter.html},",
+            "2023.",
+            "\\newblock",
+            "Accessed:",
+            "2026-06-02.",
+            "\\bibitem[Nguyen",
+            "et~al.(2013)Nguyen,",
+            "Qi,",
+            "Roychoudhury,",
+            "and",
+            "Chandra]{nguyen2013semfix}",
+            "Hoang",
+            "Duong~Thien",
+            "Nguyen,",
+            "Dawei",
+            "Qi,",
+            "Abhik",
+            "Roychoudhury,",
+            "and",
+            "Satish",
+            "Chandra.",
+            "\\newblock",
+            "{SemFix}:",
+            "Program",
+            "repair",
+            "via",
+            "semantic",
+            "analysis.",
+            "\\newblock",
+            "In",
+            "\\emph{Proceedings",
+            "of",
+            "the",
+            "35th",
+            "International",
+            "Conference",
+            "on",
+            "Software",
+            "Engineering},",
+            "pp.\\",
+            "772--781.",
+            "IEEE,",
+            "2013.",
+            "\\newblock",
+            "\\doi{10.1109/ICSE.2013.6606623}.",
+            "\\newblock",
+            "URL",
+            "\\url{https://doi.org/10.1109/ICSE.2013.6606623}.",
+            "\\bibitem[{OpenI}(2025)]{openi2025msadapter}",
+            "{OpenI}.",
+            "\\newblock",
+            "{MSAdapter}.",
+            "\\newblock",
+            "\\url{https://openi.pcl.ac.cn/OpenI/MSAdapter/src/tag/v0.6.0},",
+            "2025.",
+            "\\newblock",
+            "Version",
+            "0.6.0.",
+            "Accessed:",
+            "2026-09-20."
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
             "\\bibitem[Paszke",
             "et~al.(2019)Paszke,",
             "Gross,",
@@ -35342,7 +36136,13 @@
             "2019.",
             "\\newblock",
             "URL",
-            "\\url{https://papers.neurips.cc/paper/9015-pytorch-an-imperative-style-high-performance-deep-learning-library}.",
+            "\\url{https://papers.neurips.cc/paper/9015-pytorch-an-imperative-style-high-performance-deep-learning-library}."
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
             "\\bibitem[Pei",
             "et~al.(2017)Pei,",
             "Cao,",
@@ -35595,415 +36395,6 @@
             "\\url{https://openreview.net/forum?id=XomEU3eNeSQ}."
           ],
           "after": [
-            "\\bibitem[Lachaux",
-            "et~al.(2020)Lachaux,",
-            "Rozi{\\`e}re,",
-            "Chanussot,",
-            "and",
-            "Lample]{roziere2020transcoder}",
-            "Marie-Anne",
-            "Lachaux,",
-            "Baptiste",
-            "Rozi{\\`e}re,",
-            "Lowik",
-            "Chanussot,",
-            "and",
-            "Guillaume",
-            "Lample.",
-            "\\newblock",
-            "Unsupervised",
-            "translation",
-            "of",
-            "programming",
-            "languages.",
-            "\\newblock",
-            "In",
-            "\\emph{Advances",
-            "in",
-            "Neural",
-            "Information",
-            "Processing",
-            "Systems},",
-            "volume~33,",
-            "pp.\\",
-            "20601--20611,",
-            "2020.",
-            "\\newblock",
-            "URL",
-            "\\url{https://proceedings.neurips.cc/paper/2020/hash/ed23fbf18c2cd35f8c7f8de44f85c08d-Abstract.html}.",
-            "\\bibitem[Le",
-            "et~al.(2014)Le,",
-            "Afshari,",
-            "and",
-            "Su]{le2014emi}",
-            "Vu~Le,",
-            "Mehrdad",
-            "Afshari,",
-            "and",
-            "Zhendong",
-            "Su.",
-            "\\newblock",
-            "Compiler",
-            "validation",
-            "via",
-            "equivalence",
-            "modulo",
-            "inputs.",
-            "\\newblock",
-            "In",
-            "\\emph{Proceedings",
-            "of",
-            "the",
-            "35th",
-            "ACM",
-            "SIGPLAN",
-            "Conference",
-            "on",
-            "Programming",
-            "Language",
-            "Design",
-            "and",
-            "Implementation},",
-            "pp.\\",
-            "216--226.",
-            "ACM,",
-            "2014.",
-            "\\newblock",
-            "\\doi{10.1145/2594291.2594334}.",
-            "\\newblock",
-            "URL",
-            "\\url{https://doi.org/10.1145/2594291.2594334}.",
-            "\\bibitem[Ma",
-            "et~al.(2018)Ma,",
-            "Juefei-Xu,",
-            "Zhang,",
-            "Sun,",
-            "Xue,",
-            "Li,",
-            "Chen,",
-            "Su,",
-            "Li,",
-            "Liu,",
-            "Zhao,",
-            "and",
-            "Wang]{ma2018deepgauge}",
-            "Lei",
-            "Ma,",
-            "Felix",
-            "Juefei-Xu,",
-            "Fuyuan",
-            "Zhang,",
-            "Jiyuan",
-            "Sun,",
-            "Minhui",
-            "Xue,",
-            "Bo~Li,",
-            "Chunyang",
-            "Chen,",
-            "Ting",
-            "Su,",
-            "Li~Li,",
-            "Yang",
-            "Liu,",
-            "Jianjun",
-            "Zhao,",
-            "and",
-            "Yadong",
-            "Wang.",
-            "\\newblock",
-            "{DeepGauge}:",
-            "Multi-granularity",
-            "testing",
-            "criteria",
-            "for",
-            "deep",
-            "learning",
-            "systems.",
-            "\\newblock",
-            "In",
-            "\\emph{Proceedings",
-            "of",
-            "the",
-            "33rd",
-            "ACM/IEEE",
-            "International",
-            "Conference",
-            "on",
-            "Automated",
-            "Software",
-            "Engineering},",
-            "pp.\\",
-            "120--131.",
-            "ACM,",
-            "2018.",
-            "\\newblock",
-            "\\doi{10.1145/3238147.3238202}.",
-            "\\newblock",
-            "URL",
-            "\\url{https://doi.org/10.1145/3238147.3238202}.",
-            "\\bibitem[Macedo",
-            "et~al.(2025{\\natexlab{a}})Macedo,",
-            "Tian,",
-            "and",
-            "Adams]{macedo2025codetransengine}",
-            "Marcos",
-            "Macedo,",
-            "Yuan",
-            "Tian,",
-            "and",
-            "Bram",
-            "Adams.",
-            "\\newblock",
-            "{CodeTransEngine}:",
-            "Ready-to-use",
-            "backend",
-            "for",
-            "{LLM}-based",
-            "code",
-            "translation.",
-            "\\newblock",
-            "In",
-            "\\emph{ICLR",
-            "2025",
-            "Third",
-            "Workshop",
-            "on",
-            "Deep",
-            "Learning",
-            "for",
-            "Code},",
-            "2025{\\natexlab{a}}.",
-            "\\newblock",
-            "URL",
-            "\\url{https://openreview.net/forum?id=9WHJuzjPJf}.",
-            "\\bibitem[Macedo",
-            "et~al.(2025{\\natexlab{b}})Macedo,",
-            "Tian,",
-            "Nie,",
-            "Cogo,",
-            "and",
-            "Adams]{macedo2024intertrans}",
-            "Marcos",
-            "Macedo,",
-            "Yuan",
-            "Tian,",
-            "Pengyu",
-            "Nie,",
-            "Filipe~R.",
-            "Cogo,",
-            "and",
-            "Bram",
-            "Adams.",
-            "\\newblock",
-            "{InterTrans}:",
-            "Leveraging",
-            "transitive",
-            "intermediate",
-            "translations",
-            "to",
-            "enhance",
-            "{LLM}-based",
-            "code",
-            "translation.",
-            "\\newblock",
-            "In",
-            "\\emph{Proceedings",
-            "of",
-            "the",
-            "47th",
-            "International",
-            "Conference",
-            "on",
-            "Software",
-            "Engineering},",
-            "pp.\\",
-            "2819--2831.",
-            "IEEE,",
-            "2025{\\natexlab{b}}.",
-            "\\newblock",
-            "\\doi{10.1109/ICSE55347.2025.00236}.",
-            "\\newblock",
-            "URL",
-            "\\url{https://doi.org/10.1109/ICSE55347.2025.00236}.",
-            "\\bibitem[{MindSpore}(2020)]{mindspore2020whitepaper}",
-            "{MindSpore}.",
-            "\\newblock",
-            "{MindSpore}:",
-            "A",
-            "new",
-            "deep",
-            "learning",
-            "computing",
-            "framework.",
-            "\\newblock",
-            "\\url{https://www.mindspore.cn/en},",
-            "2020.",
-            "\\newblock",
-            "Framework",
-            "white",
-            "paper",
-            "and",
-            "documentation.",
-            "\\bibitem[{MindSpore}(2023)]{mindspore2023mindconverter}",
-            "{MindSpore}.",
-            "\\newblock",
-            "Migrating",
-            "from",
-            "third",
-            "party",
-            "frameworks",
-            "with",
-            "{MindConverter}.",
-            "\\newblock",
-            "\\url{https://www.mindspore.cn/mindinsight/docs/en/r2.0.0-alpha/migrate_3rd_scripts_mindconverter.html},",
-            "2023.",
-            "\\newblock",
-            "Accessed:",
-            "2026-06-02.",
-            "\\bibitem[Nguyen",
-            "et~al.(2013)Nguyen,",
-            "Qi,",
-            "Roychoudhury,",
-            "and",
-            "Chandra]{nguyen2013semfix}",
-            "Hoang",
-            "Duong~Thien",
-            "Nguyen,",
-            "Dawei",
-            "Qi,",
-            "Abhik",
-            "Roychoudhury,",
-            "and",
-            "Satish",
-            "Chandra.",
-            "\\newblock",
-            "{SemFix}:",
-            "Program",
-            "repair",
-            "via",
-            "semantic",
-            "analysis.",
-            "\\newblock",
-            "In",
-            "\\emph{Proceedings",
-            "of",
-            "the",
-            "35th",
-            "International",
-            "Conference",
-            "on",
-            "Software",
-            "Engineering},",
-            "pp.\\",
-            "772--781.",
-            "IEEE,",
-            "2013.",
-            "\\newblock",
-            "\\doi{10.1109/ICSE.2013.6606623}.",
-            "\\newblock",
-            "URL",
-            "\\url{https://doi.org/10.1109/ICSE.2013.6606623}.",
-            "\\bibitem[{OpenI}(2025)]{openi2025msadapter}",
-            "{OpenI}.",
-            "\\newblock",
-            "{MSAdapter}.",
-            "\\newblock",
-            "\\url{https://openi.pcl.ac.cn/OpenI/MSAdapter/src/tag/v0.6.0},",
-            "2025.",
-            "\\newblock",
-            "Version",
-            "0.6.0.",
-            "Accessed:",
-            "2026-09-20.",
-            "\\bibitem[Paszke",
-            "et~al.(2019)Paszke,",
-            "Gross,",
-            "Massa,",
-            "Lerer,",
-            "Bradbury,",
-            "Chanan,",
-            "Killeen,",
-            "Lin,",
-            "Gimelshein,",
-            "Antiga,",
-            "Desmaison,",
-            "Kopf,",
-            "Yang,",
-            "DeVito,",
-            "Raison,",
-            "Tejani,",
-            "Chilamkurthy,",
-            "Steiner,",
-            "Fang,",
-            "Bai,",
-            "and",
-            "Chintala]{paszke2019pytorch}",
-            "Adam",
-            "Paszke,",
-            "Sam",
-            "Gross,",
-            "Francisco",
-            "Massa,",
-            "Adam",
-            "Lerer,",
-            "James",
-            "Bradbury,",
-            "Gregory",
-            "Chanan,",
-            "Trevor",
-            "Killeen,",
-            "Zeming",
-            "Lin,",
-            "Natalia",
-            "Gimelshein,",
-            "Luca",
-            "Antiga,",
-            "Alban",
-            "Desmaison,",
-            "Andreas",
-            "Kopf,",
-            "Edward",
-            "Yang,",
-            "Zachary",
-            "DeVito,",
-            "Martin",
-            "Raison,",
-            "Alykhan",
-            "Tejani,",
-            "Sasank",
-            "Chilamkurthy,",
-            "Benoit",
-            "Steiner,",
-            "Lu~Fang,",
-            "Junjie",
-            "Bai,",
-            "and",
-            "Soumith",
-            "Chintala.",
-            "\\newblock",
-            "{PyTorch}:",
-            "An",
-            "imperative",
-            "style,",
-            "high-performance",
-            "deep",
-            "learning",
-            "library.",
-            "\\newblock",
-            "In",
-            "\\emph{Advances",
-            "in",
-            "Neural",
-            "Information",
-            "Processing",
-            "Systems},",
-            "volume~32,",
-            "pp.\\",
-            "8024--8035,",
-            "2019.",
-            "\\newblock",
-            "URL",
-            "\\url{https://papers.neurips.cc/paper/9015-pytorch-an-imperative-style-high-performance-deep-learning-library}.",
             "\\bibitem[Pei",
             "et~al.(2017)Pei,",
             "Cao,",
