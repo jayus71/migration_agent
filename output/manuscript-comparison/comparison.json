@@ -27,13 +27,13 @@
     }
   },
   "current": {
-    "base_commit": "e3d3b90",
-    "pdf_sha256": "6c31d9c98194d1379c41f9cd8560105e11cd20801239f6eb69a5afad78837f74"
+    "base_commit": "250a8fb",
+    "pdf_sha256": "f5d6b2701d7687adb77465579dbbc8e28ddefad58227059408e96c3d58d63922"
   },
-  "updated": "2026-09-24T17:49:59+08:00",
-  "version": "36aa7e069221e2c01b839b73ef6944ded2b0364f02b194adec01db8598a3fc3f",
-  "reading_words_added": 8273,
-  "reading_words_removed": 4297,
+  "updated": "2026-09-24T19:15:22+08:00",
+  "version": "7368e15bfa96eca28b523589f16f5f76b96ec268ff8000bc390e38043d9a98f2",
+  "reading_words_added": 8251,
+  "reading_words_removed": 4272,
   "sections": {
     "Title": {
       "reading": [
@@ -1334,7 +1334,12 @@
           "kind": "replace",
           "before": [
             "environments.",
-            "Differences"
+            "Differences",
+            "in",
+            "operator",
+            "semantics,",
+            "numerical",
+            "precision,"
           ],
           "after": [
             "environments,",
@@ -1342,10 +1347,44 @@
             "existing",
             "code",
             "across",
-            "languages",
-            "and",
-            "frameworks",
-            "can",
+            "languages"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "random",
+            "number",
+            "handling"
+          ],
+          "after": [
+            "frameworks"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "can"
+          ],
+          "after": [
+            "can"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "change"
+          ],
+          "after": [
             "reduce",
             "development",
             "cost",
@@ -1354,181 +1393,52 @@
             "This",
             "need",
             "has",
-            "driven",
-            "the",
-            "development",
-            "of",
-            "numerous",
-            "code",
-            "translation",
-            "methods.",
-            "With",
-            "the",
-            "help",
-            "of",
-            "large",
-            "language",
-            "models",
-            "(LLMs),",
-            "these",
-            "methods",
-            "now",
-            "achieve",
-            "strong",
-            "translation",
-            "results",
-            "at",
-            "the",
-            "level",
-            "of",
-            "syntax",
-            "and",
-            "program",
-            "semantics",
-            "[he-etal-2025-execoder,macedo2024intertrans,roziere2021unittests]",
-            ".",
-            "However,",
-            "success",
-            "at",
-            "translating",
-            "code",
-            "does",
-            "not",
-            "guarantee",
-            "equal",
-            "translation",
-            "performance",
-            "across",
-            "deep",
-            "learning",
-            "frameworks,",
-            "for",
-            "example,",
-            "migrating",
-            "from",
-            "PyTorch",
-            "to",
-            "MindSpore.",
-            "Different",
-            "frameworks",
-            "use",
-            "different",
-            "interfaces",
-            "and",
-            "execution",
-            "mechanisms",
-            "for",
-            "forward",
-            "computation,",
-            "gradient",
-            "computation,",
-            "and",
-            "parameter",
-            "updates",
-            "[paszke2019pytorch,mindspore2024gradient]",
-            ".",
-            "Further",
-            "differences"
+            "driven"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "in",
-            "operator",
-            "semantics,"
+            "the"
           ],
           "after": [
-            "in",
-            "operator",
-            "semantics,"
+            "the"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "numerical",
-            "precision,",
-            "and",
-            "random",
-            "number",
-            "handling",
-            "can",
-            "change",
-            "the",
             "computations",
             "performed",
             "after",
             "migration.",
             "Automatic",
-            "differentiation"
-          ],
-          "after": [
-            "automatic",
-            "differentiation,"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "differentiation",
             "and",
             "optimizer",
-            "interfaces"
-          ],
-          "after": [
-            "and",
-            "optimizer",
-            "interfaces"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "interfaces",
             "introduce",
             "further",
             "differences",
             "in",
             "how",
-            "a"
-          ],
-          "after": [
-            "can",
-            "change"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "model"
-          ],
-          "after": [
-            "model"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "learns"
-          ],
-          "after": [
-            "behavior",
-            "after",
-            "migration"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "a",
+            "model",
+            "learns",
             "[paszke2019pytorch,mindspore2020whitepaper]",
             "."
           ],
           "after": [
-            "[paszke2019pytorch,mindspore2020whitepaper]",
-            "."
+            "development",
+            "of",
+            "numerous",
+            "code",
+            "translation",
+            "methods."
           ]
         },
         {
-          "kind": "replace",
+          "kind": "equal",
           "before": [
             "Large",
             "language",
@@ -1553,46 +1463,152 @@
             "help",
             "assess",
             "and",
-            "correct"
+            "correct",
+            "translated",
+            "behavior",
+            "[roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent]",
+            "."
           ],
           "after": [
-            "As",
-            "a",
-            "result,",
-            "a"
+            "Large",
+            "language",
+            "models",
+            "(LLMs)",
+            "reduce",
+            "the",
+            "manual",
+            "effort",
+            "involved",
+            "in",
+            "code",
+            "translation",
+            "[he-etal-2025-execoder,macedo2024intertrans]",
+            ",",
+            "while",
+            "automated",
+            "tests",
+            "and",
+            "interactive",
+            "repair",
+            "help",
+            "assess",
+            "and",
+            "correct",
+            "translated",
+            "behavior",
+            "[roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent]",
+            "."
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "Training",
+            "programs",
+            "require",
+            "these",
+            "capabilities"
+          ],
+          "after": [
+            "However,",
+            "success",
+            "at",
+            "translating",
+            "code",
+            "does",
+            "not",
+            "guarantee",
+            "equal",
+            "translation",
+            "performance",
+            "across",
+            "deep",
+            "learning",
+            "frameworks,",
+            "for",
+            "example,",
+            "migrating",
+            "from",
+            "PyTorch"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "translated"
+            "to"
           ],
           "after": [
-            "translated"
+            "to"
           ]
         },
         {
-          "kind": "delete",
+          "kind": "replace",
           "before": [
-            "behavior",
-            "[roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent]",
-            ".",
-            "Training",
-            "programs",
-            "require",
-            "these",
-            "capabilities",
-            "to",
             "preserve",
             "the",
             "computations",
             "that",
             "determine",
-            "each",
-            "parameter",
-            "update.",
-            "Loss",
+            "each"
+          ],
+          "after": [
+            "MindSpore.",
+            "Different",
+            "frameworks",
+            "use",
+            "different",
+            "interfaces",
             "and",
+            "execution",
+            "mechanisms",
+            "for",
+            "forward",
+            "computation,",
+            "gradient",
+            "computation,",
+            "and"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "parameter"
+          ],
+          "after": [
+            "parameter"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "update.",
+            "Loss"
+          ],
+          "after": [
+            "updates",
+            "[paszke2019pytorch,mindspore2024gradient]",
+            ".",
+            "Further",
+            "differences",
+            "in",
+            "operator",
+            "semantics,",
+            "automatic",
+            "differentiation,"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "gradient",
             "differences",
             "(a)",
@@ -1661,8 +1677,37 @@
             "shading",
             "shows",
             "ranges.",
-            "A",
-            "translated",
+            "A"
+          ],
+          "after": [
+            "optimizer",
+            "interfaces",
+            "can",
+            "change",
+            "model",
+            "behavior",
+            "after",
+            "migration",
+            "[paszke2019pytorch,mindspore2020whitepaper]",
+            ".",
+            "As",
+            "a",
+            "result,",
+            "a"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "translated"
+          ],
+          "after": [
+            "translated"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
             "training"
           ],
           "after": []
@@ -3738,7 +3783,12 @@
           "kind": "replace",
           "before": [
             "environments.",
-            "Differences"
+            "Differences",
+            "in",
+            "operator",
+            "semantics,",
+            "numerical",
+            "precision,"
           ],
           "after": [
             "environments,",
@@ -3746,172 +3796,95 @@
             "existing",
             "code",
             "across",
-            "languages",
-            "and",
-            "frameworks",
-            "can",
+            "languages"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "random",
+            "number",
+            "handling"
+          ],
+          "after": [
+            "frameworks"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "can"
+          ],
+          "after": [
+            "can"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "change"
+          ],
+          "after": [
             "reduce",
             "development",
             "cost~\\citep{guan2025repotransagent}.",
             "This",
             "need",
             "has",
-            "driven",
-            "the",
-            "development",
-            "of",
-            "numerous",
-            "code",
-            "translation",
-            "methods.",
-            "With",
-            "the",
-            "help",
-            "of",
-            "large",
-            "language",
-            "models",
-            "(LLMs),",
-            "these",
-            "methods",
-            "now",
-            "achieve",
-            "strong",
-            "translation",
-            "results",
-            "at",
-            "the",
-            "level",
-            "of",
-            "syntax",
-            "and",
-            "program",
-            "semantics~\\citep{he-etal-2025-execoder,macedo2024intertrans,roziere2021unittests}.",
-            "However,",
-            "success",
-            "at",
-            "translating",
-            "code",
-            "does",
-            "not",
-            "guarantee",
-            "equal",
-            "translation",
-            "performance",
-            "across",
-            "deep",
-            "learning",
-            "frameworks,",
-            "for",
-            "example,",
-            "migrating",
-            "from",
-            "PyTorch",
-            "to",
-            "MindSpore.",
-            "Different",
-            "frameworks",
-            "use",
-            "different",
-            "interfaces",
-            "and",
-            "execution",
-            "mechanisms",
-            "for",
-            "forward",
-            "computation,",
-            "gradient",
-            "computation,",
-            "and",
-            "parameter",
-            "updates~\\citep{paszke2019pytorch,mindspore2024gradient}.",
-            "Further",
-            "differences"
+            "driven"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "in",
-            "operator",
-            "semantics,"
+            "the"
           ],
           "after": [
-            "in",
-            "operator",
-            "semantics,"
+            "the"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "numerical",
-            "precision,",
-            "and",
-            "random",
-            "number",
-            "handling",
-            "can",
-            "change",
-            "the",
             "computations",
             "performed",
             "after",
             "migration.",
             "Automatic",
-            "differentiation"
-          ],
-          "after": [
-            "automatic",
-            "differentiation,"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "differentiation",
             "and",
             "optimizer",
-            "interfaces"
-          ],
-          "after": [
-            "and",
-            "optimizer",
-            "interfaces"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "interfaces",
             "introduce",
             "further",
             "differences",
             "in",
-            "how"
+            "how",
+            "a",
+            "model",
+            "learns~\\citep{paszke2019pytorch,mindspore2020whitepaper}."
           ],
           "after": [
-            "can",
-            "change",
-            "model",
-            "behavior",
-            "after",
-            "migration~\\citep{paszke2019pytorch,mindspore2020whitepaper}.",
-            "As"
+            "development",
+            "of",
+            "numerous",
+            "code",
+            "translation",
+            "methods."
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "a"
-          ],
-          "after": [
-            "a"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "model",
-            "learns~\\citep{paszke2019pytorch,mindspore2020whitepaper}.",
             "Large",
             "language",
             "models",
@@ -3933,45 +3906,147 @@
             "help",
             "assess",
             "and",
-            "correct"
+            "correct",
+            "translated",
+            "behavior~\\citep{roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent}."
           ],
           "after": [
-            "result,",
-            "a"
+            "Large",
+            "language",
+            "models",
+            "(LLMs)",
+            "reduce",
+            "the",
+            "manual",
+            "effort",
+            "involved",
+            "in",
+            "code",
+            "translation~\\citep{he-etal-2025-execoder,macedo2024intertrans},",
+            "while",
+            "automated",
+            "tests",
+            "and",
+            "interactive",
+            "repair",
+            "help",
+            "assess",
+            "and",
+            "correct",
+            "translated",
+            "behavior~\\citep{roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent}."
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "Training",
+            "programs",
+            "require",
+            "these",
+            "capabilities"
+          ],
+          "after": [
+            "However,",
+            "success",
+            "at",
+            "translating",
+            "code",
+            "does",
+            "not",
+            "guarantee",
+            "equal",
+            "translation",
+            "performance",
+            "across",
+            "deep",
+            "learning",
+            "frameworks,",
+            "for",
+            "example,",
+            "migrating",
+            "from",
+            "PyTorch"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "translated"
+            "to"
           ],
           "after": [
-            "translated"
+            "to"
           ]
         },
         {
-          "kind": "delete",
+          "kind": "replace",
           "before": [
-            "behavior~\\citep{roziere2021unittests,yang2024sweagent,ibrahimzada2025matchfixagent}.",
-            "Training",
-            "programs",
-            "require",
-            "these",
-            "capabilities",
-            "to",
             "preserve",
             "the",
             "computations",
             "that",
             "determine",
-            "each",
-            "parameter",
+            "each"
+          ],
+          "after": [
+            "MindSpore.",
+            "Different",
+            "frameworks",
+            "use",
+            "different",
+            "interfaces",
+            "and",
+            "execution",
+            "mechanisms",
+            "for",
+            "forward",
+            "computation,",
+            "gradient",
+            "computation,",
+            "and"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "parameter"
+          ],
+          "after": [
+            "parameter"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "update.",
             "\\begin{figure}[t]",
             "\\centering",
             "\\includegraphics[width=\\linewidth]{figures/gradient_drift.pdf}",
-            "\\caption{Loss",
-            "and",
+            "\\caption{Loss"
+          ],
+          "after": [
+            "updates~\\citep{paszke2019pytorch,mindspore2024gradient}.",
+            "Further",
+            "differences",
+            "in",
+            "operator",
+            "semantics,",
+            "automatic",
+            "differentiation,"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "gradient",
             "differences",
             "(a)",
@@ -4041,8 +4116,35 @@
             "ranges.}",
             "\\label{fig:gradient-drift}",
             "\\end{figure}",
-            "A",
-            "translated",
+            "A"
+          ],
+          "after": [
+            "optimizer",
+            "interfaces",
+            "can",
+            "change",
+            "model",
+            "behavior",
+            "after",
+            "migration~\\citep{paszke2019pytorch,mindspore2020whitepaper}.",
+            "As",
+            "a",
+            "result,",
+            "a"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "translated"
+          ],
+          "after": [
+            "translated"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
             "training"
           ],
           "after": []
