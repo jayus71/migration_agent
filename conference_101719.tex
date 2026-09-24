@@ -56,11 +56,11 @@ This need has driven the development of numerous code translation methods.
 With the help of large language models (LLMs), these methods now achieve strong translation results at the level of syntax and program semantics~\citep{he-etal-2025-execoder,macedo2024intertrans,roziere2021unittests}.
 
 However, success at translating code does not guarantee equal translation performance across deep learning frameworks, for example, migrating from PyTorch to MindSpore.
-Different frameworks define and order their forward, backward, and parameter-update computations differently~\citep{paszke2019pytorch,mindspore2020whitepaper}.
+Different frameworks use different interfaces and execution mechanisms for forward computation, gradient computation, and parameter updates~\citep{paszke2019pytorch,mindspore2024gradient}.
 Further differences in operator semantics, automatic differentiation, and optimizer interfaces can change model behavior after migration~\citep{paszke2019pytorch,mindspore2020whitepaper}.
 As a result, a translated program can run without raising error while still producing incorrect results due to silent failures in computing losses, gradients or parameter updates.
 We use semantic drift to describe the changes in such training behavior introduced by migration.
-Current translation and repair methods are designed mainly for language-level correctness, being unable to detect or repair such semantic drift~\citep{roziere2020transcoder,roziere2021unittests,szafraniec2023compiler,he-etal-2025-execoder,macedo2024intertrans,ibrahimzada2025matchfixagent}.
+Current translation and repair methods are designed mainly for language-level correctness, being unable to detect or repair such semantic drift.
 
 To address this, we aim to locate and repair the true cause of semantic drift after initial translation. We propose LaDiM (Layered Diagnosis for Multi-Agent Code Migration), a multi-agent framework that preserves the training computation order of a deep learning program and uses the dependencies among these stages to guide diagnosis and repair of an initial translation.
 

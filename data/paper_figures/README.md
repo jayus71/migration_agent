@@ -108,6 +108,9 @@ each method name above its acceptance rate: 100%, 100%, and 88%, respectively,
 using the common denominator of 50. Text remains eight points at the included
 size. The introduction suppresses word hyphenation locally. These are complete
 migration costs.
+The September 24 presentation revision narrows the bars from 0.48 to 0.32,
+labels LaDiM as bold `Ours`, and prefixes each acceptance percentage with `Acc.`.
+The values, denominator, figure dimensions, and font size are unchanged.
 The former Figure 1 (`gradient_drift.pdf`) now appears beside the detection study.
 
 `scripts/summarize_paper_collections.py` reads frozen sources and archive members,
