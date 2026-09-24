@@ -14,6 +14,7 @@
 \usepackage[noend]{algpseudocode}
 \usepackage{wrapfig}
 \usepackage{listings}
+\usepackage{cleveref}
 \lstdefinestyle{repaircode}{
   language=Python, basicstyle=\footnotesize\ttfamily,
   columns=fullflexible, keepspaces=true, showstringspaces=false,
@@ -29,7 +30,7 @@
 % Long URLs in the footnote and bibliography cannot break at "/" or "." under
 % the url package alone, which leaves the surrounding line badly underfull.
 \usepackage{xurl}
-\usepackage{hyperref}
+
 
 \begin{document}
 \title{LaDiM: Layered Diagnosis for Multi-Agent Code Migration}
@@ -53,13 +54,9 @@ Code development environments and languages have grown increasingly diverse. Foc
 
 However, success at translating code does not guarantee equal translation performance across deep learning frameworks, for example, migrating from PyTorch to MindSpore. Different frameworks use different interfaces and execution mechanisms for forward computation, gradient computation, and parameter updates~\citep{paszke2019pytorch,mindspore2024gradient}. Further differences in operator semantics, automatic differentiation, and optimizer interfaces can change model behavior after migration~\citep{paszke2019pytorch,mindspore2020whitepaper}. As a result, a translated program can run without raising error while still producing incorrect results due to silent failures in computing losses, gradients or parameter updates. We use semantic drift to describe the changes in such training behavior introduced by migration. These methods primarily target language level translation and test based functional correctness, leaving framework specific computational drift less directly addressed~\citep{he-etal-2025-execoder,macedo2024intertrans,ibrahimzada2025matchfixagent}.
 
-To address this, we aim to locate and repair the true cause of semantic drift after initial translation. We propose LaDiM (Layered Diagnosis for Multi-Agent Code Migration), a multi-agent framework that preserves the training computation order of a deep learning program and uses the dependencies among these stages to guide diagnosis and repair of an initial translation.
+To address this, we aim to locate and repair the true cause of semantic drift after initial translation. We propose LaDiM (Layered Diagnosis for Multi-Agent Code Migration), a multi-agent framework that preserves the training computation order of deep learning programs. We propose Layered Diagnosis, inspecting the translated candidate stage by stage, e.g., forward computation, gradient computation, and parameter update, in the order of how training actually executes. The observed discrepancy during inspection is handed to a separate Repair Agent and saved to local repair history for future use in later rounds. For repository-scale migration, we propose repository context management that first organizes code files into a dependency graph and repairs them in topological order to avoid redundant inspection and improve effectiveness. An Orchestrator schedules overall process and returns verification results to guide further repair.
 
-We introduce LaDiM (Layered Diagnosis for Multi-Agent Code Migration), which uses training behavior to guide diagnosis and repair of an initial translation. Its Verifier Agent uses Layered Diagnosis to guide code inspections and tests that locate differences between source and target computations. For example, matching forward values with missing gradients directs attention to parameter registration and the differentiation path. Through independent evidence handoff, the Verifier Agent gives its code observations, measurements, and hypotheses to a Repair Agent in a separate conversation. The Orchestrator schedules their work and returns verification results after each submission. The Repair Agent retains earlier attempts and feedback as repair history. It relates each correction to its measured effects and uses unresolved discrepancies to guide the next attempt.
-
-Repository migration must preserve the behavior of shared code when it is called from different scripts and notebooks. A change that corrects one caller can alter the behavior of another, and investigation may need evidence collected earlier in a different file. LaDiM's repository context management combines two modules. Repository Structural Analysis identifies files and their interfaces. Repair Dependency Graph Planning groups related files for repair and tracks dependencies between these groups. Notebook tools edit code cells, and context reconstruction restores relevant code and findings as the agents move across files. Each observation is associated with the code version that produced it. Changes to shared code invalidate affected checks and prompt the agent to verify dependent callers again.
-
-The agent comparisons start from the same initial translations and measure migration acceptance and total token use under a shared evaluation protocol. LaDiM completes all 50 migrations from PyTorch to MindSpore with 57.4\% fewer total tokens than MatchFixAgent. The savings cover programs that require repair and programs that pass evaluation before repair. It also accepts 9/18 migrations from Java/DJL to Python/PyTorch, compared with 8/18 for SWE-agent and MatchFixAgent. All three agents complete migration of the time series repository. LaDiM uses 68.1\% fewer total tokens than SWE-agent and 80.8\% fewer than MatchFixAgent. On the recommendation repository, LaDiM passes the most behavior checks and all ten original tests. The JAX study verifies the same repair procedure on a second target framework. Our contributions are as follows.
+LaDiM achieves comparable or better translation results with substantially lower tokens consumed. As shown in \cref{fig:migration-motivation}, LaDiM completes all 50 migrations from PyTorch to MindSpore with 57.4\% fewer total tokens than MatchFixAgent, and 75.2\% fewer than SWE-agent while obtaining higher accuracy. On the repository-level translation tasks, LaDiM achieves the best translation accuracy while saving more than 80\% tokens used. Our contributions are as follows:
 \par}
 \begin{itemize}
 \item We develop Layered Diagnosis, which uses dependencies among execution, forward values, gradients, and parameter updates to locate the causes of changed training behavior.

@@ -134,7 +134,7 @@ for readability. The clean manuscript is unchanged.
     # Deleted headings can reuse counters in a latexdiff document. Give the
     # review copy unique hyperlink targets for both old and current headings.
     diff = diff.replace(r'\begin{document}',
-                        r'\hypersetup{hypertexnames=false}' + '\n'
+                        r'\ifdefined\hypersetup\hypersetup{hypertexnames=false}\fi' + '\n'
                         + r'\begin{document}' + legend, 1)
     (OUTPUT/'manuscript-diff.tex').write_text(diff)
     build = subprocess.run(['latexmk', '-norc', '-pdf', '-interaction=nonstopmode',
