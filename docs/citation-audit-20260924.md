@@ -61,7 +61,7 @@
 
 ## 仍需用户审阅的论断
 
-1. 引言第 63 行的 “Current translation and repair methods are designed mainly for language-level correctness, **being unable to detect or repair such semantic drift**.” 超出本轮核对的来源。TransCoder、Unit Tests、Compiler Representations、ExeCoder、InterTrans 和 MatchFixAgent 说明它们的目标和检测范围，但没有共同证明“无法检测或修复”；MatchFixAgent 还明确分析外部库 API 并进行测试和修复。当前稿保留用户原句，建议与旧版引言一并审阅后改为可由来源直接支持的正面范围句，例如：`These methods primarily target language-level translation and test-based functional correctness, leaving framework-specific computational drift less directly addressed.`
+1. 引言第 63 行的 “Current translation and repair methods are designed mainly for language-level correctness, **being unable to detect or repair such semantic drift**.” 超出本轮核对的来源。TransCoder、Unit Tests、Compiler Representations、ExeCoder、InterTrans 和 MatchFixAgent 说明它们的目标和检测范围，但没有共同证明“无法检测或修复”；MatchFixAgent 还明确分析外部库 API 并进行测试和修复。当前稿保留用户原句，建议与旧版引言一并审阅后改为可由来源直接支持的正面范围句，例如：`These methods primarily target language level translation and test based functional correctness, leaving framework specific computational drift less directly addressed.`
 2. 相关工作第 121 行把 SWE-agent、Reflexion、Self-Debugging 和 CodeAct 共同概括为“combine repository navigation, editing, and execution”。四者共同支持代码执行/反馈式修正，但只有 SWE-agent 直接支持完整仓库导航。建议改为分层表述：SWE-agent 支持仓库导航、编辑和测试；其他工作支持执行反馈、反思或代码行动。
 3. 第 122 行的“specialized roles”由 ChatDev 和 MetaGPT 直接支持；AutoGen 和 AgentVerse 是更一般的多 agent 协作框架。建议将后一组改写为通用协作证据，保留四个引用但缩小各自 claim。
 4. 第 106、120 行分别可进一步精确为 MindConverter 的“模型定义/权重转换与 API 映射”、APR-PLM 的“有缺陷代码及上下文和测试证据”。这两项属于措辞改进，不是元数据错误。
