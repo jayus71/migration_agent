@@ -34,9 +34,10 @@ a plan first. Every manuscript delivery must update the register's review log.
 
 ## Writing
 
-In prose source, break lines between complete sentences. Keep long sentences
-intact and preserve logical paragraph breaks; do not put a whole paragraph on
-one source line or hard-wrap sentences to a fixed width.
+In prose source, keep each complete paragraph on one source line, with blank
+lines between logical paragraphs. Do not hard-wrap prose at sentence boundaries
+or a fixed width. Preserve structured line breaks in equations, algorithms,
+tables, and code listings.
 
 Keep the official ICLR style files byte-for-byte identical to the package
 linked by the current Author Guidelines. Do not redefine the template's page

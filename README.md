@@ -109,9 +109,8 @@ and links to both PDFs.
 
 The collaboration repository is `../migration_agent_overleaf/`. Its single
 `conference_101719.tex` contains the complete paper, appendices, and table source.
-Break prose source at complete sentence boundaries. Do not manually wrap a long
-sentence at a fixed column, or join an entire paragraph into one source line.
-Blank lines separate changes of topic or reasoning within a section. Preserve
+Keep each prose paragraph on one source line, with blank lines between logical
+paragraphs. Do not manually wrap prose at sentence boundaries or a fixed column. Preserve
 structured line breaks in equations, algorithms, and tables. Figures and
 `ref.bib` remain separate supporting assets.
 

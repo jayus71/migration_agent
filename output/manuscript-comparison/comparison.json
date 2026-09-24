@@ -27,13 +27,13 @@
     }
   },
   "current": {
-    "base_commit": "e9f646b",
-    "pdf_sha256": "05ae3dc1a714a5fc11d938f146cfe000ae9055398250892ef80fe8e7bf496398"
+    "base_commit": "e3d3b90",
+    "pdf_sha256": "6c31d9c98194d1379c41f9cd8560105e11cd20801239f6eb69a5afad78837f74"
   },
-  "updated": "2026-09-24T13:58:14+08:00",
-  "version": "342bddd7928eb99aec47d99a1f6e4660bd6b9ee8a495766f69291fb66a692dfc",
-  "reading_words_added": 8202,
-  "reading_words_removed": 4273,
+  "updated": "2026-09-24T17:49:59+08:00",
+  "version": "36aa7e069221e2c01b839b73ef6944ded2b0364f02b194adec01db8598a3fc3f",
+  "reading_words_added": 8273,
+  "reading_words_removed": 4297,
   "sections": {
     "Title": {
       "reading": [
@@ -1863,26 +1863,28 @@
             "illustrates"
           ],
           "after": [
-            "Current",
+            "These",
+            "methods",
+            "primarily",
+            "target",
+            "language",
+            "level",
             "translation",
             "and",
-            "repair",
-            "methods",
-            "are",
-            "designed",
-            "mainly",
-            "for",
-            "language-level",
+            "test",
+            "based",
+            "functional",
             "correctness,",
-            "being",
-            "unable",
-            "to",
-            "detect",
-            "or",
-            "repair",
-            "such",
-            "semantic",
-            "drift.",
+            "leaving",
+            "framework",
+            "specific",
+            "computational",
+            "drift",
+            "less",
+            "directly",
+            "addressed",
+            "[he-etal-2025-execoder,macedo2024intertrans,ibrahimzada2025matchfixagent]",
+            ".",
             "To",
             "address",
             "this,",
@@ -4240,26 +4242,26 @@
             "illustrates"
           ],
           "after": [
-            "Current",
+            "These",
+            "methods",
+            "primarily",
+            "target",
+            "language",
+            "level",
             "translation",
             "and",
-            "repair",
-            "methods",
-            "are",
-            "designed",
-            "mainly",
-            "for",
-            "language-level",
+            "test",
+            "based",
+            "functional",
             "correctness,",
-            "being",
-            "unable",
-            "to",
-            "detect",
-            "or",
-            "repair",
-            "such",
-            "semantic",
-            "drift.",
+            "leaving",
+            "framework",
+            "specific",
+            "computational",
+            "drift",
+            "less",
+            "directly",
+            "addressed~\\citep{he-etal-2025-execoder,macedo2024intertrans,ibrahimzada2025matchfixagent}.",
             "To",
             "address",
             "this,",
@@ -6063,37 +6065,7 @@
             "translation",
             "paths",
             "[macedo2024intertrans]",
-            ".",
-            "Framework",
-            "migration",
-            "tools",
-            "such",
-            "as",
-            "MindConverter",
-            "supply",
-            "mappings",
-            "between",
-            "programming",
-            "interfaces",
-            "[mindspore2023mindconverter]",
-            ".",
-            "RepoTransAgent",
-            "uses",
-            "repository",
-            "context,",
-            "test",
-            "failures,",
-            "and",
-            "reflection",
-            "to",
-            "refine",
-            "translated",
-            "code",
-            "[guan2025repotransagent]",
-            ".",
-            "LaDiM",
-            "investigates",
-            "how"
+            "."
           ],
           "after": [
             "Related",
@@ -6142,18 +6114,74 @@
             "translation",
             "paths",
             "[macedo2024intertrans]",
-            ".",
+            "."
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
             "Framework",
             "migration",
             "tools",
             "such",
-            "as",
-            "MindConverter",
+            "as"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "MindConverter"
+          ],
+          "after": [
+            "MindConverter"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "supply",
             "mappings",
             "between",
             "programming",
-            "interfaces",
+            "interfaces"
+          ],
+          "after": [
+            "converts",
+            "model",
+            "definitions",
+            "and",
+            "weights",
+            "and",
+            "maps",
+            "supported",
+            "APIs"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "[mindspore2023mindconverter]",
+            ".",
+            "RepoTransAgent",
+            "uses",
+            "repository",
+            "context,",
+            "test",
+            "failures,",
+            "and",
+            "reflection",
+            "to",
+            "refine",
+            "translated",
+            "code",
+            "[guan2025repotransagent]",
+            ".",
+            "LaDiM",
+            "investigates",
+            "how"
+          ],
+          "after": [
             "[mindspore2023mindconverter]",
             ".",
             "RepoTransAgent",
@@ -6662,40 +6690,262 @@
             "guide",
             "patch",
             "generation",
-            "[nguyen2013semfix]",
+            "[nguyen2013semfix]"
+          ],
+          "after": [
+            "Automated",
+            "Program",
+            "Repair",
+            "and",
+            "LLM",
+            "Agents.",
+            "Automated",
+            "program",
+            "repair",
+            "uses",
+            "tests",
+            "or",
+            "semantic",
+            "constraints",
+            "to",
+            "guide",
+            "patch",
+            "generation",
+            "[nguyen2013semfix]"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             ",",
             "and",
-            "pretrained",
+            "pretrained"
+          ],
+          "after": [
+            ".",
+            "Pretrained"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "language",
             "models",
             "generate",
             "patches",
-            "from",
+            "from"
+          ],
+          "after": [
+            "language",
+            "models",
+            "generate",
+            "patches",
+            "from"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "buggy"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "code",
-            "and",
+            "and"
+          ],
+          "after": [
+            "code",
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "failure",
-            "evidence",
+            "evidence"
+          ],
+          "after": [
+            "its",
+            "context,",
+            "with",
+            "tests",
+            "used",
+            "to",
+            "evaluate",
+            "candidate",
+            "patches"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "[xia2023aprplm]",
-            ".",
+            "."
+          ],
+          "after": [
+            "[xia2023aprplm]",
+            "."
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "Interactive",
             "agents",
-            "combine",
+            "combine"
+          ],
+          "after": [
+            "SWE-agent",
+            "supports"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "repository",
             "navigation,",
             "editing,",
-            "and",
-            "execution",
-            "[yang2024sweagent,shinn2023reflexion,chen2023selfdebugging,wang2024codeact]",
+            "and"
+          ],
+          "after": [
+            "repository",
+            "navigation,",
+            "editing,",
+            "and"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "testing",
+            "[yang2024sweagent]",
             ".",
+            "Reflexion",
+            "and",
+            "Self-Debugging",
+            "use"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "execution"
+          ],
+          "after": [
+            "execution"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "[yang2024sweagent,shinn2023reflexion,chen2023selfdebugging,wang2024codeact]"
+          ],
+          "after": [
+            "feedback",
+            "to",
+            "support",
+            "reflection",
+            "and",
+            "self-correction",
+            "[shinn2023reflexion,chen2023selfdebugging]"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "."
+          ],
+          "after": [
+            "."
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "Multi-agent",
             "systems",
-            "distribute",
+            "distribute"
+          ],
+          "after": [
+            "CodeAct",
+            "uses",
+            "executable",
+            "code",
+            "actions",
+            "and",
+            "their",
+            "results",
+            "to",
+            "guide",
+            "subsequent",
+            "actions",
+            "[wang2024codeact]",
+            ".",
+            "ChatDev",
+            "and",
+            "MetaGPT",
+            "assign",
+            "software"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "development",
-            "activities",
-            "among",
+            "activities"
+          ],
+          "after": [
+            "development",
+            "activities"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "among"
+          ],
+          "after": [
+            "to"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "specialized",
-            "roles",
-            "[qian2023chatdev,hong2023metagpt,wu2023autogen,chen2023agentverse]",
+            "roles"
+          ],
+          "after": [
+            "specialized",
+            "roles"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "[qian2023chatdev,hong2023metagpt,wu2023autogen,chen2023agentverse]"
+          ],
+          "after": [
+            "[qian2023chatdev,hong2023metagpt]",
+            ".",
+            "AutoGen",
+            "and",
+            "AgentVerse",
+            "provide",
+            "general",
+            "frameworks",
+            "for",
+            "multi-agent",
+            "collaboration",
+            "[wu2023autogen,chen2023agentverse]"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             ".",
             "MatchFixAgent",
             "takes",
@@ -6734,58 +6984,6 @@
             "The"
           ],
           "after": [
-            "Automated",
-            "Program",
-            "Repair",
-            "and",
-            "LLM",
-            "Agents.",
-            "Automated",
-            "program",
-            "repair",
-            "uses",
-            "tests",
-            "or",
-            "semantic",
-            "constraints",
-            "to",
-            "guide",
-            "patch",
-            "generation",
-            "[nguyen2013semfix]",
-            ",",
-            "and",
-            "pretrained",
-            "language",
-            "models",
-            "generate",
-            "patches",
-            "from",
-            "code",
-            "and",
-            "failure",
-            "evidence",
-            "[xia2023aprplm]",
-            ".",
-            "Interactive",
-            "agents",
-            "combine",
-            "repository",
-            "navigation,",
-            "editing,",
-            "and",
-            "execution",
-            "[yang2024sweagent,shinn2023reflexion,chen2023selfdebugging,wang2024codeact]",
-            ".",
-            "Multi-agent",
-            "systems",
-            "distribute",
-            "development",
-            "activities",
-            "among",
-            "specialized",
-            "roles",
-            "[qian2023chatdev,hong2023metagpt,wu2023autogen,chen2023agentverse]",
             ".",
             "MatchFixAgent",
             "takes",
@@ -7003,33 +7201,7 @@
             "explores",
             "intermediate",
             "translation",
-            "paths~\\citep{macedo2024intertrans}.",
-            "Framework",
-            "migration",
-            "tools",
-            "such",
-            "as",
-            "MindConverter",
-            "supply",
-            "mappings",
-            "between",
-            "programming",
-            "interfaces~\\citep{mindspore2023mindconverter}.",
-            "RepoTransAgent",
-            "uses",
-            "repository",
-            "context,",
-            "test",
-            "failures,",
-            "and",
-            "reflection",
-            "to",
-            "refine",
-            "translated",
-            "code~\\citep{guan2025repotransagent}.",
-            "LaDiM",
-            "investigates",
-            "how"
+            "paths~\\citep{macedo2024intertrans}."
           ],
           "after": [
             "\\section{Related",
@@ -7072,18 +7244,70 @@
             "explores",
             "intermediate",
             "translation",
-            "paths~\\citep{macedo2024intertrans}.",
+            "paths~\\citep{macedo2024intertrans}."
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
             "Framework",
             "migration",
             "tools",
             "such",
-            "as",
-            "MindConverter",
+            "as"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "MindConverter"
+          ],
+          "after": [
+            "MindConverter"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "supply",
             "mappings",
             "between",
             "programming",
-            "interfaces~\\citep{mindspore2023mindconverter}.",
+            "interfaces~\\citep{mindspore2023mindconverter}."
+          ],
+          "after": [
+            "converts",
+            "model",
+            "definitions",
+            "and",
+            "weights",
+            "and",
+            "maps",
+            "supported",
+            "APIs~\\citep{mindspore2023mindconverter}."
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "RepoTransAgent",
+            "uses",
+            "repository",
+            "context,",
+            "test",
+            "failures,",
+            "and",
+            "reflection",
+            "to",
+            "refine",
+            "translated",
+            "code~\\citep{guan2025repotransagent}.",
+            "LaDiM",
+            "investigates",
+            "how"
+          ],
+          "after": [
             "RepoTransAgent",
             "uses",
             "repository",
@@ -7554,35 +7778,203 @@
             "constraints",
             "to",
             "guide",
-            "patch",
+            "patch"
+          ],
+          "after": [
+            "\\paragraph{Automated",
+            "Program",
+            "Repair",
+            "and",
+            "LLM",
+            "Agents.}",
+            "Automated",
+            "program",
+            "repair",
+            "uses",
+            "tests",
+            "or",
+            "semantic",
+            "constraints",
+            "to",
+            "guide",
+            "patch"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "generation~\\citep{nguyen2013semfix},",
             "and",
-            "pretrained",
+            "pretrained"
+          ],
+          "after": [
+            "generation~\\citep{nguyen2013semfix}.",
+            "Pretrained"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "language",
             "models",
             "generate",
             "patches",
-            "from",
+            "from"
+          ],
+          "after": [
+            "language",
+            "models",
+            "generate",
+            "patches",
+            "from"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "buggy"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "code",
-            "and",
+            "and"
+          ],
+          "after": [
+            "code",
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "failure",
             "evidence~\\citep{xia2023aprplm}.",
             "Interactive",
             "agents",
-            "combine",
+            "combine"
+          ],
+          "after": [
+            "its",
+            "context,",
+            "with",
+            "tests",
+            "used",
+            "to",
+            "evaluate",
+            "candidate",
+            "patches~\\citep{xia2023aprplm}.",
+            "SWE-agent",
+            "supports"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "repository",
             "navigation,",
             "editing,",
-            "and",
+            "and"
+          ],
+          "after": [
+            "repository",
+            "navigation,",
+            "editing,",
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "execution~\\citep{yang2024sweagent,shinn2023reflexion,chen2023selfdebugging,wang2024codeact}.",
             "Multi-agent",
             "systems",
-            "distribute",
+            "distribute"
+          ],
+          "after": [
+            "testing~\\citep{yang2024sweagent}.",
+            "Reflexion",
+            "and",
+            "Self-Debugging",
+            "use",
+            "execution",
+            "feedback",
+            "to",
+            "support",
+            "reflection",
+            "and",
+            "self-correction~\\citep{shinn2023reflexion,chen2023selfdebugging}.",
+            "CodeAct",
+            "uses",
+            "executable",
+            "code",
+            "actions",
+            "and",
+            "their",
+            "results",
+            "to",
+            "guide",
+            "subsequent",
+            "actions~\\citep{wang2024codeact}.",
+            "ChatDev",
+            "and",
+            "MetaGPT",
+            "assign",
+            "software"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "development",
-            "activities",
-            "among",
-            "specialized",
-            "roles~\\citep{qian2023chatdev,hong2023metagpt,wu2023autogen,chen2023agentverse}.",
+            "activities"
+          ],
+          "after": [
+            "development",
+            "activities"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "among"
+          ],
+          "after": [
+            "to"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "specialized"
+          ],
+          "after": [
+            "specialized"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "roles~\\citep{qian2023chatdev,hong2023metagpt,wu2023autogen,chen2023agentverse}."
+          ],
+          "after": [
+            "roles~\\citep{qian2023chatdev,hong2023metagpt}.",
+            "AutoGen",
+            "and",
+            "AgentVerse",
+            "provide",
+            "general",
+            "frameworks",
+            "for",
+            "multi-agent",
+            "collaboration~\\citep{wu2023autogen,chen2023agentverse}."
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "MatchFixAgent",
             "takes",
             "a",
@@ -7618,51 +8010,6 @@
             "The"
           ],
           "after": [
-            "\\paragraph{Automated",
-            "Program",
-            "Repair",
-            "and",
-            "LLM",
-            "Agents.}",
-            "Automated",
-            "program",
-            "repair",
-            "uses",
-            "tests",
-            "or",
-            "semantic",
-            "constraints",
-            "to",
-            "guide",
-            "patch",
-            "generation~\\citep{nguyen2013semfix},",
-            "and",
-            "pretrained",
-            "language",
-            "models",
-            "generate",
-            "patches",
-            "from",
-            "code",
-            "and",
-            "failure",
-            "evidence~\\citep{xia2023aprplm}.",
-            "Interactive",
-            "agents",
-            "combine",
-            "repository",
-            "navigation,",
-            "editing,",
-            "and",
-            "execution~\\citep{yang2024sweagent,shinn2023reflexion,chen2023selfdebugging,wang2024codeact}.",
-            "Multi-agent",
-            "systems",
-            "distribute",
-            "development",
-            "activities",
-            "among",
-            "specialized",
-            "roles~\\citep{qian2023chatdev,hong2023metagpt,wu2023autogen,chen2023agentverse}.",
             "MatchFixAgent",
             "takes",
             "a",

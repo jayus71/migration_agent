@@ -49,92 +49,40 @@ Migrating code across deep learning frameworks enables the reuse of training pro
 \caption{Tokens used on 50 PyTorch to MindSpore migrations tasks.}
 \label{fig:migration-motivation}
 \end{wrapfigure}
-Code development environments and languages have grown increasingly diverse.
-Focusing on deep learning, popular frameworks such as PyTorch, TensorFlow, and MindSpore provide programming interfaces, execution semantics, and hardware backends~\citep{paszke2019pytorch,abadi2016tensorflow,mindspore2020whitepaper}.
-To enable easy adaptation of deep models and training pipelines on new software and hardware environments, migrating existing code across languages and frameworks can reduce development cost~\citep{guan2025repotransagent}.
-This need has driven the development of numerous code translation methods.
-With the help of large language models (LLMs), these methods now achieve strong translation results at the level of syntax and program semantics~\citep{he-etal-2025-execoder,macedo2024intertrans,roziere2021unittests}.
+Code development environments and languages have grown increasingly diverse. Focusing on deep learning, popular frameworks such as PyTorch, TensorFlow, and MindSpore provide programming interfaces, execution semantics, and hardware backends~\citep{paszke2019pytorch,abadi2016tensorflow,mindspore2020whitepaper}. To enable easy adaptation of deep models and training pipelines on new software and hardware environments, migrating existing code across languages and frameworks can reduce development cost~\citep{guan2025repotransagent}. This need has driven the development of numerous code translation methods. With the help of large language models (LLMs), these methods now achieve strong translation results at the level of syntax and program semantics~\citep{he-etal-2025-execoder,macedo2024intertrans,roziere2021unittests}.
 
-However, success at translating code does not guarantee equal translation performance across deep learning frameworks, for example, migrating from PyTorch to MindSpore.
-Different frameworks use different interfaces and execution mechanisms for forward computation, gradient computation, and parameter updates~\citep{paszke2019pytorch,mindspore2024gradient}.
-Further differences in operator semantics, automatic differentiation, and optimizer interfaces can change model behavior after migration~\citep{paszke2019pytorch,mindspore2020whitepaper}.
-As a result, a translated program can run without raising error while still producing incorrect results due to silent failures in computing losses, gradients or parameter updates.
-We use semantic drift to describe the changes in such training behavior introduced by migration.
-Current translation and repair methods are designed mainly for language-level correctness, being unable to detect or repair such semantic drift.
+However, success at translating code does not guarantee equal translation performance across deep learning frameworks, for example, migrating from PyTorch to MindSpore. Different frameworks use different interfaces and execution mechanisms for forward computation, gradient computation, and parameter updates~\citep{paszke2019pytorch,mindspore2024gradient}. Further differences in operator semantics, automatic differentiation, and optimizer interfaces can change model behavior after migration~\citep{paszke2019pytorch,mindspore2020whitepaper}. As a result, a translated program can run without raising error while still producing incorrect results due to silent failures in computing losses, gradients or parameter updates. We use semantic drift to describe the changes in such training behavior introduced by migration. These methods primarily target language level translation and test based functional correctness, leaving framework specific computational drift less directly addressed~\citep{he-etal-2025-execoder,macedo2024intertrans,ibrahimzada2025matchfixagent}.
 
 To address this, we aim to locate and repair the true cause of semantic drift after initial translation. We propose LaDiM (Layered Diagnosis for Multi-Agent Code Migration), a multi-agent framework that preserves the training computation order of a deep learning program and uses the dependencies among these stages to guide diagnosis and repair of an initial translation.
 
-We introduce LaDiM (Layered Diagnosis for Multi-Agent Code Migration), which uses training behavior to guide diagnosis and repair of an initial translation.
-Its Verifier Agent uses Layered Diagnosis to guide code inspections and tests that locate differences between source and target computations.
-For example, matching forward values with missing gradients directs attention to parameter registration and the differentiation path.
-Through independent evidence handoff, the Verifier Agent gives its code observations, measurements, and hypotheses to a Repair Agent in a separate conversation.
-The Orchestrator schedules their work and returns verification results after each submission.
-The Repair Agent retains earlier attempts and feedback as repair history.
-It relates each correction to its measured effects and uses unresolved discrepancies to guide the next attempt.
+We introduce LaDiM (Layered Diagnosis for Multi-Agent Code Migration), which uses training behavior to guide diagnosis and repair of an initial translation. Its Verifier Agent uses Layered Diagnosis to guide code inspections and tests that locate differences between source and target computations. For example, matching forward values with missing gradients directs attention to parameter registration and the differentiation path. Through independent evidence handoff, the Verifier Agent gives its code observations, measurements, and hypotheses to a Repair Agent in a separate conversation. The Orchestrator schedules their work and returns verification results after each submission. The Repair Agent retains earlier attempts and feedback as repair history. It relates each correction to its measured effects and uses unresolved discrepancies to guide the next attempt.
 
-Repository migration must preserve the behavior of shared code when it is called from different scripts and notebooks.
-A change that corrects one caller can alter the behavior of another, and investigation may need evidence collected earlier in a different file.
-LaDiM's repository context management combines two modules.
-Repository Structural Analysis identifies files and their interfaces.
-Repair Dependency Graph Planning groups related files for repair and tracks dependencies between these groups.
-Notebook tools edit code cells, and context reconstruction restores relevant code and findings as the agents move across files.
-Each observation is associated with the code version that produced it.
-Changes to shared code invalidate affected checks and prompt the agent to verify dependent callers again.
+Repository migration must preserve the behavior of shared code when it is called from different scripts and notebooks. A change that corrects one caller can alter the behavior of another, and investigation may need evidence collected earlier in a different file. LaDiM's repository context management combines two modules. Repository Structural Analysis identifies files and their interfaces. Repair Dependency Graph Planning groups related files for repair and tracks dependencies between these groups. Notebook tools edit code cells, and context reconstruction restores relevant code and findings as the agents move across files. Each observation is associated with the code version that produced it. Changes to shared code invalidate affected checks and prompt the agent to verify dependent callers again.
 
-The agent comparisons start from the same initial translations and measure migration acceptance and total token use under a shared evaluation protocol.
-LaDiM completes all 50 migrations from PyTorch to MindSpore with 57.4\% fewer total tokens than MatchFixAgent.
-The savings cover programs that require repair and programs that pass evaluation before repair.
-It also accepts 9/18 migrations from Java/DJL to Python/PyTorch, compared with 8/18 for SWE-agent and MatchFixAgent.
-All three agents complete migration of the time series repository.
-LaDiM uses 68.1\% fewer total tokens than SWE-agent and 80.8\% fewer than MatchFixAgent.
-On the recommendation repository, LaDiM passes the most behavior checks and all ten original tests.
-The JAX study verifies the same repair procedure on a second target framework.
-Our contributions are as follows.
+The agent comparisons start from the same initial translations and measure migration acceptance and total token use under a shared evaluation protocol. LaDiM completes all 50 migrations from PyTorch to MindSpore with 57.4\% fewer total tokens than MatchFixAgent. The savings cover programs that require repair and programs that pass evaluation before repair. It also accepts 9/18 migrations from Java/DJL to Python/PyTorch, compared with 8/18 for SWE-agent and MatchFixAgent. All three agents complete migration of the time series repository. LaDiM uses 68.1\% fewer total tokens than SWE-agent and 80.8\% fewer than MatchFixAgent. On the recommendation repository, LaDiM passes the most behavior checks and all ten original tests. The JAX study verifies the same repair procedure on a second target framework. Our contributions are as follows.
 \par}
 \begin{itemize}
 \item We develop Layered Diagnosis, which uses dependencies among execution, forward values, gradients, and parameter updates to locate the causes of changed training behavior.
-\item We design an agent framework with independent evidence handoff and repair history to connect investigation, edits, and verification.
-Repository context management coordinates this process across dependent files through Repository Structural Analysis and Repair Dependency Graph Planning.
+\item We design an agent framework with independent evidence handoff and repair history to connect investigation, edits, and verification. Repository context management coordinates this process across dependent files through Repository Structural Analysis and Repair Dependency Graph Planning.
 \item We demonstrate LaDiM's effectiveness and token efficiency across framework, language, and repository migration, and identify the contributions of training signals and agent components through ablation studies.
 \end{itemize}
 
 \section{Related Work}
 
 \paragraph{Code Translation and Framework Migration.}
-Neural translation methods learn code mappings from multilingual corpora and use automated tests or compiler representations to improve translations~\citep{roziere2020transcoder,roziere2021unittests,szafraniec2023compiler}.
-ExeCoder encodes functional semantics, syntax structure, and variable dependencies~\citep{he-etal-2025-execoder}, while InterTrans explores intermediate translation paths~\citep{macedo2024intertrans}.
-Framework migration tools such as MindConverter supply mappings between programming interfaces~\citep{mindspore2023mindconverter}.
-RepoTransAgent uses repository context, test failures, and reflection to refine translated code~\citep{guan2025repotransagent}.
-LaDiM investigates how translated training code computes forward values and gradients and updates model parameters.
-At repository scale, it coordinates changes to shared interfaces and checks their effects on the repository entry points that use them.
+Neural translation methods learn code mappings from multilingual corpora and use automated tests or compiler representations to improve translations~\citep{roziere2020transcoder,roziere2021unittests,szafraniec2023compiler}. ExeCoder encodes functional semantics, syntax structure, and variable dependencies~\citep{he-etal-2025-execoder}, while InterTrans explores intermediate translation paths~\citep{macedo2024intertrans}. MindConverter converts model definitions and weights and maps supported APIs~\citep{mindspore2023mindconverter}. RepoTransAgent uses repository context, test failures, and reflection to refine translated code~\citep{guan2025repotransagent}. LaDiM investigates how translated training code computes forward values and gradients and updates model parameters. At repository scale, it coordinates changes to shared interfaces and checks their effects on the repository entry points that use them.
 
 \paragraph{Differential Testing and Deep Learning Verification.}
-Differential testing exposes compiler and program faults through disagreement between related executions~\citep{yang2011csmith,le2014emi}.
-DeepXplore detects behavioral differences between deep learning systems~\citep{pei2017deepxplore}, while DeepGauge measures test coverage in these systems~\citep{ma2018deepgauge}.
-More directly related to framework migration, TensorScope tests corresponding APIs across frameworks to identify inconsistent behavior~\citep{deng2023tensorscope}.
-NablaFuzz compares execution scenarios to test automatic differentiation, including first-order and higher-order gradients~\citep{yang2023nablafuzz}.
-LaDiM uses training differences as evidence for code repair.
-Its Verifier Agent inspects code to explain discrepancies in forward values, gradients, and parameter updates, then passes the supporting observations and hypotheses to the Repair Agent for testing during repair.
+Differential testing exposes compiler and program faults through disagreement between related executions~\citep{yang2011csmith,le2014emi}. DeepXplore detects behavioral differences between deep learning systems~\citep{pei2017deepxplore}, while DeepGauge measures test coverage in these systems~\citep{ma2018deepgauge}. More directly related to framework migration, TensorScope tests corresponding APIs across frameworks to identify inconsistent behavior~\citep{deng2023tensorscope}. NablaFuzz compares execution scenarios to test automatic differentiation, including first-order and higher-order gradients~\citep{yang2023nablafuzz}. LaDiM uses training differences as evidence for code repair. Its Verifier Agent inspects code to explain discrepancies in forward values, gradients, and parameter updates, then passes the supporting observations and hypotheses to the Repair Agent for testing during repair.
 
 \paragraph{Automated Program Repair and LLM Agents.}
-Automated program repair uses tests or semantic constraints to guide patch generation~\citep{nguyen2013semfix}, and pretrained language models generate patches from code and failure evidence~\citep{xia2023aprplm}.
-Interactive agents combine repository navigation, editing, and execution~\citep{yang2024sweagent,shinn2023reflexion,chen2023selfdebugging,wang2024codeact}.
-Multi-agent systems distribute development activities among specialized roles~\citep{qian2023chatdev,hong2023metagpt,wu2023autogen,chen2023agentverse}.
-MatchFixAgent takes a source program and an existing translation and uses several semantic analyses to guide test generation and repair~\citep{ibrahimzada2025matchfixagent}.
-LaDiM includes initial translation and organizes diagnosis around dependencies in training computations.
-The Verifier Agent passes its findings and supporting observations to a separate Repair Agent, which uses measurements from each submitted revision to revise its hypotheses.
+Automated program repair uses tests or semantic constraints to guide patch generation~\citep{nguyen2013semfix}. Pretrained language models generate patches from buggy code and its context, with tests used to evaluate candidate patches~\citep{xia2023aprplm}. SWE-agent supports repository navigation, editing, and testing~\citep{yang2024sweagent}. Reflexion and Self-Debugging use execution feedback to support reflection and self-correction~\citep{shinn2023reflexion,chen2023selfdebugging}. CodeAct uses executable code actions and their results to guide subsequent actions~\citep{wang2024codeact}. ChatDev and MetaGPT assign software development activities to specialized roles~\citep{qian2023chatdev,hong2023metagpt}. AutoGen and AgentVerse provide general frameworks for multi-agent collaboration~\citep{wu2023autogen,chen2023agentverse}. MatchFixAgent takes a source program and an existing translation and uses several semantic analyses to guide test generation and repair~\citep{ibrahimzada2025matchfixagent}. LaDiM includes initial translation and organizes diagnosis around dependencies in training computations. The Verifier Agent passes its findings and supporting observations to a separate Repair Agent, which uses measurements from each submitted revision to revise its hypotheses.
 \input{sections/methods}
 \input{sections/experiments}
 
 \Needspace{6\baselineskip}
 \section{Conclusion}
-We introduced LaDiM, a framework with multiple agents for preserving training behavior during code migration.
-Layered Diagnosis uses dependencies among execution, forward values, gradients, and parameter updates to guide investigation.
-The Repair Agent uses diagnostic evidence from the independent handoff and previous verification results from the repair history to guide corrective edits.
-Repository context management carries this process across shared implementations and multiple entry points.
-LaDiM completes all 50 MindSpore migrations with 57.4\% fewer total tokens than MatchFixAgent.
-In the translation error study, LaDiM repairs errors in the initial translations that all three repair baselines leave unresolved.
-Results across framework, language, and repository migration establish the effectiveness of this approach in preserving training behavior.
+We introduced LaDiM, a framework with multiple agents for preserving training behavior during code migration. Layered Diagnosis uses dependencies among execution, forward values, gradients, and parameter updates to guide investigation. The Repair Agent uses diagnostic evidence from the independent handoff and previous verification results from the repair history to guide corrective edits. Repository context management carries this process across shared implementations and multiple entry points. LaDiM completes all 50 MindSpore migrations with 57.4\% fewer total tokens than MatchFixAgent. In the translation error study, LaDiM repairs errors in the initial translations that all three repair baselines leave unresolved. Results across framework, language, and repository migration establish the effectiveness of this approach in preserving training behavior.
 % Required by ICLR 2027; left blank at the author's request.
 
 \subsection*{AI use statement}

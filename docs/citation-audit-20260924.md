@@ -4,6 +4,8 @@
 
 本审查对应意见表 A22/A23 和用户 2026-09-24 的引用核查要求。审查对象是当前稿中使用的 37 个唯一 BibTeX 键，覆盖主文引言、相关工作、实验设置和补充实验。核对包括论文或项目的题名、作者、年份、出版信息（在公开记录可得时）以及正文论断和引用位置的对应关系。
 
+下表和原行号保留初审时的论断与判断。用户随后在S42批准文末四项建议；实施情况见末节。源码已改为每段一行，原行号不再作为当前稿的定位依据。
+
 本轮打开了主要论文的正式页面、作者或会议页面、论文 PDF、官方项目文档和代码仓库，并对部分受限页面使用了同一论文的 arXiv 或作者存档。审查没有声称逐页阅读所有引用论文；无法直接取得正式全文或固定版本的条目在表中标明证据边界。数据集中的任务数量和冻结实验分母属于本地 provenance，本报告不以在线项目 README 替代这些记录。
 
 ## 已核对并已落实的元数据
@@ -59,7 +61,7 @@
 | `jingles2026timeseries` | 时间序列公开仓库 | [项目仓库](https://github.com/jinglescode/time-series-forecasting-pytorch)包含 PyTorch LSTM 时间序列示例；任务计数和选取范围以本地 provenance 为准。 |
 | `chak2026twotower` | 推荐系统 two-tower 仓库 | [项目仓库](https://github.com/gauravchak/two_tower_models)支持 two-tower 检索与排序示例；当前实验句可保留，具体两项任务数量不由 README 单独证明。 |
 
-## 仍需用户审阅的论断
+## 初审提出的论断修改（S42已批准并落实）
 
 1. 引言第 63 行的 “Current translation and repair methods are designed mainly for language-level correctness, **being unable to detect or repair such semantic drift**.” 超出本轮核对的来源。TransCoder、Unit Tests、Compiler Representations、ExeCoder、InterTrans 和 MatchFixAgent 说明它们的目标和检测范围，但没有共同证明“无法检测或修复”；MatchFixAgent 还明确分析外部库 API 并进行测试和修复。当前稿保留用户原句，建议与旧版引言一并审阅后改为可由来源直接支持的正面范围句，例如：`These methods primarily target language level translation and test based functional correctness, leaving framework specific computational drift less directly addressed.`
 2. 相关工作第 121 行把 SWE-agent、Reflexion、Self-Debugging 和 CodeAct 共同概括为“combine repository navigation, editing, and execution”。四者共同支持代码执行/反馈式修正，但只有 SWE-agent 直接支持完整仓库导航。建议改为分层表述：SWE-agent 支持仓库导航、编辑和测试；其他工作支持执行反馈、反思或代码行动。
@@ -70,6 +72,19 @@
 
 本轮发现 `yang2025multiagentcollaboration`、`gray2025workflows`、`erer2025fullyautomated` 和 `lattner2021mlir` 在当前稿中没有被引用；它们不属于本轮 37 个已使用键的审查范围，也没有因未使用而从 BibTeX 删除。
 
-## 结论
+## 初审结论
 
 引言硬编码作者年份和空方括号已全部改为 `\citep`，框架差异句已改成来源能够支持的“接口与执行机制差异”，并补入 PyTorch 与 MindSpore 的针对性引用。当前需要用户决定的是第 63 行的过强“unable”断言、相关工作第 121/122 行的能力范围，以及是否采用旧版引言中更充实的介绍段落；这些建议不应在用户确认前写成已批准正文修改。
+
+## S42批准后的实施
+
+2026-09-24，用户选中四项建议并要求“按这个改”，同时要求论文普通正文每段一行。修改以`e3d3b90`为检查点，保留用户先前对建议句中连字符的删改。
+
+| 初审项 | 已采用的正文变化 |
+|---|---|
+| 1：引言能力范围 | 将“unable to detect or repair”改为“primarily target language level translation and test based functional correctness, leaving framework specific computational drift less directly addressed”，引用ExeCoder、InterTrans和MatchFixAgent。 |
+| 2：交互式方法 | SWE-agent单独对应仓库导航、编辑和测试；Reflexion与Self-Debugging对应执行反馈、反思和自我修正；CodeAct对应可执行代码行动及后续反馈。 |
+| 3：多代理协作 | ChatDev与MetaGPT对应软件开发角色分工；AutoGen与AgentVerse对应通用多代理协作，各自就近引用。 |
+| 4：两处具体能力 | MindConverter改为模型定义、权重转换和受支持API映射；预训练语言模型修复改为从有缺陷代码及上下文生成补丁、用测试评价候选补丁。 |
+
+这些修改使用初审记录的来源，没有重新检索全部37项文献。CodeTransEngine正式出版信息和MSAdapter精确标签日期的核查缺口继续保留。旧版引言段落尚未恢复；本次批准针对所选四项建议。
