@@ -9,7 +9,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
-from matplotlib.patches import Rectangle
+from matplotlib.patches import Rectangle, FancyArrowPatch
 from matplotlib.text import Text
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -81,22 +81,36 @@ def diagnosis_panel(ax, summary):
     assert probe['call'] == 17 and probe['result']['returncode'] == 0
     assert "dispatch_tanh: ['sum_abs=0.000000e+00']" in probe['result']['stdout']
     label(ax, 8, 7, '(a) Diagnosis and repair', 9.5, fontweight='bold')
-    panel_box(ax, 8, 27, 194, 46, '#f5f7f8')
-    label(ax, 15, 33, 'Loss matches; gradients differ', 8.8, fontweight='bold')
-    label(ax, 15, 46, 'Before Tanh: 0   |   After Tanh: matched', 8.5)
-    label(ax, 15, 59, 'Tanh probe: dispatched 0 / native 4.894', 8.5)
+    panel_box(ax, 8, 27, 194, 73, '#f7f9fa')
+    label(ax, 105, 32, 'Forward: loss matches source', 8.8, ha='center')
+    for x, name in [(16, 'Linear'), (83, 'Tanh'), (150, 'Linear')]:
+        suspect = name == 'Tanh'
+        panel_box(ax, x, 49, 44, 19, '#fff0e6' if suspect else '#ffffff',
+                  '#c25a18' if suspect else RULE)
+        label(ax, x + 22, 53, name, 9, ha='center', fontweight='bold' if suspect else 'normal',
+              color='#a34511' if suspect else INK)
+    for start, end in [(61, 81), (128, 148)]:
+        ax.add_patch(FancyArrowPatch((start, 58.5), (end, 58.5), arrowstyle='-|>',
+                                     mutation_scale=7, color=MUTED, linewidth=.8))
+    label(ax, 38, 73, 'Zero gradients', 8.3, ha='center', color='#a34511')
+    label(ax, 172, 73, 'Gradients match', 8.3, ha='center', color=COLORS['LaDiM'])
+    ax.add_patch(FancyArrowPatch((105, 83), (105, 69), arrowstyle='-|>',
+                                 mutation_scale=7, color='#a34511', linewidth=.8))
+    label(ax, 105, 87, 'Probe confirms gradient break at Tanh', 8.3, ha='center')
 
 
 def code_panel(ax, additions):
-    label(ax, 8, 84, 'SWE-agent / MatchFixAgent', 8.5, fontweight='bold')
-    label(ax, 202, 84, 'No edit', 8.5, ha='right', color='#a34511')
-    panel_box(ax, 8, 101, 194, 67)
-    label(ax, 15, 106, 'LaDiM · added Tanh mapping', 8.8, fontweight='bold', color=COLORS['LaDiM'])
-    ax.add_patch(Rectangle((11, 123), 188, 42, facecolor='#dcefe2', edgecolor='none', zorder=1))
-    ax.add_patch(Rectangle((11, 123), 1.8, 42, facecolor=COLORS['LaDiM'], edgecolor='none', zorder=2))
-    for i, line in enumerate(additions):
-        label(ax, 16, 126 + 9.5 * i, '+', 8.5, color=COLORS['LaDiM'], zorder=3)
-        label(ax, 25, 126 + 9.5 * i, line, 8.5, color='#16432b', zorder=3)
+    label(ax, 8, 108, 'SWE-agent / MatchFixAgent', 8.5, fontweight='bold')
+    label(ax, 202, 108, 'No edit', 8.5, ha='right', color='#a34511')
+    panel_box(ax, 8, 123, 194, 45)
+    label(ax, 15, 127, 'LaDiM · added Tanh mapping', 8.8, fontweight='bold', color=COLORS['LaDiM'])
+    ax.add_patch(Rectangle((11, 138), 188, 27, facecolor='#dcefe2', edgecolor='none', zorder=1))
+    ax.add_patch(Rectangle((11, 138), 1.8, 27, facecolor=COLORS['LaDiM'], edgecolor='none', zorder=2))
+    # Display the two-line implementation excerpt. The complete, verified patch
+    # also registers torch.tanh and torch.nn.functional.tanh; see the caption.
+    for i, line in enumerate(additions[2:]):
+        label(ax, 16, 141 + 11 * i, '+', 9, color=COLORS['LaDiM'], zorder=3)
+        label(ax, 25, 141 + 11 * i, line, 9, color='#16432b', zorder=3)
 
 
 def trajectory_panel(ax, series):

@@ -19,35 +19,79 @@
       "inside_canvas": true
     },
     {
-      "text": "Loss matches; gradients differ",
+      "text": "Forward: loss matches source",
       "font_points": 8.8,
       "bbox_pixels": [
-        37.5,
-        339.50000000000006,
-        321.5,
-        358.50000000000006
+        131.875,
+        341.00000000000006,
+        393.125,
+        361.00000000000006
       ],
       "inside_canvas": true
     },
     {
-      "text": "Before Tanh: 0   |   After Tanh: matched",
-      "font_points": 8.5,
+      "text": "Linear",
+      "font_points": 9.0,
       "bbox_pixels": [
-        37.5,
-        306.00000000000006,
-        375.25,
-        326.00000000000006
+        65.625,
+        286.5,
+        124.375,
+        308.5
       ],
       "inside_canvas": true
     },
     {
-      "text": "Tanh probe: dispatched 0 / native 4.894",
-      "font_points": 8.5,
+      "text": "Tanh",
+      "font_points": 9.0,
       "bbox_pixels": [
-        37.5,
-        273.5,
-        373.625,
-        293.5
+        237.9375,
+        287.5,
+        287.0625,
+        308.5
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Linear",
+      "font_points": 9.0,
+      "bbox_pixels": [
+        400.625,
+        286.5,
+        459.375,
+        308.5
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Zero gradients",
+      "font_points": 8.3,
+      "bbox_pixels": [
+        34.625,
+        238.5,
+        155.375,
+        258.5
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Gradients match",
+      "font_points": 8.3,
+      "bbox_pixels": [
+        361.625,
+        238.5,
+        498.375,
+        258.5
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Probe confirms gradient break at Tanh",
+      "font_points": 8.3,
+      "bbox_pixels": [
+        103.0,
+        203.50000000000003,
+        422.0,
+        223.50000000000003
       ],
       "inside_canvas": true
     },
@@ -56,9 +100,9 @@
       "font_points": 8.5,
       "bbox_pixels": [
         20.0,
-        211.53125000000003,
+        151.53125,
         283.125,
-        231.00000000000003
+        171.0
       ],
       "inside_canvas": true
     },
@@ -67,9 +111,9 @@
       "font_points": 8.5,
       "bbox_pixels": [
         441.75,
-        211.00000000000003,
+        151.0,
         505.0,
-        231.00000000000003
+        171.0
       ],
       "inside_canvas": true
     },
@@ -78,97 +122,53 @@
       "font_points": 8.8,
       "bbox_pixels": [
         37.5,
-        157.0,
+        104.5,
         323.875,
-        176.0
+        123.5
       ],
       "inside_canvas": true
     },
     {
       "text": "+",
-      "font_points": 8.5,
+      "font_points": 9.0,
       "bbox_pixels": [
         40.0,
-        106.0,
-        52.0,
-        126.0
-      ],
-      "inside_canvas": true
-    },
-    {
-      "text": "@register_function(torch.tanh)",
-      "font_points": 8.5,
-      "bbox_pixels": [
-        62.5,
-        105.921875,
-        327.375,
-        126.0
-      ],
-      "inside_canvas": true
-    },
-    {
-      "text": "+",
-      "font_points": 8.5,
-      "bbox_pixels": [
-        40.0,
-        82.25,
-        52.0,
-        102.25
-      ],
-      "inside_canvas": true
-    },
-    {
-      "text": "@register_function(torch.nn.functional.tanh)",
-      "font_points": 8.5,
-      "bbox_pixels": [
-        62.5,
-        82.171875,
-        445.375,
-        102.25
-      ],
-      "inside_canvas": true
-    },
-    {
-      "text": "+",
-      "font_points": 8.5,
-      "bbox_pixels": [
-        40.0,
-        58.5,
-        52.0,
-        78.5
+        66.5,
+        52.625,
+        88.5
       ],
       "inside_canvas": true
     },
     {
       "text": "def functional_tanh(input):",
-      "font_points": 8.5,
+      "font_points": 9.0,
       "bbox_pixels": [
         62.5,
-        58.421875,
-        292.25,
-        78.5
+        66.390625,
+        306.0,
+        88.5
       ],
       "inside_canvas": true
     },
     {
       "text": "+",
-      "font_points": 8.5,
+      "font_points": 9.0,
       "bbox_pixels": [
         40.0,
-        34.75,
-        52.0,
-        54.75
+        39.0,
+        52.625,
+        61.0
       ],
       "inside_canvas": true
     },
     {
       "text": "    return mops.tanh(input)",
-      "font_points": 8.5,
+      "font_points": 9.0,
       "bbox_pixels": [
         62.5,
-        34.671875,
-        286.25,
-        54.75
+        38.890625,
+        299.0,
+        61.0
       ],
       "inside_canvas": true
     },
