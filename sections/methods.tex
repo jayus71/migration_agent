@@ -4,7 +4,7 @@ LaDiM uses dependencies between training computations to guide diagnosis and rep
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/hierarchical_feedback_architecture.pdf}
-\caption{Overview of LaDiM. (a) The Translator Agent produces a candidate, and the Orchestrator executes it, returns measurements, and coordinates the agents. The Verifier Agent applies Layered Diagnosis, comparing source and target in execution, forward values, gradients, and parameter updates. It focuses on the first stage that diverges (gradients in this example), and later stages are marked as not reached. Its code observations, test results, locations, and hypotheses are handed to the Repair Agent, which patches the candidate and submits it for validation. (b) For repositories, repository context management analyzes the repository structure, plans repairs over a dependency graph of work units, and reconstructs the context from an evidence store. $A_T$, $A_V$, and $A_R$ are the role instructions of the three agents. The code edit and signal traces are illustrative.}
+\caption{Overview of LaDiM. (a) The Orchestrator coordinates translation, diagnosis, repair, and validation. The Verifier investigates the first divergent stage and hands evidence to the Repair Agent. (b) Repository context management combines structural analysis, dependency planning, and evidence retrieval with context reconstruction. $A_T$, $A_V$, and $A_R$ denote agent instructions. Code and traces are illustrative. Java/DJL experiments migrate in the reverse direction, to Python/PyTorch.}
 \label{fig:architecture}
 \end{figure}
 

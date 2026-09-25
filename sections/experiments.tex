@@ -30,7 +30,7 @@ MatchFixAgent passes 0/10 original recommendation tests because an unmigrated Py
 \begin{figure}[!t]
 \centering
 \includegraphics[width=0.96\linewidth]{figures/repair_comparison.pdf}
-\caption{Token costs on MindSpore migration. (a) Total tokens, comprising initial translation and subsequent calls, grouped by whether programs pass evaluation before repair. (b) Tokens saved by LaDiM relative to MatchFixAgent on each of the 29 distinct task inputs. Tasks 1–20 pass evaluation before repair and tasks 21–29 require repair; each group is sorted from low to high. Both methods accept 50/50 tasks, while LaDiM uses significantly fewer tokens.}
+\caption{Token costs on MindSpore migration. (a) Total tokens, comprising initial translation and subsequent calls, grouped by whether programs pass evaluation before repair. (b) Tokens saved by LaDiM relative to MatchFixAgent on each of the 29 distinct task inputs. Tasks 1--20 pass evaluation before repair and tasks 21--29 require repair; each group is sorted from low to high. Both methods accept 50/50 tasks, while LaDiM uses significantly fewer tokens.}
 \label{fig:repair-comparison}
 \end{figure}
 
@@ -56,7 +56,8 @@ On recommendation, LaDiM restores reward model inference and retrieval, which re
 \textbf{Training Signals and Detection Latency.} Gradient and update faults take effect after the loss of the current step has been computed, so the loss cannot reveal them at the step where they occur. In a detection study that injects gradient scaling and partial update suppression into four models with three seeds each, gradient and update checks detect the corresponding faults at step~1 in all 12 runs per fault. A loss check with a threshold of 0.02 detects 3 and 4 of the 12 runs, respectively, within 50 steps. \cref{sec:detection-measurements} gives the protocol, the detection trajectories, and the sensitivity to the loss threshold.
 
 
-\begin{wraptable}{r}{0.45\textwidth}
+\Needspace{24\baselineskip}
+\begin{wraptable}{r}{0.48\textwidth}
 \caption{Repair and native conversion on six faulty JAX candidates. LLM repair allows up to four submissions, with costs covering investigation and repair. Native conversion runs once without an LLM. Tokens are in millions.}
 \label{tab:jax}
 \centering
