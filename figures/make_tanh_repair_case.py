@@ -17,13 +17,14 @@ DATA = ROOT / 'docs/review-evidence/tanh-case-20260925'
 OUT = ROOT / 'figures/tanh-repair-case'
 INK, MUTED, RULE = '#24313c', '#58646f', '#cad2d9'
 COLORS = {'LaDiM': '#007c61', 'SWE-agent': '#0072b2', 'MatchFixAgent': '#d55e00'}
-for font_name in ['times.ttf', 'timesbd.ttf', 'timesi.ttf', 'timesbi.ttf']:
+for font_name in ['times.ttf', 'timesbd.ttf', 'timesi.ttf', 'timesbi.ttf', 'consola.ttf']:
     for directory in [Path('/mnt/c/Windows/Fonts'), Path('C:/Windows/Fonts')]:
         font_path = directory / font_name
         if font_path.exists():
             font_manager.fontManager.addfont(str(font_path))
             break
 TNR = font_manager.findfont('Times New Roman', fallback_to_default=False)
+CODE_FONT = font_manager.findfont('Consolas', fallback_to_default=False)
 plt.rcParams.update({'font.family': 'Times New Roman',
                      'font.size': 8, 'mathtext.fontset': 'custom',
                      'mathtext.rm': 'Times New Roman', 'mathtext.it': 'Times New Roman:italic',
@@ -80,37 +81,44 @@ def diagnosis_panel(ax, summary):
     probe = json.loads((DATA / 'tool-evidence.json').read_text())[0]['event']['data']
     assert probe['call'] == 17 and probe['result']['returncode'] == 0
     assert "dispatch_tanh: ['sum_abs=0.000000e+00']" in probe['result']['stdout']
-    label(ax, 8, 7, '(a) Diagnosis and repair', 9.5, fontweight='bold')
+    assert observation['acceptance']['checks']['layer_differences_agreement']
+    assert not observation['acceptance']['checks']['gradient_vector_l2']
+    label(ax, 8, 7, '(a) Layered diagnosis and repair', 9.5, fontweight='bold')
     panel_box(ax, 8, 27, 194, 73, '#f7f9fa')
-    label(ax, 105, 32, 'Forward: loss matches source', 8.8, ha='center')
-    for x, name in [(16, 'Linear'), (83, 'Tanh'), (150, 'Linear')]:
+    for x, name, status in [(39, 'Execution', 'Pass'), (105, 'Forward values', 'Pass'),
+                             (172, 'Gradients', 'Fail')]:
+        label(ax, x, 31, name, 8.5, ha='center')
+        label(ax, x, 42, status, 8.5, ha='center', fontweight='bold',
+              color='#a34511' if status == 'Fail' else COLORS['LaDiM'])
+    for x in [72, 139]:
+        label(ax, x, 34, '→', 9, ha='center', color=MUTED)
+    for x, name in [(16, 'Linear 1'), (83, 'Tanh'), (150, 'Linear 2')]:
         suspect = name == 'Tanh'
-        panel_box(ax, x, 49, 44, 19, '#fff0e6' if suspect else '#ffffff',
+        panel_box(ax, x, 58, 44, 19, '#fff0e6' if suspect else '#ffffff',
                   '#c25a18' if suspect else RULE)
-        label(ax, x + 22, 53, name, 9, ha='center', fontweight='bold' if suspect else 'normal',
+        label(ax, x + 22, 62, name, 9, ha='center', fontweight='bold' if suspect else 'normal',
               color='#a34511' if suspect else INK)
     for start, end in [(61, 81), (128, 148)]:
-        ax.add_patch(FancyArrowPatch((start, 58.5), (end, 58.5), arrowstyle='-|>',
+        ax.add_patch(FancyArrowPatch((start, 67.5), (end, 67.5), arrowstyle='-|>',
                                      mutation_scale=7, color=MUTED, linewidth=.8))
-    label(ax, 38, 73, 'Zero gradients', 8.3, ha='center', color='#a34511')
-    label(ax, 172, 73, 'Gradients match', 8.3, ha='center', color=COLORS['LaDiM'])
-    ax.add_patch(FancyArrowPatch((105, 83), (105, 69), arrowstyle='-|>',
+    label(ax, 38, 82, 'Zero gradients', 8.3, ha='center', color='#a34511')
+    label(ax, 172, 82, 'Correct gradients', 8.3, ha='center', color=COLORS['LaDiM'])
+    ax.add_patch(FancyArrowPatch((105, 87), (105, 78), arrowstyle='-|>',
                                  mutation_scale=7, color='#a34511', linewidth=.8))
-    label(ax, 105, 87, 'Probe confirms gradient break at Tanh', 8.3, ha='center')
+    label(ax, 105, 89, 'Error', 8.3, ha='center', color='#a34511')
 
 
 def code_panel(ax, additions):
-    label(ax, 8, 108, 'SWE-agent / MatchFixAgent', 8.5, fontweight='bold')
-    label(ax, 202, 108, 'No edit', 8.5, ha='right', color='#a34511')
+    label(ax, 8, 108, 'SWE-agent and MatchFixAgent: unrepaired', 8.5, color='#a34511')
     panel_box(ax, 8, 123, 194, 45)
-    label(ax, 15, 127, 'LaDiM · added Tanh mapping', 8.8, fontweight='bold', color=COLORS['LaDiM'])
+    label(ax, 15, 127, 'LaDiM: repaired', 8.8, fontweight='bold', color=COLORS['LaDiM'])
     ax.add_patch(Rectangle((11, 138), 188, 27, facecolor='#dcefe2', edgecolor='none', zorder=1))
     ax.add_patch(Rectangle((11, 138), 1.8, 27, facecolor=COLORS['LaDiM'], edgecolor='none', zorder=2))
     # Display the two-line implementation excerpt. The complete, verified patch
     # also registers torch.tanh and torch.nn.functional.tanh; see the caption.
     for i, line in enumerate(additions[2:]):
-        label(ax, 16, 141 + 11 * i, '+', 9, color=COLORS['LaDiM'], zorder=3)
-        label(ax, 25, 141 + 11 * i, line, 9, color='#16432b', zorder=3)
+        label(ax, 16, 141 + 11 * i, '+', 9, family='Consolas', color=COLORS['LaDiM'], zorder=3)
+        label(ax, 25, 141 + 11 * i, line, 9, family='Consolas', color='#16432b', zorder=3)
 
 
 def trajectory_panel(ax, series):
@@ -171,8 +179,9 @@ def main():
         bb = Text.get_window_extent(artist, renderer)
         if bb.width == 0 or bb.height == 0:
             continue
-        assert artist.get_fontfamily() == ['Times New Roman']
-        bounds.append({'text': artist.get_text(), 'font_points': artist.get_fontsize(),
+        expected_family = 'Consolas' if artist.get_text() in additions[2:] + ['+'] else 'Times New Roman'
+        assert artist.get_fontfamily() == [expected_family]
+        bounds.append({'text': artist.get_text(), 'font_points': artist.get_fontsize(), 'font_family': expected_family,
                        'bbox_pixels': list(bb.extents),
                        'inside_canvas': bool(bb.x0 >= -.5 and bb.y0 >= -.5 and bb.x1 <= fig.bbox.width + .5 and bb.y1 <= fig.bbox.height + .5)})
     for suffix in ['pdf', 'svg', 'png']:
@@ -193,7 +202,7 @@ def main():
             for line in ax.lines:
                 if line.get_transform().transform_path(line.get_path()).intersects_bbox(bb):
                     curve_overlaps.append([annotation.get_text(), line.get_label()])
-    record = {'figure_inches': list(fig.get_size_inches()), 'font_family': 'Times New Roman',
+    record = {'figure_inches': list(fig.get_size_inches()), 'font_family': 'Times New Roman', 'code_font_family': 'Consolas',
               'minimum_font_points': min(b['font_points'] for b in bounds),
               'all_text_inside_canvas': all(b['inside_canvas'] for b in bounds), 'text_bounds': bounds,
               'inputs_sha256': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in [DATA / 'summary.json', DATA / 'calls.csv', DATA / 'repair.patch', DATA / 'tool-evidence.json']},
