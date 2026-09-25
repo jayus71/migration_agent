@@ -297,7 +297,7 @@ def export_tables(data):
            r'\textbf{Metric} & \textbf{LaDiM} & \textbf{Direct repair} & \textbf{Ivy} & \textbf{\texttt{torch2jax}} \\', r'\midrule']
     jax.append('Accepted & ' + ' & '.join(f"{r['accepted']}/{r['planned']}" for r in jax_rows) + r' \\')
     jax.append('LLM calls & ' + ' & '.join(str(r['calls']) for r in jax_rows) + r' \\')
-    jax.append('Total tokens & ' + ' & '.join(f"{r['known_total_tokens']:,}" for r in jax_rows) + r' \\')
+    jax.append('Total tokens & ' + ' & '.join(f"{r['known_total_tokens']/1e6:.3f}" for r in jax_rows) + r' \\')
     jax += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_jax_repairs.tex').write_text('\n'.join(jax) + '\n')
     components = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{4.6cm}rrrr@{}}', r'\toprule',
@@ -310,7 +310,7 @@ def export_tables(data):
         r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{4.3cm}rrrr@{}}', r'\toprule',
         r'\textbf{Condition} & \textbf{Repaired} & \textbf{Preserved} & \textbf{Accepted} & \textbf{Tokens} \\', r'\midrule']
     for row in data['natural_components'][:3]:
-        program.append(f"{row['label']} & {row['repaired']}/5 & {row['retained']}/5 & {row['accepted']}/10 & {row['tokens']:,}" + r' \\')
+        program.append(f"{row['label']} & {row['repaired']}/5 & {row['retained']}/5 & {row['accepted']}/10 & {row['tokens']/1e6:.3f}" + r' \\')
     program += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_program_components.tex').write_text('\n'.join(program) + '\n')
     costs = [r'\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrrrr@{}}', r'\toprule',
@@ -321,7 +321,7 @@ def export_tables(data):
             signals = row['main_table_signals']
             ratios = [f"{signals[k]['passed']}/{signals[k]['expected']}" for k in ('gradient', 'update')]
             costs.append(f"{LABELS[row['method']]} & " + ' & '.join(ratios) +
-                         f" & {row['repair_calls']} & {row['submissions']} & {row['repair_prompt_tokens']:,} & {row['repair_completion_tokens']:,} & {row['tokens']:,}" + r' \\')
+                         f" & {row['repair_calls']} & {row['submissions']} & {row['repair_prompt_tokens']/1e6:.3f} & {row['repair_completion_tokens']/1e6:.3f} & {row['tokens']/1e6:.3f}" + r' \\')
     costs += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_repository_costs.tex').write_text('\n'.join(costs) + '\n')
     details = {r['method']: r['details'] for r in data['repository'] if r['repository'] == 'twotower'}
@@ -402,7 +402,7 @@ def export_compact_tables(data):
         accepted = f"{row['accepted']}/{row['planned']}"
         if row['accepted'] == row['planned']:
             accepted = r'\textbf{' + accepted + '}'
-        signals.append(f"{label} & {accepted} & {row['tokens']:,}" + r' \\')
+        signals.append(f"{label} & {accepted} & {row['tokens']/1e6:.3f}" + r' \\')
     signals += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_training_signals_compact.tex').write_text('\n'.join(signals) + '\n')
 
@@ -412,7 +412,7 @@ def export_compact_tables(data):
         accepted = f"{row['accepted']}/10 ({row['repaired']}/5)"
         if row['accepted'] == 9:
             accepted = r'\textbf{' + accepted + '}'
-        program.append(f"{row['label']} & {accepted} & {row['tokens']:,}" + r' \\')
+        program.append(f"{row['label']} & {accepted} & {row['tokens']/1e6:.3f}" + r' \\')
     program += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_program_components_compact.tex').write_text('\n'.join(program) + '\n')
 
@@ -420,7 +420,7 @@ def export_compact_tables(data):
 def build_figure():
     """Actual manuscript width, with every paired input shown as signed savings."""
     data = load_data()
-    fig, (a, b) = plt.subplots(1, 2, figsize=(5.5, 2.2),
+    fig, (a, b) = plt.subplots(1, 2, figsize=(5.5, 1.85),
                               gridspec_kw={'width_ratios': [1, 1.25]})
     stage_keys = ['translation', 'initially_accepted', 'initially_faulty']
     stage_colors = ['#E2E6E9', '#7BB2C9', BLUE]
@@ -431,7 +431,7 @@ def build_figure():
             a.barh(y, value, left=left, height=.43, color=color,
                    edgecolor='white', linewidth=.4)
             left += value
-        a.text(left + .35, y, f'{left:.2f}', va='center', fontsize=8)
+        a.text(left + .35, y, f'{left:.3f}', va='center', fontsize=8)
     a.set(yticks=range(3), yticklabels=['LaDiM', 'MatchFixAgent', 'SWE-agent'],
           xlim=(0, 24), ylim=(2.55, -.75), xlabel='Total tokens (millions)')
     a.set_xticks([0, 10, 20])
@@ -446,20 +446,20 @@ def build_figure():
     for state in (True, False):
         ordered.extend(sorted((p for p in data['paired_costs'] if p['initially_accepted'] == state),
                               key=lambda p: p['matchfix_tokens'] - p['ladim_tokens']))
-    savings = np.array([(p['matchfix_tokens'] - p['ladim_tokens']) / 1000 for p in ordered])
+    savings = np.array([(p['matchfix_tokens'] - p['ladim_tokens']) / 1e6 for p in ordered])
     b.bar(np.arange(len(ordered)), savings, width=.76,
           color=['#009E73' if value >= 0 else ORANGE for value in savings], zorder=3)
     b.axhline(0, color=GRAY, linewidth=.7, zorder=4)
     b.axvline(19.5, color=GRAY, linestyle=(0, (2, 3)), linewidth=.55)
-    b.set(xlim=(-1, 29), ylim=(-200, 1400), ylabel='Tokens saved by LaDiM\n(thousands)',
-          yticks=[0, 250, 500, 750, 1000, 1250], xticks=[9.5, 24],
-          xticklabels=['Passes before repair', 'Needs repair'],
-          xlabel='Migration inputs')
+    b.set(xlim=(-.6, 28.6), ylim=(-.2, 1.4), ylabel='', xlabel='',
+          yticks=[0, .25, .5, .75, 1, 1.25])
+    b.set_xticks(range(29), [str(i) for i in range(1, 30)], fontsize=6.5)
+    b.text(-.035, -.05, 'Task', transform=b.transAxes, ha='right', va='top', fontsize=7)
     b.legend(handles=[Patch(facecolor='#009E73', label='Fewer tokens'),
                       Patch(facecolor=ORANGE, label='More tokens')],
              loc='upper left', frameon=False, fontsize=8, handlelength=.85,
              handletextpad=.35, labelspacing=.2, borderaxespad=.15)
-    b.set_title('(b) Savings on each input', loc='left', fontsize=9, pad=8)
+    b.set_title('(b) Tokens saved (millions)', loc='left', fontsize=8, pad=5)
     b.grid(axis='y', color='#E9ECEF', linewidth=.45)
     for ax in (a, b):
         ax.set_axisbelow(True)
@@ -468,7 +468,22 @@ def build_figure():
             ax.spines[side].set_color('#B3BAC0')
         ax.xaxis.label.set_fontsize(8)
         ax.yaxis.label.set_fontsize(8)
-    fig.subplots_adjust(left=.165, right=.985, top=.84, bottom=.30, wspace=.72)
+    a.set_position([.145, .24, .245, .59])
+    b.set_position([.47, .24, .515, .59])
+    a.set_ylim(2.55, -1.9)
+    a.set_xlim(0, 28)
+    a.set_title('(a) Total tokens', loc='left', fontsize=8, pad=5)
+    a.get_legend().set_bbox_to_anchor((1.13, 1.04))
+    for label in a.get_legend().get_texts():
+        label.set_fontsize(6.8)
+    for label in b.get_legend().get_texts():
+        label.set_fontsize(7)
+    for label in a.texts:
+        label.set_fontsize(7)
+    for ax in (a, b):
+        ax.tick_params(axis='both', labelsize=7, pad=2)
+        ax.xaxis.label.set_fontsize(7)
+    b.tick_params(axis='x', labelsize=6.5)
     return fig
 
 
@@ -476,8 +491,7 @@ def export_figure():
     fig = build_figure()
     with plt.rc_context({'svg.fonttype': 'none'}):
         for suffix in ('pdf', 'png', 'svg'):
-            fig.savefig(ROOT / f'figures/repair_comparison.{suffix}', dpi=300,
-                        bbox_inches='tight', pad_inches=.02)
+            fig.savefig(ROOT / f'figures/repair_comparison.{suffix}', dpi=300)
     svg_path = ROOT / 'figures/repair_comparison.svg'
     svg_path.write_text('\n'.join(line.rstrip() for line in svg_path.read_text().splitlines()) + '\n')
     plt.close(fig)

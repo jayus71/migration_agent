@@ -49,7 +49,7 @@ def row_text(label, rows):
     cells = [label]
     for row in rows:
         checks = row["protocol_checks"]
-        cells += [f"{checks['passed']}/{checks['expected']}", str(row["calls"]), f"{row['end_to_end_tokens']:,}"]
+        cells += [f"{checks['passed']}/{checks['expected']}", str(row["calls"]), f"{row['end_to_end_tokens']/1e6:.3f}"]
     return " & ".join(cells) + r" \\"
 
 
@@ -77,8 +77,8 @@ def main():
             ("Repository context management", cumulative["timeseries", "handoff"], cumulative["timeseries", "repository_context"]),
             ("Repository Structural Analysis", structure["timeseries", "no_automatic_map"], structure["timeseries", "full"])]:
         reduction = 100 * (1 - with_component["end_to_end_tokens"] / without["end_to_end_tokens"])
-        lines.append(f"{label} & {without['calls']} & {without['end_to_end_tokens']:,} & "
-                     f"{with_component['calls']} & {with_component['end_to_end_tokens']:,} & "
+        lines.append(f"{label} & {without['calls']} & {without['end_to_end_tokens']/1e6:.3f} & "
+                     f"{with_component['calls']} & {with_component['end_to_end_tokens']/1e6:.3f} & "
                      + r"\textbf{" + f"{reduction:.1f}" + r"\%}" + r" \\")
     lines += [r"\bottomrule", r"\end{tabular*}"]
     write_table("TABLE_repository_components.tex", lines, [SOURCE, STRUCTURE])
@@ -102,8 +102,8 @@ def main():
         assert row["selected_task_end_to_end_tokens"] == row["repair_total_tokens"] + 31427
         assert row["shared_translation_then_repair_total_tokens"] == row["repair_total_tokens"] + native["source_pool_translation_usage"]["total_tokens"]
         label = "Direct repair" if row["method"] == "direct_shared_tools" else row["label"]
-        lines.append(f"{label} & {row['repair_calls']} & {row['repair_total_tokens']:,} & "
-                     f"{row['selected_task_end_to_end_tokens']:,} & {row['shared_translation_then_repair_total_tokens']:,}" + r" \\")
+        lines.append(f"{label} & {row['repair_calls']} & {row['repair_total_tokens']/1e6:.3f} & "
+                     f"{row['selected_task_end_to_end_tokens']/1e6:.3f} & {row['shared_translation_then_repair_total_tokens']/1e6:.3f}" + r" \\")
     lines += [r"\bottomrule", r"\end{tabular*}"]
     write_table("TABLE_native_jax.tex", lines, [NATIVE_JAX])
 

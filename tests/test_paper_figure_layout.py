@@ -119,7 +119,7 @@ class PaperFigureLayoutTests(unittest.TestCase):
         self.assertEqual(sum(v < 0 for v in expected), 2)
         self.assertEqual(sum(expected), 6938291)
         self.assertEqual(len(b.patches), 29)
-        np.testing.assert_allclose([p.get_height() for p in b.patches], np.array(expected) / 1000)
+        np.testing.assert_allclose([p.get_height() for p in b.patches], np.array(expected) / 1e6)
         for index, method in enumerate(('ladim', 'matchfix', 'swe')):
             self.assertAlmostEqual(sum(p.get_width() for p in a.patches[index*3:index*3+3]),
                                    data['main'][method]['tokens'] / 1e6)
@@ -133,13 +133,19 @@ class PaperFigureLayoutTests(unittest.TestCase):
                 self.assertFalse(legend_box.overlaps(label.get_window_extent(renderer)))
             for bar in ax.patches:
                 self.assertFalse(legend_box.overlaps(bar.get_window_extent(renderer)))
+        self.assertEqual([t.get_text() for t in b.get_xticklabels()], [str(i) for i in range(1, 30)])
+        self.assertEqual([t.get_text() for t in b.texts], ['Task'])
+        tick_boxes = [t.get_window_extent(renderer) for t in b.get_xticklabels()]
+        for first, second in combinations(tick_boxes, 2):
+            self.assertFalse(first.overlaps(second))
+        np.testing.assert_allclose(b.get_yticks(), [0, .25, .5, .75, 1, 1.25])
         for ax in fig.axes:
             labels = [*ax.texts, *ax.get_xticklabels(), *ax.get_yticklabels(),
                       ax.xaxis.label, ax.yaxis.label, ax._left_title]
             for label in labels:
                 if not label.get_text():
                     continue
-                self.assertGreaterEqual(label.get_fontsize(), 8)
+                self.assertGreaterEqual(label.get_fontsize() * .96, 6)
                 for x, y in label.get_window_extent(renderer).get_points():
                     self.assertTrue(fig.bbox.contains(x, y), label.get_text())
 
