@@ -56,14 +56,13 @@ On recommendation, LaDiM restores reward model inference and retrieval, which re
 \textbf{Training Signals and Detection Latency.} Gradient and update faults take effect after the loss of the current step has been computed, so the loss cannot reveal them at the step where they occur. In a detection study that injects gradient scaling and partial update suppression into four models with three seeds each, gradient and update checks detect the corresponding faults at step~1 in all 12 runs per fault. A loss check with a threshold of 0.02 detects 3 and 4 of the 12 runs, respectively, within 50 steps. \cref{sec:detection-measurements} gives the protocol, the detection trajectories, and the sensitivity to the loss threshold.
 
 
-\Needspace{24\baselineskip}
-\begin{wraptable}{r}{0.48\textwidth}
+\begin{table}[!htb]
 \caption{Repair and native conversion on six faulty JAX candidates. LLM repair allows up to four submissions, with costs covering investigation and repair. Native conversion runs once without an LLM. Tokens are in millions.}
 \label{tab:jax}
 \centering
 \small
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}lccc@{}}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc@{}}
 \toprule
 Method & Accepted & Calls & Tokens \\
 \midrule
@@ -75,8 +74,8 @@ Direct repair & 6/6 & 57 & 0.353 \\
 Ivy                & 0/6 & 0 & 0 \\
 \texttt{torch2jax} & 0/6 & 0 & 0 \\
 \bottomrule
-\end{tabular}
-\end{wraptable}
+\end{tabular*}
+\end{table}
 \textbf{Generalization Across Frameworks.}
 \label{sec:generalization}
 LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults in MLP and CNN models (\cref{tab:jax}). Every case passes single-step SGD verification on three seeds after the first submission. Direct repair also accepts all six cases and uses fewer tokens. Ivy and \texttt{torch2jax} accept none of the faulty candidates after native conversion. Both converters pass evaluation on the corresponding MLP and CNN programs without these faults. In these cases, native conversion preserves the supplied execution or numerical faults, and explicit repair restores agreement in training behavior. The same diagnosis and repair procedure thus works beyond MindSpore with JAX differentiation and parameter updates. \cref{sec:jax-protocol} details the converter evaluations. \cref{sec:native-jax-study} reports the separate study of native JAX translations evaluated over consecutive training steps.
