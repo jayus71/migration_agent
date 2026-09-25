@@ -45,7 +45,7 @@ On recommendation, LaDiM restores reward model inference and retrieval, which re
 
 \textbf{Repairing Translation Errors.} Methods may edit both the ten translated programs and their supporting library. \cref{tab:repair-results}a reports how many failed programs are \emph{Repaired}, how many passing programs are \emph{Preserved}, and how many programs are finally \emph{Accepted}. LaDiM repairs four of the five failed programs and preserves all five programs that pass evaluation before repair, raising final acceptance from five to nine. Direct repair, SWE-agent, and MatchFixAgent retain the initial five successes but recover none of the failed programs. In the LSTM case, LaDiM repairs recurrent operations and tensor indexing in the supporting library, restoring agreement in loss, gradients, and parameter updates. This example shows how training discrepancies guide repair into library implementations used by the translated program (\cref{sec:natural-protocol}).
 \begin{table}[t]
-\caption{Repair results on two collections. (a) Ten initial translations, five failing and five passing before repair; candidates and supporting libraries are editable. (b) Six faulty JAX candidates; LLM repair allows up to four submissions, while each native converter runs once without an LLM. Tokens are in millions and cover all investigation and repair calls, including failed attempts.}
+\caption{Repair results on two collections. (a) Ten initial translations, five failing and five passing before repair; candidates and supporting libraries are editable. (b) Six faulty JAX candidates. LaDiM and Direct repair allow up to four LLM repair submissions; Ivy and \texttt{torch2jax} each perform one native conversion without an LLM. Tokens are in millions and cover all investigation and repair calls, including failed attempts.}
 \label{tab:repair-results}
 \centering
 \small
@@ -60,13 +60,10 @@ On recommendation, LaDiM restores reward model inference and retrieval, which re
 {\raggedright\textit{(b) JAX repair and conversion}\par}\smallskip
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc@{}}
 \toprule
-Method & Accepted & Calls & Tokens \\
+\textbf{Method} & \textbf{Accepted} & \textbf{Calls} & \textbf{Tokens} \\
 \midrule
-\multicolumn{4}{@{}l}{\textit{LLM repair}} \\
 LaDiM         & 6/6 & 76 & 0.674 \\
 Direct repair & 6/6 & 57 & 0.353 \\
-\midrule
-\multicolumn{4}{@{}l}{\textit{Single native conversion}} \\
 Ivy                & 0/6 & 0 & 0 \\
 \texttt{torch2jax} & 0/6 & 0 & 0 \\
 \bottomrule

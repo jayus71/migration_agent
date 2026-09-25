@@ -27,13 +27,13 @@
     }
   },
   "current": {
-    "base_commit": "fdad3aa",
-    "pdf_sha256": "18dd8a4d1b5c51bcf9d1c6fb22b03450a6087af656e0304e92b0fd628580ab56"
+    "base_commit": "bd5b2be",
+    "pdf_sha256": "3baf9dec15173e145faff91b00ca43b7f68b5bc1575f7d602bfb95fdf11bf2f9"
   },
-  "updated": "2026-09-25T18:43:35+08:00",
-  "version": "b3e4009d0e7e2253b963cb06e9fdca3e7a885059bc69cf7d653f8303df32cae7",
+  "updated": "2026-09-25T18:47:01+08:00",
+  "version": "dbd12c573d7c44b575127d218f3eb480f31a2a0d70500849a4b55bb56a76de68",
   "reading_words_added": 8736,
-  "reading_words_removed": 4445,
+  "reading_words_removed": 4444,
   "sections": {
     "Title": {
       "reading": [
@@ -20150,10 +20150,12 @@
             "Six",
             "faulty",
             "JAX",
-            "candidates;",
-            "LLM",
+            "candidates.",
+            "LaDiM",
+            "and",
+            "Direct",
             "repair",
-            "allows",
+            "allow",
             "up"
           ]
         },
@@ -20186,20 +20188,10 @@
           ],
           "after": [
             "four",
-            "submissions,",
-            "while",
-            "each",
-            "native",
-            "converter",
-            "runs",
-            "once",
-            "without",
-            "an",
-            "LLM.",
-            "Tokens",
-            "are",
-            "in",
-            "millions"
+            "LLM",
+            "repair",
+            "submissions;",
+            "Ivy"
           ]
         },
         {
@@ -20212,16 +20204,44 @@
           ]
         },
         {
-          "kind": "delete",
+          "kind": "replace",
           "before": [
             "preservation",
             "of",
             "initially",
             "accepted",
-            "programs.",
+            "programs."
+          ],
+          "after": [
+            "torch2jax",
+            "each",
+            "perform",
+            "one",
+            "native",
+            "conversion",
+            "without",
+            "an",
+            "LLM."
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "Tokens"
           ],
-          "after": []
+          "after": [
+            "Tokens"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "are",
+            "in",
+            "millions",
+            "and"
+          ]
         },
         {
           "kind": "equal",
@@ -20535,8 +20555,6 @@
             "Calls",
             "&",
             "Tokens",
-            "LLM",
-            "repair",
             "LaDiM",
             "&",
             "6/6",
@@ -20552,9 +20570,6 @@
             "57",
             "&",
             "0.353",
-            "Single",
-            "native",
-            "conversion",
             "Ivy",
             "&",
             "0/6",
@@ -27733,10 +27748,12 @@
             "Six",
             "faulty",
             "JAX",
-            "candidates;",
-            "LLM",
+            "candidates.",
+            "LaDiM",
+            "and",
+            "Direct",
             "repair",
-            "allows",
+            "allow",
             "up"
           ]
         },
@@ -27769,20 +27786,10 @@
           ],
           "after": [
             "four",
-            "submissions,",
-            "while",
-            "each",
-            "native",
-            "converter",
-            "runs",
-            "once",
-            "without",
-            "an",
-            "LLM.",
-            "Tokens",
-            "are",
-            "in",
-            "millions"
+            "LLM",
+            "repair",
+            "submissions;",
+            "Ivy"
           ]
         },
         {
@@ -27795,16 +27802,44 @@
           ]
         },
         {
-          "kind": "delete",
+          "kind": "replace",
           "before": [
             "preservation",
             "of",
             "initially",
             "accepted",
-            "programs.",
+            "programs."
+          ],
+          "after": [
+            "\\texttt{torch2jax}",
+            "each",
+            "perform",
+            "one",
+            "native",
+            "conversion",
+            "without",
+            "an",
+            "LLM."
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "Tokens"
           ],
-          "after": []
+          "after": [
+            "Tokens"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "are",
+            "in",
+            "millions",
+            "and"
+          ]
         },
         {
           "kind": "equal",
@@ -28209,18 +28244,15 @@
             "conversion}\\par}\\smallskip",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lccc@{}}",
             "\\toprule",
-            "Method",
+            "\\textbf{Method}",
             "&",
-            "Accepted",
+            "\\textbf{Accepted}",
             "&",
-            "Calls",
+            "\\textbf{Calls}",
             "&",
-            "Tokens",
+            "\\textbf{Tokens}",
             "\\\\",
             "\\midrule",
-            "\\multicolumn{4}{@{}l}{\\textit{LLM",
-            "repair}}",
-            "\\\\",
             "LaDiM",
             "&",
             "6/6",
@@ -28237,11 +28269,6 @@
             "57",
             "&",
             "0.353",
-            "\\\\",
-            "\\midrule",
-            "\\multicolumn{4}{@{}l}{\\textit{Single",
-            "native",
-            "conversion}}",
             "\\\\",
             "Ivy",
             "&",
