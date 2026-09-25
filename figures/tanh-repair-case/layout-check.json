@@ -1,42 +1,229 @@
 {
   "figure_inches": [
     5.5,
-    2.45
+    3.5277777777777777
   ],
   "font_family": "Times New Roman",
-  "minimum_font_points": 7.2,
+  "minimum_font_points": 7.5,
   "all_text_inside_canvas": true,
   "text_bounds": [
     {
-      "text": "(a) Code repair",
-      "font_points": 9.0,
+      "text": "(a) Layered diagnosis",
+      "font_points": 9.5,
       "bbox_pixels": [
-        17.82,
-        408.975,
-        164.82,
-        429.975
+        20.0,
+        596.5,
+        238.0,
+        617.5
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Forward",
+      "font_points": 8.8,
+      "bbox_pixels": [
+        88.5625,
+        538.5,
+        171.4375,
+        557.5
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Execution passes",
+      "font_points": 8.2,
+      "bbox_pixels": [
+        59.5625,
+        502.0,
+        200.4375,
+        520.0
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Loss difference",
+      "font_points": 8.2,
+      "bbox_pixels": [
+        66.5,
+        477.0,
+        193.5,
+        495.0
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "$1.43 \\times 10^{-6}$",
+      "font_points": 8.2,
+      "bbox_pixels": [
+        84.53262138671874,
+        443.247796875,
+        175.46737861328126,
+        470.0
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Training signals",
+      "font_points": 8.8,
+      "bbox_pixels": [
+        297.25,
+        538.5,
+        447.75,
+        557.5
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Before Tanh: gradient 0",
+      "font_points": 8.2,
+      "bbox_pixels": [
+        275.0,
+        502.0,
+        470.0,
+        520.0
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "After Tanh: match",
+      "font_points": 8.2,
+      "bbox_pixels": [
+        297.625,
+        477.0,
+        447.375,
+        495.0
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Update error: 0.771",
+      "font_points": 8.2,
+      "bbox_pixels": [
+        291.75,
+        452.0,
+        453.25,
+        470.0
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Test \u00b7 call 17",
+      "font_points": 8.8,
+      "bbox_pixels": [
+        556.4375,
+        538.5,
+        673.5625,
+        557.5
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Sum of |input gradient|",
+      "font_points": 8.2,
+      "bbox_pixels": [
+        520.9375,
+        502.0,
+        709.0625,
+        520.0
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Dispatched: 0",
+      "font_points": 8.2,
+      "bbox_pixels": [
+        558.375,
+        477.0,
+        671.625,
+        495.0
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Native Tanh: 4.894",
+      "font_points": 8.2,
+      "bbox_pixels": [
+        536.375,
+        452.0,
+        693.625,
+        470.0
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Root cause",
+      "font_points": 8.8,
+      "bbox_pixels": [
+        806.6875,
+        538.5,
+        908.3125,
+        557.5
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Missing high-level",
+      "font_points": 8.2,
+      "bbox_pixels": [
+        780.375,
+        502.0,
+        934.625,
+        520.0
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Tanh mapping",
+      "font_points": 8.2,
+      "bbox_pixels": [
+        798.625,
+        477.0,
+        916.375,
+        495.0
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "\u2192 Graph detached",
+      "font_points": 8.2,
+      "bbox_pixels": [
+        780.125,
+        452.0,
+        934.875,
+        470.0
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "(b) Code repair",
+      "font_points": 9.5,
+      "bbox_pixels": [
+        20.0,
+        379.0,
+        177.0,
+        400.0
       ],
       "inside_canvas": true
     },
     {
       "text": "SWE-agent / MatchFixAgent",
-      "font_points": 8.5,
+      "font_points": 8.1,
       "bbox_pixels": [
-        32.8185,
-        348.0827,
-        295.9435,
-        367.55145
+        35.0,
+        325.53125,
+        286.125,
+        345.0
       ],
       "inside_canvas": true
     },
     {
       "text": "Tanh missing",
-      "font_points": 8.0,
+      "font_points": 7.8,
       "bbox_pixels": [
-        395.64649999999995,
-        349.55145,
-        502.77149999999995,
-        367.55145
+        386.0,
+        327.0,
+        490.0,
+        345.0
       ],
       "inside_canvas": true
     },
@@ -44,10 +231,10 @@
       "text": "@register_function(torch.relu)",
       "font_points": 8.5,
       "bbox_pixels": [
-        37.818,
-        307.254125,
-        299.318,
-        327.33225
+        62.5,
+        277.421875,
+        324.0,
+        297.5
       ],
       "inside_canvas": true
     },
@@ -55,10 +242,10 @@
       "text": "@register_function(torch.nn.functional.relu)",
       "font_points": 8.5,
       "bbox_pixels": [
-        37.818,
-        280.860275,
-        417.318,
-        300.9384
+        62.5,
+        253.671875,
+        442.0,
+        273.75
       ],
       "inside_canvas": true
     },
@@ -66,10 +253,10 @@
       "text": "def functional_relu(input, inplace=False):",
       "font_points": 8.5,
       "bbox_pixels": [
-        37.818,
-        254.46642500000002,
-        393.568,
-        274.54455
+        62.5,
+        229.921875,
+        418.25,
+        250.0
       ],
       "inside_canvas": true
     },
@@ -77,32 +264,32 @@
       "text": "    return mops.relu(input)",
       "font_points": 8.5,
       "bbox_pixels": [
-        37.818,
-        228.07257500000006,
-        258.193,
-        248.15070000000006
+        62.5,
+        206.171875,
+        282.875,
+        226.25
       ],
       "inside_canvas": true
     },
     {
-      "text": "LaDiM",
-      "font_points": 8.5,
+      "text": "LaDiM \u00b7 insert before ReLU",
+      "font_points": 8.1,
       "bbox_pixels": [
-        32.8185,
-        157.92920000000004,
-        98.9435,
-        176.92920000000004
+        35.0,
+        151.0,
+        281.125,
+        170.0
       ],
       "inside_canvas": true
     },
     {
       "text": "Repaired",
-      "font_points": 8.0,
+      "font_points": 7.8,
       "bbox_pixels": [
-        430.14649999999995,
-        158.92920000000004,
-        502.77149999999995,
-        176.92920000000004
+        419.5,
+        152.0,
+        490.0,
+        170.0
       ],
       "inside_canvas": true
     },
@@ -110,10 +297,10 @@
       "text": "+",
       "font_points": 8.5,
       "bbox_pixels": [
-        45.31725,
-        116.71000000000001,
-        57.31725,
-        136.71
+        40.0,
+        102.5,
+        52.0,
+        122.5
       ],
       "inside_canvas": true
     },
@@ -121,10 +308,10 @@
       "text": "@register_function(torch.tanh)",
       "font_points": 8.5,
       "bbox_pixels": [
-        67.815,
-        116.63187500000001,
-        332.69,
-        136.71
+        62.5,
+        102.421875,
+        327.375,
+        122.5
       ],
       "inside_canvas": true
     },
@@ -132,10 +319,10 @@
       "text": "+",
       "font_points": 8.5,
       "bbox_pixels": [
-        45.31725,
-        90.31615000000001,
-        57.31725,
-        110.31615000000001
+        40.0,
+        78.75,
+        52.0,
+        98.75
       ],
       "inside_canvas": true
     },
@@ -143,10 +330,10 @@
       "text": "@register_function(torch.nn.functional.tanh)",
       "font_points": 8.5,
       "bbox_pixels": [
-        67.815,
-        90.23802500000001,
-        450.69,
-        110.31615000000001
+        62.5,
+        78.671875,
+        445.375,
+        98.75
       ],
       "inside_canvas": true
     },
@@ -154,10 +341,10 @@
       "text": "+",
       "font_points": 8.5,
       "bbox_pixels": [
-        45.31725,
-        63.92230000000001,
-        57.31725,
-        83.9223
+        40.0,
+        55.0,
+        52.0,
+        75.0
       ],
       "inside_canvas": true
     },
@@ -165,10 +352,10 @@
       "text": "def functional_tanh(input):",
       "font_points": 8.5,
       "bbox_pixels": [
-        67.815,
-        63.84417500000001,
-        297.565,
-        83.9223
+        62.5,
+        54.921875,
+        292.25,
+        75.0
       ],
       "inside_canvas": true
     },
@@ -176,10 +363,10 @@
       "text": "+",
       "font_points": 8.5,
       "bbox_pixels": [
-        45.31725,
-        37.52845000000001,
-        57.31725,
-        57.52845000000001
+        40.0,
+        31.25,
+        52.0,
+        51.25
       ],
       "inside_canvas": true
     },
@@ -187,274 +374,263 @@
       "text": "    return mops.tanh(input)",
       "font_points": 8.5,
       "bbox_pixels": [
-        67.815,
-        37.45032500000001,
-        291.565,
-        57.52845000000001
+        62.5,
+        31.171875,
+        286.25,
+        51.25
       ],
       "inside_canvas": true
     },
     {
-      "text": "17  Test",
-      "font_points": 7.2,
+      "text": "(c) Repair cost",
+      "font_points": 9.5,
       "bbox_pixels": [
-        634.7795744680851,
-        202.20833333333337,
-        691.4045744680851,
-        218.20833333333337
+        555.0,
+        379.0,
+        702.875,
+        400.0
       ],
       "inside_canvas": true
     },
     {
-      "text": "22  Patch",
-      "font_points": 7.2,
+      "text": "17 Test",
+      "font_points": 8.0,
       "bbox_pixels": [
-        672.3785106382978,
-        282.89500000000004,
-        739.5035106382978,
-        298.89500000000004
+        619.4,
+        165.41666666666666,
+        677.275,
+        183.41666666666666
       ],
       "inside_canvas": true
     },
     {
-      "text": "23  Accepted",
-      "font_points": 7.2,
+      "text": "22 Patch",
+      "font_points": 8.0,
       "bbox_pixels": [
-        830.2940425531915,
-        122.58333333333334,
-        924.5440425531915,
-        138.58333333333334
+        619.4,
+        220.41666666666663,
+        688.9,
+        238.41666666666663
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "23 Accepted",
+      "font_points": 8.0,
+      "bbox_pixels": [
+        619.4,
+        270.8333333333333,
+        718.775,
+        288.8333333333333
       ],
       "inside_canvas": true
     },
     {
       "text": "24: 1.488",
-      "font_points": 7.5,
+      "font_points": 8.2,
       "bbox_pixels": [
-        807.7346808510638,
-        308.375,
-        878.3596808510638,
-        326.375
+        792.2,
+        103.08333333333333,
+        869.825,
+        121.08333333333333
       ],
       "inside_canvas": true
     },
     {
       "text": "2.341",
-      "font_points": 7.5,
+      "font_points": 8.5,
       "bbox_pixels": [
-        928.0512765957446,
-        332.1461666666667,
-        970.1762765957446,
-        350.1461666666667
+        905.96,
+        279.5916666666667,
+        953.585,
+        299.5916666666667
       ],
       "inside_canvas": true
     },
     {
       "text": "1.606",
-      "font_points": 7.5,
+      "font_points": 8.5,
       "bbox_pixels": [
-        928.0512765957446,
-        254.1136666666667,
-        970.1762765957446,
-        272.1136666666667
+        905.96,
+        212.21666666666667,
+        953.71,
+        232.21666666666667
       ],
       "inside_canvas": true
     },
     {
       "text": "LLM calls",
-      "font_points": 8.0,
+      "font_points": 8.5,
       "bbox_pixels": [
-        754.4549999999999,
-        37.360000000000014,
-        838.4549999999999,
-        55.360000000000014
+        740.3125,
+        15.75,
+        829.6875,
+        35.75
       ],
       "inside_canvas": true
     },
     {
       "text": "0",
-      "font_points": 7.3,
+      "font_points": 8.0,
       "bbox_pixels": [
-        615.1775,
-        65.36000000000001,
-        624.3025,
-        81.36000000000001
+        600.0,
+        45.75,
+        610.0,
+        63.75
       ],
       "inside_canvas": true
     },
     {
       "text": "10",
-      "font_points": 7.3,
+      "font_points": 8.0,
       "bbox_pixels": [
-        685.8128723404255,
-        65.36000000000001,
-        704.0628723404255,
-        81.36000000000001
+        667.0,
+        45.75,
+        687.0,
+        63.75
       ],
       "inside_canvas": true
     },
     {
       "text": "20",
-      "font_points": 7.3,
+      "font_points": 8.0,
       "bbox_pixels": [
-        761.0107446808511,
-        65.36000000000001,
-        779.2607446808511,
-        81.36000000000001
+        739.0625,
+        45.75,
+        758.9375,
+        63.75
       ],
       "inside_canvas": true
     },
     {
       "text": "30",
-      "font_points": 7.3,
+      "font_points": 8.0,
       "bbox_pixels": [
-        836.2086170212765,
-        65.36000000000001,
-        854.4586170212765,
-        81.36000000000001
+        811.0625000000001,
+        45.75,
+        830.9375000000001,
+        63.75
       ],
       "inside_canvas": true
     },
     {
       "text": "40",
-      "font_points": 7.3,
+      "font_points": 8.0,
       "bbox_pixels": [
-        911.4064893617021,
-        65.36000000000001,
-        929.6564893617021,
-        81.36000000000001
+        883.0000000000001,
+        45.75,
+        903.0000000000001,
+        63.75
       ],
       "inside_canvas": true
     },
     {
       "text": "Cumulative tokens (millions)",
-      "font_points": 8.0,
+      "font_points": 8.5,
       "bbox_pixels": [
-        557.5525,
-        118.43500000000003,
-        575.74,
-        353.43500000000006
+        538.875,
+        74.0625,
+        558.875,
+        323.4375
       ],
       "inside_canvas": true
     },
     {
       "text": "0.0",
-      "font_points": 7.3,
+      "font_points": 8.0,
       "bbox_pixels": [
-        585.74,
-        82.61000000000001,
-        608.49,
-        98.61000000000001
+        568.875,
+        64.0,
+        593.75,
+        82.0
       ],
       "inside_canvas": true
     },
     {
       "text": "0.5",
-      "font_points": 7.3,
+      "font_points": 8.0,
       "bbox_pixels": [
-        585.865,
-        135.69333333333336,
-        608.49,
-        151.69333333333336
+        568.875,
+        109.83333333333333,
+        593.75,
+        127.83333333333333
       ],
       "inside_canvas": true
     },
     {
       "text": "1.0",
-      "font_points": 7.3,
+      "font_points": 8.0,
       "bbox_pixels": [
-        585.74,
-        188.7766666666667,
-        608.49,
-        204.7766666666667
+        568.875,
+        155.66666666666666,
+        593.75,
+        173.66666666666666
       ],
       "inside_canvas": true
     },
     {
       "text": "1.5",
-      "font_points": 7.3,
+      "font_points": 8.0,
       "bbox_pixels": [
-        585.865,
-        241.86,
-        608.49,
-        257.86
+        568.875,
+        201.5,
+        593.75,
+        219.5
       ],
       "inside_canvas": true
     },
     {
       "text": "2.0",
-      "font_points": 7.3,
+      "font_points": 8.0,
       "bbox_pixels": [
-        585.74,
-        294.9433333333334,
-        608.49,
-        310.9433333333334
+        569.0,
+        247.33333333333331,
+        593.75,
+        265.3333333333333
       ],
       "inside_canvas": true
     },
     {
       "text": "2.5",
-      "font_points": 7.3,
+      "font_points": 8.0,
       "bbox_pixels": [
-        585.865,
-        348.0266666666667,
-        608.49,
-        364.0266666666667
-      ],
-      "inside_canvas": true
-    },
-    {
-      "text": "(b) Repair cost",
-      "font_points": 9.0,
-      "bbox_pixels": [
-        582.12,
-        408.975,
-        724.12,
-        429.975
-      ],
-      "inside_canvas": true
-    },
-    {
-      "text": "\u00d7 Unrepaired",
-      "font_points": 7.5,
-      "bbox_pixels": [
-        702.9,
-        3.056000000000001,
-        802.65,
-        21.056
+        569.0,
+        293.16666666666663,
+        593.75,
+        311.16666666666663
       ],
       "inside_canvas": true
     },
     {
       "text": "LaDiM",
-      "font_points": 7.2,
+      "font_points": 7.5,
       "bbox_pixels": [
-        617.4,
-        390.74,
-        670.275,
-        406.74
+        591.5625,
+        334.5,
+        646.8125,
+        352.5
       ],
       "inside_canvas": true
     },
     {
       "text": "SWE-agent",
-      "font_points": 7.2,
+      "font_points": 7.5,
       "bbox_pixels": [
-        617.4,
-        365.14,
-        700.65,
-        381.14
+        689.0,
+        334.5,
+        775.375,
+        352.5
       ],
       "inside_canvas": true
     },
     {
       "text": "MatchFixAgent",
-      "font_points": 7.2,
+      "font_points": 7.5,
       "bbox_pixels": [
-        749.25,
-        390.74,
-        863.375,
-        406.74
+        817.5625,
+        334.5,
+        936.4375,
+        352.5
       ],
       "inside_canvas": true
     }
@@ -462,7 +638,8 @@
   "inputs_sha256": {
     "summary.json": "765142159002342b8f1852562e13bd4b08ab329a2b72c3e5e6322b16ad196e0b",
     "calls.csv": "946074c92096f243cc874d6426df0f69d20718b9f6679b03edd16aabc83df7e6",
-    "repair.patch": "6c892dae6c544666bc6320b79392aa8a51d7c5f12ddb48ef3a837b485f373077"
+    "repair.patch": "6c892dae6c544666bc6320b79392aa8a51d7c5f12ddb48ef3a837b485f373077",
+    "tool-evidence.json": "47dfe4efc362ab11ee0e1943b764477751f4b3079353c69efee0e0eabe729299"
   },
   "text_overlaps": [],
   "curve_text_overlaps": [],

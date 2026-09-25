@@ -9,7 +9,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
-from matplotlib.patches import FancyBboxPatch, Rectangle
+from matplotlib.patches import Rectangle, FancyArrowPatch
 from matplotlib.text import Text
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -57,35 +57,67 @@ def load_evidence():
     return summary, series, additions
 
 
-def text(ax, x, y, content, size=8, **kwargs):
-    return ax.text(x, y, content, fontsize=size, va='top', transform=ax.transAxes, **kwargs)
+WIDTH, HEIGHT = 396, 254
 
 
-def box(ax, y, height, face, edge):
-    ax.add_patch(FancyBboxPatch((0, y), 1, height, boxstyle='round,pad=0.008,rounding_size=0.015',
-                              transform=ax.transAxes, linewidth=.65, facecolor=face, edgecolor=edge, clip_on=False))
+def label(ax, x, y, content, size=8.5, **kwargs):
+    """Place every non-chart item on one shared point grid, from the top left."""
+    return ax.text(x, y, content, fontsize=size, va='top', **kwargs)
+
+
+def panel_box(ax, x, y, width, height, face='#ffffff', edge=RULE):
+    ax.add_patch(Rectangle((x, y), width, height, facecolor=face,
+                           edgecolor=edge, linewidth=.6, zorder=0))
+
+
+def diagnosis_panel(ax, summary):
+    observation = summary['methods'][0]['initial']['observation']
+    assert observation['execution']['target']['status'] == 'passed'
+    assert observation['acceptance']['checks']['loss_abs_diff']
+    parameters = observation['gradient_vector_comparison']['parameters']
+    assert all(p['candidate_gradient_norm'] == 0 for p in parameters[:2])
+    assert max(p['gradient_l2_diff'] for p in parameters[2:]) < 6.16e-7
+    probe = json.loads((DATA / 'tool-evidence.json').read_text())[0]['event']['data']
+    assert probe['call'] == 17 and probe['result']['returncode'] == 0
+    assert "dispatch_tanh: ['sum_abs=0.000000e+00']" in probe['result']['stdout']
+    label(ax, 8, 7, '(a) Layered diagnosis', 9.5, fontweight='bold')
+    cards = [
+        ('Forward', ['Execution passes', 'Loss difference', r'$1.43 \times 10^{-6}$']),
+        ('Training signals', ['Before Tanh: gradient 0', 'After Tanh: match', 'Update error: 0.771']),
+        ('Test · call 17', ['Sum of |input gradient|', 'Dispatched: 0', 'Native Tanh: 4.894']),
+        ('Root cause', ['Missing high-level', 'Tanh mapping', '→ Graph detached']),
+    ]
+    for i, (title, lines) in enumerate(cards):
+        x = 8 + i * 97
+        panel_box(ax, x, 25, 88, 55, '#f5f7f8' if i < 3 else '#eff7f3')
+        label(ax, x + 44, 31, title, 8.8, ha='center', fontweight='bold')
+        for j, line in enumerate(lines):
+            label(ax, x + 44, 46 + 10 * j, line, 8.2, ha='center',
+                  color=COLORS['LaDiM'] if i == 3 else INK)
+        if i < 3:
+            ax.add_patch(FancyArrowPatch((x + 89, 53), (x + 96, 53),
+                                         arrowstyle='-|>', mutation_scale=6, linewidth=.7, color=MUTED))
 
 
 def code_panel(ax, additions):
-    ax.set_axis_off()
-    text(ax, 0, 1, '(a) Code repair', 9, fontweight='bold')
-    box(ax, .51, .37, '#f7f8f9', '#cad2d9')
-    text(ax, .03, .851, 'SWE-agent / MatchFixAgent', 8.5, fontweight='bold')
-    text(ax, .97, .851, 'Tanh missing', 8, ha='right', color='#a34511')
+    label(ax, 8, 94, '(b) Code repair', 9.5, fontweight='bold')
     baseline = ['@register_function(torch.relu)', '@register_function(torch.nn.functional.relu)',
                 'def functional_relu(input, inplace=False):', '    return mops.relu(input)']
-    for i, line in enumerate(baseline):
-        text(ax, .04, .755 - i * .063, line, 8.5)
-    box(ax, .055, .37, '#ffffff', '#9abdae')
-    text(ax, .03, .396, 'LaDiM', 8.5, fontweight='bold', color=COLORS['LaDiM'])
-    text(ax, .97, .396, 'Repaired', 8, ha='right', color=COLORS['LaDiM'])
-    ax.add_patch(Rectangle((.02, .075), .96, .241, transform=ax.transAxes,
-                           facecolor='#dcefe2', edgecolor='none', zorder=1))
-    ax.add_patch(Rectangle((.02, .075), .009, .241, transform=ax.transAxes,
-                           facecolor=COLORS['LaDiM'], edgecolor='none', zorder=2))
-    for i, line in enumerate(additions):
-        text(ax, .055, .300 - i * .063, '+', 8.5, color='#00644e', zorder=3)
-        text(ax, .10, .300 - i * .063, line, 8.5, color='#16432b', zorder=3)
+    for y, title, status, lines, repaired in [
+        (112, 'SWE-agent / MatchFixAgent', 'Tanh missing', baseline, False),
+        (182, 'LaDiM · insert before ReLU', 'Repaired', additions, True),
+    ]:
+        panel_box(ax, 8, y, 194, 64)
+        ax.add_patch(Rectangle((8.3, y + .3), 193.4, 17, facecolor='#f1f4f5', edgecolor='none'))
+        label(ax, 14, y + 4, title, 8.1, fontweight='bold', color=COLORS['LaDiM'] if repaired else INK)
+        label(ax, 196, y + 4, status, 7.8, ha='right', color=COLORS['LaDiM'] if repaired else '#a34511')
+        if repaired:
+            ax.add_patch(Rectangle((11, y + 21), 188, 40, facecolor='#dcefe2', edgecolor='none', zorder=1))
+            ax.add_patch(Rectangle((11, y + 21), 1.8, 40, facecolor=COLORS['LaDiM'], edgecolor='none', zorder=2))
+        for i, line in enumerate(lines):
+            if repaired:
+                label(ax, 16, y + 23 + 9.5 * i, '+', 8.5, color=COLORS['LaDiM'], zorder=3)
+            label(ax, 25, y + 23 + 9.5 * i, line, 8.5, color='#16432b' if repaired else INK, zorder=3)
 
 
 def trajectory_panel(ax, series):
@@ -94,41 +126,43 @@ def trajectory_panel(ax, series):
         ax.plot([0] + calls, [0] + tokens, color=COLORS[name], lw=1.5, linestyle=styles[name], label=name)
         ax.scatter(calls[-1], tokens[-1], marker='o' if name == 'LaDiM' else 'x',
                    color=COLORS[name], s=24, linewidths=1.1, zorder=5)
-    ax.set(xlim=(0, 47), ylim=(0, 2.7), xlabel='LLM calls', ylabel='Cumulative tokens (millions)')
+    ax.set(xlim=(0, 50), ylim=(0, 2.7), xlabel='LLM calls', ylabel='Cumulative tokens (millions)')
     ax.set_xticks([0, 10, 20, 30, 40])
     ax.set_yticks([0, .5, 1, 1.5, 2, 2.5])
-    ax.tick_params(labelsize=7.3, width=.5, length=2.5, pad=2)
-    ax.xaxis.label.set_size(8)
-    ax.yaxis.label.set_size(8)
+    ax.tick_params(labelsize=8, width=.5, length=2.5, pad=2)
+    ax.xaxis.label.set_size(8.5)
+    ax.yaxis.label.set_size(8.5)
     ax.spines[['top', 'right']].set_visible(False)
     ax.spines[['left', 'bottom']].set_color(RULE)
     ax.grid(axis='y', color='#e5e9ed', lw=.5)
     ax.set_axisbelow(True)
     tokens = series['LaDiM'][1]
-    labels = [(17, '17  Test', (2.0, 1.07)), (22, '22  Patch', (7.0, 1.83)),
-              (23, '23  Accepted', (28.0, .32))]
+    labels = [(17, '17 Test', (2.0, 1.03)), (22, '22 Patch', (2.0, 1.63)),
+              (23, '23 Accepted', (2.0, 2.18))]
     for call, label, where in labels:
         ax.scatter(call, tokens[call - 1], s=18, facecolor='white', edgecolor=COLORS['LaDiM'], linewidth=.9, zorder=6)
-        ax.annotate(label, (call, tokens[call - 1]), xytext=where, fontsize=7.2, color=COLORS['LaDiM'],
+        ax.annotate(label, (call, tokens[call - 1]), xytext=where, fontsize=8, color=COLORS['LaDiM'],
                     arrowprops={'arrowstyle': '-', 'color': COLORS['LaDiM'], 'lw': .65},
                     bbox={'facecolor': 'white', 'edgecolor': 'none', 'pad': .7})
-    ax.annotate('24: 1.488', (24, tokens[-1]), xytext=(25, 2.07), fontsize=7.5, color=COLORS['LaDiM'],
-                arrowprops={'arrowstyle': '-', 'color': COLORS['LaDiM'], 'lw': .65})
-    ax.text(41, 2.341, '2.341', va='center', fontsize=7.5, color=COLORS['MatchFixAgent'])
-    ax.text(41, 1.606, '1.606', va='center', fontsize=7.5, color=COLORS['SWE-agent'])
+    ax.annotate('24: 1.488', (24, tokens[-1]), xytext=(26, .35), fontsize=8.2,
+                color=COLORS['LaDiM'], arrowprops={'arrowstyle': '-', 'color': COLORS['LaDiM'], 'lw': .65})
+    ax.text(41.8, 2.341, '2.341', va='center', fontsize=8.5, color=COLORS['MatchFixAgent'])
+    ax.text(41.8, 1.606, '1.606', va='center', fontsize=8.5, color=COLORS['SWE-agent'])
 
 
 def build_figure(summary, series, additions):
-    fig = plt.figure(figsize=(5.5, 2.45), dpi=180)
-    left = fig.add_axes([.018, .025, .505, .95])
-    code_panel(left, additions)
-    fig.text(.588, .975, '(b) Repair cost', fontsize=9, weight='bold', va='top')
-    ax = fig.add_axes([.626, .21, .357, .65])
+    fig = plt.figure(figsize=(WIDTH / 72, HEIGHT / 72), dpi=180)
+    canvas = fig.add_axes([0, 0, 1, 1], xlim=(0, WIDTH), ylim=(HEIGHT, 0))
+    canvas.set_axis_off()
+    diagnosis_panel(canvas, summary)
+    code_panel(canvas, additions)
+    label(canvas, 222, 94, '(c) Repair cost', 9.5, fontweight='bold')
+    ax = fig.add_axes([242 / WIDTH, (HEIGHT - 224) / HEIGHT, 144 / WIDTH, 99 / HEIGHT])
     trajectory_panel(ax, series)
     handles, labels = ax.get_legend_handles_labels()
-    fig.legend(handles, labels, loc='upper left', bbox_to_anchor=(.58, .94), ncol=2, fontsize=7.2,
-               frameon=False, borderaxespad=0, handlelength=1.6, columnspacing=.7, handletextpad=.4)
-    fig.text(.71, .016, '× Unrepaired', fontsize=7.5, color=MUTED)
+    fig.legend(handles, labels, loc='upper left', bbox_to_anchor=(222 / WIDTH, 1 - 110 / HEIGHT),
+               ncol=3, fontsize=7.5, frameon=False, borderaxespad=0,
+               handlelength=1.25, columnspacing=.7, handletextpad=.3)
     return fig
 
 
@@ -170,7 +204,7 @@ def main():
     record = {'figure_inches': list(fig.get_size_inches()), 'font_family': 'Times New Roman',
               'minimum_font_points': min(b['font_points'] for b in bounds),
               'all_text_inside_canvas': all(b['inside_canvas'] for b in bounds), 'text_bounds': bounds,
-              'inputs_sha256': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in [DATA / 'summary.json', DATA / 'calls.csv', DATA / 'repair.patch']},
+              'inputs_sha256': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in [DATA / 'summary.json', DATA / 'calls.csv', DATA / 'repair.patch', DATA / 'tool-evidence.json']},
               'text_overlaps': overlaps, 'curve_text_overlaps': curve_overlaps, 'all_calls_plotted': {k: len(v[0]) for k, v in series.items()},
               'final_tokens': {k: v[1][-1] * 1e6 for k, v in series.items()}}
     (OUT / 'layout-check.json').write_text(json.dumps(record, indent=2) + '\n')

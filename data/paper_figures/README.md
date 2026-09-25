@@ -2,7 +2,7 @@
 
 ## September 25 saved code repair preview
 
-`figures/make_tanh_repair_case.py` generates a standalone code-and-cost preview under `figures/tanh-repair-case/`, using `docs/review-evidence/tanh-case-20260925/summary.json`, `calls.csv`, and `repair.patch`. Source hashes are retained in `layout-check.json`. Both unchanged baseline code states share one block; LaDiM's four inserted lines are highlighted. The curves contain every one of the 24/40/40 calls. The 5.5 × 2.45 inch figure uses Times New Roman throughout. This preview has not replaced any manuscript figure or text. See the [preview notes](../../figures/tanh-repair-case/README.md).
+`figures/make_tanh_repair_case.py` generates a standalone diagnosis, code and cost preview under `figures/tanh-repair-case/`, using `docs/review-evidence/tanh-case-20260925/summary.json`, `calls.csv`, `repair.patch`, and `tool-evidence.json`. Source hashes are retained in `layout-check.json`. Four aligned cards show forward agreement, the gradient boundary, the executed Tanh test, and the missing mapping. Both unchanged baseline code states share one block below; LaDiM's four inserted lines are highlighted. The curves contain every one of the 24/40/40 calls. The 5.5 × 3.528 inch figure uses Times New Roman throughout. This preview has not replaced any manuscript figure or text. See the [preview notes](../../figures/tanh-repair-case/README.md).
 
 ## September 25 r4 presentation revision
 
