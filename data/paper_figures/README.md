@@ -1,5 +1,9 @@
 # Inputs for manuscript figures and tables
 
+## September 25 saved code repair preview
+
+`figures/make_tanh_repair_case.py` generates a standalone code-and-cost preview under `figures/tanh-repair-case/`, using `docs/review-evidence/tanh-case-20260925/summary.json`, `calls.csv`, and `repair.patch`. Source hashes are retained in `layout-check.json`. Both unchanged baseline code states share one block; LaDiM's four inserted lines are highlighted. The curves contain every one of the 24/40/40 calls. The 5.5 × 2.45 inch figure uses Times New Roman throughout. This preview has not replaced any manuscript figure or text. See the [preview notes](../../figures/tanh-repair-case/README.md).
+
 ## September 25 r4 presentation revision
 
 The final author SVG `figures/架构图0925终版.svg` is included unchanged as the source for `hierarchical_feedback_architecture.pdf`. Export uses Inkscape with `--export-area-drawing` and Windows Times New Roman through fontconfig. The PDF has no raster images; source and output hashes and font measurements are in `docs/review-evidence/manuscript-20260925-r4/architecture.json`. The manuscript uses 90% width and a five-line caption.

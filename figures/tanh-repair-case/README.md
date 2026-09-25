@@ -1,0 +1,9 @@
+# Tanh repair case preview
+
+This standalone preview follows the September 25 request for code on the left and cumulative token trajectories on the right. It is not yet included in the manuscript. Generate the PDF, PNG, editable-text SVG and numerical/layout audit with `.venv/bin/python figures/make_tanh_repair_case.py`. The canvas is 5.5 × 2.45 inches; all text uses Times New Roman, including 8.5-point code. The four inserted code lines have a green background and plus signs.
+
+The evidence is the [audited saved translation](../../docs/repair-case-study-20260925.md). The two baselines have identical unchanged code at the repair site, so they share one block showing the existing ReLU registration. LaDiM inserts the highlighted Tanh registration immediately before it. This is an insertion, not replacement of ReLU. The plotted cumulative values contain every saved call: 24 for LaDiM and 40 for each baseline, including failed investigation and the final report. Crosses mark unrepaired terminal candidates. Call 23 is the public acceptance test; the full cost includes call 24 and the saved external evaluation confirms all three seeds.
+
+Suggested caption: Repairing a missing Tanh mapping in a saved autoencoder translation. Green lines show LaDiM's insertion before the existing ReLU registration; both baselines leave the mapping absent. Curves include all investigation and repair calls. LaDiM probes the gradient at call 17, patches at 22, passes public verification at 23, and completes at 24. Crosses mark unrepaired baselines at 40 calls.
+
+Validation checks the input hashes and per-call totals against the audit, all text bounds, and overlap between labels and curves. The final PDF embeds Times New Roman regular and bold and contains vector graphics. Fifteen existing data and layout tests pass. Poppler rendering succeeds; the image tools returned data without a model-visible image, so no manual visual inspection is recorded.

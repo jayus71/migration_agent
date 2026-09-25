@@ -8,7 +8,8 @@ from pathlib import Path
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyBboxPatch
+from matplotlib import font_manager
+from matplotlib.patches import FancyBboxPatch, Rectangle
 from matplotlib.text import Text
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,8 +17,17 @@ DATA = ROOT / 'docs/review-evidence/tanh-case-20260925'
 OUT = ROOT / 'figures/tanh-repair-case'
 INK, MUTED, RULE = '#24313c', '#58646f', '#cad2d9'
 COLORS = {'LaDiM': '#007c61', 'SWE-agent': '#0072b2', 'MatchFixAgent': '#d55e00'}
-plt.rcParams.update({'font.family': 'serif', 'font.serif': ['STIXGeneral'],
-                     'font.size': 8, 'mathtext.fontset': 'stix', 'pdf.fonttype': 42,
+for font_name in ['times.ttf', 'timesbd.ttf', 'timesi.ttf', 'timesbi.ttf']:
+    for directory in [Path('/mnt/c/Windows/Fonts'), Path('C:/Windows/Fonts')]:
+        font_path = directory / font_name
+        if font_path.exists():
+            font_manager.fontManager.addfont(str(font_path))
+            break
+TNR = font_manager.findfont('Times New Roman', fallback_to_default=False)
+plt.rcParams.update({'font.family': 'Times New Roman',
+                     'font.size': 8, 'mathtext.fontset': 'custom',
+                     'mathtext.rm': 'Times New Roman', 'mathtext.it': 'Times New Roman:italic',
+                     'mathtext.bf': 'Times New Roman:bold', 'pdf.fonttype': 42,
                      'svg.fonttype': 'none', 'axes.linewidth': .6,
                      'text.color': INK, 'axes.labelcolor': INK,
                      'xtick.color': MUTED, 'ytick.color': MUTED})
@@ -58,23 +68,24 @@ def box(ax, y, height, face, edge):
 
 def code_panel(ax, additions):
     ax.set_axis_off()
-    text(ax, 0, 1, '(a) Final code and repair outcome', 9, fontweight='bold')
-    text(ax, 0, .918, 'Autoencoder: Linear → Tanh → Linear', 8)
-    text(ax, 0, .867, r'Loss difference: $1.43 \times 10^{-6}$ before and after repair', 7.5, color=MUTED)
-    box(ax, .477, .315, '#fcf5ef', '#debca5')
-    text(ax, .025, .766, 'SWE-agent / MatchFixAgent', 8, fontweight='bold', color='#a34511')
-    text(ax, .025, .712, 'Tanh mapping still absent; existing ReLU mapping:', 7.4, color=MUTED)
+    text(ax, 0, 1, '(a) Code repair', 9, fontweight='bold')
+    box(ax, .51, .37, '#f7f8f9', '#cad2d9')
+    text(ax, .03, .851, 'SWE-agent / MatchFixAgent', 8.5, fontweight='bold')
+    text(ax, .97, .851, 'Tanh missing', 8, ha='right', color='#a34511')
     baseline = ['@register_function(torch.relu)', '@register_function(torch.nn.functional.relu)',
                 'def functional_relu(input, inplace=False):', '    return mops.relu(input)']
     for i, line in enumerate(baseline):
-        text(ax, .025, .655 - i * .047, line, 7, family='DejaVu Sans Mono')
-    box(ax, .117, .315, '#eff8f4', '#9abdae')
-    text(ax, .025, .407, 'LaDiM', 8, fontweight='bold', color=COLORS['LaDiM'])
-    text(ax, .025, .353, 'Added Tanh mapping; accepted on all three seeds', 7.4, color=MUTED)
+        text(ax, .04, .755 - i * .063, line, 8.5)
+    box(ax, .055, .37, '#ffffff', '#9abdae')
+    text(ax, .03, .396, 'LaDiM', 8.5, fontweight='bold', color=COLORS['LaDiM'])
+    text(ax, .97, .396, 'Repaired', 8, ha='right', color=COLORS['LaDiM'])
+    ax.add_patch(Rectangle((.02, .075), .96, .241, transform=ax.transAxes,
+                           facecolor='#dcefe2', edgecolor='none', zorder=1))
+    ax.add_patch(Rectangle((.02, .075), .009, .241, transform=ax.transAxes,
+                           facecolor=COLORS['LaDiM'], edgecolor='none', zorder=2))
     for i, line in enumerate(additions):
-        text(ax, .025, .296 - i * .047, line, 7, family='DejaVu Sans Mono', color='#00644e')
-    text(ax, 0, .075, r'Gradient vector difference: $0.359 \rightarrow 1.01 \times 10^{-6}$', 7.5)
-    text(ax, 0, .025, r'Relative parameter update difference: $0.771 \rightarrow 6.42 \times 10^{-6}$', 7.5)
+        text(ax, .055, .300 - i * .063, '+', 8.5, color='#00644e', zorder=3)
+        text(ax, .10, .300 - i * .063, line, 8.5, color='#16432b', zorder=3)
 
 
 def trajectory_panel(ax, series):
@@ -108,18 +119,16 @@ def trajectory_panel(ax, series):
 
 
 def build_figure(summary, series, additions):
-    fig = plt.figure(figsize=(5.5, 2.7), dpi=180)
-    left = fig.add_axes([.018, .07, .505, .91])
+    fig = plt.figure(figsize=(5.5, 2.45), dpi=180)
+    left = fig.add_axes([.018, .025, .505, .95])
     code_panel(left, additions)
-    fig.text(.588, .98, '(b) Repair process and cost', fontsize=9, weight='bold', va='top')
-    ax = fig.add_axes([.626, .30, .357, .57])
+    fig.text(.588, .975, '(b) Repair cost', fontsize=9, weight='bold', va='top')
+    ax = fig.add_axes([.626, .21, .357, .65])
     trajectory_panel(ax, series)
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles, labels, loc='upper left', bbox_to_anchor=(.58, .94), ncol=2, fontsize=7.2,
                frameon=False, borderaxespad=0, handlelength=1.6, columnspacing=.7, handletextpad=.4)
-    fig.text(.595, .153, 'Accepted: public test passes', fontsize=7.5)
-    fig.text(.595, .111, '24 calls: final report completed', fontsize=7.5)
-    fig.text(.595, .066, '×  Unrepaired at the 40-call limit', fontsize=7.5, color=MUTED)
+    fig.text(.71, .016, '× Unrepaired', fontsize=7.5, color=MUTED)
     return fig
 
 
@@ -136,11 +145,14 @@ def main():
         bb = Text.get_window_extent(artist, renderer)
         if bb.width == 0 or bb.height == 0:
             continue
+        assert artist.get_fontfamily() == ['Times New Roman']
         bounds.append({'text': artist.get_text(), 'font_points': artist.get_fontsize(),
                        'bbox_pixels': list(bb.extents),
                        'inside_canvas': bool(bb.x0 >= -.5 and bb.y0 >= -.5 and bb.x1 <= fig.bbox.width + .5 and bb.y1 <= fig.bbox.height + .5)})
     for suffix in ['pdf', 'svg', 'png']:
         fig.savefig(OUT / ('tanh_repair_case.' + suffix), dpi=300, metadata={'Creator': 'Matplotlib'} if suffix == 'pdf' else None)
+    svg_path = OUT / 'tanh_repair_case.svg'
+    svg_path.write_text('\n'.join(line.rstrip() for line in svg_path.read_text().splitlines()) + '\n')
     overlaps = []
     for i, a in enumerate(bounds):
         for b in bounds[i + 1:]:
@@ -155,7 +167,8 @@ def main():
             for line in ax.lines:
                 if line.get_transform().transform_path(line.get_path()).intersects_bbox(bb):
                     curve_overlaps.append([annotation.get_text(), line.get_label()])
-    record = {'figure_inches': list(fig.get_size_inches()), 'minimum_font_points': min(b['font_points'] for b in bounds),
+    record = {'figure_inches': list(fig.get_size_inches()), 'font_family': 'Times New Roman',
+              'minimum_font_points': min(b['font_points'] for b in bounds),
               'all_text_inside_canvas': all(b['inside_canvas'] for b in bounds), 'text_bounds': bounds,
               'inputs_sha256': {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in [DATA / 'summary.json', DATA / 'calls.csv', DATA / 'repair.patch']},
               'text_overlaps': overlaps, 'curve_text_overlaps': curve_overlaps, 'all_calls_plotted': {k: len(v[0]) for k, v in series.items()},
