@@ -34,7 +34,7 @@ def protect_tables(source: str, blocks: dict[str, str]) -> str:
     return re.sub(r'\\begin\{table\}(?:\[[^]]*\])?.*?\\end\{table\}', protect, source, flags=re.S)
 
 
-def restore_tables(diff: str, blocks: dict[str, str]) -> str:
+def restore_tables(diff: str, blocks: dict[str, str], current_labels: set[str] | None = None) -> str:
     token_pattern = r'REVIEWTABLE[A-F0-9]{24}'
     # Split markup around tables; ulem must never wrap an alignment environment.
     command = re.compile(r'\\(DIFadd(?:FL)?|DIFdel(?:FL)?)\{')
@@ -67,7 +67,11 @@ def restore_tables(diff: str, blocks: dict[str, str]) -> str:
             block = re.sub(r'(\\begin\{table\}(?:\[[^]]*\])?)',
                            lambda m: m.group() + '\n\\color{' + color + '}\n', block, count=1)
             if not added:
-                block = re.sub(r'\\label\{[^}]+\}', '', block)
+                # Deleted prose can still cite a table that was merged or removed.
+                # Keep its old label when the current paper no longer defines it.
+                block = re.sub(r'\\label\{([^}]+)\}',
+                               lambda m: m.group() if current_labels is not None
+                               and m.group(1) not in current_labels else '', block)
         return '\n\n' + block + '\n\n'
     return re.sub(r'(?:REVIEW(DIF(?:ADD|DEL)(?:FL)?))?(' + token_pattern + ')', restore, diff)
 
@@ -130,7 +134,8 @@ for readability. The clean manuscript is unchanged.
 \end{center}
 \clearpage
 '''.replace('REVISION', revision[:7])
-    diff = restore_tables(result.stdout, blocks)
+    diff = restore_tables(result.stdout, blocks,
+                          set(re.findall(r'\\label\{([^}]+)\}', new_raw)))
     # Deleted headings can reuse counters in a latexdiff document. Give the
     # review copy unique hyperlink targets for both old and current headings.
     diff = diff.replace(r'\begin{document}',

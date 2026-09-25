@@ -37,3 +37,5 @@ TroubleShooter的[loss_compare文档](https://github.com/mindspore-ai/toolkits/b
 ## 交付与对照
 
 主稿为`conference_101719.pdf`；固定2026-09-21基线未改，HTML逐词对照与LaTeX差异PDF随最终稿刷新。反馈登记本轮覆盖全部140个有效ID，详见[逐项记录](review-evidence/manuscript-20260925-r4/feedback-review.csv)和[验证JSON](review-evidence/manuscript-20260925-r4/verification.json)。用户PPT与其他个人文件保持，未push或同步Overleaf。
+
+最终主稿内容提交为4728a48，HTML对照已刷新。LaTeX差异稿35页，已修复已删除表格的历史标签保留，重新编译无警告、overfull或未定义引用；主稿不受该审阅稿修复影响。
