@@ -1,0 +1,15 @@
+--- initial/torch4ms/ops/mtorch.py
++++ repaired/torch4ms/ops/mtorch.py
+@@ -1004,6 +1004,12 @@
+     register_function(torch.Tensor.sqrt)(functional_sqrt)
+ if hasattr(torch.Tensor, "unique"):
+     register_function(torch.Tensor.unique, is_mindspore_function=False)(functional_unique)
++
++
++@register_function(torch.tanh)
++@register_function(torch.nn.functional.tanh)
++def functional_tanh(input):
++    return mops.tanh(input)
+ 
+ 
+ @register_function(torch.relu)

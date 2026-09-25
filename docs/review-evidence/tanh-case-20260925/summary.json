@@ -1,0 +1,2276 @@
+{
+  "schema": "saved-tanh-case-audit-v1",
+  "reviewed_commit": "f36bc62fb7f8d73d6f82c20f27f9f03edfee5d17",
+  "task": "task_008",
+  "origin": {
+    "task_id": "I-08",
+    "source_path": "experiments/experiment_request_20260820/09_experiment_I_real_translation/heldout_sources/autoencoder_head.py",
+    "source_origin": "Experiment I frozen clean benchmark source; bottleneck representation motif selected before model calls",
+    "heldout_family": "autoencoder_head",
+    "no_fault_injection": true,
+    "source_sha256": "9147733310cb4f26db4f475824fccc37e7db96bbaef62faf35e1787e2728ab9e",
+    "eligible": true,
+    "errors": []
+  },
+  "source_sha256": "9147733310cb4f26db4f475824fccc37e7db96bbaef62faf35e1787e2728ab9e",
+  "task_contract_sha256": "731cb7e035d8215b961b6c97a9922075ed96acb586c41056e612c2cbe4b114f3",
+  "verified_download_files": 2550,
+  "all_initial_code_files_identical": true,
+  "initial_code_file_count": 44,
+  "all_initial_observations_identical": true,
+  "cost_scope": "All investigation and repair LLM calls on the saved initial translation, including unsuccessful stages; initial translation generation is outside this repair study.",
+  "methods": [
+    {
+      "method": "LaDiM",
+      "calls": 24,
+      "usage": {
+        "prompt_tokens": 1449988,
+        "completion_tokens": 38507,
+        "total_tokens": 1488495
+      },
+      "accepted": true,
+      "attempts": 2,
+      "stage_statuses": [
+        "investigation_only",
+        "invalid_final"
+      ],
+      "wall_time_seconds": 508.9569588640006,
+      "changed_production_files": [
+        "torch4ms/ops/mtorch.py"
+      ],
+      "initial": {
+        "observation": {
+          "schema_version": "autonomous-observation-v1",
+          "expected_backend": "mindspore",
+          "execution": {
+            "command": {
+              "status": "passed",
+              "returncode": 0,
+              "error": ""
+            },
+            "reference": {
+              "status": "passed",
+              "error": ""
+            },
+            "target": {
+              "status": "passed",
+              "error": ""
+            },
+            "training_reported": true,
+            "runtime_diagnostics": {
+              "text": "",
+              "truncated": false
+            }
+          },
+          "measurements": {
+            "loss_abs_diff": {
+              "status": "observed",
+              "value": 1.430511474609375e-06,
+              "reason": ""
+            },
+            "grad_norm_abs_diff": {
+              "status": "observed",
+              "value": 0.04596114158630371,
+              "reason": ""
+            },
+            "param_update_rel_l2": {
+              "status": "observed",
+              "value": 0.7711267081348738,
+              "reason": ""
+            }
+          },
+          "layer_differences": [
+            {
+              "name": "encoder.0",
+              "status": "observed",
+              "reference_value": 0.21846672892570496,
+              "target_value": 0.21846672892570496,
+              "abs_diff": 0.0
+            },
+            {
+              "name": "encoder.1",
+              "status": "observed",
+              "reference_value": 0.17819494009017944,
+              "target_value": 0.17819495499134064,
+              "abs_diff": 1.4901161193847656e-08
+            },
+            {
+              "name": "encoder.2",
+              "status": "observed",
+              "reference_value": -0.05332817882299423,
+              "target_value": -0.05332817882299423,
+              "abs_diff": 0.0
+            },
+            {
+              "name": "decoder",
+              "status": "observed",
+              "reference_value": -0.05724359676241875,
+              "target_value": -0.057243604212999344,
+              "abs_diff": 7.450580596923828e-09
+            },
+            {
+              "name": "head",
+              "status": "observed",
+              "reference_value": -0.20201411843299866,
+              "target_value": -0.20201411843299866,
+              "abs_diff": 0.0
+            }
+          ],
+          "parameter_updates": [
+            {
+              "name": "encoder.0.weight",
+              "status": "observed",
+              "reference_update_norm": 0.012248214334249496,
+              "candidate_update_norm": 1.8868575352826156e-05,
+              "update_diff_norm": 0.012246575206518173,
+              "update_rel_l2": 0.9998661740653406
+            },
+            {
+              "name": "encoder.0.bias",
+              "status": "observed",
+              "reference_update_norm": 0.00316177518106997,
+              "candidate_update_norm": 4.47518232249422e-06,
+              "update_diff_norm": 0.0031622787937521935,
+              "update_rel_l2": 1.0001592813066151
+            },
+            {
+              "name": "encoder.2.weight",
+              "status": "observed",
+              "reference_update_norm": 0.006325588095933199,
+              "candidate_update_norm": 0.006325588095933199,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "encoder.2.bias",
+              "status": "observed",
+              "reference_update_norm": 0.0019984247628599405,
+              "candidate_update_norm": 0.0019984247628599405,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.weight",
+              "status": "observed",
+              "reference_update_norm": 0.004003297071903944,
+              "candidate_update_norm": 0.004003297071903944,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.bias",
+              "status": "observed",
+              "reference_update_norm": 0.001996835693717003,
+              "candidate_update_norm": 0.001996835693717003,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "status": "observed",
+              "reference_update_norm": 0.006325353402644396,
+              "candidate_update_norm": 0.006325353402644396,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.bias",
+              "status": "observed",
+              "reference_update_norm": 0.0022337904665619135,
+              "candidate_update_norm": 0.0022337904665619135,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ],
+          "gradient_vector_comparison": {
+            "value": 0.35931411385536194,
+            "status": "observed",
+            "threshold": 0.05,
+            "parameters": [
+              {
+                "name": "encoder.0.weight",
+                "reference_gradient_norm": 0.3422238528728485,
+                "candidate_gradient_norm": 0.0,
+                "gradient_l2_diff": 0.3422238528728485
+              },
+              {
+                "name": "encoder.0.bias",
+                "reference_gradient_norm": 0.10949636250734329,
+                "candidate_gradient_norm": 0.0,
+                "gradient_l2_diff": 0.10949636250734329
+              },
+              {
+                "name": "encoder.2.weight",
+                "reference_gradient_norm": 0.32932889461517334,
+                "candidate_gradient_norm": 0.3293289840221405,
+                "gradient_l2_diff": 2.652741386555135e-07
+              },
+              {
+                "name": "encoder.2.bias",
+                "reference_gradient_norm": 0.2997775375843048,
+                "candidate_gradient_norm": 0.2997775971889496,
+                "gradient_l2_diff": 1.9432307851730002e-07
+              },
+              {
+                "name": "decoder.weight",
+                "reference_gradient_norm": 0.23585295677185059,
+                "candidate_gradient_norm": 0.23585300147533417,
+                "gradient_l2_diff": 1.4040827522876498e-07
+              },
+              {
+                "name": "decoder.bias",
+                "reference_gradient_norm": 0.3271910846233368,
+                "candidate_gradient_norm": 0.32719117403030396,
+                "gradient_l2_diff": 2.290371980961936e-07
+              },
+              {
+                "name": "head.weight",
+                "reference_gradient_norm": 0.8827728629112244,
+                "candidate_gradient_norm": 0.8827728033065796,
+                "gradient_l2_diff": 5.505306148734235e-07
+              },
+              {
+                "name": "head.bias",
+                "reference_gradient_norm": 0.8765590190887451,
+                "candidate_gradient_norm": 0.8765590190887451,
+                "gradient_l2_diff": 6.151129809950362e-07
+              }
+            ]
+          },
+          "acceptance": {
+            "accepted": false,
+            "reasons": [
+              "param_update_rel_l2",
+              "parameter_updates_agreement",
+              "gradient_vector_l2_unavailable_or_above_threshold"
+            ],
+            "checks": {
+              "schema": true,
+              "backend_attested": true,
+              "source_immutable": true,
+              "command_execution": true,
+              "reference_execution": true,
+              "target_execution": true,
+              "training_reported": true,
+              "loss_abs_diff": true,
+              "grad_norm_abs_diff": true,
+              "param_update_rel_l2": false,
+              "layer_differences_coverage": true,
+              "layer_differences_agreement": true,
+              "parameter_updates_coverage": true,
+              "parameter_updates_agreement": false,
+              "gradient_vector_l2": false
+            },
+            "thresholds": {
+              "loss_abs": 0.02,
+              "grad_norm_abs": 0.05,
+              "param_rel_l2": 0.03
+            }
+          },
+          "target_backend_observed": true,
+          "source_immutable": true
+        },
+        "accepted": false,
+        "measurement": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/natural10_v3/without_edit_format_feedback/conditions/task_008/autonomous_layered/evidence/measurement_0001",
+        "seed": 42
+      },
+      "final": {
+        "observation": {
+          "schema_version": "autonomous-observation-v1",
+          "expected_backend": "mindspore",
+          "execution": {
+            "command": {
+              "status": "passed",
+              "returncode": 0,
+              "error": ""
+            },
+            "reference": {
+              "status": "passed",
+              "error": ""
+            },
+            "target": {
+              "status": "passed",
+              "error": ""
+            },
+            "training_reported": true,
+            "runtime_diagnostics": {
+              "text": "",
+              "truncated": false
+            }
+          },
+          "measurements": {
+            "loss_abs_diff": {
+              "status": "observed",
+              "value": 1.430511474609375e-06,
+              "reason": ""
+            },
+            "grad_norm_abs_diff": {
+              "status": "observed",
+              "value": 0.0,
+              "reason": ""
+            },
+            "param_update_rel_l2": {
+              "status": "observed",
+              "value": 6.423932404404612e-06,
+              "reason": ""
+            }
+          },
+          "layer_differences": [
+            {
+              "name": "encoder.0",
+              "status": "observed",
+              "reference_value": 0.21846672892570496,
+              "target_value": 0.21846672892570496,
+              "abs_diff": 0.0
+            },
+            {
+              "name": "encoder.1",
+              "status": "observed",
+              "reference_value": 0.17819494009017944,
+              "target_value": 0.17819495499134064,
+              "abs_diff": 1.4901161193847656e-08
+            },
+            {
+              "name": "encoder.2",
+              "status": "observed",
+              "reference_value": -0.05332817882299423,
+              "target_value": -0.05332818254828453,
+              "abs_diff": 3.725290298461914e-09
+            },
+            {
+              "name": "decoder",
+              "status": "observed",
+              "reference_value": -0.05724359676241875,
+              "target_value": -0.057243604212999344,
+              "abs_diff": 7.450580596923828e-09
+            },
+            {
+              "name": "head",
+              "status": "observed",
+              "reference_value": -0.20201411843299866,
+              "target_value": -0.20201413333415985,
+              "abs_diff": 1.4901161193847656e-08
+            }
+          ],
+          "parameter_updates": [
+            {
+              "name": "encoder.0.weight",
+              "status": "observed",
+              "reference_update_norm": 0.012248214334249496,
+              "candidate_update_norm": 0.0122482068836689,
+              "update_diff_norm": 1.0536737704569532e-07,
+              "update_rel_l2": 8.602672533452932e-06
+            },
+            {
+              "name": "encoder.0.bias",
+              "status": "observed",
+              "reference_update_norm": 0.00316177518106997,
+              "candidate_update_norm": 0.00316177518106997,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "encoder.2.weight",
+              "status": "observed",
+              "reference_update_norm": 0.006325588095933199,
+              "candidate_update_norm": 0.006325588095933199,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "encoder.2.bias",
+              "status": "observed",
+              "reference_update_norm": 0.0019984247628599405,
+              "candidate_update_norm": 0.0019984247628599405,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.weight",
+              "status": "observed",
+              "reference_update_norm": 0.004003297071903944,
+              "candidate_update_norm": 0.004003297071903944,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.bias",
+              "status": "observed",
+              "reference_update_norm": 0.001996835693717003,
+              "candidate_update_norm": 0.001996835693717003,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "status": "observed",
+              "reference_update_norm": 0.006325353402644396,
+              "candidate_update_norm": 0.006325353402644396,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.bias",
+              "status": "observed",
+              "reference_update_norm": 0.0022337904665619135,
+              "candidate_update_norm": 0.0022337904665619135,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ],
+          "gradient_vector_comparison": {
+            "value": 1.0120579645445105e-06,
+            "status": "observed",
+            "threshold": 0.05,
+            "parameters": [
+              {
+                "name": "encoder.0.weight",
+                "reference_gradient_norm": 0.3422238528728485,
+                "candidate_gradient_norm": 0.3422240614891052,
+                "gradient_l2_diff": 4.180900532446685e-07
+              },
+              {
+                "name": "encoder.0.bias",
+                "reference_gradient_norm": 0.10949636250734329,
+                "candidate_gradient_norm": 0.10949641466140747,
+                "gradient_l2_diff": 9.38350837031976e-08
+              },
+              {
+                "name": "encoder.2.weight",
+                "reference_gradient_norm": 0.32932889461517334,
+                "candidate_gradient_norm": 0.3293289840221405,
+                "gradient_l2_diff": 2.6984787382389186e-07
+              },
+              {
+                "name": "encoder.2.bias",
+                "reference_gradient_norm": 0.2997775375843048,
+                "candidate_gradient_norm": 0.2997775971889496,
+                "gradient_l2_diff": 1.9432307851730002e-07
+              },
+              {
+                "name": "decoder.weight",
+                "reference_gradient_norm": 0.23585295677185059,
+                "candidate_gradient_norm": 0.23585298657417297,
+                "gradient_l2_diff": 1.3523833786166506e-07
+              },
+              {
+                "name": "decoder.bias",
+                "reference_gradient_norm": 0.3271910846233368,
+                "candidate_gradient_norm": 0.32719117403030396,
+                "gradient_l2_diff": 2.3015542183202342e-07
+              },
+              {
+                "name": "head.weight",
+                "reference_gradient_norm": 0.8827728629112244,
+                "candidate_gradient_norm": 0.8827728033065796,
+                "gradient_l2_diff": 5.452780555970094e-07
+              },
+              {
+                "name": "head.bias",
+                "reference_gradient_norm": 0.8765590190887451,
+                "candidate_gradient_norm": 0.8765590190887451,
+                "gradient_l2_diff": 6.012392077536788e-07
+              }
+            ]
+          },
+          "acceptance": {
+            "accepted": true,
+            "reasons": [],
+            "checks": {
+              "schema": true,
+              "backend_attested": true,
+              "source_immutable": true,
+              "command_execution": true,
+              "reference_execution": true,
+              "target_execution": true,
+              "training_reported": true,
+              "loss_abs_diff": true,
+              "grad_norm_abs_diff": true,
+              "param_update_rel_l2": true,
+              "layer_differences_coverage": true,
+              "layer_differences_agreement": true,
+              "parameter_updates_coverage": true,
+              "parameter_updates_agreement": true,
+              "gradient_vector_l2": true
+            },
+            "thresholds": {
+              "loss_abs": 0.02,
+              "grad_norm_abs": 0.05,
+              "param_rel_l2": 0.03
+            }
+          },
+          "target_backend_observed": true,
+          "source_immutable": true
+        },
+        "accepted": true,
+        "measurement": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/natural10_v3/without_edit_format_feedback/conditions/task_008/autonomous_layered/evidence/measurement_0006",
+        "seed": 42
+      },
+      "confirmations": [
+        {
+          "observation": {
+            "schema_version": "autonomous-observation-v1",
+            "expected_backend": "mindspore",
+            "execution": {
+              "command": {
+                "status": "passed",
+                "returncode": 0,
+                "error": ""
+              },
+              "reference": {
+                "status": "passed",
+                "error": ""
+              },
+              "target": {
+                "status": "passed",
+                "error": ""
+              },
+              "training_reported": true,
+              "runtime_diagnostics": {
+                "text": "",
+                "truncated": false
+              }
+            },
+            "measurements": {
+              "loss_abs_diff": {
+                "status": "observed",
+                "value": 7.152557373046875e-07,
+                "reason": ""
+              },
+              "grad_norm_abs_diff": {
+                "status": "observed",
+                "value": 1.1920928955078125e-07,
+                "reason": ""
+              },
+              "param_update_rel_l2": {
+                "status": "observed",
+                "value": 6.952975357199414e-08,
+                "reason": ""
+              }
+            },
+            "layer_differences": [
+              {
+                "name": "encoder.0",
+                "status": "observed",
+                "reference_value": -0.038853954523801804,
+                "target_value": -0.038853954523801804,
+                "abs_diff": 0.0
+              },
+              {
+                "name": "encoder.1",
+                "status": "observed",
+                "reference_value": -0.028012961149215698,
+                "target_value": -0.028012964874505997,
+                "abs_diff": 3.725290298461914e-09
+              },
+              {
+                "name": "encoder.2",
+                "status": "observed",
+                "reference_value": 0.003529973328113556,
+                "target_value": 0.0035299714654684067,
+                "abs_diff": 1.862645149230957e-09
+              },
+              {
+                "name": "decoder",
+                "status": "observed",
+                "reference_value": -0.18641118705272675,
+                "target_value": -0.18641118705272675,
+                "abs_diff": 0.0
+              },
+              {
+                "name": "head",
+                "status": "observed",
+                "reference_value": -0.02177043817937374,
+                "target_value": -0.021770432591438293,
+                "abs_diff": 5.587935447692871e-09
+              }
+            ],
+            "parameter_updates": [
+              {
+                "name": "encoder.0.weight",
+                "status": "observed",
+                "reference_update_norm": 0.012251725420355797,
+                "candidate_update_norm": 0.012251725420355797,
+                "update_diff_norm": 1.1406325883811519e-09,
+                "update_rel_l2": 9.309975119038601e-08
+              },
+              {
+                "name": "encoder.0.bias",
+                "status": "observed",
+                "reference_update_norm": 0.0031614641193300486,
+                "candidate_update_norm": 0.0031614641193300486,
+                "update_diff_norm": 0.0,
+                "update_rel_l2": 0.0
+              },
+              {
+                "name": "encoder.2.weight",
+                "status": "observed",
+                "reference_update_norm": 0.006325870286673307,
+                "candidate_update_norm": 0.006325870286673307,
+                "update_diff_norm": 0.0,
+                "update_rel_l2": 0.0
+              },
+              {
+                "name": "encoder.2.bias",
+                "status": "observed",
+                "reference_update_norm": 0.0020013870671391487,
+                "candidate_update_norm": 0.0020013870671391487,
+                "update_diff_norm": 0.0,
+                "update_rel_l2": 0.0
+              },
+              {
+                "name": "decoder.weight",
+                "status": "observed",
+                "reference_update_norm": 0.004000975284725428,
+                "candidate_update_norm": 0.004000975284725428,
+                "update_diff_norm": 0.0,
+                "update_rel_l2": 0.0
+              },
+              {
+                "name": "decoder.bias",
+                "status": "observed",
+                "reference_update_norm": 0.002001329092308879,
+                "candidate_update_norm": 0.002001329092308879,
+                "update_diff_norm": 0.0,
+                "update_rel_l2": 0.0
+              },
+              {
+                "name": "head.weight",
+                "status": "observed",
+                "reference_update_norm": 0.0063241273164749146,
+                "candidate_update_norm": 0.0063241273164749146,
+                "update_diff_norm": 0.0,
+                "update_rel_l2": 0.0
+              },
+              {
+                "name": "head.bias",
+                "status": "observed",
+                "reference_update_norm": 0.0022345224861055613,
+                "candidate_update_norm": 0.0022345224861055613,
+                "update_diff_norm": 0.0,
+                "update_rel_l2": 0.0
+              }
+            ],
+            "gradient_vector_comparison": {
+              "value": 4.944332090417447e-07,
+              "status": "observed",
+              "threshold": 0.05,
+              "parameters": [
+                {
+                  "name": "encoder.0.weight",
+                  "reference_gradient_norm": 0.18734832108020782,
+                  "candidate_gradient_norm": 0.18734829127788544,
+                  "gradient_l2_diff": 1.4080750077027915e-07
+                },
+                {
+                  "name": "encoder.0.bias",
+                  "reference_gradient_norm": 0.0648873820900917,
+                  "candidate_gradient_norm": 0.06488736718893051,
+                  "gradient_l2_diff": 4.747975879126898e-08
+                },
+                {
+                  "name": "encoder.2.weight",
+                  "reference_gradient_norm": 0.20781277120113373,
+                  "candidate_gradient_norm": 0.20781265199184418,
+                  "gradient_l2_diff": 1.977066688141349e-07
+                },
+                {
+                  "name": "encoder.2.bias",
+                  "reference_gradient_norm": 0.24056775867938995,
+                  "candidate_gradient_norm": 0.24056759476661682,
+                  "gradient_l2_diff": 1.961357440904976e-07
+                },
+                {
+                  "name": "decoder.weight",
+                  "reference_gradient_norm": 0.05593637377023697,
+                  "candidate_gradient_norm": 0.05593637749552727,
+                  "gradient_l2_diff": 9.661868638488613e-09
+                },
+                {
+                  "name": "decoder.bias",
+                  "reference_gradient_norm": 0.17899268865585327,
+                  "candidate_gradient_norm": 0.1789926439523697,
+                  "gradient_l2_diff": 9.071674611504932e-08
+                },
+                {
+                  "name": "head.weight",
+                  "reference_gradient_norm": 0.3321742117404938,
+                  "candidate_gradient_norm": 0.3321742117404938,
+                  "gradient_l2_diff": 1.7297871579557977e-07
+                },
+                {
+                  "name": "head.bias",
+                  "reference_gradient_norm": 0.5286672711372375,
+                  "candidate_gradient_norm": 0.5286672115325928,
+                  "gradient_l2_diff": 3.264680970005429e-07
+                }
+              ]
+            },
+            "acceptance": {
+              "accepted": true,
+              "reasons": [],
+              "checks": {
+                "schema": true,
+                "backend_attested": true,
+                "source_immutable": true,
+                "command_execution": true,
+                "reference_execution": true,
+                "target_execution": true,
+                "training_reported": true,
+                "loss_abs_diff": true,
+                "grad_norm_abs_diff": true,
+                "param_update_rel_l2": true,
+                "layer_differences_coverage": true,
+                "layer_differences_agreement": true,
+                "parameter_updates_coverage": true,
+                "parameter_updates_agreement": true,
+                "gradient_vector_l2": true
+              },
+              "thresholds": {
+                "loss_abs": 0.02,
+                "grad_norm_abs": 0.05,
+                "param_rel_l2": 0.03
+              }
+            },
+            "target_backend_observed": true,
+            "source_immutable": true
+          },
+          "accepted": true,
+          "measurement": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/natural10_v3/without_edit_format_feedback/conditions/task_008/autonomous_layered/evidence/measurement_0007",
+          "seed": 1042
+        },
+        {
+          "observation": {
+            "schema_version": "autonomous-observation-v1",
+            "expected_backend": "mindspore",
+            "execution": {
+              "command": {
+                "status": "passed",
+                "returncode": 0,
+                "error": ""
+              },
+              "reference": {
+                "status": "passed",
+                "error": ""
+              },
+              "target": {
+                "status": "passed",
+                "error": ""
+              },
+              "training_reported": true,
+              "runtime_diagnostics": {
+                "text": "",
+                "truncated": false
+              }
+            },
+            "measurements": {
+              "loss_abs_diff": {
+                "status": "observed",
+                "value": 4.76837158203125e-07,
+                "reason": ""
+              },
+              "grad_norm_abs_diff": {
+                "status": "observed",
+                "value": 1.1920928955078125e-07,
+                "reason": ""
+              },
+              "param_update_rel_l2": {
+                "status": "observed",
+                "value": 4.544458097492653e-07,
+                "reason": ""
+              }
+            },
+            "layer_differences": [
+              {
+                "name": "encoder.0",
+                "status": "observed",
+                "reference_value": 0.12111854553222656,
+                "target_value": 0.12111854553222656,
+                "abs_diff": 0.0
+              },
+              {
+                "name": "encoder.1",
+                "status": "observed",
+                "reference_value": 0.10288138687610626,
+                "target_value": 0.10288139432668686,
+                "abs_diff": 7.450580596923828e-09
+              },
+              {
+                "name": "encoder.2",
+                "status": "observed",
+                "reference_value": -0.1376594603061676,
+                "target_value": -0.1376594603061676,
+                "abs_diff": 0.0
+              },
+              {
+                "name": "decoder",
+                "status": "observed",
+                "reference_value": -0.15665799379348755,
+                "target_value": -0.15665800869464874,
+                "abs_diff": 1.4901161193847656e-08
+              },
+              {
+                "name": "head",
+                "status": "observed",
+                "reference_value": 0.08116762340068817,
+                "target_value": 0.08116763085126877,
+                "abs_diff": 7.450580596923828e-09
+              }
+            ],
+            "parameter_updates": [
+              {
+                "name": "encoder.0.weight",
+                "status": "observed",
+                "reference_update_norm": 0.01224490161985159,
+                "candidate_update_norm": 0.01224490161985159,
+                "update_diff_norm": 7.450580596923828e-09,
+                "update_rel_l2": 6.084639001293721e-07
+              },
+              {
+                "name": "encoder.0.bias",
+                "status": "observed",
+                "reference_update_norm": 0.0031592343002557755,
+                "candidate_update_norm": 0.0031592343002557755,
+                "update_diff_norm": 0.0,
+                "update_rel_l2": 0.0
+              },
+              {
+                "name": "encoder.2.weight",
+                "status": "observed",
+                "reference_update_norm": 0.006322263740003109,
+                "candidate_update_norm": 0.006322263740003109,
+                "update_diff_norm": 0.0,
+                "update_rel_l2": 0.0
+              },
+              {
+                "name": "encoder.2.bias",
+                "status": "observed",
+                "reference_update_norm": 0.0019978033378720284,
+                "candidate_update_norm": 0.0019978033378720284,
+                "update_diff_norm": 0.0,
+                "update_rel_l2": 0.0
+              },
+              {
+                "name": "decoder.weight",
+                "status": "observed",
+                "reference_update_norm": 0.003998699598014355,
+                "candidate_update_norm": 0.003998699598014355,
+                "update_diff_norm": 1.1641532182693481e-10,
+                "update_rel_l2": 2.9113295196175824e-08
+              },
+              {
+                "name": "decoder.bias",
+                "status": "observed",
+                "reference_update_norm": 0.0020006424747407436,
+                "candidate_update_norm": 0.0020006424747407436,
+                "update_diff_norm": 0.0,
+                "update_rel_l2": 0.0
+              },
+              {
+                "name": "head.weight",
+                "status": "observed",
+                "reference_update_norm": 0.006322928704321384,
+                "candidate_update_norm": 0.006322928704321384,
+                "update_diff_norm": 0.0,
+                "update_rel_l2": 0.0
+              },
+              {
+                "name": "head.bias",
+                "status": "observed",
+                "reference_update_norm": 0.002237241016700864,
+                "candidate_update_norm": 0.002237241016700864,
+                "update_diff_norm": 0.0,
+                "update_rel_l2": 0.0
+              }
+            ],
+            "gradient_vector_comparison": {
+              "value": 4.971215048499289e-07,
+              "status": "observed",
+              "threshold": 0.05,
+              "parameters": [
+                {
+                  "name": "encoder.0.weight",
+                  "reference_gradient_norm": 0.5052003264427185,
+                  "candidate_gradient_norm": 0.5052001476287842,
+                  "gradient_l2_diff": 3.099109733284422e-07
+                },
+                {
+                  "name": "encoder.0.bias",
+                  "reference_gradient_norm": 0.0838564932346344,
+                  "candidate_gradient_norm": 0.0838565081357956,
+                  "gradient_l2_diff": 4.716760315659485e-08
+                },
+                {
+                  "name": "encoder.2.weight",
+                  "reference_gradient_norm": 0.28473272919654846,
+                  "candidate_gradient_norm": 0.2847326099872589,
+                  "gradient_l2_diff": 2.2856386294733966e-07
+                },
+                {
+                  "name": "encoder.2.bias",
+                  "reference_gradient_norm": 0.1757408231496811,
+                  "candidate_gradient_norm": 0.17574083805084229,
+                  "gradient_l2_diff": 1.0751836043709773e-07
+                },
+                {
+                  "name": "decoder.weight",
+                  "reference_gradient_norm": 0.0734497532248497,
+                  "candidate_gradient_norm": 0.0734497532248497,
+                  "gradient_l2_diff": 5.7846143874940026e-08
+                },
+                {
+                  "name": "decoder.bias",
+                  "reference_gradient_norm": 0.06475967913866043,
+                  "candidate_gradient_norm": 0.06475970149040222,
+                  "gradient_l2_diff": 6.350090586693113e-08
+                },
+                {
+                  "name": "head.weight",
+                  "reference_gradient_norm": 0.45155754685401917,
+                  "candidate_gradient_norm": 0.45155760645866394,
+                  "gradient_l2_diff": 1.941958345241801e-07
+                },
+                {
+                  "name": "head.bias",
+                  "reference_gradient_norm": 0.545660674571991,
+                  "candidate_gradient_norm": 0.5456606149673462,
+                  "gradient_l2_diff": 1.9992005206859176e-07
+                }
+              ]
+            },
+            "acceptance": {
+              "accepted": true,
+              "reasons": [],
+              "checks": {
+                "schema": true,
+                "backend_attested": true,
+                "source_immutable": true,
+                "command_execution": true,
+                "reference_execution": true,
+                "target_execution": true,
+                "training_reported": true,
+                "loss_abs_diff": true,
+                "grad_norm_abs_diff": true,
+                "param_update_rel_l2": true,
+                "layer_differences_coverage": true,
+                "layer_differences_agreement": true,
+                "parameter_updates_coverage": true,
+                "parameter_updates_agreement": true,
+                "gradient_vector_l2": true
+              },
+              "thresholds": {
+                "loss_abs": 0.02,
+                "grad_norm_abs": 0.05,
+                "param_rel_l2": 0.03
+              }
+            },
+            "target_backend_observed": true,
+            "source_immutable": true
+          },
+          "accepted": true,
+          "measurement": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/natural10_v3/without_edit_format_feedback/conditions/task_008/autonomous_layered/evidence/measurement_0008",
+          "seed": 2042
+        }
+      ],
+      "initial_code_sha256": {
+        "candidate.py": "59df8647dfdaee2a8d4bfd78394ebcc941b5d6bf1f06c66afc94b8e45b1e59ec",
+        "torch4ms/__init__.py": "e4bc0b973066ffb04b2c3803a17b2954658626396e1920177f098ddc7f650c59",
+        "torch4ms/_autofix_probe_core.py": "e5e232200be4ed920b9fe3c65e02b82b9656c9099f229423bd444f407e8cf45d",
+        "torch4ms/_op_prim/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/ascend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/ascend/legacy.py": "8ce0076b0fa4a8ae0cd3ff4ab670079318f39c16a9e792fa5a1d9c93a86f40ba",
+        "torch4ms/_op_prim/ascend/pyboost.py": "aa4fa364895c07c57b0a2ee061014433b4df30f73242850c70e6d7518183030b",
+        "torch4ms/_op_prim/cpu/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/cpu/legacy.py": "58298fee5ab8dafd1d1223e5212251ad245ab936d0fd58d5f67d53260132757c",
+        "torch4ms/_op_prim/gpu/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/gpu/legacy.py": "d12cc92f9708b9d914de07e24f82905c8def103f3a20bb2df23690687de1be3b",
+        "torch4ms/amp.py": "f51fd07b7fdd31430c821ee5af50e71aed3f764e07c1f9bad6eca3ad80f0a2f8",
+        "torch4ms/aten/op_map.py": "e1e67ec23fbde9b5285468c948ca34212d47a7b6c5d3c85dddaa06d46db24ae5",
+        "torch4ms/aten/op_register.py": "a39ca8c90dffd5f0eb78cd8e5f3d2f0b0cf8845b5c0e3962ef35eb150b81f370",
+        "torch4ms/aten/utils.py": "127379877dce60adef4aeb7ebdabcaf152dc2db91470184340fa1a3ba0d52e21",
+        "torch4ms/autograd/__init__.py": "64e0d86aad95b852d4ed66f61a7f2de19eaa6d9dda6a6aefd9c3cfe5ba0dbeeb",
+        "torch4ms/autograd/forward_extractor.py": "4f686db0332da58132321c0a8430980f9a06f81661148fd2a5b2fe668852e987",
+        "torch4ms/autograd/graph_tracker.py": "a8343161cd4903caf39a82c1c099346ac03ae3da830e6efe637570970e4a8064",
+        "torch4ms/autograd/ms_autograd_function.py": "adcfac7b0f2d5580c08023b8a84537605f314b7df2f5cfcdd35461e25e29058b",
+        "torch4ms/checkpoint.py": "a44bf2491756be2c1713357a9334afcad689328d2654c4aef326e7e20fd85067",
+        "torch4ms/compatibility.py": "a5bfa7119beb454748fec5af7fdfda686730d8cf6afa1946448bddd2cad31edf",
+        "torch4ms/config.py": "cc194255f62c83cb03ae2d11a3305b007dfe52c42afa14b4737c4e998b7a29f8",
+        "torch4ms/decompositions.py": "72e64f62b17447cc04d72ab37b55b2b21e9e0e34cd903e72cc8cc15d8c121b9e",
+        "torch4ms/device_module.py": "190af23a6698a46eb3dfc907a71d548de20df99ab4527e457b0d0e4c47a9514b",
+        "torch4ms/distributed/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/flax.py": "c2b7e34369802497c7b2e1d68a0e43cebf59df346796186ea4994cdc91ddb5c0",
+        "torch4ms/mexport.py": "66f029e7ed97d253ec20d8f9b38dffca49546a420d94f83bc6580ed351a1a82b",
+        "torch4ms/minterop.py": "d313a2e285a73bac9fc7b768ff5349e0710f8d982ab9a8a270c628cff10396cb",
+        "torch4ms/ms_config.py": "39e7e0504b235d8ed2fe05bfd264fea0e68c1ee5cd9a3fe34ecb4ae13edc74c0",
+        "torch4ms/ops/mappings.py": "662bce276594cb3d6dc78fc9bac4be598936752031f94d9dabd7f003410a0778",
+        "torch4ms/ops/maten.py": "56b665a48e01c8670a16b0e2cdab2ce81b943f1f16a26516626c2429f131c5c7",
+        "torch4ms/ops/mc10d.py": "6144c8d2224a09bc048b3129eed2fb805f0bed34ba28f288a13c4495d0a65bf6",
+        "torch4ms/ops/mimage.py": "3a35fa4639e7559e47e2b8a4bca17728008368080cfc1ced98f72bf2ddba70b8",
+        "torch4ms/ops/mten.py": "ebfc62c6c001e25ea8f1561d721b1959846357fcb98e5a9e914ef1e254bc9522",
+        "torch4ms/ops/mtorch.py": "1731a06fe04cc141c886b1e8434973e24f75db55d560b5fb447d3649e5f8d270",
+        "torch4ms/ops/mtorchvision_nms.py": "3072fdb5b9393c415fe391445505e3847152aeba04f6de24541218b32eb92727",
+        "torch4ms/ops/op_base.py": "3421c40f5179d232f1c57a744beea392f20d114b69e16e7f849fddb1f5b95f77",
+        "torch4ms/ops/ops_registry.py": "c3840950ac6790306c12c920aee98836d203658dc989dca256221c796f10be0c",
+        "torch4ms/optim/__init__.py": "e9d9b658a3347f180a3cd7c14a3305e2c5a62ab438f54fe79f2943031698c99f",
+        "torch4ms/optim/optimizer.py": "b5ae83096512d98596186faf18ed6b82331e70181372e52f539aa891d600cd30",
+        "torch4ms/tensor.py": "6efa95a9d76c1c0528da5438caf26f8c641faa2b70d38c35aa86c268ca060f6c",
+        "torch4ms/types.py": "6e8a3a3bf34183b18dc41c013c307f6cbdb4c0b8e75753c721f988f04e265034",
+        "torch4ms/util.py": "71bf9eb9d0c4ec05f6b3eeb362d5dda30832cf2bea3ea13d30f3fcd8f7c7db78",
+        "torch4ms/view.py": "01a5f288592c4e636a079aef629b3c1c0dc58e108e6abaf9e798a8b1fab6e45c"
+      },
+      "final_code_sha256": {
+        "candidate.py": "59df8647dfdaee2a8d4bfd78394ebcc941b5d6bf1f06c66afc94b8e45b1e59ec",
+        "torch4ms/__init__.py": "e4bc0b973066ffb04b2c3803a17b2954658626396e1920177f098ddc7f650c59",
+        "torch4ms/_autofix_probe_core.py": "e5e232200be4ed920b9fe3c65e02b82b9656c9099f229423bd444f407e8cf45d",
+        "torch4ms/_op_prim/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/ascend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/ascend/legacy.py": "8ce0076b0fa4a8ae0cd3ff4ab670079318f39c16a9e792fa5a1d9c93a86f40ba",
+        "torch4ms/_op_prim/ascend/pyboost.py": "aa4fa364895c07c57b0a2ee061014433b4df30f73242850c70e6d7518183030b",
+        "torch4ms/_op_prim/cpu/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/cpu/legacy.py": "58298fee5ab8dafd1d1223e5212251ad245ab936d0fd58d5f67d53260132757c",
+        "torch4ms/_op_prim/gpu/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/gpu/legacy.py": "d12cc92f9708b9d914de07e24f82905c8def103f3a20bb2df23690687de1be3b",
+        "torch4ms/amp.py": "f51fd07b7fdd31430c821ee5af50e71aed3f764e07c1f9bad6eca3ad80f0a2f8",
+        "torch4ms/aten/op_map.py": "e1e67ec23fbde9b5285468c948ca34212d47a7b6c5d3c85dddaa06d46db24ae5",
+        "torch4ms/aten/op_register.py": "a39ca8c90dffd5f0eb78cd8e5f3d2f0b0cf8845b5c0e3962ef35eb150b81f370",
+        "torch4ms/aten/utils.py": "127379877dce60adef4aeb7ebdabcaf152dc2db91470184340fa1a3ba0d52e21",
+        "torch4ms/autograd/__init__.py": "64e0d86aad95b852d4ed66f61a7f2de19eaa6d9dda6a6aefd9c3cfe5ba0dbeeb",
+        "torch4ms/autograd/forward_extractor.py": "4f686db0332da58132321c0a8430980f9a06f81661148fd2a5b2fe668852e987",
+        "torch4ms/autograd/graph_tracker.py": "a8343161cd4903caf39a82c1c099346ac03ae3da830e6efe637570970e4a8064",
+        "torch4ms/autograd/ms_autograd_function.py": "adcfac7b0f2d5580c08023b8a84537605f314b7df2f5cfcdd35461e25e29058b",
+        "torch4ms/checkpoint.py": "a44bf2491756be2c1713357a9334afcad689328d2654c4aef326e7e20fd85067",
+        "torch4ms/compatibility.py": "a5bfa7119beb454748fec5af7fdfda686730d8cf6afa1946448bddd2cad31edf",
+        "torch4ms/config.py": "cc194255f62c83cb03ae2d11a3305b007dfe52c42afa14b4737c4e998b7a29f8",
+        "torch4ms/decompositions.py": "72e64f62b17447cc04d72ab37b55b2b21e9e0e34cd903e72cc8cc15d8c121b9e",
+        "torch4ms/device_module.py": "190af23a6698a46eb3dfc907a71d548de20df99ab4527e457b0d0e4c47a9514b",
+        "torch4ms/distributed/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/flax.py": "c2b7e34369802497c7b2e1d68a0e43cebf59df346796186ea4994cdc91ddb5c0",
+        "torch4ms/mexport.py": "66f029e7ed97d253ec20d8f9b38dffca49546a420d94f83bc6580ed351a1a82b",
+        "torch4ms/minterop.py": "d313a2e285a73bac9fc7b768ff5349e0710f8d982ab9a8a270c628cff10396cb",
+        "torch4ms/ms_config.py": "39e7e0504b235d8ed2fe05bfd264fea0e68c1ee5cd9a3fe34ecb4ae13edc74c0",
+        "torch4ms/ops/mappings.py": "662bce276594cb3d6dc78fc9bac4be598936752031f94d9dabd7f003410a0778",
+        "torch4ms/ops/maten.py": "56b665a48e01c8670a16b0e2cdab2ce81b943f1f16a26516626c2429f131c5c7",
+        "torch4ms/ops/mc10d.py": "6144c8d2224a09bc048b3129eed2fb805f0bed34ba28f288a13c4495d0a65bf6",
+        "torch4ms/ops/mimage.py": "3a35fa4639e7559e47e2b8a4bca17728008368080cfc1ced98f72bf2ddba70b8",
+        "torch4ms/ops/mten.py": "ebfc62c6c001e25ea8f1561d721b1959846357fcb98e5a9e914ef1e254bc9522",
+        "torch4ms/ops/mtorch.py": "e29e532cd4d673c5676522851ec233c193cf4f14e7074c7cb13fa1e1c98eeee1",
+        "torch4ms/ops/mtorchvision_nms.py": "3072fdb5b9393c415fe391445505e3847152aeba04f6de24541218b32eb92727",
+        "torch4ms/ops/op_base.py": "3421c40f5179d232f1c57a744beea392f20d114b69e16e7f849fddb1f5b95f77",
+        "torch4ms/ops/ops_registry.py": "c3840950ac6790306c12c920aee98836d203658dc989dca256221c796f10be0c",
+        "torch4ms/optim/__init__.py": "e9d9b658a3347f180a3cd7c14a3305e2c5a62ab438f54fe79f2943031698c99f",
+        "torch4ms/optim/optimizer.py": "b5ae83096512d98596186faf18ed6b82331e70181372e52f539aa891d600cd30",
+        "torch4ms/tensor.py": "6efa95a9d76c1c0528da5438caf26f8c641faa2b70d38c35aa86c268ca060f6c",
+        "torch4ms/types.py": "6e8a3a3bf34183b18dc41c013c307f6cbdb4c0b8e75753c721f988f04e265034",
+        "torch4ms/util.py": "71bf9eb9d0c4ec05f6b3eeb362d5dda30832cf2bea3ea13d30f3fcd8f7c7db78",
+        "torch4ms/view.py": "01a5f288592c4e636a079aef629b3c1c0dc58e108e6abaf9e798a8b1fab6e45c"
+      },
+      "result_source": {
+        "file": "task_008/ladim/result.json",
+        "remote_path": "/media/main/whj/projects/torch4ms/maintext-ablations-20260918/natural10_v3/without_edit_format_feedback/conditions/task_008/autonomous_layered/result.json",
+        "size": 105859,
+        "sha256": "fa5305a9af825e20aa3464aa4aa99ed72441bb7d9f95993532ce09be2c89b870"
+      }
+    },
+    {
+      "method": "SWE-agent",
+      "calls": 40,
+      "usage": {
+        "prompt_tokens": 1588205,
+        "completion_tokens": 17853,
+        "total_tokens": 1606058
+      },
+      "accepted": false,
+      "attempts": 1,
+      "stage_statuses": [
+        "call_budget_exhausted"
+      ],
+      "wall_time_seconds": 491.5911098269862,
+      "changed_production_files": [],
+      "initial": {
+        "observation": {
+          "schema_version": "autonomous-observation-v1",
+          "expected_backend": "mindspore",
+          "execution": {
+            "command": {
+              "status": "passed",
+              "returncode": 0,
+              "error": ""
+            },
+            "reference": {
+              "status": "passed",
+              "error": ""
+            },
+            "target": {
+              "status": "passed",
+              "error": ""
+            },
+            "training_reported": true,
+            "runtime_diagnostics": {
+              "text": "",
+              "truncated": false
+            }
+          },
+          "measurements": {
+            "loss_abs_diff": {
+              "status": "observed",
+              "value": 1.430511474609375e-06,
+              "reason": ""
+            },
+            "grad_norm_abs_diff": {
+              "status": "observed",
+              "value": 0.04596114158630371,
+              "reason": ""
+            },
+            "param_update_rel_l2": {
+              "status": "observed",
+              "value": 0.7711267081348738,
+              "reason": ""
+            }
+          },
+          "layer_differences": [
+            {
+              "name": "encoder.0",
+              "status": "observed",
+              "reference_value": 0.21846672892570496,
+              "target_value": 0.21846672892570496,
+              "abs_diff": 0.0
+            },
+            {
+              "name": "encoder.1",
+              "status": "observed",
+              "reference_value": 0.17819494009017944,
+              "target_value": 0.17819495499134064,
+              "abs_diff": 1.4901161193847656e-08
+            },
+            {
+              "name": "encoder.2",
+              "status": "observed",
+              "reference_value": -0.05332817882299423,
+              "target_value": -0.05332817882299423,
+              "abs_diff": 0.0
+            },
+            {
+              "name": "decoder",
+              "status": "observed",
+              "reference_value": -0.05724359676241875,
+              "target_value": -0.057243604212999344,
+              "abs_diff": 7.450580596923828e-09
+            },
+            {
+              "name": "head",
+              "status": "observed",
+              "reference_value": -0.20201411843299866,
+              "target_value": -0.20201411843299866,
+              "abs_diff": 0.0
+            }
+          ],
+          "parameter_updates": [
+            {
+              "name": "encoder.0.weight",
+              "status": "observed",
+              "reference_update_norm": 0.012248214334249496,
+              "candidate_update_norm": 1.8868575352826156e-05,
+              "update_diff_norm": 0.012246575206518173,
+              "update_rel_l2": 0.9998661740653406
+            },
+            {
+              "name": "encoder.0.bias",
+              "status": "observed",
+              "reference_update_norm": 0.00316177518106997,
+              "candidate_update_norm": 4.47518232249422e-06,
+              "update_diff_norm": 0.0031622787937521935,
+              "update_rel_l2": 1.0001592813066151
+            },
+            {
+              "name": "encoder.2.weight",
+              "status": "observed",
+              "reference_update_norm": 0.006325588095933199,
+              "candidate_update_norm": 0.006325588095933199,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "encoder.2.bias",
+              "status": "observed",
+              "reference_update_norm": 0.0019984247628599405,
+              "candidate_update_norm": 0.0019984247628599405,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.weight",
+              "status": "observed",
+              "reference_update_norm": 0.004003297071903944,
+              "candidate_update_norm": 0.004003297071903944,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.bias",
+              "status": "observed",
+              "reference_update_norm": 0.001996835693717003,
+              "candidate_update_norm": 0.001996835693717003,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "status": "observed",
+              "reference_update_norm": 0.006325353402644396,
+              "candidate_update_norm": 0.006325353402644396,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.bias",
+              "status": "observed",
+              "reference_update_norm": 0.0022337904665619135,
+              "candidate_update_norm": 0.0022337904665619135,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ],
+          "gradient_vector_comparison": {
+            "value": 0.35931411385536194,
+            "status": "observed",
+            "threshold": 0.05,
+            "parameters": [
+              {
+                "name": "encoder.0.weight",
+                "reference_gradient_norm": 0.3422238528728485,
+                "candidate_gradient_norm": 0.0,
+                "gradient_l2_diff": 0.3422238528728485
+              },
+              {
+                "name": "encoder.0.bias",
+                "reference_gradient_norm": 0.10949636250734329,
+                "candidate_gradient_norm": 0.0,
+                "gradient_l2_diff": 0.10949636250734329
+              },
+              {
+                "name": "encoder.2.weight",
+                "reference_gradient_norm": 0.32932889461517334,
+                "candidate_gradient_norm": 0.3293289840221405,
+                "gradient_l2_diff": 2.652741386555135e-07
+              },
+              {
+                "name": "encoder.2.bias",
+                "reference_gradient_norm": 0.2997775375843048,
+                "candidate_gradient_norm": 0.2997775971889496,
+                "gradient_l2_diff": 1.9432307851730002e-07
+              },
+              {
+                "name": "decoder.weight",
+                "reference_gradient_norm": 0.23585295677185059,
+                "candidate_gradient_norm": 0.23585300147533417,
+                "gradient_l2_diff": 1.4040827522876498e-07
+              },
+              {
+                "name": "decoder.bias",
+                "reference_gradient_norm": 0.3271910846233368,
+                "candidate_gradient_norm": 0.32719117403030396,
+                "gradient_l2_diff": 2.290371980961936e-07
+              },
+              {
+                "name": "head.weight",
+                "reference_gradient_norm": 0.8827728629112244,
+                "candidate_gradient_norm": 0.8827728033065796,
+                "gradient_l2_diff": 5.505306148734235e-07
+              },
+              {
+                "name": "head.bias",
+                "reference_gradient_norm": 0.8765590190887451,
+                "candidate_gradient_norm": 0.8765590190887451,
+                "gradient_l2_diff": 6.151129809950362e-07
+              }
+            ]
+          },
+          "acceptance": {
+            "accepted": false,
+            "reasons": [
+              "param_update_rel_l2",
+              "parameter_updates_agreement",
+              "gradient_vector_l2_unavailable_or_above_threshold"
+            ],
+            "checks": {
+              "schema": true,
+              "backend_attested": true,
+              "source_immutable": true,
+              "command_execution": true,
+              "reference_execution": true,
+              "target_execution": true,
+              "training_reported": true,
+              "loss_abs_diff": true,
+              "grad_norm_abs_diff": true,
+              "param_update_rel_l2": false,
+              "layer_differences_coverage": true,
+              "layer_differences_agreement": true,
+              "parameter_updates_coverage": true,
+              "parameter_updates_agreement": false,
+              "gradient_vector_l2": false
+            },
+            "thresholds": {
+              "loss_abs": 0.02,
+              "grad_norm_abs": 0.05,
+              "param_rel_l2": 0.03
+            }
+          },
+          "target_backend_observed": true,
+          "source_immutable": true
+        },
+        "accepted": false,
+        "measurement": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_verifier_20260917/formal_v3/conditions/task_008/swe_native_isolated/evidence/measurement_0001",
+        "seed": 42
+      },
+      "final": {
+        "observation": {
+          "schema_version": "autonomous-observation-v1",
+          "expected_backend": "mindspore",
+          "execution": {
+            "command": {
+              "status": "passed",
+              "returncode": 0,
+              "error": ""
+            },
+            "reference": {
+              "status": "passed",
+              "error": ""
+            },
+            "target": {
+              "status": "passed",
+              "error": ""
+            },
+            "training_reported": true,
+            "runtime_diagnostics": {
+              "text": "",
+              "truncated": false
+            }
+          },
+          "measurements": {
+            "loss_abs_diff": {
+              "status": "observed",
+              "value": 1.430511474609375e-06,
+              "reason": ""
+            },
+            "grad_norm_abs_diff": {
+              "status": "observed",
+              "value": 0.04596114158630371,
+              "reason": ""
+            },
+            "param_update_rel_l2": {
+              "status": "observed",
+              "value": 0.7711267081348738,
+              "reason": ""
+            }
+          },
+          "layer_differences": [
+            {
+              "name": "encoder.0",
+              "status": "observed",
+              "reference_value": 0.21846672892570496,
+              "target_value": 0.21846672892570496,
+              "abs_diff": 0.0
+            },
+            {
+              "name": "encoder.1",
+              "status": "observed",
+              "reference_value": 0.17819494009017944,
+              "target_value": 0.17819495499134064,
+              "abs_diff": 1.4901161193847656e-08
+            },
+            {
+              "name": "encoder.2",
+              "status": "observed",
+              "reference_value": -0.05332817882299423,
+              "target_value": -0.05332817882299423,
+              "abs_diff": 0.0
+            },
+            {
+              "name": "decoder",
+              "status": "observed",
+              "reference_value": -0.05724359676241875,
+              "target_value": -0.057243604212999344,
+              "abs_diff": 7.450580596923828e-09
+            },
+            {
+              "name": "head",
+              "status": "observed",
+              "reference_value": -0.20201411843299866,
+              "target_value": -0.20201411843299866,
+              "abs_diff": 0.0
+            }
+          ],
+          "parameter_updates": [
+            {
+              "name": "encoder.0.weight",
+              "status": "observed",
+              "reference_update_norm": 0.012248214334249496,
+              "candidate_update_norm": 1.8868575352826156e-05,
+              "update_diff_norm": 0.012246575206518173,
+              "update_rel_l2": 0.9998661740653406
+            },
+            {
+              "name": "encoder.0.bias",
+              "status": "observed",
+              "reference_update_norm": 0.00316177518106997,
+              "candidate_update_norm": 4.47518232249422e-06,
+              "update_diff_norm": 0.0031622787937521935,
+              "update_rel_l2": 1.0001592813066151
+            },
+            {
+              "name": "encoder.2.weight",
+              "status": "observed",
+              "reference_update_norm": 0.006325588095933199,
+              "candidate_update_norm": 0.006325588095933199,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "encoder.2.bias",
+              "status": "observed",
+              "reference_update_norm": 0.0019984247628599405,
+              "candidate_update_norm": 0.0019984247628599405,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.weight",
+              "status": "observed",
+              "reference_update_norm": 0.004003297071903944,
+              "candidate_update_norm": 0.004003297071903944,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.bias",
+              "status": "observed",
+              "reference_update_norm": 0.001996835693717003,
+              "candidate_update_norm": 0.001996835693717003,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "status": "observed",
+              "reference_update_norm": 0.006325353402644396,
+              "candidate_update_norm": 0.006325353402644396,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.bias",
+              "status": "observed",
+              "reference_update_norm": 0.0022337904665619135,
+              "candidate_update_norm": 0.0022337904665619135,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ],
+          "gradient_vector_comparison": {
+            "value": 0.35931411385536194,
+            "status": "observed",
+            "threshold": 0.05,
+            "parameters": [
+              {
+                "name": "encoder.0.weight",
+                "reference_gradient_norm": 0.3422238528728485,
+                "candidate_gradient_norm": 0.0,
+                "gradient_l2_diff": 0.3422238528728485
+              },
+              {
+                "name": "encoder.0.bias",
+                "reference_gradient_norm": 0.10949636250734329,
+                "candidate_gradient_norm": 0.0,
+                "gradient_l2_diff": 0.10949636250734329
+              },
+              {
+                "name": "encoder.2.weight",
+                "reference_gradient_norm": 0.32932889461517334,
+                "candidate_gradient_norm": 0.3293289840221405,
+                "gradient_l2_diff": 2.652741386555135e-07
+              },
+              {
+                "name": "encoder.2.bias",
+                "reference_gradient_norm": 0.2997775375843048,
+                "candidate_gradient_norm": 0.2997775971889496,
+                "gradient_l2_diff": 1.9432307851730002e-07
+              },
+              {
+                "name": "decoder.weight",
+                "reference_gradient_norm": 0.23585295677185059,
+                "candidate_gradient_norm": 0.23585300147533417,
+                "gradient_l2_diff": 1.4040827522876498e-07
+              },
+              {
+                "name": "decoder.bias",
+                "reference_gradient_norm": 0.3271910846233368,
+                "candidate_gradient_norm": 0.32719117403030396,
+                "gradient_l2_diff": 2.290371980961936e-07
+              },
+              {
+                "name": "head.weight",
+                "reference_gradient_norm": 0.8827728629112244,
+                "candidate_gradient_norm": 0.8827728033065796,
+                "gradient_l2_diff": 5.505306148734235e-07
+              },
+              {
+                "name": "head.bias",
+                "reference_gradient_norm": 0.8765590190887451,
+                "candidate_gradient_norm": 0.8765590190887451,
+                "gradient_l2_diff": 6.151129809950362e-07
+              }
+            ]
+          },
+          "acceptance": {
+            "accepted": false,
+            "reasons": [
+              "param_update_rel_l2",
+              "parameter_updates_agreement",
+              "gradient_vector_l2_unavailable_or_above_threshold"
+            ],
+            "checks": {
+              "schema": true,
+              "backend_attested": true,
+              "source_immutable": true,
+              "command_execution": true,
+              "reference_execution": true,
+              "target_execution": true,
+              "training_reported": true,
+              "loss_abs_diff": true,
+              "grad_norm_abs_diff": true,
+              "param_update_rel_l2": false,
+              "layer_differences_coverage": true,
+              "layer_differences_agreement": true,
+              "parameter_updates_coverage": true,
+              "parameter_updates_agreement": false,
+              "gradient_vector_l2": false
+            },
+            "thresholds": {
+              "loss_abs": 0.02,
+              "grad_norm_abs": 0.05,
+              "param_rel_l2": 0.03
+            }
+          },
+          "target_backend_observed": true,
+          "source_immutable": true
+        },
+        "accepted": false,
+        "measurement": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_verifier_20260917/formal_v3/conditions/task_008/swe_native_isolated/evidence/measurement_0004",
+        "seed": 42
+      },
+      "confirmations": [],
+      "initial_code_sha256": {
+        "candidate.py": "59df8647dfdaee2a8d4bfd78394ebcc941b5d6bf1f06c66afc94b8e45b1e59ec",
+        "torch4ms/__init__.py": "e4bc0b973066ffb04b2c3803a17b2954658626396e1920177f098ddc7f650c59",
+        "torch4ms/_autofix_probe_core.py": "e5e232200be4ed920b9fe3c65e02b82b9656c9099f229423bd444f407e8cf45d",
+        "torch4ms/_op_prim/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/ascend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/ascend/legacy.py": "8ce0076b0fa4a8ae0cd3ff4ab670079318f39c16a9e792fa5a1d9c93a86f40ba",
+        "torch4ms/_op_prim/ascend/pyboost.py": "aa4fa364895c07c57b0a2ee061014433b4df30f73242850c70e6d7518183030b",
+        "torch4ms/_op_prim/cpu/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/cpu/legacy.py": "58298fee5ab8dafd1d1223e5212251ad245ab936d0fd58d5f67d53260132757c",
+        "torch4ms/_op_prim/gpu/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/gpu/legacy.py": "d12cc92f9708b9d914de07e24f82905c8def103f3a20bb2df23690687de1be3b",
+        "torch4ms/amp.py": "f51fd07b7fdd31430c821ee5af50e71aed3f764e07c1f9bad6eca3ad80f0a2f8",
+        "torch4ms/aten/op_map.py": "e1e67ec23fbde9b5285468c948ca34212d47a7b6c5d3c85dddaa06d46db24ae5",
+        "torch4ms/aten/op_register.py": "a39ca8c90dffd5f0eb78cd8e5f3d2f0b0cf8845b5c0e3962ef35eb150b81f370",
+        "torch4ms/aten/utils.py": "127379877dce60adef4aeb7ebdabcaf152dc2db91470184340fa1a3ba0d52e21",
+        "torch4ms/autograd/__init__.py": "64e0d86aad95b852d4ed66f61a7f2de19eaa6d9dda6a6aefd9c3cfe5ba0dbeeb",
+        "torch4ms/autograd/forward_extractor.py": "4f686db0332da58132321c0a8430980f9a06f81661148fd2a5b2fe668852e987",
+        "torch4ms/autograd/graph_tracker.py": "a8343161cd4903caf39a82c1c099346ac03ae3da830e6efe637570970e4a8064",
+        "torch4ms/autograd/ms_autograd_function.py": "adcfac7b0f2d5580c08023b8a84537605f314b7df2f5cfcdd35461e25e29058b",
+        "torch4ms/checkpoint.py": "a44bf2491756be2c1713357a9334afcad689328d2654c4aef326e7e20fd85067",
+        "torch4ms/compatibility.py": "a5bfa7119beb454748fec5af7fdfda686730d8cf6afa1946448bddd2cad31edf",
+        "torch4ms/config.py": "cc194255f62c83cb03ae2d11a3305b007dfe52c42afa14b4737c4e998b7a29f8",
+        "torch4ms/decompositions.py": "72e64f62b17447cc04d72ab37b55b2b21e9e0e34cd903e72cc8cc15d8c121b9e",
+        "torch4ms/device_module.py": "190af23a6698a46eb3dfc907a71d548de20df99ab4527e457b0d0e4c47a9514b",
+        "torch4ms/distributed/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/flax.py": "c2b7e34369802497c7b2e1d68a0e43cebf59df346796186ea4994cdc91ddb5c0",
+        "torch4ms/mexport.py": "66f029e7ed97d253ec20d8f9b38dffca49546a420d94f83bc6580ed351a1a82b",
+        "torch4ms/minterop.py": "d313a2e285a73bac9fc7b768ff5349e0710f8d982ab9a8a270c628cff10396cb",
+        "torch4ms/ms_config.py": "39e7e0504b235d8ed2fe05bfd264fea0e68c1ee5cd9a3fe34ecb4ae13edc74c0",
+        "torch4ms/ops/mappings.py": "662bce276594cb3d6dc78fc9bac4be598936752031f94d9dabd7f003410a0778",
+        "torch4ms/ops/maten.py": "56b665a48e01c8670a16b0e2cdab2ce81b943f1f16a26516626c2429f131c5c7",
+        "torch4ms/ops/mc10d.py": "6144c8d2224a09bc048b3129eed2fb805f0bed34ba28f288a13c4495d0a65bf6",
+        "torch4ms/ops/mimage.py": "3a35fa4639e7559e47e2b8a4bca17728008368080cfc1ced98f72bf2ddba70b8",
+        "torch4ms/ops/mten.py": "ebfc62c6c001e25ea8f1561d721b1959846357fcb98e5a9e914ef1e254bc9522",
+        "torch4ms/ops/mtorch.py": "1731a06fe04cc141c886b1e8434973e24f75db55d560b5fb447d3649e5f8d270",
+        "torch4ms/ops/mtorchvision_nms.py": "3072fdb5b9393c415fe391445505e3847152aeba04f6de24541218b32eb92727",
+        "torch4ms/ops/op_base.py": "3421c40f5179d232f1c57a744beea392f20d114b69e16e7f849fddb1f5b95f77",
+        "torch4ms/ops/ops_registry.py": "c3840950ac6790306c12c920aee98836d203658dc989dca256221c796f10be0c",
+        "torch4ms/optim/__init__.py": "e9d9b658a3347f180a3cd7c14a3305e2c5a62ab438f54fe79f2943031698c99f",
+        "torch4ms/optim/optimizer.py": "b5ae83096512d98596186faf18ed6b82331e70181372e52f539aa891d600cd30",
+        "torch4ms/tensor.py": "6efa95a9d76c1c0528da5438caf26f8c641faa2b70d38c35aa86c268ca060f6c",
+        "torch4ms/types.py": "6e8a3a3bf34183b18dc41c013c307f6cbdb4c0b8e75753c721f988f04e265034",
+        "torch4ms/util.py": "71bf9eb9d0c4ec05f6b3eeb362d5dda30832cf2bea3ea13d30f3fcd8f7c7db78",
+        "torch4ms/view.py": "01a5f288592c4e636a079aef629b3c1c0dc58e108e6abaf9e798a8b1fab6e45c"
+      },
+      "final_code_sha256": {
+        "candidate.py": "59df8647dfdaee2a8d4bfd78394ebcc941b5d6bf1f06c66afc94b8e45b1e59ec",
+        "torch4ms/__init__.py": "e4bc0b973066ffb04b2c3803a17b2954658626396e1920177f098ddc7f650c59",
+        "torch4ms/_autofix_probe_core.py": "e5e232200be4ed920b9fe3c65e02b82b9656c9099f229423bd444f407e8cf45d",
+        "torch4ms/_op_prim/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/ascend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/ascend/legacy.py": "8ce0076b0fa4a8ae0cd3ff4ab670079318f39c16a9e792fa5a1d9c93a86f40ba",
+        "torch4ms/_op_prim/ascend/pyboost.py": "aa4fa364895c07c57b0a2ee061014433b4df30f73242850c70e6d7518183030b",
+        "torch4ms/_op_prim/cpu/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/cpu/legacy.py": "58298fee5ab8dafd1d1223e5212251ad245ab936d0fd58d5f67d53260132757c",
+        "torch4ms/_op_prim/gpu/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/gpu/legacy.py": "d12cc92f9708b9d914de07e24f82905c8def103f3a20bb2df23690687de1be3b",
+        "torch4ms/amp.py": "f51fd07b7fdd31430c821ee5af50e71aed3f764e07c1f9bad6eca3ad80f0a2f8",
+        "torch4ms/aten/op_map.py": "e1e67ec23fbde9b5285468c948ca34212d47a7b6c5d3c85dddaa06d46db24ae5",
+        "torch4ms/aten/op_register.py": "a39ca8c90dffd5f0eb78cd8e5f3d2f0b0cf8845b5c0e3962ef35eb150b81f370",
+        "torch4ms/aten/utils.py": "127379877dce60adef4aeb7ebdabcaf152dc2db91470184340fa1a3ba0d52e21",
+        "torch4ms/autograd/__init__.py": "64e0d86aad95b852d4ed66f61a7f2de19eaa6d9dda6a6aefd9c3cfe5ba0dbeeb",
+        "torch4ms/autograd/forward_extractor.py": "4f686db0332da58132321c0a8430980f9a06f81661148fd2a5b2fe668852e987",
+        "torch4ms/autograd/graph_tracker.py": "a8343161cd4903caf39a82c1c099346ac03ae3da830e6efe637570970e4a8064",
+        "torch4ms/autograd/ms_autograd_function.py": "adcfac7b0f2d5580c08023b8a84537605f314b7df2f5cfcdd35461e25e29058b",
+        "torch4ms/checkpoint.py": "a44bf2491756be2c1713357a9334afcad689328d2654c4aef326e7e20fd85067",
+        "torch4ms/compatibility.py": "a5bfa7119beb454748fec5af7fdfda686730d8cf6afa1946448bddd2cad31edf",
+        "torch4ms/config.py": "cc194255f62c83cb03ae2d11a3305b007dfe52c42afa14b4737c4e998b7a29f8",
+        "torch4ms/decompositions.py": "72e64f62b17447cc04d72ab37b55b2b21e9e0e34cd903e72cc8cc15d8c121b9e",
+        "torch4ms/device_module.py": "190af23a6698a46eb3dfc907a71d548de20df99ab4527e457b0d0e4c47a9514b",
+        "torch4ms/distributed/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/flax.py": "c2b7e34369802497c7b2e1d68a0e43cebf59df346796186ea4994cdc91ddb5c0",
+        "torch4ms/mexport.py": "66f029e7ed97d253ec20d8f9b38dffca49546a420d94f83bc6580ed351a1a82b",
+        "torch4ms/minterop.py": "d313a2e285a73bac9fc7b768ff5349e0710f8d982ab9a8a270c628cff10396cb",
+        "torch4ms/ms_config.py": "39e7e0504b235d8ed2fe05bfd264fea0e68c1ee5cd9a3fe34ecb4ae13edc74c0",
+        "torch4ms/ops/mappings.py": "662bce276594cb3d6dc78fc9bac4be598936752031f94d9dabd7f003410a0778",
+        "torch4ms/ops/maten.py": "56b665a48e01c8670a16b0e2cdab2ce81b943f1f16a26516626c2429f131c5c7",
+        "torch4ms/ops/mc10d.py": "6144c8d2224a09bc048b3129eed2fb805f0bed34ba28f288a13c4495d0a65bf6",
+        "torch4ms/ops/mimage.py": "3a35fa4639e7559e47e2b8a4bca17728008368080cfc1ced98f72bf2ddba70b8",
+        "torch4ms/ops/mten.py": "ebfc62c6c001e25ea8f1561d721b1959846357fcb98e5a9e914ef1e254bc9522",
+        "torch4ms/ops/mtorch.py": "1731a06fe04cc141c886b1e8434973e24f75db55d560b5fb447d3649e5f8d270",
+        "torch4ms/ops/mtorchvision_nms.py": "3072fdb5b9393c415fe391445505e3847152aeba04f6de24541218b32eb92727",
+        "torch4ms/ops/op_base.py": "3421c40f5179d232f1c57a744beea392f20d114b69e16e7f849fddb1f5b95f77",
+        "torch4ms/ops/ops_registry.py": "c3840950ac6790306c12c920aee98836d203658dc989dca256221c796f10be0c",
+        "torch4ms/optim/__init__.py": "e9d9b658a3347f180a3cd7c14a3305e2c5a62ab438f54fe79f2943031698c99f",
+        "torch4ms/optim/optimizer.py": "b5ae83096512d98596186faf18ed6b82331e70181372e52f539aa891d600cd30",
+        "torch4ms/tensor.py": "6efa95a9d76c1c0528da5438caf26f8c641faa2b70d38c35aa86c268ca060f6c",
+        "torch4ms/types.py": "6e8a3a3bf34183b18dc41c013c307f6cbdb4c0b8e75753c721f988f04e265034",
+        "torch4ms/util.py": "71bf9eb9d0c4ec05f6b3eeb362d5dda30832cf2bea3ea13d30f3fcd8f7c7db78",
+        "torch4ms/view.py": "01a5f288592c4e636a079aef629b3c1c0dc58e108e6abaf9e798a8b1fab6e45c"
+      },
+      "result_source": {
+        "file": "task_008/swe_native_isolated/result.json",
+        "remote_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_verifier_20260917/formal_v3/conditions/task_008/swe_native_isolated/result.json",
+        "size": 6352723,
+        "sha256": "f9ae759e3e273aeeee7d75d14a4b05be662545b54f3b4971f08fc06e98fac09a"
+      }
+    },
+    {
+      "method": "MatchFixAgent",
+      "calls": 40,
+      "usage": {
+        "prompt_tokens": 2312465,
+        "completion_tokens": 28143,
+        "total_tokens": 2340608
+      },
+      "accepted": false,
+      "attempts": 1,
+      "stage_statuses": [
+        "call_budget_exhausted"
+      ],
+      "wall_time_seconds": 344.90480202500476,
+      "changed_production_files": [],
+      "initial": {
+        "observation": {
+          "schema_version": "autonomous-observation-v1",
+          "expected_backend": "mindspore",
+          "execution": {
+            "command": {
+              "status": "passed",
+              "returncode": 0,
+              "error": ""
+            },
+            "reference": {
+              "status": "passed",
+              "error": ""
+            },
+            "target": {
+              "status": "passed",
+              "error": ""
+            },
+            "training_reported": true,
+            "runtime_diagnostics": {
+              "text": "",
+              "truncated": false
+            }
+          },
+          "measurements": {
+            "loss_abs_diff": {
+              "status": "observed",
+              "value": 1.430511474609375e-06,
+              "reason": ""
+            },
+            "grad_norm_abs_diff": {
+              "status": "observed",
+              "value": 0.04596114158630371,
+              "reason": ""
+            },
+            "param_update_rel_l2": {
+              "status": "observed",
+              "value": 0.7711267081348738,
+              "reason": ""
+            }
+          },
+          "layer_differences": [
+            {
+              "name": "encoder.0",
+              "status": "observed",
+              "reference_value": 0.21846672892570496,
+              "target_value": 0.21846672892570496,
+              "abs_diff": 0.0
+            },
+            {
+              "name": "encoder.1",
+              "status": "observed",
+              "reference_value": 0.17819494009017944,
+              "target_value": 0.17819495499134064,
+              "abs_diff": 1.4901161193847656e-08
+            },
+            {
+              "name": "encoder.2",
+              "status": "observed",
+              "reference_value": -0.05332817882299423,
+              "target_value": -0.05332817882299423,
+              "abs_diff": 0.0
+            },
+            {
+              "name": "decoder",
+              "status": "observed",
+              "reference_value": -0.05724359676241875,
+              "target_value": -0.057243604212999344,
+              "abs_diff": 7.450580596923828e-09
+            },
+            {
+              "name": "head",
+              "status": "observed",
+              "reference_value": -0.20201411843299866,
+              "target_value": -0.20201411843299866,
+              "abs_diff": 0.0
+            }
+          ],
+          "parameter_updates": [
+            {
+              "name": "encoder.0.weight",
+              "status": "observed",
+              "reference_update_norm": 0.012248214334249496,
+              "candidate_update_norm": 1.8868575352826156e-05,
+              "update_diff_norm": 0.012246575206518173,
+              "update_rel_l2": 0.9998661740653406
+            },
+            {
+              "name": "encoder.0.bias",
+              "status": "observed",
+              "reference_update_norm": 0.00316177518106997,
+              "candidate_update_norm": 4.47518232249422e-06,
+              "update_diff_norm": 0.0031622787937521935,
+              "update_rel_l2": 1.0001592813066151
+            },
+            {
+              "name": "encoder.2.weight",
+              "status": "observed",
+              "reference_update_norm": 0.006325588095933199,
+              "candidate_update_norm": 0.006325588095933199,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "encoder.2.bias",
+              "status": "observed",
+              "reference_update_norm": 0.0019984247628599405,
+              "candidate_update_norm": 0.0019984247628599405,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.weight",
+              "status": "observed",
+              "reference_update_norm": 0.004003297071903944,
+              "candidate_update_norm": 0.004003297071903944,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.bias",
+              "status": "observed",
+              "reference_update_norm": 0.001996835693717003,
+              "candidate_update_norm": 0.001996835693717003,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "status": "observed",
+              "reference_update_norm": 0.006325353402644396,
+              "candidate_update_norm": 0.006325353402644396,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.bias",
+              "status": "observed",
+              "reference_update_norm": 0.0022337904665619135,
+              "candidate_update_norm": 0.0022337904665619135,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ],
+          "gradient_vector_comparison": {
+            "value": 0.35931411385536194,
+            "status": "observed",
+            "threshold": 0.05,
+            "parameters": [
+              {
+                "name": "encoder.0.weight",
+                "reference_gradient_norm": 0.3422238528728485,
+                "candidate_gradient_norm": 0.0,
+                "gradient_l2_diff": 0.3422238528728485
+              },
+              {
+                "name": "encoder.0.bias",
+                "reference_gradient_norm": 0.10949636250734329,
+                "candidate_gradient_norm": 0.0,
+                "gradient_l2_diff": 0.10949636250734329
+              },
+              {
+                "name": "encoder.2.weight",
+                "reference_gradient_norm": 0.32932889461517334,
+                "candidate_gradient_norm": 0.3293289840221405,
+                "gradient_l2_diff": 2.652741386555135e-07
+              },
+              {
+                "name": "encoder.2.bias",
+                "reference_gradient_norm": 0.2997775375843048,
+                "candidate_gradient_norm": 0.2997775971889496,
+                "gradient_l2_diff": 1.9432307851730002e-07
+              },
+              {
+                "name": "decoder.weight",
+                "reference_gradient_norm": 0.23585295677185059,
+                "candidate_gradient_norm": 0.23585300147533417,
+                "gradient_l2_diff": 1.4040827522876498e-07
+              },
+              {
+                "name": "decoder.bias",
+                "reference_gradient_norm": 0.3271910846233368,
+                "candidate_gradient_norm": 0.32719117403030396,
+                "gradient_l2_diff": 2.290371980961936e-07
+              },
+              {
+                "name": "head.weight",
+                "reference_gradient_norm": 0.8827728629112244,
+                "candidate_gradient_norm": 0.8827728033065796,
+                "gradient_l2_diff": 5.505306148734235e-07
+              },
+              {
+                "name": "head.bias",
+                "reference_gradient_norm": 0.8765590190887451,
+                "candidate_gradient_norm": 0.8765590190887451,
+                "gradient_l2_diff": 6.151129809950362e-07
+              }
+            ]
+          },
+          "acceptance": {
+            "accepted": false,
+            "reasons": [
+              "param_update_rel_l2",
+              "parameter_updates_agreement",
+              "gradient_vector_l2_unavailable_or_above_threshold"
+            ],
+            "checks": {
+              "schema": true,
+              "backend_attested": true,
+              "source_immutable": true,
+              "command_execution": true,
+              "reference_execution": true,
+              "target_execution": true,
+              "training_reported": true,
+              "loss_abs_diff": true,
+              "grad_norm_abs_diff": true,
+              "param_update_rel_l2": false,
+              "layer_differences_coverage": true,
+              "layer_differences_agreement": true,
+              "parameter_updates_coverage": true,
+              "parameter_updates_agreement": false,
+              "gradient_vector_l2": false
+            },
+            "thresholds": {
+              "loss_abs": 0.02,
+              "grad_norm_abs": 0.05,
+              "param_rel_l2": 0.03
+            }
+          },
+          "target_backend_observed": true,
+          "source_immutable": true
+        },
+        "accepted": false,
+        "measurement": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_verifier_20260917/formal_v3/conditions/task_008/matchfix_full_orchestration/evidence/measurement_0001",
+        "seed": 42
+      },
+      "final": {
+        "observation": {
+          "schema_version": "autonomous-observation-v1",
+          "expected_backend": "mindspore",
+          "execution": {
+            "command": {
+              "status": "passed",
+              "returncode": 0,
+              "error": ""
+            },
+            "reference": {
+              "status": "passed",
+              "error": ""
+            },
+            "target": {
+              "status": "passed",
+              "error": ""
+            },
+            "training_reported": true,
+            "runtime_diagnostics": {
+              "text": "",
+              "truncated": false
+            }
+          },
+          "measurements": {
+            "loss_abs_diff": {
+              "status": "observed",
+              "value": 1.430511474609375e-06,
+              "reason": ""
+            },
+            "grad_norm_abs_diff": {
+              "status": "observed",
+              "value": 0.04596114158630371,
+              "reason": ""
+            },
+            "param_update_rel_l2": {
+              "status": "observed",
+              "value": 0.7711267081348738,
+              "reason": ""
+            }
+          },
+          "layer_differences": [
+            {
+              "name": "encoder.0",
+              "status": "observed",
+              "reference_value": 0.21846672892570496,
+              "target_value": 0.21846672892570496,
+              "abs_diff": 0.0
+            },
+            {
+              "name": "encoder.1",
+              "status": "observed",
+              "reference_value": 0.17819494009017944,
+              "target_value": 0.17819495499134064,
+              "abs_diff": 1.4901161193847656e-08
+            },
+            {
+              "name": "encoder.2",
+              "status": "observed",
+              "reference_value": -0.05332817882299423,
+              "target_value": -0.05332817882299423,
+              "abs_diff": 0.0
+            },
+            {
+              "name": "decoder",
+              "status": "observed",
+              "reference_value": -0.05724359676241875,
+              "target_value": -0.057243604212999344,
+              "abs_diff": 7.450580596923828e-09
+            },
+            {
+              "name": "head",
+              "status": "observed",
+              "reference_value": -0.20201411843299866,
+              "target_value": -0.20201411843299866,
+              "abs_diff": 0.0
+            }
+          ],
+          "parameter_updates": [
+            {
+              "name": "encoder.0.weight",
+              "status": "observed",
+              "reference_update_norm": 0.012248214334249496,
+              "candidate_update_norm": 1.8868575352826156e-05,
+              "update_diff_norm": 0.012246575206518173,
+              "update_rel_l2": 0.9998661740653406
+            },
+            {
+              "name": "encoder.0.bias",
+              "status": "observed",
+              "reference_update_norm": 0.00316177518106997,
+              "candidate_update_norm": 4.47518232249422e-06,
+              "update_diff_norm": 0.0031622787937521935,
+              "update_rel_l2": 1.0001592813066151
+            },
+            {
+              "name": "encoder.2.weight",
+              "status": "observed",
+              "reference_update_norm": 0.006325588095933199,
+              "candidate_update_norm": 0.006325588095933199,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "encoder.2.bias",
+              "status": "observed",
+              "reference_update_norm": 0.0019984247628599405,
+              "candidate_update_norm": 0.0019984247628599405,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.weight",
+              "status": "observed",
+              "reference_update_norm": 0.004003297071903944,
+              "candidate_update_norm": 0.004003297071903944,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "decoder.bias",
+              "status": "observed",
+              "reference_update_norm": 0.001996835693717003,
+              "candidate_update_norm": 0.001996835693717003,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.weight",
+              "status": "observed",
+              "reference_update_norm": 0.006325353402644396,
+              "candidate_update_norm": 0.006325353402644396,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            },
+            {
+              "name": "head.bias",
+              "status": "observed",
+              "reference_update_norm": 0.0022337904665619135,
+              "candidate_update_norm": 0.0022337904665619135,
+              "update_diff_norm": 0.0,
+              "update_rel_l2": 0.0
+            }
+          ],
+          "gradient_vector_comparison": {
+            "value": 0.35931411385536194,
+            "status": "observed",
+            "threshold": 0.05,
+            "parameters": [
+              {
+                "name": "encoder.0.weight",
+                "reference_gradient_norm": 0.3422238528728485,
+                "candidate_gradient_norm": 0.0,
+                "gradient_l2_diff": 0.3422238528728485
+              },
+              {
+                "name": "encoder.0.bias",
+                "reference_gradient_norm": 0.10949636250734329,
+                "candidate_gradient_norm": 0.0,
+                "gradient_l2_diff": 0.10949636250734329
+              },
+              {
+                "name": "encoder.2.weight",
+                "reference_gradient_norm": 0.32932889461517334,
+                "candidate_gradient_norm": 0.3293289840221405,
+                "gradient_l2_diff": 2.652741386555135e-07
+              },
+              {
+                "name": "encoder.2.bias",
+                "reference_gradient_norm": 0.2997775375843048,
+                "candidate_gradient_norm": 0.2997775971889496,
+                "gradient_l2_diff": 1.9432307851730002e-07
+              },
+              {
+                "name": "decoder.weight",
+                "reference_gradient_norm": 0.23585295677185059,
+                "candidate_gradient_norm": 0.23585300147533417,
+                "gradient_l2_diff": 1.4040827522876498e-07
+              },
+              {
+                "name": "decoder.bias",
+                "reference_gradient_norm": 0.3271910846233368,
+                "candidate_gradient_norm": 0.32719117403030396,
+                "gradient_l2_diff": 2.290371980961936e-07
+              },
+              {
+                "name": "head.weight",
+                "reference_gradient_norm": 0.8827728629112244,
+                "candidate_gradient_norm": 0.8827728033065796,
+                "gradient_l2_diff": 5.505306148734235e-07
+              },
+              {
+                "name": "head.bias",
+                "reference_gradient_norm": 0.8765590190887451,
+                "candidate_gradient_norm": 0.8765590190887451,
+                "gradient_l2_diff": 6.151129809950362e-07
+              }
+            ]
+          },
+          "acceptance": {
+            "accepted": false,
+            "reasons": [
+              "param_update_rel_l2",
+              "parameter_updates_agreement",
+              "gradient_vector_l2_unavailable_or_above_threshold"
+            ],
+            "checks": {
+              "schema": true,
+              "backend_attested": true,
+              "source_immutable": true,
+              "command_execution": true,
+              "reference_execution": true,
+              "target_execution": true,
+              "training_reported": true,
+              "loss_abs_diff": true,
+              "grad_norm_abs_diff": true,
+              "param_update_rel_l2": false,
+              "layer_differences_coverage": true,
+              "layer_differences_agreement": true,
+              "parameter_updates_coverage": true,
+              "parameter_updates_agreement": false,
+              "gradient_vector_l2": false
+            },
+            "thresholds": {
+              "loss_abs": 0.02,
+              "grad_norm_abs": 0.05,
+              "param_rel_l2": 0.03
+            }
+          },
+          "target_backend_observed": true,
+          "source_immutable": true
+        },
+        "accepted": false,
+        "measurement": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_verifier_20260917/formal_v3/conditions/task_008/matchfix_full_orchestration/evidence/measurement_0007",
+        "seed": 42
+      },
+      "confirmations": [],
+      "initial_code_sha256": {
+        "candidate.py": "59df8647dfdaee2a8d4bfd78394ebcc941b5d6bf1f06c66afc94b8e45b1e59ec",
+        "torch4ms/__init__.py": "e4bc0b973066ffb04b2c3803a17b2954658626396e1920177f098ddc7f650c59",
+        "torch4ms/_autofix_probe_core.py": "e5e232200be4ed920b9fe3c65e02b82b9656c9099f229423bd444f407e8cf45d",
+        "torch4ms/_op_prim/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/ascend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/ascend/legacy.py": "8ce0076b0fa4a8ae0cd3ff4ab670079318f39c16a9e792fa5a1d9c93a86f40ba",
+        "torch4ms/_op_prim/ascend/pyboost.py": "aa4fa364895c07c57b0a2ee061014433b4df30f73242850c70e6d7518183030b",
+        "torch4ms/_op_prim/cpu/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/cpu/legacy.py": "58298fee5ab8dafd1d1223e5212251ad245ab936d0fd58d5f67d53260132757c",
+        "torch4ms/_op_prim/gpu/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/gpu/legacy.py": "d12cc92f9708b9d914de07e24f82905c8def103f3a20bb2df23690687de1be3b",
+        "torch4ms/amp.py": "f51fd07b7fdd31430c821ee5af50e71aed3f764e07c1f9bad6eca3ad80f0a2f8",
+        "torch4ms/aten/op_map.py": "e1e67ec23fbde9b5285468c948ca34212d47a7b6c5d3c85dddaa06d46db24ae5",
+        "torch4ms/aten/op_register.py": "a39ca8c90dffd5f0eb78cd8e5f3d2f0b0cf8845b5c0e3962ef35eb150b81f370",
+        "torch4ms/aten/utils.py": "127379877dce60adef4aeb7ebdabcaf152dc2db91470184340fa1a3ba0d52e21",
+        "torch4ms/autograd/__init__.py": "64e0d86aad95b852d4ed66f61a7f2de19eaa6d9dda6a6aefd9c3cfe5ba0dbeeb",
+        "torch4ms/autograd/forward_extractor.py": "4f686db0332da58132321c0a8430980f9a06f81661148fd2a5b2fe668852e987",
+        "torch4ms/autograd/graph_tracker.py": "a8343161cd4903caf39a82c1c099346ac03ae3da830e6efe637570970e4a8064",
+        "torch4ms/autograd/ms_autograd_function.py": "adcfac7b0f2d5580c08023b8a84537605f314b7df2f5cfcdd35461e25e29058b",
+        "torch4ms/checkpoint.py": "a44bf2491756be2c1713357a9334afcad689328d2654c4aef326e7e20fd85067",
+        "torch4ms/compatibility.py": "a5bfa7119beb454748fec5af7fdfda686730d8cf6afa1946448bddd2cad31edf",
+        "torch4ms/config.py": "cc194255f62c83cb03ae2d11a3305b007dfe52c42afa14b4737c4e998b7a29f8",
+        "torch4ms/decompositions.py": "72e64f62b17447cc04d72ab37b55b2b21e9e0e34cd903e72cc8cc15d8c121b9e",
+        "torch4ms/device_module.py": "190af23a6698a46eb3dfc907a71d548de20df99ab4527e457b0d0e4c47a9514b",
+        "torch4ms/distributed/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/flax.py": "c2b7e34369802497c7b2e1d68a0e43cebf59df346796186ea4994cdc91ddb5c0",
+        "torch4ms/mexport.py": "66f029e7ed97d253ec20d8f9b38dffca49546a420d94f83bc6580ed351a1a82b",
+        "torch4ms/minterop.py": "d313a2e285a73bac9fc7b768ff5349e0710f8d982ab9a8a270c628cff10396cb",
+        "torch4ms/ms_config.py": "39e7e0504b235d8ed2fe05bfd264fea0e68c1ee5cd9a3fe34ecb4ae13edc74c0",
+        "torch4ms/ops/mappings.py": "662bce276594cb3d6dc78fc9bac4be598936752031f94d9dabd7f003410a0778",
+        "torch4ms/ops/maten.py": "56b665a48e01c8670a16b0e2cdab2ce81b943f1f16a26516626c2429f131c5c7",
+        "torch4ms/ops/mc10d.py": "6144c8d2224a09bc048b3129eed2fb805f0bed34ba28f288a13c4495d0a65bf6",
+        "torch4ms/ops/mimage.py": "3a35fa4639e7559e47e2b8a4bca17728008368080cfc1ced98f72bf2ddba70b8",
+        "torch4ms/ops/mten.py": "ebfc62c6c001e25ea8f1561d721b1959846357fcb98e5a9e914ef1e254bc9522",
+        "torch4ms/ops/mtorch.py": "1731a06fe04cc141c886b1e8434973e24f75db55d560b5fb447d3649e5f8d270",
+        "torch4ms/ops/mtorchvision_nms.py": "3072fdb5b9393c415fe391445505e3847152aeba04f6de24541218b32eb92727",
+        "torch4ms/ops/op_base.py": "3421c40f5179d232f1c57a744beea392f20d114b69e16e7f849fddb1f5b95f77",
+        "torch4ms/ops/ops_registry.py": "c3840950ac6790306c12c920aee98836d203658dc989dca256221c796f10be0c",
+        "torch4ms/optim/__init__.py": "e9d9b658a3347f180a3cd7c14a3305e2c5a62ab438f54fe79f2943031698c99f",
+        "torch4ms/optim/optimizer.py": "b5ae83096512d98596186faf18ed6b82331e70181372e52f539aa891d600cd30",
+        "torch4ms/tensor.py": "6efa95a9d76c1c0528da5438caf26f8c641faa2b70d38c35aa86c268ca060f6c",
+        "torch4ms/types.py": "6e8a3a3bf34183b18dc41c013c307f6cbdb4c0b8e75753c721f988f04e265034",
+        "torch4ms/util.py": "71bf9eb9d0c4ec05f6b3eeb362d5dda30832cf2bea3ea13d30f3fcd8f7c7db78",
+        "torch4ms/view.py": "01a5f288592c4e636a079aef629b3c1c0dc58e108e6abaf9e798a8b1fab6e45c"
+      },
+      "final_code_sha256": {
+        "candidate.py": "59df8647dfdaee2a8d4bfd78394ebcc941b5d6bf1f06c66afc94b8e45b1e59ec",
+        "torch4ms/__init__.py": "e4bc0b973066ffb04b2c3803a17b2954658626396e1920177f098ddc7f650c59",
+        "torch4ms/_autofix_probe_core.py": "e5e232200be4ed920b9fe3c65e02b82b9656c9099f229423bd444f407e8cf45d",
+        "torch4ms/_op_prim/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/ascend/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/ascend/legacy.py": "8ce0076b0fa4a8ae0cd3ff4ab670079318f39c16a9e792fa5a1d9c93a86f40ba",
+        "torch4ms/_op_prim/ascend/pyboost.py": "aa4fa364895c07c57b0a2ee061014433b4df30f73242850c70e6d7518183030b",
+        "torch4ms/_op_prim/cpu/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/cpu/legacy.py": "58298fee5ab8dafd1d1223e5212251ad245ab936d0fd58d5f67d53260132757c",
+        "torch4ms/_op_prim/gpu/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/_op_prim/gpu/legacy.py": "d12cc92f9708b9d914de07e24f82905c8def103f3a20bb2df23690687de1be3b",
+        "torch4ms/amp.py": "f51fd07b7fdd31430c821ee5af50e71aed3f764e07c1f9bad6eca3ad80f0a2f8",
+        "torch4ms/aten/op_map.py": "e1e67ec23fbde9b5285468c948ca34212d47a7b6c5d3c85dddaa06d46db24ae5",
+        "torch4ms/aten/op_register.py": "a39ca8c90dffd5f0eb78cd8e5f3d2f0b0cf8845b5c0e3962ef35eb150b81f370",
+        "torch4ms/aten/utils.py": "127379877dce60adef4aeb7ebdabcaf152dc2db91470184340fa1a3ba0d52e21",
+        "torch4ms/autograd/__init__.py": "64e0d86aad95b852d4ed66f61a7f2de19eaa6d9dda6a6aefd9c3cfe5ba0dbeeb",
+        "torch4ms/autograd/forward_extractor.py": "4f686db0332da58132321c0a8430980f9a06f81661148fd2a5b2fe668852e987",
+        "torch4ms/autograd/graph_tracker.py": "a8343161cd4903caf39a82c1c099346ac03ae3da830e6efe637570970e4a8064",
+        "torch4ms/autograd/ms_autograd_function.py": "adcfac7b0f2d5580c08023b8a84537605f314b7df2f5cfcdd35461e25e29058b",
+        "torch4ms/checkpoint.py": "a44bf2491756be2c1713357a9334afcad689328d2654c4aef326e7e20fd85067",
+        "torch4ms/compatibility.py": "a5bfa7119beb454748fec5af7fdfda686730d8cf6afa1946448bddd2cad31edf",
+        "torch4ms/config.py": "cc194255f62c83cb03ae2d11a3305b007dfe52c42afa14b4737c4e998b7a29f8",
+        "torch4ms/decompositions.py": "72e64f62b17447cc04d72ab37b55b2b21e9e0e34cd903e72cc8cc15d8c121b9e",
+        "torch4ms/device_module.py": "190af23a6698a46eb3dfc907a71d548de20df99ab4527e457b0d0e4c47a9514b",
+        "torch4ms/distributed/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "torch4ms/flax.py": "c2b7e34369802497c7b2e1d68a0e43cebf59df346796186ea4994cdc91ddb5c0",
+        "torch4ms/mexport.py": "66f029e7ed97d253ec20d8f9b38dffca49546a420d94f83bc6580ed351a1a82b",
+        "torch4ms/minterop.py": "d313a2e285a73bac9fc7b768ff5349e0710f8d982ab9a8a270c628cff10396cb",
+        "torch4ms/ms_config.py": "39e7e0504b235d8ed2fe05bfd264fea0e68c1ee5cd9a3fe34ecb4ae13edc74c0",
+        "torch4ms/ops/mappings.py": "662bce276594cb3d6dc78fc9bac4be598936752031f94d9dabd7f003410a0778",
+        "torch4ms/ops/maten.py": "56b665a48e01c8670a16b0e2cdab2ce81b943f1f16a26516626c2429f131c5c7",
+        "torch4ms/ops/mc10d.py": "6144c8d2224a09bc048b3129eed2fb805f0bed34ba28f288a13c4495d0a65bf6",
+        "torch4ms/ops/mimage.py": "3a35fa4639e7559e47e2b8a4bca17728008368080cfc1ced98f72bf2ddba70b8",
+        "torch4ms/ops/mten.py": "ebfc62c6c001e25ea8f1561d721b1959846357fcb98e5a9e914ef1e254bc9522",
+        "torch4ms/ops/mtorch.py": "1731a06fe04cc141c886b1e8434973e24f75db55d560b5fb447d3649e5f8d270",
+        "torch4ms/ops/mtorchvision_nms.py": "3072fdb5b9393c415fe391445505e3847152aeba04f6de24541218b32eb92727",
+        "torch4ms/ops/op_base.py": "3421c40f5179d232f1c57a744beea392f20d114b69e16e7f849fddb1f5b95f77",
+        "torch4ms/ops/ops_registry.py": "c3840950ac6790306c12c920aee98836d203658dc989dca256221c796f10be0c",
+        "torch4ms/optim/__init__.py": "e9d9b658a3347f180a3cd7c14a3305e2c5a62ab438f54fe79f2943031698c99f",
+        "torch4ms/optim/optimizer.py": "b5ae83096512d98596186faf18ed6b82331e70181372e52f539aa891d600cd30",
+        "torch4ms/tensor.py": "6efa95a9d76c1c0528da5438caf26f8c641faa2b70d38c35aa86c268ca060f6c",
+        "torch4ms/types.py": "6e8a3a3bf34183b18dc41c013c307f6cbdb4c0b8e75753c721f988f04e265034",
+        "torch4ms/util.py": "71bf9eb9d0c4ec05f6b3eeb362d5dda30832cf2bea3ea13d30f3fcd8f7c7db78",
+        "torch4ms/view.py": "01a5f288592c4e636a079aef629b3c1c0dc58e108e6abaf9e798a8b1fab6e45c"
+      },
+      "result_source": {
+        "file": "task_008/matchfix_full_orchestration/result.json",
+        "remote_path": "/media/main/whj/projects/torch4ms/ascend-torch4ms-autonomous-verifier-20260917/experiments/autonomous_verifier_20260917/formal_v3/conditions/task_008/matchfix_full_orchestration/result.json",
+        "size": 75600,
+        "sha256": "32c1b2fb9b656fc6834026d1cb0d7c6bd2dd3ff50833e48056ed87ee64540ebb"
+      }
+    }
+  ],
+  "token_reduction_percent": {
+    "SWE-agent": 7.319972255049323,
+    "MatchFixAgent": 36.40562623044953
+  },
+  "alternative_groupnorm_case": [
+    {
+      "method": "LaDiM",
+      "calls": 31,
+      "total_tokens": 2424017,
+      "accepted": true,
+      "wall_time_seconds": 632.1010950699565
+    },
+    {
+      "method": "SWE-agent",
+      "calls": 40,
+      "total_tokens": 2113876,
+      "accepted": false,
+      "wall_time_seconds": 570.6041458899854
+    },
+    {
+      "method": "MatchFixAgent",
+      "calls": 40,
+      "total_tokens": 3054103,
+      "accepted": false,
+      "wall_time_seconds": 1261.333113377972
+    }
+  ]
+}
