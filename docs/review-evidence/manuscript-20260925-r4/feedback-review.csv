@@ -1,0 +1,141 @@
+id,requirement,current_review,scope
+P01,持久维护意见表，每次修改后检查；S6,按本轮授权、检查点、文件范围、基线对照及记录核对；无实验、子代理或远端写入。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+P02,先理清逻辑给方案，不直接照意见改；S1/S4/S6；S11 已授权落实,按本轮授权、检查点、文件范围、基线对照及记录核对；无实验、子代理或远端写入。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+P03,先把内容做好，不擅自按页数删正文；S4/S5,按本轮授权、检查点、文件范围、基线对照及记录核对；无实验、子代理或远端写入。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+P04,方法图暂时不管，用户负责；S3/S4/S5；S34授权PPT重建，S35暂停，S39恢复最新参考图的PPT制作,按本轮授权、检查点、文件范围、基线对照及记录核对；无实验、子代理或远端写入。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+P05,保留既有工作、检查点、固定基线逐词对照；项目规则,按本轮授权、检查点、文件范围、基线对照及记录核对；无实验、子代理或远端写入。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+P06,审核不直接反馈给子 agent；S5,按本轮授权、检查点、文件范围、基线对照及记录核对；无实验、子代理或远端写入。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+P08,提交后提供同一固定基线的 LaTeX 差异 PDF，并保留 HTML 逐词对照；S17,按本轮授权、检查点、文件范围、基线对照及记录核对；无实验、子代理或远端写入。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+W01,全文按统一行文风格，包括摘要、方法、结果、图注、表注；S1/S3/S5,复读本轮修改与整稿，按humanizer及写作DNA核对术语和段落；不改范围外既有措辞，预算/成本和内部代号逐项核对。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+W02,证据允许时坚定表达贡献、优势和适用范围；不因假想风险收缩 claim；S3/S5,复读本轮修改与整稿，按humanizer及写作DNA核对术语和段落；不改范围外既有措辞，预算/成本和内部代号逐项核对。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+W03,术语统一，不自造 task contract、Controller、LD/IEH/DCM 等；S3/S4,复读本轮修改与整稿，按humanizer及写作DNA核对术语和段落；不改范围外既有措辞，预算/成本和内部代号逐项核对。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+W04,少用冒号/分号串句和密集连字符；S1/S2/S3,复读本轮修改与整稿，按humanizer及写作DNA核对术语和段落；不改范围外既有措辞，预算/成本和内部代号逐项核对。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+W05,不要碎片化短段；S26曾要求未命名连续论述合并；S29明确恢复按逻辑分段，取代S26的合并规则；S3→S26→S29,复读本轮修改与整稿，按humanizer及写作DNA核对术语和段落；不改范围外既有措辞，预算/成本和内部代号逐项核对。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+W06,删除无用技术报告句、内部版本/运行记账；S2/S3/S4,复读本轮修改与整稿，按humanizer及写作DNA核对术语和段落；不改范围外既有措辞，预算/成本和内部代号逐项核对。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+W07,数值、分母、预算、评价含义不变；缺测写 n/a；S5/项目规则,复读本轮修改与整稿，按humanizer及写作DNA核对术语和段落；不改范围外既有措辞，预算/成本和内部代号逐项核对。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A01,语义偏差问题后补到方法的逻辑，如 To address this；S1,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A02,删除摘要中的 and its loss initially agrees with the source；S1,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A03,摘要介绍 agent 组成，Orchestrator schedules their work and returns...；S1/S2,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A04,仓库上下文机制有名称，先讲解决什么问题；S1/S2,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A05,结果与跨范围结论合成一句；最新顺序为范围、最高节省、有效性；S1→S24,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A06,明确方法、基线、指标、集合与条件；最新摘要不写具体基线名；S5→S7,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A07,保留跨框架/语言有效性结论与 Generalization Across Frameworks 标题；S1/S5,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A08,创新点叫得出名字、贡献有对应机制与证据；S1/S2/S5,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A09,早期要求 MOST 式结论且不重复精确数字；后来确认加强结论中的定量证据；S3→S5,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A10,删除摘要 saved initial translations 的四/五、各对照零修复句；S7,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A11,摘要以SOTA方法作比较、不具名；联网核对实际摘要写法；S7/S8→S23,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A12,以原摘要为基础局部修复，简洁，不堆新分类和数字；S7，结尾按 S9,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A13,摘要不用连字符，参考其他论文的 SOTA 写法；S8,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A14,"保留 Evaluation across framework migration, language migration, and repository tasks，改后半句；S9",摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A15,结尾不要连续两次重复框架/语言范围；S10,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M01,Methods、Preliminary；3.2/3.3 标题体现两个 Agent；3.4 简洁；S1/S4,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M02,3.1 定义 task、目标、可编辑范围、agents 及符号；S1,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M03,3.1 定义四种 discrepancy 及计算公式，3.2 直接使用；S1/S4,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M04,3.1 解释 edit 是什么、如何计数；S1；后续方案将计数移附录,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M05,adapters、观测采集及具体验收放实验，不挤方法；S1/S2,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M06,删除 A supplied translation can enter directly...；S1,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M07,narrow 改 focus 等直接表达；S1,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M08,以 Verifier 为主语，错误加粗命名为 ... discrepancy；S1,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M09,错误与处理动作写在同一段，避免两段割裂；S1,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M10,参考 MatchFixAgent 的代码化伪代码，显式展现诊断逻辑；S1/S4,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M11,三份伪代码渐进复用，3.4 包含前面过程；S1,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M12,两模块名称固定为 Repository Structural Analysis / Repair Dependency Graph Planning；S5,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M13,仓库总机制说明完整组成，程序组件先于消融定义；S5,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M14,方法解释科学机制，移出接口、哈希、权限、控制流的堆叠；S2/S3/S4,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+E01,setup 先定义后文所有任务的来源、用途和区别；S1/S2,setup与协议保留原任务、输入、状态、种子、预算和阈值；变化为cref、成本单位及附录检测证据。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+E02,早期表列平均长度；用户后续已要求删除，本轮再次明确表移附录且不加平均长度；S1→S12,setup与协议保留原任务、输入、状态、种子、预算和阈值；变化为cref、成本单位及附录检测证据。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+E03,公共集合有引用，仓库规模清楚；S1,setup与协议保留原任务、输入、状态、种子、预算和阈值；变化为cref、成本单位及附录检测证据。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+E04,单独交代 Evaluation Protocol，后来要求 4.1 只用加粗段首且缩短；S1/S2/S4,setup与协议保留原任务、输入、状态、种子、预算和阈值；变化为cref、成本单位及附录检测证据。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+E05,paired checks 换易懂名称，并定义表头指标；S1/S12,setup与协议保留原任务、输入、状态、种子、预算和阈值；变化为cref、成本单位及附录检测证据。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+E06,状态演进、提交、成本账本等不要占 setup；S2,setup与协议保留原任务、输入、状态、种子、预算和阈值；变化为cref、成本单位及附录检测证据。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+E07,定义 Direct、其他基线及其真实输入；S2/S5,setup与协议保留原任务、输入、状态、种子、预算和阈值；变化为cref、成本单位及附录检测证据。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+E08,初始错误/正确程序用浅显名称，在结果前定义；S1/S2,setup与协议保留原任务、输入、状态、种子、预算和阈值；变化为cref、成本单位及附录检测证据。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+E09,baseline 首次介绍加引用，CodeTransEngine 正式名；S1,setup与协议保留原任务、输入、状态、种子、预算和阈值；变化为cref、成本单位及附录检测证据。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+E10,早期后端名称全放附录；后来要求预先定义 JAX 方法并确认包含 TorchAX 角色区分的方案；S3→S5,setup与协议保留原任务、输入、状态、种子、预算和阈值；变化为cref、成本单位及附录检测证据。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R01,CodeTransEngine 去 direct 后缀；MSAdapter 无 LLM 用量用横杠；S1,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R02,程序面板 Accepted 在最右并突出最好结果；S1,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R03,时间序列突出 repair calls；S1,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R04,推荐检查数突出并让指标名明确；S1,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R05,不用 Pass/Failed 状态列，用通过数量；S3,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R06,增加有用指标，横向利用空间；S3/S5,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R07,结果解释规律、优势和意义，别复述表格；S1/S2/S3/S5,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R08,自然错误进入正文，段首定义表头；S1/S2/S3,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R09,恢复 JAX 表与 Generalization Across Frameworks；S1/S2,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R10,Ivy/“torchax” 为什么 0，先定义；S5,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R11,新 JAX 只两项修复不足以作主文泛化，回到原六例；S5,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R12,去掉 29、7/9、dispatch cycle/第三次提交等无助主线的正文细账；S2/S3,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R13,梯度/更新延迟机制用连贯句，不用分号；S2,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R14,JAX 解释已有泛化结果；早期撤回附加降调句，后来确认按实测呈现接受与效率差异；S3/S4→S5,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F01,原训练检测图移到 Training Signals and Detection Latency 附近；S1,S60/r4将检测图移至附录A.6；正文保留故障发生位置、12次运行检测与附录引用。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F02,S1/S4曾要求引言横柱环绕；S29改为竖柱，方法名下一行列通过率，缩小并前移到正文开头,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F21,Figure 1 柱形收窄，LaDiM 改为加粗 `Ours`，通过率行标 `Acc.`；S40,S64改为最左侧一个Acc.，各方法仅保留百分比；源码与PDF/PNG/SVG同步，标签边界无重叠。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F22,按15:56新图重建可编辑PPT，保留布局并复用SVG图标，使用Times New Roman；S41,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F23,在S41原版PPT中统一对齐并突出分层诊断、证据交接和仓库上下文管理；S43,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F24,21:38新图转为可编辑PPT，矢量图标，保留布局，Times New Roman；S45,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F03,图 3 左侧不应少一根横柱；S5,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F04,图 3 右侧图例、横轴含义；图例在图内、解释进 caption；S1/S3,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F05,检测图清楚标 LaDiM step 1 与 loss check 31/18；S2,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F06,学习 ICLR 横向表格，避免纵向细长；S5,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F07,表头用完整词，换行有合理对齐；项目规则/S5,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F08,处理第10页留白、末页约六行，统一关键结果强调；S5,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+B01,明确信号表的 + 是依次累加，最后完整；S1,信号和组件消融的数值、累加关系、完整参照与故障含义保持；表格用量换算核对，未重跑实验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+B02,四组件分别按历史十份初译和时间序列消融；S5,信号和组件消融的数值、累加关系、完整参照与故障含义保持；表格用量换算核对，未重跑实验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+B03,消融出现前方法必须介绍组件；不机械引用方法小节；S5,信号和组件消融的数值、累加关系、完整参照与故障含义保持；表格用量换算核对，未重跑实验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+B04,消融开头说明任务、指标、条件，表头对应正文；S1,信号和组件消融的数值、累加关系、完整参照与故障含义保持；表格用量换算核对，未重跑实验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+B05,RSA 直接进入消融表，突出 token 减少；S5,信号和组件消融的数值、累加关系、完整参照与故障含义保持；表格用量换算核对，未重跑实验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+B06,累计加组件和其他消融结果也保留；S1/S2，后续安排 S5,信号和组件消融的数值、累加关系、完整参照与故障含义保持；表格用量换算核对，未重跑实验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+B07,原实验与新增实验的状态准确，不为改写擅自扩实验；S5/项目规则,信号和组件消融的数值、累加关系、完整参照与故障含义保持；表格用量换算核对，未重跑实验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+P07,每章委派agent逐句审查，Astra/high；S13/S14,按本轮授权、检查点、文件范围、基线对照及记录核对；无实验、子代理或远端写入。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+W08,通篇使用大同行能理解的词，不只改用户摘句；S13,复读本轮修改与整稿，按humanizer及写作DNA核对术语和段落；不改范围外既有措辞，预算/成本和内部代号逐项核对。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M15,正文已有四类差异，算法不再重复；检查三个算法冗余；S13,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M16,用到大模型的函数显式写LLM；S13,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M17,算法3体现整个仓库并复用前面算法；S13,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R15,retaining full acceptance at four submissions直说结果；S13,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R16,3/12与4/12要清楚对应；S13,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R17,healthy controls用浅显对象表达；S13,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+B08,Ten saved translations、Independent pairs等表注不用内部称呼；S13,信号和组件消融的数值、累加关系、完整参照与故障含义保持；表格用量换算核对，未重跑实验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R18,Java/DJL结果构成与冻结任务一致；W07/S15,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A16,摘要体现Translator Agent；S18,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A17,贡献删除过多实验数字，参考其他论文；S18,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M18,算法1体现分层结构，3.2/3.3体现组件及agents；S18,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M19,算法3用代码式操作表达仓库协作；S18,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+E11,调研setup各研究定义的位置；S18,setup与协议保留原任务、输入、状态、种子、预算和阈值；变化为cref、成本单位及附录检测证据。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R19,主实验各大部分末尾解释作用和优势；S18,结果段及表格核对原始分母、失败、缺测和成本；JAX并入独立子表，机制与比较范围保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F09,单行表头，单位放注，Token reduction改Saved，横排同步；S18,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F10,第10页空隙、图3/4尺寸与4–5行图注；S18,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M20,算法长度适中，按单栏实际高度审核，尤其压缩算法3；S19,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F11,调整图3图例，减少它占用的空白；S19,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M21,核对ICLR环绕规则；按最新决定算法1/2左置、算法3全宽；S21→S22,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F12,图4子图名称下移，主动减少不影响内容的空白；S20,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A18,末句按实验范围、最高token节省、有效性组织；S24,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A19,找回0921原稿；上下文管理承接协作、说清目的；联网核对SOTA写法；S23,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A20,引言作者年份与空方括号改为与下文一致的 `\citep`，框架计算差异补针对性来源；S40,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A21,先查看较充实的旧版引言，再决定是否恢复；S40；S44明确只采用0921版本中的LLM/测试/修复单句,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A22,全文引用位置和论断范围审查；S40提出建议，S42批准四项修正,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+A23,引用元信息与可定位来源；S40,摘要、引言、贡献和结论逐字比对起点未改，跨框架结论保持；A03/A04/A19及旧引用元数据缺口继续保留。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+P09,S30曾要求句间换行；S42最新要求普通正文每段完整放在一行，保留逻辑段间空行。Overleaf单文件要求沿用S25,按本轮授权、检查点、文件范围、基线对照及记录核对；无实验、子代理或远端写入。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+W09,S26曾要求3.1等未命名段落合并；S29要求按论述主题恢复段落，现以S29为准,复读本轮修改与整稿，按humanizer及写作DNA核对术语和段落；不改范围外既有措辞，预算/成本和内部代号逐项核对。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F13,消除3.2尾部及类似的大块空白；S27,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F14,消融表完整行名保持单行，左右子表同步处理；S28,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+P10,保留官方样式设定，同时检查主tex覆盖；官方未禁止的局部排版可用；S30–S32,按本轮授权、检查点、文件范围、基线对照及记录核对；无实验、子代理或远端写入。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M23,核对官方是否禁止算法缩字号，只有允许时才缩小；S30,S60批准r4局部small用于本轮；官网下载样式示例仍禁止字号变化，投稿合规项保留待处理，四官方样式字节未变。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+P11,先给论文修改方案，用户审核后再实施；S47,S60已批准r4，随后S62/S64/S66–S68明确调整图注、Acc与表格；范围外文字保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F25,方法图更新；S48的0924图源由S53的0925加粗版取代,S60最新终版SVG原样导出矢量PDF，嵌入Times New Roman，无位图，按90%宽度包含；S62图注改为5行。最小Candidate文本为3.56pt，按用户图内暂不修改要求保留，未宣称达到原计划约5pt建议。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M24,算法字号稍缩，并比较全宽／半宽环绕占用；S46,9pt的A(55%环绕)、B(50%)、C(全栏)分别编译，正文终点相同；B的While条件换行，依规则采用A，算法3全宽。三段algorithmic除引用命令外与起点一致。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F26,表格字号及表前异常空白；S46,所有实际table在caption后使用small；自然错误表置顶，消融固定两行标题移除。JAX表经历半栏/全栏比较后按S67合并，不再单独环绕。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+P12,附录／正文自动识别，图引用前缀可配置；S46,cref配置Fig.，appendix后给section/subsection/subsubsection设置appendix别名；最终PDF核对Appendix A.1/A.6，无Section A.引用。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M25,删除3.4指定首句，组件首次出现即定义；S46,按r4五段定义问题、结构分析、依赖规划、证据与上下文，以及算法接口；对照附录F/G.2/G.3核对版本关联、失效传播、75%触发与完整仓库验收。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F27,图3(b)数字标签；S54取代重复Task标签与上下排列建议,Figure 3左右并排，单次Task与1–29横排；millions刻度0至1.25，29根有符号柱、两负值、20/9分组与6938291原始差值和保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+R20,图4依据、claim与证据安排；S46/S49/S50/S52/S55/S56,受控检测图移附录，四阈值后处理表逐格复算；12/12直接检测、0.02下3/12与4/12、31/18均值越阈分别呈现。两项具名工程来源已核对，不用Agent名称替代未测对照。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F28,表3窄表环绕、token单位统一；S46,"S66实测全栏比固定半栏净省约5行；S67随后合为Table 2(a,b)，S68再移分组说明到caption。两侧标题、表头及四行基线对齐，任务分母仍为10与6。",r4 final source/rendered geometry; no new experiments or full visual-review claim
+F29,表4(b)标题不换行；S46,消融(b)标题改Repair components，(a)(b)固定高度标题移除，三位小数成本与生成器一致；原Table 4现为Table 3。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+W10,全文正文、图表token单位一致；S46,全部当前成本表、正文和图1/3使用millions；55个指定成本单元格逐格检查，预算整数及120000字符限制保持，原始数据字节未变。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+W11,拟加入或替换的英文集中入方案，减少连字符与抽象表达；S58,S60批准r4英文；依r4局部替换，S62缩图2注。摘要、引言、相关工作及结论与起点逐字一致，附加问题保留待定。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F30,页数和图形占高；S46/S49/S50/S53/S54,最终24页、正文结束第10页；S63暂停九页压缩，未执行删句或缩图清单。第8页末留白通过合并表解决，第9页顶部正常接续正文。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+M22,分清训练step观测与Verifier诊断的触发时机；关联M03/M10/M11/M17/M18。,方法、公式和三个算法逐项阅读；3.4按批准替换。algorithmic除cref外逐字相同，首次定义、角色、预算、依赖和验收保持。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F15,参考顶会主图，改善方法图的信息层级、机制呈现和整齐程度；S34/S35,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F16,新架构图先不转PPT；S35；S39恢复制作,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F17,用户认为新生成图不及前一版，要求后续指定Times New Roman；S36/S39,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F18,保留原图Python / Java的跨语言对照；S37,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F19,图中文字过多，删除各标题下重复的职责说明；S38,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim
+F20,11:33新图转为可编辑PPT，图标为可编辑矢量，尽量保持布局；字体再次确认Times New Roman；S39,按修改资产、PDF页坐标和边界核对布局；未改变的历史方法图/PPT作字节保持检查，不冒充本轮重做目视核验。,r4 final source/rendered geometry; no new experiments or full visual-review claim

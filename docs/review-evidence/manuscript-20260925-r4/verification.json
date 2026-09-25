@@ -1,0 +1,1291 @@
+{
+  "unchanged_approved_prose": [
+    "abstract",
+    "introduction",
+    "related work",
+    "conclusion"
+  ],
+  "budgets_preserved": true,
+  "algorithm_logic_preserved": true,
+  "official_style_sha256": {
+    "iclr2027_conference.sty": "797deef41724e93761426ac0cbcca46279a91cc650dd1f0ce76a4f08d2098ea6",
+    "iclr2027_conference.bst": "2d67552db7ed38ccfccb5957b52f95656e25c249724761d3cf5f7922ad1844c5",
+    "natbib.sty": "88bc70c0e48461934cab5b2accef06b74a8b3ac45ad03ccd3f2a6b7e0d6d530d",
+    "fancyhdr.sty": "b56ec4434b9f4607529a4b23dc68ad8d4b94f1f631c8cddaf7da78140d53a5ea"
+  },
+  "official_font_instructions": [
+    "f the rectangle the text\nshould fit into, and do not change font sizes (except perhaps in the\n\\textsc{References} section; see below). Please note that pages should be\nn"
+  ],
+  "architecture_source_unchanged": true,
+  "recomputed_thresholds": [
+    {
+      "threshold": 0.02,
+      "none": {
+        "detected": 0,
+        "first": null,
+        "mean": null
+      },
+      "grad_wrong": {
+        "detected": 3,
+        "first": [
+          10,
+          11
+        ],
+        "mean": 31
+      },
+      "param_wrong": {
+        "detected": 4,
+        "first": [
+          6,
+          20
+        ],
+        "mean": 18
+      }
+    },
+    {
+      "threshold": 0.005,
+      "none": {
+        "detected": 0,
+        "first": null,
+        "mean": null
+      },
+      "grad_wrong": {
+        "detected": 12,
+        "first": [
+          3,
+          37
+        ],
+        "mean": 9
+      },
+      "param_wrong": {
+        "detected": 8,
+        "first": [
+          3,
+          42
+        ],
+        "mean": 6
+      }
+    },
+    {
+      "threshold": 0.001,
+      "none": {
+        "detected": 0,
+        "first": null,
+        "mean": null
+      },
+      "grad_wrong": {
+        "detected": 12,
+        "first": [
+          2,
+          8
+        ],
+        "mean": 3
+      },
+      "param_wrong": {
+        "detected": 9,
+        "first": [
+          2,
+          14
+        ],
+        "mean": 2
+      }
+    },
+    {
+      "threshold": 1e-05,
+      "none": {
+        "detected": 0,
+        "first": null,
+        "mean": null
+      },
+      "grad_wrong": {
+        "detected": 12,
+        "first": [
+          2,
+          2
+        ],
+        "mean": 2
+      },
+      "param_wrong": {
+        "detected": 12,
+        "first": [
+          2,
+          8
+        ],
+        "mean": 2
+      }
+    }
+  ],
+  "cost_sources_match_export": true,
+  "cost_cells_checked": 55,
+  "figure1_single_acc_no_overlap": true,
+  "pages": 24,
+  "page_layout": [
+    {
+      "page": 1,
+      "top": 80.49504852294922,
+      "bottom": 732.2689208984375,
+      "blocks": [
+        [
+          80.5,
+          117.6,
+          "LADIM: LAYERED DIAGNOSIS FOR MULTI-AGENT\nCODE MIGRATION\n"
+        ],
+        [
+          136.9,
+          157.9,
+          "Anonymous authors\nPaper under double-blind review\n"
+        ],
+        [
+          187.7,
+          199.7,
+          "ABSTRACT\n"
+        ],
+        [
+          211.9,
+          408.2,
+          "Migrating code across deep learning frameworks enables the reuse of tr"
+        ],
+        [
+          428.7,
+          440.6,
+          "1\nINTRODUCTION\n"
+        ],
+        [
+          500.5,
+          512.5,
+          "5.159\n"
+        ],
+        [
+          485.7,
+          497.7,
+          "12.097\n"
+        ],
+        [
+          467.0,
+          479.1,
+          "20.831\n"
+        ],
+        [
+          522.8,
+          542.7,
+          "Ours\n100%\nMatchFixAgent\n"
+        ],
+        [
+          522.9,
+          542.7,
+          "100%\nSWE-agent\n"
+        ],
+        [
+          530.6,
+          542.7,
+          "88%\nAcc.\n"
+        ],
+        [
+          458.1,
+          470.2,
+          "Total tokens (millions)\n"
+        ],
+        [
+          561.6,
+          582.5,
+          "Figure 1: Tokens used on 50 PyTorch to\nMindSpore migrations tasks.\n"
+        ],
+        [
+          453.3,
+          627.7,
+          "Code development environments and languages have\ngrown increasingly di"
+        ],
+        [
+          634.6,
+          732.3,
+          "However, success at translating code does not guarantee equal translat"
+        ]
+      ]
+    },
+    {
+      "page": 3,
+      "top": 84.26844787597656,
+      "bottom": 733.7630615234375,
+      "blocks": [
+        [
+          84.3,
+          192.9,
+          "and Self-Debugging use execution feedback to support reflection and se"
+        ],
+        [
+          209.8,
+          221.8,
+          "3\nMETHODS\n"
+        ],
+        [
+          234.5,
+          310.3,
+          "LaDiM uses dependencies between training computations to guide diagnos"
+        ],
+        [
+          332.5,
+          340.6,
+          "Migration Setting\n"
+        ],
+        [
+          347.2,
+          353.8,
+          "Source Repository\n"
+        ],
+        [
+          357.0,
+          363.0,
+          "PyTorch (Python)\n"
+        ],
+        [
+          365.5,
+          371.2,
+          "my_project/\n"
+        ],
+        [
+          375.2,
+          380.9,
+          "train.py\n"
+        ],
+        [
+          385.0,
+          397.1,
+          "model.py\n\u2026  \u2026\n"
+        ],
+        [
+          402.5,
+          413.8,
+          "Target Frameworks\n& Languages\n"
+        ],
+        [
+          428.6,
+          433.7,
+          "MindSpore\nJAX\n"
+        ],
+        [
+          441.8,
+          454.7,
+          "Java\n\u2026\n"
+        ],
+        [
+          367.0,
+          384.5,
+          "Verifier Agent\nLayered Diagnosis\n"
+        ],
+        [
+          416.7,
+          424.8,
+          "Evidence Handoff\n"
+        ],
+        [
+          442.6,
+          452.0,
+          "Code\nobservations\n"
+        ],
+        [
+          442.6,
+          452.0,
+          "Test\nresults\n"
+        ],
+        [
+          442.6,
+          447.3,
+          "Locations Hypotheses\n"
+        ],
+        [
+          369.3,
+          384.1,
+          "Repair Agent\nPatch and Validate\n"
+        ],
+        [
+          389.3,
+          400.5,
+          "- loss = x.sum()\n+  loss = x.mean()\n"
+        ],
+        [
+          335.3,
+          343.9,
+          "Orchestrator\nExecute\nCoordinate Agents\n"
+        ],
+        [
+          351.8,
+          362.5,
+          "Revised\nprogram\n"
+        ],
+        [
+          352.1,
+          362.8,
+          "Execute\n& validate\n"
+        ],
+        [
+          479.4,
+          504.4,
+          "Repository\nContext\nManagement\n"
+        ],
+        [
+          473.3,
+          479.3,
+          "Evidence Retrieval & Context Reconstruction\n"
+        ],
+        [
+          506.0,
+          511.0,
+          "Evidence store\n"
+        ],
+        [
+          482.7,
+          487.6,
+          "Code snippets\n"
+        ],
+        [
+          489.6,
+          494.5,
+          "Test results\n"
+        ],
+        [
+          496.4,
+          501.3,
+          "Error logs\n"
+        ],
+        [
+          503.2,
+          508.1,
+          "Historical fixes\n"
+        ],
+        [
+          488.4,
+          502.9,
+          "Reconstructed\ncontext for\nrepair\n"
+        ],
+        [
+          334.4,
+          340.9,
+          "Verified Output\n"
+        ],
+        [
+          347.2,
+          359.3,
+          "Migrated\nProgram\n"
+        ],
+        [
+          378.2,
+          390.6,
+          "Target \nenvironment\n"
+        ],
+        [
+          403.1,
+          408.2,
+          "my_project/\n"
+        ],
+        [
+          414.7,
+          419.9,
+          "Main.java\n"
+        ],
+        [
+          424.2,
+          429.2,
+          "Model.java\n"
+        ],
+        [
+          433.9,
+          439.2,
+          "Data.java\n"
+        ],
+        [
+          441.5,
+          447.5,
+          "\u2026  \u2026\n"
+        ],
+        [
+          388.2,
+          393.8,
+          "Stage\nSource\nTarget\n"
+        ],
+        [
+          396.9,
+          401.9,
+          "Execution\n"
+        ],
+        [
+          408.9,
+          413.8,
+          "Forward\n"
+        ],
+        [
+          420.9,
+          425.9,
+          "Gradients\n"
+        ],
+        [
+          432.6,
+          437.6,
+          "Parameter update\n"
+        ],
+        [
+          444.8,
+          449.8,
+          "Next forward\n"
+        ],
+        [
+          414.6,
+          419.7,
+          "First divergence\n"
+        ],
+        [
+          473.4,
+          478.8,
+          "Repository Structural Analysis\n"
+        ],
+        [
+          481.5,
+          488.3,
+          "\u0192x\nFunctions\n"
+        ],
+        [
+          492.1,
+          498.2,
+          "C\nClasses\n"
+        ],
+        [
+          502.4,
+          507.5,
+          "Imports\n"
+        ],
+        [
+          487.0,
+          513.0,
+          "models/\ndata/\nutils/\n\u2026\n"
+        ],
+        [
+          351.8,
+          356.9,
+          "Execution\n"
+        ],
+        [
+          357.3,
+          362.4,
+          "results\n"
+        ],
+        [
+          352.5,
+          357.6,
+          "Diagnosis\n"
+        ],
+        [
+          358.0,
+          363.2,
+          "feedback\n"
+        ],
+        [
+          333.7,
+          345.7,
+          "Candidate\nTranslator\nAgent\n"
+        ],
+        [
+          503.4,
+          508.5,
+          "train.py\n"
+        ],
+        [
+          482.9,
+          488.0,
+          "model.py\n"
+        ],
+        [
+          487.0,
+          492.1,
+          "utils.py\n"
+        ],
+        [
+          507.4,
+          512.5,
+          "data.py\n"
+        ],
+        [
+          473.6,
+          479.3,
+          "Dependency Graph Planning\n"
+        ],
+        [
+          524.7,
+          533.3,
+          "LLM\n=<prompt\u2026>\nWork unit\nStages not reached\n"
+        ],
+        [
+          319.7,
+          326.2,
+          "(a) Layered Diagnosis for Multi-Agent Code Migration\n"
+        ],
+        [
+          460.7,
+          467.2,
+          "(b) Repository Coordination\n"
+        ],
+        [
+          546.7,
+          600.5,
+          "Figure 2: Overview of LaDiM. (a) The Orchestrator coordinates translat"
+        ],
+        [
+          626.0,
+          636.0,
+          "3.1\nPRELIMINARY\n"
+        ],
+        [
+          646.2,
+          691.3,
+          "A migration task T = (P, Ls, Fs, Lt, Ft, W) specifies a source program"
+        ],
+        [
+          698.0,
+          733.8,
+          "At step t,\nwe record source observations (et, vt, gt, \u03b8t+1 \u2212\u03b8t) and ta"
+        ]
+      ]
+    },
+    {
+      "page": 4,
+      "top": 84.03788757324219,
+      "bottom": 732.2688598632812,
+      "blocks": [
+        [
+          84.0,
+          105.2,
+          "gt contains gradients, and \u03b8t denotes the parameters before the update"
+        ],
+        [
+          125.1,
+          136.7,
+          "dexecution,t = 1[et\u0338 = \u02c6et],\ndforward,t = vt \u2212\u02c6vt,\n(1)\n"
+        ],
+        [
+          139.4,
+          153.5,
+          "dgradient,t = gt \u2212\u02c6gt,\ndupdate,t = (\u03b8t+1 \u2212\u03b8t) \u2212(\u02c6\u03b8t+1 \u2212\u02c6\u03b8t).\n(2)\n"
+        ],
+        [
+          172.2,
+          226.4,
+          "For a numerical comparison d = x \u2212\u02c6x, d \u22430 denotes agreement within it"
+        ],
+        [
+          233.1,
+          321.6,
+          "The LLM M performs translation, investigation, and repair under role i"
+        ],
+        [
+          350.5,
+          360.5,
+          "3.2\nVERIFIER AGENT WITH LAYERED DIAGNOSIS\n"
+        ],
+        [
+          391.8,
+          414.4,
+          "Algorithm 1 Layered Diagnosis\nRequire: Task T , candidate and measurem"
+        ],
+        [
+          415.2,
+          434.3,
+          "budget B, context C\nEnsure: Evidence E: code observations, test result"
+        ],
+        [
+          435.3,
+          597.7,
+          "locations, and hypotheses\n1: function LAYEREDDIAGNOSIS(T , S, M, B, C)"
+        ],
+        [
+          376.6,
+          649.6,
+          "The Verifier Agent receives the Translator\nAgent\u2019s candidate and the O"
+        ],
+        [
+          656.2,
+          732.3,
+          "Algorithm 1 expresses this reasoning through the training dependency r"
+        ]
+      ]
+    },
+    {
+      "page": 5,
+      "top": 84.26844787597656,
+      "bottom": 732.268798828125,
+      "blocks": [
+        [
+          84.3,
+          94.2,
+          "3.3\nREPAIR AGENT WITH EVIDENCE HANDOFF AND HISTORY\n"
+        ],
+        [
+          105.9,
+          159.7,
+          "Independent evidence handoff gives the Repair Agent the Verifier Agent"
+        ],
+        [
+          182.3,
+          192.6,
+          "Algorithm 2 REPAIR(T , S, E, q, M, B, C)\n"
+        ],
+        [
+          196.7,
+          321.8,
+          "1: H \u2190INDEPENDENTHANDOFF(AR, T , E, C)\n2: while SUBMISSIONSLEFT(B) \u2227BU"
+        ],
+        [
+          166.7,
+          275.3,
+          "Repair history preserves earlier edits,\nobservations, and hypotheses a"
+        ],
+        [
+          282.3,
+          368.9,
+          "Algorithm\n2\nreuses\nTOOLFEEDBACK\nfrom Algorithm 1, with H \u2225x denoting t"
+        ],
+        [
+          386.8,
+          396.8,
+          "3.4\nREPOSITORY COORDINATION\n"
+        ],
+        [
+          408.5,
+          451.3,
+          "Repository migration raises two problems that single-program migration"
+        ],
+        [
+          458.2,
+          512.1,
+          "Repository Structural Analysis. This tool returns an inventory of the "
+        ],
+        [
+          519.0,
+          627.7,
+          "Repair Dependency Graph Planning. Based on this inventory, the agent p"
+        ],
+        [
+          634.5,
+          732.3,
+          "Evidence archive and context reconstruction. Tool observations, code r"
+        ]
+      ]
+    },
+    {
+      "page": 8,
+      "top": 90.69686126708984,
+      "bottom": 732.26904296875,
+      "blocks": [
+        [
+          180.4,
+          200.4,
+          "0\n10\n20\nTotal tokens (millions)\n"
+        ],
+        [
+          131.0,
+          141.2,
+          "LaDiM\n"
+        ],
+        [
+          148.0,
+          158.1,
+          "MatchFixAgent\n"
+        ],
+        [
+          164.9,
+          175.1,
+          "SWE-agent\n"
+        ],
+        [
+          130.3,
+          140.4,
+          "5.159\n"
+        ],
+        [
+          147.2,
+          157.4,
+          "12.097\n"
+        ],
+        [
+          164.2,
+          174.3,
+          "20.831\n"
+        ],
+        [
+          90.7,
+          102.3,
+          "(a) Total tokens\n"
+        ],
+        [
+          103.3,
+          129.9,
+          "Initial translation\nPasses before repair\nNeeds repair\n"
+        ],
+        [
+          180.9,
+          190.3,
+          "1 2 3 4 5 6 7 8 9 1011121314151617181920212223242526272829\n"
+        ],
+        [
+          164.8,
+          175.0,
+          "0.00\n"
+        ],
+        [
+          153.0,
+          163.2,
+          "0.25\n"
+        ],
+        [
+          141.2,
+          151.4,
+          "0.50\n"
+        ],
+        [
+          129.5,
+          139.6,
+          "0.75\n"
+        ],
+        [
+          117.7,
+          127.8,
+          "1.00\n"
+        ],
+        [
+          105.9,
+          116.0,
+          "1.25\n"
+        ],
+        [
+          180.3,
+          190.5,
+          "Task\n"
+        ],
+        [
+          90.7,
+          102.3,
+          "(b) Tokens saved (millions)\n"
+        ],
+        [
+          106.1,
+          124.6,
+          "Fewer tokens\nMore tokens\n"
+        ],
+        [
+          223.1,
+          276.9,
+          "Figure 3: Token costs on MindSpore migration. (a) Total tokens, compri"
+        ],
+        [
+          299.6,
+          353.4,
+          "Table 2: Repair results on two collections. (a) Ten initial translatio"
+        ],
+        [
+          360.1,
+          369.1,
+          "(a) Repairing translation errors\n"
+        ],
+        [
+          376.6,
+          385.5,
+          "Method\nRepaired Preserved Tokens Accepted\n"
+        ],
+        [
+          391.6,
+          430.5,
+          "Direct repair\n0/5\n5/5\n3.751\n5/10\nSWE-agent\n0/5\n5/5\n12.678\n5/10\nMatchFi"
+        ],
+        [
+          360.1,
+          369.1,
+          "(b) JAX repair and conversion\n"
+        ],
+        [
+          376.6,
+          385.5,
+          "Method\nAccepted\nCalls\nTokens\n"
+        ],
+        [
+          391.6,
+          430.5,
+          "LaDiM\n6/6\n76\n0.674\nDirect repair\n6/6\n57\n0.353\nIvy\n0/6\n0\n0\ntorch2jax\n0/"
+        ],
+        [
+          458.9,
+          468.9,
+          "4.3\nANALYSIS EXPERIMENTS\n"
+        ],
+        [
+          480.1,
+          577.8,
+          "Repairing Translation Errors. Methods may edit both the ten translated"
+        ],
+        [
+          584.7,
+          660.5,
+          "Training Signals and Detection Latency. Gradient and update faults tak"
+        ],
+        [
+          667.4,
+          732.3,
+          "Generalization Across Frameworks.\nLaDiM repairs all six JAX cases span"
+        ]
+      ]
+    },
+    {
+      "page": 9,
+      "top": 84.26844787597656,
+      "bottom": 732.26904296875,
+      "blocks": [
+        [
+          84.3,
+          127.1,
+          "repair restores agreement in training behavior. The same diagnosis and"
+        ],
+        [
+          148.6,
+          158.6,
+          "4.4\nABLATION STUDIES\n"
+        ],
+        [
+          171.8,
+          214.6,
+          "We evaluate training signals on 16 faulty candidates, repair history a"
+        ],
+        [
+          221.5,
+          308.2,
+          "Training signals. We compare cumulative feedback on 16 fixed candidate"
+        ],
+        [
+          334.7,
+          410.6,
+          "Table 3: Effects of training signals and repair components. (a) Each +"
+        ],
+        [
+          417.4,
+          426.3,
+          "(a) Training signals\n"
+        ],
+        [
+          433.8,
+          442.8,
+          "Feedback\nAccepted\nTokens\n"
+        ],
+        [
+          448.9,
+          487.7,
+          "Execution and basic checks\n4/16\n2.089\n+ Forward values\n8/16\n2.603\n+ Gr"
+        ],
+        [
+          417.4,
+          426.3,
+          "(b) Repair components\n"
+        ],
+        [
+          433.8,
+          442.8,
+          "Condition\nAccepted\nTokens\n"
+        ],
+        [
+          448.8,
+          477.8,
+          "LaDiM\n9/10 (4/5)\n15.548\nContinuous conversation\n8/10 (3/5)\n14.516\nWith"
+        ],
+        [
+          498.2,
+          507.2,
+          "(c) Components on the time series repository\n"
+        ],
+        [
+          514.7,
+          523.7,
+          "Without component\nWith component\n"
+        ],
+        [
+          529.5,
+          538.4,
+          "Component\nCalls\nTokens\nCalls\nTokens\nSaved\n"
+        ],
+        [
+          544.4,
+          563.4,
+          "Repository context management\n26\n6.047\n22\n1.937\n68.0%\nRepository Struc"
+        ],
+        [
+          571.1,
+          609.9,
+          "Tokens are in millions. In (a,b), they cover investigation and repair."
+        ],
+        [
+          634.5,
+          732.3,
+          "Repair history and independent evidence handoff. Repair history and in"
+        ]
+      ]
+    },
+    {
+      "page": 10,
+      "top": 84.17748260498047,
+      "bottom": 732.2686767578125,
+      "blocks": [
+        [
+          84.2,
+          192.9,
+          "Repository context management and Repository Structural Analysis. On t"
+        ],
+        [
+          209.6,
+          221.5,
+          "5\nCONCLUSION\n"
+        ],
+        [
+          234.1,
+          331.7,
+          "We introduced LaDiM, a framework with multiple agents for preserving t"
+        ],
+        [
+          346.0,
+          356.0,
+          "AI USE STATEMENT\n"
+        ],
+        [
+          366.5,
+          431.3,
+          "In this work, we used generative AI tools, including OpenAI Codex, to "
+        ],
+        [
+          448.0,
+          460.0,
+          "REFERENCES\n"
+        ],
+        [
+          466.5,
+          476.5,
+          "Mart\u00b4\u0131n Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Je"
+        ],
+        [
+          477.5,
+          542.2,
+          "Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard, Manjunath Kudl"
+        ],
+        [
+          549.6,
+          559.6,
+          "Weize Chen, Yusheng Su, Jingwei Zuo, Cheng Yang, Chenfei Yuan, Chi-Min"
+        ],
+        [
+          560.6,
+          603.4,
+          "Yaxi Lu, Yi-Hsin Hung, Chen Qian, Yujia Qin, Xin Cong, Ruobing Xie, Zh"
+        ],
+        [
+          610.8,
+          620.8,
+          "Xinyun Chen, Maxwell Lin, Nathanael Sch\u00a8arli, and Denny Zhou. Teaching"
+        ],
+        [
+          621.6,
+          642.7,
+          "self-debug. In Proceedings of the Twelfth International Conference on "
+        ],
+        [
+          650.1,
+          660.1,
+          "Zizhuang Deng, Guozhu Meng, Kai Chen, Tong Liu, Lu Xiang, and Chunyang"
+        ],
+        [
+          661.1,
+          703.9,
+          "testing of cross deep learning framework APIs: Revealing inconsistenci"
+        ],
+        [
+          710.8,
+          721.3,
+          "DJL Contributors. Dive into deep learning with java. https://github.co"
+        ],
+        [
+          721.8,
+          732.3,
+          "rary/d2l-java, 2026a. Source repository, accessed September 21, 2026.\n"
+        ]
+      ]
+    },
+    {
+      "page": 17,
+      "top": 87.10855102539062,
+      "bottom": 732.26904296875,
+      "blocks": [
+        [
+          180.6,
+          202.8,
+          "1\n10\n20\n30\n40\n50\nTraining step\n"
+        ],
+        [
+          170.7,
+          182.2,
+          "10\u22126\n"
+        ],
+        [
+          141.2,
+          152.7,
+          "10\u22123\n"
+        ],
+        [
+          97.7,
+          166.1,
+          "Difference / threshold\n"
+        ],
+        [
+          87.1,
+          98.1,
+          "LaDiM detects at step 1\n"
+        ],
+        [
+          127.7,
+          146.8,
+          "Mean loss difference\ncrosses threshold at step 31\n"
+        ],
+        [
+          118.6,
+          128.9,
+          "Detection threshold\n"
+        ],
+        [
+          165.3,
+          177.1,
+          "(a) Incorrect gradients\n"
+        ],
+        [
+          148.1,
+          165.4,
+          "Loss difference\nGradient norm difference\n"
+        ],
+        [
+          180.6,
+          202.8,
+          "1\n10\n20\n30\n40\n50\nTraining step\n"
+        ],
+        [
+          97.7,
+          166.1,
+          "Difference / threshold\n"
+        ],
+        [
+          87.1,
+          98.1,
+          "LaDiM detects at step 1\n"
+        ],
+        [
+          127.7,
+          146.8,
+          "Mean loss difference\ncrosses threshold at step 18\n"
+        ],
+        [
+          118.6,
+          128.9,
+          "Detection threshold\n"
+        ],
+        [
+          165.3,
+          177.1,
+          "(b) Incorrect parameter updates\n"
+        ],
+        [
+          148.1,
+          165.4,
+          "Loss difference\nUpdate difference\n"
+        ],
+        [
+          217.1,
+          281.9,
+          "Figure 4: Detection of (a) gradient scaling and (b) partial update sup"
+        ],
+        [
+          305.6,
+          326.5,
+          "tial parameters exactly. The maximum final loss, gradient norm, and re"
+        ],
+        [
+          333.0,
+          442.1,
+          "Ivy produces a JAX/Flax implementation of each supplied model. The sam"
+        ],
+        [
+          459.0,
+          468.9,
+          "A.6\nDETECTION MEASUREMENTS\n"
+        ],
+        [
+          480.2,
+          534.0,
+          "The detection study uses four models, three seeds, and 50 training ste"
+        ],
+        [
+          541.0,
+          616.7,
+          "Fig. 4 shows trajectories in which the source and target retain their "
+        ],
+        [
+          623.7,
+          732.3,
+          "Loss comparison is an established check in framework migration. MindSp"
+        ]
+      ]
+    },
+    {
+      "page": 18,
+      "top": 91.06349182128906,
+      "bottom": 732.26904296875,
+      "blocks": [
+        [
+          91.1,
+          133.9,
+          "Table 6: Loss-only detection at different thresholds, computed post ho"
+        ],
+        [
+          136.4,
+          145.3,
+          "(a) Gradient scaling\n(b) Partial update suppression\n"
+        ],
+        [
+          161.1,
+          170.1,
+          "Threshold Detected\n"
+        ],
+        [
+          151.0,
+          170.0,
+          "First\ndetection\n"
+        ],
+        [
+          151.0,
+          170.0,
+          "Mean\ncrossing\n"
+        ],
+        [
+          151.0,
+          170.1,
+          "False\nalarms\nDetected\n"
+        ],
+        [
+          151.0,
+          170.0,
+          "First\ndetection\n"
+        ],
+        [
+          151.0,
+          170.0,
+          "Mean\ncrossing\n"
+        ],
+        [
+          151.0,
+          170.0,
+          "False\nalarms\n"
+        ],
+        [
+          176.1,
+          215.6,
+          "0.02\n3/12\n10\u201311\n31\n0/12\n4/12\n6\u201320\n18\n0/12\n0.005\n12/12\n3\u201337\n9\n0/12\n8/12"
+        ],
+        [
+          238.6,
+          248.5,
+          "The detection study uses the following scalar differences:\n"
+        ],
+        [
+          252.0,
+          266.0,
+          "\u2206loss = |L(P) \u2212L( \u02c6P)|,\n(3)\n"
+        ],
+        [
+          273.2,
+          284.7,
+          "\u2206grad =\n"
+        ],
+        [
+          268.9,
+          290.9,
+          "\f\f\f\u2225\u2207\u03b8L(P)\u22252 \u2212\u2225\u2207\u02c6\u03b8L( \u02c6P)\u22252\n"
+        ],
+        [
+          268.9,
+          290.9,
+          "\f\f\f ,\n(4)\n"
+        ],
+        [
+          290.6,
+          311.4,
+          "\u2206param = \u2225\u2206\u03b8 \u2212\u2206\u02c6\u03b8\u22252\n"
+        ],
+        [
+          300.0,
+          318.3,
+          "\u2225\u2206\u03b8\u22252 + \u03f5 .\n(5)\n"
+        ],
+        [
+          320.8,
+          355.6,
+          "Here \u2206\u03b8 and \u2206\u02c6\u03b8 denote source and target parameter updates, and \u03f5 prev"
+        ],
+        [
+          372.4,
+          384.3,
+          "B\nEVIDENCE HANDOFF AND AGENT INTEGRATION\n"
+        ],
+        [
+          396.9,
+          472.6,
+          "The component study uses the same 50 MindSpore task identifiers, initi"
+        ],
+        [
+          492.2,
+          513.1,
+          "Table 7: Component variants and added investigation for baseline agent"
+        ],
+        [
+          517.5,
+          526.5,
+          "Setting\nAccepted\nTokens\n"
+        ],
+        [
+          532.6,
+          612.3,
+          "LaDiM\n50/50\n5.159\nContinuous investigation and repair conversation\n49/"
+        ],
+        [
+          619.7,
+          639.0,
+          "\u2020 SWE-agent without added investigation has one interrupted task with "
+        ],
+        [
+          650.6,
+          704.4,
+          "with 49/50 when investigation and repair share one conversation. The v"
+        ],
+        [
+          711.3,
+          732.3,
+          "The second component study uses the same ten programs produced by init"
+        ]
+      ]
+    }
+  ],
+  "figure2_caption_lines": 5,
+  "main_end": {
+    "page": 10,
+    "bbox": [
+      265.89727783203125,
+      321.72119140625,
+      446.6585693359375,
+      331.6838073730469
+    ]
+  },
+  "build_no_overflow_or_reference_warning": true,
+  "protected_files_unchanged": {
+    "data/": 894,
+    "output/maintext": 39,
+    "output/repository-migration": 3,
+    "output/cumulative-component": 3,
+    "output/jax-expansion": 8
+  },
+  "user_ppt_preserved": true
+}

@@ -12,7 +12,7 @@ def build_figure():
     for x, method, color in [(0, 'ladim', BLUE), (1, 'matchfix', ORANGE), (2, 'swe', GRAY)]:
         row = data['main'][method]
         cost.bar(x, row['tokens'] / 1e6, width=.32, color=color)
-        cost.text(x, row['tokens'] / 1e6 + .6, f"{row['tokens'] / 1e6:.2f}",
+        cost.text(x, row['tokens'] / 1e6 + .6, f"{row['tokens'] / 1e6:.3f}",
                   fontsize=8, ha='center', va='bottom')
     cost.set(xticks=range(3), xticklabels=['', '', ''],
              xlim=(-.5, 2.5), ylim=(0, 25), yticks=[0, 10, 20])

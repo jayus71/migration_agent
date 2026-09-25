@@ -1,5 +1,15 @@
 # Inputs for manuscript figures and tables
 
+## September 25 r4 presentation revision
+
+The final author SVG `figures/架构图0925终版.svg` is included unchanged as the source for `hierarchical_feedback_architecture.pdf`. Export uses Inkscape with `--export-area-drawing` and Windows Times New Roman through fontconfig. The PDF has no raster images; source and output hashes and font measurements are in `docs/review-evidence/manuscript-20260925-r4/architecture.json`. The manuscript uses 90% width and a five-line caption.
+
+Figure 1 now has one `Acc.` label at the left of the percentage row. Figure 3 has side-by-side panels, one `Task` label, numbers 1–29, and millions on both panels; the right tick labels are 6.5pt before the 96% inclusion scale. The signed costs and 20/9 groups are unchanged. The detection plot is in Appendix A.6 with the saved-trajectory threshold sensitivity table.
+
+All current token usage displays use millions rounded to three decimal places; budget limits remain integer counts. The table generators preserve original integer inputs. Natural translation repair and the six-case JAX study share Table 2 as separate panels; the JAX panel remains inline in the manuscript and no longer includes `TABLE_jax_repairs.tex`. Internal JAX category headings moved to the shared caption so both panels contain four aligned method rows. The former Table 4 is Table 3. Earlier descriptions below record historical layouts.
+
+No experiments were run. The 25 existing figure/data checks and three manuscript comparison checks pass; see `docs/manuscript-revision-execution-20260925-r4.md` for the actual verification scope.
+
 ## Current unified migration comparison (2026-09-22)
 
 `figures/make_unified_results.py` reads the completed audit and summary under

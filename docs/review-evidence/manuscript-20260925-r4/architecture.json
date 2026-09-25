@@ -1,0 +1,19 @@
+{
+  "source_sha256": "279239cf2500da9813f1cbbc2974821722d9f23068c599d3bfb6f6b67dafa506",
+  "pdf_sha256": "c0553d5edfb34106c5c7a40bd3e637dcccc6131e5d997b1fbb523b957da0b15c",
+  "fonts": [
+    "TimesNewRomanPS-BoldItal",
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPS-ItalicMT",
+    "TimesNewRomanPSMT"
+  ],
+  "minimum_font_at_90_percent": 3.556793325398889,
+  "images": 0,
+  "page_size": [
+    0.0,
+    0.0,
+    3757.59814453125,
+    2239.302490234375
+  ],
+  "text": "Migration Setting\nSource Repository\nPyTorch (Python)\nmy_project/\ntrain.py\nmodel.py\n\u2026  \u2026\nTarget Frameworks\n& Languages\nMindSpore\nJAX\nJava\n\u2026\nVerifier Agent\nLayered Diagnosis\nEvidence Handoff\nCode\nobservations\nTest\nresults\nLocations Hypotheses\nRepair Agent\nPatch and Validate\n- loss = x.sum()\n+  loss = x.mean()\n\u2026\nOrchestrator\nExecute\nCoordinate Agents\nRevised\nprogram\nExecute\n& validate\nRepository\nContext\nManagement\nEvidence Retrieval & Context Reconstruction\nEvidence store\nCode snippets\nTest results\nError logs\nHistorical fixes\n\u2026\nReconstructed\ncontext for\nrepair\nVerified Output\nMigrated\nProgram\nTarget \nenvironment\nmy_project/\nMain.java\nModel.java\nData.java\n\u2026  \u2026\n...\nStage\nSource\nTarget\nExecution\nForward\nGradients\nParameter update\nNext forward\nFirst divergence\nRepository Structural Analysis\n\u0192x\nFunctions\nC\nClasses\nImports\n\u2026\nmodels/\ndata/\nutils/\n\u2026\nExecution\nresults\nDiagnosis\nfeedback\nCandidate\nTranslator\nAgent\ntrain.py\nmodel.py\nutils.py\ndata.py\nDependency Graph Planning\nLLM\n=<prompt\u2026>\nWork unit\nStages not reached\n(a) Layered Diagnosis for Multi-Agent Code Migration\n(b) Repository Coordination\n"
+}
