@@ -81,7 +81,7 @@ the local papers, `pypdf`, and Poppler; see the analysis notes for the procedure
 
 ## September 25 manuscript revision
 
-The approved r4 revision and subsequent figure/table feedback are implemented on `codex/iclr-2027-template`. The current PDF has 24 pages, with the main text ending on page 10; further page-limit compression is paused at the user's request. The author SVG is exported as a vector PDF, detection trajectories move to Appendix A.6, token usage uses millions, and the two repair studies share aligned panels in Table 2. See the [execution and verification record](docs/manuscript-revision-execution-20260925-r4.md). Historical layout descriptions below retain their original context.
+The approved r4 revision and subsequent figure/table feedback are implemented on codex/iclr-2027-template. The latest compression places the main-text end on page 9 near review line 479, compared with page 10 near line 506 before compression. The full PDF has 24 pages. Algorithms and tables use local small text as requested; Algorithm 3 and all figure assets remain unchanged. See the [compression record](docs/manuscript-compression-20260925.md) and [earlier r4 record](docs/manuscript-revision-execution-20260925-r4.md). Historical layout descriptions below retain their original context.
 
 ## Figures and PDF
 

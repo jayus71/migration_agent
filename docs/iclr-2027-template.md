@@ -9,6 +9,8 @@ remain inside the final-only conditional so the review PDF stays anonymous.
 
 ## Template source
 
+Latest layout check (2026-09-25, S69/S70): the main text ends on page 9 near review line 479; the AI use statement is also on page 9. References begin on page 10, appendices on page 14, and the complete PDF has 24 pages. The user explicitly selected local small text for algorithms and tables and removed the repository's default-size requirement. Official style files, body text size, page dimensions, and line spacing are unchanged. See the [compression record](manuscript-compression-20260925.md). The dated audits below preserve their original conclusions.
+
 The template comes from the supplied `docs/iclr-2027-style-files.zip`, linked by
 the [ICLR 2027 Author Guidelines](https://iclr.cc/Conferences/2027/AuthorGuidelines).
 These four files are copied without modification to the repository root:

@@ -27,13 +27,13 @@
     }
   },
   "current": {
-    "base_commit": "6110a13",
-    "pdf_sha256": "3b860d89a05a726b7f733c34d7243776e0508c5d6d6bb4fff7299a280e64f5c8"
+    "base_commit": "b8c47f4",
+    "pdf_sha256": "2e895d212285eb927dcaa90f2ae912b1781d99fc6f3e1c7d9079830cc78a9ad7"
   },
-  "updated": "2026-09-25T20:10:20+08:00",
-  "version": "f80134f7f51d2397f357fc99a091067eba0042da70e8b4957fb6546a564cf39c",
-  "reading_words_added": 8426,
-  "reading_words_removed": 4459,
+  "updated": "2026-09-25T20:14:59+08:00",
+  "version": "a6e306b472c92b6e1fcdec24724f4d49b5041edafc223d0dd77d13cc78cb0476",
+  "reading_words_added": 8355,
+  "reading_words_removed": 4458,
   "sections": {
     "Title": {
       "reading": [
@@ -20898,8 +20898,10 @@
           ]
         },
         {
-          "kind": "insert",
-          "before": [],
+          "kind": "replace",
+          "before": [
+            "Every"
+          ],
           "after": [
             "Each",
             "added",
@@ -20908,8 +20910,26 @@
             "another",
             "fault",
             "class,",
-            "increasing",
-            "final",
+            "increasing"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "final"
+          ],
+          "after": [
+            "final"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "candidate",
+            "is",
+            "then"
+          ],
+          "after": [
             "acceptance",
             "under",
             "complete",
@@ -20949,100 +20969,69 @@
             "reveal",
             "optimizer",
             "faults.",
-            "Effects",
-            "of",
-            "training",
+            "Training",
             "signals",
             "and",
             "repair",
             "components.",
             "(a)",
-            "Each",
-            "$+$",
-            "adds",
-            "a",
-            "signal",
-            "to",
-            "the",
-            "preceding",
-            "row,",
-            "ending",
-            "with",
-            "all",
-            "four",
+            "Cumulative",
             "signals",
             "on",
             "16",
             "faulty",
-            "candidates.",
-            "Final",
-            "acceptance",
-            "uses",
-            "complete",
-            "verification.",
-            "(b)",
-            "Repair",
-            "history",
-            "and",
-            "independent",
-            "evidence",
-            "handoff",
-            "on",
-            "ten",
-            "translated",
-            "programs.",
-            "Parentheses",
-            "report",
-            "how",
-            "many",
-            "of",
-            "the",
-            "five",
-            "failing",
-            "programs",
-            "are",
-            "repaired.",
-            "(c)",
-            "Comparisons",
-            "with",
-            "and",
-            "without",
-            "each",
-            "repository",
-            "component",
-            "on",
-            "the",
-            "time",
-            "series",
-            "repository."
+            "candidates,"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "Every"
-          ],
-          "after": [
-            "Every"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "final",
-            "candidate",
-            "is",
-            "then",
             "scored",
             "with",
             "complete"
           ],
           "after": [
-            "setting",
-            "passes",
+            "scored",
+            "with",
+            "complete"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "verification.",
+            "Each",
+            "$+$",
+            "adds",
+            "a",
+            "signal.",
+            "(b)",
+            "Repair",
+            "history",
+            "and",
+            "evidence",
+            "handoff",
+            "on",
+            "ten",
+            "translations;",
+            "parentheses",
+            "count",
+            "repairs",
+            "among",
+            "five",
+            "failing",
+            "programs.",
+            "(c)",
+            "Repository",
+            "components",
+            "on",
+            "time",
+            "series;",
             "all",
-            "69",
-            "behavior"
+            "settings",
+            "pass",
+            "69"
           ]
         },
         {
@@ -28429,33 +28418,12 @@
           "before": [
             "candidate",
             "is",
-            "then",
-            "scored",
-            "with"
+            "then"
           ],
           "after": [
             "acceptance",
-            "under"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "complete"
-          ],
-          "after": [
-            "complete"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "checks",
-            "on",
-            "three",
-            "seeds."
-          ],
-          "after": [
+            "under",
+            "complete",
             "verification",
             "from",
             "4/16",
@@ -28491,119 +28459,113 @@
             "updates",
             "reveal",
             "optimizer",
-            "faults."
+            "faults.",
+            "\\begin{table}[!htb]",
+            "\\caption{Training",
+            "signals",
+            "and",
+            "repair",
+            "components.",
+            "(a)",
+            "Cumulative",
+            "signals",
+            "on",
+            "16",
+            "faulty",
+            "candidates,"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "\\begin{table}[!htb]"
+            "scored",
+            "with",
+            "complete"
           ],
           "after": [
-            "\\begin{table}[!htb]"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "\\caption{Effect"
-          ],
-          "after": [
-            "\\caption{Effects"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "of",
-            "training"
-          ],
-          "after": [
-            "of",
-            "training"
+            "scored",
+            "with",
+            "complete"
           ]
         },
         {
           "kind": "insert",
           "before": [],
           "after": [
-            "signals",
-            "and",
-            "repair",
-            "components.",
-            "(a)",
+            "verification.",
             "Each",
             "$+$",
             "adds",
-            "a"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "signal"
-          ],
-          "after": [
-            "signal"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "coverage"
-          ],
-          "after": [
-            "to",
-            "the",
-            "preceding",
-            "row,",
-            "ending",
-            "with",
-            "all",
-            "four",
-            "signals"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "on"
-          ],
-          "after": [
-            "on"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "detection"
-          ],
-          "after": [
-            "16",
-            "faulty",
-            "candidates.",
-            "Final",
-            "acceptance",
-            "uses",
-            "complete",
-            "verification.",
+            "a",
+            "signal.",
             "(b)",
             "Repair",
-            "history"
+            "history",
+            "and",
+            "evidence",
+            "handoff",
+            "on",
+            "ten",
+            "translations;",
+            "parentheses",
+            "count",
+            "repairs",
+            "among",
+            "five",
+            "failing",
+            "programs.",
+            "(c)",
+            "Repository",
+            "components",
+            "on",
+            "time",
+            "series;",
+            "all",
+            "settings",
+            "pass",
+            "69"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "and"
+            "checks"
           ],
           "after": [
-            "and"
+            "checks"
           ]
         },
         {
           "kind": "replace",
           "before": [
+            "on"
+          ],
+          "after": [
+            "across"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "three"
+          ],
+          "after": [
+            "three"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "seeds.",
+            "\\begin{table}[!htb]",
+            "\\caption{Effect",
+            "of",
+            "training",
+            "signal",
+            "coverage",
+            "on",
+            "detection",
+            "and",
             "repair.",
             "Accepted",
             "candidates",
@@ -28612,84 +28574,16 @@
             "full",
             "verification.",
             "Faults",
-            "passing"
-          ],
-          "after": [
-            "independent",
-            "evidence",
-            "handoff",
-            "on",
-            "ten",
-            "translated",
-            "programs.",
-            "Parentheses",
-            "report",
-            "how",
-            "many",
-            "of"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "the"
-          ],
-          "after": [
-            "the"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "initial",
-            "available"
-          ],
-          "after": [
-            "five",
-            "failing",
-            "programs",
-            "are",
-            "repaired.",
-            "(c)",
-            "Comparisons",
-            "with",
-            "and",
-            "without",
-            "each",
-            "repository",
-            "component",
-            "on",
+            "passing",
             "the",
-            "time",
-            "series",
-            "repository.",
-            "Every",
-            "setting",
-            "passes",
-            "all",
-            "69",
-            "behavior"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "checks"
-          ],
-          "after": [
-            "checks"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "initial",
+            "available",
+            "checks",
             "trigger",
             "no",
             "repair.}"
           ],
           "after": [
-            "across",
-            "three",
             "seeds.}"
           ]
         },
@@ -29040,14 +28934,28 @@
             "Tokens",
             "are",
             "in",
-            "millions.",
-            "In",
-            "(a,b),",
-            "they",
-            "cover",
+            "millions",
+            "for",
+            "investigation",
+            "and",
+            "repair;",
+            "(c)",
+            "also",
+            "includes",
+            "initial",
+            "translation.",
+            "Calls",
+            "in",
+            "(c)",
+            "count",
             "investigation",
             "and",
             "repair.",
+            "Saved",
+            "is",
+            "the",
+            "token",
+            "reduction.",
             "Panel",
             "(b)",
             "uses",
@@ -29055,31 +28963,9 @@
             "examples",
             "and",
             "feedback",
-            "when",
-            "edits",
-            "are",
-            "incorrectly",
-            "formatted.",
-            "In",
-            "(c),",
-            "calls",
-            "cover",
-            "investigation",
-            "and",
-            "repair,",
-            "and",
-            "tokens",
-            "also",
-            "include",
-            "initial",
-            "translation.",
-            "Saved",
-            "is",
-            "the",
-            "percentage",
-            "reduction",
-            "in",
-            "tokens.",
+            "on",
+            "malformed",
+            "edits.",
             "\\end{minipage}"
           ]
         },
@@ -29704,196 +29590,46 @@
           "before": [
             "Conclusion",
             "We",
-            "introduced",
-            "LaDiM,",
-            "a"
+            "introduced"
           ],
           "after": [
             "Conclusion",
             "We",
-            "introduced",
-            "LaDiM,",
-            "a"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "multi-agent"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "framework"
-          ],
-          "after": [
-            "framework"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "with",
-            "multiple",
-            "agents"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "for"
-          ],
-          "after": [
-            "for"
+            "introduced"
           ]
         },
         {
           "kind": "replace",
+          "before": [
+            "LaDiM,",
+            "a",
+            "multi-agent",
+            "framework"
+          ],
+          "after": [
+            "LaDiM"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "for"
+          ],
+          "after": [
+            "for"
+          ]
+        },
+        {
+          "kind": "delete",
           "before": [
             "migrating",
             "deep",
-            "learning"
-          ],
-          "after": [
+            "learning",
+            "code",
+            "while",
             "preserving",
             "training",
-            "behavior",
-            "during"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "code"
-          ],
-          "after": [
-            "code"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "while"
-          ],
-          "after": [
-            "migration.",
-            "Layered",
-            "Diagnosis",
-            "uses",
-            "dependencies",
-            "among",
-            "execution,",
-            "forward",
-            "values,",
-            "gradients,",
-            "and",
-            "parameter",
-            "updates",
-            "to",
-            "guide",
-            "investigation.",
-            "The",
-            "Repair",
-            "Agent",
-            "uses",
-            "diagnostic",
-            "evidence",
-            "from",
-            "the",
-            "independent",
-            "handoff",
-            "and",
-            "previous",
-            "verification",
-            "results",
-            "from",
-            "the",
-            "repair",
-            "history",
-            "to",
-            "guide",
-            "corrective",
-            "edits.",
-            "Repository",
-            "context",
-            "management",
-            "carries",
-            "this",
-            "process",
-            "across",
-            "shared",
-            "implementations",
-            "and",
-            "multiple",
-            "entry",
-            "points.",
-            "LaDiM",
-            "completes",
-            "all",
-            "50",
-            "MindSpore",
-            "migrations",
-            "with",
-            "57.4%",
-            "fewer",
-            "total",
-            "tokens",
-            "than",
-            "MatchFixAgent.",
-            "In",
-            "the",
-            "translation",
-            "error",
-            "study,",
-            "LaDiM",
-            "repairs",
-            "errors",
-            "in",
-            "the",
-            "initial",
-            "translations",
-            "that",
-            "all",
-            "three",
-            "repair",
-            "baselines",
-            "leave",
-            "unresolved.",
-            "Results",
-            "across",
-            "framework,",
-            "language,",
-            "and",
-            "repository",
-            "migration",
-            "establish",
-            "the",
-            "effectiveness",
-            "of",
-            "this",
-            "approach",
-            "in"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "preserving",
-            "training",
-            "behavior."
-          ],
-          "after": [
-            "preserving",
-            "training",
-            "behavior."
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
+            "behavior.",
             "Specifically,",
             "LaDiM",
             "uses",
@@ -29958,19 +29694,125 @@
             "demonstrate",
             "LaDiM's",
             "effectiveness",
-            "in",
+            "in"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
             "preserving",
             "training",
-            "behavior",
-            "and",
+            "behavior"
+          ],
+          "after": [
+            "preserving",
+            "training",
+            "behavior"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "during",
+            "code",
+            "migration.",
+            "Layered",
+            "Diagnosis",
+            "traces",
+            "dependencies",
+            "among",
+            "execution,",
+            "forward",
+            "values,",
+            "gradients,"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "its",
             "efficiency",
             "in",
-            "diagnosis",
-            "and",
+            "diagnosis"
+          ],
+          "after": [
+            "parameter",
+            "updates.",
+            "Independent",
+            "evidence",
+            "handoff"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "repair."
           ],
-          "after": []
+          "after": [
+            "repair",
+            "history",
+            "guide",
+            "corrective",
+            "edits,",
+            "while",
+            "repository",
+            "context",
+            "management",
+            "coordinates",
+            "work",
+            "across",
+            "shared",
+            "implementations",
+            "and",
+            "entry",
+            "points.",
+            "Experiments",
+            "across",
+            "frameworks,",
+            "languages,",
+            "and",
+            "repositories",
+            "show",
+            "that",
+            "LaDiM",
+            "preserves",
+            "training",
+            "behavior",
+            "with",
+            "lower",
+            "token",
+            "costs",
+            "and",
+            "repairs",
+            "translation",
+            "errors",
+            "that",
+            "the",
+            "repair",
+            "baselines",
+            "leave",
+            "unresolved."
+          ]
         },
         {
           "kind": "equal",
@@ -30030,196 +29872,46 @@
           "before": [
             "\\section{Conclusion}",
             "We",
-            "introduced",
-            "LaDiM,",
-            "a"
+            "introduced"
           ],
           "after": [
             "\\section{Conclusion}",
             "We",
-            "introduced",
-            "LaDiM,",
-            "a"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "multi-agent"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "framework"
-          ],
-          "after": [
-            "framework"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "with",
-            "multiple",
-            "agents"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "for"
-          ],
-          "after": [
-            "for"
+            "introduced"
           ]
         },
         {
           "kind": "replace",
+          "before": [
+            "LaDiM,",
+            "a",
+            "multi-agent",
+            "framework"
+          ],
+          "after": [
+            "LaDiM"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "for"
+          ],
+          "after": [
+            "for"
+          ]
+        },
+        {
+          "kind": "delete",
           "before": [
             "migrating",
             "deep",
-            "learning"
-          ],
-          "after": [
+            "learning",
+            "code",
+            "while",
             "preserving",
             "training",
-            "behavior",
-            "during"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "code"
-          ],
-          "after": [
-            "code"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "while"
-          ],
-          "after": [
-            "migration.",
-            "Layered",
-            "Diagnosis",
-            "uses",
-            "dependencies",
-            "among",
-            "execution,",
-            "forward",
-            "values,",
-            "gradients,",
-            "and",
-            "parameter",
-            "updates",
-            "to",
-            "guide",
-            "investigation.",
-            "The",
-            "Repair",
-            "Agent",
-            "uses",
-            "diagnostic",
-            "evidence",
-            "from",
-            "the",
-            "independent",
-            "handoff",
-            "and",
-            "previous",
-            "verification",
-            "results",
-            "from",
-            "the",
-            "repair",
-            "history",
-            "to",
-            "guide",
-            "corrective",
-            "edits.",
-            "Repository",
-            "context",
-            "management",
-            "carries",
-            "this",
-            "process",
-            "across",
-            "shared",
-            "implementations",
-            "and",
-            "multiple",
-            "entry",
-            "points.",
-            "LaDiM",
-            "completes",
-            "all",
-            "50",
-            "MindSpore",
-            "migrations",
-            "with",
-            "57.4\\%",
-            "fewer",
-            "total",
-            "tokens",
-            "than",
-            "MatchFixAgent.",
-            "In",
-            "the",
-            "translation",
-            "error",
-            "study,",
-            "LaDiM",
-            "repairs",
-            "errors",
-            "in",
-            "the",
-            "initial",
-            "translations",
-            "that",
-            "all",
-            "three",
-            "repair",
-            "baselines",
-            "leave",
-            "unresolved.",
-            "Results",
-            "across",
-            "framework,",
-            "language,",
-            "and",
-            "repository",
-            "migration",
-            "establish",
-            "the",
-            "effectiveness",
-            "of",
-            "this",
-            "approach",
-            "in"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "preserving",
-            "training",
-            "behavior."
-          ],
-          "after": [
-            "preserving",
-            "training",
-            "behavior."
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
+            "behavior.",
             "Specifically,",
             "LaDiM",
             "uses",
@@ -30284,19 +29976,125 @@
             "demonstrate",
             "LaDiM's",
             "effectiveness",
-            "in",
+            "in"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
             "preserving",
             "training",
-            "behavior",
-            "and",
+            "behavior"
+          ],
+          "after": [
+            "preserving",
+            "training",
+            "behavior"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "during",
+            "code",
+            "migration.",
+            "Layered",
+            "Diagnosis",
+            "traces",
+            "dependencies",
+            "among",
+            "execution,",
+            "forward",
+            "values,",
+            "gradients,"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "its",
             "efficiency",
             "in",
-            "diagnosis",
-            "and",
+            "diagnosis"
+          ],
+          "after": [
+            "parameter",
+            "updates.",
+            "Independent",
+            "evidence",
+            "handoff"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "repair."
           ],
-          "after": []
+          "after": [
+            "repair",
+            "history",
+            "guide",
+            "corrective",
+            "edits,",
+            "while",
+            "repository",
+            "context",
+            "management",
+            "coordinates",
+            "work",
+            "across",
+            "shared",
+            "implementations",
+            "and",
+            "entry",
+            "points.",
+            "Experiments",
+            "across",
+            "frameworks,",
+            "languages,",
+            "and",
+            "repositories",
+            "show",
+            "that",
+            "LaDiM",
+            "preserves",
+            "training",
+            "behavior",
+            "with",
+            "lower",
+            "token",
+            "costs",
+            "and",
+            "repairs",
+            "translation",
+            "errors",
+            "that",
+            "the",
+            "repair",
+            "baselines",
+            "leave",
+            "unresolved."
+          ]
         },
         {
           "kind": "equal",

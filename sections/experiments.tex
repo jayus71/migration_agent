@@ -81,7 +81,7 @@ LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults
 
 \textbf{Training signals.} We compare cumulative feedback on 16 fixed candidates from a CNN, an image MLP, a Transformer classifier, and a small causal language model. Each model contributes four candidates with execution, forward, gradient, and update faults, respectively. Sources, candidates, tools, and budgets are fixed. Available feedback determines whether repair begins and stops. Each added signal exposes another fault class, increasing final acceptance under complete verification from 4/16 to 16/16 (\cref{tab:signal-ablation}a). Initially undetected faults decrease from 12 to 8 to 4 to 0 across the four settings. Forward values reveal changed computations, gradients reveal differentiation faults, and updates reveal optimizer faults.
 \begin{table}[!htb]
-\caption{Effects of training signals and repair components. (a) Each $+$ adds a signal to the preceding row, ending with all four signals on 16 faulty candidates. Final acceptance uses complete verification. (b) Repair history and independent evidence handoff on ten translated programs. Parentheses report how many of the five failing programs are repaired. (c) Comparisons with and without each repository component on the time series repository. Every setting passes all 69 behavior checks across three seeds.}
+\caption{Training signals and repair components. (a) Cumulative signals on 16 faulty candidates, scored with complete verification. Each $+$ adds a signal. (b) Repair history and evidence handoff on ten translations; parentheses count repairs among five failing programs. (c) Repository components on time series; all settings pass 69 checks across three seeds.}
 \label{tab:signal-ablation}
 \label{tab:cumulative-components}
 \centering
@@ -101,7 +101,7 @@ LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults
 \input{figures/TABLE_repository_components.tex}
 \par\smallskip
 \begin{minipage}{\linewidth}
-Tokens are in millions. In (a,b), they cover investigation and repair. Panel (b) uses editing examples and feedback when edits are incorrectly formatted. In (c), calls cover investigation and repair, and tokens also include initial translation. Saved is the percentage reduction in tokens.
+Tokens are in millions for investigation and repair; (c) also includes initial translation. Calls in (c) count investigation and repair. Saved is the token reduction. Panel (b) uses editing examples and feedback on malformed edits.
 \end{minipage}
 \end{table}
 

@@ -174,7 +174,7 @@ Treat this section as a hard submission gate. Re-check the official pages immedi
 ### Current repository audit (2026-09-25)
 
 - **Resolved in the 2026-09-25 revision: AI use statement visible.** `conference_101719.tex` now contains a non-empty disclosure outside `\ificlrfinal`, so the anonymous review PDF includes it. Re-check the disclosure against the final AI-use form before upload.
-- **BLOCKER: page limit not met.** The recorded build places the main-text end on page 10. Reduce the submission version to nine main-text pages or fewer without changing the official style files.
+- **Resolved in the 2026-09-25 compression: page limit met.** The latest rendered build ends the main text on page 9 near review line 479. Algorithms and tables use local small text per the user's explicit instruction; the official style files are unchanged. Re-check the final PDF after subsequent edits.
 - **Recommended item missing: reproducibility statement.** No `Reproducibility Statement` is currently present in the manuscript. Add it before the references and link it to the existing code, data, provenance, seeds, budgets, and reproduction commands.
 - **Template check satisfied, subject to a final re-check.** The repository audit records a byte-for-byte match between the four tracked style files and the ICLR 2027 archive. Re-verify the archive hash and compile with the official files immediately before submission.
 - **Anonymous review mode is present but not fully cleared.** The source uses `Anonymous Authors` and final-only acknowledgments, but audit the final PDF, supplementary bundle, code archive, URLs, comments, and metadata for author or institutional identifiers.
