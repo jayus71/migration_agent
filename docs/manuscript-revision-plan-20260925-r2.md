@@ -1,20 +1,57 @@
 # 论文方案第二次修订：0925加粗架构图、紧凑数字轴与Figure 4去留
 
-2026年9月25日。用户指定figures/架构图0925加粗版.svg，并接受略微缩小；明确拒绝Figure 3上下排列，要求左右并排，横轴只写一次Task，逐柱显示1–29；继续询问loss对照是否有具名方法依据，以及Figure 4是否适合留在当前位置。本文件替代[本日上一版方案](manuscript-revision-plan-20260925.md)中的架构图满宽建议和Figure 3上下排列建议。其余论文修改维持先审方案的范围。
+2026年9月25日。用户指定figures/架构图0925加粗版.svg，并接受略微缩小；明确拒绝Figure 3上下排列，要求左右并排，横轴只写一次Task，逐柱显示1–29；继续询问loss对照是否有具名方法依据，以及Figure 4是否适合留在当前位置。本文件替代[本日上一版方案](manuscript-revision-plan-20260925.md)中的架构图满宽建议和Figure 3上下排列建议。其余论文修改维持先审方案的范围。用户随后认可检测claim的证据解释，要求按这一方向更新论文修改方案；以下第1节已纳入确认的表述和证据安排。本轮修改方案文件，正式论文实施尚未开始。
 
-## 1. Figure 4的建议：保留证据，当前图移到附录
+## 1. 已确认的检测claim与证据安排
 
-本轮找到直接相关、可以具名引用的工程工具：MindSpore TroubleShooter的loss_compare。它读取两份训练日志，提取loss，输出两条loss曲线、逐项误差曲线及最大绝对／相对误差统计。这个工具提供了loss对比用于训练迁移核查的具体来源。
+用户认可的claim为：
 
-已对照API文档和实现：loss_compare没有自动判错阈值、在线停止规则或首检时间输出。实现中的误差曲线为left−right，最大绝对误差统计取绝对值。本文Figure 4绘制的是绝对loss差值并按我们冻结的阈值归一化；31／18步由我们的0.02阈值和跨运行均值计算得到。图例不宜直接写成TroubleShooter detects at step 31，也不应标成MatchFixAgent。可以在图注或对应正文中引用TroubleShooter，解释loss对照的实际用途，曲线继续标为Loss difference。
+> 在受控的梯度和参数更新故障中，当前loss的一致性不足以判断训练计算是否正确；直接比较对应训练信号，可以在故障发生的训练步发现差异。
 
-另一个直接来源是MindSpore Transformers的Precision Tuning Guide。它依次比较第1步loss、第1步梯度local norm、第2步loss或更新后权重，并在长训练中继续比较loss。该来源既支持loss差异是有意义的核查信号，也说明梯度和更新检查本身已有工程实践。本文需要通过统一任务上的修复、验收与成本结果来说明方法效果。
+这一表述用于解释LaDiM为何需要同时观察forward、梯度和参数更新。实验条件为梯度缩放与部分更新抑制两类受控故障，各含四个模型、三个种子，共12条运行。每对匹配运行在第1步的loss差值完全相同，正常与故障由loss检查得到相同结果；对应的梯度／更新检查各12/12在第1步检出。这是信号检测和设计动机的证据。
 
-目前这张图在正文中的证据优先级较低。保存数据已经显示，阈值降到10⁻⁵时两类故障的均值loss曲线都在第2步越阈，同批12条正常轨迹无误报。因此0.02下的31／18步无法作为广泛适用的延迟优势；即使引用一个具名工具，仍需解释阈值选择。两种受控故障在forward之后被注入，第一步loss与匹配正常轨迹完全相同，也使“后向／更新信号先出现差异”具有明确的构造条件。
+### 正文拟采用的文字
 
-建议将现有Figure 4及阈值敏感性结果一起放入附录，正文保留简短机制说明，并保留Table 4(a)在16个候选上的反馈消融结果：完整验收随执行、forward、梯度、更新信号逐步开放，从4/16、8/16、12/16到16/16。正文用这项实测结果说明增加训练信号后修复效果的变化；附录解释具体故障怎样在各信号中暴露。Figure 4仍保留第1步直接检测、0.02条件下均值31／18步、12次运行min–max阴影，以及逐运行检出分母。
+将sections/experiments.tex目前“Training Signals and Detection Latency”段改为简短的训练信号机制说明，弱化检测延迟的比较性标题，并引用附录中的完整轨迹与敏感性分析。英文拟稿如下：
 
-如果后续决定保留在正文，其定位应为“同一轨迹上的检测信号对照”，并同时交代较小阈值下的结果；它不能承担未经运行的具名Agent检测性能比较。本轮首选移附录，这是待用户审核的新建议，尚未移动图、修改正文或重新编号。
+> Controlled gradient-scaling and partial-update faults can leave the current loss unchanged while altering subsequent training computations. In all 12 runs per fault, the first-step loss difference is identical to that in the matched fault-free run, whereas the corresponding gradient or update check detects the fault at that step. These observations motivate checking gradients and parameter updates alongside forward values during migration verification.
+
+在Training signals消融段按现有结果承接其修复意义，拟采用：
+
+> On 16 fixed faulty candidates, adding forward, gradient, and update feedback to execution checks raises final acceptance under complete verification from 4/16 to 16/16. Each added signal exposes an additional fault class and provides feedback for repair.
+
+正式实施时使用自动附录／表格引用。中间两行8/16、12/16及完整成本保留在表4(a)，正文分析增加反馈的作用，不重复整张表。
+
+### Figure 4与阈值分析的安排
+
+将现有Figure 4和已有阈值敏感性结果纳入附录sec:detection-measurements，正文保留上述机制说明和16例信号消融。该安排已经写入本轮修改方案；当前没有移动图、调整编号或改写论文。
+
+附录图保留两类故障、第1步直接检测、原始归一化曲线、12次运行的min–max阴影、分母与检测协议。图例继续使用Loss difference、Gradient norm difference、Update difference；在正文称Loss-only verification时，说明它是我们在同一轨迹上计算的检查规则。
+
+附录图注拟稿：
+
+> Training-signal differences under controlled gradient scaling (a) and partial update suppression (b). Source and target executions start from matched initial states and then train independently. Direct gradient and update checks detect their respective faults at step 1 in all 12 runs per fault. At the absolute loss-difference threshold of 0.02, the mean loss curves first cross at steps 31 and 18. Curves show means; shaded bands span the minimum and maximum across four models and three seeds. Differences are normalized by their respective thresholds.
+
+附录相邻文字／敏感性表同时报告：0.02下，50步内loss检出分别为3/12和4/12；10⁻⁵下，两类故障均12/12检出，梯度故障均在第2步，更新故障在第2–8步，两条均值曲线均在第2步越阈，同批正常对照0/12误报。正常样本和事后阈值重算的条件就近写明。原冻结阈值和主方法验收结果保持，敏感性分析不反向改写历史协议。
+
+31／18步用于描述0.02这一具体设置。正文的claim采用第一步的信号可观测性解释，不再将“普遍早几十步”作为这张图的结论。故障注入发生在forward之后这一构造条件在附录协议中保持明确。
+
+### 每项claim由哪项证据支撑
+
+| Claim或分析目的 | 对应证据 | 方案中的用途 |
+|---|---|---|
+| 当前loss不足以覆盖后向／更新错误，直接检查能识别本组受控故障 | 匹配正常对照、第1步12/12检测、完整轨迹与敏感性 | 正文简述设计动机，附录呈现机制验证 |
+| 增加训练反馈改善本组候选的完整修复验收 | 表4(a)：16个固定候选，完整验收4/16、8/16、12/16、16/16 | 主文保留信号消融及机制分析 |
+| 依赖关系如何帮助定位错误原因 | 对应的诊断记录、代码证据或明确隔离此因素的实验 | 不从这张曲线推导排序优越性，也不将信号越阈写成LLM代码定位正确 |
+| 完整方法的修复效果与token效率 | 共同任务上的方法比较、真实翻译错误修复和组件消融 | 保留现有实测范围、预算、分母与成本结果 |
+
+实施时联动检查摘要、贡献、方法、实验、图注与附录对该图的引用。Layered Diagnosis的机制描述继续说明如何使用训练依赖关系指导调查；其效果归因按上表对应证据组织。本方案不增加“首次检查梯度／更新”或“优于所有loss检测方法”等新结论，不启动额外实验。
+
+### Loss对照的具名来源
+
+已核对MindSpore TroubleShooter的loss_compare API与实现。它读取两份训练日志，输出loss曲线、逐项误差和最大绝对／相对误差统计，提供loss比较用于训练核查的具体工程来源。该工具没有自动判错阈值、在线停止规则或首检时间输出；其误差曲线为left−right，我们的图使用绝对差值并按自身协议阈值归一化。因此只把它引用为loss对照的实践依据，不把本文曲线标为TroubleShooter或MatchFixAgent的检测结果。
+
+MindSpore Transformers的Precision Tuning Guide依次比较第1步loss、第1步梯度local norm、第2步loss或更新后权重，并在长训练中继续比较loss。它用于说明训练信号核查的已有实践；本研究对信号组织和修复流程的效果仍由相应实验说明。
 
 ### 本轮核对的直接来源
 
@@ -51,4 +88,9 @@
 
 本轮检查点983d2c1，新增方案、预览、脚本和反馈登记后单独提交。1,080个受保护文件前后哈希相同，包含论文源码、正式图形生成器、已包含图表、冻结数据、官方样式与新SVG。核对字体、矢量属性、标签重叠、冻结成本与源文件哈希，并查看最终截图；没有编译或修改正式论文、刷新未变的基线比较、重跑实验或推送。完整验证见[verification.json](review-evidence/manuscript-20260925-r2/verification.json)。
 
-Figure 4移附录的建议尚未实施，整稿页数也尚未重新计算。其余算法、表格、引用及3.4候选正文保持此前待审核状态。
+本轮按用户认可的claim方向更新第1节，将正文短机制说明、表4(a)修复证据、附录曲线及敏感性组织为明确的修改安排。方案和反馈记录已更新，正式论文实施及整稿页数核验尚未开始。其余算法、表格、引用及3.4候选正文保持此前状态。
+
+
+### 2026年9月25日claim方案更新记录
+
+本轮检查点eb9e387。修改限于本方案、claim证据说明的状态提示及反馈登记；源稿、既有图表、冻结数据和基线不变。逐项核对上述文字中的12次运行、16个候选、阈值、个体首检及均值越阈的含义，沿用已经核验的数据；没有新增实验、重新编译或将历史检查写成本轮全稿核验。0925加粗架构图90%宽度及Figure 3左右并排、单次Task加数字轴的安排保持。
