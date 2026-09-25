@@ -3,7 +3,7 @@
 \begin{figure}[!t]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/hierarchical_feedback_architecture.pdf}
-\caption{Overview of LaDiM. (a) The Translator produces a candidate, and the Orchestrator compares its execution, forward values, gradients, and parameter updates with the source. The Verifier investigates the first divergent stage (gradients here) and hands code observations, test results, locations, and hypotheses to the Repair Agent. The Repair Agent tests and edits the candidate, using the Orchestrator's feedback until acceptance or budget exhaustion. (b) Repository context management analyzes code structure, orders repairs through work-unit dependencies, and reconstructs compact contexts from archived evidence.}
+\caption{Overview of LaDiM. (a) The Orchestrator evaluates the Translator's candidate across execution, forward values, gradients, and parameter updates. The Verifier investigates the first divergence (gradients here), handing code observations, test results, locations, and hypotheses to the Repair Agent. Repair continues with testing, editing, and Orchestrator feedback until acceptance or budget exhaustion. (b) Repository context management analyzes code structure, orders dependent repairs, and reconstructs compact contexts from archived evidence.}
 \label{fig:architecture}
 \end{figure}
 
@@ -97,6 +97,7 @@ Repair history preserves earlier edits, observations, and hypotheses across atte
 \end{wrapfigure}
 \cref{alg:repair} reuses \textsc{ToolFeedback} from \cref{alg:diagnose}, with $H\mathbin{\|}x$ denoting the addition of a record $x$ to the repair history. Its \textsc{RepairComplete} condition requires a completion response, an applied edit in the current stage, and a test executed after the last edit. If an edit or test is missing, the conversation requests that action within the remaining budget. The Orchestrator evaluates the candidate when the repair stage ends.\par}
 
+\vspace{8pt}
 \begin{algorithm}[!htb]
 \caption{Repository migration and repair coordination}
 \label{alg:repository}
