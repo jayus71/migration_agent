@@ -101,3 +101,23 @@ Page-count reduction remains a content/layout task rather than a reason to
 change the template. The AI use statement is present in the review build. These
 outstanding submission tasks are separate from the
 byte-level template verification.
+
+## Official conditional macros audit (2026-09-25)
+
+The official example source uses the public switch `\iclrfinalcopy`, which is
+commented out for anonymous submission and enabled for a camera-ready paper.
+The official `iclr2027_conference.sty` defines the switch internally with
+`\newif\ificlrfinal` and uses `\ificlrfinal` for the review/final header and
+author block. The root style file and `docs/template/iclr2027/iclr2027_conference.sty`
+are byte-for-byte identical to the same file in the official ZIP.
+
+The paper uses that official internal conditional only around acknowledgments:
+the AI use statement is unconditional and therefore appears in the anonymous
+review PDF, while funding and institutional acknowledgments remain final-only.
+This conditional does not change page dimensions, font sizes, line spacing, or
+other formatting parameters. The official example and the current paper both
+leave `\iclrfinalcopy` commented out for review.
+
+The official example was compiled in an isolated copy with the tracked style
+files. It produced a 7-page US Letter PDF and included the official AI use,
+Ethics, and Reproducibility statement sections.
