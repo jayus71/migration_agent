@@ -662,6 +662,12 @@ S18的摘要、贡献、setup、结果和表头修改已完成并继续保留。
 - The disclosure records generative AI assistance with software implementation and editing, experiment planning and analysis, figure preparation, literature search, and manuscript drafting and editing, and states that the authors reviewed the assistance and take responsibility for the final content.
 - `latexmk` succeeded in the WSL environment and `pdftotext` confirmed the statement on page 10 of the 24-page PDF. The fixed-baseline manuscript comparison was refreshed. The nine-page main-text limit and missing reproducibility statement remain open submission items.
 
+### 2026-09-25: official ICLR conditional macro and preamble audit
+
+- Compared the official example and style files in `docs/template/iclr2027` with the official ICLR 2027 ZIP and the root files. All four style files are byte-for-byte identical. The official `.tex` exposes `\\iclrfinalcopy`; the official `.sty` defines and internally uses `\\ificlrfinal`. The paper's conditional around acknowledgments therefore uses an official style macro and does not alter formatting parameters.
+- The main preamble contained an unused `listings` style with `\\footnotesize`; no listing environment uses it. Removed that dead package/style definition to keep the submission source free of unnecessary local font-size overrides. No experimental or manuscript-content claim changed.
+- The official example compiled in isolation as a 7-page US Letter PDF; the current manuscript remains a 24-page PDF with the existing nine-page main-text issue recorded separately.
+
 ### 2026-09-24：从 Overleaf 1ff0b3c 同步全部新增修改（只提交，不推送）
 
 - 用户明确要求先检查冲突，无冲突直接合并，有冲突先汇报，并暂不push。主仓库本轮检查点为 31173ef；相关论文文件干净，另一个方法图任务的暂存文件、登记增量及PPT工作区修改均保持。本轮用独立Git索引提交，避免纳入这些文件。

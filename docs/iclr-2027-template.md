@@ -118,6 +118,11 @@ This conditional does not change page dimensions, font sizes, line spacing, or
 other formatting parameters. The official example and the current paper both
 leave `\iclrfinalcopy` commented out for review.
 
+The preamble audit also found an unused `listings` style that set code text to
+`\footnotesize`; no listing uses it. That dead definition and package import
+were removed from the paper preamble so the submission source contains no
+unneeded local font-size override.
+
 The official example was compiled in an isolated copy with the tracked style
 files. It produced a 7-page US Letter PDF and included the official AI use,
 Ethics, and Reproducibility statement sections.
