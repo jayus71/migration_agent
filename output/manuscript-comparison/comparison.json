@@ -27,12 +27,12 @@
     }
   },
   "current": {
-    "base_commit": "e615868",
-    "pdf_sha256": "ad68a79fb18784b3fc15c83e2c5d08940f766eaea383ddbb68d814fdf60264a1"
+    "base_commit": "8d38e7e",
+    "pdf_sha256": "f6ded71219b57dfa3c6934bd01c01d1ad2373ba31a4b39d36c3a56deb45d5173"
   },
-  "updated": "2026-09-25T18:17:38+08:00",
-  "version": "c337de22a581358b641452e2d4b31a448107c832c74138e6a6e4fa70d79ffcda",
-  "reading_words_added": 8816,
+  "updated": "2026-09-25T18:27:46+08:00",
+  "version": "53382a996cc9f8d0714c98f1184b3ed3d45666c9abae2d4f1456a862e8dae091",
+  "reading_words_added": 8753,
   "reading_words_removed": 4447,
   "sections": {
     "Title": {
@@ -7469,239 +7469,20 @@
         {
           "kind": "replace",
           "before": [
-            "process,"
-          ],
-          "after": [
-            "process.",
-            "For",
-            "repository",
-            "migration,",
-            "LaDiM",
-            "additionally",
-            "maintains",
-            "repository",
-            "context",
-            "across",
-            "files",
-            "and",
-            "conversations",
-            "(fig:architectureb;",
-            "sec:repository-method).",
-            "Overview",
-            "of",
-            "LaDiM.",
-            "(a)",
-            "The",
-            "Translator",
-            "Agent",
-            "produces",
-            "a",
-            "candidate,",
-            "and",
-            "the",
-            "Orchestrator",
-            "executes",
-            "it,",
-            "returns",
-            "measurements,",
-            "and",
-            "coordinates",
-            "the",
-            "agents.",
-            "The",
-            "Verifier",
-            "Agent",
-            "applies",
-            "Layered",
-            "Diagnosis,",
-            "comparing",
-            "source",
-            "and",
-            "target",
-            "in",
-            "execution,",
-            "forward",
-            "values,",
-            "gradients,",
-            "and",
-            "parameter",
-            "updates.",
-            "It",
-            "focuses",
-            "on",
-            "the",
-            "first",
-            "stage",
-            "that",
-            "diverges",
-            "(gradients",
-            "in",
-            "this",
-            "example),",
-            "and",
-            "later",
-            "stages",
-            "are",
-            "marked",
-            "as",
-            "not",
-            "reached.",
-            "Its",
-            "code",
-            "observations,",
-            "test",
-            "results,",
-            "locations,",
-            "and",
-            "hypotheses",
-            "are",
-            "handed",
-            "to",
-            "the",
-            "Repair",
-            "Agent,"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "which"
-          ],
-          "after": [
-            "which"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "process,",
+            "which",
             "continues",
-            "until"
-          ],
-          "after": [
-            "patches"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "until",
             "the",
-            "candidate"
-          ],
-          "after": [
+            "candidate",
+            "passes",
             "the",
-            "candidate"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "passes"
-          ],
-          "after": [
-            "and",
-            "submits",
-            "it",
-            "for",
-            "validation.",
-            "(b)",
-            "For",
-            "repositories,",
-            "repository",
-            "context",
-            "management",
-            "analyzes"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "the"
-          ],
-          "after": [
-            "the"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
             "acceptance",
             "checks",
             "or",
-            "reaches"
-          ],
-          "after": [
-            "repository",
-            "structure,",
-            "plans",
-            "repairs",
-            "over",
-            "a",
-            "dependency",
-            "graph",
-            "of",
-            "work",
-            "units,",
-            "and",
-            "reconstructs"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "the"
-          ],
-          "after": [
-            "the"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "context",
-            "from",
-            "an",
-            "evidence",
-            "store.",
-            "$A_T$",
-            ",",
-            "$A_V$",
-            ",",
-            "and",
-            "$A_R$",
-            "are",
+            "reaches",
             "the",
-            "role",
-            "instructions",
-            "of",
-            "the",
-            "three",
-            "agents.",
-            "The",
-            "code",
-            "edit",
-            "and",
-            "signal",
-            "traces",
-            "are",
-            "illustrative.",
-            "Preliminary",
-            "A",
-            "migration"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "task"
-          ],
-          "after": [
-            "task"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "task",
             "budget.",
             "LaDiM's",
             "migration",
@@ -7717,8 +7498,34 @@
             "to",
             "investigate",
             "through",
-            "code",
-            "and",
+            "code"
+          ],
+          "after": [
+            "process.",
+            "For",
+            "repository",
+            "migration,",
+            "LaDiM",
+            "additionally",
+            "maintains",
+            "repository",
+            "context",
+            "across",
+            "files"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "training",
             "observations.",
             "The",
@@ -7730,13 +7537,55 @@
             "and",
             "revises",
             "the",
-            "candidate.",
+            "candidate."
+          ],
+          "after": [
+            "conversations",
+            "(fig:architectureb;",
+            "sec:repository-method).",
+            "Overview",
+            "of",
+            "LaDiM.",
+            "(a)"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "The",
-            "Orchestrator",
+            "Orchestrator"
+          ],
+          "after": [
+            "The",
+            "Orchestrator"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "checks",
             "submitted",
-            "changes",
-            "and",
+            "changes"
+          ],
+          "after": [
+            "coordinates",
+            "translation,",
+            "diagnosis,",
+            "repair,"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "returns",
             "measurements",
             "for",
@@ -7746,18 +7595,103 @@
             "adapters",
             "obtain",
             "observations",
-            "from",
-            "the",
+            "from"
+          ],
+          "after": [
+            "validation.",
+            "The",
+            "Verifier",
+            "investigates"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "the"
+          ],
+          "after": [
+            "the"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "target",
             "framework.",
             "Task",
-            "Definition",
-            "and",
+            "Definition"
+          ],
+          "after": [
+            "first",
+            "divergent",
+            "stage"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "Training",
             "Observations",
             "Given"
           ],
           "after": [
+            "hands",
+            "evidence",
+            "to",
+            "the",
+            "Repair",
+            "Agent.",
+            "(b)",
+            "Repository",
+            "context",
+            "management",
+            "combines",
+            "structural",
+            "analysis,",
+            "dependency",
+            "planning,",
+            "and",
+            "evidence",
+            "retrieval",
+            "with",
+            "context",
+            "reconstruction.",
+            "$A_T$",
+            ",",
+            "$A_V$",
+            ",",
+            "and",
+            "$A_R$",
+            "denote",
+            "agent",
+            "instructions.",
+            "Code",
+            "and",
+            "traces",
+            "are",
+            "illustrative.",
+            "Java/DJL",
+            "experiments",
+            "migrate",
+            "in",
+            "the",
+            "reverse",
+            "direction,",
+            "to",
+            "Python/PyTorch.",
+            "Preliminary",
+            "A",
+            "migration",
+            "task",
             "$\\mathcal",
             "T=(P,L_s,F_s,L_t,F_t,W)$",
             "specifies"
@@ -11660,7 +11594,21 @@
         {
           "kind": "replace",
           "before": [
-            "process,"
+            "process,",
+            "which",
+            "continues",
+            "until",
+            "the",
+            "candidate",
+            "passes",
+            "the",
+            "acceptance",
+            "checks",
+            "or",
+            "reaches",
+            "the",
+            "task",
+            "budget."
           ],
           "after": [
             "process.",
@@ -11677,221 +11625,28 @@
             "and",
             "conversations",
             "(\\cref{fig:architecture}b;",
-            "\\cref{sec:repository-method}).",
+            "\\cref{sec:repository-method})."
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "\\begin{figure}[!htb]",
-            "\\centering",
-            "\\includegraphics[width=0.9\\textwidth]{figures/hierarchical_feedback_architecture.pdf}",
-            "\\caption{Overview",
-            "of",
-            "LaDiM.",
-            "(a)",
-            "The",
-            "Translator",
-            "Agent",
-            "produces",
-            "a",
-            "candidate,",
-            "and",
-            "the",
-            "Orchestrator",
-            "executes",
-            "it,",
-            "returns",
-            "measurements,",
-            "and",
-            "coordinates",
-            "the",
-            "agents.",
-            "The",
-            "Verifier",
-            "Agent",
-            "applies",
-            "Layered",
-            "Diagnosis,",
-            "comparing",
-            "source",
-            "and",
-            "target",
-            "in",
-            "execution,",
-            "forward",
-            "values,",
-            "gradients,",
-            "and",
-            "parameter",
-            "updates.",
-            "It",
-            "focuses",
-            "on",
-            "the",
-            "first",
-            "stage",
-            "that",
-            "diverges",
-            "(gradients",
-            "in",
-            "this",
-            "example),",
-            "and",
-            "later",
-            "stages",
-            "are",
-            "marked",
-            "as",
-            "not",
-            "reached.",
-            "Its",
-            "code",
-            "observations,",
-            "test",
-            "results,",
-            "locations,",
-            "and",
-            "hypotheses",
-            "are",
-            "handed",
-            "to",
-            "the",
-            "Repair",
-            "Agent,"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "which"
+            "\\centering"
           ],
           "after": [
-            "which"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "continues",
-            "until"
-          ],
-          "after": [
-            "patches"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "the",
-            "candidate"
-          ],
-          "after": [
-            "the",
-            "candidate"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "passes"
-          ],
-          "after": [
-            "and",
-            "submits",
-            "it",
-            "for",
-            "validation.",
-            "(b)",
-            "For",
-            "repositories,",
-            "repository",
-            "context",
-            "management",
-            "analyzes"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "the"
-          ],
-          "after": [
-            "the"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "acceptance",
-            "checks",
-            "or",
-            "reaches"
-          ],
-          "after": [
-            "repository",
-            "structure,",
-            "plans",
-            "repairs",
-            "over",
-            "a",
-            "dependency",
-            "graph",
-            "of",
-            "work",
-            "units,",
-            "and",
-            "reconstructs"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "the"
-          ],
-          "after": [
-            "the"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "task",
-            "budget.",
             "\\begin{figure}[!htb]",
-            "\\centering",
+            "\\centering"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "\\includegraphics[width=\\textwidth]{figures/hierarchical_feedback_architecture.pdf}",
             "\\caption{LaDiM's",
             "migration",
-            "workflow."
-          ],
-          "after": [
-            "context",
-            "from",
-            "an",
-            "evidence",
-            "store.",
-            "$A_T$,",
-            "$A_V$,",
-            "and",
-            "$A_R$",
-            "are",
-            "the",
-            "role",
-            "instructions",
-            "of",
-            "the",
-            "three",
-            "agents."
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "The"
-          ],
-          "after": [
-            "The"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
+            "workflow.",
+            "The",
             "Translator",
             "generates",
             "a",
@@ -11901,38 +11656,9 @@
             "Verifier",
             "to",
             "investigate",
-            "through"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "code"
-          ],
-          "after": [
-            "code"
-          ]
-        },
-        {
-          "kind": "insert",
-          "before": [],
-          "after": [
-            "edit"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "and"
-          ],
-          "after": [
-            "and"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "through",
+            "code",
+            "and",
             "training",
             "observations.",
             "The",
@@ -11944,13 +11670,53 @@
             "and",
             "revises",
             "the",
-            "candidate.",
+            "candidate."
+          ],
+          "after": [
+            "\\includegraphics[width=0.9\\textwidth]{figures/hierarchical_feedback_architecture.pdf}",
+            "\\caption{Overview",
+            "of",
+            "LaDiM.",
+            "(a)"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "The",
-            "Orchestrator",
+            "Orchestrator"
+          ],
+          "after": [
+            "The",
+            "Orchestrator"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "checks",
             "submitted",
-            "changes",
-            "and",
+            "changes"
+          ],
+          "after": [
+            "coordinates",
+            "translation,",
+            "diagnosis,",
+            "repair,"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "returns",
             "measurements",
             "for",
@@ -11960,16 +11726,77 @@
             "adapters",
             "obtain",
             "observations",
-            "from",
-            "the",
+            "from"
+          ],
+          "after": [
+            "validation.",
+            "The",
+            "Verifier",
+            "investigates"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "the"
+          ],
+          "after": [
+            "the"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "target",
             "framework.}"
           ],
           "after": [
-            "signal",
+            "first",
+            "divergent",
+            "stage",
+            "and",
+            "hands",
+            "evidence",
+            "to",
+            "the",
+            "Repair",
+            "Agent.",
+            "(b)",
+            "Repository",
+            "context",
+            "management",
+            "combines",
+            "structural",
+            "analysis,",
+            "dependency",
+            "planning,",
+            "and",
+            "evidence",
+            "retrieval",
+            "with",
+            "context",
+            "reconstruction.",
+            "$A_T$,",
+            "$A_V$,",
+            "and",
+            "$A_R$",
+            "denote",
+            "agent",
+            "instructions.",
+            "Code",
+            "and",
             "traces",
             "are",
-            "illustrative.}"
+            "illustrative.",
+            "Java/DJL",
+            "experiments",
+            "migrate",
+            "in",
+            "the",
+            "reverse",
+            "direction,",
+            "to",
+            "Python/PyTorch.}"
           ]
         },
         {
@@ -18640,7 +18467,7 @@
             "task",
             "inputs.",
             "Tasks",
-            "1–20",
+            "1-20",
             "pass",
             "evaluation",
             "before",
@@ -18693,7 +18520,7 @@
           ],
           "after": [
             "tasks",
-            "21–29",
+            "21-29",
             "require",
             "repair;",
             "each",
@@ -21066,7 +20893,8 @@
             "the",
             "loss",
             "threshold.",
-            "r0.45",
+            "24",
+            "r0.48",
             "Repair",
             "and",
             "native",
@@ -26173,7 +26001,7 @@
             "task",
             "inputs.",
             "Tasks",
-            "1–20",
+            "1--20",
             "pass",
             "evaluation",
             "before",
@@ -26226,7 +26054,7 @@
           ],
           "after": [
             "tasks",
-            "21–29",
+            "21--29",
             "require",
             "repair;",
             "each",
@@ -28731,7 +28559,8 @@
             "the",
             "loss",
             "threshold.",
-            "\\begin{wraptable}{r}{0.45\\textwidth}",
+            "\\Needspace{24\\baselineskip}",
+            "\\begin{wraptable}{r}{0.48\\textwidth}",
             "\\caption{Repair",
             "and",
             "native",
@@ -32920,7 +32749,7 @@
             "Gradient",
             "derivation.",
             "https://www.mindspore.cn/docs/en/r2.4.0/migration_guide/model_development/gradient.html,",
-            "2024a.",
+            "2024.",
             "MindSpore",
             "2.4.0",
             "documentation,",
@@ -32928,6 +32757,18 @@
             "Comparison.",
             "Accessed:",
             "2026-09-24.",
+            "MindSpore.",
+            "Precision",
+            "tuning",
+            "guide.",
+            "https://www.mindspore.cn/mindformers/docs/en/r1.7.0/advanced_development/precision_optimization.html,",
+            "2025a.",
+            "MindSpore",
+            "Transformers",
+            "r1.7.0",
+            "documentation.",
+            "Accessed:",
+            "2026-09-25.",
             "MindSpore.",
             "TroubleShooter",
             "losscompare:",
@@ -32939,19 +32780,7 @@
             "training",
             "logs.",
             "https://github.com/mindspore-ai/toolkits/blob/e0486eee96a1893b5e1b59f02669804a2d796030/troubleshooter/docs/api/widget/loss_compare.md,",
-            "2024b.",
-            "Accessed:",
-            "2026-09-25.",
-            "MindSpore.",
-            "Precision",
-            "tuning",
-            "guide.",
-            "https://www.mindspore.cn/mindformers/docs/en/r1.7.0/advanced_development/precision_optimization.html,",
-            "2025.",
-            "MindSpore",
-            "Transformers",
-            "r1.7.0",
-            "documentation.",
+            "2025b.",
             "Accessed:",
             "2026-09-25."
           ]
@@ -34128,6 +33957,15 @@
             "10.1145/1993498.1993532.",
             "URL",
             "https://doi.org/10.1145/1993498.1993532."
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "sectionappendix",
+            "subsectionappendix",
+            "subsubsectionappendix"
           ]
         }
       ],
@@ -35759,14 +35597,14 @@
           "kind": "insert",
           "before": [],
           "after": [
-            "\\bibitem[{MindSpore}(2024{\\natexlab{a}})]{mindspore2024gradient}",
+            "\\bibitem[{MindSpore}(2024)]{mindspore2024gradient}",
             "{MindSpore}.",
             "\\newblock",
             "Gradient",
             "derivation.",
             "\\newblock",
             "\\url{https://www.mindspore.cn/docs/en/r2.4.0/migration_guide/model_development/gradient.html},",
-            "2024{\\natexlab{a}}.",
+            "2024.",
             "\\newblock",
             "MindSpore",
             "2.4.0",
@@ -35775,7 +35613,23 @@
             "Comparison.",
             "Accessed:",
             "2026-09-24.",
-            "\\bibitem[{MindSpore}(2024{\\natexlab{b}})]{mindspore_troubleshooter_loss_compare}",
+            "\\bibitem[{MindSpore}(2025{\\natexlab{a}})]{mindspore_precision_tuning}",
+            "{MindSpore}.",
+            "\\newblock",
+            "Precision",
+            "tuning",
+            "guide.",
+            "\\newblock",
+            "\\url{https://www.mindspore.cn/mindformers/docs/en/r1.7.0/advanced_development/precision_optimization.html},",
+            "2025{\\natexlab{a}}.",
+            "\\newblock",
+            "MindSpore",
+            "Transformers",
+            "r1.7.0",
+            "documentation.",
+            "Accessed:",
+            "2026-09-25.",
+            "\\bibitem[{MindSpore}(2025{\\natexlab{b}})]{mindspore_troubleshooter_loss_compare}",
             "{MindSpore}.",
             "\\newblock",
             "{TroubleShooter}",
@@ -35789,24 +35643,8 @@
             "logs.",
             "\\newblock",
             "\\url{https://github.com/mindspore-ai/toolkits/blob/e0486eee96a1893b5e1b59f02669804a2d796030/troubleshooter/docs/api/widget/loss_compare.md},",
-            "2024{\\natexlab{b}}.",
+            "2025{\\natexlab{b}}.",
             "\\newblock",
-            "Accessed:",
-            "2026-09-25.",
-            "\\bibitem[{MindSpore}(2025)]{mindspore_precision_tuning}",
-            "{MindSpore}.",
-            "\\newblock",
-            "Precision",
-            "tuning",
-            "guide.",
-            "\\newblock",
-            "\\url{https://www.mindspore.cn/mindformers/docs/en/r1.7.0/advanced_development/precision_optimization.html},",
-            "2025.",
-            "\\newblock",
-            "MindSpore",
-            "Transformers",
-            "r1.7.0",
-            "documentation.",
             "Accessed:",
             "2026-09-25."
           ]
@@ -37364,6 +37202,15 @@
             "\\end{thebibliography}",
             "\\clearpage",
             "\\appendix"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "\\crefalias{section}{appendix}",
+            "\\crefalias{subsection}{appendix}",
+            "\\crefalias{subsubsection}{appendix}"
           ]
         }
       ]
