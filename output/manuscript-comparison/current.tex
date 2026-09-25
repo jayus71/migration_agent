@@ -74,7 +74,7 @@ Automated program repair uses tests or semantic constraints to guide patch gener
 \section{Methods}
 \label{sec:method}
 \cref{fig:architecture} overviews LaDiM; \cref{sec:hierarchy,sec:repair-agent,sec:repository-method} describe diagnosis, repair, and repository coordination.
-\begin{figure}[!htb]
+\begin{figure}[!t]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/hierarchical_feedback_architecture.pdf}
 \caption{Overview of LaDiM. (a) The Orchestrator coordinates translation, diagnosis, repair, and validation. The Verifier investigates the first divergent stage and hands evidence to the Repair Agent. (b) Repository context management combines structural analysis, dependency planning, and evidence retrieval with context reconstruction. $A_T$, $A_V$, and $A_R$ denote agent instructions. Code and traces are illustrative. Java/DJL experiments migrate in the reverse direction, to Python/PyTorch.}
