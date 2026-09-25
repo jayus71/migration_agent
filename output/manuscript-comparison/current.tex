@@ -142,7 +142,8 @@ The Verifier Agent receives the Translator Agent's candidate and the Orchestrato
 \setlength{\intextsep}{0pt}
 
 Independent evidence handoff gives the Repair Agent the Verifier Agent's recorded code observations, test results, and hypotheses, identified as the Verifier Agent's findings. The Repair Agent reassesses this evidence, runs further tests, and edits files in $W$, including supporting library code when the task permits it. The Orchestrator verifies each submission and returns the remaining discrepancies to guide the Repair Agent's next investigation and edits.
-\begin{wrapfigure}{L}{0.55\textwidth}
+\Needspace{13\baselineskip}
+\begin{wrapfigure}{l}{0.55\textwidth}
 \begin{minipage}{\linewidth}
 \begin{algorithm}[H]
 \caption{\textsc{Repair}$(\mathcal T,S,E,q,M,B,C)$}
@@ -210,7 +211,6 @@ Repository migration raises two problems that single-program migration does not:
 \textbf{Evidence archive and context reconstruction.} Tool observations, code read by the agent, measurements, hypotheses, and conversations are stored in an archive $C.E$ outside the editable workspace, each tagged with the code version it describes. At evidence handoff, when the agent switches work units, or when the conversation exceeds 75\% of the context capacity, \textsc{PrepareContext} replaces the conversation with a compact one containing the current plan and progress, the structured findings, the latest measurements, and previously read code that is relevant to the active unit and unchanged since it was read.
 
 \cref{alg:repository} connects these components to \cref{alg:diagnose,alg:repair}. \textsc{Execute} handles unit selection, file and notebook-cell operations, tests, and evidence retrieval, and returns an observation $o$ with the set $U$ of units affected by file or plan changes. All units share the repository files, the repair history, and the total budget.
-
 
 
 
