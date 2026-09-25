@@ -454,7 +454,7 @@ def build_figure():
     b.set(xlim=(-.6, 28.6), ylim=(-.2, 1.4), ylabel='', xlabel='',
           yticks=[0, .25, .5, .75, 1, 1.25])
     b.set_xticks(range(29), [str(i) for i in range(1, 30)], fontsize=6.5)
-    b.text(-.035, -.05, 'Task', transform=b.transAxes, ha='right', va='top', fontsize=7)
+    b.set_xlabel('Tasks sorted by tokens saved within each group', labelpad=4)
     b.legend(handles=[Patch(facecolor='#009E73', label='Fewer tokens'),
                       Patch(facecolor=ORANGE, label='More tokens')],
              loc='upper left', frameon=False, fontsize=8, handlelength=.85,

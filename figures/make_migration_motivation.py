@@ -22,7 +22,7 @@ def build_figure():
                   ha='center', va='top')
         cost.text(x, -.20, acceptance, transform=cost.get_xaxis_transform(),
                   fontsize=8, ha='center', va='top')
-    cost.text(-.025, -.20, 'Acc.', transform=cost.transAxes,
+    cost.text(.100, -.20, 'Acc.', transform=cost.transAxes,
               fontsize=8, ha='right', va='top')
     cost.set_title('Total tokens (millions)', loc='left', fontsize=8, pad=3)
     cost.tick_params(labelsize=8, length=2, pad=2)

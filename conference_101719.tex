@@ -26,6 +26,8 @@
 % Long URLs in the footnote and bibliography cannot break at "/" or "." under
 % the url package alone, which leaves the surrounding line badly underfull.
 \usepackage{xurl}
+% Keep the template heading gaps at their natural size.
+\raggedbottom
 
 
 \begin{document}
@@ -34,7 +36,7 @@
 \maketitle
 \suppressfloats[t]
 \begin{abstract}
-Migrating code across deep learning frameworks enables the reuse of training programs in new software and hardware environments. Different frameworks, however, might compute gradients or update parameters in different ways, leading to wrong results even when a translated program runs without error. Current methods are mostly designed for language transfer, neglecting the subtle differences in framework level. To address this, LaDiM preserves the underlying training computation order, e.g., forward, gradient computation, update, and uses the dependencies among these stages to detect and localize silent computational errors. LaDiM includes Translator, Verifier, and Repair agents working under a shared Orchestrator. The Translator produces an initial output. The Verifier traces discrepancies along the computation order and hands its findings to the Repair Agent, which revises  using evidences and a persistent repair history. For repository-scale migrations, LaDiM further introduces repository context management which tracks cross-file dependencies and preserves diagnostic context as agents move across the repository. Evaluation across framework migration, language migration, and repository-level translate tasks shows that LaDiM achieves comparable or better migration results with up to 80.8\% fewer tokens than state-of-the-art methods, demonstrating its effectiveness.
+Migrating code across deep learning frameworks enables the reuse of training programs in new software and hardware environments. Different frameworks, however, might compute gradients or update parameters in different ways, leading to wrong results even when a translated program runs without error. Current methods are mostly designed for language transfer, neglecting the subtle differences in framework level. To address this, LaDiM preserves the underlying training computation order, e.g., forward, gradient computation, update, and uses the dependencies among these stages to detect and localize silent computational errors. LaDiM includes Translator, Verifier, and Repair agents working under a shared Orchestrator. The Translator produces an initial output. The Verifier traces discrepancies along the computation order and hands its findings to the Repair Agent, which revises the candidate using this evidence and a persistent repair history. For repository-scale migrations, LaDiM further introduces repository context management which tracks cross-file dependencies and preserves diagnostic context as agents move across the repository. Evaluation across framework migration, language migration, and repository migration tasks shows that LaDiM achieves comparable or better migration results with up to 80.8\% fewer tokens than state-of-the-art methods, demonstrating its effectiveness.
 \end{abstract}
 
 \section{Introduction}
