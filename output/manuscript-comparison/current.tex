@@ -437,9 +437,9 @@ Tokens are reported as counts. In (a,b), they cover investigation and repair. Pa
 \Needspace{6\baselineskip}
 \section{Conclusion}
 We introduced LaDiM, a framework with multiple agents for preserving training behavior during code migration. Layered Diagnosis uses dependencies among execution, forward values, gradients, and parameter updates to guide investigation. The Repair Agent uses diagnostic evidence from the independent handoff and previous verification results from the repair history to guide corrective edits. Repository context management carries this process across shared implementations and multiple entry points. LaDiM completes all 50 MindSpore migrations with 57.4\% fewer total tokens than MatchFixAgent. In the translation error study, LaDiM repairs errors in the initial translations that all three repair baselines leave unresolved. Results across framework, language, and repository migration establish the effectiveness of this approach in preserving training behavior.
-
-
 \subsection*{AI use statement}
+In this work, we used generative AI tools, including OpenAI Codex, to assist with software implementation and editing, experiment planning and analysis, figure preparation, literature search, and drafting and editing the manuscript. We reviewed all AI-assisted work, tested generated code and figures, and checked claims and citations against the underlying sources. The authors take responsibility for the final content of this work, including text, code, figures, and analyses produced with AI assistance.
+
 
 \bibliographystyle{iclr2027_conference}
 

@@ -4,7 +4,8 @@ The manuscript entry point remains `conference_101719.tex`. It uses the official
 ICLR 2027 single-column style, anonymous review header, line numbers, and
 author-year citations. The funding acknowledgment and project repository link
 are included only when `\iclrfinalcopy` is enabled. That switch remains disabled.
-The AI use statement is intentionally empty at the author's request.
+The AI use statement is included in the anonymous review build. Acknowledgments
+remain inside the final-only conditional so the review PDF stays anonymous.
 
 ## Template source
 
@@ -61,7 +62,10 @@ page 11, and the appendix starts on page 14. The official style, margins, body f
 and line spacing are unchanged. The user authorized horizontal table organization
 after the content revision, preserving the prose and evidence. Further compression
 to the nine-page main-text limit remains deferred.
-The AI use statement remains blank for the authors to complete.
+The AI use statement is now present in the anonymous review build. The current
+text describes the generative AI assistance used for software, experiments,
+figures, literature search, and manuscript preparation, together with review
+and author-responsibility language.
 
 The [revision record](paper-clarity-execution-20260922.md) lists evidence sources and the
 data, layout, compilation, and visual checks. This revision uses completed
@@ -94,6 +98,6 @@ changing data. The official style definitions remain untouched.
 
 The body still ends on page 10; the initial-submission limit is nine pages.
 Page-count reduction remains a content/layout task rather than a reason to
-change the template. The AI use statement remains reserved for the author as
-previously instructed. These outstanding submission tasks are separate from the
+change the template. The AI use statement is present in the review build. These
+outstanding submission tasks are separate from the
 byte-level template verification.

@@ -83,9 +83,10 @@ the local papers, `pypdf`, and Poppler; see the analysis notes for the procedure
 
 The manuscript uses the official ICLR 2027 template in anonymous review mode.
 The initial submission has a nine-page main-text limit; references and the AI
-use statement are excluded. The AI use statement is intentionally blank for
-the authors to complete. See [ICLR template notes](docs/iclr-2027-template.md)
-for the template source, build instructions, and current page count.
+use statement are excluded. The AI use statement is present in the anonymous
+review build and must be kept current with the tools and tasks used to prepare
+the paper. See [ICLR template notes](docs/iclr-2027-template.md) for the
+template source, build instructions, and current page count.
 
 ```bash
 .venv/bin/python figures/make_gradient_drift.py

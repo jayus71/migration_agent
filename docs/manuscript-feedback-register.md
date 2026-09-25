@@ -646,6 +646,12 @@ S18的摘要、贡献、setup、结果和表头修改已完成并继续保留。
 - 其余有效意见沿用原核验日期和待解决状态。没有修改或重新核验论文正文、实验、固定基线与论文内嵌图形；未运行实验、latexmk或push。详见[另存修订记录](method-figure-revised-20260924.md)。
 
 
+### 2026-09-25: ICLR AI use statement made visible in the review build
+
+- The user required the ICLR AI use statement to remain visible rather than hidden by `\ificlrfinal`. The manuscript now includes a non-empty disclosure before the references in both review and final builds; acknowledgments remain final-only for anonymity.
+- The disclosure records generative AI assistance with software implementation and editing, experiment planning and analysis, figure preparation, literature search, and manuscript drafting and editing, and states that the authors reviewed the assistance and take responsibility for the final content.
+- `latexmk` succeeded in the WSL environment and `pdftotext` confirmed the statement on page 10 of the 24-page PDF. The fixed-baseline manuscript comparison was refreshed. The nine-page main-text limit and missing reproducibility statement remain open submission items.
+
 ### 2026-09-24：从 Overleaf 1ff0b3c 同步全部新增修改（只提交，不推送）
 
 - 用户明确要求先检查冲突，无冲突直接合并，有冲突先汇报，并暂不push。主仓库本轮检查点为 31173ef；相关论文文件干净，另一个方法图任务的暂存文件、登记增量及PPT工作区修改均保持。本轮用独立Git索引提交，避免纳入这些文件。
