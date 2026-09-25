@@ -1,0 +1,197 @@
+{
+  "checkpoint": "3549b0e",
+  "architecture_fonts": [
+    "TimesNewRomanPS-BoldMT",
+    "TimesNewRomanPSMT"
+  ],
+  "architecture_scales": [
+    {
+      "scale": 1,
+      "width_mm": 139.7,
+      "height_mm": 84.69626448262085,
+      "smallest_text_pt": 4.746304434678386
+    },
+    {
+      "scale": 0.95,
+      "width_mm": 132.715,
+      "height_mm": 80.46145125848982,
+      "smallest_text_pt": 4.508989212944466
+    },
+    {
+      "scale": 0.9,
+      "width_mm": 125.72999999999999,
+      "height_mm": 76.22663803435879,
+      "smallest_text_pt": 4.271673991210547
+    }
+  ],
+  "old_figure_height_mm": 62.366071428571416,
+  "current_figure3_height_mm": 44.20247236352107,
+  "figure3_layouts": [
+    {
+      "variant": "figure3-side-by-side",
+      "printed_width_pt": 380.15999999999997,
+      "printed_height_pt": 152.064,
+      "task_font_pt": 7.68,
+      "label_overlap_pairs": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          17,
+          18
+        ],
+        [
+          18,
+          19
+        ],
+        [
+          19,
+          20
+        ],
+        [
+          20,
+          21
+        ],
+        [
+          21,
+          22
+        ],
+        [
+          22,
+          23
+        ],
+        [
+          23,
+          24
+        ],
+        [
+          24,
+          25
+        ],
+        [
+          25,
+          26
+        ],
+        [
+          26,
+          27
+        ],
+        [
+          27,
+          28
+        ],
+        [
+          28,
+          29
+        ]
+      ],
+      "clipped_task_labels": [],
+      "b_axis_width_pt": 127.34117647058821
+    },
+    {
+      "variant": "figure3-stacked",
+      "printed_width_pt": 380.15999999999997,
+      "printed_height_pt": 207.35999999999999,
+      "task_font_pt": 7.68,
+      "label_overlap_pairs": [],
+      "clipped_task_labels": [],
+      "b_axis_width_pt": 328.83840000000004
+    },
+    {
+      "variant": "figure3-staggered",
+      "printed_width_pt": 380.15999999999997,
+      "printed_height_pt": 186.624,
+      "task_font_pt": 7.68,
+      "label_overlap_pairs": [],
+      "clipped_task_labels": [],
+      "b_axis_width_pt": 127.34117647058821
+    }
+  ],
+  "paired_inputs": 29,
+  "negative_bars": 2,
+  "total_savings_tokens": 6938291,
+  "healthy_max_loss_abs_diff": 3.814697265625e-06,
+  "same_step1_loss_for_healthy_and_faulty": true,
+  "reference_loss_matched_across_conditions": true,
+  "direct_checks": {
+    "grad_wrong": {
+      "metric": "grad_norm_abs_diff",
+      "threshold": 0.05,
+      "first_detection_step_all_runs": 1,
+      "detected": 12,
+      "healthy_runs_flagged": 0
+    },
+    "param_wrong": {
+      "metric": "param_update_rel_l2",
+      "threshold": 0.03,
+      "first_detection_step_all_runs": 1,
+      "detected": 12,
+      "healthy_runs_flagged": 0
+    }
+  },
+  "protected_files": 1096,
+  "protected_files_changed": [],
+  "threshold_source": "data/experiments/03_experiment_C_gradient_and_parameter_faults/results_per_step/section65_per_step_divergence_steps50.csv",
+  "threshold_source_sha256": "7865835c5887bf2c1354f9071d16bec8c6382829cf8d09285de66fa975553d26"
+}
