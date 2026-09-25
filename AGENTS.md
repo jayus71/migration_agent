@@ -143,3 +143,41 @@ Compile the manuscript with `latexmk` and inspect the resulting PDF. Do not clai
 an experiment was rerun when only analysis or typesetting was checked.
 
 Use subagents only when requested. When requested, use `gpt-6-astra`.
+
+## ICLR 2027 submission compliance
+
+Treat this section as a hard submission gate. Re-check the official pages immediately before uploading because deadlines, form fields, and policies can change:
+
+- [ICLR 2027 Author Guidelines](https://iclr.cc/Conferences/2027/AuthorGuidelines)
+- [ICLR 2027 AI Policy for Authors](https://iclr.cc/Conferences/2027/AIPolicyForAuthors)
+- [ICLR 2027 Call for Papers](https://iclr.cc/Conferences/2027/CallForPapers)
+- [ICLR 2027 official style files](https://media.iclr.cc/Conferences/ICLR2027/iclr-2027-style-files.zip)
+
+### Required paper and submission contents
+
+- Submit the genuine, final abstract and paper through the ICLR 2027 OpenReview venue. Verify the current abstract and full-paper deadlines; the official page states that late submissions are not accommodated.
+- Include a non-empty `AI use statement` in the submitted paper PDF. It must be visible in the anonymous review build, appear before the references, and be excluded from the page count. Complete the separate AI-use fields in the OpenReview form as well.
+- The AI disclosure must cover every required-disclosure task that applies, including synthetic data, theoretical or conceptual development, mathematical claims or proofs, hypotheses, methodology or experiment design, method implementation, translation, dataset cleaning or reformatting, qualitative analysis, and result interpretation. Disclose recommended uses when applicable, including code editing, figures or images, paper drafting or editing, literature search, brainstorming, parameter suggestions, and artifact creation. State how the authors reviewed AI-assisted work and take responsibility for the final content.
+- Add the recommended paragraph-long `Reproducibility Statement` at the end of the main text before the references. It should point to the paper, appendix, code, data-processing description, assumptions or proofs, and supplementary materials that support reproduction. ICLR does not require a separate reproducibility checklist file; do not treat one as a missing formal upload.
+- Add an `Ethics Statement` when the work raises relevant issues such as human subjects, data release, harmful applications, sponsorship or conflicts, bias or fairness, privacy or security, legal compliance, or research integrity. This statement is optional otherwise and does not count toward the page limit (the guidelines recommend no more than one page).
+- Use the official ICLR 2027 style files byte-for-byte. Keep the review submission in anonymous mode and do not change the official page dimensions, body font sizes, or line spacing.
+- Keep the main text at nine pages or fewer at initial submission. References do not count, and appendices may follow the bibliography; the AI-use, reproducibility, and applicable ethics statements are excluded as specified by the guidelines. Reviewers are not required to read appendices or supplementary material.
+- Assemble any supplementary text after the references and label it as an appendix. Code and other supplementary files are encouraged but optional; every submitted file, archive, link, source comment, generated artifact, and file metadata must preserve double-blind anonymity and be runnable or inspectable as described in the reproducibility statement.
+
+### OpenReview and policy checks
+
+- Confirm that every author has a current OpenReview profile and that the author names, order, affiliations, email addresses, conflicts, subject areas, keywords, title, and abstract are final and consistent. Do not add or remove authors after the abstract deadline, do not change the author set after the paper deadline, and observe the title-change restriction after the paper deadline.
+- Check the ICLR author quotas and reciprocal-reviewing requirement for the current cycle, including the requirement that at least one eligible author registers as a reviewer when the guidelines require it.
+- Confirm that the work is not previously published, accepted, or submitted in parallel in violation of the dual-submission policy. Cite related anonymous-review work in third person as required.
+- Have every author read and explicitly acknowledge the ICLR Code of Ethics during submission. Decide and record whether an ethics statement is applicable before final PDF generation.
+- Verify that the upload contains the intended PDF and anonymous supplementary bundle, and that the PDF page count is measured from the final rendered submission rather than from source files or an earlier build.
+
+### Current repository audit (2026-09-25)
+
+- **BLOCKER: AI use statement missing.** `conference_101719.tex` contains an empty statement under `\ificlrfinal`, so the anonymous review PDF currently omits the required disclosure. Fill it with the final disclosure and keep it in the review build.
+- **BLOCKER: page limit not met.** The recorded build places the main-text end on page 10. Reduce the submission version to nine main-text pages or fewer without changing the official style files.
+- **Recommended item missing: reproducibility statement.** No `Reproducibility Statement` is currently present in the manuscript. Add it before the references and link it to the existing code, data, provenance, seeds, budgets, and reproduction commands.
+- **Template check satisfied, subject to a final re-check.** The repository audit records a byte-for-byte match between the four tracked style files and the ICLR 2027 archive. Re-verify the archive hash and compile with the official files immediately before submission.
+- **Anonymous review mode is present but not fully cleared.** The source uses `Anonymous Authors` and final-only acknowledgments, but audit the final PDF, supplementary bundle, code archive, URLs, comments, and metadata for author or institutional identifiers.
+- **OpenReview-only items are unverified in this checkout.** Before upload, record the final author/profile, abstract, conflict, quota, reviewer-registration, Code of Ethics, dual-submission, and AI-form checks in the submission log.
+- **Ethics applicability is unresolved.** No ethics statement is currently present. Make an explicit applicability decision from the final data, software, sponsorship, privacy, safety, and research-integrity description; add the statement if any listed issue applies.
