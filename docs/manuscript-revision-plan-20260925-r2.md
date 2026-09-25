@@ -8,19 +8,19 @@
 
 | 原始要求 | 当前修改安排 | 详细依据与进度 |
 |---|---|---|
-| 架构图及解释 | 使用0925加粗SVG导出矢量PDF，按90%正文宽度包含；同步方法开头和图注，解释调度、三个Agent、分层诊断、证据交接与仓库模块 | 本文第2节；初版第1节的解释拟稿继续适用，图源由后续确认替换；PDF和尺寸预览已完成，论文未替换 |
+| 架构图及解释 | 使用0925加粗SVG导出矢量PDF，按90%正文宽度包含；同步方法开头和图注，解释调度、三个Agent、分层诊断、证据交接与仓库模块 | 本文第2节；英文统一见本文第5节E01–E02，图源由后续确认替换；PDF和尺寸预览已完成，论文未替换 |
 | 1. 伪代码稍缩字号，比较全宽与半宽／环绕 | 比较10pt全宽、10pt环绕、9pt全宽、9pt环绕，按相同内容测整页净收益 | 初版第2节；9pt已列为试排候选，正式稿字号与官方规则的冲突待处理，尚未试排算法 |
 | 2. 表格稍缩字号并排查表前空白 | 9pt候选与算法共享字号决定；检查固定两行标题框、浮动体间距、齐底伸展、主动间隔及分页保护，分别处理多余占位 | 初版第3节；已定位表4标题固定高度等来源，尚未更改表格 |
 | 3. 正文／附录自动识别引用 | 用cleveref的cref/Cref替代硬编码Appendix加ref，编译核对附录及附录子节类型 | 初版第4节；此处为交叉引用，文献cite命令保持 |
 | 4. 图号前缀可配置 | 集中定义figure引用为Fig./Figs.，正文用自动引用输出Fig. 1等 | 初版第4节；图注编号沿用模板 |
-| 5. 3.4未定义组件 | 删除指定首句及先列名称再使用的开头，按结构分析、依赖规划、证据和上下文、算法接口展开，首次出现即解释职责 | 初版第5节已有四段英文拟稿，保留notebook工具、代码版本相关证据和检查失效机制 |
+| 5. 3.4未定义组件 | 删除指定首句及先列名称再使用的开头，按结构分析、依赖规划、证据和上下文、算法接口展开，首次出现即解释职责 | 本文第5节E03给出完整四段英文拟稿，保留notebook工具、代码版本相关证据和检查失效机制 |
 | 6. Figure 3(b)横轴 | 两子图左右并排，横轴左端仅写一次Task，逐柱横排1–29，删除Migration inputs | 本文第3节；已试排并核对，图高45.1 mm，正式论文未替换 |
 | 7. Figure 4阴影与loss对照依据 | 明确阴影为12次运行min–max；引用已核对的loss比较实践；采用已确认的受控故障claim，将曲线及阈值敏感性纳入附录方案，正文保留机制说明与信号消融 | 本文第1节含正文英文拟稿、附录图注、阈值分析和claim—证据对应；不把曲线标为未测具名方法 |
 | 8. Table 3窄表、正文环绕与单位 | 将方法列转成方法行，尝试约55%–60%宽度的左表右文；比较图注及旁侧正文后的净占高，token单位millions | 初版第8节已有表格候选，保留全部方法、分组、验收和成本含义；尚未试排 |
 | 9. Table 4(b)标题及全文token单位 | 改为单行Repair components，取消两行固定标题占位；正文、图表及附录成本统一millions，成本通常三位小数，预算按精确值换算，同步生成器 | 初版第9节；原始整数账本及预算不变 |
 | 10. 页数检查及压缩 | 实施后编译检查主文结束页与总页数；优先调整图表、算法和占位，再精简重复说明，超出方案的大段删移另列审核 | 初版第10节，纳入本轮Figure 4附录安排及最新图形尺寸；当前仍24页、主文至第10页，新稿页数未测 |
 
-[初版完整方案](manuscript-revision-plan-20260924.md)保留各项的详细实现与文字候选。本表及本文第1–3节确定当前安排；初版已被更新的图源、标签形式和Figure 4定位按本表执行。
+[初版完整方案](manuscript-revision-plan-20260924.md)保留各项的详细实现与文字候选。本表及本文第1–3节确定当前安排；初版已被更新的图源、标签形式和Figure 4定位按本表执行。拟写入论文的英文统一以本文第5节为准，供用户逐段润色；此前各版英文保留为历史，不再作为并行候选。
 
 字号问题尚有一个具体待决条件：初版核对的ICLR官方要求写明“do not change font sizes”，未列算法或表格例外，因此当前方案包括9pt独立试排，不把正式稿缩为9pt记作已经确定或已经满足格式要求。该状态不影响其余项目继续准备。
 
@@ -34,25 +34,17 @@
 
 ### 正文拟采用的文字
 
-将sections/experiments.tex目前“Training Signals and Detection Latency”段改为简短的训练信号机制说明，弱化检测延迟的比较性标题，并引用附录中的完整轨迹与敏感性分析。英文拟稿如下：
+将sections/experiments.tex目前“Training Signals and Detection Latency”段改为简短的训练信号机制说明，引用附录中的完整轨迹与敏感性分析。完整英文见第5节E06；表4(a)相邻的完整消融分析见E07。两处分别交代信号可观测性和修复效果，并保留各自的模型、候选、反馈及预算条件。
 
-> Controlled gradient-scaling and partial-update faults can leave the current loss unchanged while altering subsequent training computations. In all 12 runs per fault, the first-step loss difference is identical to that in the matched fault-free run, whereas the corresponding gradient or update check detects the fault at that step. These observations motivate checking gradients and parameter updates alongside forward values during migration verification.
-
-在Training signals消融段按现有结果承接其修复意义，拟采用：
-
-> On 16 fixed faulty candidates, adding forward, gradient, and update feedback to execution checks raises final acceptance under complete verification from 4/16 to 16/16. Each added signal exposes an additional fault class and provides feedback for repair.
-
-正式实施时使用自动附录／表格引用。中间两行8/16、12/16及完整成本保留在表4(a)，正文分析增加反馈的作用，不重复整张表。
+正式实施时使用自动附录／表格引用。中间两行8/16、12/16及完整成本保留在表4(a)。
 
 ### Figure 4与阈值分析的安排
 
 将现有Figure 4和已有阈值敏感性结果纳入附录sec:detection-measurements，正文保留上述机制说明和16例信号消融。该安排已经写入本轮修改方案；当前没有移动图、调整编号或改写论文。
 
-附录图保留两类故障、第1步直接检测、原始归一化曲线、12次运行的min–max阴影、分母与检测协议。图例继续使用Loss difference、Gradient norm difference、Update difference；在正文称Loss-only verification时，说明它是我们在同一轨迹上计算的检查规则。
+附录图保留两类故障、第1步直接检测、原始归一化曲线、12次运行的min–max阴影、分母与检测协议。图例继续使用Loss difference、Gradient norm difference、Update difference；相邻文字使用verification using loss alone，说明它是我们在同一轨迹上计算的检查规则；图例直接标信号名称。
 
-附录图注拟稿：
-
-> Training-signal differences under controlled gradient scaling (a) and partial update suppression (b). Source and target executions start from matched initial states and then train independently. Direct gradient and update checks detect their respective faults at step 1 in all 12 runs per fault. At the absolute loss-difference threshold of 0.02, the mean loss curves first cross at steps 31 and 18. Curves show means; shaded bands span the minimum and maximum across four models and three seeds. Differences are normalized by their respective thresholds.
+附录图注、完整解释、阈值表及全部图内标签的英文见第5节E08–E11。原来的连字符密集候选由这些完整拟稿替代。
 
 附录相邻文字／敏感性表同时报告：0.02下，50步内loss检出分别为3/12和4/12；10⁻⁵下，两类故障均12/12检出，梯度故障均在第2步，更新故障在第2–8步，两条均值曲线均在第2步越阈，同批正常对照0/12误报。正常样本和事后阈值重算的条件就近写明。原冻结阈值和主方法验收结果保持，敏感性分析不反向改写历史协议。
 
@@ -110,9 +102,295 @@ MindSpore Transformers的Precision Tuning Guide依次比较第1步loss、第1步
 
 本轮检查点983d2c1，新增方案、预览、脚本和反馈登记后单独提交。1,080个受保护文件前后哈希相同，包含论文源码、正式图形生成器、已包含图表、冻结数据、官方样式与新SVG。核对字体、矢量属性、标签重叠、冻结成本与源文件哈希，并查看最终截图；没有编译或修改正式论文、刷新未变的基线比较、重跑实验或推送。完整验证见[verification.json](review-evidence/manuscript-20260925-r2/verification.json)。
 
-本轮按用户认可的claim方向更新第1节，将正文短机制说明、表4(a)修复证据、附录曲线及敏感性组织为明确的修改安排。方案和反馈记录已更新，正式论文实施及整稿页数核验尚未开始。其余算法、表格、引用及3.4候选正文保持此前状态。
+本轮按用户认可的claim方向更新第1节，将正文短机制说明、表4(a)修复证据、附录曲线及敏感性组织为明确的修改安排。方案和反馈记录已更新，正式论文实施及整稿页数核验尚未开始。算法与表格布局继续待试排；英文候选按下文S58更新记录及第5节汇总。
 
 
 ### 2026年9月25日claim方案更新记录
 
 本轮检查点eb9e387。修改限于本方案、claim证据说明的状态提示及反馈登记；源稿、既有图表、冻结数据和基线不变。逐项核对上述文字中的12次运行、16个候选、阈值、个体首检及均值越阈的含义，沿用已经核验的数据；没有新增实验、重新编译或将历史检查写成本轮全稿核验。0925加粗架构图90%宽度及Figure 3左右并排、单次Task加数字轴的安排保持。
+
+
+## 5. 拟加入和替换的英文全文（供逐段润色）
+
+本节把本轮方案涉及的英文集中在同一处。E01–E17覆盖正文、图注、表注、标题与标签；E18列出全文统一token单位时需要替换的句子。引号块内是拟写入论文的英文，块外中文说明修改位置与范围。编号仅供审阅，不写入论文。参考命令保留LaTeX形式，正式实施后自动生成编号。
+
+这一版减少连字符，优先写清谁做什么、观察到什么、为什么需要这些信号。组件名称在首次出现的同一句中解释；算法函数名、方法专名及数学记号保持。摘要、贡献、结论和其余未列段落没有新增改写；Generalization Across Frameworks标题保持。
+
+### E01　方法开头：替换方法节第一段
+
+> LaDiM uses the dependencies among execution, forward computation, gradients, and parameter updates to guide diagnosis and repair. The Translator produces a candidate in the requested language and framework. The Verifier Agent examines the code and compares source and target computations to investigate discrepancies. It passes its observations and hypotheses to a separate Repair Agent, which tests the proposed causes and revises the candidate. The Orchestrator schedules the agents, evaluates each submitted candidate, and returns the results for further repair. For repository migration, the agents also use tools to inspect code structure, plan work across files, and retrieve evidence from earlier conversations. \Cref{fig:architecture} shows the workflow.
+
+这里的依赖关系用于解释诊断依据；不加入“每个训练步调用LLM”或“固定顺序遍历所有层”的新说法。MindSpore与JAX的适用范围已有正文和图示，保留各自实验设置。
+
+### E02　0925加粗架构图：完整图注
+
+> LaDiM's migration workflow. The Translator creates a candidate, the Verifier Agent investigates discrepancies in execution and training computations, and the Repair Agent uses the evidence to test possible causes and revise the code. The Orchestrator schedules their work and checks each submission. Repository tools support code inspection, repair planning, and evidence retrieval across files and conversations. The code edit and signal traces illustrate the workflow.
+
+最后一句说明图中代码与曲线的示意性质。图内已有英文沿用用户0925加粗SVG，不在这次方案中重写图源文字；论文使用其矢量PDF和90%宽度安排。
+
+### E03　3.4 Repository Coordination：完整替换四段正文
+
+删除指定首句“A change to a shared implementation can affect several callers in a repository.”及原先罗列组件的开头；算法3保持现有操作和记号。
+
+> LaDiM coordinates repository repair by keeping the repair plan, code observations, and investigation evidence available as work moves between files and conversations. Repository Structural Analysis lets the agent inspect files, imports, function and class definitions, and notebook structure when needed. Repair Dependency Graph Planning groups related target files into work units, assigns each unit a repair goal and selected tests, and records prerequisites between units as a directed acyclic graph.
+
+> The agent selects a work unit whose prerequisites have valid local checks, then edits the files assigned to that unit. LaDiM records syntax checks and the tests selected in the plan. When the target files or dependency plan change, it invalidates checks for the affected units and any units that depend on them, so the agent can check those files again. The Orchestrator determines acceptance by evaluating the complete repository, including its entry points and training computations.
+
+> Notebook tools let the agent inspect and revise code cells while checking the syntax of each edit. An evidence archive stores code observations, measurements, hypotheses, and conversations together with the corresponding code versions. When evidence passes to the Repair Agent, work moves to another unit, or the conversation approaches its capacity, \textsc{PrepareContext} rebuilds the conversation from the current plan and relevant records. It can restore observations from earlier code reads when the corresponding files have not changed.
+
+> \Cref{alg:repository} connects these tools to the diagnosis and repair procedures in \cref{alg:diagnose,alg:repair}. The context $C$ stores the dependency graph in $C.G$, local check results in $C.Q$, and archived evidence in $C.E$. \textsc{UpdateDependencyGraph} updates the repair plan. \textsc{Execute} handles unit selection, file and notebook operations, tests, and evidence retrieval. These operations update the shared state $S$ and context $C$, returning observations $o$ and the units $U$ affected by changes to the files or plan. All work units share the repository files, repair history, and total budget.
+
+### E04　Figure 3：完整图注
+
+> Token costs for MindSpore migration. (a) Total costs include initial translation and subsequent calls, grouped by whether the programs pass evaluation before repair. (b) Each bar shows MatchFixAgent's token cost minus LaDiM's for one distinct input. Inputs 1 to 20 pass before repair, and inputs 21 to 29 require repair. Bars are sorted by savings within each group. Positive values indicate lower costs for LaDiM. The 29 distinct inputs represent the 50 task identifiers used to report acceptance. Both methods accept all 50 tasks. Token costs and savings are in millions.
+
+正文关于1、2、4次提交预算的46/50、50/50、50/50结果保持，不因图注写最终验收而删去。
+
+### E05　Figure 3：拟变更的图内文字
+
+| 位置 | 最终英文／数字 |
+|---|---|
+| 左子图标题 | (a) Total tokens |
+| 左纵轴 | Tokens (millions) |
+| 右子图标题 | (b) Tokens saved (millions) |
+| 右横轴左端，只出现一次 | Task |
+| 右横轴逐柱刻度 | 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 |
+
+两个子图继续左右并排。删除Migration inputs；已有方法名、成本分层和分组图例保留，E04说明分组与正负方向。这里的Task编号是图内展示编号。
+
+### E06　正文检测段：完整小标题与段落
+
+小标题：
+
+> Checking Training Computations
+
+正文：
+
+> A fault in gradient computation or a parameter update can occur after the loss for the current step has already been computed. We examine this case by scaling gradients or suppressing part of an update in four models with three seeds each. At step 1, the loss difference between source and target is identical in each faulty run and its matched run without the fault. The corresponding gradient or update check detects the fault at that step in all 12 runs for each fault. These results show why migration verification needs to check gradients and parameter updates as well as forward values. \Cref{sec:detection-measurements} reports the trajectories and the effect of changing the loss threshold.
+
+### E07　表4(a)相邻正文：完整训练信号消融段
+
+保留原小标题Training signals。这段替换原段全部内容，保留16个候选和固定实验条件。
+
+> We compare four sets of feedback on 16 fixed candidates from a CNN, an image MLP, a Transformer classifier, and a small causal language model. Each model contributes one candidate with an execution fault, one with a forward fault, one with a gradient fault, and one with an update fault. The source programs, candidates, tools, and budgets are the same across settings. The available feedback determines when repair starts and stops, while final acceptance always uses complete verification. Adding forward, gradient, and update feedback to execution checks raises final acceptance from 4/16 to 16/16 (\cref{tab:signal-ablation}a). The number of faults missed before repair falls from 12 to 8 to 4 to 0. Forward comparisons reveal incorrect computed values, gradient comparisons reveal errors in differentiation, and update comparisons reveal errors in parameter changes. Each added signal makes another class of faults available for repair.
+
+### E08　附录检测实验：完整替换说明
+
+保留Detection Measurements小节和sec:detection-measurements标签。下列英文替换现有实验说明；原来的三条差值公式放在最后两个短段之间，公式本身不改。
+
+> The detection study uses four models, three seeds, and 50 training steps. We introduce two faults after the loss for the current step has been computed: scaling the gradients and suppressing part of the parameter update. For each fault, we compare source and target executions under two settings. In one setting, the target starts every checked step from the source state. In the other, the executions start from matching states and then retain their own states as training proceeds. The thresholds are 0.02 for the absolute loss difference, 0.05 for the absolute difference between gradient norms, and 0.03 for the relative parameter update difference.
+
+> \Cref{fig:gradient-drift} shows the executions that retain their own states. At step 1, the loss difference in every faulty run is identical to that in its matched run without the fault. A decision based on this value alone therefore gives the same result for both runs at that step. The gradient check detects gradient scaling at step 1 in all 12 runs, and the update check detects partial update suppression at step 1 in all 12 runs.
+
+> At the loss threshold of 0.02, loss checks detect gradient scaling in 3 of 12 runs and partial update suppression in 4 of 12 runs within 50 steps. The mean loss curves cross the threshold at steps 31 and 18, respectively. These are the first crossings of the mean curves; individual runs cross at different steps or stay below the threshold. The shaded bands show the minimum and maximum at each step across the 12 runs.
+
+> Reducing the loss threshold detects more of these faults and detects them sooner (\cref{tab:loss-threshold-sensitivity}). At $10^{-5}$, the loss check detects gradient scaling at step 2 in all 12 runs and partial update suppression between steps 2 and 8 in all 12 runs. No matched run without a fault crosses this threshold in the recorded 50 steps. The largest loss difference in those runs is $3.815\times10^{-6}$. Thus, the delay after step 1 depends on the threshold, while the identical loss values at step 1 explain why the loss check cannot distinguish these faults at that step. We recompute the thresholds on the saved trajectories; the runs without faults are matched controls, not a separate set used to calibrate a threshold.
+
+> Comparing loss values is an established practice in migration checks. MindSpore TroubleShooter's \texttt{loss_compare} tool compares two training logs and reports loss curves and error statistics \cite{mindspore_troubleshooter_loss_compare}. The MindSpore Transformers precision guide also uses loss, gradient norms, and updated weights to investigate numerical discrepancies \cite{mindspore_precision_tuning}. Here, verification using loss alone applies our stated threshold to the recorded loss differences. TroubleShooter does not specify this threshold or report the detection times shown here.
+
+> We measure the absolute loss difference, the absolute difference between gradient norms, and the relative parameter update difference as follows.
+
+> Here $\Delta\theta$ and $\Delta\hat\theta$ denote the source and target parameter updates, and $\epsilon$ prevents division by zero. Each curve in \cref{fig:gradient-drift} is divided by its detection threshold. The main migration comparison uses the tensor comparisons specified in \cref{sec:migration-settings}.
+
+两个新文献键为拟新增键，尚未写入bib文件，分别对应第1节已经核对的TroubleShooter固定提交文档及MindSpore Transformers r1.7.0精度指南。正式实施时写入完整文献条目。阈值表标签tab:loss-threshold-sensitivity也为拟新增标签。
+
+### E09　附录检测图：完整图注
+
+> Differences in training computations under (a) gradient scaling and (b) partial update suppression. The source and target start from matching states and then train independently. Gradient and update checks detect their respective faults at step 1 in all 12 runs for each fault. At the loss threshold of 0.02, the mean loss curves first cross at steps 31 and 18. These crossings describe the mean curves, not the detection times of individual runs. Curves show means, and shaded bands span the minimum and maximum across four models and three seeds. Each difference is divided by its detection threshold.
+
+### E10　附录检测图：全部拟用标签
+
+| 位置 | 英文 |
+|---|---|
+| 子图(a)，放在图内 | (a) Gradient scaling |
+| 子图(b)，放在图内 | (b) Partial update suppression |
+| 横轴 | Training step |
+| 纵轴 | Difference / threshold |
+| loss曲线图例 | Loss difference |
+| 梯度曲线图例 | Gradient norm difference |
+| 更新曲线图例 | Update difference |
+| 水平线 | Detection threshold |
+| (a)第1步箭头 | Gradient check: step 1 |
+| (b)第1步箭头 | Update check: step 1 |
+| (a)loss均值越阈箭头 | Mean loss crossing: step 31 |
+| (b)loss均值越阈箭头 | Mean loss crossing: step 18 |
+
+阴影在E09解释为最小值至最大值，不在图内追加密集说明。此图移到附录后仍由自动引用编号。
+
+
+### E11　阈值敏感性表：标题、表头、数据与表注
+
+完整caption：
+
+> Effect of the loss threshold on detection in the saved trajectories. Each fault has 12 runs from four models and three seeds. Detection is measured over 50 training steps.
+
+表格分成上下两块，共用Loss threshold列，避免横向挤入两类故障的所有指标。以下四个阈值来自已保存的敏感性CSV，0.02为原阈值。
+
+(a) Gradient scaling
+
+| Loss threshold | Detected runs | First detection step | Mean curve crossing | False alarms |
+|---|---:|---|---:|---:|
+| 0.02 | 3/12 | 10 to 11 | 31 | 0/12 |
+| 0.005 | 12/12 | 3 to 37 | 9 | 0/12 |
+| 0.001 | 12/12 | 2 to 8 | 3 | 0/12 |
+| $10^{-5}$ | 12/12 | 2 | 2 | 0/12 |
+
+(b) Partial update suppression
+
+| Loss threshold | Detected runs | First detection step | Mean curve crossing | False alarms |
+|---|---:|---|---:|---:|
+| 0.02 | 4/12 | 6 to 20 | 18 | 0/12 |
+| 0.005 | 8/12 | 3 to 42 | 6 | 0/12 |
+| 0.001 | 9/12 | 2 to 14 | 2 | 0/12 |
+| $10^{-5}$ | 12/12 | 2 to 8 | 2 | 0/12 |
+
+完整表注：
+
+> The Detected runs column counts runs that cross the threshold. First detection step gives the earliest and latest first crossings among detected runs. Mean curve crossing is the first step at which the mean loss difference crosses the threshold. The False alarms column counts matched runs without a fault that cross the threshold. Runs that remain below the threshold are excluded from the range of detection steps. All thresholds are applied to the same saved trajectories.
+
+数据来源：[loss-threshold-sensitivity.csv](review-evidence/manuscript-20260925/loss-threshold-sensitivity.csv)。两块False alarms使用同一批正常对照，分母不相加。更低阈值的全部历史结果保留在该CSV，本文选择四行说明从原阈值到两组全部检出的变化。
+
+### E12　Table 3：完整caption、分组与表头
+
+> Repair and native conversion on six faulty JAX candidates. LLM repair allows up to four submissions, and its costs cover investigation and repair. Native conversion runs once without an LLM and is accepted only if it removes the supplied fault. Tokens are in millions.
+
+| Method | Accepted | Calls | Tokens |
+|---|---:|---:|---:|
+| **LLM repair** | | | |
+| LaDiM | 6/6 | 76 | 0.674 |
+| Direct repair | 6/6 | 57 | 0.353 |
+| **Native conversion** | | | |
+| Ivy | 0/6 | 0 | 0 |
+| torch2jax | 0/6 | 0 | 0 |
+
+用约55%–60%正文宽度试排左表右文；以上文字同时适用于最终全宽候选。Generalization Across Frameworks正文沿用，仅将引用换成自动引用，不为了环绕新增解释。
+
+### E13　Table 4：完整caption、子标题与表注
+
+Caption：
+
+> Effects of training signals and repair components. (a) Each $+$ adds a signal to the preceding row, ending with all four signals on 16 faulty candidates. Final acceptance uses complete verification. (b) Repair history and independent evidence handoff on ten translated programs. Parentheses give the number of repaired programs among the five that fail before repair. All three settings preserve the five programs that pass before repair. (c) Comparisons with and without each repository component on the time series repository. Every setting passes all 69 behavior checks across three seeds.
+
+子标题：
+
+> (a) Training signals
+
+> (b) Repair components
+
+(c)沿用原表分组与完整组件名称；不新增缩略术语。表头保持Feedback / Accepted / Tokens、Condition / Accepted / Tokens以及Component / Without component / With component / Calls / Tokens / Saved。
+
+完整表注：
+
+> Tokens are in millions. In (a,b), they cover investigation and repair. Panel (b) provides examples of the edit format and feedback on incorrectly formatted edits. In (c), calls cover investigation and repair, and tokens also include initial translation. Saved gives the percentage reduction in tokens. Each setting in (c) is run once. The two comparisons use separate runs of LaDiM with all components, so their token costs differ.
+
+### E14　全文token单位：统一说明
+
+在附录Task Construction and Accounting的成本说明中增加一次：
+
+> Token costs are reported in millions and rounded to three decimal places. Totals are calculated before rounding. Token budgets retain their exact values after conversion to millions.
+
+这段也解释独立四舍五入可能出现的末位差异。成本与预算分开：例如16384的严格预算写0.016384 million，不能舍为0.016。零成本、缺测n/a、不适用的横杠继续保留。
+
+### E15　附录仓库成本表：完整caption
+
+替换tab:repository-costs的caption：
+
+> Training checks and complete costs for repository migration. Each training signal has nine checks for time series, from three steps on three seeds, and 18 for recommendation, from six model execution paths and three steps on the public seed. Calls, input tokens, and output tokens cover investigation and repair. The Tokens column gives the total including the shared initial translation. All token values are in millions.
+
+### E16　附录仓库组件表：两处完整caption
+
+累积组件表tab:repository-cumulative-full：
+
+> Cumulative agent components on both repositories. The Checks column gives the number of passed behavior checks. Calls cover investigation and repair, and tokens also include the shared initial translation. Each row adds a component to the preceding row. Tokens are in millions.
+
+独立组件表tab:repository-independent：
+
+> Repository comparisons that remove one component at a time. Both comparisons use the same LaDiM run with all components for each repository. The Checks column gives the number of passed behavior checks. Calls cover investigation and repair, and tokens include initial translation. Tokens are in millions.
+
+两张表内部的比较口径不同，保留各自caption与表4中的独立运行说明。
+
+### E17　附录原生JAX实验：完整caption
+
+替换tab:native-jax的caption：
+
+> Repair of two failing native JAX translations from twelve source workloads. Calls and Tokens cover repair. Two tasks and All sources give total token costs, including the shared initial translation costs of 0.031 and 0.140 million tokens, respectively, counted once. Each method accepts 1/2 repair tasks and 9/12 source workloads overall. All token values are in millions.
+
+### E18　全文token单位：全部拟替换的英文句子
+
+以下按sections/supplementary_experiments.tex中的小节和出现顺序定位。只替换列出的句子，保留所在段落的其他信息；合入LaTeX时仍按整段一行保存。百分比沿用原始整数计算，不能从三位小数显示值重新计算。
+
+**E18.1　Task Construction and Accounting：InterTrans成本句**
+
+> InterTrans uses 2.286 million tokens, including 0.574 million from incomplete generation calls and 1.712 million from the completed search.
+
+**E18.2　同小节：MindSpore分组成本连续四句**
+
+> The shared initial translations for MindSpore cost 0.429 million tokens. This amount is included once in each repair method's total. Subsequent LaDiM calls use 1.410 million tokens on programs that pass evaluation before repair and 3.320 million on programs that need repair. The corresponding MatchFixAgent totals are 5.136 and 6.532 million tokens.
+
+**E18.3　Numerical Comparisons and Migration Settings：完整预算段**
+
+> For each program, each agent has cumulative investigation and repair limits of 40 LLM calls, 0.120 million output tokens, 1,800 seconds, and four submissions. Each call allows at most 0.016384 million output tokens, and LaDiM allows eight calls per investigation or repair stage. Initial translation is separate from this repair budget and allows at most 0.131072 million output tokens per call. Test-guided repair rewrites the complete candidate, with four repair rounds and at most 0.131072 million output tokens per call. For each repository, each agent has cumulative limits of 80 calls, 0.480 million output tokens, 3,600 seconds, and four submissions, with at most 0.032768 million output tokens per call. Output budgets include reasoning tokens, and all input usage is recorded.
+
+**E18.4　JAX修复协议：预算句与成本句**
+
+> For each task, both methods allow up to four submissions, 40 LLM calls, 0.120 million output tokens, and 1,800 seconds, including investigation.
+
+> Across the six tasks, LaDiM uses 76 calls and 0.674 million tokens, and Direct repair uses 57 calls and 0.353 million tokens.
+
+**E18.5　受控MindSpore修复集合：总成本句**
+
+> Total token use is 39.983 million for LaDiM, 42.579 million for SWE-agent, and 12.459 million for Direct repair.
+
+**E18.6　十二个源程序的配对修复集合：结果句与预算句**
+
+> LaDiM accepts 12/12 and MatchFixAgent accepts 11/12, using 6.643 and 14.506 million tokens, respectively.
+
+> Each method has up to four submissions, 40 LLM calls, 0.120 million output tokens, and 1,800 seconds per task.
+
+**E18.7　十个初始翻译程序：成本句**
+
+> LaDiM uses 13.207 million tokens.
+
+**E18.8　Repository Migration：初始翻译两句**
+
+> The time series translation uses three generation calls totaling 0.164 million tokens. The recommendation translation uses 20 calls totaling 0.368 million tokens.
+
+**E18.9　仓库调查预算句**
+
+> For the repository experiments, investigation allows up to six LLM calls and 0.064 million output tokens.
+
+**E18.10　累积组件：时间序列成本连续三句**
+
+> On time series, LaDiM with all three added components uses 1.937 million tokens in total, 68.4\% fewer than the base Repair Agent. Adding repository context management to investigation and independent evidence handoff reduces total tokens from 6.047 million to 1.937 million. Input tokens for investigation and repair fall from 5.731 million to 1.700 million.
+
+**E18.11　结构分析：推荐仓库成本句**
+
+> Enabling structural analysis uses 9.962 million tokens in total, 38.9\% more than the 7.172 million used without it.
+
+**E18.12　依赖规划：时间序列结果句**
+
+> Without Repair Dependency Graph Planning, time series completes all 69 checks after one submission, using 21 calls and 1.804 million tokens in total.
+
+**E18.13　依赖规划：推荐仓库预算句**
+
+> Removing planning exhausts the budget of 0.480 million output tokens after 69 calls, while LaDiM with all components uses all 80 calls.
+
+**E18.14　原生JAX协议：严格预算两句**
+
+> Each method on each repair task has a cumulative budget of 40 LLM calls, four submissions, 0.120 million output tokens, and 1,800 seconds, including investigation. Each initial translation has one call with at most 0.016384 million output tokens.
+
+**E18.15　原生JAX翻译：输入、输出与总成本句**
+
+> Initial translation of all twelve sources uses 0.029 million input tokens and 0.110 million output tokens, totaling 0.140 million, including both generation failures.
+
+原始值为29455、110269、139724，独立舍入后分项之和与总数显示值相差0.001 million；按E14统一说明，不修改账本。
+
+### E19　引用、伪代码、间距和页数：没有另加英文段落的项目
+
+正文图引用集中配置为Fig.和Figs.，通过\cref或\Cref生成，例如Fig. 3、Figs. 3 and 4。正文／附录引用自动识别为Section或Appendix；不把文献\cite替换为交叉引用命令。本节拟稿里的命令在实施后使用实际编号，不写死附录字母或移动后的图号。
+
+伪代码字号和全宽／环绕试排、表前空白、Table 3环绕、Table 4标题高度、页数压缩均是既定排版任务，不需要新增英文解释。算法caption和指令保持现有文字。若试排后确实需要删减额外正文，会把具体英文删改另列审核。
+
+### 2026年9月25日S58英文集中稿记录
+
+本节是用户润色用的英文候选，替代本方案此前零散英文。保留S53的0925加粗图、S54的Figure 3左右并排与单次Task标签、S56确认的检测claim，以及原始十项要求。E01–E19包含拟替换英文、新增文献键的来源、token数值的显示规则和无须新增正文的排版项。正式论文、正式图表和实验数据不在本轮修改范围内。
