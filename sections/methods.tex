@@ -33,6 +33,7 @@ The LLM $M$ performs translation, investigation, and repair under role instructi
 \caption{Layered Diagnosis}
 \label{alg:diagnose}
 \raggedright
+\small
 \begin{algorithmic}[1]
 \Require $\mathcal T,S,M,B,C$
 \Ensure Evidence $E$
@@ -74,6 +75,7 @@ Independent evidence handoff gives the Repair Agent the Verifier Agent's recorde
 \caption{\textsc{Repair}$(\mathcal T,S,E,q,M,B,C)$}
 \label{alg:repair}
 \raggedright
+\small
 \begin{algorithmic}[1]
 \State $H\gets\Call{IndependentHandoff}{A_R,\mathcal T,E,C}$
 \While{$\Call{SubmissionsLeft}{B}\land\allowbreak\Call{BudgetLeft}{B}$}
@@ -110,6 +112,7 @@ Repository migration raises two problems that single-program migration does not:
 \begin{algorithm}[!htb]
 \caption{Repository migration and repair coordination}
 \label{alg:repository}
+\small
 \begin{algorithmic}[1]
 \Function{RepositoryMigrate}{$\mathcal T,M,B$}
   \State $C\gets\Call{RepositoryContext}{\mathcal T}$

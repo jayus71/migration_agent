@@ -27,11 +27,11 @@
     }
   },
   "current": {
-    "base_commit": "a628706",
-    "pdf_sha256": "9779391860080f45812549201641fda9fc8680efdbd376e38aafcf17b5262241"
+    "base_commit": "6110a13",
+    "pdf_sha256": "3b860d89a05a726b7f733c34d7243776e0508c5d6d6bb4fff7299a280e64f5c8"
   },
-  "updated": "2026-09-25T20:06:32+08:00",
-  "version": "50361d2b4166ed4b1b2f15ca254ade546cb6c7a87c6f5985a6dc5caa086f4506",
+  "updated": "2026-09-25T20:10:20+08:00",
+  "version": "f80134f7f51d2397f357fc99a091067eba0042da70e8b4957fb6546a564cf39c",
   "reading_words_added": 8426,
   "reading_words_removed": 4459,
   "sections": {
@@ -12090,6 +12090,7 @@
             "Diagnosis}",
             "\\label{alg:diagnose}",
             "\\raggedright",
+            "\\small",
             "\\begin{algorithmic}[1]",
             "\\Require",
             "$\\mathcal",
@@ -13027,6 +13028,7 @@
             "T,S,E,q,M,B,C)$}",
             "\\label{alg:repair}",
             "\\raggedright",
+            "\\small",
             "\\begin{algorithmic}[1]",
             "\\State",
             "$H\\gets\\Call{IndependentHandoff}{A_R,\\mathcal",
@@ -14780,6 +14782,7 @@
             "repair",
             "coordination}",
             "\\label{alg:repository}",
+            "\\small",
             "\\begin{algorithmic}[1]",
             "\\Function{RepositoryMigrate}{$\\mathcal",
             "T,M,B$}",
@@ -23326,17 +23329,18 @@
           "kind": "equal",
           "before": [
             "\\label{tab:main-results}",
-            "\\centering"
+            "\\centering",
+            "\\small"
           ],
           "after": [
             "\\label{tab:main-results}",
-            "\\centering"
+            "\\centering",
+            "\\small"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "\\small",
             "\\setlength{\\tabcolsep}{5pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrr@{}}"
           ],
@@ -26768,7 +26772,9 @@
         {
           "kind": "replace",
           "before": [
-            "natural"
+            "natural",
+            "translation",
+            "faults"
           ],
           "after": [
             "(a)",
@@ -26776,8 +26782,28 @@
             "initial",
             "translations,",
             "five",
-            "failing",
-            "and",
+            "failing"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "preservation",
+            "of",
+            "initially",
+            "accepted",
+            "programs."
+          ],
+          "after": [
             "five",
             "passing,",
             "and",
@@ -26799,63 +26825,98 @@
             "perform",
             "one",
             "native",
-            "conversion.",
-            "Tokens",
-            "are",
-            "in",
-            "millions",
-            "for",
-            "all",
-            "investigation",
-            "and",
-            "repair",
-            "calls.}",
-            "\\label{tab:repair-results}",
-            "\\centering",
-            "\\setlength{\\tabcolsep}{2pt}",
-            "\\begin{minipage}[t]{0.555\\linewidth}",
-            "\\vspace{0pt}",
-            "{\\raggedright\\textit{(a)",
-            "Repairing"
+            "conversion."
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "translation"
+            "Tokens"
           ],
           "after": [
-            "translation"
+            "Tokens"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "faults",
-            "and",
-            "preservation",
-            "of",
-            "initially",
-            "accepted",
-            "programs.",
-            "Tokens",
-            "cover",
-            "all",
+            "cover"
+          ],
+          "after": [
+            "are",
+            "in",
+            "millions",
+            "for"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "all"
+          ],
+          "after": [
+            "all"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "ten",
             "selected",
-            "complete",
-            "repair",
+            "complete"
+          ],
+          "after": [
+            "investigation",
+            "and"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "repair"
+          ],
+          "after": [
+            "repair"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "runs,",
             "starting",
             "from",
             "supplied",
             "translations.}",
-            "\\label{tab:natural-repairs}",
+            "\\label{tab:natural-repairs}"
+          ],
+          "after": [
+            "calls.}",
+            "\\label{tab:repair-results}"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "\\centering",
-            "\\small",
+            "\\small"
+          ],
+          "after": [
+            "\\centering",
+            "\\small"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "\\setlength{\\tabcolsep}{4pt}"
           ],
           "after": [
+            "\\setlength{\\tabcolsep}{2pt}",
+            "\\begin{minipage}[t]{0.555\\linewidth}",
+            "\\vspace{0pt}",
+            "{\\raggedright\\textit{(a)",
+            "Repairing",
+            "translation",
             "errors}\\par}\\smallskip"
           ]
         },
@@ -28651,16 +28712,17 @@
         {
           "kind": "equal",
           "before": [
-            "\\centering"
+            "\\centering",
+            "\\small"
           ],
           "after": [
-            "\\centering"
+            "\\centering",
+            "\\small"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "\\small",
             "\\setlength{\\tabcolsep}{4pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrr@{}}"
           ],
@@ -41078,6 +41140,7 @@
             "counts.}",
             "\\label{tab:collections}",
             "\\centering",
+            "\\small",
             "\\setlength{\\tabcolsep}{3pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{3.1cm}>{\\raggedright\\arraybackslash}p{3.1cm}>{\\raggedright\\arraybackslash}p{4.9cm}r@{}}",
             "\\toprule",
@@ -42356,6 +42419,7 @@
             "collection.}",
             "\\label{tab:program-costs}",
             "\\centering",
+            "\\small",
             "\\setlength{\\tabcolsep}{3pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrr@{}}",
             "\\toprule",
@@ -45823,6 +45887,7 @@
             "threshold.}",
             "\\label{tab:loss-threshold-sensitivity}",
             "\\centering",
+            "\\small",
             "\\setlength{\\tabcolsep}{3.5pt}",
             "\\begin{tabular}{@{}lcccc@{\\hspace{10pt}}cccc@{}}",
             "\\toprule",
@@ -48506,7 +48571,15 @@
             "subsequent",
             "calls.}",
             "\\label{tab:components}",
-            "\\centering"
+            "\\centering",
+            "\\small",
+            "\\setlength{\\tabcolsep}{4pt}",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrr@{}}",
+            "\\toprule",
+            "\\textbf{Setting}",
+            "&",
+            "\\textbf{Accepted}",
+            "&"
           ],
           "after": [
             "include",
@@ -48517,28 +48590,8 @@
             "subsequent",
             "calls.}",
             "\\label{tab:components}",
-            "\\centering"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "\\small"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "\\setlength{\\tabcolsep}{4pt}",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrr@{}}",
-            "\\toprule",
-            "\\textbf{Setting}",
-            "&",
-            "\\textbf{Accepted}",
-            "&"
-          ],
-          "after": [
+            "\\centering",
+            "\\small",
             "\\setlength{\\tabcolsep}{4pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrr@{}}",
             "\\toprule",
@@ -49561,26 +49614,14 @@
           "kind": "equal",
           "before": [
             "\\label{tab:natural-components}",
-            "\\centering"
-          ],
-          "after": [
-            "\\label{tab:natural-components}",
-            "\\centering"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "\\small"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "\\centering",
+            "\\small",
             "\\setlength{\\tabcolsep}{3pt}"
           ],
           "after": [
+            "\\label{tab:natural-components}",
+            "\\centering",
+            "\\small",
             "\\setlength{\\tabcolsep}{3pt}"
           ]
         },
@@ -57086,17 +57127,18 @@
           "kind": "equal",
           "before": [
             "\\label{tab:repository-costs}",
-            "\\centering"
+            "\\centering",
+            "\\small"
           ],
           "after": [
             "\\label{tab:repository-costs}",
-            "\\centering"
+            "\\centering",
+            "\\small"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "\\small",
             "\\setlength{\\tabcolsep}{3pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrrr@{}}"
           ],
@@ -59351,23 +59393,8 @@
           "kind": "equal",
           "before": [
             "\\label{tab:repository-checks}",
-            "\\centering"
-          ],
-          "after": [
-            "\\label{tab:repository-checks}",
-            "\\centering"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "\\small"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "\\centering",
+            "\\small",
             "\\setlength{\\tabcolsep}{4pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrr@{}}",
             "\\toprule",
@@ -59382,6 +59409,9 @@
             "\\midrule"
           ],
           "after": [
+            "\\label{tab:repository-checks}",
+            "\\centering",
+            "\\small",
             "\\setlength{\\tabcolsep}{4pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrr@{}}",
             "\\toprule",
@@ -63455,6 +63485,7 @@
             "millions.}",
             "\\label{tab:repository-cumulative-full}",
             "\\centering",
+            "\\small",
             "\\setlength{\\tabcolsep}{3pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{5.4cm}rrrrrr@{}}",
             "\\toprule",
@@ -63836,6 +63867,7 @@
             "millions.}",
             "\\label{tab:repository-independent}",
             "\\centering",
+            "\\small",
             "\\setlength{\\tabcolsep}{3pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}>{\\raggedright\\arraybackslash}p{5.4cm}rrrrrr@{}}",
             "\\toprule",
@@ -65041,6 +65073,7 @@
             "millions.}",
             "\\label{tab:native-jax}",
             "\\centering",
+            "\\small",
             "\\setlength{\\tabcolsep}{3pt}",
             "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lrrrr@{}}",
             "\\toprule",

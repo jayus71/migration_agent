@@ -41,9 +41,8 @@ tables, and code listings.
 
 Keep the official ICLR style files byte-for-byte identical to the package
 linked by the current Author Guidelines. Do not redefine the template's page
-dimensions, body font sizes, or line spacing. The 2027 formatting instructions
-prohibit font-size changes and give no algorithm exception; keep pseudocode at
-the default size unless the official rules explicitly change.
+dimensions, body font sizes, or line spacing. Use local \small for algorithm
+bodies and table contents, as explicitly requested by the user on 2026-09-25.
 Do not treat absence from the official example TeX as a prohibition. Preserve
 permitted URL wrapping, local hyphenation, pagination, and figure/table layout
 controls. Follow explicit user preferences for optional hyperlink styling.

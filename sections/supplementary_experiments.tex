@@ -7,6 +7,7 @@
 \caption{Program collections for migration and repair, with their candidate construction, model coverage, and task counts.}
 \label{tab:collections}
 \centering
+\small
 \setlength{\tabcolsep}{3pt}
 \input{figures/TABLE_task_collections.tex}
 \end{table}
@@ -21,6 +22,7 @@ All failed tasks remain in each study's declared denominator, and all failed cal
 \caption{Complete input and output token costs by method for the two program migration collections. Input, output, and total tokens are in millions. Calls and tokens include initial translation and every subsequent call. Acceptance uses the declared task denominator for each collection.}
 \label{tab:program-costs}
 \centering
+\small
 \setlength{\tabcolsep}{3pt}
 \input{figures/TABLE_program_costs.tex}
 \end{table}
@@ -81,6 +83,7 @@ Loss comparison is an established check in framework migration. MindSpore Troubl
 \caption{Loss-only detection at different thresholds, computed post hoc on the saved trajectories (12 runs per fault, 50 steps). First detection gives the range of first-crossing steps over detected runs; mean crossing is the first step at which the mean loss difference crosses the threshold; false alarms count fault-free runs that cross the threshold.}
 \label{tab:loss-threshold-sensitivity}
 \centering
+\small
 \setlength{\tabcolsep}{3.5pt}
 \begin{tabular}{@{}lcccc@{\hspace{10pt}}cccc@{}}
 \toprule
@@ -111,6 +114,7 @@ The component study uses the same 50 MindSpore task identifiers, initial transla
 \caption{Component variants and added investigation for baseline agents on the 50 MindSpore task identifiers. Tokens are in millions and include initial translation and all subsequent calls.}
 \label{tab:components}
 \centering
+\small
 \setlength{\tabcolsep}{4pt}
 \input{figures/TABLE_unified_components.tex}
 \par\vspace{3pt}
@@ -125,6 +129,7 @@ The second component study uses the same ten programs produced by initial transl
 \caption{Complete component results on ten programs produced by initial translation. Repaired counts failed programs corrected, and Preserved counts passing programs that remain accepted. Tokens are in millions and cover investigation and repair on all ten programs, including failed attempts.}
 \label{tab:natural-components}
 \centering
+\small
 \setlength{\tabcolsep}{3pt}
 \input{figures/TABLE_natural_components.tex}
 \end{table}
@@ -155,6 +160,7 @@ All methods receive identical copies of the source repositories and the same ini
 \caption{Training checks and complete costs for repository migration. Each training signal has nine checks for time series, from three steps on three seeds, and 18 for recommendation, from six model execution paths and three steps on the public seed. Calls, input tokens, and output tokens cover investigation and repair. Tokens reports the total including the common initial translation. Tokens are in millions.}
 \label{tab:repository-costs}
 \centering
+\small
 \setlength{\tabcolsep}{2pt}
 \input{figures/TABLE_repository_costs.tex}
 \end{table}
@@ -173,6 +179,7 @@ LaDiM passes all 18 forward loss, 18 training return loss, and 18 gradient check
 \caption{Recommendation repository checks passed on the public seed. The 114 numerical checks are included in the 145 behavior checks. The six training signal rows divide the 108 training checks, with 18 per signal. One unmeasured retrieval check remains in the denominators for SWE-agent and MatchFixAgent.}
 \label{tab:repository-checks}
 \centering
+\small
 \setlength{\tabcolsep}{4pt}
 \input{figures/TABLE_repository_checks.tex}
 \end{table}
@@ -194,6 +201,7 @@ We add Verifier investigation, independent evidence handoff, and repository cont
 \caption{Cumulative agent components on both repositories. Checks reports passed behavior checks. Calls cover investigation and repair, and tokens also include the shared initial translation. Each row adds a component to the preceding row. Tokens are in millions.}
 \label{tab:repository-cumulative-full}
 \centering
+\small
 \setlength{\tabcolsep}{3pt}
 \input{figures/TABLE_cumulative_components.tex}
 \end{table}
@@ -207,6 +215,7 @@ The comparison with and without Repository Structural Analysis retains Repair De
 \caption{Repository comparisons that remove one component at a time. Both comparisons use the same LaDiM run with all components for each repository. Checks reports passed behavior checks. Calls cover investigation and repair, and tokens include initial translation. Tokens are in millions.}
 \label{tab:repository-independent}
 \centering
+\small
 \setlength{\tabcolsep}{3pt}
 \input{figures/TABLE_repository_independent.tex}
 \end{table}
@@ -226,6 +235,7 @@ This study uses twelve public model workloads from PyTorch examples, minGPT, and
 \caption{Repair of two failing native JAX translations from twelve source workloads. Calls and Tokens cover repair. Two tasks and All sources report total tokens including 0.031 and 0.140 million shared initial translation tokens, respectively, counted once. Each method accepts 1/2 repair tasks and 9/12 source workloads overall. Tokens are in millions.}
 \label{tab:native-jax}
 \centering
+\small
 \setlength{\tabcolsep}{3pt}
 \input{figures/TABLE_native_jax.tex}
 \end{table}

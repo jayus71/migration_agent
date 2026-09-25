@@ -17,6 +17,7 @@ To examine repair of actual translation errors, we use ten programs produced by 
 \caption{Migration acceptance and token use on common inputs: (a,b) individual programs; (c,d) repositories. Tokens are in millions. Calls count all LLM calls in (a,b) and investigation and repair calls in (c,d).}
 \label{tab:main-results}
 \centering
+\small
 \setlength{\tabcolsep}{3pt}
 \input{figures/TABLE_main_comparison.tex}
 \end{table}
@@ -43,6 +44,7 @@ On recommendation, LaDiM restores reward model inference and retrieval, which re
 \caption{Repair of (a) ten initial translations, five failing and five passing, and (b) six faulty JAX candidates. LaDiM and Direct repair allow four submissions; Ivy and \texttt{torch2jax} perform one native conversion. Tokens are in millions for all investigation and repair calls.}
 \label{tab:repair-results}
 \centering
+\small
 \setlength{\tabcolsep}{2pt}
 \begin{minipage}[t]{0.555\linewidth}
 \vspace{0pt}
@@ -83,6 +85,7 @@ LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults
 \label{tab:signal-ablation}
 \label{tab:cumulative-components}
 \centering
+\small
 \setlength{\tabcolsep}{3pt}
 \begin{minipage}[t]{0.495\linewidth}
 \vspace{0pt}
