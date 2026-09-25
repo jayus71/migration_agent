@@ -3,7 +3,7 @@
 \begin{figure}[!t]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/hierarchical_feedback_architecture.pdf}
-\caption{Overview of LaDiM. (a) The Translator Agent produces an initial candidate, and the Orchestrator executes it alongside the source program to measure execution, forward values, gradients, and parameter updates. If the candidate is not accepted, the Verifier Agent applies Layered Diagnosis: it compares these stages in training order and investigates the first one that diverges (gradients in this example), so later stages are not reached. Its code observations, test results, code locations, and hypotheses are handed to the Repair Agent, which tests and edits the candidate and submits it to the Orchestrator. The Orchestrator returns the remaining discrepancies to the Repair Agent until the candidate is accepted or the budget is exhausted. (b) For repositories, repository context management analyzes the repository structure, orders repairs over a dependency graph of work units, and stores evidence outside the conversation so that a compact context can be reconstructed when the agent switches units.}
+\caption{Overview of LaDiM. (a) The Translator produces a candidate, and the Orchestrator compares its execution, forward values, gradients, and parameter updates with the source. The Verifier investigates the first divergent stage (gradients here) and hands code observations, test results, locations, and hypotheses to the Repair Agent. The Repair Agent tests and edits the candidate, using the Orchestrator's feedback until acceptance or budget exhaustion. (b) Repository context management analyzes code structure, orders repairs through work-unit dependencies, and reconstructs compact contexts from archived evidence.}
 \label{fig:architecture}
 \end{figure}
 
@@ -25,7 +25,7 @@ The LLM $M$ performs translation, investigation, and repair under role instructi
 \label{sec:hierarchy}
 % Keep wrapping local to this subsection.
 {
-\begin{wrapfigure}{l}{0.55\textwidth}
+\begin{wrapfigure}{l}{0.50\textwidth}
 \begin{minipage}{\linewidth}
 \setlength{\intextsep}{0pt}
 \begin{algorithm}[H]
@@ -97,17 +97,6 @@ Repair history preserves earlier edits, observations, and hypotheses across atte
 
 \cref{alg:repair} reuses \textsc{ToolFeedback} from \cref{alg:diagnose}, with $H\mathbin{\|}x$ denoting the addition of a record $x$ to the repair history. Its \textsc{RepairComplete} condition requires a completion response, an applied edit in the current stage, and a test executed after the last edit. If an edit or test is missing, the conversation requests that action within the remaining budget. The Orchestrator evaluates the candidate when the repair stage ends.\par}
 
-\subsection{Repository Coordination}
-\label{sec:repository-method}
-Repository migration raises two problems that single-program migration does not: a repair may span several interdependent files, and evidence gathered on one file must remain available while the agent works on others. Repository context management addresses both through three components (\cref{fig:architecture}b).
-
-\textbf{Repository Structural Analysis.} This tool returns an inventory of the target repository: its files, the imports among them, the functions and classes each file defines, and the cells of each notebook. It also lists files not yet assigned to any work unit. The agent invokes it on demand.
-
-\textbf{Repair Dependency Graph Planning.} Based on this inventory, the agent partitions the target files into \emph{work units}. Each unit specifies its editable files, a repair goal, its tests, and the units it depends on; together, the units form a directed acyclic graph $C.G$. A unit may start only when the checks of its prerequisites remain valid, so shared implementations are repaired before the units that use them. $C.Q$ stores each unit's syntax check and test results with the code version on which they ran; when a file or the plan changes, the results of the affected units and their dependents are invalidated. Unit checks only guide the agent; the Orchestrator decides acceptance by verifying the complete repository.
-
-\textbf{Evidence archive and context reconstruction.} Tool observations, code read by the agent, measurements, hypotheses, and conversations are stored in an archive $C.E$ outside the editable workspace, each tagged with the code version it describes. At evidence handoff, when the agent switches work units, or when the conversation exceeds 75\% of the context capacity, \textsc{PrepareContext} replaces the conversation with a compact one containing the current plan and progress, the structured findings, the latest measurements, and previously read code that is relevant to the active unit and unchanged since it was read.
-
-\cref{alg:repository} connects these components to \cref{alg:diagnose,alg:repair}. \textsc{Execute} handles unit selection, file and notebook-cell operations, tests, and evidence retrieval, and returns an observation $o$ with the set $U$ of units affected by file or plan changes. All units share the repository files, the repair history, and the total budget.
 \begin{algorithm}[!htb]
 \caption{Repository migration and repair coordination}
 \label{alg:repository}
@@ -135,3 +124,16 @@ Repository migration raises two problems that single-program migration does not:
 \EndFunction
 \end{algorithmic}
 \end{algorithm}
+
+\subsection{Repository Coordination}
+\label{sec:repository-method}
+Repository migration raises two problems that single-program migration does not: a repair may span several interdependent files, and evidence gathered on one file must remain available while the agent works on others. Repository context management addresses both through three components (\cref{fig:architecture}b).
+
+\textbf{Repository Structural Analysis.} This tool returns an inventory of the target repository: its files, the imports among them, the functions and classes each file defines, and the cells of each notebook. It also lists files not yet assigned to any work unit. The agent invokes it on demand.
+
+\textbf{Repair Dependency Graph Planning.} Based on this inventory, the agent partitions the target files into \emph{work units}. Each unit specifies its editable files, a repair goal, its tests, and the units it depends on; together, the units form a directed acyclic graph $C.G$. A unit may start only when the checks of its prerequisites remain valid, so shared implementations are repaired before the units that use them. $C.Q$ stores each unit's syntax check and test results with the code version on which they ran; when a file or the plan changes, the results of the affected units and their dependents are invalidated. Unit checks only guide the agent; the Orchestrator decides acceptance by verifying the complete repository.
+
+\textbf{Evidence archive and context reconstruction.} Tool observations, code read by the agent, measurements, hypotheses, and conversations are stored in an archive $C.E$ outside the editable workspace, each tagged with the code version it describes. At evidence handoff, when the agent switches work units, or when the conversation exceeds 75\% of the context capacity, \textsc{PrepareContext} replaces the conversation with a compact one containing the current plan and progress, the structured findings, the latest measurements, and previously read code that is relevant to the active unit and unchanged since it was read.
+
+\cref{alg:repository} connects these components to \cref{alg:diagnose,alg:repair}. \textsc{Execute} handles unit selection, file and notebook-cell operations, tests, and evidence retrieval, and returns an observation $o$ with the set $U$ of units affected by file or plan changes. All units share the repository files, the repair history, and the total budget.
+

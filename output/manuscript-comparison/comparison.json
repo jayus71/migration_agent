@@ -28,12 +28,12 @@
   },
   "current": {
     "base_commit": "50daf1f",
-    "pdf_sha256": "a1283de9c9b9b825f8762bc0d52d78d7af4dda74e22ea09b3267c3ba708c11ac"
+    "pdf_sha256": "1e5afa0ebe821f6f27464f239c4021b033ae326ed7d284eefdf5219b07042b57"
   },
-  "updated": "2026-09-26T00:40:25+08:00",
-  "version": "c5057c4c2ab4d53d4c124ed1b6eda44c403fed3199ebc3f2ec06afd5035185b3",
-  "reading_words_added": 8672,
-  "reading_words_removed": 4463,
+  "updated": "2026-09-26T00:42:18+08:00",
+  "version": "21903e688f58a8e6e5a695837c0f3869e94d6cd4b138fa6673813242a8897ddd",
+  "reading_words_added": 8599,
+  "reading_words_removed": 4444,
   "sections": {
     "Title": {
       "reading": [
@@ -7361,292 +7361,177 @@
           "before": [
             "LaDiM",
             "LaDiM",
-            "migrates"
+            "migrates",
+            "a",
+            "source",
+            "training",
+            "program",
+            "into",
+            "the",
+            "requested",
+            "language",
+            "and",
+            "framework",
+            "through",
+            "diagnosis",
+            "and",
+            "repair"
           ],
           "after": [
             "Methods",
-            "Overview",
-            "of",
-            "LaDiM.",
-            "(a)",
-            "The",
-            "Translator",
-            "Agent",
-            "produces",
+            "Overview"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "of"
+          ],
+          "after": [
+            "of"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "an",
             "initial",
+            "translation."
+          ],
+          "after": [
+            "LaDiM.",
+            "(a)"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "The",
+            "Translator"
+          ],
+          "after": [
+            "The",
+            "Translator"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "generates"
+          ],
+          "after": [
+            "produces"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "a",
             "candidate,",
             "and",
-            "the",
-            "Orchestrator",
-            "executes",
-            "it",
-            "alongside",
-            "the",
-            "source",
-            "program",
-            "to",
-            "measure",
+            "the"
+          ],
+          "after": [
+            "a",
+            "candidate,",
+            "and",
+            "the"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "Verifier",
+            "inspects",
+            "its",
+            "code",
+            "and"
+          ],
+          "after": [
+            "Orchestrator"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "compares",
+            "its"
+          ],
+          "after": [
+            "compares",
+            "its"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "training",
+            "behavior"
+          ],
+          "after": [
             "execution,",
             "forward",
             "values,",
             "gradients,",
             "and",
             "parameter",
-            "updates.",
-            "If",
+            "updates"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "with",
             "the",
-            "candidate",
-            "is",
-            "not",
-            "accepted,",
+            "source."
+          ],
+          "after": [
+            "with",
             "the",
+            "source."
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "A",
+            "separate"
+          ],
+          "after": [
+            "The",
             "Verifier",
-            "Agent",
-            "applies",
-            "Layered",
-            "Diagnosis:",
-            "it",
-            "compares",
-            "these",
-            "stages",
-            "in",
-            "training",
-            "order",
-            "and",
             "investigates",
             "the",
             "first",
-            "one",
-            "that",
-            "diverges",
+            "divergent",
+            "stage",
             "(gradients",
-            "in",
-            "this",
-            "example),",
-            "so",
-            "later",
-            "stages",
-            "are",
-            "not",
-            "reached.",
-            "Its",
+            "here)",
+            "and",
+            "hands",
             "code",
             "observations,",
             "test",
             "results,",
-            "code",
             "locations,",
             "and",
             "hypotheses",
-            "are",
-            "handed",
             "to",
-            "the",
-            "Repair",
-            "Agent,",
-            "which",
-            "tests",
-            "and",
-            "edits",
-            "the",
-            "candidate",
-            "and",
-            "submits",
-            "it",
-            "to",
-            "the",
-            "Orchestrator.",
-            "The",
-            "Orchestrator",
-            "returns",
-            "the",
-            "remaining",
-            "discrepancies",
-            "to",
-            "the",
-            "Repair",
-            "Agent",
-            "until",
-            "the",
-            "candidate",
-            "is",
-            "accepted",
-            "or",
-            "the",
-            "budget",
-            "is",
-            "exhausted.",
-            "(b)",
-            "For",
-            "repositories,",
-            "repository",
-            "context",
-            "management",
-            "analyzes",
-            "the",
-            "repository",
-            "structure,",
-            "orders",
-            "repairs",
-            "over",
-            "a",
-            "dependency",
-            "graph",
-            "of",
-            "work",
-            "units,",
-            "and",
-            "stores",
-            "evidence",
-            "outside",
-            "the",
-            "conversation",
-            "so",
-            "that",
-            "a",
-            "compact",
-            "context",
-            "can",
-            "be",
-            "reconstructed",
-            "when",
-            "the",
-            "agent",
-            "switches",
-            "units.",
-            "Preliminary",
-            "A",
-            "migration",
-            "task",
-            "$\\mathcal",
-            "T=(P,L_s,F_s,L_t,F_t,W)$",
-            "specifies"
+            "the"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "a",
-            "source"
+            "Repair"
           ],
           "after": [
-            "a",
-            "source"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "training"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "program"
-          ],
-          "after": [
-            "program"
+            "Repair"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "into",
-            "the",
-            "requested"
-          ],
-          "after": [
-            "$P$",
-            ",",
-            "its"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "language",
-            "and",
-            "framework"
-          ],
-          "after": [
-            "language",
-            "and",
-            "framework"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "through",
-            "diagnosis"
-          ],
-          "after": [
-            "$(L_s,F_s)$",
-            ",",
-            "the",
-            "requested",
-            "target",
-            "environment",
-            "$(L_t,F_t)$",
-            ","
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "and"
-          ],
-          "after": [
-            "and"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "repair",
-            "of"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "an"
-          ],
-          "after": [
-            "an"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "initial",
-            "translation.",
-            "The",
-            "Translator",
-            "generates",
-            "a",
-            "candidate,",
-            "and",
-            "the",
-            "Verifier",
-            "inspects",
-            "its",
-            "code",
-            "and",
-            "compares",
-            "its",
-            "training",
-            "behavior",
-            "with",
-            "the",
-            "source.",
-            "A",
-            "separate",
-            "Repair",
             "Agent",
             "examines",
             "the",
@@ -7716,14 +7601,87 @@
             "code",
             "and",
             "training",
-            "observations.",
+            "observations."
+          ],
+          "after": [
+            "Agent."
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "The",
             "Repair",
-            "Agent",
-            "receives",
-            "the",
-            "evidence",
+            "Agent"
+          ],
+          "after": [
+            "The",
+            "Repair",
+            "Agent"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "receives"
+          ],
+          "after": [
+            "tests",
             "and",
+            "edits"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "the"
+          ],
+          "after": [
+            "the"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "evidence"
+          ],
+          "after": [
+            "candidate,",
+            "using",
+            "the",
+            "Orchestrator's",
+            "feedback",
+            "until",
+            "acceptance",
+            "or",
+            "budget",
+            "exhaustion.",
+            "(b)",
+            "Repository",
+            "context",
+            "management",
+            "analyzes",
+            "code",
+            "structure,",
+            "orders",
+            "repairs",
+            "through",
+            "work-unit",
+            "dependencies,"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "revises",
             "the",
             "candidate.",
@@ -7741,8 +7699,26 @@
             "Execution",
             "adapters",
             "obtain",
-            "observations",
-            "from",
+            "observations"
+          ],
+          "after": [
+            "reconstructs",
+            "compact",
+            "contexts"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "from"
+          ],
+          "after": [
+            "from"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "the",
             "target",
             "framework.",
@@ -7751,70 +7727,137 @@
             "and",
             "Training",
             "Observations",
-            "Given",
-            "a",
-            "source",
-            "training",
-            "program",
-            "$P$",
-            "in",
-            "language",
-            "$L_s$",
-            "and",
-            "framework",
-            "$F_s$",
-            ",",
-            "migration"
+            "Given"
           ],
           "after": [
-            "editable",
-            "file",
-            "scope",
-            "$W$",
-            ".",
-            "Migration"
+            "archived",
+            "evidence.",
+            "Preliminary",
+            "A",
+            "migration",
+            "task",
+            "$\\mathcal",
+            "T=(P,L_s,F_s,L_t,F_t,W)$",
+            "specifies"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "produces",
-            "a"
+            "a",
+            "source"
           ],
           "after": [
+            "a",
+            "source"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "training"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "program",
+            "$P$"
+          ],
+          "after": [
+            "program",
+            "$P$"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "in",
+            "language",
+            "$L_s$",
+            "and",
+            "framework",
+            "$F_s$"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            ","
+          ],
+          "after": [
+            ","
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "migration",
             "produces",
-            "a"
+            "a",
+            "program",
+            "$\\hat{P}$",
+            "for",
+            "the",
+            "target"
+          ],
+          "after": [
+            "its"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "language",
+            "and",
+            "framework"
+          ],
+          "after": [
+            "language",
+            "and",
+            "framework"
           ]
         },
         {
           "kind": "insert",
           "before": [],
           "after": [
-            "target"
+            "$(L_s,F_s)$",
+            ",",
+            "the",
+            "requested",
+            "target",
+            "environment"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "program"
-          ],
-          "after": [
-            "program"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "$\\hat{P}$",
-            "for",
-            "the",
-            "target",
-            "language",
-            "and",
-            "framework",
             "$(L_t,F_t)$"
           ],
           "after": [
+            "$(L_t,F_t)$"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            ",",
+            "and",
+            "an",
+            "editable",
+            "file",
+            "scope",
+            "$W$",
+            ".",
+            "Migration",
+            "produces",
+            "a",
+            "target",
+            "program",
             "$\\hat",
             "P$"
           ]
@@ -9857,7 +9900,7 @@
           ]
         },
         {
-          "kind": "delete",
+          "kind": "replace",
           "before": [
             "measured",
             "discrepancies.",
@@ -9885,17 +9928,24 @@
             "next.",
             "The",
             "current",
-            "files",
-            "and"
+            "files"
           ],
-          "after": []
+          "after": [
+            "repair",
+            "stage",
+            "ends.",
+            "Repository",
+            "migration"
+          ]
         },
         {
           "kind": "equal",
           "before": [
+            "and",
             "repair"
           ],
           "after": [
+            "and",
             "repair"
           ]
         },
@@ -9965,8 +10015,57 @@
             "status."
           ],
           "after": [
-            "stage",
-            "ends."
+            "coordination",
+            "RepositoryMigrate",
+            "$\\mathcal",
+            "T,M,B$",
+            "$C\\gets\\Call{RepositoryContext}{\\mathcal",
+            "T}$",
+            "$S.\\hat",
+            "P\\gets\\Call{LLMTranslate}{M,A_T,\\mathcal",
+            "T}$",
+            "$(S.m,q)\\gets\\mathcal",
+            "O.\\Call{Verify}{S.\\hat",
+            "P}$",
+            "Complete",
+            "repository",
+            "if",
+            "$q=\\mathrm{accepted}$",
+            "then",
+            "return",
+            "$(S.\\hat",
+            "P,q)$",
+            "$E\\gets\\Call{LayeredDiagnosis}{\\mathcal",
+            "T,S,M,B,C}$",
+            "alg:diagnose",
+            "$\\Call{Repair}{\\mathcal",
+            "T,S,E,q,M,B,C}$",
+            "alg:repair",
+            "$C$",
+            ".ExecuteTools",
+            "$a,S,A$",
+            "$r\\gets[\\,]$",
+            "$c\\in",
+            "a.\\mathrm{tools}$",
+            "$U\\gets\\varnothing$",
+            "if",
+            "$c.\\mathrm{kind}=\\mathrm{structure}$",
+            "then",
+            "$o\\gets\\Call{RepositoryStructuralAnalysis}{C,S}$",
+            "else",
+            "if",
+            "$c.\\mathrm{kind}=\\mathrm{plan}$",
+            "then",
+            "$(C.G,U,o)\\gets\\Call{UpdateDependencyGraph}{c,C}$",
+            "else",
+            "$(C,S,o,U)\\gets\\Call{Execute}{c,C,S,A}$",
+            "$C.E\\gets",
+            "C.E\\mathbin{\\|}(o,\\Call{CodeVersion}{S})$",
+            ";",
+            "$r\\gets",
+            "r\\mathbin{\\|}o$",
+            "$C.Q[U\\cup\\Call{Dependents}{C.G,U}]\\gets\\mathrm{invalid}$",
+            "$(C,S,r)$"
           ]
         },
         {
@@ -11027,62 +11126,7 @@
           "after": [
             "the",
             "total",
-            "budget.",
-            "Repository",
-            "migration",
-            "and",
-            "repair",
-            "coordination",
-            "RepositoryMigrate",
-            "$\\mathcal",
-            "T,M,B$",
-            "$C\\gets\\Call{RepositoryContext}{\\mathcal",
-            "T}$",
-            "$S.\\hat",
-            "P\\gets\\Call{LLMTranslate}{M,A_T,\\mathcal",
-            "T}$",
-            "$(S.m,q)\\gets\\mathcal",
-            "O.\\Call{Verify}{S.\\hat",
-            "P}$",
-            "Complete",
-            "repository",
-            "if",
-            "$q=\\mathrm{accepted}$",
-            "then",
-            "return",
-            "$(S.\\hat",
-            "P,q)$",
-            "$E\\gets\\Call{LayeredDiagnosis}{\\mathcal",
-            "T,S,M,B,C}$",
-            "alg:diagnose",
-            "$\\Call{Repair}{\\mathcal",
-            "T,S,E,q,M,B,C}$",
-            "alg:repair",
-            "$C$",
-            ".ExecuteTools",
-            "$a,S,A$",
-            "$r\\gets[\\,]$",
-            "$c\\in",
-            "a.\\mathrm{tools}$",
-            "$U\\gets\\varnothing$",
-            "if",
-            "$c.\\mathrm{kind}=\\mathrm{structure}$",
-            "then",
-            "$o\\gets\\Call{RepositoryStructuralAnalysis}{C,S}$",
-            "else",
-            "if",
-            "$c.\\mathrm{kind}=\\mathrm{plan}$",
-            "then",
-            "$(C.G,U,o)\\gets\\Call{UpdateDependencyGraph}{c,C}$",
-            "else",
-            "$(C,S,o,U)\\gets\\Call{Execute}{c,C,S,A}$",
-            "$C.E\\gets",
-            "C.E\\mathbin{\\|}(o,\\Call{CodeVersion}{S})$",
-            ";",
-            "$r\\gets",
-            "r\\mathbin{\\|}o$",
-            "$C.Q[U\\cup\\Call{Dependents}{C.G,U}]\\gets\\mathrm{invalid}$",
-            "$(C,S,r)$"
+            "budget."
           ]
         }
       ],
@@ -11109,293 +11153,179 @@
           "kind": "replace",
           "before": [
             "LaDiM",
-            "migrates"
+            "migrates",
+            "a",
+            "source",
+            "training",
+            "program",
+            "into",
+            "the",
+            "requested",
+            "language",
+            "and",
+            "framework",
+            "through",
+            "diagnosis",
+            "and",
+            "repair"
           ],
           "after": [
             "\\begin{figure}[!t]",
             "\\centering",
             "\\includegraphics[width=0.9\\textwidth]{figures/hierarchical_feedback_architecture.pdf}",
-            "\\caption{Overview",
-            "of",
-            "LaDiM.",
-            "(a)",
-            "The",
-            "Translator",
-            "Agent",
-            "produces",
+            "\\caption{Overview"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "of"
+          ],
+          "after": [
+            "of"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "an",
             "initial",
+            "translation."
+          ],
+          "after": [
+            "LaDiM.",
+            "(a)"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "The",
+            "Translator"
+          ],
+          "after": [
+            "The",
+            "Translator"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "generates"
+          ],
+          "after": [
+            "produces"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "a",
             "candidate,",
             "and",
-            "the",
-            "Orchestrator",
-            "executes",
-            "it",
-            "alongside",
-            "the",
-            "source",
-            "program",
-            "to",
-            "measure",
+            "the"
+          ],
+          "after": [
+            "a",
+            "candidate,",
+            "and",
+            "the"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "Verifier",
+            "inspects",
+            "its",
+            "code",
+            "and"
+          ],
+          "after": [
+            "Orchestrator"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "compares",
+            "its"
+          ],
+          "after": [
+            "compares",
+            "its"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "training",
+            "behavior"
+          ],
+          "after": [
             "execution,",
             "forward",
             "values,",
             "gradients,",
             "and",
             "parameter",
-            "updates.",
-            "If",
+            "updates"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "with",
             "the",
-            "candidate",
-            "is",
-            "not",
-            "accepted,",
+            "source."
+          ],
+          "after": [
+            "with",
             "the",
+            "source."
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "A",
+            "separate"
+          ],
+          "after": [
+            "The",
             "Verifier",
-            "Agent",
-            "applies",
-            "Layered",
-            "Diagnosis:",
-            "it",
-            "compares",
-            "these",
-            "stages",
-            "in",
-            "training",
-            "order",
-            "and",
             "investigates",
             "the",
             "first",
-            "one",
-            "that",
-            "diverges",
+            "divergent",
+            "stage",
             "(gradients",
-            "in",
-            "this",
-            "example),",
-            "so",
-            "later",
-            "stages",
-            "are",
-            "not",
-            "reached.",
-            "Its",
+            "here)",
+            "and",
+            "hands",
             "code",
             "observations,",
             "test",
             "results,",
-            "code",
             "locations,",
             "and",
             "hypotheses",
-            "are",
-            "handed",
             "to",
-            "the",
-            "Repair",
-            "Agent,",
-            "which",
-            "tests",
-            "and",
-            "edits",
-            "the",
-            "candidate",
-            "and",
-            "submits",
-            "it",
-            "to",
-            "the",
-            "Orchestrator.",
-            "The",
-            "Orchestrator",
-            "returns",
-            "the",
-            "remaining",
-            "discrepancies",
-            "to",
-            "the",
-            "Repair",
-            "Agent",
-            "until",
-            "the",
-            "candidate",
-            "is",
-            "accepted",
-            "or",
-            "the",
-            "budget",
-            "is",
-            "exhausted.",
-            "(b)",
-            "For",
-            "repositories,",
-            "repository",
-            "context",
-            "management",
-            "analyzes",
-            "the",
-            "repository",
-            "structure,",
-            "orders",
-            "repairs",
-            "over",
-            "a",
-            "dependency",
-            "graph",
-            "of",
-            "work",
-            "units,",
-            "and",
-            "stores",
-            "evidence",
-            "outside",
-            "the",
-            "conversation",
-            "so",
-            "that",
-            "a",
-            "compact",
-            "context",
-            "can",
-            "be",
-            "reconstructed",
-            "when",
-            "the",
-            "agent",
-            "switches",
-            "units.}",
-            "\\label{fig:architecture}",
-            "\\end{figure}",
-            "\\subsection{Preliminary}",
-            "A",
-            "migration",
-            "task",
-            "$\\mathcal",
-            "T=(P,L_s,F_s,L_t,F_t,W)$",
-            "specifies"
+            "the"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "a",
-            "source"
+            "Repair"
           ],
           "after": [
-            "a",
-            "source"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "training"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "program"
-          ],
-          "after": [
-            "program"
+            "Repair"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "into",
-            "the",
-            "requested"
-          ],
-          "after": [
-            "$P$,",
-            "its"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "language",
-            "and",
-            "framework"
-          ],
-          "after": [
-            "language",
-            "and",
-            "framework"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "through",
-            "diagnosis"
-          ],
-          "after": [
-            "$(L_s,F_s)$,",
-            "the",
-            "requested",
-            "target",
-            "environment",
-            "$(L_t,F_t)$,"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "and"
-          ],
-          "after": [
-            "and"
-          ]
-        },
-        {
-          "kind": "delete",
-          "before": [
-            "repair",
-            "of"
-          ],
-          "after": []
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "an"
-          ],
-          "after": [
-            "an"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "initial",
-            "translation.",
-            "The",
-            "Translator",
-            "generates",
-            "a",
-            "candidate,",
-            "and",
-            "the",
-            "Verifier",
-            "inspects",
-            "its",
-            "code",
-            "and",
-            "compares",
-            "its",
-            "training",
-            "behavior",
-            "with",
-            "the",
-            "source.",
-            "A",
-            "separate",
-            "Repair",
             "Agent",
             "examines",
             "the",
@@ -11467,14 +11397,87 @@
             "code",
             "and",
             "training",
-            "observations.",
+            "observations."
+          ],
+          "after": [
+            "Agent."
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "The",
             "Repair",
-            "Agent",
-            "receives",
-            "the",
-            "evidence",
+            "Agent"
+          ],
+          "after": [
+            "The",
+            "Repair",
+            "Agent"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "receives"
+          ],
+          "after": [
+            "tests",
             "and",
+            "edits"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "the"
+          ],
+          "after": [
+            "the"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "evidence"
+          ],
+          "after": [
+            "candidate,",
+            "using",
+            "the",
+            "Orchestrator's",
+            "feedback",
+            "until",
+            "acceptance",
+            "or",
+            "budget",
+            "exhaustion.",
+            "(b)",
+            "Repository",
+            "context",
+            "management",
+            "analyzes",
+            "code",
+            "structure,",
+            "orders",
+            "repairs",
+            "through",
+            "work-unit",
+            "dependencies,"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "and"
+          ],
+          "after": [
+            "and"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "revises",
             "the",
             "candidate.",
@@ -11492,57 +11495,83 @@
             "Execution",
             "adapters",
             "obtain",
-            "observations",
-            "from",
-            "the",
-            "target",
-            "framework.}",
-            "\\label{fig:architecture}",
-            "\\end{figure}",
-            "\\subsection{Task",
-            "Definition",
-            "and",
-            "Training",
-            "Observations}",
-            "Given",
-            "a",
-            "source",
-            "training",
-            "program",
-            "$P$",
-            "in",
-            "language",
-            "$L_s$",
-            "and",
-            "framework",
-            "$F_s$,",
-            "migration"
+            "observations"
           ],
           "after": [
-            "editable",
-            "file",
-            "scope",
-            "$W$.",
-            "Migration"
+            "reconstructs",
+            "compact",
+            "contexts"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "produces",
-            "a"
+            "from"
           ],
           "after": [
-            "produces",
-            "a"
+            "from"
           ]
         },
         {
-          "kind": "insert",
-          "before": [],
+          "kind": "replace",
+          "before": [
+            "the",
+            "target",
+            "framework.}"
+          ],
           "after": [
-            "target"
+            "archived",
+            "evidence.}"
           ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "\\label{fig:architecture}",
+            "\\end{figure}"
+          ],
+          "after": [
+            "\\label{fig:architecture}",
+            "\\end{figure}"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
+            "\\subsection{Task",
+            "Definition",
+            "and",
+            "Training",
+            "Observations}",
+            "Given"
+          ],
+          "after": [
+            "\\subsection{Preliminary}",
+            "A",
+            "migration",
+            "task",
+            "$\\mathcal",
+            "T=(P,L_s,F_s,L_t,F_t,W)$",
+            "specifies"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "a",
+            "source"
+          ],
+          "after": [
+            "a",
+            "source"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "training"
+          ],
+          "after": []
         },
         {
           "kind": "equal",
@@ -11556,16 +11585,63 @@
         {
           "kind": "replace",
           "before": [
+            "$P$",
+            "in",
+            "language",
+            "$L_s$",
+            "and",
+            "framework",
+            "$F_s$,",
+            "migration",
+            "produces",
+            "a",
+            "program",
             "$\\hat{P}$",
             "for",
             "the",
-            "target",
+            "target"
+          ],
+          "after": [
+            "$P$,",
+            "its"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
             "language",
             "and",
-            "framework",
+            "framework"
+          ],
+          "after": [
+            "language",
+            "and",
+            "framework"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "$(L_t,F_t)$"
           ],
           "after": [
+            "$(L_s,F_s)$,",
+            "the",
+            "requested",
+            "target",
+            "environment",
+            "$(L_t,F_t)$,",
+            "and",
+            "an",
+            "editable",
+            "file",
+            "scope",
+            "$W$.",
+            "Migration",
+            "produces",
+            "a",
+            "target",
+            "program",
             "$\\hat",
             "P$"
           ]
@@ -12272,7 +12348,7 @@
             "Diagnosis}",
             "\\label{sec:hierarchy}",
             "{",
-            "\\begin{wrapfigure}{l}{0.55\\textwidth}",
+            "\\begin{wrapfigure}{l}{0.50\\textwidth}",
             "\\begin{minipage}{\\linewidth}",
             "\\setlength{\\intextsep}{0pt}",
             "\\begin{algorithm}[H]",
@@ -13636,7 +13712,7 @@
           ]
         },
         {
-          "kind": "delete",
+          "kind": "replace",
           "before": [
             "measured",
             "discrepancies.",
@@ -13664,17 +13740,25 @@
             "next.",
             "The",
             "current",
-            "files",
-            "and"
+            "files"
           ],
-          "after": []
+          "after": [
+            "repair",
+            "stage",
+            "ends.\\par}",
+            "\\begin{algorithm}[!htb]",
+            "\\caption{Repository",
+            "migration"
+          ]
         },
         {
           "kind": "equal",
           "before": [
+            "and",
             "repair"
           ],
           "after": [
+            "and",
             "repair"
           ]
         },
@@ -13744,8 +13828,77 @@
             "status."
           ],
           "after": [
-            "stage",
-            "ends.\\par}"
+            "coordination}",
+            "\\label{alg:repository}",
+            "\\small",
+            "\\begin{algorithmic}[1]",
+            "\\Function{RepositoryMigrate}{$\\mathcal",
+            "T,M,B$}",
+            "\\State",
+            "$C\\gets\\Call{RepositoryContext}{\\mathcal",
+            "T}$",
+            "\\State",
+            "$S.\\hat",
+            "P\\gets\\Call{LLMTranslate}{M,A_T,\\mathcal",
+            "T}$",
+            "\\State",
+            "$(S.m,q)\\gets\\mathcal",
+            "O.\\Call{Verify}{S.\\hat",
+            "P}$",
+            "\\Comment{Complete",
+            "repository}",
+            "\\State",
+            "\\textbf{if}",
+            "$q=\\mathrm{accepted}$",
+            "\\textbf{then",
+            "return}",
+            "$(S.\\hat",
+            "P,q)$",
+            "\\State",
+            "$E\\gets\\Call{LayeredDiagnosis}{\\mathcal",
+            "T,S,M,B,C}$",
+            "\\Comment{\\cref{alg:diagnose}}",
+            "\\State",
+            "\\Return",
+            "$\\Call{Repair}{\\mathcal",
+            "T,S,E,q,M,B,C}$",
+            "\\Comment{\\cref{alg:repair}}",
+            "\\EndFunction",
+            "\\Function{$C$.ExecuteTools}{$a,S,A$}",
+            "\\State",
+            "$r\\gets[\\,]$",
+            "\\ForAll{$c\\in",
+            "a.\\mathrm{tools}$}",
+            "\\State",
+            "$U\\gets\\varnothing$",
+            "\\State",
+            "\\textbf{if}",
+            "$c.\\mathrm{kind}=\\mathrm{structure}$",
+            "\\textbf{then}",
+            "$o\\gets\\Call{RepositoryStructuralAnalysis}{C,S}$",
+            "\\State",
+            "\\textbf{else",
+            "if}",
+            "$c.\\mathrm{kind}=\\mathrm{plan}$",
+            "\\textbf{then}",
+            "$(C.G,U,o)\\gets\\Call{UpdateDependencyGraph}{c,C}$",
+            "\\State",
+            "\\textbf{else}",
+            "$(C,S,o,U)\\gets\\Call{Execute}{c,C,S,A}$",
+            "\\State",
+            "$C.E\\gets",
+            "C.E\\mathbin{\\|}(o,\\Call{CodeVersion}{S})$;",
+            "$r\\gets",
+            "r\\mathbin{\\|}o$",
+            "\\State",
+            "$C.Q[U\\cup\\Call{Dependents}{C.G,U}]\\gets\\mathrm{invalid}$",
+            "\\EndFor",
+            "\\State",
+            "\\Return",
+            "$(C,S,r)$",
+            "\\EndFunction",
+            "\\end{algorithmic}",
+            "\\end{algorithm}"
           ]
         },
         {
@@ -14806,83 +14959,7 @@
           "after": [
             "the",
             "total",
-            "budget.",
-            "\\begin{algorithm}[!htb]",
-            "\\caption{Repository",
-            "migration",
-            "and",
-            "repair",
-            "coordination}",
-            "\\label{alg:repository}",
-            "\\small",
-            "\\begin{algorithmic}[1]",
-            "\\Function{RepositoryMigrate}{$\\mathcal",
-            "T,M,B$}",
-            "\\State",
-            "$C\\gets\\Call{RepositoryContext}{\\mathcal",
-            "T}$",
-            "\\State",
-            "$S.\\hat",
-            "P\\gets\\Call{LLMTranslate}{M,A_T,\\mathcal",
-            "T}$",
-            "\\State",
-            "$(S.m,q)\\gets\\mathcal",
-            "O.\\Call{Verify}{S.\\hat",
-            "P}$",
-            "\\Comment{Complete",
-            "repository}",
-            "\\State",
-            "\\textbf{if}",
-            "$q=\\mathrm{accepted}$",
-            "\\textbf{then",
-            "return}",
-            "$(S.\\hat",
-            "P,q)$",
-            "\\State",
-            "$E\\gets\\Call{LayeredDiagnosis}{\\mathcal",
-            "T,S,M,B,C}$",
-            "\\Comment{\\cref{alg:diagnose}}",
-            "\\State",
-            "\\Return",
-            "$\\Call{Repair}{\\mathcal",
-            "T,S,E,q,M,B,C}$",
-            "\\Comment{\\cref{alg:repair}}",
-            "\\EndFunction",
-            "\\Function{$C$.ExecuteTools}{$a,S,A$}",
-            "\\State",
-            "$r\\gets[\\,]$",
-            "\\ForAll{$c\\in",
-            "a.\\mathrm{tools}$}",
-            "\\State",
-            "$U\\gets\\varnothing$",
-            "\\State",
-            "\\textbf{if}",
-            "$c.\\mathrm{kind}=\\mathrm{structure}$",
-            "\\textbf{then}",
-            "$o\\gets\\Call{RepositoryStructuralAnalysis}{C,S}$",
-            "\\State",
-            "\\textbf{else",
-            "if}",
-            "$c.\\mathrm{kind}=\\mathrm{plan}$",
-            "\\textbf{then}",
-            "$(C.G,U,o)\\gets\\Call{UpdateDependencyGraph}{c,C}$",
-            "\\State",
-            "\\textbf{else}",
-            "$(C,S,o,U)\\gets\\Call{Execute}{c,C,S,A}$",
-            "\\State",
-            "$C.E\\gets",
-            "C.E\\mathbin{\\|}(o,\\Call{CodeVersion}{S})$;",
-            "$r\\gets",
-            "r\\mathbin{\\|}o$",
-            "\\State",
-            "$C.Q[U\\cup\\Call{Dependents}{C.G,U}]\\gets\\mathrm{invalid}$",
-            "\\EndFor",
-            "\\State",
-            "\\Return",
-            "$(C,S,r)$",
-            "\\EndFunction",
-            "\\end{algorithmic}",
-            "\\end{algorithm}"
+            "budget."
           ]
         }
       ]
@@ -20619,20 +20696,25 @@
             "target",
             "framework.",
             "Appendix",
-            "[sec:supplementary-protocols]",
-            "reports"
+            "[sec:supplementary-protocols]"
           ],
           "after": [
             "sec:jax-protocol",
-            "details"
+            "details",
+            "the",
+            "converter",
+            "evaluations.",
+            "sec:native-jax-study"
           ]
         },
         {
           "kind": "equal",
           "before": [
+            "reports",
             "the"
           ],
           "after": [
+            "reports",
             "the"
           ]
         },
@@ -20645,8 +20727,17 @@
             "costs."
           ],
           "after": [
-            "converter",
-            "evaluations."
+            "separate",
+            "study",
+            "of",
+            "native",
+            "JAX",
+            "translations",
+            "evaluated",
+            "over",
+            "consecutive",
+            "training",
+            "steps."
           ]
         },
         {
@@ -28129,20 +28220,25 @@
             "another",
             "target",
             "framework.",
-            "Appendix~\\ref{sec:supplementary-protocols}",
-            "reports"
+            "Appendix~\\ref{sec:supplementary-protocols}"
           ],
           "after": [
             "\\cref{sec:jax-protocol}",
-            "details"
+            "details",
+            "the",
+            "converter",
+            "evaluations.",
+            "\\cref{sec:native-jax-study}"
           ]
         },
         {
           "kind": "equal",
           "before": [
+            "reports",
             "the"
           ],
           "after": [
+            "reports",
             "the"
           ]
         },
@@ -28155,8 +28251,17 @@
             "costs."
           ],
           "after": [
-            "converter",
-            "evaluations."
+            "separate",
+            "study",
+            "of",
+            "native",
+            "JAX",
+            "translations",
+            "evaluated",
+            "over",
+            "consecutive",
+            "training",
+            "steps."
           ]
         },
         {
