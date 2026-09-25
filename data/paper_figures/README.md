@@ -1,5 +1,10 @@
 # Inputs for manuscript figures and tables
 
+## September 26 manuscript inclusion
+
+The Tanh figure is now Figure 4 in the manuscript at full width. Its left panel says Gradient blocked and identifies the repaired supporting-library file. All evidence, 24/40/40 calls, token totals and three-seed acceptance remain unchanged. Figure 1 moves its single Acc. label next to the first percentage; Figure 3 places Tasks sorted by tokens saved within each group below the axis, preserving all bars and both groups. The original detection figure is now Figure 5 in Appendix A.6. Generators and PDF/PNG/SVG assets match. Existing figure/data checks pass; the final manuscript has nine pages of main text. See the [r5 execution record](../../docs/manuscript-revision-execution-20260926-r5.md) for the precise verification scope and image-display limitation. Earlier sections below retain their historical status.
+
+
 ## September 25 saved code repair preview
 
 `figures/make_tanh_repair_case.py` generates a standalone diagnosis, code and cost preview under `figures/tanh-repair-case/`, using `docs/review-evidence/tanh-case-20260925/summary.json`, `calls.csv`, `repair.patch`, and `tool-evidence.json`. Source hashes are retained in `layout-check.json`. Execution and Forward values pass while Gradients fail; the Linear 1 → Tanh → Linear 2 diagram locates the gradient discrepancy at Tanh. Two lines from LaDiM's inserted implementation are highlighted below; the omitted registration decorators are explained in the caption. The baseline result explicitly reads “SWE-agent and MatchFixAgent: unrepaired.” A red cross and green check align at the right of the two outcome rows. The curves contain every one of the 24/40/40 calls. The compact 5.5 × 2.039 inch figure uses Times New Roman labels and Consolas code. Status symbols sit above the diagnostic terms, the top arrows are centered between the words, and both baseline curve endpoints are red crosses labeled Unrepaired. This preview has not replaced any manuscript figure or text. See the [preview notes](../../figures/tanh-repair-case/README.md).

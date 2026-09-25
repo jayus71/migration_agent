@@ -79,6 +79,10 @@ extracted text, page images, and raw search responses stay local and are ignored
 Git. Reading the DNA requires no PDF downloads. Repeating the extraction requires
 the local papers, `pypdf`, and Poppler; see the analysis notes for the procedure.
 
+## September 26 manuscript revision
+
+The approved r5 feedback is implemented, including the Tanh repair case in Figure 4 and Appendix D, shorter overview and case captions, and the requested Figure 1/3 labels. Layout changes preserve all prose after the user's layout-first instruction and keep the conclusion on page 9; the full PDF has 25 pages. Algorithms 1/2 remain wrapped on the left, and Algorithm 3 remains full width. See the [r5 execution record](docs/manuscript-revision-execution-20260926-r5.md) for changes and validation. The image-display limitation is recorded there; numerical geometry checks are not described as manual visual review. Historical records follow.
+
 ## September 25 manuscript revision
 
 The approved r4 revision and subsequent figure/table feedback are implemented on codex/iclr-2027-template. The latest compression places the main-text end on page 9 near review line 479, compared with page 10 near line 506 before compression. The full PDF has 24 pages. Algorithms and tables use local small text as requested; Algorithm 3 and all figure assets remain unchanged. See the [compression record](docs/manuscript-compression-20260925.md) and [earlier r4 record](docs/manuscript-revision-execution-20260925-r4.md). Historical layout descriptions below retain their original context.
