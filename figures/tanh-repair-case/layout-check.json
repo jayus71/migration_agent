@@ -1,0 +1,500 @@
+{
+  "figure_inches": [
+    5.5,
+    2.7
+  ],
+  "minimum_font_points": 7.0,
+  "all_text_inside_canvas": true,
+  "text_bounds": [
+    {
+      "text": "(a) Final code and repair outcome",
+      "font_points": 9.0,
+      "bbox_pixels": [
+        17.82,
+        455.139375,
+        342.695,
+        476.28
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Autoencoder: Linear \u2192 Tanh \u2192 Linear",
+      "font_points": 8.0,
+      "bbox_pixels": [
+        17.82,
+        422.874055,
+        333.945,
+        440.01468
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Loss difference: $1.43 \\times 10^{-6}$ before and after repair",
+      "font_points": 7.5,
+      "bbox_pixels": [
+        17.82,
+        391.75942000000003,
+        403.39051757812496,
+        417.45942
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "SWE-agent / MatchFixAgent",
+      "font_points": 8.0,
+      "bbox_pixels": [
+        30.31875,
+        354.79116,
+        278.44375,
+        372.79116
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Tanh mapping still absent; existing ReLU mapping:",
+      "font_points": 7.4,
+      "bbox_pixels": [
+        30.31875,
+        332.87787000000003,
+        415.19375,
+        348.90912000000003
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "@register_function(torch.relu)",
+      "font_points": 7.0,
+      "bbox_pixels": [
+        30.31875,
+        305.43467499999997,
+        345.31875,
+        323.70029999999997
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "@register_function(torch.nn.functional.relu)",
+      "font_points": 7.0,
+      "bbox_pixels": [
+        30.31875,
+        284.648455,
+        492.31875,
+        302.91408
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "def functional_relu(input, inplace=False):",
+      "font_points": 7.0,
+      "bbox_pixels": [
+        30.31875,
+        263.86223500000006,
+        471.31875,
+        282.12786000000006
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "    return mops.relu(input)",
+      "font_points": 7.0,
+      "bbox_pixels": [
+        30.31875,
+        243.34163999999998,
+        313.81875,
+        261.34164
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "LaDiM",
+      "font_points": 8.0,
+      "bbox_pixels": [
+        30.31875,
+        196.01981999999998,
+        92.81875,
+        214.01981999999998
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Added Tanh mapping; accepted on all three seeds",
+      "font_points": 7.4,
+      "bbox_pixels": [
+        30.31875,
+        174.10653,
+        398.81875,
+        190.13778
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "@register_function(torch.tanh)",
+      "font_points": 7.0,
+      "bbox_pixels": [
+        30.31875,
+        146.663335,
+        345.31875,
+        164.92896
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "@register_function(torch.nn.functional.tanh)",
+      "font_points": 7.0,
+      "bbox_pixels": [
+        30.31875,
+        125.877115,
+        492.31875,
+        144.14274
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "def functional_tanh(input):",
+      "font_points": 7.0,
+      "bbox_pixels": [
+        30.31875,
+        105.090895,
+        313.81875,
+        123.35652
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "    return mops.tanh(input)",
+      "font_points": 7.0,
+      "bbox_pixels": [
+        30.31875,
+        84.5703,
+        313.81875,
+        102.5703
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Gradient vector difference: $0.359 \\rightarrow 1.01 \\times 10^{-6}$",
+      "font_points": 7.5,
+      "bbox_pixels": [
+        17.82,
+        44.52075000000001,
+        376.98680358886725,
+        67.18950000000001
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Relative parameter update difference: $0.771 \\rightarrow 6.42 \\times 10^{-6}$",
+      "font_points": 7.5,
+      "bbox_pixels": [
+        17.82,
+        19.37650000000001,
+        456.6555352783204,
+        45.07650000000001
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "17  Test",
+      "font_points": 7.2,
+      "bbox_pixels": [
+        634.7795744680851,
+        251.582,
+        692.9045744680851,
+        267.582
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "22  Patch",
+      "font_points": 7.2,
+      "bbox_pixels": [
+        672.3785106382978,
+        329.558,
+        739.7535106382978,
+        345.558
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "23  Accepted",
+      "font_points": 7.2,
+      "bbox_pixels": [
+        830.2940425531915,
+        174.632,
+        925.6690425531915,
+        190.66325
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "24: 1.488",
+      "font_points": 7.5,
+      "bbox_pixels": [
+        807.7346808510638,
+        354.182,
+        878.4846808510638,
+        371.322625
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "2.341",
+      "font_points": 7.5,
+      "bbox_pixels": [
+        928.0512765957446,
+        377.4162875,
+        970.3012765957446,
+        394.5569125
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "1.606",
+      "font_points": 7.5,
+      "bbox_pixels": [
+        928.0512765957446,
+        302.0052875,
+        970.4262765957446,
+        319.1459125
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "LLM calls",
+      "font_points": 8.0,
+      "bbox_pixels": [
+        754.5799999999999,
+        91.40937500000001,
+        838.3299999999999,
+        108.55000000000001
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "0",
+      "font_points": 7.3,
+      "bbox_pixels": [
+        615.1775,
+        118.55000000000001,
+        624.3025,
+        134.55
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "10",
+      "font_points": 7.3,
+      "bbox_pixels": [
+        685.8128723404255,
+        118.55000000000001,
+        704.0628723404255,
+        134.55
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "20",
+      "font_points": 7.3,
+      "bbox_pixels": [
+        761.0107446808511,
+        118.55000000000001,
+        779.2607446808511,
+        134.55
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "30",
+      "font_points": 7.3,
+      "bbox_pixels": [
+        836.2086170212765,
+        118.55000000000001,
+        854.4586170212765,
+        134.55
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "40",
+      "font_points": 7.3,
+      "bbox_pixels": [
+        911.4064893617021,
+        118.55000000000001,
+        929.6564893617021,
+        134.55
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Cumulative tokens (millions)",
+      "font_points": 8.0,
+      "bbox_pixels": [
+        558.599375,
+        167.3725,
+        575.74,
+        401.2475
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "0.0",
+      "font_points": 7.3,
+      "bbox_pixels": [
+        585.74,
+        135.8,
+        608.49,
+        151.8
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "0.5",
+      "font_points": 7.3,
+      "bbox_pixels": [
+        585.74,
+        187.10000000000002,
+        608.49,
+        203.10000000000002
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "1.0",
+      "font_points": 7.3,
+      "bbox_pixels": [
+        585.74,
+        238.4,
+        608.49,
+        254.4
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "1.5",
+      "font_points": 7.3,
+      "bbox_pixels": [
+        585.74,
+        289.7,
+        608.49,
+        305.7
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "2.0",
+      "font_points": 7.3,
+      "bbox_pixels": [
+        585.74,
+        341.0,
+        608.49,
+        357.0
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "2.5",
+      "font_points": 7.3,
+      "bbox_pixels": [
+        585.74,
+        392.3,
+        608.49,
+        408.3
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "(b) Repair process and cost",
+      "font_points": 9.0,
+      "bbox_pixels": [
+        582.12,
+        455.13937500000003,
+        842.995,
+        476.28000000000003
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "Accepted: public test passes",
+      "font_points": 7.5,
+      "bbox_pixels": [
+        589.05,
+        70.358,
+        801.175,
+        88.01425
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "24 calls: final report completed",
+      "font_points": 7.5,
+      "bbox_pixels": [
+        589.05,
+        49.946000000000005,
+        824.425,
+        67.60225
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "\u00d7  Unrepaired at the 40-call limit",
+      "font_points": 7.5,
+      "bbox_pixels": [
+        589.05,
+        28.076000000000008,
+        838.8,
+        45.73225000000001
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "LaDiM",
+      "font_points": 7.2,
+      "bbox_pixels": [
+        617.4,
+        433.04,
+        670.4,
+        449.04
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "SWE-agent",
+      "font_points": 7.2,
+      "bbox_pixels": [
+        617.4,
+        407.44,
+        700.525,
+        423.44
+      ],
+      "inside_canvas": true
+    },
+    {
+      "text": "MatchFixAgent",
+      "font_points": 7.2,
+      "bbox_pixels": [
+        749.125,
+        433.04,
+        863.375,
+        449.07125
+      ],
+      "inside_canvas": true
+    }
+  ],
+  "inputs_sha256": {
+    "summary.json": "765142159002342b8f1852562e13bd4b08ab329a2b72c3e5e6322b16ad196e0b",
+    "calls.csv": "946074c92096f243cc874d6426df0f69d20718b9f6679b03edd16aabc83df7e6",
+    "repair.patch": "6c892dae6c544666bc6320b79392aa8a51d7c5f12ddb48ef3a837b485f373077"
+  },
+  "text_overlaps": [],
+  "curve_text_overlaps": [],
+  "all_calls_plotted": {
+    "LaDiM": 24,
+    "SWE-agent": 40,
+    "MatchFixAgent": 40
+  },
+  "final_tokens": {
+    "LaDiM": 1488495.0,
+    "SWE-agent": 1606058.0,
+    "MatchFixAgent": 2340608.0
+  }
+}
