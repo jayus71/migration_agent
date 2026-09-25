@@ -27,13 +27,13 @@
     }
   },
   "current": {
-    "base_commit": "60402a2",
-    "pdf_sha256": "ac808a272911443bc0049047e2ff5534a179eab46cb6e513e1ff3056375e6473"
+    "base_commit": "fdad3aa",
+    "pdf_sha256": "18dd8a4d1b5c51bcf9d1c6fb22b03450a6087af656e0304e92b0fd628580ab56"
   },
-  "updated": "2026-09-25T18:35:38+08:00",
-  "version": "283ca68d5735db95960495fd161726bde4d1791cb8e5122360ffe2428ce8f510",
-  "reading_words_added": 8751,
-  "reading_words_removed": 4447,
+  "updated": "2026-09-25T18:43:35+08:00",
+  "version": "b3e4009d0e7e2253b963cb06e9fdca3e7a885059bc69cf7d653f8303df32cae7",
+  "reading_words_added": 8736,
+  "reading_words_removed": 4445,
   "sections": {
     "Title": {
       "reading": [
@@ -19674,7 +19674,7 @@
           "kind": "insert",
           "before": [],
           "after": [
-            "tab:natural-repairs",
+            "tab:repair-resultsa",
             "reports",
             "how",
             "many",
@@ -20118,8 +20118,57 @@
           "kind": "replace",
           "before": [
             "next",
-            "fault",
-            "to",
+            "fault"
+          ],
+          "after": [
+            "translated",
+            "program",
+            "(sec:natural-protocol).",
+            "Repair",
+            "results",
+            "on",
+            "two",
+            "collections.",
+            "(a)",
+            "Ten",
+            "initial",
+            "translations,",
+            "five",
+            "failing",
+            "and",
+            "five",
+            "passing",
+            "before",
+            "repair;",
+            "candidates",
+            "and",
+            "supporting",
+            "libraries",
+            "are",
+            "editable.",
+            "(b)",
+            "Six",
+            "faulty",
+            "JAX",
+            "candidates;",
+            "LLM",
+            "repair",
+            "allows",
+            "up"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "to"
+          ],
+          "after": [
+            "to"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "investigate.",
             "Appendix",
             "[sec:natural-protocol]",
@@ -20128,100 +20177,60 @@
             "checks",
             "for",
             "this",
-            "case."
+            "case.",
+            "Repair",
+            "of",
+            "natural",
+            "translation",
+            "faults"
           ],
           "after": [
-            "translated",
-            "program",
-            "(sec:natural-protocol)."
+            "four",
+            "submissions,",
+            "while",
+            "each",
+            "native",
+            "converter",
+            "runs",
+            "once",
+            "without",
+            "an",
+            "LLM.",
+            "Tokens",
+            "are",
+            "in",
+            "millions"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "Repair"
+            "and"
           ],
           "after": [
-            "Repair"
+            "and"
           ]
         },
         {
           "kind": "delete",
           "before": [
+            "preservation",
             "of",
-            "natural",
-            "translation",
-            "faults"
+            "initially",
+            "accepted",
+            "programs.",
+            "Tokens"
           ],
           "after": []
         },
         {
           "kind": "equal",
           "before": [
-            "and",
-            "preservation"
-          ],
-          "after": [
-            "and",
-            "preservation"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "of",
-            "initially",
-            "accepted",
-            "programs."
-          ],
-          "after": [
-            "on",
-            "ten",
-            "programs",
-            "produced",
-            "by",
-            "the",
-            "initial",
-            "translation.",
-            "Five",
-            "programs",
-            "fail",
-            "evaluation",
-            "and",
-            "five",
-            "pass",
-            "before",
-            "repair."
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "Tokens"
-          ],
-          "after": [
-            "Tokens"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "cover"
-          ],
-          "after": [
-            "are",
-            "in",
-            "millions",
-            "and",
-            "include"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "cover",
             "all"
           ],
           "after": [
+            "cover",
             "all"
           ]
         },
@@ -20257,12 +20266,9 @@
           ],
           "after": [
             "calls,",
-            "with",
-            "candidates",
-            "and",
-            "supporting",
-            "libraries",
-            "editable."
+            "including",
+            "failed",
+            "attempts."
           ]
         },
         {
@@ -20503,12 +20509,67 @@
           ]
         },
         {
-          "kind": "delete",
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "Method"
+          ]
+        },
+        {
+          "kind": "equal",
           "before": [
-            "&",
+            "&"
+          ],
+          "after": [
+            "&"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "13.207"
           ],
-          "after": []
+          "after": [
+            "Accepted",
+            "&",
+            "Calls",
+            "&",
+            "Tokens",
+            "LLM",
+            "repair",
+            "LaDiM",
+            "&",
+            "6/6",
+            "&",
+            "76",
+            "&",
+            "0.674",
+            "Direct",
+            "repair",
+            "&",
+            "6/6",
+            "&",
+            "57",
+            "&",
+            "0.353",
+            "Single",
+            "native",
+            "conversion",
+            "Ivy",
+            "&",
+            "0/6",
+            "&",
+            "0",
+            "&",
+            "0",
+            "torch2jax",
+            "&",
+            "0/6",
+            "&",
+            "0",
+            "&",
+            "0"
+          ]
         },
         {
           "kind": "equal",
@@ -20879,73 +20940,49 @@
           "kind": "replace",
           "before": [
             "observation",
-            "window"
+            "window",
+            "in",
+            "only",
+            "3/12"
           ],
           "after": [
             "protocol,",
             "the",
             "detection",
-            "trajectories,",
-            "and",
-            "the",
-            "sensitivity",
-            "to",
-            "the",
-            "loss",
-            "threshold.",
-            "Repair",
-            "and",
-            "native",
-            "conversion",
-            "on",
-            "six",
-            "faulty",
-            "JAX",
-            "candidates.",
-            "LLM",
-            "repair",
-            "allows",
-            "up",
-            "to",
-            "four",
-            "submissions,",
-            "with",
-            "costs",
-            "covering",
-            "investigation",
-            "and",
-            "repair.",
-            "Native",
-            "conversion",
-            "runs",
-            "once",
-            "without",
-            "an",
-            "LLM.",
-            "Tokens",
-            "are"
+            "trajectories,"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "in"
+            "and"
           ],
           "after": [
-            "in"
+            "and"
+          ]
+        },
+        {
+          "kind": "delete",
+          "before": [
+            "4/12",
+            "runs,",
+            "even",
+            "though"
+          ],
+          "after": []
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "the"
+          ],
+          "after": [
+            "the"
           ]
         },
         {
           "kind": "replace",
           "before": [
-            "only",
-            "3/12",
-            "and",
-            "4/12",
-            "runs,",
-            "even",
-            "though",
-            "the",
             "mean",
             "curves",
             "cross",
@@ -20968,8 +21005,25 @@
             "and",
             "update",
             "checks",
-            "make",
-            "the",
+            "make"
+          ],
+          "after": [
+            "sensitivity",
+            "to"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "the"
+          ],
+          "after": [
+            "the"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "affected",
             "computation",
             "available",
@@ -20978,48 +21032,8 @@
             "investigation."
           ],
           "after": [
-            "millions.",
-            "Method",
-            "&",
-            "Accepted",
-            "&",
-            "Calls",
-            "&",
-            "Tokens",
-            "LLM",
-            "repair",
-            "LaDiM",
-            "&",
-            "6/6",
-            "&",
-            "76",
-            "&",
-            "0.674",
-            "Direct",
-            "repair",
-            "&",
-            "6/6",
-            "&",
-            "57",
-            "&",
-            "0.353",
-            "Single",
-            "native",
-            "conversion",
-            "Ivy",
-            "&",
-            "0/6",
-            "&",
-            "0",
-            "&",
-            "0",
-            "torch2jax",
-            "&",
-            "0/6",
-            "&",
-            "0",
-            "&",
-            "0"
+            "loss",
+            "threshold."
           ]
         },
         {
@@ -21057,7 +21071,7 @@
             "and",
             "CNN",
             "models",
-            "(tab:jax).",
+            "(tab:repair-resultsb).",
             "Every",
             "case",
             "passes",
@@ -27244,7 +27258,7 @@
           "kind": "insert",
           "before": [],
           "after": [
-            "\\cref{tab:natural-repairs}",
+            "\\cref{tab:repair-results}a",
             "reports",
             "how",
             "many",
@@ -27686,8 +27700,58 @@
           "kind": "replace",
           "before": [
             "next",
-            "fault",
-            "to",
+            "fault"
+          ],
+          "after": [
+            "translated",
+            "program",
+            "(\\cref{sec:natural-protocol}).",
+            "\\begin{table}[t]",
+            "\\caption{Repair",
+            "results",
+            "on",
+            "two",
+            "collections.",
+            "(a)",
+            "Ten",
+            "initial",
+            "translations,",
+            "five",
+            "failing",
+            "and",
+            "five",
+            "passing",
+            "before",
+            "repair;",
+            "candidates",
+            "and",
+            "supporting",
+            "libraries",
+            "are",
+            "editable.",
+            "(b)",
+            "Six",
+            "faulty",
+            "JAX",
+            "candidates;",
+            "LLM",
+            "repair",
+            "allows",
+            "up"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "to"
+          ],
+          "after": [
+            "to"
+          ]
+        },
+        {
+          "kind": "replace",
+          "before": [
             "investigate.",
             "Appendix~\\ref{sec:natural-protocol}",
             "records",
@@ -27696,101 +27760,60 @@
             "for",
             "this",
             "case.",
-            "\\begin{table}[!htb]"
+            "\\begin{table}[!htb]",
+            "\\caption{Repair",
+            "of",
+            "natural",
+            "translation",
+            "faults"
           ],
           "after": [
-            "translated",
-            "program",
-            "(\\cref{sec:natural-protocol}).",
-            "\\begin{table}[t]"
+            "four",
+            "submissions,",
+            "while",
+            "each",
+            "native",
+            "converter",
+            "runs",
+            "once",
+            "without",
+            "an",
+            "LLM.",
+            "Tokens",
+            "are",
+            "in",
+            "millions"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "\\caption{Repair"
+            "and"
           ],
           "after": [
-            "\\caption{Repair"
+            "and"
           ]
         },
         {
           "kind": "delete",
           "before": [
+            "preservation",
             "of",
-            "natural",
-            "translation",
-            "faults"
+            "initially",
+            "accepted",
+            "programs.",
+            "Tokens"
           ],
           "after": []
         },
         {
           "kind": "equal",
           "before": [
-            "and",
-            "preservation"
-          ],
-          "after": [
-            "and",
-            "preservation"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "of",
-            "initially",
-            "accepted",
-            "programs."
-          ],
-          "after": [
-            "on",
-            "ten",
-            "programs",
-            "produced",
-            "by",
-            "the",
-            "initial",
-            "translation.",
-            "Five",
-            "programs",
-            "fail",
-            "evaluation",
-            "and",
-            "five",
-            "pass",
-            "before",
-            "repair."
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "Tokens"
-          ],
-          "after": [
-            "Tokens"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
-            "cover"
-          ],
-          "after": [
-            "are",
-            "in",
-            "millions",
-            "and",
-            "include"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
+            "cover",
             "all"
           ],
           "after": [
+            "cover",
             "all"
           ]
         },
@@ -27822,27 +27845,24 @@
             "starting",
             "from",
             "supplied",
-            "translations.}"
+            "translations.}",
+            "\\label{tab:natural-repairs}"
           ],
           "after": [
             "calls,",
-            "with",
-            "candidates",
-            "and",
-            "supporting",
-            "libraries",
-            "editable.}"
+            "including",
+            "failed",
+            "attempts.}",
+            "\\label{tab:repair-results}"
           ]
         },
         {
           "kind": "equal",
           "before": [
-            "\\label{tab:natural-repairs}",
             "\\centering",
             "\\small"
           ],
           "after": [
-            "\\label{tab:natural-repairs}",
             "\\centering",
             "\\small"
           ]
@@ -27853,7 +27873,13 @@
             "\\setlength{\\tabcolsep}{4pt}"
           ],
           "after": [
-            "\\setlength{\\tabcolsep}{3pt}"
+            "\\setlength{\\tabcolsep}{2pt}",
+            "\\begin{minipage}[t]{0.555\\linewidth}",
+            "\\vspace{0pt}",
+            "{\\raggedright\\textit{(a)",
+            "Repairing",
+            "translation",
+            "errors}\\par}\\smallskip"
           ]
         },
         {
@@ -28161,13 +28187,89 @@
           "before": [
             "\\\\",
             "\\bottomrule",
-            "\\end{tabular*}",
-            "\\end{table}"
+            "\\end{tabular*}"
           ],
           "after": [
             "\\\\",
             "\\bottomrule",
+            "\\end{tabular*}"
+          ]
+        },
+        {
+          "kind": "insert",
+          "before": [],
+          "after": [
+            "\\end{minipage}\\hfill",
+            "\\begin{minipage}[t]{0.415\\linewidth}",
+            "\\vspace{0pt}",
+            "{\\raggedright\\textit{(b)",
+            "JAX",
+            "repair",
+            "and",
+            "conversion}\\par}\\smallskip",
+            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lccc@{}}",
+            "\\toprule",
+            "Method",
+            "&",
+            "Accepted",
+            "&",
+            "Calls",
+            "&",
+            "Tokens",
+            "\\\\",
+            "\\midrule",
+            "\\multicolumn{4}{@{}l}{\\textit{LLM",
+            "repair}}",
+            "\\\\",
+            "LaDiM",
+            "&",
+            "6/6",
+            "&",
+            "76",
+            "&",
+            "0.674",
+            "\\\\",
+            "Direct",
+            "repair",
+            "&",
+            "6/6",
+            "&",
+            "57",
+            "&",
+            "0.353",
+            "\\\\",
+            "\\midrule",
+            "\\multicolumn{4}{@{}l}{\\textit{Single",
+            "native",
+            "conversion}}",
+            "\\\\",
+            "Ivy",
+            "&",
+            "0/6",
+            "&",
+            "0",
+            "&",
+            "0",
+            "\\\\",
+            "\\texttt{torch2jax}",
+            "&",
+            "0/6",
+            "&",
+            "0",
+            "&",
+            "0",
+            "\\\\",
+            "\\bottomrule",
             "\\end{tabular*}",
+            "\\end{minipage}"
+          ]
+        },
+        {
+          "kind": "equal",
+          "before": [
+            "\\end{table}"
+          ],
+          "after": [
             "\\end{table}"
           ]
         },
@@ -28557,38 +28659,22 @@
             "the",
             "loss",
             "threshold.",
-            "\\begin{table}[!htb]",
-            "\\caption{Repair",
-            "and",
-            "native",
-            "conversion",
-            "on",
+            "\\textbf{Generalization",
+            "Across",
+            "Frameworks.}",
+            "\\label{sec:generalization}",
+            "LaDiM",
+            "repairs",
+            "all",
             "six",
-            "faulty",
             "JAX",
-            "candidates.",
-            "LLM",
-            "repair",
-            "allows",
-            "up",
-            "to",
-            "four",
-            "submissions,",
-            "with",
-            "costs",
-            "covering",
-            "investigation",
+            "cases",
+            "spanning",
+            "execution,",
+            "forward,",
             "and",
-            "repair.",
-            "Native",
-            "conversion",
-            "runs",
-            "once",
-            "without",
-            "an",
-            "LLM.",
-            "Tokens",
-            "are"
+            "gradient",
+            "faults"
           ]
         },
         {
@@ -28607,79 +28693,7 @@
             "3/12"
           ],
           "after": [
-            "millions.}",
-            "\\label{tab:jax}",
-            "\\centering",
-            "\\small",
-            "\\setlength{\\tabcolsep}{3pt}",
-            "\\begin{tabular*}{\\linewidth}{@{\\extracolsep{\\fill}}lccc@{}}",
-            "\\toprule",
-            "Method",
-            "&",
-            "Accepted",
-            "&",
-            "Calls",
-            "&",
-            "Tokens",
-            "\\\\",
-            "\\midrule",
-            "\\multicolumn{4}{@{}l}{\\textit{LLM",
-            "repair}}",
-            "\\\\",
-            "LaDiM",
-            "&",
-            "6/6",
-            "&",
-            "76",
-            "&",
-            "0.674",
-            "\\\\",
-            "Direct",
-            "repair",
-            "&",
-            "6/6",
-            "&",
-            "57",
-            "&",
-            "0.353",
-            "\\\\",
-            "\\midrule",
-            "\\multicolumn{4}{@{}l}{\\textit{Single",
-            "native",
-            "conversion}}",
-            "\\\\",
-            "Ivy",
-            "&",
-            "0/6",
-            "&",
-            "0",
-            "&",
-            "0",
-            "\\\\",
-            "\\texttt{torch2jax}",
-            "&",
-            "0/6",
-            "&",
-            "0",
-            "&",
-            "0",
-            "\\\\",
-            "\\bottomrule",
-            "\\end{tabular*}",
-            "\\end{table}",
-            "\\textbf{Generalization",
-            "Across",
-            "Frameworks.}",
-            "\\label{sec:generalization}",
-            "LaDiM",
-            "repairs",
-            "all",
-            "six",
-            "JAX",
-            "cases",
-            "spanning",
-            "execution,",
-            "forward,"
+            "MLP"
           ]
         },
         {
@@ -28700,14 +28714,9 @@
             "though"
           ],
           "after": [
-            "gradient",
-            "faults",
-            "in",
-            "MLP",
-            "and",
             "CNN",
             "models",
-            "(\\cref{tab:jax}).",
+            "(\\cref{tab:repair-results}b).",
             "Every",
             "case",
             "passes",
@@ -48210,7 +48219,7 @@
             "includes"
           ],
           "after": [
-            "tab:natural-repairs,",
+            "tab:repair-resultsa,",
             "of",
             "which",
             "five",
@@ -48388,7 +48397,7 @@
           "kind": "insert",
           "before": [],
           "after": [
-            "tab:natural-repairs.",
+            "tab:repair-resultsa.",
             "All",
             "conditions",
             "also",
@@ -50334,7 +50343,7 @@
             "includes"
           ],
           "after": [
-            "\\cref{tab:natural-repairs},",
+            "\\cref{tab:repair-results}a,",
             "of",
             "which",
             "five",
@@ -50512,7 +50521,7 @@
           "kind": "insert",
           "before": [],
           "after": [
-            "\\cref{tab:natural-repairs}.",
+            "\\cref{tab:repair-results}a.",
             "All",
             "conditions",
             "also",
@@ -53208,7 +53217,7 @@
             "input,"
           ],
           "after": [
-            "tab:natural-repairs",
+            "tab:repair-resultsa",
             "cover",
             "all",
             "ten",
@@ -54220,7 +54229,7 @@
             "input,"
           ],
           "after": [
-            "\\cref{tab:natural-repairs}",
+            "\\cref{tab:repair-results}a",
             "cover",
             "all",
             "ten",

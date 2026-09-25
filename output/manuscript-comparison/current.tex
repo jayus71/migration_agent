@@ -305,13 +305,16 @@ On recommendation, LaDiM restores reward model inference and retrieval, which re
 \subsection{Analysis Experiments}
 \label{sec:fault-characterization}
 
-\textbf{Repairing Translation Errors.} Methods may edit both the ten translated programs and their supporting library. \cref{tab:natural-repairs} reports how many failed programs are \emph{Repaired}, how many passing programs are \emph{Preserved}, and how many programs are finally \emph{Accepted}. LaDiM repairs four of the five failed programs and preserves all five programs that pass evaluation before repair, raising final acceptance from five to nine. Direct repair, SWE-agent, and MatchFixAgent retain the initial five successes but recover none of the failed programs. In the LSTM case, LaDiM repairs recurrent operations and tensor indexing in the supporting library, restoring agreement in loss, gradients, and parameter updates. This example shows how training discrepancies guide repair into library implementations used by the translated program (\cref{sec:natural-protocol}).
+\textbf{Repairing Translation Errors.} Methods may edit both the ten translated programs and their supporting library. \cref{tab:repair-results}a reports how many failed programs are \emph{Repaired}, how many passing programs are \emph{Preserved}, and how many programs are finally \emph{Accepted}. LaDiM repairs four of the five failed programs and preserves all five programs that pass evaluation before repair, raising final acceptance from five to nine. Direct repair, SWE-agent, and MatchFixAgent retain the initial five successes but recover none of the failed programs. In the LSTM case, LaDiM repairs recurrent operations and tensor indexing in the supporting library, restoring agreement in loss, gradients, and parameter updates. This example shows how training discrepancies guide repair into library implementations used by the translated program (\cref{sec:natural-protocol}).
 \begin{table}[t]
-\caption{Repair and preservation on ten programs produced by the initial translation. Five programs fail evaluation and five pass before repair. Tokens are in millions and include all investigation and repair calls, with candidates and supporting libraries editable.}
-\label{tab:natural-repairs}
+\caption{Repair results on two collections. (a) Ten initial translations, five failing and five passing before repair; candidates and supporting libraries are editable. (b) Six faulty JAX candidates; LLM repair allows up to four submissions, while each native converter runs once without an LLM. Tokens are in millions and cover all investigation and repair calls, including failed attempts.}
+\label{tab:repair-results}
 \centering
 \small
-\setlength{\tabcolsep}{3pt}
+\setlength{\tabcolsep}{2pt}
+\begin{minipage}[t]{0.555\linewidth}
+\vspace{0pt}
+{\raggedright\textit{(a) Repairing translation errors}\par}\smallskip
 
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}
 \toprule
@@ -325,17 +328,10 @@ LaDiM & \textbf{4/5} & 5/5 & 13.207 & \textbf{9/10} \\
 \end{tabular*}
 
 
-\end{table}
-
-\textbf{Training Signals and Detection Latency.} Gradient and update faults take effect after the loss of the current step has been computed, so the loss cannot reveal them at the step where they occur. In a detection study that injects gradient scaling and partial update suppression into four models with three seeds each, gradient and update checks detect the corresponding faults at step~1 in all 12 runs per fault. A loss check with a threshold of 0.02 detects 3 and 4 of the 12 runs, respectively, within 50 steps. \cref{sec:detection-measurements} gives the protocol, the detection trajectories, and the sensitivity to the loss threshold.
-
-
-\begin{table}[!htb]
-\caption{Repair and native conversion on six faulty JAX candidates. LLM repair allows up to four submissions, with costs covering investigation and repair. Native conversion runs once without an LLM. Tokens are in millions.}
-\label{tab:jax}
-\centering
-\small
-\setlength{\tabcolsep}{3pt}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.415\linewidth}
+\vspace{0pt}
+{\raggedright\textit{(b) JAX repair and conversion}\par}\smallskip
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc@{}}
 \toprule
 Method & Accepted & Calls & Tokens \\
@@ -349,10 +345,16 @@ Ivy                & 0/6 & 0 & 0 \\
 \texttt{torch2jax} & 0/6 & 0 & 0 \\
 \bottomrule
 \end{tabular*}
+\end{minipage}
 \end{table}
+
+\textbf{Training Signals and Detection Latency.} Gradient and update faults take effect after the loss of the current step has been computed, so the loss cannot reveal them at the step where they occur. In a detection study that injects gradient scaling and partial update suppression into four models with three seeds each, gradient and update checks detect the corresponding faults at step~1 in all 12 runs per fault. A loss check with a threshold of 0.02 detects 3 and 4 of the 12 runs, respectively, within 50 steps. \cref{sec:detection-measurements} gives the protocol, the detection trajectories, and the sensitivity to the loss threshold.
+
+
+
 \textbf{Generalization Across Frameworks.}
 \label{sec:generalization}
-LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults in MLP and CNN models (\cref{tab:jax}). Every case passes single-step SGD verification on three seeds after the first submission. Direct repair also accepts all six cases and uses fewer tokens. Ivy and \texttt{torch2jax} accept none of the faulty candidates after native conversion. Both converters pass evaluation on the corresponding MLP and CNN programs without these faults. In these cases, native conversion preserves the supplied execution or numerical faults, and explicit repair restores agreement in training behavior. The same diagnosis and repair procedure thus works beyond MindSpore with JAX differentiation and parameter updates. \cref{sec:jax-protocol} details the converter evaluations. \cref{sec:native-jax-study} reports the separate study of native JAX translations evaluated over consecutive training steps.
+LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults in MLP and CNN models (\cref{tab:repair-results}b). Every case passes single-step SGD verification on three seeds after the first submission. Direct repair also accepts all six cases and uses fewer tokens. Ivy and \texttt{torch2jax} accept none of the faulty candidates after native conversion. Both converters pass evaluation on the corresponding MLP and CNN programs without these faults. In these cases, native conversion preserves the supplied execution or numerical faults, and explicit repair restores agreement in training behavior. The same diagnosis and repair procedure thus works beyond MindSpore with JAX differentiation and parameter updates. \cref{sec:jax-protocol} details the converter evaluations. \cref{sec:native-jax-study} reports the separate study of native JAX translations evaluated over consecutive training steps.
 
 
 \subsection{Ablation Studies}
@@ -983,7 +985,7 @@ $\dagger$ SWE-agent without added investigation has one interrupted task with un
 \end{table}
 LaDiM accepts 50/50 task identifiers, compared with 49/50 when investigation and repair share one conversation. The variants without repair history and without progress reminders each accept 50/50 while using fewer tokens than LaDiM. Among the 29 distinct inputs represented by these identifiers, 20 translated programs pass evaluation before repair. Only two of the nine failing programs require a second repair submission under LaDiM. Most inputs are therefore accepted before a later repair attempt can use earlier repair history.
 
-The second component study uses the same ten programs produced by initial translation as \cref{tab:natural-repairs}, of which five fail evaluation and five pass before repair. Methods may edit these programs and their supporting libraries. LaDiM in \cref{tab:natural-components} uses independent evidence handoff and repair history, with examples of the edit format and corrective feedback for malformed edits. Each other condition changes one component while retaining the candidates, workspace access, acceptance checks, and repair budgets. Removing the edit examples and format correction gives the LaDiM configuration reported in \cref{tab:natural-repairs}. All conditions also pass evaluation on the five programs that pass before repair.
+The second component study uses the same ten programs produced by initial translation as \cref{tab:repair-results}a, of which five fail evaluation and five pass before repair. Methods may edit these programs and their supporting libraries. LaDiM in \cref{tab:natural-components} uses independent evidence handoff and repair history, with examples of the edit format and corrective feedback for malformed edits. Each other condition changes one component while retaining the candidates, workspace access, acceptance checks, and repair budgets. Removing the edit examples and format correction gives the LaDiM configuration reported in \cref{tab:repair-results}a. All conditions also pass evaluation on the five programs that pass before repair.
 \begin{table}[!htb]
 \caption{Complete component results on ten programs produced by initial translation. Repaired counts failed programs corrected, and Preserved counts passing programs that remain accepted. Tokens are in millions and cover investigation and repair on all ten programs, including failed attempts.}
 \label{tab:natural-components}
@@ -1021,7 +1023,7 @@ Of the ten programs produced by initial translation, five fail evaluation and fi
 
 Target forward computation and differentiation execute in MindSpore through \texttt{torch4ms}. PyTorch then applies optimizer updates to the target parameters. The comparison uses matching inputs and initial parameters, with acceptance confirmed on three seeds. The thresholds are 0.02 for the absolute loss difference, 0.05 for the absolute difference between gradient norms, and 0.03 for the relative parameter update difference. The L2 difference between gradient vectors has an additional threshold of 0.05, alongside the specified layer and parameter checks.
 
-The LLM call counts in \cref{tab:natural-repairs} cover all ten programs, including failed repairs and investigation of programs that pass before repair. LaDiM uses 193 calls, Direct repair uses 120, SWE-agent uses 386, and MatchFixAgent uses 265. LaDiM uses 13.207 million tokens.
+The LLM call counts in \cref{tab:repair-results}a cover all ten programs, including failed repairs and investigation of programs that pass before repair. LaDiM uses 193 calls, Direct repair uses 120, SWE-agent uses 386, and MatchFixAgent uses 265. LaDiM uses 13.207 million tokens.
 
 In the LSTM example in \cref{sec:fault-characterization}, LaDiM repairs two errors in the supporting library. The first submission leaves an unregistered recurrent operator unresolved. LaDiM reproduces the failure, implements the recurrence in MindSpore, and registers the recurrent operator. The second submission exposes recursive tensor indexing. A focused test identifies the repeated calls in tensor indexing, which the third submission corrects. On the public evaluation seed, the final absolute loss difference is $2.38\times10^{-7}$, gradient vector L2 difference is $4.19\times10^{-7}$, and relative parameter update difference is $8.11\times10^{-7}$. The example uses 32 LLM calls.
 

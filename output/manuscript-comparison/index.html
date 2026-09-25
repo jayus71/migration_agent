@@ -11,14 +11,14 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 </style>
 <body class="only-changes"><header><div class="eyebrow">LADIM / REVISION HISTORY</div>
 <h1>论文逐词对照</h1><p>固定原稿与当前稿并排显示。红色为删除，绿色为新增；移动或重写的文字会同时显示在两侧。</p>
-<p class="meta">基线：2026-09-21，6 Pro 修改前保存的原稿 · 当前稿更新于 <strong>2026-09-25T18:35:38+08:00</strong> · <span id="live">编译后自动更新</span></p>
+<p class="meta">基线：2026-09-21，6 Pro 修改前保存的原稿 · 当前稿更新于 <strong>2026-09-25T18:43:35+08:00</strong> · <span id="live">编译后自动更新</span></p>
 <p class="meta"><a href="baseline.pdf" target="_blank">查看原稿 PDF</a>　<a href="current.pdf" target="_blank">查看当前 PDF</a>　<a href="baseline.tex" download>原稿展开源码</a>　<a href="current.tex" download>当前展开源码</a>　<a href="comparison.json" download>下载完整对照记录</a></p></header>
 <div class="tools"><select id="mode" aria-label="对照内容"><option value="reading">正文逐词</option><option value="latex">LaTeX 逐词</option></select>
 <select id="jump" aria-label="跳转章节"><option value="">跳转章节</option><option value="0">Title</option><option value="1">Abstract</option><option value="2">Introduction</option><option value="3">Related Work</option><option value="4">Methods</option><option value="5">Experiments</option><option value="6">Conclusion</option><option value="7">References</option><option value="8">Appendix — Additional Experimental Protocols</option><option value="9">Appendix — Evidence Handoff and Agent Integration</option><option value="10">Appendix — Additional Repair Collections</option><option value="11">Appendix — Natural Translation Repair Protocol</option><option value="12">Appendix — Repository Protocols and Detailed Results</option><option value="13">Appendix — Repository Context and Evidence</option><option value="14">Appendix — Repository Component Results</option><option value="15">Appendix — Native JAX Migration with Consecutive Training Steps</option></select>
 <input type="search" id="search" placeholder="按章节或文字筛选" aria-label="搜索对照文字">
 <label><input id="changes" type="checkbox" checked> 只看有改动的章节</label><button id="context">展开全部上下文</button><button onclick="location.reload()">刷新</button>
-<span class="legend"><span class="removed">− 删除 4447 词</span>　<span class="added">+ 新增 8751 词</span></span></div>
-<main><div class="column-head"><div>修改前<small>2026-09-21 · 固定基线</small></div><div>当前版本<small>60402a2 · 本地工作区</small></div></div>
+<span class="legend"><span class="removed">− 删除 4445 词</span>　<span class="added">+ 新增 8736 词</span></span></div>
+<main><div class="column-head"><div>修改前<small>2026-09-21 · 固定基线</small></div><div>当前版本<small>fdad3aa · 本地工作区</small></div></div>
 <div id="reading" class="view"><section class="section unchanged" id="reading-0" data-title="Title"><h2>Title<span class="count"><b class="removed">−0</b> <b class="added">+0</b></span></h2>
 <div class="pair equal"><div class="old">LaDiM: Layered Diagnosis for Multi-Agent Code Migration</div><div class="new">LaDiM: Layered Diagnosis for Multi-Agent Code Migration</div></div>
 </section>
@@ -445,7 +445,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
 <div class="pair replace"><div class="old">stage budgets.</div><div class="new">the total budget. Repository migration and repair coordination RepositoryMigrate $\mathcal T,M,B$ $C\gets\Call{RepositoryContext}{\mathcal T}$ $S.\hat P\gets\Call{LLMTranslate}{M,A_T,\mathcal T}$ $(S.m,q)\gets\mathcal O.\Call{Verify}{S.\hat P}$ Complete repository if $q=\mathrm{accepted}$ then return $(S.\hat P,q)$ $E\gets\Call{LayeredDiagnosis}{\mathcal T,S,M,B,C}$ alg:diagnose $\Call{Repair}{\mathcal T,S,E,q,M,B,C}$ alg:repair $C$ .ExecuteTools $a,S,A$ $r\gets[\,]$ $c\in a.\mathrm{tools}$ $U\gets\varnothing$ if $c.\mathrm{kind}=\mathrm{structure}$ then $o\gets\Call{RepositoryStructuralAnalysis}{C,S}$ else if $c.\mathrm{kind}=\mathrm{plan}$ then $(C.G,U,o)\gets\Call{UpdateDependencyGraph}{c,C}$ else $(C,S,o,U)\gets\Call{Execute}{c,C,S,A}$ $C.E\gets C.E\mathbin{\|}(o,\Call{CodeVersion}{S})$ ; $r\gets r\mathbin{\|}o$ $C.Q[U\cup\Call{Dependents}{C.G,U}]\gets\mathrm{invalid}$ $(C,S,r)$</div></div>
 </section>
-<section class="section changed" id="reading-5" data-title="Experiments"><h2>Experiments<span class="count"><b class="removed">−1801</b> <b class="added">+1566</b></span></h2>
+<section class="section changed" id="reading-5" data-title="Experiments"><h2>Experiments<span class="count"><b class="removed">−1799</b> <b class="added">+1551</b></span></h2>
 <div class="pair equal"><div class="old">Experiments Experimental Setup</div><div class="new">Experiments Experimental Setup</div></div>
 <div class="pair replace"><div class="old">Tasks and verification.</div><div class="new">Tasks.</div></div>
 <div class="pair equal"><div class="old">The main</div><div class="new">The main</div></div>
@@ -711,7 +711,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">programs and</div><div class="new">programs and</div></div>
 <div class="pair replace"><div class="old">five initially accepted programs, with edits allowed in the candidate and its</div><div class="new">their</div></div>
 <div class="pair equal"><div class="old">supporting library.</div><div class="new">supporting library.</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">tab:natural-repairs reports how many failed programs are Repaired, how many passing programs are Preserved, and how many programs are finally Accepted.</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">tab:repair-resultsa reports how many failed programs are Repaired, how many passing programs are Preserved, and how many programs are finally Accepted.</div></div>
 <div class="pair equal"><div class="old">LaDiM repairs four</div><div class="new">LaDiM repairs four</div></div>
 <div class="pair replace"><div class="old">faulty</div><div class="new">of the five failed</div></div>
 <div class="pair equal"><div class="old">programs and preserves all five</div><div class="new">programs and preserves all five</div></div>
@@ -735,17 +735,15 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">how</div><div class="new">how</div></div>
 <div class="pair replace"><div class="old">measurements after a change reveal</div><div class="new">training discrepancies guide repair into library implementations used by</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">next fault to investigate. Appendix [sec:natural-protocol] records the checks for this case.</div><div class="new">translated program (sec:natural-protocol).</div></div>
-<div class="pair equal"><div class="old">Repair</div><div class="new">Repair</div></div>
-<div class="pair delete"><div class="old">of natural translation faults</div><div class="new">&nbsp;</div></div>
-<div class="pair equal"><div class="old">and preservation</div><div class="new">and preservation</div></div>
-<div class="pair replace"><div class="old">of initially accepted programs.</div><div class="new">on ten programs produced by the initial translation. Five programs fail evaluation and five pass before repair.</div></div>
-<div class="pair equal"><div class="old">Tokens</div><div class="new">Tokens</div></div>
-<div class="pair replace"><div class="old">cover</div><div class="new">are in millions and include</div></div>
-<div class="pair equal"><div class="old">all</div><div class="new">all</div></div>
+<div class="pair replace"><div class="old">next fault</div><div class="new">translated program (sec:natural-protocol). Repair results on two collections. (a) Ten initial translations, five failing and five passing before repair; candidates and supporting libraries are editable. (b) Six faulty JAX candidates; LLM repair allows up</div></div>
+<div class="pair equal"><div class="old">to</div><div class="new">to</div></div>
+<div class="pair replace"><div class="old">investigate. Appendix [sec:natural-protocol] records the checks for this case. Repair of natural translation faults</div><div class="new">four submissions, while each native converter runs once without an LLM. Tokens are in millions</div></div>
+<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
+<div class="pair delete"><div class="old">preservation of initially accepted programs. Tokens</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">cover all</div><div class="new">cover all</div></div>
 <div class="pair replace"><div class="old">ten selected complete</div><div class="new">investigation and</div></div>
 <div class="pair equal"><div class="old">repair</div><div class="new">repair</div></div>
-<div class="pair replace"><div class="old">runs, starting from supplied translations.</div><div class="new">calls, with candidates and supporting libraries editable.</div></div>
+<div class="pair replace"><div class="old">runs, starting from supplied translations.</div><div class="new">calls, including failed attempts.</div></div>
 <div class="pair equal"><div class="old">Method &amp;</div><div class="new">Method &amp;</div></div>
 <div class="pair replace"><div class="old">Faulty programs repaired</div><div class="new">Repaired &amp; Preserved &amp; Tokens</div></div>
 <div class="pair equal"><div class="old">&amp; Accepted</div><div class="new">&amp; Accepted</div></div>
@@ -767,7 +765,9 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">LaDiM &amp; 4/5 &amp; 5/5 &amp;</div><div class="new">LaDiM &amp; 4/5 &amp; 5/5 &amp;</div></div>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">13.207 &amp;</div></div>
 <div class="pair equal"><div class="old">9/10</div><div class="new">9/10</div></div>
-<div class="pair delete"><div class="old">&amp; 13.207</div><div class="new">&nbsp;</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">Method</div></div>
+<div class="pair equal"><div class="old">&amp;</div><div class="new">&amp;</div></div>
+<div class="pair replace"><div class="old">13.207</div><div class="new">Accepted &amp; Calls &amp; Tokens LLM repair LaDiM &amp; 6/6 &amp; 76 &amp; 0.674 Direct repair &amp; 6/6 &amp; 57 &amp; 0.353 Single native conversion Ivy &amp; 0/6 &amp; 0 &amp; 0 torch2jax &amp; 0/6 &amp; 0 &amp; 0</div></div>
 <div class="pair equal"><div class="old">Training Signals and Detection</div><div class="new">Training Signals and Detection</div></div>
 <div class="pair replace"><div class="old">Latency The diagnostic study follows four models for 50 steps under three seeds. With per-step synchronization, each target model starts the checked step from the source state, allowing a discrepancy to be associated with the current computation. Correct translations pass the recorded checks, with a maximum loss difference of $3.815\times10^{-6}$ .</div><div class="new">Latency.</div></div>
 <div class="pair equal"><div class="old">Gradient</div><div class="new">Gradient</div></div>
@@ -791,11 +791,15 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">within</div><div class="new">within</div></div>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">50 steps. sec:detection-measurements gives</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">observation window</div><div class="new">protocol, the detection trajectories, and the sensitivity to the loss threshold. Repair and native conversion on six faulty JAX candidates. LLM repair allows up to four submissions, with costs covering investigation and repair. Native conversion runs once without an LLM. Tokens are</div></div>
-<div class="pair equal"><div class="old">in</div><div class="new">in</div></div>
-<div class="pair replace"><div class="old">only 3/12 and 4/12 runs, even though the mean curves cross at steps 31 and 18. Loss detection therefore depends on how errors accumulate, while direct gradient and update checks make the affected computation available for immediate investigation.</div><div class="new">millions. Method &amp; Accepted &amp; Calls &amp; Tokens LLM repair LaDiM &amp; 6/6 &amp; 76 &amp; 0.674 Direct repair &amp; 6/6 &amp; 57 &amp; 0.353 Single native conversion Ivy &amp; 0/6 &amp; 0 &amp; 0 torch2jax &amp; 0/6 &amp; 0 &amp; 0</div></div>
+<div class="pair replace"><div class="old">observation window in only 3/12</div><div class="new">protocol, the detection trajectories,</div></div>
+<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
+<div class="pair delete"><div class="old">4/12 runs, even though</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">mean curves cross at steps 31 and 18. Loss detection therefore depends on how errors accumulate, while direct gradient and update checks make</div><div class="new">sensitivity to</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">affected computation available for immediate investigation.</div><div class="new">loss threshold.</div></div>
 <div class="pair equal"><div class="old">Generalization Across</div><div class="new">Generalization Across</div></div>
-<div class="pair replace"><div class="old">Frameworks</div><div class="new">Frameworks. LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults in MLP and CNN models (tab:jax). Every case passes single-step SGD verification on three seeds after the first submission. Direct repair also accepts all six cases and uses fewer tokens. Ivy and torch2jax accept none of the faulty candidates after native conversion. Both converters pass evaluation on the corresponding MLP and CNN programs without these faults. In these cases, native conversion preserves the supplied execution or numerical faults, and explicit repair restores agreement in training behavior.</div></div>
+<div class="pair replace"><div class="old">Frameworks</div><div class="new">Frameworks. LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults in MLP and CNN models (tab:repair-resultsb). Every case passes single-step SGD verification on three seeds after the first submission. Direct repair also accepts all six cases and uses fewer tokens. Ivy and torch2jax accept none of the faulty candidates after native conversion. Both converters pass evaluation on the corresponding MLP and CNN programs without these faults. In these cases, native conversion preserves the supplied execution or numerical faults, and explicit repair restores agreement in training behavior.</div></div>
 <div class="pair equal"><div class="old">The</div><div class="new">The</div></div>
 <div class="pair delete"><div class="old">JAX study applies the</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">same diagnosis and repair procedure</div><div class="new">same diagnosis and repair procedure</div></div>
@@ -1210,7 +1214,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">component study uses the same ten</div><div class="new">component study uses the same ten</div></div>
 <div class="pair replace"><div class="old">supplied candidates</div><div class="new">programs produced by initial translation</div></div>
 <div class="pair equal"><div class="old">as</div><div class="new">as</div></div>
-<div class="pair replace"><div class="old">Table [tab:natural-repairs] . Its reference configuration includes</div><div class="new">tab:natural-repairs, of which five fail evaluation and five pass before repair. Methods may edit these programs and their supporting libraries. LaDiM in tab:natural-components uses independent evidence handoff and repair history, with</div></div>
+<div class="pair replace"><div class="old">Table [tab:natural-repairs] . Its reference configuration includes</div><div class="new">tab:repair-resultsa, of which five fail evaluation and five pass before repair. Methods may edit these programs and their supporting libraries. LaDiM in tab:natural-components uses independent evidence handoff and repair history, with</div></div>
 <div class="pair equal"><div class="old">examples of the edit format and corrective feedback for malformed edits. Each</div><div class="new">examples of the edit format and corrective feedback for malformed edits. Each</div></div>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">other</div></div>
 <div class="pair equal"><div class="old">condition changes</div><div class="new">condition changes</div></div>
@@ -1220,7 +1224,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">format</div><div class="new">format</div></div>
 <div class="pair replace"><div class="old">assistance</div><div class="new">correction</div></div>
 <div class="pair equal"><div class="old">gives the LaDiM configuration reported in</div><div class="new">gives the LaDiM configuration reported in</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">tab:natural-repairs. All conditions also pass evaluation on</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">tab:repair-resultsa. All conditions also pass evaluation on</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
 <div class="pair replace"><div class="old">natural fault comparison. Effect of</div><div class="new">five programs that pass before repair. Complete component results on ten programs produced by initial translation. Repaired counts failed programs corrected, and Preserved counts passing programs that remain accepted. Tokens are in millions and cover investigation and</div></div>
 <div class="pair equal"><div class="old">repair</div><div class="new">repair</div></div>
@@ -1358,7 +1362,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">counts</div><div class="new">counts</div></div>
 <div class="pair delete"><div class="old">every call</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">in</div><div class="new">in</div></div>
-<div class="pair replace"><div class="old">the selected complete run for each input,</div><div class="new">tab:natural-repairs cover all ten programs,</div></div>
+<div class="pair replace"><div class="old">the selected complete run for each input,</div><div class="new">tab:repair-resultsa cover all ten programs,</div></div>
 <div class="pair equal"><div class="old">including failed repairs and investigation of</div><div class="new">including failed repairs and investigation of</div></div>
 <div class="pair replace"><div class="old">initially accepted programs.</div><div class="new">programs that pass before repair.</div></div>
 <div class="pair equal"><div class="old">LaDiM uses 193 calls,</div><div class="new">LaDiM uses 193 calls,</div></div>
@@ -2119,7 +2123,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
 <div class="pair replace"><div class="old">stage budgets.</div><div class="new">the total budget. \begin{algorithm}[!htb] \caption{Repository migration and repair coordination} \label{alg:repository} \small \begin{algorithmic}[1] \Function{RepositoryMigrate}{$\mathcal T,M,B$} \State $C\gets\Call{RepositoryContext}{\mathcal T}$ \State $S.\hat P\gets\Call{LLMTranslate}{M,A_T,\mathcal T}$ \State $(S.m,q)\gets\mathcal O.\Call{Verify}{S.\hat P}$ \Comment{Complete repository} \State \textbf{if} $q=\mathrm{accepted}$ \textbf{then return} $(S.\hat P,q)$ \State $E\gets\Call{LayeredDiagnosis}{\mathcal T,S,M,B,C}$ \Comment{\cref{alg:diagnose}} \State \Return $\Call{Repair}{\mathcal T,S,E,q,M,B,C}$ \Comment{\cref{alg:repair}} \EndFunction \Function{$C$.ExecuteTools}{$a,S,A$} \State $r\gets[\,]$ \ForAll{$c\in a.\mathrm{tools}$} \State $U\gets\varnothing$ \State \textbf{if} $c.\mathrm{kind}=\mathrm{structure}$ \textbf{then} $o\gets\Call{RepositoryStructuralAnalysis}{C,S}$ \State \textbf{else if} $c.\mathrm{kind}=\mathrm{plan}$ \textbf{then} $(C.G,U,o)\gets\Call{UpdateDependencyGraph}{c,C}$ \State \textbf{else} $(C,S,o,U)\gets\Call{Execute}{c,C,S,A}$ \State $C.E\gets C.E\mathbin{\|}(o,\Call{CodeVersion}{S})$; $r\gets r\mathbin{\|}o$ \State $C.Q[U\cup\Call{Dependents}{C.G,U}]\gets\mathrm{invalid}$ \EndFor \State \Return $(C,S,r)$ \EndFunction \end{algorithmic} \end{algorithm}</div></div>
 </section>
-<section class="section changed" id="latex-5" data-title="Experiments"><h2>Experiments<span class="count"><b class="removed">−1775</b> <b class="added">+1732</b></span></h2>
+<section class="section changed" id="latex-5" data-title="Experiments"><h2>Experiments<span class="count"><b class="removed">−1777</b> <b class="added">+1730</b></span></h2>
 <div class="pair equal"><div class="old">\section{Experiments} \subsection{Experimental Setup} \label{sec:setup}</div><div class="new">\section{Experiments} \subsection{Experimental Setup} \label{sec:setup}</div></div>
 <div class="pair replace"><div class="old">\paragraph{Tasks and verification.}</div><div class="new">\textbf{Tasks.}</div></div>
 <div class="pair equal"><div class="old">The main</div><div class="new">The main</div></div>
@@ -2409,7 +2413,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">programs and</div><div class="new">programs and</div></div>
 <div class="pair replace"><div class="old">five initially accepted programs, with edits allowed in the candidate and its</div><div class="new">their</div></div>
 <div class="pair equal"><div class="old">supporting library.</div><div class="new">supporting library.</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">\cref{tab:natural-repairs} reports how many failed programs are \emph{Repaired}, how many passing programs are \emph{Preserved}, and how many programs are finally \emph{Accepted}.</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">\cref{tab:repair-results}a reports how many failed programs are \emph{Repaired}, how many passing programs are \emph{Preserved}, and how many programs are finally \emph{Accepted}.</div></div>
 <div class="pair equal"><div class="old">LaDiM repairs four</div><div class="new">LaDiM repairs four</div></div>
 <div class="pair replace"><div class="old">faulty</div><div class="new">of the five failed</div></div>
 <div class="pair equal"><div class="old">programs and preserves all five</div><div class="new">programs and preserves all five</div></div>
@@ -2433,19 +2437,17 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">how</div><div class="new">how</div></div>
 <div class="pair replace"><div class="old">measurements after a change reveal</div><div class="new">training discrepancies guide repair into library implementations used by</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">next fault to investigate. Appendix~\ref{sec:natural-protocol} records the checks for this case. \begin{table}[!htb]</div><div class="new">translated program (\cref{sec:natural-protocol}). \begin{table}[t]</div></div>
-<div class="pair equal"><div class="old">\caption{Repair</div><div class="new">\caption{Repair</div></div>
-<div class="pair delete"><div class="old">of natural translation faults</div><div class="new">&nbsp;</div></div>
-<div class="pair equal"><div class="old">and preservation</div><div class="new">and preservation</div></div>
-<div class="pair replace"><div class="old">of initially accepted programs.</div><div class="new">on ten programs produced by the initial translation. Five programs fail evaluation and five pass before repair.</div></div>
-<div class="pair equal"><div class="old">Tokens</div><div class="new">Tokens</div></div>
-<div class="pair replace"><div class="old">cover</div><div class="new">are in millions and include</div></div>
-<div class="pair equal"><div class="old">all</div><div class="new">all</div></div>
+<div class="pair replace"><div class="old">next fault</div><div class="new">translated program (\cref{sec:natural-protocol}). \begin{table}[t] \caption{Repair results on two collections. (a) Ten initial translations, five failing and five passing before repair; candidates and supporting libraries are editable. (b) Six faulty JAX candidates; LLM repair allows up</div></div>
+<div class="pair equal"><div class="old">to</div><div class="new">to</div></div>
+<div class="pair replace"><div class="old">investigate. Appendix~\ref{sec:natural-protocol} records the checks for this case. \begin{table}[!htb] \caption{Repair of natural translation faults</div><div class="new">four submissions, while each native converter runs once without an LLM. Tokens are in millions</div></div>
+<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
+<div class="pair delete"><div class="old">preservation of initially accepted programs. Tokens</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">cover all</div><div class="new">cover all</div></div>
 <div class="pair replace"><div class="old">ten selected complete</div><div class="new">investigation and</div></div>
 <div class="pair equal"><div class="old">repair</div><div class="new">repair</div></div>
-<div class="pair replace"><div class="old">runs, starting from supplied translations.}</div><div class="new">calls, with candidates and supporting libraries editable.}</div></div>
-<div class="pair equal"><div class="old">\label{tab:natural-repairs} \centering \small</div><div class="new">\label{tab:natural-repairs} \centering \small</div></div>
-<div class="pair replace"><div class="old">\setlength{\tabcolsep}{4pt}</div><div class="new">\setlength{\tabcolsep}{3pt}</div></div>
+<div class="pair replace"><div class="old">runs, starting from supplied translations.} \label{tab:natural-repairs}</div><div class="new">calls, including failed attempts.} \label{tab:repair-results}</div></div>
+<div class="pair equal"><div class="old">\centering \small</div><div class="new">\centering \small</div></div>
+<div class="pair replace"><div class="old">\setlength{\tabcolsep}{4pt}</div><div class="new">\setlength{\tabcolsep}{2pt} \begin{minipage}[t]{0.555\linewidth} \vspace{0pt} {\raggedright\textit{(a) Repairing translation errors}\par}\smallskip</div></div>
 <div class="pair equal"><div class="old">\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}} \toprule \textbf{Method} &amp;</div><div class="new">\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}} \toprule \textbf{Method} &amp;</div></div>
 <div class="pair replace"><div class="old">\thead{Faulty\\programs repaired}</div><div class="new">\textbf{Repaired}</div></div>
 <div class="pair equal"><div class="old">&amp;</div><div class="new">&amp;</div></div>
@@ -2474,7 +2476,9 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair replace"><div class="old">9/10</div><div class="new">13.207</div></div>
 <div class="pair equal"><div class="old">&amp;</div><div class="new">&amp;</div></div>
 <div class="pair replace"><div class="old">13.207</div><div class="new">\textbf{9/10}</div></div>
-<div class="pair equal"><div class="old">\\ \bottomrule \end{tabular*} \end{table}</div><div class="new">\\ \bottomrule \end{tabular*} \end{table}</div></div>
+<div class="pair equal"><div class="old">\\ \bottomrule \end{tabular*}</div><div class="new">\\ \bottomrule \end{tabular*}</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">\end{minipage}\hfill \begin{minipage}[t]{0.415\linewidth} \vspace{0pt} {\raggedright\textit{(b) JAX repair and conversion}\par}\smallskip \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc@{}} \toprule Method &amp; Accepted &amp; Calls &amp; Tokens \\ \midrule \multicolumn{4}{@{}l}{\textit{LLM repair}} \\ LaDiM &amp; 6/6 &amp; 76 &amp; 0.674 \\ Direct repair &amp; 6/6 &amp; 57 &amp; 0.353 \\ \midrule \multicolumn{4}{@{}l}{\textit{Single native conversion}} \\ Ivy &amp; 0/6 &amp; 0 &amp; 0 \\ \texttt{torch2jax} &amp; 0/6 &amp; 0 &amp; 0 \\ \bottomrule \end{tabular*} \end{minipage}</div></div>
+<div class="pair equal"><div class="old">\end{table}</div><div class="new">\end{table}</div></div>
 <div class="pair replace"><div class="old">\subsubsection{Training</div><div class="new">\textbf{Training</div></div>
 <div class="pair equal"><div class="old">Signals and Detection</div><div class="new">Signals and Detection</div></div>
 <div class="pair replace"><div class="old">Latency} The diagnostic study follows four models for 50 steps under three seeds. With per-step synchronization, each target model starts the checked step from the source state, allowing a discrepancy to be associated with the current computation. Correct translations pass the recorded checks, with a maximum loss difference of $3.815\times10^{-6}$.</div><div class="new">Latency.}</div></div>
@@ -2499,11 +2503,11 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">within</div><div class="new">within</div></div>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">50 steps. \cref{sec:detection-measurements} gives</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">observation window</div><div class="new">protocol, the detection trajectories, and the sensitivity to the loss threshold. \begin{table}[!htb] \caption{Repair and native conversion on six faulty JAX candidates. LLM repair allows up to four submissions, with costs covering investigation and repair. Native conversion runs once without an LLM. Tokens are</div></div>
+<div class="pair replace"><div class="old">observation window</div><div class="new">protocol, the detection trajectories, and the sensitivity to the loss threshold. \textbf{Generalization Across Frameworks.} \label{sec:generalization} LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults</div></div>
 <div class="pair equal"><div class="old">in</div><div class="new">in</div></div>
-<div class="pair replace"><div class="old">only 3/12</div><div class="new">millions.} \label{tab:jax} \centering \small \setlength{\tabcolsep}{3pt} \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc@{}} \toprule Method &amp; Accepted &amp; Calls &amp; Tokens \\ \midrule \multicolumn{4}{@{}l}{\textit{LLM repair}} \\ LaDiM &amp; 6/6 &amp; 76 &amp; 0.674 \\ Direct repair &amp; 6/6 &amp; 57 &amp; 0.353 \\ \midrule \multicolumn{4}{@{}l}{\textit{Single native conversion}} \\ Ivy &amp; 0/6 &amp; 0 &amp; 0 \\ \texttt{torch2jax} &amp; 0/6 &amp; 0 &amp; 0 \\ \bottomrule \end{tabular*} \end{table} \textbf{Generalization Across Frameworks.} \label{sec:generalization} LaDiM repairs all six JAX cases spanning execution, forward,</div></div>
+<div class="pair replace"><div class="old">only 3/12</div><div class="new">MLP</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">4/12 runs, even though</div><div class="new">gradient faults in MLP and CNN models (\cref{tab:jax}). Every case passes single-step SGD verification on three seeds after</div></div>
+<div class="pair replace"><div class="old">4/12 runs, even though</div><div class="new">CNN models (\cref{tab:repair-results}b). Every case passes single-step SGD verification on three seeds after</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
 <div class="pair replace"><div class="old">mean curves cross at steps 31</div><div class="new">first submission. Direct repair also accepts all six cases</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
@@ -2973,7 +2977,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">component study uses the same ten</div><div class="new">component study uses the same ten</div></div>
 <div class="pair replace"><div class="old">supplied candidates</div><div class="new">programs produced by initial translation</div></div>
 <div class="pair equal"><div class="old">as</div><div class="new">as</div></div>
-<div class="pair replace"><div class="old">Table~\ref{tab:natural-repairs}. Its reference configuration includes</div><div class="new">\cref{tab:natural-repairs}, of which five fail evaluation and five pass before repair. Methods may edit these programs and their supporting libraries. LaDiM in \cref{tab:natural-components} uses independent evidence handoff and repair history, with</div></div>
+<div class="pair replace"><div class="old">Table~\ref{tab:natural-repairs}. Its reference configuration includes</div><div class="new">\cref{tab:repair-results}a, of which five fail evaluation and five pass before repair. Methods may edit these programs and their supporting libraries. LaDiM in \cref{tab:natural-components} uses independent evidence handoff and repair history, with</div></div>
 <div class="pair equal"><div class="old">examples of the edit format and corrective feedback for malformed edits. Each</div><div class="new">examples of the edit format and corrective feedback for malformed edits. Each</div></div>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">other</div></div>
 <div class="pair equal"><div class="old">condition changes</div><div class="new">condition changes</div></div>
@@ -2983,7 +2987,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">format</div><div class="new">format</div></div>
 <div class="pair replace"><div class="old">assistance</div><div class="new">correction</div></div>
 <div class="pair equal"><div class="old">gives the LaDiM configuration reported in</div><div class="new">gives the LaDiM configuration reported in</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">\cref{tab:natural-repairs}. All conditions also pass evaluation on</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">\cref{tab:repair-results}a. All conditions also pass evaluation on</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
 <div class="pair replace"><div class="old">natural fault comparison.</div><div class="new">five programs that pass before repair.</div></div>
 <div class="pair equal"><div class="old">\begin{table}[!htb]</div><div class="new">\begin{table}[!htb]</div></div>
@@ -3133,7 +3137,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">counts</div><div class="new">counts</div></div>
 <div class="pair delete"><div class="old">every call</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">in</div><div class="new">in</div></div>
-<div class="pair replace"><div class="old">the selected complete run for each input,</div><div class="new">\cref{tab:natural-repairs} cover all ten programs,</div></div>
+<div class="pair replace"><div class="old">the selected complete run for each input,</div><div class="new">\cref{tab:repair-results}a cover all ten programs,</div></div>
 <div class="pair equal"><div class="old">including failed repairs and investigation of</div><div class="new">including failed repairs and investigation of</div></div>
 <div class="pair replace"><div class="old">initially accepted programs.</div><div class="new">programs that pass before repair.</div></div>
 <div class="pair equal"><div class="old">LaDiM uses 193 calls,</div><div class="new">LaDiM uses 193 calls,</div></div>
@@ -3487,7 +3491,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 </section></div>
 <p class="footer">正文视图去除排版指令，保留文字、表格内容和公式源码；LaTeX 视图保留展开后的完整指令。图形外观请对照两份 PDF。基线文件逐项校验，后续更新保持基线不变。</p></main>
 <script>
-const version='283ca68d5735db95960495fd161726bde4d1791cb8e5122360ffe2428ce8f510',mode=document.getElementById('mode'),search=document.getElementById('search');
+const version='b3e4009d0e7e2253b963cb06e9fdca3e7a885059bc69cf7d653f8303df32cae7',mode=document.getElementById('mode'),search=document.getElementById('search');
 new ResizeObserver(([entry])=>document.documentElement.style.setProperty('--tools-height',entry.target.offsetHeight+'px')).observe(document.querySelector('.tools'));
 function filter(){const q=search.value.trim().toLowerCase();document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',q&&!s.textContent.toLowerCase().includes(q)))}
 mode.onchange=()=>{document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!==mode.value));filter()};search.oninput=filter;
