@@ -9,7 +9,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
-from matplotlib.patches import Rectangle, FancyArrowPatch
+from matplotlib.patches import Rectangle
 from matplotlib.text import Text
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -57,7 +57,7 @@ def load_evidence():
     return summary, series, additions
 
 
-WIDTH, HEIGHT = 396, 254
+WIDTH, HEIGHT = 396, 176.4
 
 
 def label(ax, x, y, content, size=8.5, **kwargs):
@@ -80,44 +80,23 @@ def diagnosis_panel(ax, summary):
     probe = json.loads((DATA / 'tool-evidence.json').read_text())[0]['event']['data']
     assert probe['call'] == 17 and probe['result']['returncode'] == 0
     assert "dispatch_tanh: ['sum_abs=0.000000e+00']" in probe['result']['stdout']
-    label(ax, 8, 7, '(a) Layered diagnosis', 9.5, fontweight='bold')
-    cards = [
-        ('Forward', ['Execution passes', 'Loss difference', r'$1.43 \times 10^{-6}$']),
-        ('Training signals', ['Before Tanh: gradient 0', 'After Tanh: match', 'Update error: 0.771']),
-        ('Test · call 17', ['Sum of |input gradient|', 'Dispatched: 0', 'Native Tanh: 4.894']),
-        ('Root cause', ['Missing high-level', 'Tanh mapping', '→ Graph detached']),
-    ]
-    for i, (title, lines) in enumerate(cards):
-        x = 8 + i * 97
-        panel_box(ax, x, 25, 88, 55, '#f5f7f8' if i < 3 else '#eff7f3')
-        label(ax, x + 44, 31, title, 8.8, ha='center', fontweight='bold')
-        for j, line in enumerate(lines):
-            label(ax, x + 44, 46 + 10 * j, line, 8.2, ha='center',
-                  color=COLORS['LaDiM'] if i == 3 else INK)
-        if i < 3:
-            ax.add_patch(FancyArrowPatch((x + 89, 53), (x + 96, 53),
-                                         arrowstyle='-|>', mutation_scale=6, linewidth=.7, color=MUTED))
+    label(ax, 8, 7, '(a) Diagnosis and repair', 9.5, fontweight='bold')
+    panel_box(ax, 8, 27, 194, 46, '#f5f7f8')
+    label(ax, 15, 33, 'Loss matches; gradients differ', 8.8, fontweight='bold')
+    label(ax, 15, 46, 'Before Tanh: 0   |   After Tanh: matched', 8.5)
+    label(ax, 15, 59, 'Tanh probe: dispatched 0 / native 4.894', 8.5)
 
 
 def code_panel(ax, additions):
-    label(ax, 8, 94, '(b) Code repair', 9.5, fontweight='bold')
-    baseline = ['@register_function(torch.relu)', '@register_function(torch.nn.functional.relu)',
-                'def functional_relu(input, inplace=False):', '    return mops.relu(input)']
-    for y, title, status, lines, repaired in [
-        (112, 'SWE-agent / MatchFixAgent', 'Tanh missing', baseline, False),
-        (182, 'LaDiM · insert before ReLU', 'Repaired', additions, True),
-    ]:
-        panel_box(ax, 8, y, 194, 64)
-        ax.add_patch(Rectangle((8.3, y + .3), 193.4, 17, facecolor='#f1f4f5', edgecolor='none'))
-        label(ax, 14, y + 4, title, 8.1, fontweight='bold', color=COLORS['LaDiM'] if repaired else INK)
-        label(ax, 196, y + 4, status, 7.8, ha='right', color=COLORS['LaDiM'] if repaired else '#a34511')
-        if repaired:
-            ax.add_patch(Rectangle((11, y + 21), 188, 40, facecolor='#dcefe2', edgecolor='none', zorder=1))
-            ax.add_patch(Rectangle((11, y + 21), 1.8, 40, facecolor=COLORS['LaDiM'], edgecolor='none', zorder=2))
-        for i, line in enumerate(lines):
-            if repaired:
-                label(ax, 16, y + 23 + 9.5 * i, '+', 8.5, color=COLORS['LaDiM'], zorder=3)
-            label(ax, 25, y + 23 + 9.5 * i, line, 8.5, color='#16432b' if repaired else INK, zorder=3)
+    label(ax, 8, 84, 'SWE-agent / MatchFixAgent', 8.5, fontweight='bold')
+    label(ax, 202, 84, 'No edit', 8.5, ha='right', color='#a34511')
+    panel_box(ax, 8, 101, 194, 67)
+    label(ax, 15, 106, 'LaDiM · added Tanh mapping', 8.8, fontweight='bold', color=COLORS['LaDiM'])
+    ax.add_patch(Rectangle((11, 123), 188, 42, facecolor='#dcefe2', edgecolor='none', zorder=1))
+    ax.add_patch(Rectangle((11, 123), 1.8, 42, facecolor=COLORS['LaDiM'], edgecolor='none', zorder=2))
+    for i, line in enumerate(additions):
+        label(ax, 16, 126 + 9.5 * i, '+', 8.5, color=COLORS['LaDiM'], zorder=3)
+        label(ax, 25, 126 + 9.5 * i, line, 8.5, color='#16432b', zorder=3)
 
 
 def trajectory_panel(ax, series):
@@ -144,8 +123,7 @@ def trajectory_panel(ax, series):
         ax.annotate(label, (call, tokens[call - 1]), xytext=where, fontsize=8, color=COLORS['LaDiM'],
                     arrowprops={'arrowstyle': '-', 'color': COLORS['LaDiM'], 'lw': .65},
                     bbox={'facecolor': 'white', 'edgecolor': 'none', 'pad': .7})
-    ax.annotate('24: 1.488', (24, tokens[-1]), xytext=(26, .35), fontsize=8.2,
-                color=COLORS['LaDiM'], arrowprops={'arrowstyle': '-', 'color': COLORS['LaDiM'], 'lw': .65})
+    ax.text(24.5, 1.77, '1.488', fontsize=8.5, color=COLORS['LaDiM'])
     ax.text(41.8, 2.341, '2.341', va='center', fontsize=8.5, color=COLORS['MatchFixAgent'])
     ax.text(41.8, 1.606, '1.606', va='center', fontsize=8.5, color=COLORS['SWE-agent'])
 
@@ -156,11 +134,11 @@ def build_figure(summary, series, additions):
     canvas.set_axis_off()
     diagnosis_panel(canvas, summary)
     code_panel(canvas, additions)
-    label(canvas, 222, 94, '(c) Repair cost', 9.5, fontweight='bold')
-    ax = fig.add_axes([242 / WIDTH, (HEIGHT - 224) / HEIGHT, 144 / WIDTH, 99 / HEIGHT])
+    label(canvas, 222, 7, '(b) Repair cost', 9.5, fontweight='bold')
+    ax = fig.add_axes([242 / WIDTH, (HEIGHT - 145) / HEIGHT, 144 / WIDTH, 99 / HEIGHT])
     trajectory_panel(ax, series)
     handles, labels = ax.get_legend_handles_labels()
-    fig.legend(handles, labels, loc='upper left', bbox_to_anchor=(222 / WIDTH, 1 - 110 / HEIGHT),
+    fig.legend(handles, labels, loc='upper left', bbox_to_anchor=(222 / WIDTH, 1 - 29 / HEIGHT),
                ncol=3, fontsize=7.5, frameon=False, borderaxespad=0,
                handlelength=1.25, columnspacing=.7, handletextpad=.3)
     return fig
