@@ -27,13 +27,13 @@
     }
   },
   "current": {
-    "base_commit": "50daf1f",
-    "pdf_sha256": "1e5afa0ebe821f6f27464f239c4021b033ae326ed7d284eefdf5219b07042b57"
+    "base_commit": "e98193a",
+    "pdf_sha256": "b5459794eb7c9b2bb52c6da46dd83e45c13663b05ac20c30f7b943591c45f341"
   },
-  "updated": "2026-09-26T00:42:18+08:00",
-  "version": "21903e688f58a8e6e5a695837c0f3869e94d6cd4b138fa6673813242a8897ddd",
-  "reading_words_added": 8599,
-  "reading_words_removed": 4444,
+  "updated": "2026-09-26T00:48:08+08:00",
+  "version": "998f4b4a61842fd1f8e8d4df544a4b428c845ef3c1808f37947d24fec8a4583d",
+  "reading_words_added": 8574,
+  "reading_words_removed": 4446,
   "sections": {
     "Title": {
       "reading": [
@@ -9496,7 +9496,6 @@
             "investigation",
             "and",
             "edits.",
-            "15",
             "Repair",
             "$(\\mathcal",
             "T,S,E,q,M,B,C)$",
@@ -12348,9 +12347,9 @@
             "Diagnosis}",
             "\\label{sec:hierarchy}",
             "{",
+            "\\setlength{\\intextsep}{0pt}",
             "\\begin{wrapfigure}{l}{0.50\\textwidth}",
             "\\begin{minipage}{\\linewidth}",
-            "\\setlength{\\intextsep}{0pt}",
             "\\begin{algorithm}[H]",
             "\\caption{Layered",
             "Diagnosis}",
@@ -13111,6 +13110,7 @@
             "History}",
             "\\label{sec:repair-agent}",
             "{",
+            "\\setlength{\\intextsep}{0pt}",
             "Independent",
             "evidence",
             "handoff",
@@ -13286,10 +13286,8 @@
             "investigation",
             "and",
             "edits.",
-            "\\Needspace{15\\baselineskip}",
-            "\\begin{wrapfigure}{l}{0.55\\textwidth}",
+            "\\begin{wrapfigure}{L}{0.55\\textwidth}",
             "\\begin{minipage}{\\linewidth}",
-            "\\setlength{\\intextsep}{0pt}",
             "\\begin{algorithm}[H]",
             "\\caption{\\textsc{Repair}$(\\mathcal",
             "T,S,E,q,M,B,C)$}",
@@ -19785,20 +19783,34 @@
             "0",
             "&",
             "0",
-            "LaDiM",
-            "repairs",
+            "Repairing",
             "a",
             "silent",
             "gradient",
-            "fault",
-            "in",
-            "an",
-            "autoencoder",
-            "classifier.",
+            "fault.",
             "(a)",
-            "Matching",
-            "forward",
-            "values"
+            "Layered",
+            "Diagnosis",
+            "identifies",
+            "Tanh",
+            "as",
+            "the",
+            "gradient",
+            "break;",
+            "the",
+            "highlighted",
+            "code",
+            "adds",
+            "its",
+            "missing",
+            "MindSpore",
+            "mapping",
+            "(registration",
+            "decorators",
+            "omitted).",
+            "(b)",
+            "Cumulative",
+            "investigation"
           ]
         },
         {
@@ -19814,55 +19826,14 @@
           "kind": "replace",
           "before": [
             "Detection",
-            "Latency"
-          ],
-          "after": [
-            "correct",
-            "downstream",
-            "gradients",
-            "direct",
-            "diagnosis",
-            "to",
-            "Tanh."
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "The"
-          ],
-          "after": [
-            "The"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "Latency",
+            "The",
             "diagnostic",
             "study",
             "follows",
             "four",
-            "models"
-          ],
-          "after": [
-            "patch",
-            "registers",
-            "MindSpore's",
-            "tanh"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "for"
-          ],
-          "after": [
-            "for"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "models",
+            "for",
             "50",
             "steps",
             "under",
@@ -19877,44 +19848,10 @@
             "starts"
           ],
           "after": [
-            "torch.tanh",
-            "and",
-            "torch.nn.functional.tanh",
-            "(decorators",
-            "omitted).",
-            "(b)",
-            "Investigation",
-            "and",
             "repair",
-            "costs",
-            "include",
-            "all",
-            "calls,",
-            "excluding",
-            "initial",
-            "translation.",
+            "tokens.",
             "LaDiM",
-            "tests",
-            "at",
-            "call",
-            "17,",
-            "patches",
-            "at",
-            "22,",
-            "passes",
-            "public",
-            "verification",
-            "at",
-            "23,",
-            "and",
-            "finishes",
-            "at",
-            "24.",
-            "Both",
-            "baselines",
-            "remain",
-            "unrepaired",
-            "at"
+            "repairs"
           ]
         },
         {
@@ -19933,8 +19870,15 @@
             "step"
           ],
           "after": [
-            "40-call",
-            "limit.",
+            "program,",
+            "while",
+            "both",
+            "baselines",
+            "remain",
+            "unrepaired",
+            "after",
+            "40",
+            "calls.",
             "Case",
             "Study:",
             "From",
@@ -27269,20 +27213,34 @@
             "\\begin{figure}[t]",
             "\\centering",
             "\\includegraphics[width=\\linewidth]{figures/tanh-repair-case/tanh_repair_case.pdf}",
-            "\\caption{LaDiM",
-            "repairs",
+            "\\caption{Repairing",
             "a",
             "silent",
             "gradient",
-            "fault",
-            "in",
-            "an",
-            "autoencoder",
-            "classifier.",
+            "fault.",
             "(a)",
-            "Matching",
-            "forward",
-            "values"
+            "Layered",
+            "Diagnosis",
+            "identifies",
+            "Tanh",
+            "as",
+            "the",
+            "gradient",
+            "break;",
+            "the",
+            "highlighted",
+            "code",
+            "adds",
+            "its",
+            "missing",
+            "MindSpore",
+            "mapping",
+            "(registration",
+            "decorators",
+            "omitted).",
+            "(b)",
+            "Cumulative",
+            "investigation"
           ]
         },
         {
@@ -27298,55 +27256,14 @@
           "kind": "replace",
           "before": [
             "Detection",
-            "Latency}"
-          ],
-          "after": [
-            "correct",
-            "downstream",
-            "gradients",
-            "direct",
-            "diagnosis",
-            "to",
-            "Tanh."
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "The"
-          ],
-          "after": [
-            "The"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "Latency}",
+            "The",
             "diagnostic",
             "study",
             "follows",
             "four",
-            "models"
-          ],
-          "after": [
-            "patch",
-            "registers",
-            "MindSpore's",
-            "\\texttt{tanh}"
-          ]
-        },
-        {
-          "kind": "equal",
-          "before": [
-            "for"
-          ],
-          "after": [
-            "for"
-          ]
-        },
-        {
-          "kind": "replace",
-          "before": [
+            "models",
+            "for",
             "50",
             "steps",
             "under",
@@ -27361,44 +27278,10 @@
             "starts"
           ],
           "after": [
-            "\\texttt{torch.tanh}",
-            "and",
-            "\\texttt{torch.nn.functional.tanh}",
-            "(decorators",
-            "omitted).",
-            "(b)",
-            "Investigation",
-            "and",
             "repair",
-            "costs",
-            "include",
-            "all",
-            "calls,",
-            "excluding",
-            "initial",
-            "translation.",
+            "tokens.",
             "LaDiM",
-            "tests",
-            "at",
-            "call",
-            "17,",
-            "patches",
-            "at",
-            "22,",
-            "passes",
-            "public",
-            "verification",
-            "at",
-            "23,",
-            "and",
-            "finishes",
-            "at",
-            "24.",
-            "Both",
-            "baselines",
-            "remain",
-            "unrepaired",
-            "at"
+            "repairs"
           ]
         },
         {
@@ -27417,8 +27300,15 @@
             "step"
           ],
           "after": [
-            "40-call",
-            "limit.}",
+            "program,",
+            "while",
+            "both",
+            "baselines",
+            "remain",
+            "unrepaired",
+            "after",
+            "40",
+            "calls.}",
             "\\label{fig:tanh-case}",
             "\\end{figure}",
             "\\textbf{Case",

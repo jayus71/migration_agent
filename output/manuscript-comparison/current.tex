@@ -100,9 +100,9 @@ The LLM $M$ performs translation, investigation, and repair under role instructi
 \label{sec:hierarchy}
 
 {
+\setlength{\intextsep}{0pt}
 \begin{wrapfigure}{l}{0.50\textwidth}
 \begin{minipage}{\linewidth}
-\setlength{\intextsep}{0pt}
 \begin{algorithm}[H]
 \caption{Layered Diagnosis}
 \label{alg:diagnose}
@@ -139,12 +139,11 @@ The Verifier Agent receives the Translator Agent's candidate and the Orchestrato
 \label{sec:repair-agent}
 
 {
+\setlength{\intextsep}{0pt}
 
 Independent evidence handoff gives the Repair Agent the Verifier Agent's recorded code observations, test results, and hypotheses, identified as the Verifier Agent's findings. The Repair Agent reassesses this evidence, runs further tests, and edits files in $W$, including supporting library code when the task permits it. The Orchestrator verifies each submission and returns the remaining discrepancies to guide the Repair Agent's next investigation and edits.
-\Needspace{15\baselineskip}
-\begin{wrapfigure}{l}{0.55\textwidth}
+\begin{wrapfigure}{L}{0.55\textwidth}
 \begin{minipage}{\linewidth}
-\setlength{\intextsep}{0pt}
 \begin{algorithm}[H]
 \caption{\textsc{Repair}$(\mathcal T,S,E,q,M,B,C)$}
 \label{alg:repair}
@@ -348,7 +347,7 @@ Ivy                & 0/6 & 0 & 0 \\
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figures/tanh-repair-case/tanh_repair_case.pdf}
-\caption{LaDiM repairs a silent gradient fault in an autoencoder classifier. (a) Matching forward values and correct downstream gradients direct diagnosis to Tanh. The patch registers MindSpore's \texttt{tanh} for \texttt{torch.tanh} and \texttt{torch.nn.functional.tanh} (decorators omitted). (b) Investigation and repair costs include all calls, excluding initial translation. LaDiM tests at call 17, patches at 22, passes public verification at 23, and finishes at 24. Both baselines remain unrepaired at the 40-call limit.}
+\caption{Repairing a silent gradient fault. (a) Layered Diagnosis identifies Tanh as the gradient break; the highlighted code adds its missing MindSpore mapping (registration decorators omitted). (b) Cumulative investigation and repair tokens. LaDiM repairs the program, while both baselines remain unrepaired after 40 calls.}
 \label{fig:tanh-case}
 \end{figure}
 

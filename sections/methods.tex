@@ -25,9 +25,9 @@ The LLM $M$ performs translation, investigation, and repair under role instructi
 \label{sec:hierarchy}
 % Keep wrapping local to this subsection.
 {
+\setlength{\intextsep}{0pt}
 \begin{wrapfigure}{l}{0.50\textwidth}
 \begin{minipage}{\linewidth}
-\setlength{\intextsep}{0pt}
 \begin{algorithm}[H]
 \caption{Layered Diagnosis}
 \label{alg:diagnose}
@@ -64,12 +64,11 @@ The Verifier Agent receives the Translator Agent's candidate and the Orchestrato
 \label{sec:repair-agent}
 % Keep wrapping local to this subsection.
 {
+\setlength{\intextsep}{0pt}
 
 Independent evidence handoff gives the Repair Agent the Verifier Agent's recorded code observations, test results, and hypotheses, identified as the Verifier Agent's findings. The Repair Agent reassesses this evidence, runs further tests, and edits files in $W$, including supporting library code when the task permits it. The Orchestrator verifies each submission and returns the remaining discrepancies to guide the Repair Agent's next investigation and edits.
-\Needspace{15\baselineskip}
-\begin{wrapfigure}{l}{0.55\textwidth}
+\begin{wrapfigure}{L}{0.55\textwidth}
 \begin{minipage}{\linewidth}
-\setlength{\intextsep}{0pt}
 \begin{algorithm}[H]
 \caption{\textsc{Repair}$(\mathcal T,S,E,q,M,B,C)$}
 \label{alg:repair}
