@@ -58,7 +58,7 @@ def load_evidence():
     return summary, series, additions
 
 
-WIDTH, HEIGHT = 396, 154.8
+WIDTH, HEIGHT = 396, 146.8
 
 
 def label(ax, x, y, content, size=8.5, **kwargs):
@@ -95,44 +95,43 @@ def diagnosis_panel(ax, summary):
     assert observation['acceptance']['checks']['layer_differences_agreement']
     assert not observation['acceptance']['checks']['gradient_vector_l2']
     label(ax, 8, 7, '(a) Layered diagnosis and repair', 9.5, fontweight='bold')
-    panel_box(ax, 8, 23, 194, 60, '#f7f9fa')
-    for x, name, status in [(38, 'Execution', 'Pass'), (105, 'Forward values', 'Pass'),
-                             (172, 'Gradients', 'Fail')]:
+    panel_box(ax, 8, 23, 194, 52, '#f7f9fa')
+    for x, name, passed in [(38, 'Execution', True), (105, 'Forward values', True),
+                             (172, 'Gradients', False)]:
         label(ax, x, 27, name, 8.5, ha='center')
-        label(ax, x, 36, status, 8.5, ha='center', fontweight='bold',
-              color='#a34511' if status == 'Fail' else COLORS['LaDiM'])
-    for x in [71, 138]:
-        ax.add_patch(FancyArrowPatch((x - 7, 31), (x + 7, 31), arrowstyle='-|>',
-                                     mutation_scale=7, color=MUTED, linewidth=.8))
+        ax.add_patch(Rectangle((x - 5, 17.5), 10, 8, facecolor='white', edgecolor='none', zorder=2))
+        status_mark(ax, x, 21, passed)
+    # Midpoints of the actual word gaps (not the column centers).
+    for x in [66.95, 143.42]:
+        ax.add_patch(FancyArrowPatch((x - 4, 31), (x + 4, 31), arrowstyle='-|>',
+                                     mutation_scale=6, color=MUTED, linewidth=.8, shrinkA=0, shrinkB=0))
     for x, name in [(16, 'Linear 1'), (83, 'Tanh'), (150, 'Linear 2')]:
         suspect = name == 'Tanh'
-        panel_box(ax, x, 48, 44, 16, '#fff0e6' if suspect else '#ffffff',
+        panel_box(ax, x, 40, 44, 16, '#fff0e6' if suspect else '#ffffff',
                   '#c25a18' if suspect else RULE)
-        label(ax, x + 22, 51, name, 9, ha='center', fontweight='bold' if suspect else 'normal',
+        label(ax, x + 22, 43, name, 9, ha='center', fontweight='bold' if suspect else 'normal',
               color='#a34511' if suspect else INK)
     for start, end in [(61, 81), (128, 148)]:
-        ax.add_patch(FancyArrowPatch((start, 56), (end, 56), arrowstyle='-|>',
+        ax.add_patch(FancyArrowPatch((start, 48), (end, 48), arrowstyle='-|>',
                                      mutation_scale=7, color=MUTED, linewidth=.8))
-    label(ax, 38, 68, 'Zero gradients', 8.3, ha='center', color='#a34511')
-    label(ax, 172, 68, 'Correct gradients', 8.3, ha='center', color=COLORS['LaDiM'])
-    ax.add_patch(FancyArrowPatch((105, 72), (105, 64), arrowstyle='-|>',
-                                 mutation_scale=7, color='#a34511', linewidth=.8))
-    label(ax, 105, 74, 'Error', 8.3, ha='center', color='#a34511')
+    label(ax, 38, 62, 'Zero gradients', 8.3, ha='center', color='#a34511')
+    label(ax, 172, 62, 'Correct gradients', 8.3, ha='center', color=COLORS['LaDiM'])
+    label(ax, 105, 62, 'Error', 8.3, ha='center', color='#a34511')
 
 
 def code_panel(ax, additions):
-    label(ax, 8, 90, 'SWE-agent and MatchFixAgent: unrepaired', 8.5, color='#a34511')
-    status_mark(ax, 192, 94, False)
-    panel_box(ax, 8, 105, 194, 41)
-    label(ax, 15, 109, 'LaDiM: repaired', 8.8, fontweight='bold', color=COLORS['LaDiM'])
-    status_mark(ax, 192, 113, True)
-    ax.add_patch(Rectangle((11, 120), 188, 23, facecolor='#dcefe2', edgecolor='none', zorder=1))
-    ax.add_patch(Rectangle((11, 120), 1.8, 23, facecolor=COLORS['LaDiM'], edgecolor='none', zorder=2))
+    label(ax, 8, 82, 'SWE-agent and MatchFixAgent: unrepaired', 8.5, color='#a34511')
+    status_mark(ax, 192, 86, False)
+    panel_box(ax, 8, 97, 194, 41)
+    label(ax, 15, 101, 'LaDiM: repaired', 8.8, fontweight='bold', color=COLORS['LaDiM'])
+    status_mark(ax, 192, 105, True)
+    ax.add_patch(Rectangle((11, 112), 188, 23, facecolor='#dcefe2', edgecolor='none', zorder=1))
+    ax.add_patch(Rectangle((11, 112), 1.8, 23, facecolor=COLORS['LaDiM'], edgecolor='none', zorder=2))
     # Display the two-line implementation excerpt. The complete, verified patch
     # also registers torch.tanh and torch.nn.functional.tanh; see the caption.
     for i, line in enumerate(additions[2:]):
-        label(ax, 16, 122 + 10.5 * i, '+', 9, family='Consolas', color=COLORS['LaDiM'], zorder=3)
-        label(ax, 25, 122 + 10.5 * i, line, 9, family='Consolas', color='#16432b', zorder=3)
+        label(ax, 16, 114 + 10.5 * i, '+', 9, family='Consolas', color=COLORS['LaDiM'], zorder=3)
+        label(ax, 25, 114 + 10.5 * i, line, 9, family='Consolas', color='#16432b', zorder=3)
 
 
 def trajectory_panel(ax, series):
@@ -140,8 +139,8 @@ def trajectory_panel(ax, series):
     for name, (calls, tokens) in series.items():
         ax.plot([0] + calls, [0] + tokens, color=COLORS[name], lw=1.5, linestyle=styles[name], label=name)
         ax.scatter(calls[-1], tokens[-1], marker='o' if name == 'LaDiM' else 'x',
-                   color=COLORS[name], s=24, linewidths=1.1, zorder=5)
-    ax.set(xlim=(0, 50), ylim=(0, 2.7), xlabel='LLM calls', ylabel='Cumulative tokens (millions)')
+                   color=COLORS[name] if name == 'LaDiM' else '#c62828', s=24, linewidths=1.1, zorder=5)
+    ax.set(xlim=(0, 56), ylim=(0, 2.7), xlabel='LLM calls', ylabel='Cumulative tokens (millions)')
     ax.set_xticks([0, 10, 20, 30, 40])
     ax.set_yticks([0, .5, 1, 1.5, 2, 2.5])
     ax.tick_params(labelsize=8, width=.5, length=2.5, pad=2)
@@ -160,8 +159,10 @@ def trajectory_panel(ax, series):
                     arrowprops={'arrowstyle': '-', 'color': COLORS['LaDiM'], 'lw': .65},
                     bbox={'facecolor': 'white', 'edgecolor': 'none', 'pad': .7})
     ax.text(24.5, 1.77, '1.488', fontsize=8.5, color=COLORS['LaDiM'])
-    ax.text(41.8, 2.341, '2.341', va='center', fontsize=8.5, color=COLORS['MatchFixAgent'])
-    ax.text(41.8, 1.606, '1.606', va='center', fontsize=8.5, color=COLORS['SWE-agent'])
+    for name in ['MatchFixAgent', 'SWE-agent']:
+        final = series[name][1][-1]
+        ax.text(41.8, final + .10, f'{final:.3f}', va='center', fontsize=8.5, color=COLORS[name])
+        ax.text(41.8, final - .20, 'Unrepaired', va='center', fontsize=7.5, color='#c62828')
 
 
 def build_figure(summary, series, additions):
@@ -171,7 +172,7 @@ def build_figure(summary, series, additions):
     diagnosis_panel(canvas, summary)
     code_panel(canvas, additions)
     label(canvas, 222, 7, '(b) Repair cost', 9.5, fontweight='bold')
-    ax = fig.add_axes([242 / WIDTH, (HEIGHT - 123) / HEIGHT, 144 / WIDTH, 81 / HEIGHT])
+    ax = fig.add_axes([242 / WIDTH, (HEIGHT - 115) / HEIGHT, 144 / WIDTH, 73 / HEIGHT])
     trajectory_panel(ax, series)
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles, labels, loc='upper left', bbox_to_anchor=(222 / WIDTH, 1 - 24 / HEIGHT),
