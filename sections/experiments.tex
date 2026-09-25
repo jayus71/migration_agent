@@ -7,48 +7,42 @@
 
 To examine repair of actual translation errors, we use ten programs produced by the initial translation, of which five fail evaluation and five pass before repair. We use 16 faulty candidates to study training signals and six faulty MLP and CNN candidates to study repair on JAX. A separate detection study examines how early gradient, update, and loss checks reveal training faults. \cref{sec:task-construction} summarizes the program collections in \cref{tab:collections}.
 
-\textbf{Baselines.} We compare LaDiM with SWE-agent~\citep{yang2024sweagent} and MatchFixAgent~\citep{ibrahimzada2025matchfixagent} using a common DeepSeek backend and each baseline's native repair procedure. The main table also includes Direct LLM for initial translation, CodeTransEngine's direct translation configuration~\citep{macedo2025codetransengine}, MSAdapter~\citep{openi2025msadapter}, and InterTrans~\citep{macedo2024intertrans}. Test-guided repair rewrites the complete candidate using test feedback. Direct repair in the analysis studies receives the same candidate as LaDiM and uses LaDiM's inspection, testing, and editing tools. For JAX, Ivy converts code between frameworks by transpiling the supplied model~\citep{ivy2026transpiler}, while \texttt{torch2jax} maps PyTorch operations and tensors to JAX through native conversion~\citep{torch2jax2026}. We apply each converter once to the supplied faulty candidates and measure whether the existing faults are removed, without LLM repair.
+\textbf{Baselines.} We compare LaDiM with SWE-agent~\citep{yang2024sweagent} and MatchFixAgent~\citep{ibrahimzada2025matchfixagent} using a common DeepSeek backend and each baseline's native repair procedure. The main table also includes Direct LLM for initial translation, CodeTransEngine's direct translation configuration~\citep{macedo2025codetransengine}, MSAdapter~\citep{openi2025msadapter}, and InterTrans~\citep{macedo2024intertrans}. Test-guided repair rewrites the complete candidate using test feedback. Direct repair in the analysis studies receives the same candidate as LaDiM and uses LaDiM's inspection, testing, and editing tools. For JAX, Ivy and \texttt{torch2jax} each perform one native conversion of the faulty candidates (\cref{sec:jax-protocol}).
 
-\textbf{Evaluation Protocol.} Methods use common source programs, evaluation inputs, and corresponding initial parameters. Repair methods also receive the same initial translations. Acceptance requires agreement in execution, forward values, gradients, and parameter updates, together with the task's optimizer and interface checks. For repositories, \emph{Checks} counts successful execution, numerical, and interface checks. \emph{Entries} counts successful execution of the training script, notebook, and teaching examples. \emph{Tests} counts passing tests supplied by the repository. Candidates that pass the evaluation available during repair are checked on additional seeds. Investigation and repair allow up to 40 LLM calls per program and 80 per repository, with at most four submissions. \cref{sec:supplementary-protocols} gives the numerical tolerances, seeds, and complete budgets.
+\textbf{Evaluation Protocol.} Methods use common source programs, evaluation inputs, and corresponding initial parameters. Repair methods also receive the same initial translations. Acceptance requires agreement in execution, forward values, gradients, and parameter updates, together with the task's optimizer and interface checks. For repositories, \emph{Checks} counts successful execution, numerical, and interface checks. \emph{Entries} counts successful execution of the training script, notebook, and teaching examples. \emph{Tests} counts passing tests supplied by the repository. Candidates that pass the evaluation available during repair are checked on additional seeds. Investigation and repair allow up to 40 LLM calls per program and 80 per repository, with at most four submissions. End-to-end costs include initial translation once and all subsequent calls, including failed attempts. \cref{sec:supplementary-protocols} gives the numerical tolerances, seeds, and complete budgets.
 
 \subsection{Main Results}
 \label{sec:main-results}
 \begin{table}[t]
-\caption{Migration acceptance and token use on common inputs. Panels (a,b) compare individual programs, and panels (c,d) compare repositories. End-to-end costs include the shared initial translation once and all subsequent calls, including failed attempts. Tokens are in millions. Calls count all LLM calls in (a,b) and investigation and repair calls in (c,d). Dash denotes methods without LLM calls.}
+\caption{Migration acceptance and token use on common inputs: (a,b) individual programs; (c,d) repositories. Tokens are in millions. Calls count all LLM calls in (a,b) and investigation and repair calls in (c,d).}
 \label{tab:main-results}
 \centering
-\small
 \setlength{\tabcolsep}{3pt}
 \input{figures/TABLE_main_comparison.tex}
-\par\smallskip
-\begin{minipage}{\linewidth}
-MatchFixAgent passes 0/10 original recommendation tests because an unmigrated PyTorch import prevents test collection. Complete token costs and repository gradient and parameter update checks appear in \cref{tab:program-costs,tab:repository-costs}.
-\end{minipage}
 \end{table}
 
-\textbf{Migration to MindSpore.} LaDiM completes all 50 MindSpore migrations with 57.4\% fewer tokens than MatchFixAgent (\cref{tab:main-results}a). The savings cover both programs that require repair and programs that pass evaluation before repair (\cref{fig:repair-comparison}). Reduced input token usage accounts for 93.0\% of the savings, so most of the reduction comes from processing less context during investigation and repair. With submission limits of one, two, and four, LaDiM accepts 46/50, 50/50, and 50/50 tasks, respectively. It therefore achieves complete migration with at most two submissions per program while substantially reducing the context processed by the LLM.
+\textbf{Migration to MindSpore.} LaDiM completes all 50 MindSpore migrations with 57.4\% fewer tokens than MatchFixAgent (\cref{tab:main-results}a). The savings cover both programs that require repair and programs that pass evaluation before repair (\cref{fig:repair-comparison}). Reduced input token usage accounts for 93.0\% of the savings, so most of the reduction comes from processing less context during investigation and repair. With submission limits of one, two, and four, LaDiM accepts 46/50, 50/50, and 50/50 tasks, respectively.
 \begin{figure}[!t]
 \centering
 \includegraphics[width=0.96\linewidth]{figures/repair_comparison.pdf}
-\caption{Token costs on MindSpore migration. (a) Total tokens, comprising initial translation and subsequent calls, grouped by whether programs pass evaluation before repair. (b) Tokens saved by LaDiM relative to MatchFixAgent on each of the 29 distinct task inputs. Tasks 1--20 pass evaluation before repair and tasks 21--29 require repair; each group is sorted from low to high. Both methods accept 50/50 tasks, while LaDiM uses significantly fewer tokens.}
+\caption{MindSpore migration token costs. (a) Initial translation and subsequent calls, grouped by whether repair is needed. (b) MatchFixAgent minus LaDiM tokens for 29 distinct inputs: tasks 1--20 pass before repair; tasks 21--29 require repair. Savings are sorted within each group.}
 \label{fig:repair-comparison}
 \end{figure}
 
-\textbf{Migration across languages.} LaDiM accepts all programs completed by MatchFixAgent and an additional recurrent network example in the Java/DJL collection (\cref{tab:main-results}b). Its 9/18 accepted programs comprise all eight textbook examples and one application, compared with 8/18 for SWE-agent and MatchFixAgent. LaDiM uses 11.7\% fewer tokens than SWE-agent and 24.2\% fewer than MatchFixAgent. LaDiM thus extends training behavior repair across languages, accepting more programs with fewer tokens than both agent baselines.
+\textbf{Migration across languages.} LaDiM accepts all programs completed by MatchFixAgent and an additional recurrent network example in the Java/DJL collection (\cref{tab:main-results}b). Its 9/18 accepted programs comprise all eight textbook examples and one application, compared with 8/18 for SWE-agent and MatchFixAgent. LaDiM uses 11.7\% fewer tokens than SWE-agent and 24.2\% fewer than MatchFixAgent.
 
 \textbf{Repository migration.} All three agents complete the time series migration, preserving the shared model across a training script, notebook, and teaching examples. At the same complete acceptance of 69/69 checks, LaDiM uses 68.1\% fewer end-to-end tokens than SWE-agent and 80.8\% fewer than MatchFixAgent.
 
-On recommendation, LaDiM restores reward model inference and retrieval, which remain unresolved in both baselines, and executes the training command. It achieves the highest behavioral coverage, passing 130/145 checks and all ten original tests. The repository results show that LaDiM combines lower migration costs on time series with broader behavioral coverage on recommendation, where shared implementations serve training, inference, and retrieval. \cref{sec:repository-results} gives the remaining numerical differences and detailed checks.
+On recommendation, LaDiM restores reward model inference and retrieval, which remain unresolved in both baselines, and executes the training command. It achieves the highest behavioral coverage, passing 130/145 checks and all ten original tests. \cref{sec:repository-results} gives the remaining numerical differences and detailed checks.
 
 \subsection{Analysis Experiments}
 \label{sec:fault-characterization}
 
 \textbf{Repairing Translation Errors.} Methods may edit both the ten translated programs and their supporting library. \cref{tab:repair-results}a reports how many failed programs are \emph{Repaired}, how many passing programs are \emph{Preserved}, and how many programs are finally \emph{Accepted}. LaDiM repairs four of the five failed programs and preserves all five programs that pass evaluation before repair, raising final acceptance from five to nine. Direct repair, SWE-agent, and MatchFixAgent retain the initial five successes but recover none of the failed programs. In the LSTM case, LaDiM repairs recurrent operations and tensor indexing in the supporting library, restoring agreement in loss, gradients, and parameter updates. This example shows how training discrepancies guide repair into library implementations used by the translated program (\cref{sec:natural-protocol}).
 \begin{table}[t]
-\caption{Repair results on two collections. (a) Ten initial translations, five failing and five passing before repair; candidates and supporting libraries are editable. (b) Six faulty JAX candidates. LaDiM and Direct repair allow up to four LLM repair submissions; Ivy and \texttt{torch2jax} each perform one native conversion without an LLM. Tokens are in millions and cover all investigation and repair calls, including failed attempts.}
+\caption{Repair of (a) ten initial translations, five failing and five passing, and (b) six faulty JAX candidates. LaDiM and Direct repair allow four submissions; Ivy and \texttt{torch2jax} perform one native conversion. Tokens are in millions for all investigation and repair calls.}
 \label{tab:repair-results}
 \centering
-\small
 \setlength{\tabcolsep}{2pt}
 \begin{minipage}[t]{0.555\linewidth}
 \vspace{0pt}
@@ -82,15 +76,13 @@ LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults
 
 \subsection{Ablation Studies}
 \label{sec:ablations}
-We evaluate training signals on 16 faulty candidates, repair history and independent evidence handoff on the ten translated programs, and repository context management and Repository Structural Analysis on the time series repository. \cref{tab:signal-ablation} reports acceptance and token use for these three studies.
 
 \textbf{Training signals.} We compare cumulative feedback on 16 fixed candidates from a CNN, an image MLP, a Transformer classifier, and a small causal language model. Each model contributes four candidates with execution, forward, gradient, and update faults, respectively. Sources, candidates, tools, and budgets are fixed. Available feedback determines whether repair begins and stops. Each added signal exposes another fault class, increasing final acceptance under complete verification from 4/16 to 16/16 (\cref{tab:signal-ablation}a). Initially undetected faults decrease from 12 to 8 to 4 to 0 across the four settings. Forward values reveal changed computations, gradients reveal differentiation faults, and updates reveal optimizer faults.
 \begin{table}[!htb]
-\caption{Effects of training signals and repair components. (a) Each $+$ adds a signal to the preceding row, ending with all four signals on 16 faulty candidates. Final acceptance uses complete verification. (b) Repair history and independent evidence handoff on ten translated programs. Parentheses report how many of the five failing programs are repaired. All three settings also pass evaluation on the five programs that pass before repair. (c) Comparisons with and without each repository component on the time series repository. Every setting passes all 69 behavior checks across three seeds.}
+\caption{Effects of training signals and repair components. (a) Each $+$ adds a signal to the preceding row, ending with all four signals on 16 faulty candidates. Final acceptance uses complete verification. (b) Repair history and independent evidence handoff on ten translated programs. Parentheses report how many of the five failing programs are repaired. (c) Comparisons with and without each repository component on the time series repository. Every setting passes all 69 behavior checks across three seeds.}
 \label{tab:signal-ablation}
 \label{tab:cumulative-components}
 \centering
-\small
 \setlength{\tabcolsep}{3pt}
 \begin{minipage}[t]{0.495\linewidth}
 \vspace{0pt}
@@ -106,7 +98,7 @@ We evaluate training signals on 16 faulty candidates, repair history and indepen
 \input{figures/TABLE_repository_components.tex}
 \par\smallskip
 \begin{minipage}{\linewidth}
-Tokens are in millions. In (a,b), they cover investigation and repair. Panel (b) uses editing examples and feedback when edits are incorrectly formatted. In (c), calls cover investigation and repair, and tokens also include initial translation. Saved is the percentage reduction in tokens. Each setting in (c) is run once. The two comparisons use separate runs of LaDiM with all components enabled, so their token costs differ.
+Tokens are in millions. In (a,b), they cover investigation and repair. Panel (b) uses editing examples and feedback when edits are incorrectly formatted. In (c), calls cover investigation and repair, and tokens also include initial translation. Saved is the percentage reduction in tokens.
 \end{minipage}
 \end{table}
 

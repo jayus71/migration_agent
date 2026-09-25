@@ -1,6 +1,6 @@
 \section{Methods}
 \label{sec:method}
-LaDiM uses dependencies between training computations to guide diagnosis and repair. The Translator first produces a candidate in the requested language and framework. The Verifier Agent investigates discrepancies between source and target executions and passes its findings and supporting observations to a separate Repair Agent. The Repair Agent tests these hypotheses and revises the candidate. The Orchestrator schedules their work and returns verification results after each submission to guide further repair. \cref{fig:architecture}a shows this process. For repository migration, LaDiM additionally maintains repository context across files and conversations (\cref{fig:architecture}b; \cref{sec:repository-method}).
+\cref{fig:architecture} overviews LaDiM; \cref{sec:hierarchy,sec:repair-agent,sec:repository-method} describe diagnosis, repair, and repository coordination.
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/hierarchical_feedback_architecture.pdf}
@@ -33,16 +33,16 @@ The LLM $M$ performs translation, investigation, and repair under role instructi
 \caption{Layered Diagnosis}
 \label{alg:diagnose}
 \raggedright
-\small
 \begin{algorithmic}[1]
-\Require Task $\mathcal T$, candidate and measurements $S$, LLM $M$, budget $B$, context $C$
-\Ensure Evidence $E$: code observations, test results, locations, and hypotheses
+\Require $\mathcal T,S,M,B,C$
+\Ensure Evidence $E$
 \Function{LayeredDiagnosis}{$\mathcal T,S,M,B,C$}
-  \State $H\gets\Call{StartConversation}{A_V,\mathcal T,S}$; $b\gets\Call{DiagnosisAllowance}{B}$
+  \State $H\gets\Call{StartConversation}{A_V,\mathcal T,S}$
+  \State $b\gets\Call{DiagnosisAllowance}{B}$
   \State $\mathcal D:\ \mathrm{execution}\to v_t\to g_t\to\Delta\theta_t\to v_{t+1}$
   \While{$\Call{WithinLimits}{b,B}$}
     \State $H\gets C.\Call{PrepareContext}{H,S}$
-    \State $(\ell,h,a)\gets\Call{LLMCall}{M,A_V,H,b,B}$ \Comment{Trace $\mathcal D$, test causes}
+    \State $(\ell,h,a)\gets\Call{LLMCall}{M,A_V,H,b,B}$
     \State $H\gets\Call{ToolFeedback}{a,H,S,A_V,C}$
     \State \textbf{if} $a.\mathrm{complete}$ \textbf{then break}
   \EndWhile
@@ -50,7 +50,7 @@ The LLM $M$ performs translation, investigation, and repair under role instructi
 \EndFunction
 \Function{ToolFeedback}{$a,H,S,A,C$}
   \State $(C,S,r)\gets C.\Call{ExecuteTools}{a,S,A}$
-  \State \Return $H\mathbin{\|}(a,r)$ \Comment{Append response and tool observations}
+  \State \Return $H\mathbin{\|}(a,r)$
 \EndFunction
 \end{algorithmic}
 \end{algorithm}
@@ -74,14 +74,13 @@ Independent evidence handoff gives the Repair Agent the Verifier Agent's recorde
 \caption{\textsc{Repair}$(\mathcal T,S,E,q,M,B,C)$}
 \label{alg:repair}
 \raggedright
-\small
 \begin{algorithmic}[1]
 \State $H\gets\Call{IndependentHandoff}{A_R,\mathcal T,E,C}$
 \While{$\Call{SubmissionsLeft}{B}\land\allowbreak\Call{BudgetLeft}{B}$}
   \State $H\gets H\mathbin{\|}S.m$; $b\gets\Call{RepairAllowance}{B}$
   \While{$\Call{WithinLimits}{b,B}$}
     \State $H\gets C.\Call{PrepareContext}{H,S}$
-    \State $a\gets\Call{LLMCall}{M,A_R,H,b,B}$ \Comment{Test hypotheses and select edits}
+    \State $a\gets\Call{LLMCall}{M,A_R,H,b,B}$ \Comment{Test and edit}
     \State $H\gets\Call{ToolFeedback}{a,H,S,A_R,C}$
     \State \textbf{if} $\Call{RepairComplete}{a,H}$ \textbf{then break}
   \EndWhile
@@ -111,7 +110,6 @@ Repository migration raises two problems that single-program migration does not:
 \begin{algorithm}[!htb]
 \caption{Repository migration and repair coordination}
 \label{alg:repository}
-\small
 \begin{algorithmic}[1]
 \Function{RepositoryMigrate}{$\mathcal T,M,B$}
   \State $C\gets\Call{RepositoryContext}{\mathcal T}$
