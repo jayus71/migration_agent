@@ -70,7 +70,7 @@ Ivy                & 0/6 & 0 & 0 \\
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figures/tanh-repair-case/tanh_repair_case.pdf}
-\caption{Layered Diagnosis localizes and repairs a silent gradient fault that execution, forward, and loss checks all miss, in a translated autoencoder-style classifier. (a) Execution and forward values match the source, but the first linear layer receives zero gradients while the second receives correct ones, isolating Tanh as the break. A targeted test confirms that the supporting library lacks a MindSpore mapping for Tanh; the highlighted repair registers MindSpore's \texttt{tanh} for \texttt{torch.tanh} and \texttt{torch.nn.functional.tanh} (decorators omitted). (b) Cumulative investigation and repair tokens, excluding initial translation. LaDiM tests its diagnosis at call 17, patches at call 22, and passes public verification at call 23, and finishes after call 24 with 1.488 million tokens. SWE-agent and MatchFixAgent (crosses) exhaust the 40-call limit at 1.606 and 2.341 million tokens without a repair.}
+\caption{LaDiM repairs a silent gradient fault in an autoencoder classifier. (a) Matching forward values and correct downstream gradients direct diagnosis to Tanh. The patch registers MindSpore's \texttt{tanh} for \texttt{torch.tanh} and \texttt{torch.nn.functional.tanh} (decorators omitted). (b) Investigation and repair costs include all calls, excluding initial translation. LaDiM tests at call 17, patches at 22, passes public verification at 23, and finishes at 24. Both baselines remain unrepaired at the 40-call limit.}
 \label{fig:tanh-case}
 \end{figure}
 
@@ -78,7 +78,7 @@ Ivy                & 0/6 & 0 & 0 \\
 
 \textbf{Generalization Across Frameworks.}
 \label{sec:generalization}
-LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults in MLP and CNN models (\cref{tab:repair-results}b). Every case passes single-step SGD verification on three seeds after the first submission. Direct repair also accepts all six cases and uses fewer tokens. Ivy and \texttt{torch2jax} accept none of the faulty candidates after native conversion. Both converters pass evaluation on the corresponding MLP and CNN programs without these faults. In these cases, native conversion preserves the supplied execution or numerical faults, and explicit repair restores agreement in training behavior. The same diagnosis and repair procedure thus works beyond MindSpore with JAX differentiation and parameter updates. \cref{sec:jax-protocol} details the converter evaluations. \cref{sec:native-jax-study} reports the separate study of native JAX translations evaluated over consecutive training steps.
+LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults in MLP and CNN models (\cref{tab:repair-results}b). Every case passes single-step SGD verification on three seeds after the first submission. Direct repair also accepts all six cases and uses fewer tokens. Ivy and \texttt{torch2jax} accept none of the faulty candidates after native conversion. Both converters pass evaluation on the corresponding MLP and CNN programs without these faults. In these cases, native conversion preserves the supplied execution or numerical faults, and explicit repair restores agreement in training behavior. The same diagnosis and repair procedure thus works beyond MindSpore with JAX differentiation and parameter updates. \cref{sec:jax-protocol} details the converter evaluations.
 
 \subsection{Ablation Studies}
 \label{sec:ablations}

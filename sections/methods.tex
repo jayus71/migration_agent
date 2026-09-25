@@ -65,6 +65,8 @@ The Verifier Agent receives the Translator Agent's candidate and the Orchestrato
 % Keep wrapping local to this subsection.
 {
 
+Independent evidence handoff gives the Repair Agent the Verifier Agent's recorded code observations, test results, and hypotheses, identified as the Verifier Agent's findings. The Repair Agent reassesses this evidence, runs further tests, and edits files in $W$, including supporting library code when the task permits it. The Orchestrator verifies each submission and returns the remaining discrepancies to guide the Repair Agent's next investigation and edits.
+\Needspace{15\baselineskip}
 \begin{wrapfigure}{l}{0.55\textwidth}
 \begin{minipage}{\linewidth}
 \setlength{\intextsep}{0pt}
@@ -91,7 +93,6 @@ The Verifier Agent receives the Translator Agent's candidate and the Orchestrato
 \end{algorithm}
 \end{minipage}
 \end{wrapfigure}
-Independent evidence handoff gives the Repair Agent the Verifier Agent's recorded code observations, test results, and hypotheses, identified as the Verifier Agent's findings. The Repair Agent reassesses this evidence, runs further tests, and edits files in $W$, including supporting library code when the task permits it. The Orchestrator verifies each submission and returns the remaining discrepancies to guide the Repair Agent's next investigation and edits.
 Repair history preserves earlier edits, observations, and hypotheses across attempts. The continuing conversation includes failed tests and verification feedback, allowing the agent to relate a changed result to the preceding modification and revise explanations that did not resolve the fault. The current candidate also persists, so later attempts build on applied changes.
 
 \cref{alg:repair} reuses \textsc{ToolFeedback} from \cref{alg:diagnose}, with $H\mathbin{\|}x$ denoting the addition of a record $x$ to the repair history. Its \textsc{RepairComplete} condition requires a completion response, an applied edit in the current stage, and a test executed after the last edit. If an edit or test is missing, the conversation requests that action within the remaining budget. The Orchestrator evaluates the candidate when the repair stage ends.\par}

@@ -134,7 +134,10 @@ class PaperFigureLayoutTests(unittest.TestCase):
             for bar in ax.patches:
                 self.assertFalse(legend_box.overlaps(bar.get_window_extent(renderer)))
         self.assertEqual([t.get_text() for t in b.get_xticklabels()], [str(i) for i in range(1, 30)])
-        self.assertEqual([t.get_text() for t in b.texts], ['Task'])
+        self.assertEqual([t.get_text() for t in b.texts], [])
+        self.assertEqual(b.get_xlabel(), 'Tasks sorted by tokens saved within each group')
+        xlabel_box = b.xaxis.label.get_window_extent(renderer)
+        self.assertLess(xlabel_box.y1, min(t.get_window_extent(renderer).y0 for t in b.get_xticklabels()))
         tick_boxes = [t.get_window_extent(renderer) for t in b.get_xticklabels()]
         for first, second in combinations(tick_boxes, 2):
             self.assertFalse(first.overlaps(second))

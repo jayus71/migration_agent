@@ -11,18 +11,18 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 </style>
 <body class="only-changes"><header><div class="eyebrow">LADIM / REVISION HISTORY</div>
 <h1>论文逐词对照</h1><p>固定原稿与当前稿并排显示。红色为删除，绿色为新增；移动或重写的文字会同时显示在两侧。</p>
-<p class="meta">基线：2026-09-21，6 Pro 修改前保存的原稿 · 当前稿更新于 <strong>2026-09-25T22:29:38+08:00</strong> · <span id="live">编译后自动更新</span></p>
+<p class="meta">基线：2026-09-21，6 Pro 修改前保存的原稿 · 当前稿更新于 <strong>2026-09-26T00:40:25+08:00</strong> · <span id="live">编译后自动更新</span></p>
 <p class="meta"><a href="baseline.pdf" target="_blank">查看原稿 PDF</a>　<a href="current.pdf" target="_blank">查看当前 PDF</a>　<a href="baseline.tex" download>原稿展开源码</a>　<a href="current.tex" download>当前展开源码</a>　<a href="comparison.json" download>下载完整对照记录</a></p></header>
 <div class="tools"><select id="mode" aria-label="对照内容"><option value="reading">正文逐词</option><option value="latex">LaTeX 逐词</option></select>
 <select id="jump" aria-label="跳转章节"><option value="">跳转章节</option><option value="0">Title</option><option value="1">Abstract</option><option value="2">Introduction</option><option value="3">Related Work</option><option value="4">Methods</option><option value="5">Experiments</option><option value="6">Conclusion</option><option value="7">References</option><option value="8">Appendix — Additional Experimental Protocols</option><option value="9">Appendix — Evidence Handoff and Agent Integration</option><option value="10">Appendix — Additional Repair Collections</option><option value="11">Appendix — Natural Translation Repair Protocol</option><option value="12">Appendix — Repository Protocols and Detailed Results</option><option value="13">Appendix — Repository Context and Evidence</option><option value="14">Appendix — Repository Component Results</option><option value="15">Appendix — Native JAX Migration with Consecutive Training Steps</option></select>
 <input type="search" id="search" placeholder="按章节或文字筛选" aria-label="搜索对照文字">
 <label><input id="changes" type="checkbox" checked> 只看有改动的章节</label><button id="context">展开全部上下文</button><button onclick="location.reload()">刷新</button>
-<span class="legend"><span class="removed">− 删除 4458 词</span>　<span class="added">+ 新增 8355 词</span></span></div>
-<main><div class="column-head"><div>修改前<small>2026-09-21 · 固定基线</small></div><div>当前版本<small>a981a5a · 本地工作区</small></div></div>
+<span class="legend"><span class="removed">− 删除 4463 词</span>　<span class="added">+ 新增 8672 词</span></span></div>
+<main><div class="column-head"><div>修改前<small>2026-09-21 · 固定基线</small></div><div>当前版本<small>50daf1f · 本地工作区</small></div></div>
 <div id="reading" class="view"><section class="section unchanged" id="reading-0" data-title="Title"><h2>Title<span class="count"><b class="removed">−0</b> <b class="added">+0</b></span></h2>
 <div class="pair equal"><div class="old">LaDiM: Layered Diagnosis for Multi-Agent Code Migration</div><div class="new">LaDiM: Layered Diagnosis for Multi-Agent Code Migration</div></div>
 </section>
-<section class="section changed" id="reading-1" data-title="Abstract"><h2>Abstract<span class="count"><b class="removed">−134</b> <b class="added">+157</b></span></h2>
+<section class="section changed" id="reading-1" data-title="Abstract"><h2>Abstract<span class="count"><b class="removed">−126</b> <b class="added">+152</b></span></h2>
 <div class="pair equal"><div class="old">Migrating</div><div class="new">Migrating</div></div>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">code across</div></div>
 <div class="pair equal"><div class="old">deep learning</div><div class="new">deep learning</div></div>
@@ -38,7 +38,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">errors.</div><div class="new">errors.</div></div>
 <div class="pair replace"><div class="old">Such semantic drift may remain hidden even when the program runs successfully</div><div class="new">LaDiM includes Translator, Verifier,</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">its loss initially agrees with the source. We propose LaDiM,</div><div class="new">Repair agents work under</div></div>
+<div class="pair replace"><div class="old">its loss initially agrees with the source. We propose LaDiM,</div><div class="new">Repair agents working under</div></div>
 <div class="pair equal"><div class="old">a</div><div class="new">a</div></div>
 <div class="pair replace"><div class="old">multi-agent framework that uses dependencies between training computations to guide diagnosis and repair.</div><div class="new">shared Orchestrator. The Translator produces an initial output.</div></div>
 <div class="pair equal"><div class="old">The Verifier</div><div class="new">The Verifier</div></div>
@@ -46,17 +46,31 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
 <div class="pair replace"><div class="old">translated program diverges from</div><div class="new">computation order and hands its findings to</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">source</div><div class="new">Repair Agent, which revises using evidences</div></div>
+<div class="pair replace"><div class="old">source</div><div class="new">Repair Agent, which revises the candidate using this evidence</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">passes supporting evidence</div><div class="new">a persistent repair history. For repository-scale migrations, LaDiM further introduces repository context management which tracks cross-file dependencies and preserves diagnostic context as agents move across the repository. Evaluation across framework migration, language migration, and repository-level translate tasks shows that LaDiM achieves comparable or better migration results with up</div></div>
+<div class="pair delete"><div class="old">passes supporting evidence to</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">a</div><div class="new">a</div></div>
+<div class="pair replace"><div class="old">separate Repair Agent. Measurements after each submitted change guide</div><div class="new">persistent repair history. For repository-scale migrations, LaDiM</div></div>
+<div class="pair equal"><div class="old">further</div><div class="new">further</div></div>
+<div class="pair replace"><div class="old">repair. For repositories, LaDiM</div><div class="new">introduces repository context management which</div></div>
+<div class="pair equal"><div class="old">tracks</div><div class="new">tracks</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">cross-file</div></div>
+<div class="pair equal"><div class="old">dependencies</div><div class="new">dependencies</div></div>
+<div class="pair delete"><div class="old">between files</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
+<div class="pair replace"><div class="old">retains evidence</div><div class="new">preserves diagnostic context</div></div>
+<div class="pair equal"><div class="old">as</div><div class="new">as</div></div>
+<div class="pair replace"><div class="old">work moves between them. On 50</div><div class="new">agents move across the repository. Evaluation across framework migration, language migration, and repository</div></div>
+<div class="pair equal"><div class="old">migration tasks</div><div class="new">migration tasks</div></div>
+<div class="pair replace"><div class="old">from PyTorch</div><div class="new">shows that LaDiM achieves comparable or better migration results with up</div></div>
 <div class="pair equal"><div class="old">to</div><div class="new">to</div></div>
-<div class="pair replace"><div class="old">a separate Repair Agent. Measurements after each submitted change guide further repair. For repositories, LaDiM tracks dependencies between files and retains evidence as work moves between them. On 50 migration tasks from PyTorch to MindSpore, LaDiM matches MatchFixAgent&#x27;s full acceptance with 57.4%</div><div class="new">80.8%</div></div>
+<div class="pair replace"><div class="old">MindSpore, LaDiM matches MatchFixAgent&#x27;s full acceptance with 57.4%</div><div class="new">80.8%</div></div>
 <div class="pair equal"><div class="old">fewer</div><div class="new">fewer</div></div>
 <div class="pair replace"><div class="old">total tokens, including initial translation. Experiments on MindSpore and JAX, together with migration tasks from Java to Python, demonstrate LaDiM&#x27;s effectiveness across frameworks and programming languages.</div><div class="new">tokens than state-of-the-art methods, demonstrating its effectiveness.</div></div>
 </section>
 <section class="section changed" id="reading-2" data-title="Introduction"><h2>Introduction<span class="count"><b class="removed">−485</b> <b class="added">+392</b></span></h2>
 <div class="pair equal"><div class="old">Introduction</div><div class="new">Introduction</div></div>
-<div class="pair replace"><div class="old">Migrating</div><div class="new">Tokens used on 50 PyTorch to MindSpore migrations tasks. Code development environments and languages have grown increasingly diverse. Focusing on</div></div>
+<div class="pair replace"><div class="old">Migrating</div><div class="new">Tokens used on 50 PyTorch to MindSpore migration tasks. Code development environments and languages have grown increasingly diverse. Focusing on</div></div>
 <div class="pair equal"><div class="old">deep</div><div class="new">deep</div></div>
 <div class="pair replace"><div class="old">learning code allows existing</div><div class="new">learning, popular frameworks such as PyTorch, TensorFlow, and MindSpore provide programming interfaces, execution semantics, and hardware backends [paszke2019pytorch,abadi2016tensorflow,mindspore2020whitepaper] . To enable easy adaptation of deep</div></div>
 <div class="pair equal"><div class="old">models and training</div><div class="new">models and training</div></div>
@@ -230,8 +244,8 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">to revise its hypotheses.</div><div class="new">to revise its hypotheses.</div></div>
 <div class="pair delete"><div class="old">The comparison evaluates both methods from the same initial translation and includes translation costs.</div><div class="new">&nbsp;</div></div>
 </section>
-<section class="section changed" id="reading-4" data-title="Methods"><h2>Methods<span class="count"><b class="removed">−929</b> <b class="added">+1300</b></span></h2>
-<div class="pair replace"><div class="old">LaDiM LaDiM migrates</div><div class="new">Methods fig:architecture overviews LaDiM; sec:hierarchy,sec:repair-agent,sec:repository-method describe diagnosis, repair, and repository coordination. Overview of LaDiM. (a) The Orchestrator coordinates translation, diagnosis, repair, and validation. The Verifier investigates the first divergent stage and hands evidence to the Repair Agent. (b) Repository context management combines structural analysis, dependency planning, and evidence retrieval with context reconstruction. $A_T$ , $A_V$ , and $A_R$ denote agent instructions. Code and traces are illustrative. Java/DJL experiments migrate in the reverse direction, to Python/PyTorch. Preliminary A migration task $\mathcal T=(P,L_s,F_s,L_t,F_t,W)$ specifies</div></div>
+<section class="section changed" id="reading-4" data-title="Methods"><h2>Methods<span class="count"><b class="removed">−929</b> <b class="added">+1243</b></span></h2>
+<div class="pair replace"><div class="old">LaDiM LaDiM migrates</div><div class="new">Methods Overview of LaDiM. (a) The Translator Agent produces an initial candidate, and the Orchestrator executes it alongside the source program to measure execution, forward values, gradients, and parameter updates. If the candidate is not accepted, the Verifier Agent applies Layered Diagnosis: it compares these stages in training order and investigates the first one that diverges (gradients in this example), so later stages are not reached. Its code observations, test results, code locations, and hypotheses are handed to the Repair Agent, which tests and edits the candidate and submits it to the Orchestrator. The Orchestrator returns the remaining discrepancies to the Repair Agent until the candidate is accepted or the budget is exhausted. (b) For repositories, repository context management analyzes the repository structure, orders repairs over a dependency graph of work units, and stores evidence outside the conversation so that a compact context can be reconstructed when the agent switches units. Preliminary A migration task $\mathcal T=(P,L_s,F_s,L_t,F_t,W)$ specifies</div></div>
 <div class="pair equal"><div class="old">a source</div><div class="new">a source</div></div>
 <div class="pair delete"><div class="old">training</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">program</div><div class="new">program</div></div>
@@ -281,7 +295,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
 <div class="pair replace"><div class="old">parameters. Some tasks</div><div class="new">algorithms, $S.\hat P$ is the candidate, $S.m$ contains its measurements, $q$ is its verification status, and $H$ is a conversation. Context $C$ retains evidence and provides tools; for repository tasks, it</div></div>
 <div class="pair equal"><div class="old">also</div><div class="new">also</div></div>
-<div class="pair replace"><div class="old">expose buffers or optimizer state. If</div><div class="new">stores the dependency plan and local check results. A submission sends the complete candidate for external verification after a repair stage that can contain several LLM calls, tests, and edits. Each $\textsc{LLMCall}(M,A,H,b,B)$ invokes $M$ with instructions $A$ and conversation $H$ , charging its usage to the stage allowance $b$ and shared budget $B$ . The Orchestrator counts each submission against $B$ . Verifier Agent with Layered Diagnosis Layered Diagnosis $\mathcal T,S,M,B,C$ Evidence $E$ LayeredDiagnosis $\mathcal T,S,M,B,C$ $H\gets\Call{StartConversation}{A_V,\mathcal T,S}$ $b\gets\Call{DiagnosisAllowance}{B}$ $\mathcal D:\ \mathrm{execution}\to v_t\to g_t\to\Delta\theta_t\to v_{t+1}$ $\Call{WithinLimits}{b,B}$ $H\gets C.\Call{PrepareContext}{H,S}$ $(\ell,h,a)\gets\Call{LLMCall}{M,A_V,H,b,B}$ $H\gets\Call{ToolFeedback}{a,H,S,A_V,C}$ if $a.\mathrm{complete}$ then break $\Call{PublicEvidence}{H,C}$ ToolFeedback $a,H,S,A,C$ $(C,S,r)\gets C.\Call{ExecuteTools}{a,S,A}$ $H\mathbin{\|}(a,r)$ The Verifier Agent receives the Translator Agent&#x27;s candidate and the Orchestrator&#x27;s measurements. It uses Layered Diagnosis to focus its investigation on the computations responsible for observed discrepancies. For an</div></div>
+<div class="pair replace"><div class="old">expose buffers or optimizer state. If</div><div class="new">stores the dependency plan and local check results. A submission sends the complete candidate for external verification after a repair stage that can contain several LLM calls, tests, and edits. Each $\textsc{LLMCall}(M,A,H,b,B)$ invokes $M$ with instructions $A$ and conversation $H$ , charging its usage to the stage allowance $b$ and shared budget $B$ . The Orchestrator counts each submission against $B$ . Verifier Agent with Layered Diagnosis Layered Diagnosis $\mathcal T,S,M,B,C$ Evidence $E$ LayeredDiagnosis $\mathcal T,S,M,B,C$ $H\gets\Call{StartConversation}{A_V,\mathcal T,S}$ $b\gets\Call{DiagnosisAllowance}{B}$ $\mathcal D:\ \mathrm{execution}\to v_t\to g_t\to\Delta\theta_t\to v_{t+1}$ $\Call{WithinLimits}{b,B}$ $H\gets C.\Call{PrepareContext}{H,S}$ $(\ell,h,a)\gets\Call{LLMCall}{M,A_V,H,b,B}$ $H\gets\Call{ToolFeedback}{a,H,S,A_V,C}$ if $a.\mathrm{complete}$ then break $\Call{PublicEvidence}{H,C}$ ToolFeedback $a,H,S,A,C$ $(C,S,r)\gets C.\Call{ExecuteTools}{a,S,A}$ $H\mathbin{\|}(a,r)$ The Verifier Agent receives the Translator Agent&#x27;s candidate and the Orchestrator&#x27;s measurements (fig:architecturea). It uses Layered Diagnosis to focus its investigation on the computations responsible for observed discrepancies. For an</div></div>
 <div class="pair equal"><div class="old">execution</div><div class="new">execution</div></div>
 <div class="pair replace"><div class="old">fails, the adapter returns</div><div class="new">discrepancy ( $d_{\mathrm{execution},t}=1$ ), it inspects</div></div>
 <div class="pair equal"><div class="old">the exception and</div><div class="new">the exception and</div></div>
@@ -349,33 +363,31 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">repair</div><div class="new">repair</div></div>
 <div class="pair replace"><div class="old">conversation persist across attempts, and all calls count against one cumulative task budget. Progress reminders report the remaining allowance. When all required checks and confirmation runs pass, the Orchestrator accepts the candidate. A candidate that initially passes the checks can finish investigation and confirmation without corrective edits. If the budget is exhausted, LaDiM returns the current candidate and its verification status.</div><div class="new">stage ends.</div></div>
 <div class="pair equal"><div class="old">Repository Coordination Repository migration</div><div class="new">Repository Coordination Repository migration</div></div>
-<div class="pair replace"><div class="old">requires changes</div><div class="new">raises two problems that single-program migration does not: a repair may span several files that depend on each other, and evidence gathered on one file must remain available while the agent works on others. Repository context management addresses both through three components, described below. Repository Structural Analysis. This tool returns an inventory of the target repository: its files, the imports among them, the functions and classes each file defines, and the cells of each notebook. It also lists target files that are not yet assigned</div></div>
+<div class="pair replace"><div class="old">requires changes</div><div class="new">raises two problems that single-program migration does not: a repair may span several interdependent files, and evidence gathered on one file must remain available while the agent works on others. Repository context management addresses both through three components (fig:architectureb). Repository Structural Analysis. This tool returns an inventory of the target repository: its files, the imports among them, the functions and classes each file defines, and the cells of each notebook. It also lists files not yet assigned</div></div>
 <div class="pair equal"><div class="old">to</div><div class="new">to</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">any work unit, showing which parts of the repository remain unplanned. The agent invokes the tool on demand; it is not run at initialization or when the context is rebuilt. Repair Dependency Graph Planning. Based on this inventory, the agent partitions the target files into work units. Each unit specifies the files it may edit, a repair goal, and the tests that check it, and declares the units it depends on; together, the units form a directed acyclic graph $C.G$ . The agent may start a unit only when the checks of its prerequisite units remain valid, and may edit only the files assigned to that unit, so prerequisite units such as</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">any work unit. The agent invokes it on demand. Repair Dependency Graph Planning. Based on this inventory, the agent partitions the target files into work units. Each unit specifies its editable files, a repair goal, its tests, and the units it depends on; together, the units form a directed acyclic graph $C.G$ . A unit may start only when the checks of its prerequisites remain valid, so</div></div>
 <div class="pair equal"><div class="old">shared implementations</div><div class="new">shared implementations</div></div>
-<div class="pair replace"><div class="old">to remain compatible</div><div class="new">are repaired before the units that depend on them. For each unit, LaDiM stores the results of syntax checks and selected tests in $C.Q$ , together</div></div>
+<div class="pair replace"><div class="old">to remain compatible</div><div class="new">are repaired before the units that use them. $C.Q$ stores each unit&#x27;s syntax check and test results</div></div>
 <div class="pair equal"><div class="old">with</div><div class="new">with</div></div>
-<div class="pair replace"><div class="old">several callers. LaDiM provides</div><div class="new">the code version on which they ran. When</div></div>
+<div class="pair replace"><div class="old">several callers. LaDiM provides</div><div class="new">the code version on which they ran; when</div></div>
 <div class="pair equal"><div class="old">a</div><div class="new">a</div></div>
-<div class="pair replace"><div class="old">map of source files, imports, symbols, and notebook cells from which</div><div class="new">file or</div></div>
+<div class="pair replace"><div class="old">map</div><div class="new">file or the plan changes, the results</div></div>
+<div class="pair equal"><div class="old">of</div><div class="new">of</div></div>
+<div class="pair delete"><div class="old">source files, imports, symbols, and notebook cells from which</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">agent proposes work units with explicit file scopes and dependencies. Each unit describes an interface goal and any declared local tests. The agent selects a unit whose prerequisites have current checkpoints and investigates</div><div class="new">plan changes, these results are invalidated for</div></div>
+<div class="pair delete"><div class="old">agent proposes work units with explicit file scopes and dependencies. Each unit describes an interface goal and any declared local tests. The agent selects a unit whose prerequisites have current checkpoints and investigates the related interfaces before editing. A checkpoint records syntax validation and the outcome of any selected tests. When code changes, previous measurements are marked as belonging to an earlier candidate, and checkpoints for</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">affected units and their dependents</div><div class="new">affected units and their dependents</div></div>
+<div class="pair replace"><div class="old">become stale. Revising a plan can also invalidate local checkpoints, while measurements retain their association with</div><div class="new">are invalidated. Unit checks only guide</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair delete"><div class="old">related interfaces before editing. A checkpoint records syntax validation and the outcome of any selected tests. When code changes, previous measurements are marked as belonging to an earlier candidate, and checkpoints for</div><div class="new">&nbsp;</div></div>
-<div class="pair equal"><div class="old">affected units and</div><div class="new">affected units and</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">all of</div></div>
-<div class="pair equal"><div class="old">their</div><div class="new">their</div></div>
-<div class="pair replace"><div class="old">dependents become stale. Revising a plan can also invalidate local checkpoints, while measurements retain their association with</div><div class="new">dependents, which must then be checked again. Unit checks only guide</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">unchanged candidate. The Orchestrator determines final</div><div class="new">agent;</div></div>
-<div class="pair equal"><div class="old">acceptance</div><div class="new">acceptance</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">is decided</div></div>
-<div class="pair equal"><div class="old">by</div><div class="new">by</div></div>
-<div class="pair replace"><div class="old">evaluating</div><div class="new">the Orchestrator, which verifies</div></div>
+<div class="pair replace"><div class="old">unchanged candidate. The</div><div class="new">agent; the</div></div>
+<div class="pair equal"><div class="old">Orchestrator</div><div class="new">Orchestrator</div></div>
+<div class="pair replace"><div class="old">determines final</div><div class="new">decides</div></div>
+<div class="pair equal"><div class="old">acceptance by</div><div class="new">acceptance by</div></div>
+<div class="pair replace"><div class="old">evaluating</div><div class="new">verifying</div></div>
 <div class="pair equal"><div class="old">the complete</div><div class="new">the complete</div></div>
-<div class="pair replace"><div class="old">declared repository scope,</div><div class="new">repository,</div></div>
-<div class="pair equal"><div class="old">including its entry points and training</div><div class="new">including its entry points and training</div></div>
-<div class="pair replace"><div class="old">checks. As work moves across files, LaDiM keeps complete observations</div><div class="new">computations. Evidence archive and context reconstruction. Tool observations, code read by the agent, measurements, hypotheses,</div></div>
+<div class="pair replace"><div class="old">declared repository scope, including its entry points</div><div class="new">repository. Evidence archive</div></div>
+<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
+<div class="pair replace"><div class="old">training checks. As work moves across files, LaDiM keeps complete observations</div><div class="new">context reconstruction. Tool observations, code read by the agent, measurements, hypotheses,</div></div>
 <div class="pair equal"><div class="old">and conversations</div><div class="new">and conversations</div></div>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">are stored</div></div>
 <div class="pair equal"><div class="old">in an</div><div class="new">in an</div></div>
@@ -383,41 +395,39 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">archive</div><div class="new">archive</div></div>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">$C.E$</div></div>
 <div class="pair equal"><div class="old">outside the editable</div><div class="new">outside the editable</div></div>
-<div class="pair replace"><div class="old">workspace. A read-only tool retrieves records</div><div class="new">workspace, each tagged with the code version it describes. When evidence is handed to the Repair Agent, when the agent switches to another work unit,</div></div>
-<div class="pair equal"><div class="old">or</div><div class="new">or</div></div>
-<div class="pair replace"><div class="old">selected portions of them, allowing an agent to inspect arrays or logs omitted from a summary. At the independent role handoff, an actual switch between work units, or a context capacity boundary, LaDiM rebuilds</div><div class="new">when</div></div>
+<div class="pair replace"><div class="old">workspace. A read-only tool retrieves records or selected portions of them, allowing an</div><div class="new">workspace, each tagged with the code version it describes. At evidence handoff, when the</div></div>
+<div class="pair equal"><div class="old">agent</div><div class="new">agent</div></div>
+<div class="pair replace"><div class="old">to inspect arrays or logs omitted from a summary. At the independent role handoff, an actual switch between</div><div class="new">switches</div></div>
+<div class="pair equal"><div class="old">work units, or</div><div class="new">work units, or</div></div>
+<div class="pair replace"><div class="old">a context capacity boundary, LaDiM rebuilds</div><div class="new">when</div></div>
 <div class="pair equal"><div class="old">the conversation</div><div class="new">the conversation</div></div>
-<div class="pair replace"><div class="old">around</div><div class="new">exceeds 75% of the context capacity, PrepareContext replaces the conversation with a compact one. The new conversation contains</div></div>
+<div class="pair replace"><div class="old">around</div><div class="new">exceeds 75% of the context capacity, PrepareContext replaces the conversation with a compact one containing</div></div>
 <div class="pair equal"><div class="old">the current plan and</div><div class="new">the current plan and</div></div>
 <div class="pair replace"><div class="old">available evidence. It retains</div><div class="new">progress,</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
 <div class="pair delete"><div class="old">full</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">structured</div><div class="new">structured</div></div>
-<div class="pair replace"><div class="old">hypotheses</div><div class="new">findings</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">next steps,</div><div class="new">hypotheses, the</div></div>
-<div class="pair equal"><div class="old">latest</div><div class="new">latest</div></div>
-<div class="pair replace"><div class="old">measurements,</div><div class="new">measurements</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">recently</div><div class="new">tool results, and previously</div></div>
+<div class="pair replace"><div class="old">hypotheses and next steps,</div><div class="new">findings, the</div></div>
+<div class="pair equal"><div class="old">latest measurements, and</div><div class="new">latest measurements, and</div></div>
+<div class="pair replace"><div class="old">recently</div><div class="new">previously</div></div>
 <div class="pair equal"><div class="old">read code</div><div class="new">read code</div></div>
 <div class="pair replace"><div class="old">for</div><div class="new">that is relevant to</div></div>
 <div class="pair equal"><div class="old">the active unit</div><div class="new">the active unit</div></div>
-<div class="pair replace"><div class="old">whose</div><div class="new">and unchanged since it was read. Notebook tools let the agent read and edit individual code cells, with a syntax check after each edit. alg:repository connects these components to alg:diagnose,alg:repair. UpdateDependencyGraph applies Repair Dependency Graph Planning, and Execute handles unit selection,</div></div>
+<div class="pair replace"><div class="old">whose</div><div class="new">and unchanged since it was read. alg:repository connects these components to alg:diagnose,alg:repair. Execute handles unit selection,</div></div>
 <div class="pair equal"><div class="old">file</div><div class="new">file</div></div>
 <div class="pair delete"><div class="old">hashes still match. First selecting a unit</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">continuing</div><div class="new">notebook operations, tests, and evidence retrieval. Each operation updates the shared state $S$ and context $C$ , and returns</div></div>
+<div class="pair replace"><div class="old">continuing</div><div class="new">notebook-cell operations, tests, and evidence retrieval, and returns</div></div>
 <div class="pair equal"><div class="old">an</div><div class="new">an</div></div>
-<div class="pair replace"><div class="old">ordinary repair stage preserve the existing conversation. These rules carry the state of the investigation between units while keeping the evidence associated</div><div class="new">observation $o$ together</div></div>
+<div class="pair replace"><div class="old">ordinary repair stage preserve the existing conversation. These rules carry the state of the investigation between units while keeping the evidence associated</div><div class="new">observation $o$</div></div>
 <div class="pair equal"><div class="old">with the</div><div class="new">with the</div></div>
-<div class="pair replace"><div class="old">code it describes. Appendix [sec:repository-context] gives</div><div class="new">set $U$ of units affected by changes to files or</div></div>
+<div class="pair replace"><div class="old">code it describes. Appendix [sec:repository-context] gives</div><div class="new">set $U$ of units affected by file or plan changes. All units share</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">context limits</div><div class="new">plan. All work units share the repository files, the repair history,</div></div>
+<div class="pair replace"><div class="old">context limits</div><div class="new">repository files, the repair history,</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
 <div class="pair replace"><div class="old">stage budgets.</div><div class="new">the total budget. Repository migration and repair coordination RepositoryMigrate $\mathcal T,M,B$ $C\gets\Call{RepositoryContext}{\mathcal T}$ $S.\hat P\gets\Call{LLMTranslate}{M,A_T,\mathcal T}$ $(S.m,q)\gets\mathcal O.\Call{Verify}{S.\hat P}$ Complete repository if $q=\mathrm{accepted}$ then return $(S.\hat P,q)$ $E\gets\Call{LayeredDiagnosis}{\mathcal T,S,M,B,C}$ alg:diagnose $\Call{Repair}{\mathcal T,S,E,q,M,B,C}$ alg:repair $C$ .ExecuteTools $a,S,A$ $r\gets[\,]$ $c\in a.\mathrm{tools}$ $U\gets\varnothing$ if $c.\mathrm{kind}=\mathrm{structure}$ then $o\gets\Call{RepositoryStructuralAnalysis}{C,S}$ else if $c.\mathrm{kind}=\mathrm{plan}$ then $(C.G,U,o)\gets\Call{UpdateDependencyGraph}{c,C}$ else $(C,S,o,U)\gets\Call{Execute}{c,C,S,A}$ $C.E\gets C.E\mathbin{\|}(o,\Call{CodeVersion}{S})$ ; $r\gets r\mathbin{\|}o$ $C.Q[U\cup\Call{Dependents}{C.G,U}]\gets\mathrm{invalid}$ $(C,S,r)$</div></div>
 </section>
-<section class="section changed" id="reading-5" data-title="Experiments"><h2>Experiments<span class="count"><b class="removed">−1785</b> <b class="added">+1293</b></span></h2>
+<section class="section changed" id="reading-5" data-title="Experiments"><h2>Experiments<span class="count"><b class="removed">−1802</b> <b class="added">+1426</b></span></h2>
 <div class="pair equal"><div class="old">Experiments Experimental Setup</div><div class="new">Experiments Experimental Setup</div></div>
 <div class="pair replace"><div class="old">Tasks and verification.</div><div class="new">Tasks.</div></div>
 <div class="pair equal"><div class="old">The main</div><div class="new">The main</div></div>
@@ -689,35 +699,13 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">programs and preserves all five</div><div class="new">programs and preserves all five</div></div>
 <div class="pair delete"><div class="old">accepted</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">programs</div><div class="new">programs</div></div>
-<div class="pair replace"><div class="old">(Table [tab:natural-repairs] ). The three repair baselines preserve</div><div class="new">that pass evaluation before repair, raising final</div></div>
-<div class="pair equal"><div class="old">acceptance</div><div class="new">acceptance</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">from five to nine. Direct repair, SWE-agent, and MatchFixAgent retain the initial five successes</div></div>
-<div class="pair equal"><div class="old">but</div><div class="new">but</div></div>
-<div class="pair replace"><div class="old">leave all five faulty programs unresolved. Thus</div><div class="new">recover none of</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">difference comes from producing effective corrections on faulty translations. This collection requires investigation of both translated code</div><div class="new">failed programs. In the LSTM case, LaDiM repairs recurrent operations</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">the library operations used during training. Its repair costs include unsuccessful attempts on the remaining faulty program as well as investigation of initially accepted programs. The direct repair control uses the fewest tokens, while LaDiM&#x27;s additional investigation and repair produce four more accepted programs. One successful repair begins with an LSTM translation that cannot execute because</div><div class="new">tensor indexing in</div></div>
-<div class="pair equal"><div class="old">the supporting</div><div class="new">the supporting</div></div>
-<div class="pair replace"><div class="old">library has no registered implementation for its recurrent operator. LaDiM inspects the dispatch registration and reproduces the failure, then adds the recurrent computation using operations in the target framework. The next evaluation proceeds beyond the encoder but exposes recursive tensor indexing. A focused indexing test identifies the dispatch cycle, and a further edit restores execution and</div><div class="new">library, restoring</div></div>
-<div class="pair equal"><div class="old">agreement in</div><div class="new">agreement in</div></div>
-<div class="pair delete"><div class="old">the measured</div><div class="new">&nbsp;</div></div>
-<div class="pair equal"><div class="old">loss, gradients, and parameter updates.</div><div class="new">loss, gradients, and parameter updates.</div></div>
-<div class="pair replace"><div class="old">The sequence illustrates</div><div class="new">This example shows</div></div>
-<div class="pair equal"><div class="old">how</div><div class="new">how</div></div>
-<div class="pair replace"><div class="old">measurements after a change reveal</div><div class="new">training discrepancies guide repair into library implementations used by</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">next fault to investigate. Appendix [sec:natural-protocol] records the checks for this case.</div><div class="new">translated program (sec:natural-protocol).</div></div>
-<div class="pair equal"><div class="old">Repair of</div><div class="new">Repair of</div></div>
-<div class="pair replace"><div class="old">natural translation faults</div><div class="new">(a) ten initial translations, five failing</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">preservation of initially accepted programs.</div><div class="new">five passing, and (b) six faulty JAX candidates. LaDiM and Direct repair allow four submissions; Ivy and torch2jax perform one native conversion.</div></div>
-<div class="pair equal"><div class="old">Tokens</div><div class="new">Tokens</div></div>
-<div class="pair replace"><div class="old">cover</div><div class="new">are in millions for</div></div>
-<div class="pair equal"><div class="old">all</div><div class="new">all</div></div>
-<div class="pair replace"><div class="old">ten selected complete</div><div class="new">investigation and</div></div>
+<div class="pair replace"><div class="old">(Table [tab:natural-repairs] ). The three</div><div class="new">that pass evaluation before repair, raising final acceptance from five to nine. Direct repair, SWE-agent, and MatchFixAgent retain the initial five successes but recover none of the failed programs. sec:natural-protocol details a repaired LSTM whose recurrent operators and tensor indexing in the supporting library required two further submissions. Repair of (a) ten initial translations, five failing and five passing, and (b) six faulty JAX candidates. LaDiM and Direct</div></div>
 <div class="pair equal"><div class="old">repair</div><div class="new">repair</div></div>
-<div class="pair replace"><div class="old">runs, starting from supplied translations.</div><div class="new">calls.</div></div>
+<div class="pair replace"><div class="old">baselines preserve acceptance but leave</div><div class="new">allow four submissions; Ivy and torch2jax perform one native conversion. Tokens are in millions for</div></div>
+<div class="pair equal"><div class="old">all</div><div class="new">all</div></div>
+<div class="pair delete"><div class="old">five faulty programs unresolved. Thus the difference comes from producing effective corrections on faulty translations. This collection requires investigation of both translated code and the library operations used during training. Its repair costs include unsuccessful attempts on the remaining faulty program as well as investigation of initially accepted programs. The direct repair control uses the fewest tokens, while LaDiM&#x27;s additional</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">investigation and repair</div><div class="new">investigation and repair</div></div>
+<div class="pair replace"><div class="old">produce four more accepted programs. One successful repair begins with an LSTM translation that cannot execute because the supporting library has no registered implementation for its recurrent operator. LaDiM inspects the dispatch registration and reproduces the failure, then adds the recurrent computation using operations in the target framework. The next evaluation proceeds beyond the encoder but exposes recursive tensor indexing. A focused indexing test identifies the dispatch cycle, and a further edit restores execution and agreement in the measured loss, gradients, and parameter updates. The sequence illustrates how measurements after a change reveal the next fault to investigate. Appendix [sec:natural-protocol] records the checks for this case. Repair of natural translation faults and preservation of initially accepted programs. Tokens cover all ten selected complete repair runs, starting from supplied translations.</div><div class="new">calls.</div></div>
 <div class="pair equal"><div class="old">Method &amp;</div><div class="new">Method &amp;</div></div>
 <div class="pair replace"><div class="old">Faulty programs repaired</div><div class="new">Repaired &amp; Preserved &amp; Tokens</div></div>
 <div class="pair equal"><div class="old">&amp; Accepted</div><div class="new">&amp; Accepted</div></div>
@@ -741,37 +729,45 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">9/10</div><div class="new">9/10</div></div>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">Method</div></div>
 <div class="pair equal"><div class="old">&amp;</div><div class="new">&amp;</div></div>
-<div class="pair replace"><div class="old">13.207</div><div class="new">Accepted &amp; Calls &amp; Tokens LaDiM &amp; 6/6 &amp; 76 &amp; 0.674 Direct repair &amp; 6/6 &amp; 57 &amp; 0.353 Ivy &amp; 0/6 &amp; 0 &amp; 0 torch2jax &amp; 0/6 &amp; 0 &amp; 0</div></div>
-<div class="pair equal"><div class="old">Training Signals and Detection</div><div class="new">Training Signals and Detection</div></div>
-<div class="pair replace"><div class="old">Latency The diagnostic study follows four models for 50 steps under three seeds. With per-step synchronization, each target model starts the checked step from the source state, allowing a discrepancy to be associated with the current computation. Correct translations pass the recorded checks, with a maximum loss difference of $3.815\times10^{-6}$ .</div><div class="new">Latency.</div></div>
-<div class="pair equal"><div class="old">Gradient</div><div class="new">Gradient</div></div>
-<div class="pair delete"><div class="old">faults can preserve loss agreement,</div><div class="new">&nbsp;</div></div>
-<div class="pair equal"><div class="old">and update faults</div><div class="new">and update faults</div></div>
-<div class="pair replace"><div class="old">can preserve both</div><div class="new">take effect after the loss of</div></div>
-<div class="pair equal"><div class="old">the current</div><div class="new">the current</div></div>
-<div class="pair replace"><div class="old">forward computation</div><div class="new">step has been computed, so the loss cannot reveal them at the step where they occur. In a detection study that injects gradient scaling</div></div>
+<div class="pair replace"><div class="old">13.207 Training Signals</div><div class="new">Accepted &amp; Calls &amp; Tokens LaDiM &amp; 6/6 &amp; 76 &amp; 0.674 Direct repair &amp; 6/6 &amp; 57 &amp; 0.353 Ivy &amp; 0/6 &amp; 0 &amp; 0 torch2jax &amp; 0/6 &amp; 0 &amp; 0 LaDiM repairs a silent gradient fault in an autoencoder classifier. (a) Matching forward values</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">gradient. When each execution retains its own state, the faults influence later forward values. The</div><div class="new">partial update suppression into four models with three seeds each,</div></div>
+<div class="pair replace"><div class="old">Detection Latency</div><div class="new">correct downstream gradients direct diagnosis to Tanh.</div></div>
+<div class="pair equal"><div class="old">The</div><div class="new">The</div></div>
+<div class="pair replace"><div class="old">diagnostic study follows four models</div><div class="new">patch registers MindSpore&#x27;s tanh</div></div>
+<div class="pair equal"><div class="old">for</div><div class="new">for</div></div>
+<div class="pair replace"><div class="old">50 steps under three seeds. With per-step synchronization, each target model starts</div><div class="new">torch.tanh and torch.nn.functional.tanh (decorators omitted). (b) Investigation and repair costs include all calls, excluding initial translation. LaDiM tests at call 17, patches at 22, passes public verification at 23, and finishes at 24. Both baselines remain unrepaired at</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">checked step</div><div class="new">40-call limit. Case Study: From a Silent Gradient Fault to an Accepted Repair. fig:tanh-case traces a failing translation</div></div>
+<div class="pair equal"><div class="old">from</div><div class="new">from</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">tab:repair-resultsa, an autoencoder-style classifier whose encoder applies Tanh between two linear layers. Execution and forward values match</div></div>
+<div class="pair equal"><div class="old">the source</div><div class="new">the source</div></div>
+<div class="pair replace"><div class="old">state, allowing</div><div class="new">and the loss differs by only $1.4\times10^{-6}$ , yet the first linear layer receives zero gradients. Because the second layer&#x27;s gradients are correct, the Verifier isolates Tanh, and</div></div>
+<div class="pair equal"><div class="old">a</div><div class="new">a</div></div>
+<div class="pair replace"><div class="old">discrepancy</div><div class="new">targeted test confirms that the supporting library lacks a MindSpore mapping for it, so Tanh silently runs in PyTorch outside MindSpore differentiation. LaDiM registers MindSpore&#x27;s tanh and passes public verification at call 23, with acceptance confirmed on three seeds and 1.488 million tokens over all 24 calls. SWE-agent and MatchFixAgent also suspect Tanh but never turn the suspicion into a tested patch, exhausting the 40-call limit after 1.606 and 2.341 million tokens. Such faults are invisible</div></div>
+<div class="pair equal"><div class="old">to</div><div class="new">to</div></div>
+<div class="pair delete"><div class="old">be associated with</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">current computation. Correct translations pass</div><div class="new">loss at</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">recorded checks, with a maximum loss difference of $3.815\times10^{-6}$ . Gradient faults can preserve loss agreement, and update faults can preserve both the current forward computation and gradient. When each execution retains its own state, the faults influence later forward values. The</div><div class="new">step where they occur:</div></div>
 <div class="pair equal"><div class="old">gradient and update checks</div><div class="new">gradient and update checks</div></div>
 <div class="pair delete"><div class="old">in Figure [fig:gradient-drift]</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">detect</div><div class="new">detect</div></div>
-<div class="pair replace"><div class="old">their respective</div><div class="new">the corresponding</div></div>
+<div class="pair replace"><div class="old">their respective</div><div class="new">injected</div></div>
 <div class="pair equal"><div class="old">faults at step 1 in all 12 runs per</div><div class="new">faults at step 1 in all 12 runs per</div></div>
-<div class="pair replace"><div class="old">panel. Individual</div><div class="new">fault. A</div></div>
+<div class="pair replace"><div class="old">panel. Individual</div><div class="new">fault, whereas a</div></div>
 <div class="pair equal"><div class="old">loss</div><div class="new">loss</div></div>
-<div class="pair replace"><div class="old">trajectories cross</div><div class="new">check with a threshold of 0.02 detects 3 and 4 of</div></div>
+<div class="pair replace"><div class="old">trajectories cross</div><div class="new">check at</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">threshold</div><div class="new">12 runs, respectively,</div></div>
-<div class="pair equal"><div class="old">within</div><div class="new">within</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">50 steps. sec:detection-measurements gives</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">observation window in only 3/12</div><div class="new">protocol, the detection trajectories,</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair delete"><div class="old">4/12 runs, even though</div><div class="new">&nbsp;</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">mean curves cross at steps 31 and 18. Loss detection therefore depends on how errors accumulate, while direct gradient and update checks make</div><div class="new">sensitivity to</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">affected computation available for immediate investigation.</div><div class="new">loss threshold.</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">0.02</div></div>
+<div class="pair equal"><div class="old">threshold</div><div class="new">threshold</div></div>
+<div class="pair replace"><div class="old">within the observation window in only</div><div class="new">detects</div></div>
+<div class="pair equal"><div class="old">3/12</div><div class="new">3/12</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">gradient-scaling</div></div>
+<div class="pair equal"><div class="old">and 4/12</div><div class="new">and 4/12</div></div>
+<div class="pair replace"><div class="old">runs, even though the mean curves cross at</div><div class="new">update-suppression runs within 50</div></div>
+<div class="pair equal"><div class="old">steps</div><div class="new">steps</div></div>
+<div class="pair replace"><div class="old">31 and 18. Loss detection therefore depends on how errors accumulate, while direct gradient and update checks make the affected computation available for immediate investigation.</div><div class="new">(sec:detection-measurements).</div></div>
 <div class="pair equal"><div class="old">Generalization Across</div><div class="new">Generalization Across</div></div>
 <div class="pair replace"><div class="old">Frameworks</div><div class="new">Frameworks. LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults in MLP and CNN models (tab:repair-resultsb). Every case passes single-step SGD verification on three seeds after the first submission. Direct repair also accepts all six cases and uses fewer tokens. Ivy and torch2jax accept none of the faulty candidates after native conversion. Both converters pass evaluation on the corresponding MLP and CNN programs without these faults. In these cases, native conversion preserves the supplied execution or numerical faults, and explicit repair restores agreement in training behavior.</div></div>
 <div class="pair equal"><div class="old">The</div><div class="new">The</div></div>
@@ -781,9 +777,9 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">with</div><div class="new">with</div></div>
 <div class="pair replace"><div class="old">shared tools both accept all six within their first submission under verification on three seeds. The execution adapter changes while the investigation continues to use corresponding forward values, gradients,</div><div class="new">JAX differentiation</div></div>
 <div class="pair equal"><div class="old">and parameter updates.</div><div class="new">and parameter updates.</div></div>
-<div class="pair replace"><div class="old">These repairs demonstrate LaDiM&#x27;s effectiveness with another target framework. Appendix [sec:supplementary-protocols]</div><div class="new">sec:jax-protocol details the converter evaluations. sec:native-jax-study</div></div>
-<div class="pair equal"><div class="old">reports the</div><div class="new">reports the</div></div>
-<div class="pair replace"><div class="old">implementation and complete costs.</div><div class="new">separate study of native JAX translations evaluated over consecutive training steps.</div></div>
+<div class="pair replace"><div class="old">These repairs demonstrate LaDiM&#x27;s effectiveness with another target framework. Appendix [sec:supplementary-protocols] reports</div><div class="new">sec:jax-protocol details</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">implementation and complete costs.</div><div class="new">converter evaluations.</div></div>
 <div class="pair equal"><div class="old">Ablation Studies Training</div><div class="new">Ablation Studies Training</div></div>
 <div class="pair replace"><div class="old">signal coverage.</div><div class="new">signals.</div></div>
 <div class="pair equal"><div class="old">We</div><div class="new">We</div></div>
@@ -1296,7 +1292,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
 <div class="pair replace"><div class="old">acceptance checks. The corresponding agent and tool backend configurations are documented with the frozen sources and results.</div><div class="new">computed values, without an additional confirmation stage across random seeds.</div></div>
 </section>
-<section class="section changed" id="reading-11" data-title="Appendix — Natural Translation Repair Protocol"><h2>Appendix — Natural Translation Repair Protocol<span class="count"><b class="removed">−133</b> <b class="added">+116</b></span></h2>
+<section class="section changed" id="reading-11" data-title="Appendix — Natural Translation Repair Protocol"><h2>Appendix — Natural Translation Repair Protocol<span class="count"><b class="removed">−129</b> <b class="added">+362</b></span></h2>
 <div class="pair equal"><div class="old">Natural Translation Repair Protocol</div><div class="new">Natural Translation Repair Protocol</div></div>
 <div class="pair replace"><div class="old">The</div><div class="new">Of the</div></div>
 <div class="pair equal"><div class="old">ten</div><div class="new">ten</div></div>
@@ -1366,7 +1362,13 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">difference is $2.38\times10^{-7}$ , gradient vector L2 difference is $4.19\times10^{-7}$ , and relative parameter update difference is $8.11\times10^{-7}$ . The example uses 32</div><div class="new">difference is $2.38\times10^{-7}$ , gradient vector L2 difference is $4.19\times10^{-7}$ , and relative parameter update difference is $8.11\times10^{-7}$ . The example uses 32</div></div>
 <div class="pair replace"><div class="old">model</div><div class="new">LLM</div></div>
 <div class="pair equal"><div class="old">calls.</div><div class="new">calls.</div></div>
-<div class="pair delete"><div class="old">This trajectory belongs to the same LaDiM configuration as the natural fault table.</div><div class="new">&nbsp;</div></div>
+<div class="pair replace"><div class="old">This trajectory belongs</div><div class="new">In the autoencoder example of fig:tanh-case, the supporting library registers the low-level Tanh operator but not torch.tanh or torch.nn.functional.tanh. Unregistered calls fall back to PyTorch on copied tensors, which preserves forward values but disconnects the MindSpore differentiation graph. Before repair, on the public evaluation seed, layer outputs differ by at most $1.5\times10^{-8}$ and the absolute loss difference is $1.43\times10^{-6}$ . The gradients of the first linear layer&#x27;s weight and bias are zero, against norms of 0.342 and 0.109 in the source, while the other six parameter gradients differ by at most $6.2\times10^{-7}$ . The gradient vector L2 difference is 0.359 and the relative parameter update difference is 0.771, whereas the absolute gradient-norm difference, 0.046, stays below its threshold. LaDiM&#x27;s first submission contains no edits and fails. Its diagnostic test compares summed absolute input gradients under MindSpore differentiation: 4.894 for native tanh and zero for dispatched Tanh, while dispatched ReLU, sigmoid, and multiplication all pass nonzero gradients. The patch adds a four-line registration</div></div>
+<div class="pair equal"><div class="old">to the</div><div class="new">to the</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">library, and the second submission is accepted on all three seeds, with gradient vector L2 difference $1.01\times10^{-6}$ and relative parameter update difference $6.42\times10^{-6}$ on the public seed. SWE-agent and MatchFixAgent both attribute the zero gradients to Tanh, and MatchFixAgent even drafts the</div></div>
+<div class="pair equal"><div class="old">same</div><div class="new">same</div></div>
+<div class="pair replace"><div class="old">LaDiM configuration as</div><div class="new">registration, yet neither applies an edit to</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">natural fault table.</div><div class="new">library within 40 calls, so both leave the program unrepaired. This case illustrates the completion condition in sec:repair-agent: the Repair Agent must apply an edit and test after that edit before completing the repair stage.</div></div>
 </section>
 <section class="section changed" id="reading-12" data-title="Appendix — Repository Protocols and Detailed Results"><h2>Appendix — Repository Protocols and Detailed Results<span class="count"><b class="removed">−169</b> <b class="added">+484</b></span></h2>
 <div class="pair equal"><div class="old">Repository Protocols and Detailed Results All methods receive</div><div class="new">Repository Protocols and Detailed Results All methods receive</div></div>
@@ -1685,7 +1687,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair replace"><div class="old">for\\</div><div class="new">for</div></div>
 <div class="pair equal"><div class="old">Multi-Agent Code Migration</div><div class="new">Multi-Agent Code Migration</div></div>
 </section>
-<section class="section changed" id="latex-1" data-title="Abstract"><h2>Abstract<span class="count"><b class="removed">−134</b> <b class="added">+157</b></span></h2>
+<section class="section changed" id="latex-1" data-title="Abstract"><h2>Abstract<span class="count"><b class="removed">−126</b> <b class="added">+152</b></span></h2>
 <div class="pair equal"><div class="old">Migrating</div><div class="new">Migrating</div></div>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">code across</div></div>
 <div class="pair equal"><div class="old">deep learning</div><div class="new">deep learning</div></div>
@@ -1701,7 +1703,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">errors.</div><div class="new">errors.</div></div>
 <div class="pair replace"><div class="old">Such semantic drift may remain hidden even when the program runs successfully</div><div class="new">LaDiM includes Translator, Verifier,</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">its loss initially agrees with the source. We propose LaDiM,</div><div class="new">Repair agents work under</div></div>
+<div class="pair replace"><div class="old">its loss initially agrees with the source. We propose LaDiM,</div><div class="new">Repair agents working under</div></div>
 <div class="pair equal"><div class="old">a</div><div class="new">a</div></div>
 <div class="pair replace"><div class="old">multi-agent framework that uses dependencies between training computations to guide diagnosis and repair.</div><div class="new">shared Orchestrator. The Translator produces an initial output.</div></div>
 <div class="pair equal"><div class="old">The Verifier</div><div class="new">The Verifier</div></div>
@@ -1709,17 +1711,31 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
 <div class="pair replace"><div class="old">translated program diverges from</div><div class="new">computation order and hands its findings to</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">source</div><div class="new">Repair Agent, which revises using evidences</div></div>
+<div class="pair replace"><div class="old">source</div><div class="new">Repair Agent, which revises the candidate using this evidence</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">passes supporting evidence</div><div class="new">a persistent repair history. For repository-scale migrations, LaDiM further introduces repository context management which tracks cross-file dependencies and preserves diagnostic context as agents move across the repository. Evaluation across framework migration, language migration, and repository-level translate tasks shows that LaDiM achieves comparable or better migration results with up</div></div>
+<div class="pair delete"><div class="old">passes supporting evidence to</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">a</div><div class="new">a</div></div>
+<div class="pair replace"><div class="old">separate Repair Agent. Measurements after each submitted change guide</div><div class="new">persistent repair history. For repository-scale migrations, LaDiM</div></div>
+<div class="pair equal"><div class="old">further</div><div class="new">further</div></div>
+<div class="pair replace"><div class="old">repair. For repositories, LaDiM</div><div class="new">introduces repository context management which</div></div>
+<div class="pair equal"><div class="old">tracks</div><div class="new">tracks</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">cross-file</div></div>
+<div class="pair equal"><div class="old">dependencies</div><div class="new">dependencies</div></div>
+<div class="pair delete"><div class="old">between files</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
+<div class="pair replace"><div class="old">retains evidence</div><div class="new">preserves diagnostic context</div></div>
+<div class="pair equal"><div class="old">as</div><div class="new">as</div></div>
+<div class="pair replace"><div class="old">work moves between them. On 50</div><div class="new">agents move across the repository. Evaluation across framework migration, language migration, and repository</div></div>
+<div class="pair equal"><div class="old">migration tasks</div><div class="new">migration tasks</div></div>
+<div class="pair replace"><div class="old">from PyTorch</div><div class="new">shows that LaDiM achieves comparable or better migration results with up</div></div>
 <div class="pair equal"><div class="old">to</div><div class="new">to</div></div>
-<div class="pair replace"><div class="old">a separate Repair Agent. Measurements after each submitted change guide further repair. For repositories, LaDiM tracks dependencies between files and retains evidence as work moves between them. On 50 migration tasks from PyTorch to MindSpore, LaDiM matches MatchFixAgent&#x27;s full acceptance with 57.4\%</div><div class="new">80.8\%</div></div>
+<div class="pair replace"><div class="old">MindSpore, LaDiM matches MatchFixAgent&#x27;s full acceptance with 57.4\%</div><div class="new">80.8\%</div></div>
 <div class="pair equal"><div class="old">fewer</div><div class="new">fewer</div></div>
 <div class="pair replace"><div class="old">total tokens, including initial translation. Experiments on MindSpore and JAX, together with migration tasks from Java to Python, demonstrate LaDiM&#x27;s effectiveness across frameworks and programming languages.</div><div class="new">tokens than state-of-the-art methods, demonstrating its effectiveness.</div></div>
 </section>
 <section class="section changed" id="latex-2" data-title="Introduction"><h2>Introduction<span class="count"><b class="removed">−486</b> <b class="added">+390</b></span></h2>
 <div class="pair equal"><div class="old">\section{Introduction}</div><div class="new">\section{Introduction}</div></div>
-<div class="pair replace"><div class="old">Migrating</div><div class="new">{\hyphenpenalty=10000\emergencystretch=1em \begin{wrapfigure}{r}{0.43\textwidth} \vspace{-\intextsep} \centering \includegraphics[width=\linewidth]{figures/migration_motivation.pdf} \caption{Tokens used on 50 PyTorch to MindSpore migrations tasks.} \label{fig:migration-motivation} \end{wrapfigure} Code development environments and languages have grown increasingly diverse. Focusing on</div></div>
+<div class="pair replace"><div class="old">Migrating</div><div class="new">{\hyphenpenalty=10000\emergencystretch=1em \begin{wrapfigure}{r}{0.43\textwidth} \vspace{-\intextsep} \centering \includegraphics[width=\linewidth]{figures/migration_motivation.pdf} \caption{Tokens used on 50 PyTorch to MindSpore migration tasks.} \label{fig:migration-motivation} \end{wrapfigure} Code development environments and languages have grown increasingly diverse. Focusing on</div></div>
 <div class="pair equal"><div class="old">deep</div><div class="new">deep</div></div>
 <div class="pair replace"><div class="old">learning code allows existing</div><div class="new">learning, popular frameworks such as PyTorch, TensorFlow, and MindSpore provide programming interfaces, execution semantics, and hardware backends~\citep{paszke2019pytorch,abadi2016tensorflow,mindspore2020whitepaper}. To enable easy adaptation of deep</div></div>
 <div class="pair equal"><div class="old">models and training</div><div class="new">models and training</div></div>
@@ -1886,10 +1902,10 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">to revise its hypotheses.</div><div class="new">to revise its hypotheses.</div></div>
 <div class="pair delete"><div class="old">The comparison evaluates both methods from the same initial translation and includes translation costs.</div><div class="new">&nbsp;</div></div>
 </section>
-<section class="section changed" id="latex-4" data-title="Methods"><h2>Methods<span class="count"><b class="removed">−931</b> <b class="added">+1347</b></span></h2>
+<section class="section changed" id="latex-4" data-title="Methods"><h2>Methods<span class="count"><b class="removed">−931</b> <b class="added">+1294</b></span></h2>
 <div class="pair replace"><div class="old">\section{LaDiM}</div><div class="new">\section{Methods}</div></div>
 <div class="pair equal"><div class="old">\label{sec:method}</div><div class="new">\label{sec:method}</div></div>
-<div class="pair replace"><div class="old">LaDiM migrates</div><div class="new">\cref{fig:architecture} overviews LaDiM; \cref{sec:hierarchy,sec:repair-agent,sec:repository-method} describe diagnosis, repair, and repository coordination. \begin{figure}[!t] \centering \includegraphics[width=0.9\textwidth]{figures/hierarchical_feedback_architecture.pdf} \caption{Overview of LaDiM. (a) The Orchestrator coordinates translation, diagnosis, repair, and validation. The Verifier investigates the first divergent stage and hands evidence to the Repair Agent. (b) Repository context management combines structural analysis, dependency planning, and evidence retrieval with context reconstruction. $A_T$, $A_V$, and $A_R$ denote agent instructions. Code and traces are illustrative. Java/DJL experiments migrate in the reverse direction, to Python/PyTorch.} \label{fig:architecture} \end{figure} \subsection{Preliminary} A migration task $\mathcal T=(P,L_s,F_s,L_t,F_t,W)$ specifies</div></div>
+<div class="pair replace"><div class="old">LaDiM migrates</div><div class="new">\begin{figure}[!t] \centering \includegraphics[width=0.9\textwidth]{figures/hierarchical_feedback_architecture.pdf} \caption{Overview of LaDiM. (a) The Translator Agent produces an initial candidate, and the Orchestrator executes it alongside the source program to measure execution, forward values, gradients, and parameter updates. If the candidate is not accepted, the Verifier Agent applies Layered Diagnosis: it compares these stages in training order and investigates the first one that diverges (gradients in this example), so later stages are not reached. Its code observations, test results, code locations, and hypotheses are handed to the Repair Agent, which tests and edits the candidate and submits it to the Orchestrator. The Orchestrator returns the remaining discrepancies to the Repair Agent until the candidate is accepted or the budget is exhausted. (b) For repositories, repository context management analyzes the repository structure, orders repairs over a dependency graph of work units, and stores evidence outside the conversation so that a compact context can be reconstructed when the agent switches units.} \label{fig:architecture} \end{figure} \subsection{Preliminary} A migration task $\mathcal T=(P,L_s,F_s,L_t,F_t,W)$ specifies</div></div>
 <div class="pair equal"><div class="old">a source</div><div class="new">a source</div></div>
 <div class="pair delete"><div class="old">training</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">program</div><div class="new">program</div></div>
@@ -1941,7 +1957,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">also</div><div class="new">also</div></div>
 <div class="pair replace"><div class="old">expose buffers or optimizer state. If execution fails,</div><div class="new">stores</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">adapter returns</div><div class="new">dependency plan and local check results. A submission sends the complete candidate for external verification after a repair stage that can contain several LLM calls, tests, and edits. Each $\textsc{LLMCall}(M,A,H,b,B)$ invokes $M$ with instructions $A$ and conversation $H$, charging its usage to the stage allowance $b$ and shared budget $B$. The Orchestrator counts each submission against $B$. \subsection{Verifier Agent with Layered Diagnosis} \label{sec:hierarchy} { \begin{wrapfigure}{l}{0.55\textwidth} \begin{minipage}{\linewidth} \setlength{\intextsep}{0pt} \begin{algorithm}[H] \caption{Layered Diagnosis} \label{alg:diagnose} \raggedright \small \begin{algorithmic}[1] \Require $\mathcal T,S,M,B,C$ \Ensure Evidence $E$ \Function{LayeredDiagnosis}{$\mathcal T,S,M,B,C$} \State $H\gets\Call{StartConversation}{A_V,\mathcal T,S}$ \State $b\gets\Call{DiagnosisAllowance}{B}$ \State $\mathcal D:\ \mathrm{execution}\to v_t\to g_t\to\Delta\theta_t\to v_{t+1}$ \While{$\Call{WithinLimits}{b,B}$} \State $H\gets C.\Call{PrepareContext}{H,S}$ \State $(\ell,h,a)\gets\Call{LLMCall}{M,A_V,H,b,B}$ \State $H\gets\Call{ToolFeedback}{a,H,S,A_V,C}$ \State \textbf{if} $a.\mathrm{complete}$ \textbf{then break} \EndWhile \State \Return $\Call{PublicEvidence}{H,C}$ \EndFunction \Function{ToolFeedback}{$a,H,S,A,C$} \State $(C,S,r)\gets C.\Call{ExecuteTools}{a,S,A}$ \State \Return $H\mathbin{\|}(a,r)$ \EndFunction \end{algorithmic} \end{algorithm} \end{minipage} \end{wrapfigure} The Verifier Agent receives the Translator Agent&#x27;s candidate and the Orchestrator&#x27;s measurements. It uses Layered Diagnosis to focus its investigation on the computations responsible for observed discrepancies. For an \textbf{execution discrepancy} ($d_{\mathrm{execution},t}=1$), it inspects</div></div>
+<div class="pair replace"><div class="old">adapter returns</div><div class="new">dependency plan and local check results. A submission sends the complete candidate for external verification after a repair stage that can contain several LLM calls, tests, and edits. Each $\textsc{LLMCall}(M,A,H,b,B)$ invokes $M$ with instructions $A$ and conversation $H$, charging its usage to the stage allowance $b$ and shared budget $B$. The Orchestrator counts each submission against $B$. \subsection{Verifier Agent with Layered Diagnosis} \label{sec:hierarchy} { \begin{wrapfigure}{l}{0.55\textwidth} \begin{minipage}{\linewidth} \setlength{\intextsep}{0pt} \begin{algorithm}[H] \caption{Layered Diagnosis} \label{alg:diagnose} \raggedright \small \begin{algorithmic}[1] \Require $\mathcal T,S,M,B,C$ \Ensure Evidence $E$ \Function{LayeredDiagnosis}{$\mathcal T,S,M,B,C$} \State $H\gets\Call{StartConversation}{A_V,\mathcal T,S}$ \State $b\gets\Call{DiagnosisAllowance}{B}$ \State $\mathcal D:\ \mathrm{execution}\to v_t\to g_t\to\Delta\theta_t\to v_{t+1}$ \While{$\Call{WithinLimits}{b,B}$} \State $H\gets C.\Call{PrepareContext}{H,S}$ \State $(\ell,h,a)\gets\Call{LLMCall}{M,A_V,H,b,B}$ \State $H\gets\Call{ToolFeedback}{a,H,S,A_V,C}$ \State \textbf{if} $a.\mathrm{complete}$ \textbf{then break} \EndWhile \State \Return $\Call{PublicEvidence}{H,C}$ \EndFunction \Function{ToolFeedback}{$a,H,S,A,C$} \State $(C,S,r)\gets C.\Call{ExecuteTools}{a,S,A}$ \State \Return $H\mathbin{\|}(a,r)$ \EndFunction \end{algorithmic} \end{algorithm} \end{minipage} \end{wrapfigure} The Verifier Agent receives the Translator Agent&#x27;s candidate and the Orchestrator&#x27;s measurements (\cref{fig:architecture}a). It uses Layered Diagnosis to focus its investigation on the computations responsible for observed discrepancies. For an \textbf{execution discrepancy} ($d_{\mathrm{execution},t}=1$), it inspects</div></div>
 <div class="pair equal"><div class="old">the exception and</div><div class="new">the exception and</div></div>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">the calls that produced it. For a \textbf{forward discrepancy} ($d_{\mathrm{forward},t}\not\simeq0$), it traces the operators that produce different values and tests the suspected computation. When forward values agree but a \textbf{gradient discrepancy} ($d_{\mathrm{gradient},t}\not\simeq0$) remains, it examines parameter registration and the path from the parameters to the loss. When both forward values and gradients agree, it investigates an \textbf{update discrepancy} ($d_{\mathrm{update},t}\not\simeq0$) through the optimizer&#x27;s rule and state. The first step with an observed discrepancy further guides this investigation because a changed update can alter later forward computations. The LLM selects code inspections and tests that distinguish possible causes, then records the code locations and</div></div>
 <div class="pair equal"><div class="old">observations</div><div class="new">observations</div></div>
@@ -2007,33 +2023,31 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">repair</div><div class="new">repair</div></div>
 <div class="pair replace"><div class="old">conversation persist across attempts, and all calls count against one cumulative task budget. Progress reminders report the remaining allowance. When all required checks and confirmation runs pass, the Orchestrator accepts the candidate. A candidate that initially passes the checks can finish investigation and confirmation without corrective edits. If the budget is exhausted, LaDiM returns the current candidate and its verification status.</div><div class="new">stage ends.\par}</div></div>
 <div class="pair equal"><div class="old">\subsection{Repository Coordination} \label{sec:repository-method} Repository migration</div><div class="new">\subsection{Repository Coordination} \label{sec:repository-method} Repository migration</div></div>
-<div class="pair replace"><div class="old">requires changes</div><div class="new">raises two problems that single-program migration does not: a repair may span several files that depend on each other, and evidence gathered on one file must remain available while the agent works on others. Repository context management addresses both through three components, described below. \textbf{Repository Structural Analysis.} This tool returns an inventory of the target repository: its files, the imports among them, the functions and classes each file defines, and the cells of each notebook. It also lists target files that are not yet assigned</div></div>
+<div class="pair replace"><div class="old">requires changes</div><div class="new">raises two problems that single-program migration does not: a repair may span several interdependent files, and evidence gathered on one file must remain available while the agent works on others. Repository context management addresses both through three components (\cref{fig:architecture}b). \textbf{Repository Structural Analysis.} This tool returns an inventory of the target repository: its files, the imports among them, the functions and classes each file defines, and the cells of each notebook. It also lists files not yet assigned</div></div>
 <div class="pair equal"><div class="old">to</div><div class="new">to</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">any work unit, showing which parts of the repository remain unplanned. The agent invokes the tool on demand; it is not run at initialization or when the context is rebuilt. \textbf{Repair Dependency Graph Planning.} Based on this inventory, the agent partitions the target files into \emph{work units}. Each unit specifies the files it may edit, a repair goal, and the tests that check it, and declares the units it depends on; together, the units form a directed acyclic graph $C.G$. The agent may start a unit only when the checks of its prerequisite units remain valid, and may edit only the files assigned to that unit, so prerequisite units such as</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">any work unit. The agent invokes it on demand. \textbf{Repair Dependency Graph Planning.} Based on this inventory, the agent partitions the target files into \emph{work units}. Each unit specifies its editable files, a repair goal, its tests, and the units it depends on; together, the units form a directed acyclic graph $C.G$. A unit may start only when the checks of its prerequisites remain valid, so</div></div>
 <div class="pair equal"><div class="old">shared implementations</div><div class="new">shared implementations</div></div>
-<div class="pair replace"><div class="old">to remain compatible</div><div class="new">are repaired before the units that depend on them. For each unit, LaDiM stores the results of syntax checks and selected tests in $C.Q$, together</div></div>
+<div class="pair replace"><div class="old">to remain compatible</div><div class="new">are repaired before the units that use them. $C.Q$ stores each unit&#x27;s syntax check and test results</div></div>
 <div class="pair equal"><div class="old">with</div><div class="new">with</div></div>
-<div class="pair replace"><div class="old">several callers. LaDiM provides</div><div class="new">the code version on which they ran. When</div></div>
+<div class="pair replace"><div class="old">several callers. LaDiM provides</div><div class="new">the code version on which they ran; when</div></div>
 <div class="pair equal"><div class="old">a</div><div class="new">a</div></div>
-<div class="pair replace"><div class="old">map of source files, imports, symbols, and notebook cells from which</div><div class="new">file or</div></div>
+<div class="pair replace"><div class="old">map</div><div class="new">file or the plan changes, the results</div></div>
+<div class="pair equal"><div class="old">of</div><div class="new">of</div></div>
+<div class="pair delete"><div class="old">source files, imports, symbols, and notebook cells from which</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">agent proposes work units with explicit file scopes and dependencies. Each unit describes an interface goal and any declared local tests. The agent selects a unit whose prerequisites have current checkpoints and investigates</div><div class="new">plan changes, these results are invalidated for</div></div>
+<div class="pair delete"><div class="old">agent proposes work units with explicit file scopes and dependencies. Each unit describes an interface goal and any declared local tests. The agent selects a unit whose prerequisites have current checkpoints and investigates the related interfaces before editing. A checkpoint records syntax validation and the outcome of any selected tests. When code changes, previous measurements are marked as belonging to an earlier candidate, and checkpoints for</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">affected units and their dependents</div><div class="new">affected units and their dependents</div></div>
+<div class="pair replace"><div class="old">become stale. Revising a plan can also invalidate local checkpoints, while measurements retain their association with</div><div class="new">are invalidated. Unit checks only guide</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair delete"><div class="old">related interfaces before editing. A checkpoint records syntax validation and the outcome of any selected tests. When code changes, previous measurements are marked as belonging to an earlier candidate, and checkpoints for</div><div class="new">&nbsp;</div></div>
-<div class="pair equal"><div class="old">affected units and</div><div class="new">affected units and</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">all of</div></div>
-<div class="pair equal"><div class="old">their</div><div class="new">their</div></div>
-<div class="pair replace"><div class="old">dependents become stale. Revising a plan can also invalidate local checkpoints, while measurements retain their association with</div><div class="new">dependents, which must then be checked again. Unit checks only guide</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">unchanged candidate. The Orchestrator determines final</div><div class="new">agent;</div></div>
-<div class="pair equal"><div class="old">acceptance</div><div class="new">acceptance</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">is decided</div></div>
-<div class="pair equal"><div class="old">by</div><div class="new">by</div></div>
-<div class="pair replace"><div class="old">evaluating</div><div class="new">the Orchestrator, which verifies</div></div>
+<div class="pair replace"><div class="old">unchanged candidate. The</div><div class="new">agent; the</div></div>
+<div class="pair equal"><div class="old">Orchestrator</div><div class="new">Orchestrator</div></div>
+<div class="pair replace"><div class="old">determines final</div><div class="new">decides</div></div>
+<div class="pair equal"><div class="old">acceptance by</div><div class="new">acceptance by</div></div>
+<div class="pair replace"><div class="old">evaluating</div><div class="new">verifying</div></div>
 <div class="pair equal"><div class="old">the complete</div><div class="new">the complete</div></div>
-<div class="pair replace"><div class="old">declared repository scope,</div><div class="new">repository,</div></div>
-<div class="pair equal"><div class="old">including its entry points and training</div><div class="new">including its entry points and training</div></div>
-<div class="pair replace"><div class="old">checks. As work moves across files, LaDiM keeps complete observations</div><div class="new">computations. \textbf{Evidence archive and context reconstruction.} Tool observations, code read by the agent, measurements, hypotheses,</div></div>
+<div class="pair replace"><div class="old">declared repository scope, including its entry points</div><div class="new">repository. \textbf{Evidence archive</div></div>
+<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
+<div class="pair replace"><div class="old">training checks. As work moves across files, LaDiM keeps complete observations</div><div class="new">context reconstruction.} Tool observations, code read by the agent, measurements, hypotheses,</div></div>
 <div class="pair equal"><div class="old">and conversations</div><div class="new">and conversations</div></div>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">are stored</div></div>
 <div class="pair equal"><div class="old">in an</div><div class="new">in an</div></div>
@@ -2041,41 +2055,39 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">archive</div><div class="new">archive</div></div>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">$C.E$</div></div>
 <div class="pair equal"><div class="old">outside the editable</div><div class="new">outside the editable</div></div>
-<div class="pair replace"><div class="old">workspace. A read-only tool retrieves records</div><div class="new">workspace, each tagged with the code version it describes. When evidence is handed to the Repair Agent, when the agent switches to another work unit,</div></div>
-<div class="pair equal"><div class="old">or</div><div class="new">or</div></div>
-<div class="pair replace"><div class="old">selected portions of them, allowing an agent to inspect arrays or logs omitted from a summary. At the independent role handoff, an actual switch between work units, or a context capacity boundary, LaDiM rebuilds</div><div class="new">when</div></div>
+<div class="pair replace"><div class="old">workspace. A read-only tool retrieves records or selected portions of them, allowing an</div><div class="new">workspace, each tagged with the code version it describes. At evidence handoff, when the</div></div>
+<div class="pair equal"><div class="old">agent</div><div class="new">agent</div></div>
+<div class="pair replace"><div class="old">to inspect arrays or logs omitted from a summary. At the independent role handoff, an actual switch between</div><div class="new">switches</div></div>
+<div class="pair equal"><div class="old">work units, or</div><div class="new">work units, or</div></div>
+<div class="pair replace"><div class="old">a context capacity boundary, LaDiM rebuilds</div><div class="new">when</div></div>
 <div class="pair equal"><div class="old">the conversation</div><div class="new">the conversation</div></div>
-<div class="pair replace"><div class="old">around</div><div class="new">exceeds 75\% of the context capacity, \textsc{PrepareContext} replaces the conversation with a compact one. The new conversation contains</div></div>
+<div class="pair replace"><div class="old">around</div><div class="new">exceeds 75\% of the context capacity, \textsc{PrepareContext} replaces the conversation with a compact one containing</div></div>
 <div class="pair equal"><div class="old">the current plan and</div><div class="new">the current plan and</div></div>
 <div class="pair replace"><div class="old">available evidence. It retains</div><div class="new">progress,</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
 <div class="pair delete"><div class="old">full</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">structured</div><div class="new">structured</div></div>
-<div class="pair replace"><div class="old">hypotheses</div><div class="new">findings</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">next steps,</div><div class="new">hypotheses, the</div></div>
-<div class="pair equal"><div class="old">latest</div><div class="new">latest</div></div>
-<div class="pair replace"><div class="old">measurements,</div><div class="new">measurements</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">recently</div><div class="new">tool results, and previously</div></div>
+<div class="pair replace"><div class="old">hypotheses and next steps,</div><div class="new">findings, the</div></div>
+<div class="pair equal"><div class="old">latest measurements, and</div><div class="new">latest measurements, and</div></div>
+<div class="pair replace"><div class="old">recently</div><div class="new">previously</div></div>
 <div class="pair equal"><div class="old">read code</div><div class="new">read code</div></div>
 <div class="pair replace"><div class="old">for</div><div class="new">that is relevant to</div></div>
 <div class="pair equal"><div class="old">the active unit</div><div class="new">the active unit</div></div>
-<div class="pair replace"><div class="old">whose</div><div class="new">and unchanged since it was read. Notebook tools let the agent read and edit individual code cells, with a syntax check after each edit. \cref{alg:repository} connects these components to \cref{alg:diagnose,alg:repair}. \textsc{UpdateDependencyGraph} applies Repair Dependency Graph Planning, and \textsc{Execute} handles unit selection,</div></div>
+<div class="pair replace"><div class="old">whose</div><div class="new">and unchanged since it was read. \cref{alg:repository} connects these components to \cref{alg:diagnose,alg:repair}. \textsc{Execute} handles unit selection,</div></div>
 <div class="pair equal"><div class="old">file</div><div class="new">file</div></div>
 <div class="pair delete"><div class="old">hashes still match. First selecting a unit</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">continuing</div><div class="new">notebook operations, tests, and evidence retrieval. Each operation updates the shared state $S$ and context $C$, and returns</div></div>
+<div class="pair replace"><div class="old">continuing</div><div class="new">notebook-cell operations, tests, and evidence retrieval, and returns</div></div>
 <div class="pair equal"><div class="old">an</div><div class="new">an</div></div>
-<div class="pair replace"><div class="old">ordinary repair stage preserve the existing conversation. These rules carry the state of the investigation between units while keeping the evidence associated</div><div class="new">observation $o$ together</div></div>
+<div class="pair replace"><div class="old">ordinary repair stage preserve the existing conversation. These rules carry the state of the investigation between units while keeping the evidence associated</div><div class="new">observation $o$</div></div>
 <div class="pair equal"><div class="old">with the</div><div class="new">with the</div></div>
-<div class="pair replace"><div class="old">code it describes. Appendix~\ref{sec:repository-context} gives</div><div class="new">set $U$ of units affected by changes to files or</div></div>
+<div class="pair replace"><div class="old">code it describes. Appendix~\ref{sec:repository-context} gives</div><div class="new">set $U$ of units affected by file or plan changes. All units share</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">context limits</div><div class="new">plan. All work units share the repository files, the repair history,</div></div>
+<div class="pair replace"><div class="old">context limits</div><div class="new">repository files, the repair history,</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
 <div class="pair replace"><div class="old">stage budgets.</div><div class="new">the total budget. \begin{algorithm}[!htb] \caption{Repository migration and repair coordination} \label{alg:repository} \small \begin{algorithmic}[1] \Function{RepositoryMigrate}{$\mathcal T,M,B$} \State $C\gets\Call{RepositoryContext}{\mathcal T}$ \State $S.\hat P\gets\Call{LLMTranslate}{M,A_T,\mathcal T}$ \State $(S.m,q)\gets\mathcal O.\Call{Verify}{S.\hat P}$ \Comment{Complete repository} \State \textbf{if} $q=\mathrm{accepted}$ \textbf{then return} $(S.\hat P,q)$ \State $E\gets\Call{LayeredDiagnosis}{\mathcal T,S,M,B,C}$ \Comment{\cref{alg:diagnose}} \State \Return $\Call{Repair}{\mathcal T,S,E,q,M,B,C}$ \Comment{\cref{alg:repair}} \EndFunction \Function{$C$.ExecuteTools}{$a,S,A$} \State $r\gets[\,]$ \ForAll{$c\in a.\mathrm{tools}$} \State $U\gets\varnothing$ \State \textbf{if} $c.\mathrm{kind}=\mathrm{structure}$ \textbf{then} $o\gets\Call{RepositoryStructuralAnalysis}{C,S}$ \State \textbf{else if} $c.\mathrm{kind}=\mathrm{plan}$ \textbf{then} $(C.G,U,o)\gets\Call{UpdateDependencyGraph}{c,C}$ \State \textbf{else} $(C,S,o,U)\gets\Call{Execute}{c,C,S,A}$ \State $C.E\gets C.E\mathbin{\|}(o,\Call{CodeVersion}{S})$; $r\gets r\mathbin{\|}o$ \State $C.Q[U\cup\Call{Dependents}{C.G,U}]\gets\mathrm{invalid}$ \EndFor \State \Return $(C,S,r)$ \EndFunction \end{algorithmic} \end{algorithm}</div></div>
 </section>
-<section class="section changed" id="latex-5" data-title="Experiments"><h2>Experiments<span class="count"><b class="removed">−1773</b> <b class="added">+1422</b></span></h2>
+<section class="section changed" id="latex-5" data-title="Experiments"><h2>Experiments<span class="count"><b class="removed">−1789</b> <b class="added">+1558</b></span></h2>
 <div class="pair equal"><div class="old">\section{Experiments} \subsection{Experimental Setup} \label{sec:setup}</div><div class="new">\section{Experiments} \subsection{Experimental Setup} \label{sec:setup}</div></div>
 <div class="pair replace"><div class="old">\paragraph{Tasks and verification.}</div><div class="new">\textbf{Tasks.}</div></div>
 <div class="pair equal"><div class="old">The main</div><div class="new">The main</div></div>
@@ -2371,35 +2383,13 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">programs and preserves all five</div><div class="new">programs and preserves all five</div></div>
 <div class="pair delete"><div class="old">accepted</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">programs</div><div class="new">programs</div></div>
-<div class="pair replace"><div class="old">(Table~\ref{tab:natural-repairs}). The three repair baselines preserve</div><div class="new">that pass evaluation before repair, raising final</div></div>
-<div class="pair equal"><div class="old">acceptance</div><div class="new">acceptance</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">from five to nine. Direct repair, SWE-agent, and MatchFixAgent retain the initial five successes</div></div>
-<div class="pair equal"><div class="old">but</div><div class="new">but</div></div>
-<div class="pair replace"><div class="old">leave all five faulty programs unresolved. Thus</div><div class="new">recover none of</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">difference comes from producing effective corrections on faulty translations. This collection requires investigation of both translated code</div><div class="new">failed programs. In the LSTM case, LaDiM repairs recurrent operations</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">the library operations used during training. Its repair costs include unsuccessful attempts on the remaining faulty program as well as investigation of initially accepted programs. The direct repair control uses the fewest tokens, while LaDiM&#x27;s additional investigation and repair produce four more accepted programs. One successful repair begins with an LSTM translation that cannot execute because</div><div class="new">tensor indexing in</div></div>
-<div class="pair equal"><div class="old">the supporting</div><div class="new">the supporting</div></div>
-<div class="pair replace"><div class="old">library has no registered implementation for its recurrent operator. LaDiM inspects the dispatch registration and reproduces the failure, then adds the recurrent computation using operations in the target framework. The next evaluation proceeds beyond the encoder but exposes recursive tensor indexing. A focused indexing test identifies the dispatch cycle, and a further edit restores execution and</div><div class="new">library, restoring</div></div>
-<div class="pair equal"><div class="old">agreement in</div><div class="new">agreement in</div></div>
-<div class="pair delete"><div class="old">the measured</div><div class="new">&nbsp;</div></div>
-<div class="pair equal"><div class="old">loss, gradients, and parameter updates.</div><div class="new">loss, gradients, and parameter updates.</div></div>
-<div class="pair replace"><div class="old">The sequence illustrates</div><div class="new">This example shows</div></div>
-<div class="pair equal"><div class="old">how</div><div class="new">how</div></div>
-<div class="pair replace"><div class="old">measurements after a change reveal</div><div class="new">training discrepancies guide repair into library implementations used by</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">next fault to investigate. Appendix~\ref{sec:natural-protocol} records the checks for this case. \begin{table}[!htb]</div><div class="new">translated program (\cref{sec:natural-protocol}). \begin{table}[t]</div></div>
-<div class="pair equal"><div class="old">\caption{Repair of</div><div class="new">\caption{Repair of</div></div>
-<div class="pair replace"><div class="old">natural translation faults</div><div class="new">(a) ten initial translations, five failing</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">preservation of initially accepted programs.</div><div class="new">five passing, and (b) six faulty JAX candidates. LaDiM and Direct repair allow four submissions; Ivy and \texttt{torch2jax} perform one native conversion.</div></div>
-<div class="pair equal"><div class="old">Tokens</div><div class="new">Tokens</div></div>
-<div class="pair replace"><div class="old">cover</div><div class="new">are in millions for</div></div>
-<div class="pair equal"><div class="old">all</div><div class="new">all</div></div>
-<div class="pair replace"><div class="old">ten selected complete</div><div class="new">investigation and</div></div>
+<div class="pair replace"><div class="old">(Table~\ref{tab:natural-repairs}). The three</div><div class="new">that pass evaluation before repair, raising final acceptance from five to nine. Direct repair, SWE-agent, and MatchFixAgent retain the initial five successes but recover none of the failed programs. \cref{sec:natural-protocol} details a repaired LSTM whose recurrent operators and tensor indexing in the supporting library required two further submissions. \begin{table}[t] \caption{Repair of (a) ten initial translations, five failing and five passing, and (b) six faulty JAX candidates. LaDiM and Direct</div></div>
 <div class="pair equal"><div class="old">repair</div><div class="new">repair</div></div>
-<div class="pair replace"><div class="old">runs, starting from supplied translations.} \label{tab:natural-repairs}</div><div class="new">calls.} \label{tab:repair-results}</div></div>
+<div class="pair replace"><div class="old">baselines preserve acceptance but leave</div><div class="new">allow four submissions; Ivy and \texttt{torch2jax} perform one native conversion. Tokens are in millions for</div></div>
+<div class="pair equal"><div class="old">all</div><div class="new">all</div></div>
+<div class="pair delete"><div class="old">five faulty programs unresolved. Thus the difference comes from producing effective corrections on faulty translations. This collection requires investigation of both translated code and the library operations used during training. Its repair costs include unsuccessful attempts on the remaining faulty program as well as investigation of initially accepted programs. The direct repair control uses the fewest tokens, while LaDiM&#x27;s additional</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">investigation and repair</div><div class="new">investigation and repair</div></div>
+<div class="pair replace"><div class="old">produce four more accepted programs. One successful repair begins with an LSTM translation that cannot execute because the supporting library has no registered implementation for its recurrent operator. LaDiM inspects the dispatch registration and reproduces the failure, then adds the recurrent computation using operations in the target framework. The next evaluation proceeds beyond the encoder but exposes recursive tensor indexing. A focused indexing test identifies the dispatch cycle, and a further edit restores execution and agreement in the measured loss, gradients, and parameter updates. The sequence illustrates how measurements after a change reveal the next fault to investigate. Appendix~\ref{sec:natural-protocol} records the checks for this case. \begin{table}[!htb] \caption{Repair of natural translation faults and preservation of initially accepted programs. Tokens cover all ten selected complete repair runs, starting from supplied translations.} \label{tab:natural-repairs}</div><div class="new">calls.} \label{tab:repair-results}</div></div>
 <div class="pair equal"><div class="old">\centering \small</div><div class="new">\centering \small</div></div>
 <div class="pair replace"><div class="old">\setlength{\tabcolsep}{4pt}</div><div class="new">\setlength{\tabcolsep}{2pt} \begin{minipage}[t]{0.555\linewidth} \vspace{0pt} {\raggedright\textit{(a) Repairing translation errors}\par}\smallskip</div></div>
 <div class="pair equal"><div class="old">\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}} \toprule \textbf{Method} &amp;</div><div class="new">\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}} \toprule \textbf{Method} &amp;</div></div>
@@ -2433,35 +2423,43 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">\\ \bottomrule \end{tabular*}</div><div class="new">\\ \bottomrule \end{tabular*}</div></div>
 <div class="pair insert"><div class="old">&nbsp;</div><div class="new">\end{minipage}\hfill \begin{minipage}[t]{0.415\linewidth} \vspace{0pt} {\raggedright\textit{(b) JAX repair and conversion}\par}\smallskip \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lccc@{}} \toprule \textbf{Method} &amp; \textbf{Accepted} &amp; \textbf{Calls} &amp; \textbf{Tokens} \\ \midrule LaDiM &amp; 6/6 &amp; 76 &amp; 0.674 \\ Direct repair &amp; 6/6 &amp; 57 &amp; 0.353 \\ Ivy &amp; 0/6 &amp; 0 &amp; 0 \\ \texttt{torch2jax} &amp; 0/6 &amp; 0 &amp; 0 \\ \bottomrule \end{tabular*} \end{minipage}</div></div>
 <div class="pair equal"><div class="old">\end{table}</div><div class="new">\end{table}</div></div>
-<div class="pair replace"><div class="old">\subsubsection{Training</div><div class="new">\textbf{Training</div></div>
-<div class="pair equal"><div class="old">Signals and Detection</div><div class="new">Signals and Detection</div></div>
-<div class="pair replace"><div class="old">Latency} The diagnostic study follows four models for 50 steps under three seeds. With per-step synchronization, each target model starts the checked step from the source state, allowing a discrepancy to be associated with the current computation. Correct translations pass the recorded checks, with a maximum loss difference of $3.815\times10^{-6}$.</div><div class="new">Latency.}</div></div>
-<div class="pair equal"><div class="old">Gradient</div><div class="new">Gradient</div></div>
-<div class="pair delete"><div class="old">faults can preserve loss agreement,</div><div class="new">&nbsp;</div></div>
-<div class="pair equal"><div class="old">and update faults</div><div class="new">and update faults</div></div>
-<div class="pair replace"><div class="old">can preserve both</div><div class="new">take effect after the loss of</div></div>
-<div class="pair equal"><div class="old">the current</div><div class="new">the current</div></div>
-<div class="pair replace"><div class="old">forward computation</div><div class="new">step has been computed, so the loss cannot reveal them at the step where they occur. In a detection study that injects gradient scaling</div></div>
+<div class="pair replace"><div class="old">\subsubsection{Training Signals</div><div class="new">\begin{figure}[t] \centering \includegraphics[width=\linewidth]{figures/tanh-repair-case/tanh_repair_case.pdf} \caption{LaDiM repairs a silent gradient fault in an autoencoder classifier. (a) Matching forward values</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">gradient. When each execution retains its own state, the faults influence later forward values. The</div><div class="new">partial update suppression into four models with three seeds each,</div></div>
+<div class="pair replace"><div class="old">Detection Latency}</div><div class="new">correct downstream gradients direct diagnosis to Tanh.</div></div>
+<div class="pair equal"><div class="old">The</div><div class="new">The</div></div>
+<div class="pair replace"><div class="old">diagnostic study follows four models</div><div class="new">patch registers MindSpore&#x27;s \texttt{tanh}</div></div>
+<div class="pair equal"><div class="old">for</div><div class="new">for</div></div>
+<div class="pair replace"><div class="old">50 steps under three seeds. With per-step synchronization, each target model starts</div><div class="new">\texttt{torch.tanh} and \texttt{torch.nn.functional.tanh} (decorators omitted). (b) Investigation and repair costs include all calls, excluding initial translation. LaDiM tests at call 17, patches at 22, passes public verification at 23, and finishes at 24. Both baselines remain unrepaired at</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">checked step</div><div class="new">40-call limit.} \label{fig:tanh-case} \end{figure} \textbf{Case Study: From a Silent Gradient Fault to an Accepted Repair.} \cref{fig:tanh-case} traces a failing translation</div></div>
+<div class="pair equal"><div class="old">from</div><div class="new">from</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">\cref{tab:repair-results}a, an autoencoder-style classifier whose encoder applies Tanh between two linear layers. Execution and forward values match</div></div>
+<div class="pair equal"><div class="old">the source</div><div class="new">the source</div></div>
+<div class="pair replace"><div class="old">state, allowing</div><div class="new">and the loss differs by only $1.4\times10^{-6}$, yet the first linear layer receives zero gradients. Because the second layer&#x27;s gradients are correct, the Verifier isolates Tanh, and</div></div>
+<div class="pair equal"><div class="old">a</div><div class="new">a</div></div>
+<div class="pair replace"><div class="old">discrepancy</div><div class="new">targeted test confirms that the supporting library lacks a MindSpore mapping for it, so Tanh silently runs in PyTorch outside MindSpore differentiation. LaDiM registers MindSpore&#x27;s \texttt{tanh} and passes public verification at call 23, with acceptance confirmed on three seeds and 1.488 million tokens over all 24 calls. SWE-agent and MatchFixAgent also suspect Tanh but never turn the suspicion into a tested patch, exhausting the 40-call limit after 1.606 and 2.341 million tokens. Such faults are invisible</div></div>
+<div class="pair equal"><div class="old">to</div><div class="new">to</div></div>
+<div class="pair delete"><div class="old">be associated with</div><div class="new">&nbsp;</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">current computation. Correct translations pass</div><div class="new">loss at</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">recorded checks, with a maximum loss difference of $3.815\times10^{-6}$. Gradient faults can preserve loss agreement, and update faults can preserve both the current forward computation and gradient. When each execution retains its own state, the faults influence later forward values. The</div><div class="new">step where they occur:</div></div>
 <div class="pair equal"><div class="old">gradient and update checks</div><div class="new">gradient and update checks</div></div>
 <div class="pair delete"><div class="old">in Figure~\ref{fig:gradient-drift}</div><div class="new">&nbsp;</div></div>
 <div class="pair equal"><div class="old">detect</div><div class="new">detect</div></div>
-<div class="pair replace"><div class="old">their respective</div><div class="new">the corresponding</div></div>
+<div class="pair replace"><div class="old">their respective</div><div class="new">injected</div></div>
 <div class="pair equal"><div class="old">faults at step~1 in all 12 runs per</div><div class="new">faults at step~1 in all 12 runs per</div></div>
-<div class="pair replace"><div class="old">panel. Individual</div><div class="new">fault. A</div></div>
+<div class="pair replace"><div class="old">panel. Individual</div><div class="new">fault, whereas a</div></div>
 <div class="pair equal"><div class="old">loss</div><div class="new">loss</div></div>
-<div class="pair replace"><div class="old">trajectories cross</div><div class="new">check with a threshold of 0.02 detects 3 and 4 of</div></div>
+<div class="pair replace"><div class="old">trajectories cross</div><div class="new">check at</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">threshold</div><div class="new">12 runs, respectively,</div></div>
-<div class="pair equal"><div class="old">within</div><div class="new">within</div></div>
-<div class="pair insert"><div class="old">&nbsp;</div><div class="new">50 steps. \cref{sec:detection-measurements} gives</div></div>
-<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
-<div class="pair replace"><div class="old">observation window</div><div class="new">protocol, the detection trajectories, and the sensitivity to the loss threshold. \textbf{Generalization Across Frameworks.} \label{sec:generalization} LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults</div></div>
-<div class="pair equal"><div class="old">in</div><div class="new">in</div></div>
-<div class="pair replace"><div class="old">only 3/12</div><div class="new">MLP</div></div>
-<div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
-<div class="pair replace"><div class="old">4/12 runs, even though</div><div class="new">CNN models (\cref{tab:repair-results}b). Every case passes single-step SGD verification on three seeds after</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">0.02</div></div>
+<div class="pair equal"><div class="old">threshold</div><div class="new">threshold</div></div>
+<div class="pair replace"><div class="old">within the observation window in only</div><div class="new">detects</div></div>
+<div class="pair equal"><div class="old">3/12</div><div class="new">3/12</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">gradient-scaling</div></div>
+<div class="pair equal"><div class="old">and 4/12</div><div class="new">and 4/12</div></div>
+<div class="pair replace"><div class="old">runs, even though</div><div class="new">update-suppression runs within 50 steps (\cref{sec:detection-measurements}). \textbf{Generalization Across Frameworks.} \label{sec:generalization} LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults in MLP and CNN models (\cref{tab:repair-results}b). Every case passes single-step SGD verification on three seeds after</div></div>
 <div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
 <div class="pair replace"><div class="old">mean curves cross at steps 31</div><div class="new">first submission. Direct repair also accepts all six cases</div></div>
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
@@ -2479,9 +2477,9 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">with</div><div class="new">with</div></div>
 <div class="pair replace"><div class="old">shared tools both accept all six within their first submission under verification on three seeds. The execution adapter changes while the investigation continues to use corresponding forward values, gradients,</div><div class="new">JAX differentiation</div></div>
 <div class="pair equal"><div class="old">and parameter updates.</div><div class="new">and parameter updates.</div></div>
-<div class="pair replace"><div class="old">These repairs demonstrate LaDiM&#x27;s effectiveness with another target framework. Appendix~\ref{sec:supplementary-protocols}</div><div class="new">\cref{sec:jax-protocol} details the converter evaluations. \cref{sec:native-jax-study}</div></div>
-<div class="pair equal"><div class="old">reports the</div><div class="new">reports the</div></div>
-<div class="pair replace"><div class="old">implementation and complete costs.</div><div class="new">separate study of native JAX translations evaluated over consecutive training steps.</div></div>
+<div class="pair replace"><div class="old">These repairs demonstrate LaDiM&#x27;s effectiveness with another target framework. Appendix~\ref{sec:supplementary-protocols} reports</div><div class="new">\cref{sec:jax-protocol} details</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">implementation and complete costs.</div><div class="new">converter evaluations.</div></div>
 <div class="pair equal"><div class="old">\subsection{Ablation Studies} \label{sec:ablations}</div><div class="new">\subsection{Ablation Studies} \label{sec:ablations}</div></div>
 <div class="pair replace"><div class="old">\paragraph{Training signal coverage.}</div><div class="new">\textbf{Training signals.}</div></div>
 <div class="pair equal"><div class="old">We</div><div class="new">We</div></div>
@@ -3037,7 +3035,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">and</div><div class="new">and</div></div>
 <div class="pair replace"><div class="old">acceptance checks. The corresponding agent and tool backend configurations are documented with the frozen sources and results.</div><div class="new">computed values, without an additional confirmation stage across random seeds.</div></div>
 </section>
-<section class="section changed" id="latex-11" data-title="Appendix — Natural Translation Repair Protocol"><h2>Appendix — Natural Translation Repair Protocol<span class="count"><b class="removed">−131</b> <b class="added">+116</b></span></h2>
+<section class="section changed" id="latex-11" data-title="Appendix — Natural Translation Repair Protocol"><h2>Appendix — Natural Translation Repair Protocol<span class="count"><b class="removed">−127</b> <b class="added">+360</b></span></h2>
 <div class="pair equal"><div class="old">\section{Natural Translation Repair Protocol} \label{sec:natural-protocol}</div><div class="new">\section{Natural Translation Repair Protocol} \label{sec:natural-protocol}</div></div>
 <div class="pair replace"><div class="old">The</div><div class="new">Of the</div></div>
 <div class="pair equal"><div class="old">ten</div><div class="new">ten</div></div>
@@ -3107,7 +3105,13 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 <div class="pair equal"><div class="old">difference is $2.38\times10^{-7}$, gradient vector L2 difference is $4.19\times10^{-7}$, and relative parameter update difference is $8.11\times10^{-7}$. The example uses 32</div><div class="new">difference is $2.38\times10^{-7}$, gradient vector L2 difference is $4.19\times10^{-7}$, and relative parameter update difference is $8.11\times10^{-7}$. The example uses 32</div></div>
 <div class="pair replace"><div class="old">model</div><div class="new">LLM</div></div>
 <div class="pair equal"><div class="old">calls.</div><div class="new">calls.</div></div>
-<div class="pair delete"><div class="old">This trajectory belongs to the same LaDiM configuration as the natural fault table.</div><div class="new">&nbsp;</div></div>
+<div class="pair replace"><div class="old">This trajectory belongs</div><div class="new">In the autoencoder example of \cref{fig:tanh-case}, the supporting library registers the low-level Tanh operator but not \texttt{torch.tanh} or \texttt{torch.nn.functional.tanh}. Unregistered calls fall back to PyTorch on copied tensors, which preserves forward values but disconnects the MindSpore differentiation graph. Before repair, on the public evaluation seed, layer outputs differ by at most $1.5\times10^{-8}$ and the absolute loss difference is $1.43\times10^{-6}$. The gradients of the first linear layer&#x27;s weight and bias are zero, against norms of 0.342 and 0.109 in the source, while the other six parameter gradients differ by at most $6.2\times10^{-7}$. The gradient vector L2 difference is 0.359 and the relative parameter update difference is 0.771, whereas the absolute gradient-norm difference, 0.046, stays below its threshold. LaDiM&#x27;s first submission contains no edits and fails. Its diagnostic test compares summed absolute input gradients under MindSpore differentiation: 4.894 for native \texttt{tanh} and zero for dispatched Tanh, while dispatched ReLU, sigmoid, and multiplication all pass nonzero gradients. The patch adds a four-line registration</div></div>
+<div class="pair equal"><div class="old">to the</div><div class="new">to the</div></div>
+<div class="pair insert"><div class="old">&nbsp;</div><div class="new">library, and the second submission is accepted on all three seeds, with gradient vector L2 difference $1.01\times10^{-6}$ and relative parameter update difference $6.42\times10^{-6}$ on the public seed. SWE-agent and MatchFixAgent both attribute the zero gradients to Tanh, and MatchFixAgent even drafts the</div></div>
+<div class="pair equal"><div class="old">same</div><div class="new">same</div></div>
+<div class="pair replace"><div class="old">LaDiM configuration as</div><div class="new">registration, yet neither applies an edit to</div></div>
+<div class="pair equal"><div class="old">the</div><div class="new">the</div></div>
+<div class="pair replace"><div class="old">natural fault table.</div><div class="new">library within 40 calls, so both leave the program unrepaired. This case illustrates the completion condition in \cref{sec:repair-agent}: the Repair Agent must apply an edit and test after that edit before completing the repair stage.</div></div>
 </section>
 <section class="section changed" id="latex-12" data-title="Appendix — Repository Protocols and Detailed Results"><h2>Appendix — Repository Protocols and Detailed Results<span class="count"><b class="removed">−168</b> <b class="added">+489</b></span></h2>
 <div class="pair equal"><div class="old">\section{Repository Protocols and Detailed Results} \label{sec:repository-results} All methods receive</div><div class="new">\section{Repository Protocols and Detailed Results} \label{sec:repository-results} All methods receive</div></div>
@@ -3431,7 +3435,7 @@ button,select,input[type=search]{font:inherit;color:var(--ink);border:1px solid 
 </section></div>
 <p class="footer">正文视图去除排版指令，保留文字、表格内容和公式源码；LaTeX 视图保留展开后的完整指令。图形外观请对照两份 PDF。基线文件逐项校验，后续更新保持基线不变。</p></main>
 <script>
-const version='8e1efd8dfeba63dc840b4906bffa05f7477141cf05eac46de9b879d56c95dd19',mode=document.getElementById('mode'),search=document.getElementById('search');
+const version='c5057c4c2ab4d53d4c124ed1b6eda44c403fed3199ebc3f2ec06afd5035185b3',mode=document.getElementById('mode'),search=document.getElementById('search');
 new ResizeObserver(([entry])=>document.documentElement.style.setProperty('--tools-height',entry.target.offsetHeight+'px')).observe(document.querySelector('.tools'));
 function filter(){const q=search.value.trim().toLowerCase();document.querySelectorAll('.section').forEach(s=>s.classList.toggle('hidden',q&&!s.textContent.toLowerCase().includes(q)))}
 mode.onchange=()=>{document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!==mode.value));filter()};search.oninput=filter;
