@@ -58,7 +58,7 @@
     "immutable_checkpoint": "not recorded",
     "context_unit": "serialized_message_characters",
     "context_capacity": 1000000,
-    "top_p": "omitted in inspected requests",
+    "top_p": "0.95 in native InterTrans configuration; omitted in inspected shared-generation and agent requests",
     "generation_temperature": 0,
     "agent_temperature": "omitted with thinking enabled",
     "reused_java_temperature": 0.1,
@@ -70,9 +70,9 @@
     "native_jax_response_created_utc": [
       "2026-09-22T08:02:34+00:00",
       "2026-09-22T09:03:35+00:00"
-    ]
+    ],
+    "test_guided_temperature": 0.1
   },
-  "supplementary_bundle": "No selected submission code bundle found. User asked to provide its path; paper statement describes preserved archives without claiming an anonymized submission bundle exists.",
   "source_sha256": {
     "data/audits/unified50-preflight-20260918/formal_launch/results_audit_final.json": "69e64ebf2f95a60a932b99b2074b2edb241bd4e853d8b40f2f6fac274cb67026",
     "data/audits/unified50-preflight-20260918/final_review/manifest.json": "783dc9ead3169fcbbb19eeac626709b29c5bd0e3f80be37a928f8abadd70f865",
@@ -83,6 +83,34 @@
     "output/repository-migration-20260921/final-evidence.tar.gz": "8b22203bac919e0b44d94b04f1ff7b0b0c02fc601a5a6984bfc518553904058b",
     "output/maintext-jax-autonomous-20260918/maintext_jax_complete_20260918.tar.gz": "cabff024da637e58471ecc8d530adc3124bda671ef84cd9e2568e15912edb65e",
     "output/intertrans-completion-20260918-evidence.tar.gz": "5f9c2e227c1a6bb72000043ba3e49eca2be094def335b686d0b56ea29bcd1489",
-    "output/jax-expansion-20260922/formal_metadata_complete_20260922.tar.gz": "005a21a6640ce24fe28baa692a1ae5eb7eed64d1af7249b218bdf4861bd62485"
+    "output/jax-expansion-20260922/formal_metadata_complete_20260922.tar.gz": "005a21a6640ce24fe28baa692a1ae5eb7eed64d1af7249b218bdf4861bd62485",
+    "data/audits/unified50-preflight-20260918/final_review/cross_language/manifest.json": "625e1ca4949c8f0482895a310a34728b0bfabd7f9a6db0cee1640beb0dab3cb6"
+  },
+  "supplementary_bundle_initial_state": "No selected submission code bundle found. User asked to provide its path; paper statement describes preserved archives without claiming an anonymized submission bundle exists.",
+  "supplementary_bundle": {
+    "created_by": "separate concurrent task, commit aa53b43",
+    "path": "supplementary/ladim-supplementary.zip",
+    "sha256": "2bebc17a05853e7bad956ff184aef2970501777650707d10a99257995a4ee814",
+    "bytes": 208765,
+    "members": 72,
+    "includes": [
+      "program and repository implementations",
+      "evaluation utilities",
+      "baseline configurations",
+      "offline regression tests"
+    ],
+    "excludes": [
+      "datasets",
+      "framework bridges",
+      "third-party baseline implementations",
+      "raw model records"
+    ],
+    "verified_in_this_task": "README, archive contents, configuration consistency; no rerun of the separate packaging task tests"
+  },
+  "intertrans_settings_source": {
+    "archive_member": "intertrans-completion-20260918/code_snapshot/n18/pairing/intertrans_adapter.py",
+    "sha256": "5de2e8f6a9b66f57fe1822b0d5fe397d77437fa2c6ffec4f6cc02fefb6516b1c",
+    "temperature_line": 41,
+    "top_p_line": 45
   }
 }

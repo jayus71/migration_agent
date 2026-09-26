@@ -454,7 +454,7 @@ We used generative AI for preliminary literature research, method implementation
 
 
 \subsection*{Reproducibility Statement}
-\cref{sec:method} describes LaDiM's diagnosis, repair, and repository coordination procedures. \cref{sec:setup,sec:supplementary-protocols} specify the task collections, input construction, numerical tolerances, initial states, random seeds, and call, token, and time budgets. \cref{sec:llm-settings} records the LLM backend and decoding settings. The experiment archives preserve the implementation, evaluation scripts, baseline configurations, and request and response records used to obtain the reported results. Costs include failed calls and count shared initial translation once per method, as detailed in \cref{sec:task-construction}.
+The supplementary material contains the implementation of LaDiM, the evaluation scripts, and the configurations used to run all baselines, anonymized for review. Section 4.1 and Appendix A specify the task collections, numerical tolerances, random seeds, and call, token, and time budgets. Appendix I lists the LLM backend and decoding settings shared by all methods. All reported costs include failed calls and the shared initial translation, as described in Appendix A.1.
 
 
 \bibliographystyle{iclr2027_conference}
@@ -1244,8 +1244,8 @@ All LLM-based methods use the request model identifier \texttt{deepseek-v4-flash
 Requested model & \texttt{deepseek-v4-flash} \\
 Returned model & \texttt{deepseek-flash} \\
 Reasoning mode & Enabled with high reasoning effort for the agent repair protocols; inherited provider settings for the reused Java initial translations and native InterTrans generation. \\
-Temperature & Omitted by the agent client when reasoning is enabled; 0 in MindSpore initial-generation requests; 0.1 in reused Java initial translations and native InterTrans configuration. \\
-Top-p & Not set explicitly in the inspected generation and agent requests. \\
+Temperature & Omitted by the agent client when reasoning is enabled; 0 in MindSpore initial-generation requests; 0.1 in reused Java initial translations, native InterTrans, and test-guided repair. \\
+Top-p & 0.95 for native InterTrans; omitted in the inspected shared-generation and agent requests. \\
 Context capacity & 1,000,000 serialized-message characters in the agent controller; the provider independently enforces its token window. \\
 Maximum output per call & 131,072 for program initial translation and test-guided repair; 16,384 for program agent repair; 32,768 for repository agent repair. Native JAX initial translation uses 16,384 (\cref{sec:native-jax-study}). \\
 Context reconstruction & At 75\% of the configured character capacity for LaDiM on repositories, as well as at evidence handoff and work-unit changes. \\
