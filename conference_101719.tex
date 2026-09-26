@@ -14,6 +14,7 @@
 \usepackage[noend]{algpseudocode}
 \algrenewcommand\algorithmicindent{1em}
 \usepackage{wrapfig}
+\usepackage{hyperref}
 \usepackage[capitalise,noabbrev]{cleveref}
 \crefname{figure}{Fig.}{Figs.}
 \Crefname{figure}{Fig.}{Figs.}
@@ -22,12 +23,11 @@
 % sitting on different baselines in the same row.
 \newcommand{\hdr}[2]{\begin{tabular}[b]{@{}c@{}}\textbf{#1}\\\textbf{#2}\end{tabular}}
 \newcommand{\thead}[1]{\textbf{\shortstack[b]{#1}}}
-\usepackage[hyphens]{url}
+%\usepackage[hyphens]{url}
 % Long URLs in the footnote and bibliography cannot break at "/" or "." under
 % the url package alone, which leaves the surrounding line badly underfull.
-\usepackage{xurl}
 % Keep the template heading gaps at their natural size.
-\raggedbottom
+% \raggedbottom
 
 
 \begin{document}
@@ -36,15 +36,15 @@
 \maketitle
 \suppressfloats[t]
 \begin{abstract}
-Migrating code across deep learning frameworks enables the reuse of training programs in new software and hardware environments. Different frameworks, however, might compute gradients or update parameters in different ways, leading to wrong results even when a translated program runs without error. Current methods are mostly designed for language transfer, neglecting the subtle differences in framework level. To address this, LaDiM preserves the underlying training computation order, e.g., forward, gradient computation, update, and uses the dependencies among these stages to detect and localize silent computational errors. LaDiM includes Translator, Verifier, and Repair agents working under a shared Orchestrator. The Translator produces an initial output. The Verifier traces discrepancies along the computation order and hands its findings to the Repair Agent, which revises the candidate using this evidence and a persistent repair history. For repository-scale migrations, LaDiM further introduces repository context management which tracks cross-file dependencies and preserves diagnostic context as agents move across the repository. Evaluation across framework migration, language migration, and repository migration tasks shows that LaDiM achieves comparable or better migration results with up to 80.8\% fewer tokens than state-of-the-art methods, demonstrating its effectiveness.
+Migrating code across deep learning frameworks enables the reuse of training programs in new software and hardware environments. Different frameworks, however, might compute gradients or update parameters in different ways, leading to wrong results even when a translated program runs without error. Current methods are mostly designed for language transfer, neglecting the subtle differences in framework level. To address this, LaDiM preserves the underlying training computation order, e.g., forward, gradient computation, update, and uses the dependencies among these stages to detect and localize silent computational errors. LaDiM includes Translator, Verifier, and Repair agents working under a shared Orchestrator. The Translator produces an initial output. The Verifier traces discrepancies along the computation order and hands its findings to the Repair Agent, which revises the candidate using this evidence and a persistent repair history. For repository level migrations, LaDiM further introduces repository context management which tracks cross file dependencies and preserves diagnostic context as agents move across the repository. Evaluation across framework migration, language migration, and repository migration tasks shows that LaDiM achieves comparable or better migration results with up to 80.8\% fewer tokens than state-of-the-art methods, demonstrating its effectiveness.
 \end{abstract}
 
 \section{Introduction}
-{\hyphenpenalty=10000\emergencystretch=1em
-\begin{wrapfigure}{r}{0.43\textwidth}
+{
+\begin{wrapfigure}{r}{0.39\textwidth}
 \vspace{-\intextsep}
 \centering
-\includegraphics[width=\linewidth]{figures/migration_motivation.pdf}
+\includegraphics[width=0.4\textwidth]{figures/migration_motivation.pdf}
 \caption{Tokens used on 50 PyTorch to MindSpore migration tasks.}
 \label{fig:migration-motivation}
 \end{wrapfigure}
@@ -75,9 +75,10 @@ Automated program repair uses tests or semantic constraints to guide patch gener
 \input{sections/methods}
 \input{sections/experiments}
 
-\Needspace{6\baselineskip}
 \section{Conclusion}
-We introduced LaDiM for preserving training behavior during code migration. Layered Diagnosis traces dependencies among execution, forward values, gradients, and parameter updates. Independent evidence handoff and repair history guide corrective edits, while repository context management coordinates work across shared implementations and entry points. Experiments across frameworks, languages, and repositories show that LaDiM preserves training behavior with lower token costs and repairs translation errors that the repair baselines leave unresolved.
+We introduced LaDiM for preserving training behavior during code migration. Layered Diagnosis traces dependencies among execution, forward values, gradients, and parameter updates. Independent evidence handoff and repair history guide corrective edits, while repository context management coordinates work across shared implementations and entry points. Experiments across frameworks, languages, and repositories show that LaDiM preserves training behavior with lower token costs and repairs translation errors that the repair baselines leave unresolved. By tracing training behavior stage by stage, LaDiM turns silent computational drift into localized, repairable evidence, making framework-level migration of deep learning programs reliable at practical cost.
+
+
 \subsection*{AI use statement}
 We used generative AI for preliminary literature research, method implementation, result analysis, and manuscript and figure editing. The authors checked the code, results, and citations and take responsibility for the final work.
 
