@@ -1,5 +1,9 @@
 # Inputs for manuscript figures and tables
 
+## September 26 method overview replacement
+
+The author-supplied `figures/架构图0926终版.svg` is the current source for Figure 2. Inkscape exported it to `figures/hierarchical_feedback_architecture.pdf` with `--export-area-drawing` and the Windows Times New Roman fonts through fontconfig; the manuscript includes that PDF at 90% text width. The source SHA-256 is `93accbc97a3ec505d0fa9937e2773a934abeac8f742716fd22cc9606effc2a94`, and the PDF SHA-256 is `5ae5bded600e4d6cb8e408218c9298973653ced1147a40d44e46d1ba33e5eb67`. The PDF embeds four Times New Roman faces and contains no raster images. The final manuscript build has 25 pages, with the main text ending on page 9; Figure 2 was inspected on the rendered manuscript page. The September 25 overview record below describes the earlier source and remains as historical provenance.
+
 ## September 26 manuscript inclusion
 
 The Tanh figure is now Figure 4 in the manuscript at full width. Its left panel says Gradient blocked and identifies the repaired supporting-library file. All evidence, 24/40/40 calls, token totals and three-seed acceptance remain unchanged. Figure 1 moves its single Acc. label next to the first percentage; Figure 3 places Tasks sorted by tokens saved within each group below the axis, preserving all bars and both groups. The original detection figure is now Figure 5 in Appendix A.6. Generators and PDF/PNG/SVG assets match. Existing figure/data checks pass; the final manuscript has nine pages of main text. See the [r5 execution record](../../docs/manuscript-revision-execution-20260926-r5.md) for the precise verification scope and image-display limitation. Earlier sections below retain their historical status.
