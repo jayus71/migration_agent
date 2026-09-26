@@ -1,0 +1,88 @@
+{
+  "review_base": "9ce1e71",
+  "unique_input_acceptance": {
+    "ladim": {
+      "accepted": 29,
+      "denominator": 29,
+      "accepted_aliases": 50,
+      "nonaccepted": []
+    },
+    "matchfix": {
+      "accepted": 29,
+      "denominator": 29,
+      "accepted_aliases": 50,
+      "nonaccepted": []
+    },
+    "swe": {
+      "accepted": 25,
+      "denominator": 29,
+      "accepted_aliases": 44,
+      "nonaccepted": [
+        {
+          "group": "group_012",
+          "aliases": [
+            "task_022"
+          ],
+          "accepted": null
+        },
+        {
+          "group": "group_021",
+          "aliases": [
+            "task_037",
+            "task_039",
+            "task_049"
+          ],
+          "accepted": false
+        },
+        {
+          "group": "group_023",
+          "aliases": [
+            "task_040"
+          ],
+          "accepted": false
+        },
+        {
+          "group": "group_025",
+          "aliases": [
+            "task_043"
+          ],
+          "accepted": false
+        }
+      ]
+    }
+  },
+  "backend": {
+    "requested_model": "deepseek-v4-flash",
+    "returned_model": "deepseek-flash",
+    "deployment": "HTTP API; official versus proxy deployment not established from the archived requests",
+    "immutable_checkpoint": "not recorded",
+    "context_unit": "serialized_message_characters",
+    "context_capacity": 1000000,
+    "top_p": "omitted in inspected requests",
+    "generation_temperature": 0,
+    "agent_temperature": "omitted with thinking enabled",
+    "reused_java_temperature": 0.1,
+    "native_intertrans_temperature": 0.1,
+    "jax133_response_created_utc": [
+      "2026-09-17T18:30:53+00:00",
+      "2026-09-17T18:52:23+00:00"
+    ],
+    "native_jax_response_created_utc": [
+      "2026-09-22T08:02:34+00:00",
+      "2026-09-22T09:03:35+00:00"
+    ]
+  },
+  "supplementary_bundle": "No selected submission code bundle found. User asked to provide its path; paper statement describes preserved archives without claiming an anonymized submission bundle exists.",
+  "source_sha256": {
+    "data/audits/unified50-preflight-20260918/formal_launch/results_audit_final.json": "69e64ebf2f95a60a932b99b2074b2edb241bd4e853d8b40f2f6fac274cb67026",
+    "data/audits/unified50-preflight-20260918/final_review/manifest.json": "783dc9ead3169fcbbb19eeac626709b29c5bd0e3f80be37a928f8abadd70f865",
+    "data/audits/unified50-preflight-20260918/final_review/budgets.json": "5c51af50763e75124931c5b9cd0d583482bfb0cb2a247a275e7e610621b7d928",
+    "data/audits/unified50-preflight-20260918/requests/group_001/direct.json": "93f900fa8e1a9648a5caa35f0b140ed3b7699a8853cfbb64effab7c647c51517",
+    "data/audits/unified50-preflight-20260918/extension_configuration_audit.json": "ec1ab88fc6b9910e667fa12c45838edaa9067fdeaf60f5ac2639cb9f95ff5046",
+    "docs/review-evidence/tanh-case-20260925/summary.json": "765142159002342b8f1852562e13bd4b08ab329a2b72c3e5e6322b16ad196e0b",
+    "output/repository-migration-20260921/final-evidence.tar.gz": "8b22203bac919e0b44d94b04f1ff7b0b0c02fc601a5a6984bfc518553904058b",
+    "output/maintext-jax-autonomous-20260918/maintext_jax_complete_20260918.tar.gz": "cabff024da637e58471ecc8d530adc3124bda671ef84cd9e2568e15912edb65e",
+    "output/intertrans-completion-20260918-evidence.tar.gz": "5f9c2e227c1a6bb72000043ba3e49eca2be094def335b686d0b56ea29bcd1489",
+    "output/jax-expansion-20260922/formal_metadata_complete_20260922.tar.gz": "005a21a6640ce24fe28baa692a1ae5eb7eed64d1af7249b218bdf4861bd62485"
+  }
+}

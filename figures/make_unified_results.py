@@ -240,7 +240,7 @@ def export_tables(data):
             comparison.append(f"{TABLE_LABELS[method]} & {passed} & {ratio(gradient)} & {ratio(update)} & {ratio(entry)} & {calls} & {row['tokens']/1e6:.3f}" + r' \\')
         comparison += [r'\bottomrule', r'\end{tabular*}']
     (ROOT / 'figures/TABLE_unified_comparison.tex').write_text('\n'.join(comparison) + '\n')
-    labels = [('main/ladim', 'LaDiM'), ('continuous_role/ladim', 'Continuous investigation and repair conversation'),
+    labels = [('main/ladim', 'LaDiM'), ('continuous_role/ladim', 'Continuous conversation'),
               ('without_repair_history/ladim', 'Without repair history'),
               ('without_progress_prompt/ladim', 'Without progress reminders'),
               ('main/matchfix', 'MatchFixAgent'), ('matchfix_investigation/matchfix', 'MatchFixAgent with independent investigation'),

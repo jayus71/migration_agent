@@ -87,7 +87,7 @@ def main():
     for label, data, condition in [
             ("LaDiM", structure, "full"),
             ("Without Repository Structural Analysis", structure, "no_automatic_map"),
-            ("Without Repair Dependency Graph Planning", planning, "no_work_unit_planning")]:
+            ("Without Dependency Graph Planning", planning, "no_work_unit_planning")]:
         lines.append(row_text(label, [data[repository, condition] for repository in ("timeseries", "twotower")]))
     lines += [r"\bottomrule", r"\end{tabular*}"]
     write_table("TABLE_repository_independent.tex", lines, [STRUCTURE, PLANNING])

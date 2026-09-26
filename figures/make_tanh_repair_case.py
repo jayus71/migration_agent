@@ -124,7 +124,7 @@ def code_panel(ax, additions):
     status_mark(ax, 192, 86, False)
     panel_box(ax, 8, 97, 194, 41)
     label(ax, 15, 101, 'LaDiM: repaired', 8.8, fontweight='bold', color=COLORS['LaDiM'])
-    label(ax, 95, 101.5, 'torch4ms/ops/mtorch.py', 7, color=MUTED)
+    label(ax, 95, 101.5, 'supporting library', 7, color=MUTED)
     status_mark(ax, 192, 105, True)
     ax.add_patch(Rectangle((11, 112), 188, 23, facecolor='#dcefe2', edgecolor='none', zorder=1))
     ax.add_patch(Rectangle((11, 112), 1.8, 23, facecolor=COLORS['LaDiM'], edgecolor='none', zorder=2))
