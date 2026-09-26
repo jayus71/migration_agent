@@ -79,6 +79,9 @@ def restore_tables(diff: str, blocks: dict[str, str], current_labels: set[str] |
 def review_layout(source: str) -> str:
     """Use ordinary figure placement in the review copy to keep marks readable."""
     source = re.sub(r'\\hyphenpenalty\s*=\s*\d+|\\emergencystretch\s*=\s*[\d.]+\w+', '', source)
+    # Line-count hints belong to the clean layout. Markup between an assignment
+    # and its integer makes TeX read a brace where it expects a number.
+    source = re.sub(r'\\looseness\s*=\s*-?\d+', '', source)
     # Wrapped algorithms use a minipage only in the clean manuscript. Present
     # them at full width here so the change marks have room and floats do not
     # become nested after removing the surrounding wrapfigure.
