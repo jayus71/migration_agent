@@ -30,6 +30,7 @@ To examine repair of actual translation errors, we use ten programs produced by 
 \includegraphics[width=0.96\linewidth]{figures/repair_comparison.pdf}
 \caption{MindSpore migration token costs. (a) Initial translation and subsequent calls, grouped by whether repair is needed. (b) MatchFixAgent minus LaDiM tokens for 29 distinct inputs. Tasks 1--20 pass before repair, while tasks 21--29 require repair.}
 \label{fig:repair-comparison}
+\vspace{-8pt}
 \end{figure}
 
 \textbf{Migration across languages.} LaDiM accepts all programs completed by MatchFixAgent and an additional recurrent network example in the Java/DJL collection (\cref{tab:main-results}b). Its 9/18 accepted programs comprise all eight textbook examples and one application, compared with 8/18 for SWE-agent and MatchFixAgent. LaDiM uses 11.7\% fewer tokens than SWE-agent and 24.2\% fewer than MatchFixAgent.
@@ -67,6 +68,7 @@ Ivy                & 0/6 & 0 & 0 \\
 \bottomrule
 \end{tabular*}
 \end{minipage}
+\vspace{-8pt}
 \end{table}
 
 \begin{figure}[t]
@@ -75,6 +77,7 @@ Ivy                & 0/6 & 0 & 0 \\
 \vspace{-12pt}
 \caption{Repairing a silent gradient fault. (a) Layered Diagnosis identifies Tanh as the gradient break. The highlighted code adds its missing MindSpore mapping (registration decorators omitted). (b) Cumulative investigation and repair tokens. LaDiM repairs the program, while both baselines remain unrepaired after 40 calls.}
 \label{fig:tanh-case}
+\vspace{-12pt}
 \end{figure}
 
 \textbf{Case Study: From a Silent Gradient Fault to an Accepted Repair.} \cref{fig:tanh-case} traces a failing translation from \cref{tab:repair-results}a: an autoencoder-style classifier whose encoder applies Tanh between two linear layers. Execution and forward values match the source and the loss differs by only $1.4\times10^{-6}$, yet the first linear layer receives zero gradients. Because the second layer's gradients are correct, the Verifier isolates Tanh, and a targeted test confirms that the supporting library lacks a MindSpore mapping for it, so Tanh silently runs in PyTorch outside MindSpore differentiation. LaDiM registers MindSpore's \texttt{tanh} and passes public verification at call 23, with acceptance confirmed on three seeds with 1.488 million token consumption over all 24 calls. SWE-agent and MatchFixAgent also suspect Tanh but never turn the suspicion into a tested patch, exhausting the 40-call limit after 1.606 and 2.341 million tokens. Neither the loss nor the gradient-norm difference (0.046, below its 0.05 threshold) flags this fault; the per-parameter gradient comparison exposes it, and agreement in the neighboring layers localizes it to Tanh. A loss comparison can show that training has drifted, but not where. \cref{sec:detection-measurements} reports further detection measurements.
@@ -104,9 +107,9 @@ LaDiM repairs all six JAX cases spanning execution, forward, and gradient faults
 {\raggedright\textit{(b) Repair components}\par}\smallskip
 \input{figures/TABLE_program_components_compact.tex}
 \end{minipage}
-\par\medskip
-\input{figures/TABLE_repository_components.tex}
 \par\smallskip
+\input{figures/TABLE_repository_components.tex}
+\par\vspace{-8pt}
 \end{table}
 
 \textbf{Repair history and independent evidence handoff.} Repair history and independent evidence handoff improve repair on the ten translated programs (\cref{tab:signal-ablation}b). The LaDiM row enables both components, and the other two rows change one component at a time. With repair history, LaDiM repairs four of five failed programs. Removing that history reduces the count to zero. Independent evidence handoff repairs one more program than a shared investigation and repair conversation, increasing final acceptance from 8/10 to 9/10. All three settings preserve the five programs that pass evaluation before repair. Repair history retains earlier attempts and their verification feedback, while independent evidence handoff lets the Repair Agent reassess the Verifier's evidence in its own conversation.
