@@ -953,4 +953,13 @@ S60批准开始正式修订，取代P11的待审核状态；最新SVG保持字�
 - 本轮批准项：引言仓库结果范围、Tanh定位解释、图4与桥库匿名化、50/29任务口径及去重通过数、附录中的组件成本差异、规划组件与会话术语、新增后端设置附录和复现声明、计算顺序与指代措辞，以及三项排版修复。适用P01/P05/P08/P09/P10、W01/W03/W06/W07/W10、A01/A05/A18、M12/M13/M21/M24、E01/E04/E07/E10、R04/R08/R12/R20/R21、B02/B03/B08、F02/F07/F21/F25/F26/F30。
 - S90覆盖旧M12全称要求：名称统一为 Repository Structural Analysis / Dependency Graph Planning。S90允许正文增加50个任务对应29个不同输入的说明，覆盖R12在此处的旧删减安排。S90保留图1 Acc.；第6项不增加正文或表3 caption文字。
 - 实施前证据：冻结审计的SWE-agent为25/29不同输入、44/50任务标识；另外四个输入含三个失败及一个中断无终态。模型请求与返回记录尚在核查，按真实阶段差异填写，不能把意见模板中的共享设置当作已证事实。
-- 当前状态：已批准，实施中。全部有效意见的逐项回归检查和最终版本记录将在编译后补充。
+- 当前状态：已完成。用户随后确认复现声明采用原建议措辞；正文保留 `the implementation of LaDiM, the evaluation scripts, and the configurations used to run all baselines, anonymized for review`，不在声明中展开补充包的排除范围。
+
+### 2026-09-26：S90/S91最终核验与版面反馈
+
+- 核验版本为 `18b99db` 及其后仅报告/清单修改的工作树；S90批准项逐项回归检查。摘要与引言的 `preserves` 改为 `follows`，引言 `These methods` 改为 `Existing translation methods`，用户确认的 `higher accuracy` 改为 `higher acceptance`；图1的 `Acc.` 保留。
+- 引言仓库结论限定为时间序列仓库的 68% token 节省和推荐仓库的 behavioral coverage；正文补充 50 个任务标识对应 29 个输入，附录给出 LaDiM/MatchFixAgent 29/29、SWE-agent 25/29 及四个非接受输入的组成。Table 3b 与 Table 2a 的 edit-format assistance 解释仅放附录。
+- `Repair Dependency Graph Planning` 全部统一为 `Dependency Graph Planning`；组件表的 `Continuous investigation and repair conversation` 改为 `Continuous conversation`；`Natural Translation Repair Protocol` 改为 `Initial Translation Repair Protocol`；正文与图形中的 `torch4ms`/`mtorch` 已匿名化。
+- 新增 LLM 后端设置附录，按冻结配置记录 InterTrans 的 `top-p=0.95` 与 test-guided repair 的 temperature `0.1`，并保留各阶段实际不同的温度、输出上限、重试和上下文设置。复现声明按用户最终确认恢复原建议措辞。
+- 第八页空白来自官方 `\flushbottom` 对浮动体间距的拉伸以及表格/图形连续浮动的组合；通过局部 `\vspace`、案例段落的 `\Needspace` 与 `\looseness` 调整消除异常空行，不改官方样式文件、版心、正文全局字号或行距。最终案例段落完整位于第八页，结论仍在第九页。
+- 验证：`latexmk`成功，完整PDF 25页、正文9页；最终日志无 overfull、重复 destination、未定义引用或 LaTeX/package warning。28项单元测试通过；固定基线 HTML 和 LaTeX 差异稿均已刷新。未重跑实验、未推送。用户PPT、未跟踪SVG、`.vscode/`与`other/`保持原状；并行任务 `aa53b43` 的补充包未计入本轮逐字修改报告。
