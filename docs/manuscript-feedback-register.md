@@ -104,6 +104,7 @@
 | S85 | 2026-09-26 用户要求按r5第7.8节缩减Fig.4图注，(a)(b)各一到两句，不重复具体API和调用过程。 |
 | S86 | 2026-09-26 用户授权将最新修改同步至Overleaf协作仓库，并推送主仓库和Overleaf仓库。 |
 | S87 | 2026-09-26 用户询问当前 PDF 引用框消失的原因，并比较含 `hyperref` 的 Overleaf 导言区与现版，同时要求核对新增排版控制是否符合 ICLR 官方格式。本轮先说明查证结果；未要求直接修改论文。 |
+| S88 | 2026-09-26 用户报告将 `[hyphens]{url}` 与 `hyperref` 合用时编译报错，并询问当前 Overleaf 导言区的实际影响与 ICLR desk reject 风险。本轮核查加载顺序和官方要求；未要求直接修改论文。 |
 | H | 历史方案和审查记录：[9 月 21 日方案](paper-revision-plan-20260921.md)、[重建方案](paper-rebuild-plan-20260922.md)、[风格审查](paper-style-review-20260922.md)、[最近方案](paper-clarity-and-ablation-plan-20260922.md)、[执行记录](paper-clarity-execution-20260922.md)。这些文档用于追踪处理经过，不能替代用户原要求。 |
 
 **上一轮核验：2026-09-23，S25–S28段落、Overleaf源码及消融表整理。** 源仓库初始检查点`e04fa99`，Overleaf初始检查点`05e6df1`；表格调整前分别保存为`c43af0a`和`d7e0b16`。110项逐项复核；措辞、公式、算法和数值保持，合并非显式分组段落、解决3.2后的空白并消除消融行名换行。详见[本轮记录](overleaf-readability-20260923.md)。
@@ -927,3 +928,10 @@ S60批准开始正式修订，取代P11的待审核状态；最新SVG保持字�
 - 核验版本为当前 `codex/iclr-2027-template` 工作树；本轮只检查源码、Git 历史、官方文件和现有 PDF，没有修订论文。当前导言区加载 `cleveref`、`url` 和 `xurl`，没有加载 `hyperref`；现有 25 页 PDF 的链接注释数为零。`e6132f2` 于 2026-09-24 同步 Overleaf 变更时移除 `hyperref`；此前 `c6631ff` 已依用户 S31 要求移除 `hidelinks` 选项，保留无选项的 `hyperref`。
 - 2026-09-26 重新下载官方 ICLR 2027 样式 ZIP，SHA-256 为 `0d940dfa9398ae99a18f24a85a8a683f367204b6af6d17d2899e60a67102529e`，与仓库归档相同；根目录 `iclr2027_conference.sty` 与官方包内文件同为 `797deef41724e93761426ac0cbcca46279a91cc650dd1f0ce76a4f08d2098ea6`。官方示例加载无选项的 `hyperref` 与 `url`。当前额外的 `xurl`、`cleveref`、分页及局部排版控制不在官方示例中，但没有改写官方样式文件、版心、正文全局字号或行距。现版 `\raggedbottom` 会覆盖官方样式中的 `\flushbottom`，令页底可能不齐；官方示例未单独禁止该分页控制。现稿算法和表格局部使用 `\small`，这是此前用户 S70 明确要求，但官方示例“do not change font sizes（参考文献或可例外）”的字面要求更严格；本轮记录此合规性风险，不自行撤销用户决定。
 - S87 的可见链接框问题已定位；是否恢复 `hyperref` 尚无用户修改指令。P10 维持上次论文核验状态，本轮没有把阅读现有 PDF 记作新的全文视觉审核，也没有运行 `latexmk`、实验或逐词比较。
+
+
+### 2026-09-26：S88宏包顺序与投稿格式说明
+
+- 使用当前官方 `iclr2027_conference.sty` 在 TeX Live 2025 编译三份独立的最小文档：`url[hyphens] → xurl → hyperref → cleveref` 成功；`hyperref → url[hyphens]` 报 `Option clash for package url`；`cleveref → url[hyphens] → xurl → hyperref` 报 `cleveref must be loaded after hyperref`。因此用户报告的是加载顺序冲突；原贴的 Overleaf 版将带选项的 `url` 注释，并在 `cleveref` 前加载 `hyperref`，不会触发这两种顺序错误。
+- 再次下载的官方 ZIP 哈希与 S87 相同。官方示例加载无选项的 `hyperref` 与 `url`；Author Guidelines 明确初投稿正文最多九页，超页 desk reject，要求使用官方样式文件。官方示例 Final instructions 禁止改样式文件参数、版心和字号（参考文献或可例外）。没有查到把 `hyperref`、`cleveref`、`xurl` 列为单独拒稿原因的规定。当前 Overleaf 版的 `\raggedbottom` 覆盖官方 `\flushbottom`，局部 `\small` 是 S70 用户要求且与官方示例的字号禁令存在字面风险；本轮仅向用户说明，不替用户更改排版决定。
+- 仅做最小编译复现与官方网页/样式包核查；未编译或修改完整论文、未刷新固定基线逐词比较、未执行实验或推送。S87/P10 既有核验状态保留，本轮不声称完成全文格式审查。
